@@ -1,0 +1,14 @@
+$rise_drag_view $mol_view
+	plugins /
+		^
+		<= Drag $rise_drag
+			on_drag_start? <=> on_drag_start? null
+			on_drag_end? <=> on_drag_end? null
+			on_drag? <=> on_drag? null
+			dragged => dragged
+			y? <=> y? 0
+			x? <=> x? 0
+			drags_synced <= drags_synced /$rise_drag
+	style *
+		^
+		userSelect \none

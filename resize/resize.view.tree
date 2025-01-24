@@ -1,0 +1,86 @@
+$rise_resize $mol_view
+	sub /
+		<= Content $mol_scroll
+			sub <= content_wrapper /
+				<= Fullsize_wrapper $mol_view
+					style *
+						minHeight \100%
+						minWidth \100%
+					sub <= content /
+						<= Drag_view $rise_drag_view
+							sub <= drag_body /
+							x? <=> x? 0
+							y? <=> y? 0
+							on_drag_start? <=> on_drag_start? null
+							on_drag_end? <=> on_drag_end? null
+							dragged => dragged
+							drags_synced <= drags_synced /$rise_drag
+							Drag => Drag
+		^ edges /
+			<= Top_edge $rise_resize_edge
+				on_drag_start? <=> resize_start? null
+				on_drag_end? <=> resize_end? null
+				y? <=> top_edge_y? 0
+			<= Left_edge $rise_resize_edge
+				on_drag_start? <=> resize_start? null
+				on_drag_end? <=> resize_end? null
+				x? <=> left_edge_x? 0
+			<= Bottom_edge $rise_resize_edge
+				on_drag_start? <=> resize_start? null
+				on_drag_end? <=> resize_end? null
+				y? <=> bottom_edge_y? 0
+			<= Right_edge $rise_resize_edge
+				on_drag_start? <=> resize_start? null
+				on_drag_end? <=> resize_end? null
+				x? <=> right_edge_x? 0
+			<= Top_left_edge $rise_resize_edge
+				on_drag_start? <=> resize_start? null
+				on_drag_end? <=> resize_end? null
+				y? <=> top_edge_y? 0
+				x? <=> left_edge_x? 0
+			<= Top_right_edge $rise_resize_edge
+				on_drag_start? <=> resize_start? null
+				on_drag_end? <=> resize_end? null
+				y? <=> top_edge_y? 0
+				x? <=> right_edge_x? 0
+			<= Bottom_left_edge $rise_resize_edge
+				on_drag_start? <=> resize_start? null
+				on_drag_end? <=> resize_end? null
+				y? <=> bottom_edge_y? 0
+				x? <=> left_edge_x? 0
+			<= Bottom_right_edge $rise_resize_edge
+				on_drag_start? <=> resize_start? null
+				on_drag_end? <=> resize_end? null
+				y? <=> bottom_edge_y? 0
+				x? <=> right_edge_x? 0
+	resizing? false
+	-
+	height_min 100
+	width_min 100
+	-
+	height 0
+	width 0
+	top 0
+	left 0
+	-
+	stick_threshold 10
+	-
+	x_stick? 0
+	y_stick? 0
+	bottom_edge_y_stick? <= height_min
+	right_edge_x_stick? <= width_min
+	top_edge_y_stick? 0
+	left_edge_x_stick? 0
+	-
+	sticks_y /number
+	sticks_x /number
+	auto / <= vals_to_sticks null
+	-
+	style *
+		^
+		top <= top_px \0px
+		left <= left_px \0px
+		height <= height_px \300px
+		width <= width_px \500px
+
+$rise_resize_edge $rise_drag_view

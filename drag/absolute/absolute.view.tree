@@ -1,0 +1,8 @@
+$rise_drag_absolute $rise_drag_view
+	y? <=> top? 0
+	x? <=> left? 0
+	style *
+		^
+		position \absolute
+		top <= top_px \0px
+		left <= left_px \0px

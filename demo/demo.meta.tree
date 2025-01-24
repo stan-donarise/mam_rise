@@ -1,0 +1,6 @@
+include \/rise/drag/demo
+include \/rise/resize/demo
+include \/rise/resize/ratio/demo
+include \/rise/toggle/demo
+include \/rise/range/demo
+include \/rise/radio/demo

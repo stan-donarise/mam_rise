@@ -1,0 +1,7 @@
+$rise_toggle_demo $mol_example_small
+	sub /
+		<= Toggle $rise_toggle
+	tags /
+		\toggle
+	aspects /
+		\Widget

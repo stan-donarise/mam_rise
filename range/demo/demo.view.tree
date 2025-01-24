@@ -1,0 +1,21 @@
+$rise_range_demo $mol_example_small
+	sub /
+		<= List $mol_list
+			sub /
+				<= Number $mol_number
+					value? <=> value?
+					value_min <= min
+					value_max <= max
+				<= Range $rise_range
+					value? <=> value? 10
+					min <= min 0
+					max <= max 10
+				<= Range_disabled $rise_range
+					value? <=> value?
+					disabled true
+					min <= min
+					max <= max
+	tags /
+		\range
+	aspects /
+		\Widget

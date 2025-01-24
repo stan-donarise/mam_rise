@@ -1,0 +1,3 @@
+$rise_demo $mol_app_demo
+	menu_title \$rise
+	sources_uri \https://github.com/stan-donarise/mam_rise

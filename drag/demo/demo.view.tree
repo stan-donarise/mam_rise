@@ -1,0 +1,19 @@
+$rise_drag_demo $mol_example_small
+	sub /
+		<= Draggable $rise_drag_absolute
+			sub /
+				<= Card $mol_card
+					title \Draggable
+			drags_synced /
+				<= Synced_drag
+		<= Synced $rise_drag_absolute
+			top? <=> top? 100
+			left? <=> left? 100
+			Drag => Synced_drag
+			sub /
+				<= Synced_card $mol_card
+					title \Synced
+	tags /
+		\drag
+	aspects /
+		\Widget

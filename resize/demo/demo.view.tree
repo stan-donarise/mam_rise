@@ -1,0 +1,41 @@
+$rise_resize_demo $mol_example_small
+	sub /
+		<= Resize $rise_resize
+			height => height
+			width => width
+			top => top
+			left => left
+			x => x
+			y => y
+			bottom_edge_y => bottom_edge_y
+			right_edge_x => right_edge_x
+			top_edge_y => top_edge_y
+			left_edge_x => left_edge_x
+			x_stick => x_stick
+			y_stick => y_stick
+			bottom_edge_y_stick => bottom_edge_y_stick
+			right_edge_x_stick => right_edge_x_stick
+			top_edge_y_stick => top_edge_y_stick
+			left_edge_x_stick => left_edge_x_stick
+			drag_body /
+				<= Content $mol_text
+					text <= content \
+			sticks_y <= sticks_y /
+				0
+				100
+				450
+			sticks_x <= sticks_x /
+				0
+				100
+				450
+		^ sticks /
+	Stick_x* $mol_view
+		style *
+			left <= stick_left* \
+	Stick_y* $mol_view
+		style *
+			top <= stick_top* \
+	tags /
+		\resize
+	aspects /
+		\Widget

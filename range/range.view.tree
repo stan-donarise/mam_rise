@@ -1,0 +1,53 @@
+$rise_range $mol_view
+	minimal_height 48
+	unit \
+	medium? 5
+	enabled true
+	sub /
+		<= Labels $mol_view
+			sub /
+				<= Min $mol_view
+					sub / <= label_min \
+				<= Medium $mol_view
+					sub / <= label_medium \
+				<= Max $mol_view
+					sub / <= label_max \
+		<= Input $rise_range_input
+			disabled <= disabled false
+			min <= min? 0
+			max <= max? 10
+			step <= step? 1
+			value? <=> value? 0
+			event_input? <=> event_input? null
+		<= Current $mol_view
+			sub /
+				<= Value $rise_range_value
+					sub / <= value
+					disabled <= disabled
+	attr *
+		^
+		disabled <= disabled
+	style *
+		^
+		--rise_range_percent <= percent \0%
+
+$rise_range_input $mol_view
+	dom_name \input
+	attr *
+		^
+		type \range
+		disabled <= disabled false
+	field *
+		^
+		min <= min? 0
+		max <= max? 10
+		step <= step? 1
+		value <= value? 0
+	event *
+		^
+		input? <=> event_input? null
+
+$rise_range_value $mol_view
+	attr *
+		^
+		disabled <= disabled false

@@ -1,0 +1,22 @@
+$rise_drag $mol_plugin
+	x? 0
+	y? 0
+	repos_x* 1
+	repos_y* 1
+	-
+	on_drag? null
+	on_drag_start? null
+	on_drag_end? null
+	-
+	drag? null
+	drag_start? null
+	drag_end? null
+	-
+	event *
+		^
+		pointerdown? <=> pointerdown? null
+	attr *
+		^
+		rise_dragged <= dragged? false
+	-
+	drags_synced /$rise_drag

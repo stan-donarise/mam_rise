@@ -1,0 +1,5 @@
+$rise_radio $mol_switch
+	option_label* /
+		<= Circle* $mol_view
+			sub <= circle_inner* / <= Circle_inner* $mol_view
+		<= option_title*
