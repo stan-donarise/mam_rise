@@ -1,6 +1,8 @@
 $rise_resize_demo $mol_example_small
 	sub /
 		<= Resize $rise_resize
+			height_min 150
+			width_min 150
 			height => height
 			width => width
 			top => top
