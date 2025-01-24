@@ -874,6 +874,7 @@ declare namespace $ {
 		drag( next?: any ): any
 		drag_start( next?: any ): any
 		drag_end( next?: any ): any
+		use_buttons( ): readonly(any)[]
 		event( ): ({ 
 			pointerdown( next?: ReturnType< $rise_drag['pointerdown'] > ): ReturnType< $rise_drag['pointerdown'] >,
 		})  & ReturnType< $mol_plugin['event'] >
@@ -1067,6 +1068,16 @@ declare namespace $ {
 		,
 		ReturnType< $rise_drag['drags_synced'] >
 	>
+	type $rise_drag__repos_x_rise_drag_view_7 = $mol_type_enforce<
+		ReturnType< $rise_drag_view['repos_x'] >
+		,
+		ReturnType< $rise_drag['repos_x'] >
+	>
+	type $rise_drag__repos_y_rise_drag_view_8 = $mol_type_enforce<
+		ReturnType< $rise_drag_view['repos_y'] >
+		,
+		ReturnType< $rise_drag['repos_y'] >
+	>
 	export class $rise_drag_view extends $mol_view {
 		on_drag_start( next?: any ): any
 		on_drag_end( next?: any ): any
@@ -1075,6 +1086,8 @@ declare namespace $ {
 		y( next?: number ): number
 		x( next?: number ): number
 		drags_synced( ): readonly($rise_drag)[]
+		repos_x( id: any): number
+		repos_y( id: any): number
 		Drag( ): $rise_drag
 		plugins( ): readonly(any)[]
 		style( ): ({ 
@@ -1085,6 +1098,13 @@ declare namespace $ {
 }
 
 //# sourceMappingURL=view.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $rise_drag_view extends $.$rise_drag_view {
+        repos_x(val: number): number;
+        repos_y(val: number): number;
+    }
+}
+
 declare namespace $ {
 
 	export class $rise_drag_absolute extends $rise_drag_view {
@@ -1282,7 +1302,17 @@ declare namespace $ {
 		,
 		ReturnType< $rise_drag_view['drags_synced'] >
 	>
-	type $mol_view__style_rise_resize_7 = $mol_type_enforce<
+	type $rise_drag_view__repos_x_rise_resize_7 = $mol_type_enforce<
+		ReturnType< $rise_resize['repos_x'] >
+		,
+		ReturnType< $rise_drag_view['repos_x'] >
+	>
+	type $rise_drag_view__repos_y_rise_resize_8 = $mol_type_enforce<
+		ReturnType< $rise_resize['repos_y'] >
+		,
+		ReturnType< $rise_drag_view['repos_y'] >
+	>
+	type $mol_view__style_rise_resize_9 = $mol_type_enforce<
 		({ 
 			'minHeight': string,
 			'minWidth': string,
@@ -1290,60 +1320,50 @@ declare namespace $ {
 		,
 		ReturnType< $mol_view['style'] >
 	>
-	type $mol_view__sub_rise_resize_8 = $mol_type_enforce<
+	type $mol_view__sub_rise_resize_10 = $mol_type_enforce<
 		ReturnType< $rise_resize['content'] >
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $mol_scroll__sub_rise_resize_9 = $mol_type_enforce<
+	type $mol_scroll__sub_rise_resize_11 = $mol_type_enforce<
 		ReturnType< $rise_resize['content_wrapper'] >
 		,
 		ReturnType< $mol_scroll['sub'] >
 	>
-	type $rise_resize_edge__on_drag_start_rise_resize_10 = $mol_type_enforce<
+	type $rise_resize_edge__repos_x_rise_resize_12 = $mol_type_enforce<
+		ReturnType< $rise_resize['repos_x'] >
+		,
+		ReturnType< $rise_resize_edge['repos_x'] >
+	>
+	type $rise_resize_edge__repos_y_rise_resize_13 = $mol_type_enforce<
+		ReturnType< $rise_resize['repos_y'] >
+		,
+		ReturnType< $rise_resize_edge['repos_y'] >
+	>
+	type $rise_resize_edge__on_drag_start_rise_resize_14 = $mol_type_enforce<
 		ReturnType< $rise_resize['resize_start'] >
 		,
 		ReturnType< $rise_resize_edge['on_drag_start'] >
 	>
-	type $rise_resize_edge__on_drag_end_rise_resize_11 = $mol_type_enforce<
+	type $rise_resize_edge__on_drag_end_rise_resize_15 = $mol_type_enforce<
 		ReturnType< $rise_resize['resize_end'] >
 		,
 		ReturnType< $rise_resize_edge['on_drag_end'] >
 	>
-	type $rise_resize_edge__y_rise_resize_12 = $mol_type_enforce<
+	type $rise_resize_edge__y_rise_resize_16 = $mol_type_enforce<
 		ReturnType< $rise_resize['top_edge_y'] >
 		,
 		ReturnType< $rise_resize_edge['y'] >
 	>
-	type $rise_resize_edge__on_drag_start_rise_resize_13 = $mol_type_enforce<
-		ReturnType< $rise_resize['resize_start'] >
+	type $rise_resize_edge__repos_x_rise_resize_17 = $mol_type_enforce<
+		ReturnType< $rise_resize['repos_x'] >
 		,
-		ReturnType< $rise_resize_edge['on_drag_start'] >
+		ReturnType< $rise_resize_edge['repos_x'] >
 	>
-	type $rise_resize_edge__on_drag_end_rise_resize_14 = $mol_type_enforce<
-		ReturnType< $rise_resize['resize_end'] >
+	type $rise_resize_edge__repos_y_rise_resize_18 = $mol_type_enforce<
+		ReturnType< $rise_resize['repos_y'] >
 		,
-		ReturnType< $rise_resize_edge['on_drag_end'] >
-	>
-	type $rise_resize_edge__x_rise_resize_15 = $mol_type_enforce<
-		ReturnType< $rise_resize['left_edge_x'] >
-		,
-		ReturnType< $rise_resize_edge['x'] >
-	>
-	type $rise_resize_edge__on_drag_start_rise_resize_16 = $mol_type_enforce<
-		ReturnType< $rise_resize['resize_start'] >
-		,
-		ReturnType< $rise_resize_edge['on_drag_start'] >
-	>
-	type $rise_resize_edge__on_drag_end_rise_resize_17 = $mol_type_enforce<
-		ReturnType< $rise_resize['resize_end'] >
-		,
-		ReturnType< $rise_resize_edge['on_drag_end'] >
-	>
-	type $rise_resize_edge__y_rise_resize_18 = $mol_type_enforce<
-		ReturnType< $rise_resize['bottom_edge_y'] >
-		,
-		ReturnType< $rise_resize_edge['y'] >
+		ReturnType< $rise_resize_edge['repos_y'] >
 	>
 	type $rise_resize_edge__on_drag_start_rise_resize_19 = $mol_type_enforce<
 		ReturnType< $rise_resize['resize_start'] >
@@ -1356,69 +1376,69 @@ declare namespace $ {
 		ReturnType< $rise_resize_edge['on_drag_end'] >
 	>
 	type $rise_resize_edge__x_rise_resize_21 = $mol_type_enforce<
-		ReturnType< $rise_resize['right_edge_x'] >
-		,
-		ReturnType< $rise_resize_edge['x'] >
-	>
-	type $rise_resize_edge__on_drag_start_rise_resize_22 = $mol_type_enforce<
-		ReturnType< $rise_resize['resize_start'] >
-		,
-		ReturnType< $rise_resize_edge['on_drag_start'] >
-	>
-	type $rise_resize_edge__on_drag_end_rise_resize_23 = $mol_type_enforce<
-		ReturnType< $rise_resize['resize_end'] >
-		,
-		ReturnType< $rise_resize_edge['on_drag_end'] >
-	>
-	type $rise_resize_edge__y_rise_resize_24 = $mol_type_enforce<
-		ReturnType< $rise_resize['top_edge_y'] >
-		,
-		ReturnType< $rise_resize_edge['y'] >
-	>
-	type $rise_resize_edge__x_rise_resize_25 = $mol_type_enforce<
 		ReturnType< $rise_resize['left_edge_x'] >
 		,
 		ReturnType< $rise_resize_edge['x'] >
 	>
-	type $rise_resize_edge__on_drag_start_rise_resize_26 = $mol_type_enforce<
+	type $rise_resize_edge__repos_x_rise_resize_22 = $mol_type_enforce<
+		ReturnType< $rise_resize['repos_x'] >
+		,
+		ReturnType< $rise_resize_edge['repos_x'] >
+	>
+	type $rise_resize_edge__repos_y_rise_resize_23 = $mol_type_enforce<
+		ReturnType< $rise_resize['repos_y'] >
+		,
+		ReturnType< $rise_resize_edge['repos_y'] >
+	>
+	type $rise_resize_edge__on_drag_start_rise_resize_24 = $mol_type_enforce<
 		ReturnType< $rise_resize['resize_start'] >
 		,
 		ReturnType< $rise_resize_edge['on_drag_start'] >
 	>
-	type $rise_resize_edge__on_drag_end_rise_resize_27 = $mol_type_enforce<
+	type $rise_resize_edge__on_drag_end_rise_resize_25 = $mol_type_enforce<
 		ReturnType< $rise_resize['resize_end'] >
 		,
 		ReturnType< $rise_resize_edge['on_drag_end'] >
 	>
-	type $rise_resize_edge__y_rise_resize_28 = $mol_type_enforce<
-		ReturnType< $rise_resize['top_edge_y'] >
-		,
-		ReturnType< $rise_resize_edge['y'] >
-	>
-	type $rise_resize_edge__x_rise_resize_29 = $mol_type_enforce<
-		ReturnType< $rise_resize['right_edge_x'] >
-		,
-		ReturnType< $rise_resize_edge['x'] >
-	>
-	type $rise_resize_edge__on_drag_start_rise_resize_30 = $mol_type_enforce<
-		ReturnType< $rise_resize['resize_start'] >
-		,
-		ReturnType< $rise_resize_edge['on_drag_start'] >
-	>
-	type $rise_resize_edge__on_drag_end_rise_resize_31 = $mol_type_enforce<
-		ReturnType< $rise_resize['resize_end'] >
-		,
-		ReturnType< $rise_resize_edge['on_drag_end'] >
-	>
-	type $rise_resize_edge__y_rise_resize_32 = $mol_type_enforce<
+	type $rise_resize_edge__y_rise_resize_26 = $mol_type_enforce<
 		ReturnType< $rise_resize['bottom_edge_y'] >
 		,
 		ReturnType< $rise_resize_edge['y'] >
 	>
-	type $rise_resize_edge__x_rise_resize_33 = $mol_type_enforce<
-		ReturnType< $rise_resize['left_edge_x'] >
+	type $rise_resize_edge__repos_x_rise_resize_27 = $mol_type_enforce<
+		ReturnType< $rise_resize['repos_x'] >
+		,
+		ReturnType< $rise_resize_edge['repos_x'] >
+	>
+	type $rise_resize_edge__repos_y_rise_resize_28 = $mol_type_enforce<
+		ReturnType< $rise_resize['repos_y'] >
+		,
+		ReturnType< $rise_resize_edge['repos_y'] >
+	>
+	type $rise_resize_edge__on_drag_start_rise_resize_29 = $mol_type_enforce<
+		ReturnType< $rise_resize['resize_start'] >
+		,
+		ReturnType< $rise_resize_edge['on_drag_start'] >
+	>
+	type $rise_resize_edge__on_drag_end_rise_resize_30 = $mol_type_enforce<
+		ReturnType< $rise_resize['resize_end'] >
+		,
+		ReturnType< $rise_resize_edge['on_drag_end'] >
+	>
+	type $rise_resize_edge__x_rise_resize_31 = $mol_type_enforce<
+		ReturnType< $rise_resize['right_edge_x'] >
 		,
 		ReturnType< $rise_resize_edge['x'] >
+	>
+	type $rise_resize_edge__repos_x_rise_resize_32 = $mol_type_enforce<
+		ReturnType< $rise_resize['repos_x'] >
+		,
+		ReturnType< $rise_resize_edge['repos_x'] >
+	>
+	type $rise_resize_edge__repos_y_rise_resize_33 = $mol_type_enforce<
+		ReturnType< $rise_resize['repos_y'] >
+		,
+		ReturnType< $rise_resize_edge['repos_y'] >
 	>
 	type $rise_resize_edge__on_drag_start_rise_resize_34 = $mol_type_enforce<
 		ReturnType< $rise_resize['resize_start'] >
@@ -1431,11 +1451,101 @@ declare namespace $ {
 		ReturnType< $rise_resize_edge['on_drag_end'] >
 	>
 	type $rise_resize_edge__y_rise_resize_36 = $mol_type_enforce<
-		ReturnType< $rise_resize['bottom_edge_y'] >
+		ReturnType< $rise_resize['top_edge_y'] >
 		,
 		ReturnType< $rise_resize_edge['y'] >
 	>
 	type $rise_resize_edge__x_rise_resize_37 = $mol_type_enforce<
+		ReturnType< $rise_resize['left_edge_x'] >
+		,
+		ReturnType< $rise_resize_edge['x'] >
+	>
+	type $rise_resize_edge__repos_x_rise_resize_38 = $mol_type_enforce<
+		ReturnType< $rise_resize['repos_x'] >
+		,
+		ReturnType< $rise_resize_edge['repos_x'] >
+	>
+	type $rise_resize_edge__repos_y_rise_resize_39 = $mol_type_enforce<
+		ReturnType< $rise_resize['repos_y'] >
+		,
+		ReturnType< $rise_resize_edge['repos_y'] >
+	>
+	type $rise_resize_edge__on_drag_start_rise_resize_40 = $mol_type_enforce<
+		ReturnType< $rise_resize['resize_start'] >
+		,
+		ReturnType< $rise_resize_edge['on_drag_start'] >
+	>
+	type $rise_resize_edge__on_drag_end_rise_resize_41 = $mol_type_enforce<
+		ReturnType< $rise_resize['resize_end'] >
+		,
+		ReturnType< $rise_resize_edge['on_drag_end'] >
+	>
+	type $rise_resize_edge__y_rise_resize_42 = $mol_type_enforce<
+		ReturnType< $rise_resize['top_edge_y'] >
+		,
+		ReturnType< $rise_resize_edge['y'] >
+	>
+	type $rise_resize_edge__x_rise_resize_43 = $mol_type_enforce<
+		ReturnType< $rise_resize['right_edge_x'] >
+		,
+		ReturnType< $rise_resize_edge['x'] >
+	>
+	type $rise_resize_edge__repos_x_rise_resize_44 = $mol_type_enforce<
+		ReturnType< $rise_resize['repos_x'] >
+		,
+		ReturnType< $rise_resize_edge['repos_x'] >
+	>
+	type $rise_resize_edge__repos_y_rise_resize_45 = $mol_type_enforce<
+		ReturnType< $rise_resize['repos_y'] >
+		,
+		ReturnType< $rise_resize_edge['repos_y'] >
+	>
+	type $rise_resize_edge__on_drag_start_rise_resize_46 = $mol_type_enforce<
+		ReturnType< $rise_resize['resize_start'] >
+		,
+		ReturnType< $rise_resize_edge['on_drag_start'] >
+	>
+	type $rise_resize_edge__on_drag_end_rise_resize_47 = $mol_type_enforce<
+		ReturnType< $rise_resize['resize_end'] >
+		,
+		ReturnType< $rise_resize_edge['on_drag_end'] >
+	>
+	type $rise_resize_edge__y_rise_resize_48 = $mol_type_enforce<
+		ReturnType< $rise_resize['bottom_edge_y'] >
+		,
+		ReturnType< $rise_resize_edge['y'] >
+	>
+	type $rise_resize_edge__x_rise_resize_49 = $mol_type_enforce<
+		ReturnType< $rise_resize['left_edge_x'] >
+		,
+		ReturnType< $rise_resize_edge['x'] >
+	>
+	type $rise_resize_edge__repos_x_rise_resize_50 = $mol_type_enforce<
+		ReturnType< $rise_resize['repos_x'] >
+		,
+		ReturnType< $rise_resize_edge['repos_x'] >
+	>
+	type $rise_resize_edge__repos_y_rise_resize_51 = $mol_type_enforce<
+		ReturnType< $rise_resize['repos_y'] >
+		,
+		ReturnType< $rise_resize_edge['repos_y'] >
+	>
+	type $rise_resize_edge__on_drag_start_rise_resize_52 = $mol_type_enforce<
+		ReturnType< $rise_resize['resize_start'] >
+		,
+		ReturnType< $rise_resize_edge['on_drag_start'] >
+	>
+	type $rise_resize_edge__on_drag_end_rise_resize_53 = $mol_type_enforce<
+		ReturnType< $rise_resize['resize_end'] >
+		,
+		ReturnType< $rise_resize_edge['on_drag_end'] >
+	>
+	type $rise_resize_edge__y_rise_resize_54 = $mol_type_enforce<
+		ReturnType< $rise_resize['bottom_edge_y'] >
+		,
+		ReturnType< $rise_resize_edge['y'] >
+	>
+	type $rise_resize_edge__x_rise_resize_55 = $mol_type_enforce<
 		ReturnType< $rise_resize['right_edge_x'] >
 		,
 		ReturnType< $rise_resize_edge['x'] >
@@ -1449,6 +1559,8 @@ declare namespace $ {
 		dragged( ): ReturnType< ReturnType< $rise_resize['Drag_view'] >['dragged'] >
 		drags_synced( ): readonly($rise_drag)[]
 		Drag( ): ReturnType< ReturnType< $rise_resize['Drag_view'] >['Drag'] >
+		repos_x( id: any): number
+		repos_y( id: any): number
 		Drag_view( ): $rise_drag_view
 		content( ): readonly(any)[]
 		Fullsize_wrapper( ): $mol_view
@@ -1508,6 +1620,8 @@ declare namespace $ {
 //# sourceMappingURL=resize.view.tree.d.ts.map
 declare namespace $.$$ {
     class $rise_resize extends $.$rise_resize {
+        repos_x(val: number): number;
+        repos_y(val: number): number;
         to_stick(sticks: readonly number[], val: number, shift: number): number;
         to_stick_x(val: number, shift: number): number;
         to_stick_y(val: number, shift: number): number;
@@ -3929,65 +4043,65 @@ declare namespace $.$$ {
 
 declare namespace $ {
 
-	type $rise_resize_edge__on_drag_start_rise_resize_ratio_1 = $mol_type_enforce<
+	type $rise_resize_edge__repos_x_rise_resize_ratio_1 = $mol_type_enforce<
+		ReturnType< $rise_resize_ratio['repos_x'] >
+		,
+		ReturnType< $rise_resize_edge['repos_x'] >
+	>
+	type $rise_resize_edge__repos_y_rise_resize_ratio_2 = $mol_type_enforce<
+		ReturnType< $rise_resize_ratio['repos_y'] >
+		,
+		ReturnType< $rise_resize_edge['repos_y'] >
+	>
+	type $rise_resize_edge__on_drag_start_rise_resize_ratio_3 = $mol_type_enforce<
 		ReturnType< $rise_resize_ratio['resize_start'] >
 		,
 		ReturnType< $rise_resize_edge['on_drag_start'] >
 	>
-	type $rise_resize_edge__on_drag_end_rise_resize_ratio_2 = $mol_type_enforce<
+	type $rise_resize_edge__on_drag_end_rise_resize_ratio_4 = $mol_type_enforce<
 		ReturnType< $rise_resize_ratio['resize_end'] >
 		,
 		ReturnType< $rise_resize_edge['on_drag_end'] >
 	>
-	type $rise_resize_edge__x_rise_resize_ratio_3 = $mol_type_enforce<
+	type $rise_resize_edge__x_rise_resize_ratio_5 = $mol_type_enforce<
 		ReturnType< $rise_resize_ratio['left_top_edge_ratio_x'] >
 		,
 		ReturnType< $rise_resize_edge['x'] >
 	>
-	type $rise_resize_edge__on_drag_start_rise_resize_ratio_4 = $mol_type_enforce<
+	type $rise_resize_edge__repos_x_rise_resize_ratio_6 = $mol_type_enforce<
+		ReturnType< $rise_resize_ratio['repos_x'] >
+		,
+		ReturnType< $rise_resize_edge['repos_x'] >
+	>
+	type $rise_resize_edge__repos_y_rise_resize_ratio_7 = $mol_type_enforce<
+		ReturnType< $rise_resize_ratio['repos_y'] >
+		,
+		ReturnType< $rise_resize_edge['repos_y'] >
+	>
+	type $rise_resize_edge__on_drag_start_rise_resize_ratio_8 = $mol_type_enforce<
 		ReturnType< $rise_resize_ratio['resize_start'] >
 		,
 		ReturnType< $rise_resize_edge['on_drag_start'] >
 	>
-	type $rise_resize_edge__on_drag_end_rise_resize_ratio_5 = $mol_type_enforce<
+	type $rise_resize_edge__on_drag_end_rise_resize_ratio_9 = $mol_type_enforce<
 		ReturnType< $rise_resize_ratio['resize_end'] >
 		,
 		ReturnType< $rise_resize_edge['on_drag_end'] >
 	>
-	type $rise_resize_edge__x_rise_resize_ratio_6 = $mol_type_enforce<
+	type $rise_resize_edge__x_rise_resize_ratio_10 = $mol_type_enforce<
 		ReturnType< $rise_resize_ratio['left_bottom_edge_ratio_x'] >
 		,
 		ReturnType< $rise_resize_edge['x'] >
 	>
-	type $rise_resize_edge__on_drag_start_rise_resize_ratio_7 = $mol_type_enforce<
-		ReturnType< $rise_resize_ratio['resize_start'] >
+	type $rise_resize_edge__repos_x_rise_resize_ratio_11 = $mol_type_enforce<
+		ReturnType< $rise_resize_ratio['repos_x'] >
 		,
-		ReturnType< $rise_resize_edge['on_drag_start'] >
+		ReturnType< $rise_resize_edge['repos_x'] >
 	>
-	type $rise_resize_edge__on_drag_end_rise_resize_ratio_8 = $mol_type_enforce<
-		ReturnType< $rise_resize_ratio['resize_end'] >
+	type $rise_resize_edge__repos_y_rise_resize_ratio_12 = $mol_type_enforce<
+		ReturnType< $rise_resize_ratio['repos_y'] >
 		,
-		ReturnType< $rise_resize_edge['on_drag_end'] >
-	>
-	type $rise_resize_edge__x_rise_resize_ratio_9 = $mol_type_enforce<
-		ReturnType< $rise_resize_ratio['right_bottom_edge_ratio_x'] >
-		,
-		ReturnType< $rise_resize_edge['x'] >
-	>
-	type $rise_resize_edge__on_drag_start_rise_resize_ratio_10 = $mol_type_enforce<
-		ReturnType< $rise_resize_ratio['resize_start'] >
-		,
-		ReturnType< $rise_resize_edge['on_drag_start'] >
-	>
-	type $rise_resize_edge__on_drag_end_rise_resize_ratio_11 = $mol_type_enforce<
-		ReturnType< $rise_resize_ratio['resize_end'] >
-		,
-		ReturnType< $rise_resize_edge['on_drag_end'] >
-	>
-	type $rise_resize_edge__x_rise_resize_ratio_12 = $mol_type_enforce<
-		ReturnType< $rise_resize_ratio['right_top_edge_ratio_x'] >
-		,
-		ReturnType< $rise_resize_edge['x'] >
+		ReturnType< $rise_resize_edge['repos_y'] >
 	>
 	type $rise_resize_edge__on_drag_start_rise_resize_ratio_13 = $mol_type_enforce<
 		ReturnType< $rise_resize_ratio['resize_start'] >
@@ -3999,52 +4113,132 @@ declare namespace $ {
 		,
 		ReturnType< $rise_resize_edge['on_drag_end'] >
 	>
-	type $rise_resize_edge__y_rise_resize_ratio_15 = $mol_type_enforce<
+	type $rise_resize_edge__x_rise_resize_ratio_15 = $mol_type_enforce<
+		ReturnType< $rise_resize_ratio['right_bottom_edge_ratio_x'] >
+		,
+		ReturnType< $rise_resize_edge['x'] >
+	>
+	type $rise_resize_edge__repos_x_rise_resize_ratio_16 = $mol_type_enforce<
+		ReturnType< $rise_resize_ratio['repos_x'] >
+		,
+		ReturnType< $rise_resize_edge['repos_x'] >
+	>
+	type $rise_resize_edge__repos_y_rise_resize_ratio_17 = $mol_type_enforce<
+		ReturnType< $rise_resize_ratio['repos_y'] >
+		,
+		ReturnType< $rise_resize_edge['repos_y'] >
+	>
+	type $rise_resize_edge__on_drag_start_rise_resize_ratio_18 = $mol_type_enforce<
+		ReturnType< $rise_resize_ratio['resize_start'] >
+		,
+		ReturnType< $rise_resize_edge['on_drag_start'] >
+	>
+	type $rise_resize_edge__on_drag_end_rise_resize_ratio_19 = $mol_type_enforce<
+		ReturnType< $rise_resize_ratio['resize_end'] >
+		,
+		ReturnType< $rise_resize_edge['on_drag_end'] >
+	>
+	type $rise_resize_edge__x_rise_resize_ratio_20 = $mol_type_enforce<
+		ReturnType< $rise_resize_ratio['right_top_edge_ratio_x'] >
+		,
+		ReturnType< $rise_resize_edge['x'] >
+	>
+	type $rise_resize_edge__repos_x_rise_resize_ratio_21 = $mol_type_enforce<
+		ReturnType< $rise_resize_ratio['repos_x'] >
+		,
+		ReturnType< $rise_resize_edge['repos_x'] >
+	>
+	type $rise_resize_edge__repos_y_rise_resize_ratio_22 = $mol_type_enforce<
+		ReturnType< $rise_resize_ratio['repos_y'] >
+		,
+		ReturnType< $rise_resize_edge['repos_y'] >
+	>
+	type $rise_resize_edge__on_drag_start_rise_resize_ratio_23 = $mol_type_enforce<
+		ReturnType< $rise_resize_ratio['resize_start'] >
+		,
+		ReturnType< $rise_resize_edge['on_drag_start'] >
+	>
+	type $rise_resize_edge__on_drag_end_rise_resize_ratio_24 = $mol_type_enforce<
+		ReturnType< $rise_resize_ratio['resize_end'] >
+		,
+		ReturnType< $rise_resize_edge['on_drag_end'] >
+	>
+	type $rise_resize_edge__y_rise_resize_ratio_25 = $mol_type_enforce<
 		ReturnType< $rise_resize_ratio['top_left_edge_ratio_y'] >
 		,
 		ReturnType< $rise_resize_edge['y'] >
 	>
-	type $rise_resize_edge__on_drag_start_rise_resize_ratio_16 = $mol_type_enforce<
+	type $rise_resize_edge__repos_x_rise_resize_ratio_26 = $mol_type_enforce<
+		ReturnType< $rise_resize_ratio['repos_x'] >
+		,
+		ReturnType< $rise_resize_edge['repos_x'] >
+	>
+	type $rise_resize_edge__repos_y_rise_resize_ratio_27 = $mol_type_enforce<
+		ReturnType< $rise_resize_ratio['repos_y'] >
+		,
+		ReturnType< $rise_resize_edge['repos_y'] >
+	>
+	type $rise_resize_edge__on_drag_start_rise_resize_ratio_28 = $mol_type_enforce<
 		ReturnType< $rise_resize_ratio['resize_start'] >
 		,
 		ReturnType< $rise_resize_edge['on_drag_start'] >
 	>
-	type $rise_resize_edge__on_drag_end_rise_resize_ratio_17 = $mol_type_enforce<
+	type $rise_resize_edge__on_drag_end_rise_resize_ratio_29 = $mol_type_enforce<
 		ReturnType< $rise_resize_ratio['resize_end'] >
 		,
 		ReturnType< $rise_resize_edge['on_drag_end'] >
 	>
-	type $rise_resize_edge__y_rise_resize_ratio_18 = $mol_type_enforce<
+	type $rise_resize_edge__y_rise_resize_ratio_30 = $mol_type_enforce<
 		ReturnType< $rise_resize_ratio['top_right_edge_ratio_y'] >
 		,
 		ReturnType< $rise_resize_edge['y'] >
 	>
-	type $rise_resize_edge__on_drag_start_rise_resize_ratio_19 = $mol_type_enforce<
+	type $rise_resize_edge__repos_x_rise_resize_ratio_31 = $mol_type_enforce<
+		ReturnType< $rise_resize_ratio['repos_x'] >
+		,
+		ReturnType< $rise_resize_edge['repos_x'] >
+	>
+	type $rise_resize_edge__repos_y_rise_resize_ratio_32 = $mol_type_enforce<
+		ReturnType< $rise_resize_ratio['repos_y'] >
+		,
+		ReturnType< $rise_resize_edge['repos_y'] >
+	>
+	type $rise_resize_edge__on_drag_start_rise_resize_ratio_33 = $mol_type_enforce<
 		ReturnType< $rise_resize_ratio['resize_start'] >
 		,
 		ReturnType< $rise_resize_edge['on_drag_start'] >
 	>
-	type $rise_resize_edge__on_drag_end_rise_resize_ratio_20 = $mol_type_enforce<
+	type $rise_resize_edge__on_drag_end_rise_resize_ratio_34 = $mol_type_enforce<
 		ReturnType< $rise_resize_ratio['resize_end'] >
 		,
 		ReturnType< $rise_resize_edge['on_drag_end'] >
 	>
-	type $rise_resize_edge__y_rise_resize_ratio_21 = $mol_type_enforce<
+	type $rise_resize_edge__y_rise_resize_ratio_35 = $mol_type_enforce<
 		ReturnType< $rise_resize_ratio['bottom_left_edge_ratio_y'] >
 		,
 		ReturnType< $rise_resize_edge['y'] >
 	>
-	type $rise_resize_edge__on_drag_start_rise_resize_ratio_22 = $mol_type_enforce<
+	type $rise_resize_edge__repos_x_rise_resize_ratio_36 = $mol_type_enforce<
+		ReturnType< $rise_resize_ratio['repos_x'] >
+		,
+		ReturnType< $rise_resize_edge['repos_x'] >
+	>
+	type $rise_resize_edge__repos_y_rise_resize_ratio_37 = $mol_type_enforce<
+		ReturnType< $rise_resize_ratio['repos_y'] >
+		,
+		ReturnType< $rise_resize_edge['repos_y'] >
+	>
+	type $rise_resize_edge__on_drag_start_rise_resize_ratio_38 = $mol_type_enforce<
 		ReturnType< $rise_resize_ratio['resize_start'] >
 		,
 		ReturnType< $rise_resize_edge['on_drag_start'] >
 	>
-	type $rise_resize_edge__on_drag_end_rise_resize_ratio_23 = $mol_type_enforce<
+	type $rise_resize_edge__on_drag_end_rise_resize_ratio_39 = $mol_type_enforce<
 		ReturnType< $rise_resize_ratio['resize_end'] >
 		,
 		ReturnType< $rise_resize_edge['on_drag_end'] >
 	>
-	type $rise_resize_edge__y_rise_resize_ratio_24 = $mol_type_enforce<
+	type $rise_resize_edge__y_rise_resize_ratio_40 = $mol_type_enforce<
 		ReturnType< $rise_resize_ratio['bottom_right_edge_ratio_y'] >
 		,
 		ReturnType< $rise_resize_edge['y'] >
@@ -4102,29 +4296,34 @@ declare namespace $ {
 		,
 		ReturnType< $mol_text['text'] >
 	>
-	type $rise_resize_ratio__drag_body_rise_resize_ratio_demo_2 = $mol_type_enforce<
+	type $rise_resize_ratio__ratio_rise_resize_ratio_demo_2 = $mol_type_enforce<
+		number
+		,
+		ReturnType< $rise_resize_ratio['ratio'] >
+	>
+	type $rise_resize_ratio__drag_body_rise_resize_ratio_demo_3 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $rise_resize_ratio['drag_body'] >
 	>
-	type $rise_resize_ratio__sticks_y_rise_resize_ratio_demo_3 = $mol_type_enforce<
+	type $rise_resize_ratio__sticks_y_rise_resize_ratio_demo_4 = $mol_type_enforce<
 		ReturnType< $rise_resize_ratio_demo['sticks_y'] >
 		,
 		ReturnType< $rise_resize_ratio['sticks_y'] >
 	>
-	type $rise_resize_ratio__sticks_x_rise_resize_ratio_demo_4 = $mol_type_enforce<
+	type $rise_resize_ratio__sticks_x_rise_resize_ratio_demo_5 = $mol_type_enforce<
 		ReturnType< $rise_resize_ratio_demo['sticks_x'] >
 		,
 		ReturnType< $rise_resize_ratio['sticks_x'] >
 	>
-	type $mol_view__style_rise_resize_ratio_demo_5 = $mol_type_enforce<
+	type $mol_view__style_rise_resize_ratio_demo_6 = $mol_type_enforce<
 		({ 
 			'left': ReturnType< $rise_resize_ratio_demo['stick_left'] >,
 		}) 
 		,
 		ReturnType< $mol_view['style'] >
 	>
-	type $mol_view__style_rise_resize_ratio_demo_6 = $mol_type_enforce<
+	type $mol_view__style_rise_resize_ratio_demo_7 = $mol_type_enforce<
 		({ 
 			'top': ReturnType< $rise_resize_ratio_demo['stick_top'] >,
 		}) 

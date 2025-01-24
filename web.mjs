@@ -2685,6 +2685,9 @@ var $;
 			if(next !== undefined) return next;
 			return null;
 		}
+		use_buttons(){
+			return [0];
+		}
 		event(){
 			return {...(super.event()), "pointerdown": (next) => (this.pointerdown(next))};
 		}
@@ -2766,6 +2769,8 @@ var $;
                 this.on_drag_end(event);
             }
             pointerdown(event) {
+                if (!this.use_buttons().includes(event.button))
+                    return;
                 this.drag_start(event);
                 this.drags_synced().forEach(d => d.drag_start(event));
                 const mousemove = new $mol_dom_listener(this.$.$mol_dom_context.document, 'mousemove', $mol_wire_async(event => {
@@ -3147,6 +3152,12 @@ var $;
 		drags_synced(){
 			return [];
 		}
+		repos_x(id){
+			return 1;
+		}
+		repos_y(id){
+			return 1;
+		}
 		Drag(){
 			const obj = new this.$.$rise_drag();
 			(obj.on_drag_start) = (next) => ((this.on_drag_start(next)));
@@ -3155,6 +3166,8 @@ var $;
 			(obj.y) = (next) => ((this.y(next)));
 			(obj.x) = (next) => ((this.x(next)));
 			(obj.drags_synced) = () => ((this.drags_synced()));
+			(obj.repos_x) = (id) => ((this.repos_x(id)));
+			(obj.repos_y) = (id) => ((this.repos_y(id)));
 			return obj;
 		}
 		plugins(){
@@ -3174,6 +3187,24 @@ var $;
 
 ;
 "use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $rise_drag_view extends $.$rise_drag_view {
+            repos_x(val) {
+                return val;
+            }
+            repos_y(val) {
+                return val;
+            }
+        }
+        $$.$rise_drag_view = $rise_drag_view;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
 
 ;
 	($.$rise_drag_absolute) = class $rise_drag_absolute extends ($.$rise_drag_view) {
@@ -3566,6 +3597,12 @@ var $;
 		Drag(){
 			return (this.Drag_view().Drag());
 		}
+		repos_x(id){
+			return 1;
+		}
+		repos_y(id){
+			return 1;
+		}
 		Drag_view(){
 			const obj = new this.$.$rise_drag_view();
 			(obj.sub) = () => ((this.drag_body()));
@@ -3574,6 +3611,8 @@ var $;
 			(obj.on_drag_start) = (next) => ((this.on_drag_start(next)));
 			(obj.on_drag_end) = (next) => ((this.on_drag_end(next)));
 			(obj.drags_synced) = () => ((this.drags_synced()));
+			(obj.repos_x) = (id) => ((this.repos_x(id)));
+			(obj.repos_y) = (id) => ((this.repos_y(id)));
 			return obj;
 		}
 		content(){
@@ -3607,6 +3646,8 @@ var $;
 		}
 		Top_edge(){
 			const obj = new this.$.$rise_resize_edge();
+			(obj.repos_x) = (id) => ((this.repos_x(id)));
+			(obj.repos_y) = (id) => ((this.repos_y(id)));
 			(obj.on_drag_start) = (next) => ((this.resize_start(next)));
 			(obj.on_drag_end) = (next) => ((this.resize_end(next)));
 			(obj.y) = (next) => ((this.top_edge_y(next)));
@@ -3618,6 +3659,8 @@ var $;
 		}
 		Left_edge(){
 			const obj = new this.$.$rise_resize_edge();
+			(obj.repos_x) = (id) => ((this.repos_x(id)));
+			(obj.repos_y) = (id) => ((this.repos_y(id)));
 			(obj.on_drag_start) = (next) => ((this.resize_start(next)));
 			(obj.on_drag_end) = (next) => ((this.resize_end(next)));
 			(obj.x) = (next) => ((this.left_edge_x(next)));
@@ -3629,6 +3672,8 @@ var $;
 		}
 		Bottom_edge(){
 			const obj = new this.$.$rise_resize_edge();
+			(obj.repos_x) = (id) => ((this.repos_x(id)));
+			(obj.repos_y) = (id) => ((this.repos_y(id)));
 			(obj.on_drag_start) = (next) => ((this.resize_start(next)));
 			(obj.on_drag_end) = (next) => ((this.resize_end(next)));
 			(obj.y) = (next) => ((this.bottom_edge_y(next)));
@@ -3640,6 +3685,8 @@ var $;
 		}
 		Right_edge(){
 			const obj = new this.$.$rise_resize_edge();
+			(obj.repos_x) = (id) => ((this.repos_x(id)));
+			(obj.repos_y) = (id) => ((this.repos_y(id)));
 			(obj.on_drag_start) = (next) => ((this.resize_start(next)));
 			(obj.on_drag_end) = (next) => ((this.resize_end(next)));
 			(obj.x) = (next) => ((this.right_edge_x(next)));
@@ -3647,6 +3694,8 @@ var $;
 		}
 		Top_left_edge(){
 			const obj = new this.$.$rise_resize_edge();
+			(obj.repos_x) = (id) => ((this.repos_x(id)));
+			(obj.repos_y) = (id) => ((this.repos_y(id)));
 			(obj.on_drag_start) = (next) => ((this.resize_start(next)));
 			(obj.on_drag_end) = (next) => ((this.resize_end(next)));
 			(obj.y) = (next) => ((this.top_edge_y(next)));
@@ -3655,6 +3704,8 @@ var $;
 		}
 		Top_right_edge(){
 			const obj = new this.$.$rise_resize_edge();
+			(obj.repos_x) = (id) => ((this.repos_x(id)));
+			(obj.repos_y) = (id) => ((this.repos_y(id)));
 			(obj.on_drag_start) = (next) => ((this.resize_start(next)));
 			(obj.on_drag_end) = (next) => ((this.resize_end(next)));
 			(obj.y) = (next) => ((this.top_edge_y(next)));
@@ -3663,6 +3714,8 @@ var $;
 		}
 		Bottom_left_edge(){
 			const obj = new this.$.$rise_resize_edge();
+			(obj.repos_x) = (id) => ((this.repos_x(id)));
+			(obj.repos_y) = (id) => ((this.repos_y(id)));
 			(obj.on_drag_start) = (next) => ((this.resize_start(next)));
 			(obj.on_drag_end) = (next) => ((this.resize_end(next)));
 			(obj.y) = (next) => ((this.bottom_edge_y(next)));
@@ -3671,6 +3724,8 @@ var $;
 		}
 		Bottom_right_edge(){
 			const obj = new this.$.$rise_resize_edge();
+			(obj.repos_x) = (id) => ((this.repos_x(id)));
+			(obj.repos_y) = (id) => ((this.repos_y(id)));
 			(obj.on_drag_start) = (next) => ((this.resize_start(next)));
 			(obj.on_drag_end) = (next) => ((this.resize_end(next)));
 			(obj.y) = (next) => ((this.bottom_edge_y(next)));
@@ -3699,10 +3754,10 @@ var $;
 			return "0px";
 		}
 		height_px(){
-			return "300px";
+			return "20px";
 		}
 		width_px(){
-			return "500px";
+			return "20px";
 		}
 		sub(){
 			return [(this.Content()), ...(this.edges())];
@@ -3712,10 +3767,10 @@ var $;
 			return false;
 		}
 		height_min(){
-			return 100;
+			return 20;
 		}
 		width_min(){
-			return 100;
+			return 20;
 		}
 		height(){
 			return 0;
@@ -3843,6 +3898,12 @@ var $;
     var $$;
     (function ($$) {
         class $rise_resize extends $.$rise_resize {
+            repos_x(val) {
+                return val;
+            }
+            repos_y(val) {
+                return val;
+            }
             to_stick(sticks, val, shift) {
                 for (const stick of sticks) {
                     const to_stick = stick - (val + shift);
@@ -9313,6 +9374,8 @@ var $;
 		}
 		Left_top_edge_ratio(){
 			const obj = new this.$.$rise_resize_edge();
+			(obj.repos_x) = (id) => ((this.repos_x(id)));
+			(obj.repos_y) = (id) => ((this.repos_y(id)));
 			(obj.on_drag_start) = (next) => ((this.resize_start(next)));
 			(obj.on_drag_end) = (next) => ((this.resize_end(next)));
 			(obj.x) = (next) => ((this.left_top_edge_ratio_x(next)));
@@ -9324,6 +9387,8 @@ var $;
 		}
 		Left_bottom_edge_ratio(){
 			const obj = new this.$.$rise_resize_edge();
+			(obj.repos_x) = (id) => ((this.repos_x(id)));
+			(obj.repos_y) = (id) => ((this.repos_y(id)));
 			(obj.on_drag_start) = (next) => ((this.resize_start(next)));
 			(obj.on_drag_end) = (next) => ((this.resize_end(next)));
 			(obj.x) = (next) => ((this.left_bottom_edge_ratio_x(next)));
@@ -9335,6 +9400,8 @@ var $;
 		}
 		Right_bottom_edge_ratio(){
 			const obj = new this.$.$rise_resize_edge();
+			(obj.repos_x) = (id) => ((this.repos_x(id)));
+			(obj.repos_y) = (id) => ((this.repos_y(id)));
 			(obj.on_drag_start) = (next) => ((this.resize_start(next)));
 			(obj.on_drag_end) = (next) => ((this.resize_end(next)));
 			(obj.x) = (next) => ((this.right_bottom_edge_ratio_x(next)));
@@ -9346,6 +9413,8 @@ var $;
 		}
 		Right_top_edge_ratio(){
 			const obj = new this.$.$rise_resize_edge();
+			(obj.repos_x) = (id) => ((this.repos_x(id)));
+			(obj.repos_y) = (id) => ((this.repos_y(id)));
 			(obj.on_drag_start) = (next) => ((this.resize_start(next)));
 			(obj.on_drag_end) = (next) => ((this.resize_end(next)));
 			(obj.x) = (next) => ((this.right_top_edge_ratio_x(next)));
@@ -9357,6 +9426,8 @@ var $;
 		}
 		Top_left_edge_ratio(){
 			const obj = new this.$.$rise_resize_edge();
+			(obj.repos_x) = (id) => ((this.repos_x(id)));
+			(obj.repos_y) = (id) => ((this.repos_y(id)));
 			(obj.on_drag_start) = (next) => ((this.resize_start(next)));
 			(obj.on_drag_end) = (next) => ((this.resize_end(next)));
 			(obj.y) = (next) => ((this.top_left_edge_ratio_y(next)));
@@ -9368,6 +9439,8 @@ var $;
 		}
 		Top_right_edge_ratio(){
 			const obj = new this.$.$rise_resize_edge();
+			(obj.repos_x) = (id) => ((this.repos_x(id)));
+			(obj.repos_y) = (id) => ((this.repos_y(id)));
 			(obj.on_drag_start) = (next) => ((this.resize_start(next)));
 			(obj.on_drag_end) = (next) => ((this.resize_end(next)));
 			(obj.y) = (next) => ((this.top_right_edge_ratio_y(next)));
@@ -9379,6 +9452,8 @@ var $;
 		}
 		Bottom_left_edge_ratio(){
 			const obj = new this.$.$rise_resize_edge();
+			(obj.repos_x) = (id) => ((this.repos_x(id)));
+			(obj.repos_y) = (id) => ((this.repos_y(id)));
 			(obj.on_drag_start) = (next) => ((this.resize_start(next)));
 			(obj.on_drag_end) = (next) => ((this.resize_end(next)));
 			(obj.y) = (next) => ((this.bottom_left_edge_ratio_y(next)));
@@ -9390,13 +9465,15 @@ var $;
 		}
 		Bottom_right_edge_ratio(){
 			const obj = new this.$.$rise_resize_edge();
+			(obj.repos_x) = (id) => ((this.repos_x(id)));
+			(obj.repos_y) = (id) => ((this.repos_y(id)));
 			(obj.on_drag_start) = (next) => ((this.resize_start(next)));
 			(obj.on_drag_end) = (next) => ((this.resize_end(next)));
 			(obj.y) = (next) => ((this.bottom_right_edge_ratio_y(next)));
 			return obj;
 		}
 		ratio(){
-			return 1;
+			return 0;
 		}
 		edges_ratio(){
 			return [
@@ -9719,6 +9796,7 @@ var $;
 		}
 		Resize(){
 			const obj = new this.$.$rise_resize_ratio();
+			(obj.ratio) = () => (1);
 			(obj.drag_body) = () => ([(this.Content())]);
 			(obj.sticks_y) = () => ((this.sticks_y()));
 			(obj.sticks_x) = () => ((this.sticks_x()));

@@ -12,6 +12,11 @@ $rise_drag $mol_plugin
 	drag_start? null
 	drag_end? null
 	-
+	use_buttons /
+		0 - \left
+		-\ 1 - \right
+		-\ 2 - \middle
+	-
 	event *
 		^
 		pointerdown? <=> pointerdown? null
@@ -62,6 +67,8 @@ $rise_drag_view $mol_view
 			y? <=> y? 0
 			x? <=> x? 0
 			drags_synced <= drags_synced /$rise_drag
+			repos_x* <= repos_x* 1
+			repos_y* <= repos_y* 1
 	style *
 		^
 		userSelect \none
@@ -123,47 +130,65 @@ $rise_resize $mol_view
 							dragged => dragged
 							drags_synced <= drags_synced /$rise_drag
 							Drag => Drag
+							repos_x* <= repos_x* 1
+							repos_y* <= repos_y* 1
 		^ edges /
 			<= Top_edge $rise_resize_edge
+				repos_x* <= repos_x*
+				repos_y* <= repos_y*
 				on_drag_start? <=> resize_start? null
 				on_drag_end? <=> resize_end? null
 				y? <=> top_edge_y? 0
 			<= Left_edge $rise_resize_edge
+				repos_x* <= repos_x*
+				repos_y* <= repos_y*
 				on_drag_start? <=> resize_start? null
 				on_drag_end? <=> resize_end? null
 				x? <=> left_edge_x? 0
 			<= Bottom_edge $rise_resize_edge
+				repos_x* <= repos_x*
+				repos_y* <= repos_y*
 				on_drag_start? <=> resize_start? null
 				on_drag_end? <=> resize_end? null
 				y? <=> bottom_edge_y? 0
 			<= Right_edge $rise_resize_edge
+				repos_x* <= repos_x*
+				repos_y* <= repos_y*
 				on_drag_start? <=> resize_start? null
 				on_drag_end? <=> resize_end? null
 				x? <=> right_edge_x? 0
 			<= Top_left_edge $rise_resize_edge
+				repos_x* <= repos_x*
+				repos_y* <= repos_y*
 				on_drag_start? <=> resize_start? null
 				on_drag_end? <=> resize_end? null
 				y? <=> top_edge_y? 0
 				x? <=> left_edge_x? 0
 			<= Top_right_edge $rise_resize_edge
+				repos_x* <= repos_x*
+				repos_y* <= repos_y*
 				on_drag_start? <=> resize_start? null
 				on_drag_end? <=> resize_end? null
 				y? <=> top_edge_y? 0
 				x? <=> right_edge_x? 0
 			<= Bottom_left_edge $rise_resize_edge
+				repos_x* <= repos_x*
+				repos_y* <= repos_y*
 				on_drag_start? <=> resize_start? null
 				on_drag_end? <=> resize_end? null
 				y? <=> bottom_edge_y? 0
 				x? <=> left_edge_x? 0
 			<= Bottom_right_edge $rise_resize_edge
+				repos_x* <= repos_x*
+				repos_y* <= repos_y*
 				on_drag_start? <=> resize_start? null
 				on_drag_end? <=> resize_end? null
 				y? <=> bottom_edge_y? 0
 				x? <=> right_edge_x? 0
 	resizing? false
 	-
-	height_min 100
-	width_min 100
+	height_min 20
+	width_min 20
 	-
 	height 0
 	width 0
@@ -187,8 +212,8 @@ $rise_resize $mol_view
 		^
 		top <= top_px \0px
 		left <= left_px \0px
-		height <= height_px \300px
-		width <= width_px \500px
+		height <= height_px \20px
+		width <= width_px \20px
 
 $rise_resize_edge $rise_drag_view
 
@@ -720,37 +745,53 @@ $rise_resize_demo $mol_example_small
 		\Widget
 
 $rise_resize_ratio $rise_resize
-	ratio 1
+	ratio 0
 	edges_ratio /
 		<= Left_top_edge_ratio $rise_resize_edge
+			repos_x* <= repos_x*
+			repos_y* <= repos_y*
 			on_drag_start? <=> resize_start?
 			on_drag_end? <=> resize_end?
 			x? <=> left_top_edge_ratio_x? 0
 		<= Left_bottom_edge_ratio $rise_resize_edge
+			repos_x* <= repos_x*
+			repos_y* <= repos_y*
 			on_drag_start? <=> resize_start?
 			on_drag_end? <=> resize_end?
 			x? <=> left_bottom_edge_ratio_x? 0
 		<= Right_bottom_edge_ratio $rise_resize_edge
+			repos_x* <= repos_x*
+			repos_y* <= repos_y*
 			on_drag_start? <=> resize_start?
 			on_drag_end? <=> resize_end?
 			x? <=> right_bottom_edge_ratio_x? 0
 		<= Right_top_edge_ratio $rise_resize_edge
+			repos_x* <= repos_x*
+			repos_y* <= repos_y*
 			on_drag_start? <=> resize_start?
 			on_drag_end? <=> resize_end?
 			x? <=> right_top_edge_ratio_x? 0
 		<= Top_left_edge_ratio $rise_resize_edge
+			repos_x* <= repos_x*
+			repos_y* <= repos_y*
 			on_drag_start? <=> resize_start?
 			on_drag_end? <=> resize_end?
 			y? <=> top_left_edge_ratio_y? 0
 		<= Top_right_edge_ratio $rise_resize_edge
+			repos_x* <= repos_x*
+			repos_y* <= repos_y*
 			on_drag_start? <=> resize_start?
 			on_drag_end? <=> resize_end?
 			y? <=> top_right_edge_ratio_y? 0
 		<= Bottom_left_edge_ratio $rise_resize_edge
+			repos_x* <= repos_x*
+			repos_y* <= repos_y*
 			on_drag_start? <=> resize_start?
 			on_drag_end? <=> resize_end?
 			y? <=> bottom_left_edge_ratio_y? 0
 		<= Bottom_right_edge_ratio $rise_resize_edge
+			repos_x* <= repos_x*
+			repos_y* <= repos_y*
 			on_drag_start? <=> resize_start?
 			on_drag_end? <=> resize_end?
 			y? <=> bottom_right_edge_ratio_y? 0
@@ -758,6 +799,7 @@ $rise_resize_ratio $rise_resize
 $rise_resize_ratio_demo $mol_example_small
 	sub /
 		<= Resize $rise_resize_ratio
+			ratio 1
 			height => height
 			width => width
 			top => top
