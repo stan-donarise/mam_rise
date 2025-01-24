@@ -3965,29 +3965,39 @@ declare namespace $ {
 		,
 		ReturnType< $mol_text['text'] >
 	>
-	type $rise_resize__drag_body_rise_resize_demo_2 = $mol_type_enforce<
+	type $rise_resize__height_min_rise_resize_demo_2 = $mol_type_enforce<
+		number
+		,
+		ReturnType< $rise_resize['height_min'] >
+	>
+	type $rise_resize__width_min_rise_resize_demo_3 = $mol_type_enforce<
+		number
+		,
+		ReturnType< $rise_resize['width_min'] >
+	>
+	type $rise_resize__drag_body_rise_resize_demo_4 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $rise_resize['drag_body'] >
 	>
-	type $rise_resize__sticks_y_rise_resize_demo_3 = $mol_type_enforce<
+	type $rise_resize__sticks_y_rise_resize_demo_5 = $mol_type_enforce<
 		ReturnType< $rise_resize_demo['sticks_y'] >
 		,
 		ReturnType< $rise_resize['sticks_y'] >
 	>
-	type $rise_resize__sticks_x_rise_resize_demo_4 = $mol_type_enforce<
+	type $rise_resize__sticks_x_rise_resize_demo_6 = $mol_type_enforce<
 		ReturnType< $rise_resize_demo['sticks_x'] >
 		,
 		ReturnType< $rise_resize['sticks_x'] >
 	>
-	type $mol_view__style_rise_resize_demo_5 = $mol_type_enforce<
+	type $mol_view__style_rise_resize_demo_7 = $mol_type_enforce<
 		({ 
 			'left': ReturnType< $rise_resize_demo['stick_left'] >,
 		}) 
 		,
 		ReturnType< $mol_view['style'] >
 	>
-	type $mol_view__style_rise_resize_demo_6 = $mol_type_enforce<
+	type $mol_view__style_rise_resize_demo_8 = $mol_type_enforce<
 		({ 
 			'top': ReturnType< $rise_resize_demo['stick_top'] >,
 		}) 
@@ -4296,34 +4306,44 @@ declare namespace $ {
 		,
 		ReturnType< $mol_text['text'] >
 	>
-	type $rise_resize_ratio__ratio_rise_resize_ratio_demo_2 = $mol_type_enforce<
+	type $rise_resize_ratio__height_min_rise_resize_ratio_demo_2 = $mol_type_enforce<
+		number
+		,
+		ReturnType< $rise_resize_ratio['height_min'] >
+	>
+	type $rise_resize_ratio__width_min_rise_resize_ratio_demo_3 = $mol_type_enforce<
+		number
+		,
+		ReturnType< $rise_resize_ratio['width_min'] >
+	>
+	type $rise_resize_ratio__ratio_rise_resize_ratio_demo_4 = $mol_type_enforce<
 		number
 		,
 		ReturnType< $rise_resize_ratio['ratio'] >
 	>
-	type $rise_resize_ratio__drag_body_rise_resize_ratio_demo_3 = $mol_type_enforce<
+	type $rise_resize_ratio__drag_body_rise_resize_ratio_demo_5 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $rise_resize_ratio['drag_body'] >
 	>
-	type $rise_resize_ratio__sticks_y_rise_resize_ratio_demo_4 = $mol_type_enforce<
+	type $rise_resize_ratio__sticks_y_rise_resize_ratio_demo_6 = $mol_type_enforce<
 		ReturnType< $rise_resize_ratio_demo['sticks_y'] >
 		,
 		ReturnType< $rise_resize_ratio['sticks_y'] >
 	>
-	type $rise_resize_ratio__sticks_x_rise_resize_ratio_demo_5 = $mol_type_enforce<
+	type $rise_resize_ratio__sticks_x_rise_resize_ratio_demo_7 = $mol_type_enforce<
 		ReturnType< $rise_resize_ratio_demo['sticks_x'] >
 		,
 		ReturnType< $rise_resize_ratio['sticks_x'] >
 	>
-	type $mol_view__style_rise_resize_ratio_demo_6 = $mol_type_enforce<
+	type $mol_view__style_rise_resize_ratio_demo_8 = $mol_type_enforce<
 		({ 
 			'left': ReturnType< $rise_resize_ratio_demo['stick_left'] >,
 		}) 
 		,
 		ReturnType< $mol_view['style'] >
 	>
-	type $mol_view__style_rise_resize_ratio_demo_7 = $mol_type_enforce<
+	type $mol_view__style_rise_resize_ratio_demo_9 = $mol_type_enforce<
 		({ 
 			'top': ReturnType< $rise_resize_ratio_demo['stick_top'] >,
 		}) 

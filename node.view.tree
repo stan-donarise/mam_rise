@@ -705,6 +705,8 @@ $mol_text_list_item $mol_paragraph
 $rise_resize_demo $mol_example_small
 	sub /
 		<= Resize $rise_resize
+			height_min 150
+			width_min 150
 			height => height
 			width => width
 			top => top
@@ -799,6 +801,8 @@ $rise_resize_ratio $rise_resize
 $rise_resize_ratio_demo $mol_example_small
 	sub /
 		<= Resize $rise_resize_ratio
+			height_min 150
+			width_min 150
 			ratio 1
 			height => height
 			width => width

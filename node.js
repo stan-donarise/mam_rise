@@ -9756,6 +9756,8 @@ var $;
 		}
 		Resize(){
 			const obj = new this.$.$rise_resize();
+			(obj.height_min) = () => (150);
+			(obj.width_min) = () => (150);
 			(obj.drag_body) = () => ([(this.Content())]);
 			(obj.sticks_y) = () => ((this.sticks_y()));
 			(obj.sticks_x) = () => ((this.sticks_x()));
@@ -10307,6 +10309,8 @@ var $;
 		}
 		Resize(){
 			const obj = new this.$.$rise_resize_ratio();
+			(obj.height_min) = () => (150);
+			(obj.width_min) = () => (150);
 			(obj.ratio) = () => (1);
 			(obj.drag_body) = () => ([(this.Content())]);
 			(obj.sticks_y) = () => ((this.sticks_y()));
