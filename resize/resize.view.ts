@@ -2,6 +2,14 @@ namespace $.$$ {
 
 	export class $rise_resize extends $.$rise_resize {
 
+		repos_x( val: number ): number {
+			return val
+		}
+		
+		repos_y( val: number ): number {
+			return val
+		}
+		
 		to_stick( sticks: readonly number[], val: number, shift: number ) {
 			for( const stick of sticks ) {
 				const to_stick = stick - (val + shift)

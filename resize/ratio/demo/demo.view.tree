@@ -1,6 +1,7 @@
 $rise_resize_ratio_demo $mol_example_small
 	sub /
 		<= Resize $rise_resize_ratio
+			ratio 1
 			height => height
 			width => width
 			top => top

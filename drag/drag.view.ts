@@ -33,6 +33,8 @@ namespace $.$$ {
 
 		pointerdown( event: PointerEvent ) {
 			
+			if( !this.use_buttons().includes( event.button ) ) return
+			
 			this.drag_start( event )
 			this.drags_synced().forEach( d => d.drag_start( event ) )
 			

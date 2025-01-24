@@ -16,47 +16,65 @@ $rise_resize $mol_view
 							dragged => dragged
 							drags_synced <= drags_synced /$rise_drag
 							Drag => Drag
+							repos_x* <= repos_x* 1
+							repos_y* <= repos_y* 1
 		^ edges /
 			<= Top_edge $rise_resize_edge
+				repos_x* <= repos_x*
+				repos_y* <= repos_y*
 				on_drag_start? <=> resize_start? null
 				on_drag_end? <=> resize_end? null
 				y? <=> top_edge_y? 0
 			<= Left_edge $rise_resize_edge
+				repos_x* <= repos_x*
+				repos_y* <= repos_y*
 				on_drag_start? <=> resize_start? null
 				on_drag_end? <=> resize_end? null
 				x? <=> left_edge_x? 0
 			<= Bottom_edge $rise_resize_edge
+				repos_x* <= repos_x*
+				repos_y* <= repos_y*
 				on_drag_start? <=> resize_start? null
 				on_drag_end? <=> resize_end? null
 				y? <=> bottom_edge_y? 0
 			<= Right_edge $rise_resize_edge
+				repos_x* <= repos_x*
+				repos_y* <= repos_y*
 				on_drag_start? <=> resize_start? null
 				on_drag_end? <=> resize_end? null
 				x? <=> right_edge_x? 0
 			<= Top_left_edge $rise_resize_edge
+				repos_x* <= repos_x*
+				repos_y* <= repos_y*
 				on_drag_start? <=> resize_start? null
 				on_drag_end? <=> resize_end? null
 				y? <=> top_edge_y? 0
 				x? <=> left_edge_x? 0
 			<= Top_right_edge $rise_resize_edge
+				repos_x* <= repos_x*
+				repos_y* <= repos_y*
 				on_drag_start? <=> resize_start? null
 				on_drag_end? <=> resize_end? null
 				y? <=> top_edge_y? 0
 				x? <=> right_edge_x? 0
 			<= Bottom_left_edge $rise_resize_edge
+				repos_x* <= repos_x*
+				repos_y* <= repos_y*
 				on_drag_start? <=> resize_start? null
 				on_drag_end? <=> resize_end? null
 				y? <=> bottom_edge_y? 0
 				x? <=> left_edge_x? 0
 			<= Bottom_right_edge $rise_resize_edge
+				repos_x* <= repos_x*
+				repos_y* <= repos_y*
 				on_drag_start? <=> resize_start? null
 				on_drag_end? <=> resize_end? null
 				y? <=> bottom_edge_y? 0
 				x? <=> right_edge_x? 0
 	resizing? false
 	-
-	height_min 100
-	width_min 100
+	height_min 20
+	width_min 20
 	-
 	height 0
 	width 0
@@ -80,7 +98,7 @@ $rise_resize $mol_view
 		^
 		top <= top_px \0px
 		left <= left_px \0px
-		height <= height_px \300px
-		width <= width_px \500px
+		height <= height_px \20px
+		width <= width_px \20px
 
 $rise_resize_edge $rise_drag_view

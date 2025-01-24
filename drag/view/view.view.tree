@@ -9,6 +9,8 @@ $rise_drag_view $mol_view
 			y? <=> y? 0
 			x? <=> x? 0
 			drags_synced <= drags_synced /$rise_drag
+			repos_x* <= repos_x* 1
+			repos_y* <= repos_y* 1
 	style *
 		^
 		userSelect \none

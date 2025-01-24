@@ -1,35 +1,51 @@
 $rise_resize_ratio $rise_resize
-	ratio 1
+	ratio 0
 	edges_ratio /
 		<= Left_top_edge_ratio $rise_resize_edge
+			repos_x* <= repos_x*
+			repos_y* <= repos_y*
 			on_drag_start? <=> resize_start?
 			on_drag_end? <=> resize_end?
 			x? <=> left_top_edge_ratio_x? 0
 		<= Left_bottom_edge_ratio $rise_resize_edge
+			repos_x* <= repos_x*
+			repos_y* <= repos_y*
 			on_drag_start? <=> resize_start?
 			on_drag_end? <=> resize_end?
 			x? <=> left_bottom_edge_ratio_x? 0
 		<= Right_bottom_edge_ratio $rise_resize_edge
+			repos_x* <= repos_x*
+			repos_y* <= repos_y*
 			on_drag_start? <=> resize_start?
 			on_drag_end? <=> resize_end?
 			x? <=> right_bottom_edge_ratio_x? 0
 		<= Right_top_edge_ratio $rise_resize_edge
+			repos_x* <= repos_x*
+			repos_y* <= repos_y*
 			on_drag_start? <=> resize_start?
 			on_drag_end? <=> resize_end?
 			x? <=> right_top_edge_ratio_x? 0
 		<= Top_left_edge_ratio $rise_resize_edge
+			repos_x* <= repos_x*
+			repos_y* <= repos_y*
 			on_drag_start? <=> resize_start?
 			on_drag_end? <=> resize_end?
 			y? <=> top_left_edge_ratio_y? 0
 		<= Top_right_edge_ratio $rise_resize_edge
+			repos_x* <= repos_x*
+			repos_y* <= repos_y*
 			on_drag_start? <=> resize_start?
 			on_drag_end? <=> resize_end?
 			y? <=> top_right_edge_ratio_y? 0
 		<= Bottom_left_edge_ratio $rise_resize_edge
+			repos_x* <= repos_x*
+			repos_y* <= repos_y*
 			on_drag_start? <=> resize_start?
 			on_drag_end? <=> resize_end?
 			y? <=> bottom_left_edge_ratio_y? 0
 		<= Bottom_right_edge_ratio $rise_resize_edge
+			repos_x* <= repos_x*
+			repos_y* <= repos_y*
 			on_drag_start? <=> resize_start?
 			on_drag_end? <=> resize_end?
 			y? <=> bottom_right_edge_ratio_y? 0
