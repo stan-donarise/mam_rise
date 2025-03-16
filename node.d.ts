@@ -1366,6 +1366,10 @@ declare namespace $ {
 
 //# sourceMappingURL=demo.view.tree.d.ts.map
 declare namespace $ {
+    let $mol_action: typeof $mol_wire_method;
+}
+
+declare namespace $ {
     type $mol_style_pseudo_class = ':active' | ':any' | ':any-link' | ':checked' | ':default' | ':defined' | ':dir(rtl)' | ':dir(ltr)' | ':disabled' | ':empty' | ':enabled' | ':first' | ':first-child' | ':first-of-type' | ':fullscreen' | ':focus' | ':focus-visible' | ':focus-within' | ':hover' | ':indeterminate' | ':in-range' | ':invalid' | ':last-child' | ':last-of-type' | ':left' | ':link' | ':not()' | ':nth-child(even)' | ':nth-child(odd)' | ':nth-last-child(even)' | ':nth-last-child(odd)' | ':nth-of-type(even)' | ':nth-of-type(odd)' | ':nth-last-of-type(even)' | ':nth-last-of-type(odd)' | ':only-child' | ':only-of-type' | ':optional' | ':out-of-range' | ':placeholder-shown' | ':read-only' | ':read-write' | ':required' | ':right' | ':root' | ':scope' | ':target' | ':valid' | ':visited';
 }
 
@@ -1410,41 +1414,6 @@ declare namespace $ {
 }
 
 declare namespace $ {
-
-	export class $mol_scroll extends $mol_view {
-		tabindex( ): number
-		event_scroll( next?: any ): any
-		scroll_top( next?: number ): number
-		scroll_left( next?: number ): number
-		attr( ): ({ 
-			'tabindex': ReturnType< $mol_scroll['tabindex'] >,
-		})  & ReturnType< $mol_view['attr'] >
-		event( ): ({ 
-			scroll( next?: ReturnType< $mol_scroll['event_scroll'] > ): ReturnType< $mol_scroll['event_scroll'] >,
-		})  & ReturnType< $mol_view['event'] >
-	}
-	
-}
-
-//# sourceMappingURL=scroll.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $mol_scroll extends $.$mol_scroll {
-        scroll_top(next?: number, cache?: 'cache'): number;
-        scroll_left(next?: number, cache?: 'cache'): number;
-        event_scroll(next?: Event): void;
-        minimal_height(): number;
-        minimal_width(): number;
-    }
-}
-
-declare namespace $.$$ {
-}
-
-declare namespace $ {
-    let $mol_action: typeof $mol_wire_method;
-}
-
-declare namespace $ {
     let $mol_layer: Record<"focus" | "float" | "hover" | "speck" | "popup", $mol_style_func<"var", unknown>>;
 }
 
@@ -1453,280 +1422,267 @@ declare namespace $ {
 
 declare namespace $ {
 
-	type $rise_drag_view__sub_rise_resize_1 = $mol_type_enforce<
+	type $rise_drag_view__minimal_height_rise_resize_1 = $mol_type_enforce<
+		number
+		,
+		ReturnType< $rise_drag_view['minimal_height'] >
+	>
+	type $rise_drag_view__sub_rise_resize_2 = $mol_type_enforce<
 		ReturnType< $rise_resize['drag_body'] >
 		,
 		ReturnType< $rise_drag_view['sub'] >
 	>
-	type $rise_drag_view__x_rise_resize_2 = $mol_type_enforce<
+	type $rise_drag_view__x_rise_resize_3 = $mol_type_enforce<
 		ReturnType< $rise_resize['x'] >
 		,
 		ReturnType< $rise_drag_view['x'] >
 	>
-	type $rise_drag_view__y_rise_resize_3 = $mol_type_enforce<
+	type $rise_drag_view__y_rise_resize_4 = $mol_type_enforce<
 		ReturnType< $rise_resize['y'] >
 		,
 		ReturnType< $rise_drag_view['y'] >
 	>
-	type $rise_drag_view__on_drag_start_rise_resize_4 = $mol_type_enforce<
+	type $rise_drag_view__on_drag_start_rise_resize_5 = $mol_type_enforce<
 		ReturnType< $rise_resize['on_drag_start'] >
 		,
 		ReturnType< $rise_drag_view['on_drag_start'] >
 	>
-	type $rise_drag_view__on_drag_end_rise_resize_5 = $mol_type_enforce<
+	type $rise_drag_view__on_drag_end_rise_resize_6 = $mol_type_enforce<
 		ReturnType< $rise_resize['on_drag_end'] >
 		,
 		ReturnType< $rise_drag_view['on_drag_end'] >
 	>
-	type $rise_drag_view__drags_synced_rise_resize_6 = $mol_type_enforce<
+	type $rise_drag_view__drags_synced_rise_resize_7 = $mol_type_enforce<
 		ReturnType< $rise_resize['drags_synced'] >
 		,
 		ReturnType< $rise_drag_view['drags_synced'] >
 	>
-	type $rise_drag_view__repos_x_rise_resize_7 = $mol_type_enforce<
+	type $rise_drag_view__repos_x_rise_resize_8 = $mol_type_enforce<
 		ReturnType< $rise_resize['repos_x'] >
 		,
 		ReturnType< $rise_drag_view['repos_x'] >
 	>
-	type $rise_drag_view__repos_y_rise_resize_8 = $mol_type_enforce<
+	type $rise_drag_view__repos_y_rise_resize_9 = $mol_type_enforce<
 		ReturnType< $rise_resize['repos_y'] >
 		,
 		ReturnType< $rise_drag_view['repos_y'] >
 	>
-	type $mol_view__style_rise_resize_9 = $mol_type_enforce<
-		({ 
-			'minHeight': string,
-			'minWidth': string,
-		}) 
-		,
-		ReturnType< $mol_view['style'] >
-	>
-	type $mol_view__sub_rise_resize_10 = $mol_type_enforce<
-		ReturnType< $rise_resize['content'] >
-		,
-		ReturnType< $mol_view['sub'] >
-	>
-	type $mol_scroll__sub_rise_resize_11 = $mol_type_enforce<
-		ReturnType< $rise_resize['content_wrapper'] >
-		,
-		ReturnType< $mol_scroll['sub'] >
-	>
-	type $rise_resize_edge__repos_x_rise_resize_12 = $mol_type_enforce<
+	type $rise_resize_edge__repos_x_rise_resize_10 = $mol_type_enforce<
 		ReturnType< $rise_resize['repos_x'] >
 		,
 		ReturnType< $rise_resize_edge['repos_x'] >
 	>
-	type $rise_resize_edge__repos_y_rise_resize_13 = $mol_type_enforce<
+	type $rise_resize_edge__repos_y_rise_resize_11 = $mol_type_enforce<
 		ReturnType< $rise_resize['repos_y'] >
 		,
 		ReturnType< $rise_resize_edge['repos_y'] >
 	>
-	type $rise_resize_edge__on_drag_start_rise_resize_14 = $mol_type_enforce<
+	type $rise_resize_edge__on_drag_start_rise_resize_12 = $mol_type_enforce<
 		ReturnType< $rise_resize['resize_start'] >
 		,
 		ReturnType< $rise_resize_edge['on_drag_start'] >
 	>
-	type $rise_resize_edge__on_drag_end_rise_resize_15 = $mol_type_enforce<
+	type $rise_resize_edge__on_drag_end_rise_resize_13 = $mol_type_enforce<
 		ReturnType< $rise_resize['resize_end'] >
 		,
 		ReturnType< $rise_resize_edge['on_drag_end'] >
 	>
-	type $rise_resize_edge__y_rise_resize_16 = $mol_type_enforce<
+	type $rise_resize_edge__y_rise_resize_14 = $mol_type_enforce<
 		ReturnType< $rise_resize['top_edge_y'] >
 		,
 		ReturnType< $rise_resize_edge['y'] >
 	>
-	type $rise_resize_edge__repos_x_rise_resize_17 = $mol_type_enforce<
+	type $rise_resize_edge__repos_x_rise_resize_15 = $mol_type_enforce<
 		ReturnType< $rise_resize['repos_x'] >
 		,
 		ReturnType< $rise_resize_edge['repos_x'] >
 	>
-	type $rise_resize_edge__repos_y_rise_resize_18 = $mol_type_enforce<
+	type $rise_resize_edge__repos_y_rise_resize_16 = $mol_type_enforce<
 		ReturnType< $rise_resize['repos_y'] >
 		,
 		ReturnType< $rise_resize_edge['repos_y'] >
 	>
-	type $rise_resize_edge__on_drag_start_rise_resize_19 = $mol_type_enforce<
+	type $rise_resize_edge__on_drag_start_rise_resize_17 = $mol_type_enforce<
 		ReturnType< $rise_resize['resize_start'] >
 		,
 		ReturnType< $rise_resize_edge['on_drag_start'] >
 	>
-	type $rise_resize_edge__on_drag_end_rise_resize_20 = $mol_type_enforce<
+	type $rise_resize_edge__on_drag_end_rise_resize_18 = $mol_type_enforce<
 		ReturnType< $rise_resize['resize_end'] >
 		,
 		ReturnType< $rise_resize_edge['on_drag_end'] >
 	>
-	type $rise_resize_edge__x_rise_resize_21 = $mol_type_enforce<
+	type $rise_resize_edge__x_rise_resize_19 = $mol_type_enforce<
 		ReturnType< $rise_resize['left_edge_x'] >
 		,
 		ReturnType< $rise_resize_edge['x'] >
 	>
-	type $rise_resize_edge__repos_x_rise_resize_22 = $mol_type_enforce<
+	type $rise_resize_edge__repos_x_rise_resize_20 = $mol_type_enforce<
 		ReturnType< $rise_resize['repos_x'] >
 		,
 		ReturnType< $rise_resize_edge['repos_x'] >
 	>
-	type $rise_resize_edge__repos_y_rise_resize_23 = $mol_type_enforce<
+	type $rise_resize_edge__repos_y_rise_resize_21 = $mol_type_enforce<
 		ReturnType< $rise_resize['repos_y'] >
 		,
 		ReturnType< $rise_resize_edge['repos_y'] >
 	>
-	type $rise_resize_edge__on_drag_start_rise_resize_24 = $mol_type_enforce<
+	type $rise_resize_edge__on_drag_start_rise_resize_22 = $mol_type_enforce<
 		ReturnType< $rise_resize['resize_start'] >
 		,
 		ReturnType< $rise_resize_edge['on_drag_start'] >
 	>
-	type $rise_resize_edge__on_drag_end_rise_resize_25 = $mol_type_enforce<
+	type $rise_resize_edge__on_drag_end_rise_resize_23 = $mol_type_enforce<
 		ReturnType< $rise_resize['resize_end'] >
 		,
 		ReturnType< $rise_resize_edge['on_drag_end'] >
 	>
-	type $rise_resize_edge__y_rise_resize_26 = $mol_type_enforce<
+	type $rise_resize_edge__y_rise_resize_24 = $mol_type_enforce<
 		ReturnType< $rise_resize['bottom_edge_y'] >
 		,
 		ReturnType< $rise_resize_edge['y'] >
 	>
-	type $rise_resize_edge__repos_x_rise_resize_27 = $mol_type_enforce<
+	type $rise_resize_edge__repos_x_rise_resize_25 = $mol_type_enforce<
 		ReturnType< $rise_resize['repos_x'] >
 		,
 		ReturnType< $rise_resize_edge['repos_x'] >
 	>
-	type $rise_resize_edge__repos_y_rise_resize_28 = $mol_type_enforce<
+	type $rise_resize_edge__repos_y_rise_resize_26 = $mol_type_enforce<
 		ReturnType< $rise_resize['repos_y'] >
 		,
 		ReturnType< $rise_resize_edge['repos_y'] >
 	>
-	type $rise_resize_edge__on_drag_start_rise_resize_29 = $mol_type_enforce<
+	type $rise_resize_edge__on_drag_start_rise_resize_27 = $mol_type_enforce<
 		ReturnType< $rise_resize['resize_start'] >
 		,
 		ReturnType< $rise_resize_edge['on_drag_start'] >
 	>
-	type $rise_resize_edge__on_drag_end_rise_resize_30 = $mol_type_enforce<
+	type $rise_resize_edge__on_drag_end_rise_resize_28 = $mol_type_enforce<
 		ReturnType< $rise_resize['resize_end'] >
 		,
 		ReturnType< $rise_resize_edge['on_drag_end'] >
 	>
-	type $rise_resize_edge__x_rise_resize_31 = $mol_type_enforce<
+	type $rise_resize_edge__x_rise_resize_29 = $mol_type_enforce<
 		ReturnType< $rise_resize['right_edge_x'] >
 		,
 		ReturnType< $rise_resize_edge['x'] >
 	>
-	type $rise_resize_edge__repos_x_rise_resize_32 = $mol_type_enforce<
+	type $rise_resize_edge__repos_x_rise_resize_30 = $mol_type_enforce<
 		ReturnType< $rise_resize['repos_x'] >
 		,
 		ReturnType< $rise_resize_edge['repos_x'] >
 	>
-	type $rise_resize_edge__repos_y_rise_resize_33 = $mol_type_enforce<
+	type $rise_resize_edge__repos_y_rise_resize_31 = $mol_type_enforce<
 		ReturnType< $rise_resize['repos_y'] >
 		,
 		ReturnType< $rise_resize_edge['repos_y'] >
 	>
-	type $rise_resize_edge__on_drag_start_rise_resize_34 = $mol_type_enforce<
+	type $rise_resize_edge__on_drag_start_rise_resize_32 = $mol_type_enforce<
 		ReturnType< $rise_resize['resize_start'] >
 		,
 		ReturnType< $rise_resize_edge['on_drag_start'] >
 	>
-	type $rise_resize_edge__on_drag_end_rise_resize_35 = $mol_type_enforce<
+	type $rise_resize_edge__on_drag_end_rise_resize_33 = $mol_type_enforce<
 		ReturnType< $rise_resize['resize_end'] >
 		,
 		ReturnType< $rise_resize_edge['on_drag_end'] >
 	>
-	type $rise_resize_edge__y_rise_resize_36 = $mol_type_enforce<
+	type $rise_resize_edge__y_rise_resize_34 = $mol_type_enforce<
 		ReturnType< $rise_resize['top_edge_y'] >
 		,
 		ReturnType< $rise_resize_edge['y'] >
 	>
-	type $rise_resize_edge__x_rise_resize_37 = $mol_type_enforce<
+	type $rise_resize_edge__x_rise_resize_35 = $mol_type_enforce<
 		ReturnType< $rise_resize['left_edge_x'] >
 		,
 		ReturnType< $rise_resize_edge['x'] >
 	>
-	type $rise_resize_edge__repos_x_rise_resize_38 = $mol_type_enforce<
+	type $rise_resize_edge__repos_x_rise_resize_36 = $mol_type_enforce<
 		ReturnType< $rise_resize['repos_x'] >
 		,
 		ReturnType< $rise_resize_edge['repos_x'] >
 	>
-	type $rise_resize_edge__repos_y_rise_resize_39 = $mol_type_enforce<
+	type $rise_resize_edge__repos_y_rise_resize_37 = $mol_type_enforce<
 		ReturnType< $rise_resize['repos_y'] >
 		,
 		ReturnType< $rise_resize_edge['repos_y'] >
 	>
-	type $rise_resize_edge__on_drag_start_rise_resize_40 = $mol_type_enforce<
+	type $rise_resize_edge__on_drag_start_rise_resize_38 = $mol_type_enforce<
 		ReturnType< $rise_resize['resize_start'] >
 		,
 		ReturnType< $rise_resize_edge['on_drag_start'] >
 	>
-	type $rise_resize_edge__on_drag_end_rise_resize_41 = $mol_type_enforce<
+	type $rise_resize_edge__on_drag_end_rise_resize_39 = $mol_type_enforce<
 		ReturnType< $rise_resize['resize_end'] >
 		,
 		ReturnType< $rise_resize_edge['on_drag_end'] >
 	>
-	type $rise_resize_edge__y_rise_resize_42 = $mol_type_enforce<
+	type $rise_resize_edge__y_rise_resize_40 = $mol_type_enforce<
 		ReturnType< $rise_resize['top_edge_y'] >
 		,
 		ReturnType< $rise_resize_edge['y'] >
 	>
-	type $rise_resize_edge__x_rise_resize_43 = $mol_type_enforce<
+	type $rise_resize_edge__x_rise_resize_41 = $mol_type_enforce<
 		ReturnType< $rise_resize['right_edge_x'] >
 		,
 		ReturnType< $rise_resize_edge['x'] >
 	>
-	type $rise_resize_edge__repos_x_rise_resize_44 = $mol_type_enforce<
+	type $rise_resize_edge__repos_x_rise_resize_42 = $mol_type_enforce<
 		ReturnType< $rise_resize['repos_x'] >
 		,
 		ReturnType< $rise_resize_edge['repos_x'] >
 	>
-	type $rise_resize_edge__repos_y_rise_resize_45 = $mol_type_enforce<
+	type $rise_resize_edge__repos_y_rise_resize_43 = $mol_type_enforce<
 		ReturnType< $rise_resize['repos_y'] >
 		,
 		ReturnType< $rise_resize_edge['repos_y'] >
 	>
-	type $rise_resize_edge__on_drag_start_rise_resize_46 = $mol_type_enforce<
+	type $rise_resize_edge__on_drag_start_rise_resize_44 = $mol_type_enforce<
 		ReturnType< $rise_resize['resize_start'] >
 		,
 		ReturnType< $rise_resize_edge['on_drag_start'] >
 	>
-	type $rise_resize_edge__on_drag_end_rise_resize_47 = $mol_type_enforce<
+	type $rise_resize_edge__on_drag_end_rise_resize_45 = $mol_type_enforce<
 		ReturnType< $rise_resize['resize_end'] >
 		,
 		ReturnType< $rise_resize_edge['on_drag_end'] >
 	>
-	type $rise_resize_edge__y_rise_resize_48 = $mol_type_enforce<
+	type $rise_resize_edge__y_rise_resize_46 = $mol_type_enforce<
 		ReturnType< $rise_resize['bottom_edge_y'] >
 		,
 		ReturnType< $rise_resize_edge['y'] >
 	>
-	type $rise_resize_edge__x_rise_resize_49 = $mol_type_enforce<
+	type $rise_resize_edge__x_rise_resize_47 = $mol_type_enforce<
 		ReturnType< $rise_resize['left_edge_x'] >
 		,
 		ReturnType< $rise_resize_edge['x'] >
 	>
-	type $rise_resize_edge__repos_x_rise_resize_50 = $mol_type_enforce<
+	type $rise_resize_edge__repos_x_rise_resize_48 = $mol_type_enforce<
 		ReturnType< $rise_resize['repos_x'] >
 		,
 		ReturnType< $rise_resize_edge['repos_x'] >
 	>
-	type $rise_resize_edge__repos_y_rise_resize_51 = $mol_type_enforce<
+	type $rise_resize_edge__repos_y_rise_resize_49 = $mol_type_enforce<
 		ReturnType< $rise_resize['repos_y'] >
 		,
 		ReturnType< $rise_resize_edge['repos_y'] >
 	>
-	type $rise_resize_edge__on_drag_start_rise_resize_52 = $mol_type_enforce<
+	type $rise_resize_edge__on_drag_start_rise_resize_50 = $mol_type_enforce<
 		ReturnType< $rise_resize['resize_start'] >
 		,
 		ReturnType< $rise_resize_edge['on_drag_start'] >
 	>
-	type $rise_resize_edge__on_drag_end_rise_resize_53 = $mol_type_enforce<
+	type $rise_resize_edge__on_drag_end_rise_resize_51 = $mol_type_enforce<
 		ReturnType< $rise_resize['resize_end'] >
 		,
 		ReturnType< $rise_resize_edge['on_drag_end'] >
 	>
-	type $rise_resize_edge__y_rise_resize_54 = $mol_type_enforce<
+	type $rise_resize_edge__y_rise_resize_52 = $mol_type_enforce<
 		ReturnType< $rise_resize['bottom_edge_y'] >
 		,
 		ReturnType< $rise_resize_edge['y'] >
 	>
-	type $rise_resize_edge__x_rise_resize_55 = $mol_type_enforce<
+	type $rise_resize_edge__x_rise_resize_53 = $mol_type_enforce<
 		ReturnType< $rise_resize['right_edge_x'] >
 		,
 		ReturnType< $rise_resize_edge['x'] >
@@ -1743,10 +1699,7 @@ declare namespace $ {
 		repos_x( id: any): number
 		repos_y( id: any): number
 		Drag_view( ): $rise_drag_view
-		content( ): readonly(any)[]
-		Fullsize_wrapper( ): $mol_view
-		content_wrapper( ): readonly(any)[]
-		Content( ): $mol_scroll
+		controls( ): readonly(any)[]
 		resize_start( next?: any ): any
 		resize_end( next?: any ): any
 		top_edge_y( next?: number ): number
@@ -1782,6 +1735,7 @@ declare namespace $ {
 		right_edge_x_stick( next?: ReturnType< $rise_resize['width_min'] > ): ReturnType< $rise_resize['width_min'] >
 		top_edge_y_stick( next?: number ): number
 		left_edge_x_stick( next?: number ): number
+		stickable( next?: boolean ): boolean
 		sticks_y( ): readonly(number)[]
 		sticks_x( ): readonly(number)[]
 		auto( ): readonly(any)[]
@@ -1830,6 +1784,352 @@ declare namespace $.$$ {
 declare namespace $.$$ {
 }
 
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	export class $mol_speck extends $mol_view {
+		theme( ): string
+		value( ): any
+		attr( ): ({ 
+			'mol_theme': ReturnType< $mol_speck['theme'] >,
+		})  & ReturnType< $mol_view['attr'] >
+		style( ): ({ 
+			'minHeight': string,
+		})  & ReturnType< $mol_view['style'] >
+		sub( ): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=speck.view.tree.d.ts.map
+declare namespace $ {
+    enum $mol_keyboard_code {
+        backspace = 8,
+        tab = 9,
+        enter = 13,
+        shift = 16,
+        ctrl = 17,
+        alt = 18,
+        pause = 19,
+        capsLock = 20,
+        escape = 27,
+        space = 32,
+        pageUp = 33,
+        pageDown = 34,
+        end = 35,
+        home = 36,
+        left = 37,
+        up = 38,
+        right = 39,
+        down = 40,
+        insert = 45,
+        delete = 46,
+        key0 = 48,
+        key1 = 49,
+        key2 = 50,
+        key3 = 51,
+        key4 = 52,
+        key5 = 53,
+        key6 = 54,
+        key7 = 55,
+        key8 = 56,
+        key9 = 57,
+        A = 65,
+        B = 66,
+        C = 67,
+        D = 68,
+        E = 69,
+        F = 70,
+        G = 71,
+        H = 72,
+        I = 73,
+        J = 74,
+        K = 75,
+        L = 76,
+        M = 77,
+        N = 78,
+        O = 79,
+        P = 80,
+        Q = 81,
+        R = 82,
+        S = 83,
+        T = 84,
+        U = 85,
+        V = 86,
+        W = 87,
+        X = 88,
+        Y = 89,
+        Z = 90,
+        metaLeft = 91,
+        metaRight = 92,
+        select = 93,
+        numpad0 = 96,
+        numpad1 = 97,
+        numpad2 = 98,
+        numpad3 = 99,
+        numpad4 = 100,
+        numpad5 = 101,
+        numpad6 = 102,
+        numpad7 = 103,
+        numpad8 = 104,
+        numpad9 = 105,
+        multiply = 106,
+        add = 107,
+        subtract = 109,
+        decimal = 110,
+        divide = 111,
+        F1 = 112,
+        F2 = 113,
+        F3 = 114,
+        F4 = 115,
+        F5 = 116,
+        F6 = 117,
+        F7 = 118,
+        F8 = 119,
+        F9 = 120,
+        F10 = 121,
+        F11 = 122,
+        F12 = 123,
+        numLock = 144,
+        scrollLock = 145,
+        semicolon = 186,
+        equals = 187,
+        comma = 188,
+        dash = 189,
+        period = 190,
+        forwardSlash = 191,
+        graveAccent = 192,
+        bracketOpen = 219,
+        slashBack = 220,
+        slashBackLeft = 226,
+        bracketClose = 221,
+        quoteSingle = 222
+    }
+}
+
+declare namespace $ {
+
+	type $mol_speck__value_mol_button_1 = $mol_type_enforce<
+		ReturnType< $mol_button['error'] >
+		,
+		ReturnType< $mol_speck['value'] >
+	>
+	export class $mol_button extends $mol_view {
+		event_activate( next?: any ): any
+		clicks( next?: any ): any
+		event_key_press( next?: any ): any
+		disabled( ): boolean
+		tab_index( ): number
+		hint( ): string
+		hint_safe( ): ReturnType< $mol_button['hint'] >
+		error( ): string
+		enabled( ): boolean
+		click( next?: any ): any
+		event_click( next?: any ): any
+		event( ): ({ 
+			click( next?: ReturnType< $mol_button['event_activate'] > ): ReturnType< $mol_button['event_activate'] >,
+			dblclick( next?: ReturnType< $mol_button['clicks'] > ): ReturnType< $mol_button['clicks'] >,
+			keydown( next?: ReturnType< $mol_button['event_key_press'] > ): ReturnType< $mol_button['event_key_press'] >,
+		})  & ReturnType< $mol_view['event'] >
+		attr( ): ({ 
+			'disabled': ReturnType< $mol_button['disabled'] >,
+			'role': string,
+			'tabindex': ReturnType< $mol_button['tab_index'] >,
+			'title': ReturnType< $mol_button['hint_safe'] >,
+		})  & ReturnType< $mol_view['attr'] >
+		sub( ): readonly($mol_view_content)[]
+		Speck( ): $mol_speck
+	}
+	
+}
+
+//# sourceMappingURL=button.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $mol_button extends $.$mol_button {
+        status(next?: any[]): any[];
+        disabled(): boolean;
+        event_activate(next: Event): void;
+        event_key_press(event: KeyboardEvent): void;
+        tab_index(): number;
+        error(): string;
+        hint_safe(): string;
+        sub_visible(): ($mol_view_content | $mol_speck)[];
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	export class $mol_button_typed extends $mol_button {
+		minimal_height( ): number
+		minimal_width( ): number
+	}
+	
+}
+
+//# sourceMappingURL=typed.view.tree.d.ts.map
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	export class $mol_button_minor extends $mol_button_typed {
+	}
+	
+}
+
+//# sourceMappingURL=minor.view.tree.d.ts.map
+declare namespace $ {
+    function $mol_maybe<Value>(value: Value | null | undefined): Value[];
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	type $mol_view__sub_mol_check_1 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	export class $mol_check extends $mol_button_minor {
+		checked( next?: boolean ): boolean
+		aria_checked( ): string
+		aria_role( ): string
+		Icon( ): any
+		title( ): string
+		Title( ): $mol_view
+		label( ): readonly(any)[]
+		attr( ): ({ 
+			'mol_check_checked': ReturnType< $mol_check['checked'] >,
+			'aria-checked': ReturnType< $mol_check['aria_checked'] >,
+			'role': ReturnType< $mol_check['aria_role'] >,
+		})  & ReturnType< $mol_button_minor['attr'] >
+		sub( ): readonly($mol_view_content)[]
+	}
+	
+}
+
+//# sourceMappingURL=check.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $mol_check extends $.$mol_check {
+        click(next?: Event): void;
+        sub(): readonly $mol_view_content[];
+        label(): readonly any[];
+        aria_checked(): string;
+    }
+}
+
+declare namespace $ {
+    class $mol_state_time extends $mol_object {
+        static task(precision: number, reset?: null): $mol_after_timeout | $mol_after_frame;
+        static now(precision: number): number;
+    }
+}
+
+declare namespace $ {
+
+	export class $mol_svg extends $mol_view {
+		dom_name( ): string
+		dom_name_space( ): string
+		font_size( ): number
+		font_family( ): string
+		style_size( ): Record<string, any>
+	}
+	
+}
+
+//# sourceMappingURL=svg.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $mol_svg extends $.$mol_svg {
+        computed_style(): Record<string, any>;
+        font_size(): number;
+        font_family(): any;
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	export class $mol_svg_root extends $mol_svg {
+		view_box( ): string
+		aspect( ): string
+		dom_name( ): string
+		attr( ): ({ 
+			'viewBox': ReturnType< $mol_svg_root['view_box'] >,
+			'preserveAspectRatio': ReturnType< $mol_svg_root['aspect'] >,
+		})  & ReturnType< $mol_svg['attr'] >
+	}
+	
+}
+
+//# sourceMappingURL=root.view.tree.d.ts.map
+declare namespace $ {
+
+	export class $mol_svg_path extends $mol_svg {
+		geometry( ): string
+		dom_name( ): string
+		attr( ): ({ 
+			'd': ReturnType< $mol_svg_path['geometry'] >,
+		})  & ReturnType< $mol_svg['attr'] >
+	}
+	
+}
+
+//# sourceMappingURL=path.view.tree.d.ts.map
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	type $mol_svg_path__geometry_mol_icon_1 = $mol_type_enforce<
+		ReturnType< $mol_icon['path'] >
+		,
+		ReturnType< $mol_svg_path['geometry'] >
+	>
+	export class $mol_icon extends $mol_svg_root {
+		path( ): string
+		Path( ): $mol_svg_path
+		view_box( ): string
+		minimal_width( ): number
+		minimal_height( ): number
+		sub( ): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=icon.view.tree.d.ts.map
+declare namespace $ {
+
+	export class $mol_icon_tick extends $mol_icon {
+		path( ): string
+	}
+	
+}
+
+//# sourceMappingURL=tick.view.tree.d.ts.map
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	export class $mol_check_box extends $mol_check {
+		Icon( ): $mol_icon_tick
+	}
+	
+}
+
+//# sourceMappingURL=box.view.tree.d.ts.map
 declare namespace $ {
 
 	export class $mol_paragraph extends $mol_view {
@@ -2200,208 +2500,6 @@ declare namespace $.$$ {
 }
 
 declare namespace $ {
-}
-
-declare namespace $ {
-
-	export class $mol_speck extends $mol_view {
-		theme( ): string
-		value( ): any
-		attr( ): ({ 
-			'mol_theme': ReturnType< $mol_speck['theme'] >,
-		})  & ReturnType< $mol_view['attr'] >
-		style( ): ({ 
-			'minHeight': string,
-		})  & ReturnType< $mol_view['style'] >
-		sub( ): readonly(any)[]
-	}
-	
-}
-
-//# sourceMappingURL=speck.view.tree.d.ts.map
-declare namespace $ {
-    enum $mol_keyboard_code {
-        backspace = 8,
-        tab = 9,
-        enter = 13,
-        shift = 16,
-        ctrl = 17,
-        alt = 18,
-        pause = 19,
-        capsLock = 20,
-        escape = 27,
-        space = 32,
-        pageUp = 33,
-        pageDown = 34,
-        end = 35,
-        home = 36,
-        left = 37,
-        up = 38,
-        right = 39,
-        down = 40,
-        insert = 45,
-        delete = 46,
-        key0 = 48,
-        key1 = 49,
-        key2 = 50,
-        key3 = 51,
-        key4 = 52,
-        key5 = 53,
-        key6 = 54,
-        key7 = 55,
-        key8 = 56,
-        key9 = 57,
-        A = 65,
-        B = 66,
-        C = 67,
-        D = 68,
-        E = 69,
-        F = 70,
-        G = 71,
-        H = 72,
-        I = 73,
-        J = 74,
-        K = 75,
-        L = 76,
-        M = 77,
-        N = 78,
-        O = 79,
-        P = 80,
-        Q = 81,
-        R = 82,
-        S = 83,
-        T = 84,
-        U = 85,
-        V = 86,
-        W = 87,
-        X = 88,
-        Y = 89,
-        Z = 90,
-        metaLeft = 91,
-        metaRight = 92,
-        select = 93,
-        numpad0 = 96,
-        numpad1 = 97,
-        numpad2 = 98,
-        numpad3 = 99,
-        numpad4 = 100,
-        numpad5 = 101,
-        numpad6 = 102,
-        numpad7 = 103,
-        numpad8 = 104,
-        numpad9 = 105,
-        multiply = 106,
-        add = 107,
-        subtract = 109,
-        decimal = 110,
-        divide = 111,
-        F1 = 112,
-        F2 = 113,
-        F3 = 114,
-        F4 = 115,
-        F5 = 116,
-        F6 = 117,
-        F7 = 118,
-        F8 = 119,
-        F9 = 120,
-        F10 = 121,
-        F11 = 122,
-        F12 = 123,
-        numLock = 144,
-        scrollLock = 145,
-        semicolon = 186,
-        equals = 187,
-        comma = 188,
-        dash = 189,
-        period = 190,
-        forwardSlash = 191,
-        graveAccent = 192,
-        bracketOpen = 219,
-        slashBack = 220,
-        slashBackLeft = 226,
-        bracketClose = 221,
-        quoteSingle = 222
-    }
-}
-
-declare namespace $ {
-
-	type $mol_speck__value_mol_button_1 = $mol_type_enforce<
-		ReturnType< $mol_button['error'] >
-		,
-		ReturnType< $mol_speck['value'] >
-	>
-	export class $mol_button extends $mol_view {
-		event_activate( next?: any ): any
-		clicks( next?: any ): any
-		event_key_press( next?: any ): any
-		disabled( ): boolean
-		tab_index( ): number
-		hint( ): string
-		hint_safe( ): ReturnType< $mol_button['hint'] >
-		error( ): string
-		enabled( ): boolean
-		click( next?: any ): any
-		event_click( next?: any ): any
-		event( ): ({ 
-			click( next?: ReturnType< $mol_button['event_activate'] > ): ReturnType< $mol_button['event_activate'] >,
-			dblclick( next?: ReturnType< $mol_button['clicks'] > ): ReturnType< $mol_button['clicks'] >,
-			keydown( next?: ReturnType< $mol_button['event_key_press'] > ): ReturnType< $mol_button['event_key_press'] >,
-		})  & ReturnType< $mol_view['event'] >
-		attr( ): ({ 
-			'disabled': ReturnType< $mol_button['disabled'] >,
-			'role': string,
-			'tabindex': ReturnType< $mol_button['tab_index'] >,
-			'title': ReturnType< $mol_button['hint_safe'] >,
-		})  & ReturnType< $mol_view['attr'] >
-		sub( ): readonly($mol_view_content)[]
-		Speck( ): $mol_speck
-	}
-	
-}
-
-//# sourceMappingURL=button.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $mol_button extends $.$mol_button {
-        status(next?: any[]): any[];
-        disabled(): boolean;
-        event_activate(next: Event): void;
-        event_key_press(event: KeyboardEvent): void;
-        tab_index(): number;
-        error(): string;
-        hint_safe(): string;
-        sub_visible(): ($mol_view_content | $mol_speck)[];
-    }
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
-
-	export class $mol_button_typed extends $mol_button {
-		minimal_height( ): number
-		minimal_width( ): number
-	}
-	
-}
-
-//# sourceMappingURL=typed.view.tree.d.ts.map
-declare namespace $ {
-}
-
-declare namespace $ {
-
-	export class $mol_button_minor extends $mol_button_typed {
-	}
-	
-}
-
-//# sourceMappingURL=minor.view.tree.d.ts.map
-declare namespace $ {
     type $mol_blob = Blob;
     let $mol_blob: {
         prototype: Blob;
@@ -2409,87 +2507,6 @@ declare namespace $ {
     };
 }
 
-declare namespace $ {
-    class $mol_state_time extends $mol_object {
-        static task(precision: number, reset?: null): $mol_after_timeout | $mol_after_frame;
-        static now(precision: number): number;
-    }
-}
-
-declare namespace $ {
-
-	export class $mol_svg extends $mol_view {
-		dom_name( ): string
-		dom_name_space( ): string
-		font_size( ): number
-		font_family( ): string
-		style_size( ): Record<string, any>
-	}
-	
-}
-
-//# sourceMappingURL=svg.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $mol_svg extends $.$mol_svg {
-        computed_style(): Record<string, any>;
-        font_size(): number;
-        font_family(): any;
-    }
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
-
-	export class $mol_svg_root extends $mol_svg {
-		view_box( ): string
-		aspect( ): string
-		dom_name( ): string
-		attr( ): ({ 
-			'viewBox': ReturnType< $mol_svg_root['view_box'] >,
-			'preserveAspectRatio': ReturnType< $mol_svg_root['aspect'] >,
-		})  & ReturnType< $mol_svg['attr'] >
-	}
-	
-}
-
-//# sourceMappingURL=root.view.tree.d.ts.map
-declare namespace $ {
-
-	export class $mol_svg_path extends $mol_svg {
-		geometry( ): string
-		dom_name( ): string
-		attr( ): ({ 
-			'd': ReturnType< $mol_svg_path['geometry'] >,
-		})  & ReturnType< $mol_svg['attr'] >
-	}
-	
-}
-
-//# sourceMappingURL=path.view.tree.d.ts.map
-declare namespace $ {
-}
-
-declare namespace $ {
-
-	type $mol_svg_path__geometry_mol_icon_1 = $mol_type_enforce<
-		ReturnType< $mol_icon['path'] >
-		,
-		ReturnType< $mol_svg_path['geometry'] >
-	>
-	export class $mol_icon extends $mol_svg_root {
-		path( ): string
-		Path( ): $mol_svg_path
-		view_box( ): string
-		minimal_width( ): number
-		minimal_height( ): number
-		sub( ): readonly(any)[]
-	}
-	
-}
-
-//# sourceMappingURL=icon.view.tree.d.ts.map
 declare namespace $ {
 
 	export class $mol_icon_clipboard extends $mol_icon {
@@ -2893,48 +2910,6 @@ declare namespace $ {
 
 //# sourceMappingURL=float.view.tree.d.ts.map
 declare namespace $ {
-    function $mol_maybe<Value>(value: Value | null | undefined): Value[];
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
-
-	type $mol_view__sub_mol_check_1 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_view['sub'] >
-	>
-	export class $mol_check extends $mol_button_minor {
-		checked( next?: boolean ): boolean
-		aria_checked( ): string
-		aria_role( ): string
-		Icon( ): any
-		title( ): string
-		Title( ): $mol_view
-		label( ): readonly(any)[]
-		attr( ): ({ 
-			'mol_check_checked': ReturnType< $mol_check['checked'] >,
-			'aria-checked': ReturnType< $mol_check['aria_checked'] >,
-			'role': ReturnType< $mol_check['aria_role'] >,
-		})  & ReturnType< $mol_button_minor['attr'] >
-		sub( ): readonly($mol_view_content)[]
-	}
-	
-}
-
-//# sourceMappingURL=check.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $mol_check extends $.$mol_check {
-        click(next?: Event): void;
-        sub(): readonly $mol_view_content[];
-        label(): readonly any[];
-        aria_checked(): string;
-    }
-}
-
-declare namespace $ {
 
 	export class $mol_icon_chevron extends $mol_icon {
 		path( ): string
@@ -3304,6 +3279,37 @@ declare namespace $.$$ {
 }
 
 declare namespace $ {
+}
+
+declare namespace $ {
+
+	export class $mol_scroll extends $mol_view {
+		tabindex( ): number
+		event_scroll( next?: any ): any
+		scroll_top( next?: number ): number
+		scroll_left( next?: number ): number
+		attr( ): ({ 
+			'tabindex': ReturnType< $mol_scroll['tabindex'] >,
+		})  & ReturnType< $mol_view['attr'] >
+		event( ): ({ 
+			scroll( next?: ReturnType< $mol_scroll['event_scroll'] > ): ReturnType< $mol_scroll['event_scroll'] >,
+		})  & ReturnType< $mol_view['event'] >
+	}
+	
+}
+
+//# sourceMappingURL=scroll.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $mol_scroll extends $.$mol_scroll {
+        scroll_top(next?: number, cache?: 'cache'): number;
+        scroll_left(next?: number, cache?: 'cache'): number;
+        event_scroll(next?: Event): void;
+        minimal_height(): number;
+        minimal_width(): number;
+    }
+}
+
+declare namespace $.$$ {
 }
 
 declare namespace $ {
@@ -4081,44 +4087,59 @@ declare namespace $ {
 //# sourceMappingURL=list.view.tree.d.ts.map
 declare namespace $ {
 
-	type $mol_text__text_rise_resize_demo_1 = $mol_type_enforce<
+	type __rise_resize_demo_1 = $mol_type_enforce<
+		Parameters< $rise_resize_demo['stickable'] >[0]
+		,
+		Parameters< ReturnType< $rise_resize_demo['Resize'] >['stickable'] >[0]
+	>
+	type $mol_check_box__title_rise_resize_demo_2 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_check_box['title'] >
+	>
+	type $mol_check_box__checked_rise_resize_demo_3 = $mol_type_enforce<
+		ReturnType< $rise_resize_demo['stickable'] >
+		,
+		ReturnType< $mol_check_box['checked'] >
+	>
+	type $mol_text__text_rise_resize_demo_4 = $mol_type_enforce<
 		ReturnType< $rise_resize_demo['content'] >
 		,
 		ReturnType< $mol_text['text'] >
 	>
-	type $rise_resize__height_min_rise_resize_demo_2 = $mol_type_enforce<
+	type $rise_resize__height_min_rise_resize_demo_5 = $mol_type_enforce<
 		number
 		,
 		ReturnType< $rise_resize['height_min'] >
 	>
-	type $rise_resize__width_min_rise_resize_demo_3 = $mol_type_enforce<
+	type $rise_resize__width_min_rise_resize_demo_6 = $mol_type_enforce<
 		number
 		,
 		ReturnType< $rise_resize['width_min'] >
 	>
-	type $rise_resize__drag_body_rise_resize_demo_4 = $mol_type_enforce<
+	type $rise_resize__drag_body_rise_resize_demo_7 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $rise_resize['drag_body'] >
 	>
-	type $rise_resize__sticks_y_rise_resize_demo_5 = $mol_type_enforce<
+	type $rise_resize__sticks_y_rise_resize_demo_8 = $mol_type_enforce<
 		ReturnType< $rise_resize_demo['sticks_y'] >
 		,
 		ReturnType< $rise_resize['sticks_y'] >
 	>
-	type $rise_resize__sticks_x_rise_resize_demo_6 = $mol_type_enforce<
+	type $rise_resize__sticks_x_rise_resize_demo_9 = $mol_type_enforce<
 		ReturnType< $rise_resize_demo['sticks_x'] >
 		,
 		ReturnType< $rise_resize['sticks_x'] >
 	>
-	type $mol_view__style_rise_resize_demo_7 = $mol_type_enforce<
+	type $mol_view__style_rise_resize_demo_10 = $mol_type_enforce<
 		({ 
 			'left': ReturnType< $rise_resize_demo['stick_left'] >,
 		}) 
 		,
 		ReturnType< $mol_view['style'] >
 	>
-	type $mol_view__style_rise_resize_demo_8 = $mol_type_enforce<
+	type $mol_view__style_rise_resize_demo_11 = $mol_type_enforce<
 		({ 
 			'top': ReturnType< $rise_resize_demo['stick_top'] >,
 		}) 
@@ -4142,6 +4163,8 @@ declare namespace $ {
 		right_edge_x_stick( ): ReturnType< ReturnType< $rise_resize_demo['Resize'] >['right_edge_x_stick'] >
 		top_edge_y_stick( ): ReturnType< ReturnType< $rise_resize_demo['Resize'] >['top_edge_y_stick'] >
 		left_edge_x_stick( ): ReturnType< ReturnType< $rise_resize_demo['Resize'] >['left_edge_x_stick'] >
+		stickable( next?: ReturnType< ReturnType< $rise_resize_demo['Resize'] >['stickable'] > ): ReturnType< ReturnType< $rise_resize_demo['Resize'] >['stickable'] >
+		Stickable( ): $mol_check_box
 		content( ): string
 		Content( ): $mol_text
 		sticks_y( ): readonly(any)[]

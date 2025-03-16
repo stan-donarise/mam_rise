@@ -102,36 +102,21 @@ $rise_drag_demo $mol_example_small
 	aspects /
 		\Widget
 
-$mol_scroll $mol_view
-	scroll_top? 0
-	scroll_left? 0
-	attr *
-		^
-		tabindex <= tabindex -1
-	event *
-		^
-		scroll?event <=> event_scroll?event null
-
 $rise_resize $mol_view
 	sub /
-		<= Content $mol_scroll
-			sub <= content_wrapper /
-				<= Fullsize_wrapper $mol_view
-					style *
-						minHeight \100%
-						minWidth \100%
-					sub <= content /
-						<= Drag_view $rise_drag_view
-							sub <= drag_body /
-							x? <=> x? 0
-							y? <=> y? 0
-							on_drag_start? <=> on_drag_start? null
-							on_drag_end? <=> on_drag_end? null
-							dragged => dragged
-							drags_synced <= drags_synced /$rise_drag
-							Drag => Drag
-							repos_x* <= repos_x* 1
-							repos_y* <= repos_y* 1
+		<= Drag_view $rise_drag_view
+			minimal_height 0
+			sub <= drag_body /
+			x? <=> x? 0
+			y? <=> y? 0
+			on_drag_start? <=> on_drag_start? null
+			on_drag_end? <=> on_drag_end? null
+			dragged => dragged
+			drags_synced <= drags_synced /$rise_drag
+			Drag => Drag
+			repos_x* <= repos_x* 1
+			repos_y* <= repos_y* 1
+		^ controls /
 		^ edges /
 			<= Top_edge $rise_resize_edge
 				repos_x* <= repos_x*
@@ -204,6 +189,7 @@ $rise_resize $mol_view
 	top_edge_y_stick? 0
 	left_edge_x_stick? 0
 	-
+	stickable? true
 	sticks_y /number
 	sticks_x /number
 	auto / <= vals_to_sticks null
@@ -216,6 +202,89 @@ $rise_resize $mol_view
 		width <= width_px \20px
 
 $rise_resize_edge $rise_drag_view
+
+$mol_speck $mol_view
+	attr *
+		^
+		mol_theme <= theme \$mol_theme_accent
+	style *
+		^
+		minHeight \1em
+	sub /
+		<= value null
+
+$mol_button $mol_view
+	enabled true
+	click?event null
+	event_click?event null
+	event *
+		^
+		click?event <=> event_activate?event null
+		dblclick?event <=> clicks?event null
+		keydown?event <=> event_key_press?event null 
+	attr *
+		^
+		disabled <= disabled false
+		role \button
+		tabindex <= tab_index 0
+		title <= hint_safe <= hint \
+	sub /$mol_view_content
+		<= title
+	Speck $mol_speck
+		value <= error \
+
+$mol_button_typed $mol_button
+	minimal_height 40
+	minimal_width 40
+
+$mol_button_minor $mol_button_typed
+
+$mol_check $mol_button_minor
+	attr *
+		^
+		mol_check_checked <= checked? false
+		aria-checked <= aria_checked \false
+		role <= aria_role \checkbox
+	sub /$mol_view_content
+		<= Icon null
+		<= label /
+			<= Title $mol_view
+				sub /
+					<= title \
+
+$mol_svg $mol_view
+	dom_name \svg
+	dom_name_space \http://www.w3.org/2000/svg
+	font_size 16
+	font_family \
+	style_size *
+
+$mol_svg_root $mol_svg
+	dom_name \svg
+	attr *
+		^
+		viewBox <= view_box \0 0 100 100
+		preserveAspectRatio <= aspect \xMidYMid
+
+$mol_svg_path $mol_svg
+	dom_name \path
+	attr *
+		^
+		d <= geometry \
+
+
+$mol_icon $mol_svg_root
+	view_box \0 0 24 24
+	minimal_width 16
+	minimal_height 16
+	sub /
+		<= Path $mol_svg_path
+			geometry <= path \
+
+$mol_icon_tick $mol_icon path \M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z
+
+$mol_check_box $mol_check
+	Icon $mol_icon_tick
 
 $mol_paragraph $mol_view
 	line_height 24
@@ -269,71 +338,6 @@ $mol_text_code_line $mol_paragraph
 		uri <= token_uri* \
 	find_pos* null
 
-$mol_speck $mol_view
-	attr *
-		^
-		mol_theme <= theme \$mol_theme_accent
-	style *
-		^
-		minHeight \1em
-	sub /
-		<= value null
-
-$mol_button $mol_view
-	enabled true
-	click?event null
-	event_click?event null
-	event *
-		^
-		click?event <=> event_activate?event null
-		dblclick?event <=> clicks?event null
-		keydown?event <=> event_key_press?event null 
-	attr *
-		^
-		disabled <= disabled false
-		role \button
-		tabindex <= tab_index 0
-		title <= hint_safe <= hint \
-	sub /$mol_view_content
-		<= title
-	Speck $mol_speck
-		value <= error \
-
-$mol_button_typed $mol_button
-	minimal_height 40
-	minimal_width 40
-
-$mol_button_minor $mol_button_typed
-
-$mol_svg $mol_view
-	dom_name \svg
-	dom_name_space \http://www.w3.org/2000/svg
-	font_size 16
-	font_family \
-	style_size *
-
-$mol_svg_root $mol_svg
-	dom_name \svg
-	attr *
-		^
-		viewBox <= view_box \0 0 100 100
-		preserveAspectRatio <= aspect \xMidYMid
-
-$mol_svg_path $mol_svg
-	dom_name \path
-	attr *
-		^
-		d <= geometry \
-
-
-$mol_icon $mol_svg_root
-	view_box \0 0 24 24
-	minimal_width 16
-	minimal_height 16
-	sub /
-		<= Path $mol_svg_path
-			geometry <= path \
-
 $mol_icon_clipboard $mol_icon path \M19,3H14.82C14.4,1.84 13.3,1 12,1C10.7,1 9.6,1.84 9.18,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M12,3A1,1 0 0,1 13,4A1,1 0 0,1 12,5A1,1 0 0,1 11,4A1,1 0 0,1 12,3
 
 $mol_icon_clipboard_outline $mol_icon path \M19,3H14.82C14.4,1.84 13.3,1 12,1C10.7,1 9.6,1.84 9.18,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M12,3A1,1 0 0,1 13,4A1,1 0 0,1 12,5A1,1 0 0,1 11,4A1,1 0 0,1 12,3M7,7H17V5H19V19H5V5H7V7Z
@@ -379,19 +383,6 @@ $mol_float $mol_view
 	style *
 		^
 		minHeight \auto
-
-$mol_check $mol_button_minor
-	attr *
-		^
-		mol_check_checked <= checked? false
-		aria-checked <= aria_checked \false
-		role <= aria_role \checkbox
-	sub /$mol_view_content
-		<= Icon null
-		<= label /
-			<= Title $mol_view
-				sub /
-					<= title \
 
 $mol_icon_chevron $mol_icon path \M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z
 
@@ -504,6 +495,16 @@ $mol_link_iconed $mol_link
 	content /
 		<= title <= uri
 	host \
+
+$mol_scroll $mol_view
+	scroll_top? 0
+	scroll_left? 0
+	attr *
+		^
+		tabindex <= tabindex -1
+	event *
+		^
+		scroll?event <=> event_scroll?event null
 
 $mol_embed_native $mol_scroll
 	uri? \
@@ -723,7 +724,11 @@ $rise_resize_demo $mol_example_small
 			right_edge_x_stick => right_edge_x_stick
 			top_edge_y_stick => top_edge_y_stick
 			left_edge_x_stick => left_edge_x_stick
+			stickable? => stickable?
 			drag_body /
+				<= Stickable $mol_check_box
+					title \Stickable
+					checked? <=> stickable?
 				<= Content $mol_text
 					text <= content \
 			sticks_y <= sticks_y /
