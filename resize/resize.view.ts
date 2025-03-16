@@ -11,6 +11,8 @@ namespace $.$$ {
 		}
 		
 		to_stick( sticks: readonly number[], val: number, shift: number ) {
+			if( !this.stickable() ) return val
+			
 			for( const stick of sticks ) {
 				const to_stick = stick - (val + shift)
 				if( Math.abs( to_stick ) < this.stick_threshold() ) {

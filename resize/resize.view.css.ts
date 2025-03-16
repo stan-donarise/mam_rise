@@ -27,18 +27,13 @@ namespace $.$$ {
 		position: 'absolute',
 		transition: 'none',
 
-		// backgroundColor: 'color-mix(in srgb, var(--mol_theme_line) 50%, transparent)',
-
-		Fullsize_wrapper: {
-			position: 'relative',
-			height: 'auto',
-			width: 'auto',
-		},
-		
 		Drag_view: {
-			flex: {
-				grow: 1,
-			},
+			// flex: {
+			// 	grow: 1,
+			// },
+			position: 'absolute',
+			width: '100%',
+			height: '100%',
 		},
 		
 		Top_edge: {

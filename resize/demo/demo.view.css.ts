@@ -17,6 +17,12 @@ namespace $.$$ {
 			background: {
 				color: $mol_theme.card,
 			},
+			Drag_view: {
+				flex: {
+					direction: 'column',
+				},
+				overflow: 'hidden',
+			},
 		},
 
 		Stick_x: {

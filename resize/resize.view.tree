@@ -1,23 +1,18 @@
 $rise_resize $mol_view
 	sub /
-		<= Content $mol_scroll
-			sub <= content_wrapper /
-				<= Fullsize_wrapper $mol_view
-					style *
-						minHeight \100%
-						minWidth \100%
-					sub <= content /
-						<= Drag_view $rise_drag_view
-							sub <= drag_body /
-							x? <=> x? 0
-							y? <=> y? 0
-							on_drag_start? <=> on_drag_start? null
-							on_drag_end? <=> on_drag_end? null
-							dragged => dragged
-							drags_synced <= drags_synced /$rise_drag
-							Drag => Drag
-							repos_x* <= repos_x* 1
-							repos_y* <= repos_y* 1
+		<= Drag_view $rise_drag_view
+			minimal_height 0
+			sub <= drag_body /
+			x? <=> x? 0
+			y? <=> y? 0
+			on_drag_start? <=> on_drag_start? null
+			on_drag_end? <=> on_drag_end? null
+			dragged => dragged
+			drags_synced <= drags_synced /$rise_drag
+			Drag => Drag
+			repos_x* <= repos_x* 1
+			repos_y* <= repos_y* 1
+		^ controls /
 		^ edges /
 			<= Top_edge $rise_resize_edge
 				repos_x* <= repos_x*
@@ -90,6 +85,7 @@ $rise_resize $mol_view
 	top_edge_y_stick? 0
 	left_edge_x_stick? 0
 	-
+	stickable? true
 	sticks_y /number
 	sticks_x /number
 	auto / <= vals_to_sticks null

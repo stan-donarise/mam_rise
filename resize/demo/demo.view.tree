@@ -19,7 +19,11 @@ $rise_resize_demo $mol_example_small
 			right_edge_x_stick => right_edge_x_stick
 			top_edge_y_stick => top_edge_y_stick
 			left_edge_x_stick => left_edge_x_stick
+			stickable? => stickable?
 			drag_body /
+				<= Stickable $mol_check_box
+					title \Stickable
+					checked? <=> stickable?
 				<= Content $mol_text
 					text <= content \
 			sticks_y <= sticks_y /
