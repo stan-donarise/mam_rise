@@ -93,22 +93,35 @@ namespace $.$$ {
 		}
 
 		@ $mol_mem
-		top(): number {
+		top( next?: number ): number {
+			if( next !== undefined ) {
+				this.y_stick( next - this.top_edge_y_stick() )
+			}
 			return this.y_stick() + this.top_edge_y_stick()
 		}
 
 		@ $mol_mem
-		left(): number {
+		left( next?: number ): number {
+			if( next !== undefined ) {
+				this.x_stick( next - this.left_edge_x_stick() )
+			}
 			return this.x_stick() + this.left_edge_x_stick()
 		}
 
 		@ $mol_mem
-		width(): number {
+		width( next?: number ): number {
+			if( next !== undefined ) {
+				console.log('next', next)
+				this.right_edge_x_stick( next + this.left_edge_x_stick() )
+			}
 			return this.right_edge_x_stick() - this.left_edge_x_stick()
 		}
 
 		@ $mol_mem
-		height(): number {
+		height( next?: number ): number {
+			if( next !== undefined ) {
+				this.bottom_edge_y_stick( next + this.top_edge_y_stick() )
+			}
 			return this.bottom_edge_y_stick() - this.top_edge_y_stick()
 		}
 

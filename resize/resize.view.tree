@@ -71,10 +71,10 @@ $rise_resize $mol_view
 	height_min 20
 	width_min 20
 	-
-	height 0
-	width 0
-	top 0
-	left 0
+	height? 0
+	width? 0
+	top? 0
+	left? 0
 	-
 	stick_threshold 10
 	-
