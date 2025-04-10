@@ -1729,10 +1729,10 @@ declare namespace $ {
 		resizing( next?: boolean ): boolean
 		height_min( ): number
 		width_min( ): number
-		height( ): number
-		width( ): number
-		top( ): number
-		left( ): number
+		height( next?: number ): number
+		width( next?: number ): number
+		top( next?: number ): number
+		left( next?: number ): number
 		stick_threshold( ): number
 		x_stick( next?: number ): number
 		y_stick( next?: number ): number
@@ -1771,10 +1771,10 @@ declare namespace $.$$ {
         bottom_edge_y(next?: number): number;
         left_edge_x(next?: number): number;
         right_edge_x(next?: number): number;
-        top(): number;
-        left(): number;
-        width(): number;
-        height(): number;
+        top(next?: number): number;
+        left(next?: number): number;
+        width(next?: number): number;
+        height(next?: number): number;
         height_px(): string;
         width_px(): string;
         top_px(): string;

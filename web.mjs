@@ -3605,16 +3605,20 @@ var $;
 		width_min(){
 			return 20;
 		}
-		height(){
+		height(next){
+			if(next !== undefined) return next;
 			return 0;
 		}
-		width(){
+		width(next){
+			if(next !== undefined) return next;
 			return 0;
 		}
-		top(){
+		top(next){
+			if(next !== undefined) return next;
 			return 0;
 		}
-		left(){
+		left(next){
+			if(next !== undefined) return next;
 			return 0;
 		}
 		stick_threshold(){
@@ -3687,6 +3691,10 @@ var $;
 	($mol_mem(($.$rise_resize.prototype), "Bottom_left_edge"));
 	($mol_mem(($.$rise_resize.prototype), "Bottom_right_edge"));
 	($mol_mem(($.$rise_resize.prototype), "resizing"));
+	($mol_mem(($.$rise_resize.prototype), "height"));
+	($mol_mem(($.$rise_resize.prototype), "width"));
+	($mol_mem(($.$rise_resize.prototype), "top"));
+	($mol_mem(($.$rise_resize.prototype), "left"));
 	($mol_mem(($.$rise_resize.prototype), "x_stick"));
 	($mol_mem(($.$rise_resize.prototype), "y_stick"));
 	($mol_mem(($.$rise_resize.prototype), "bottom_edge_y_stick"));
@@ -3935,16 +3943,29 @@ var $;
                 this.right_edge_x_stick(right_edge_x_stick);
                 return next;
             }
-            top() {
+            top(next) {
+                if (next !== undefined) {
+                    this.y_stick(next - this.top_edge_y_stick());
+                }
                 return this.y_stick() + this.top_edge_y_stick();
             }
-            left() {
+            left(next) {
+                if (next !== undefined) {
+                    this.x_stick(next - this.left_edge_x_stick());
+                }
                 return this.x_stick() + this.left_edge_x_stick();
             }
-            width() {
+            width(next) {
+                if (next !== undefined) {
+                    console.log('next', next);
+                    this.right_edge_x_stick(next + this.left_edge_x_stick());
+                }
                 return this.right_edge_x_stick() - this.left_edge_x_stick();
             }
-            height() {
+            height(next) {
+                if (next !== undefined) {
+                    this.bottom_edge_y_stick(next + this.top_edge_y_stick());
+                }
                 return this.bottom_edge_y_stick() - this.top_edge_y_stick();
             }
             height_px() {
