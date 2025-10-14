@@ -207,13 +207,7 @@ $rise_resize $mol_view
 $rise_resize_edge $rise_drag_view
 
 $mol_speck $mol_view
-	minimal_width 12
-	attr *
-		^
-		mol_theme <= theme \$mol_theme_accent
-	style *
-		^
-		minHeight \1em
+	theme \$mol_theme_accent
 	sub /
 		<= value null
 
