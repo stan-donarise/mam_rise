@@ -213,6 +213,7 @@
     "$mol_icon_youtube",
     "$mol_frame",
     "$mol_embed_rutube",
+    "$mol_embed_vklive",
     "$mol_expander",
     "$rise_resize_ratio_demo",
     "$rise_resize_ratio",
