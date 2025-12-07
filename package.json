@@ -275,7 +275,6 @@
     "$mol_app_demo_main"
   ],
   "dependencies": {
-    "internal": "*",
     "jsdom": "*"
   }
 }
