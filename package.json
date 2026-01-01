@@ -240,6 +240,8 @@
     "$mol_page",
     "$mol_search",
     "$mol_pop",
+    "$mol_follower",
+    "$mol_ghost",
     "$mol_nav",
     "$mol_icon_close",
     "$mol_tag_tree",
