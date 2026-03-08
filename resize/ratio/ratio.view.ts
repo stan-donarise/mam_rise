@@ -88,28 +88,6 @@ namespace $.$$ {
 			return this.ratio() ? this.edges_ratio() : super.edges()
 		}
 
-		@ $mol_action
-		vals_to_sticks() {
-			this.x( this.x_stick() )
-			this.y( this.y_stick() )
-			
-			if( this.ratio() ) {
-				this.left_bottom_edge_ratio_x( this.left_edge_x_stick() )
-				this.left_top_edge_ratio_x( this.left_edge_x_stick() )
-				this.right_bottom_edge_ratio_x( this.right_edge_x_stick() )
-				this.right_top_edge_ratio_x( this.right_edge_x_stick() )
-				this.top_left_edge_ratio_y( this.top_edge_y_stick() )
-				this.top_right_edge_ratio_y( this.top_edge_y_stick() )
-				this.bottom_left_edge_ratio_y( this.bottom_edge_y_stick() )
-				this.bottom_right_edge_ratio_y( this.bottom_edge_y_stick() )
-			} else {
-				this.bottom_edge_y( this.bottom_edge_y_stick() )
-				this.right_edge_x( this.right_edge_x_stick() )
-				this.top_edge_y( this.top_edge_y_stick() )
-				this.left_edge_x( this.left_edge_x_stick() )
-			}
-		}
-
 	}
 
 }

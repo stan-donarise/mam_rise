@@ -12,6 +12,7 @@ $rise_resize $mol_view
 			Drag => Drag
 			repos_x* <= repos_x* 1
 			repos_y* <= repos_y* 1
+			pointerdown? => drag_pointerdown?
 		^ controls /
 		^ edges /
 			<= Top_edge $rise_resize_edge
@@ -88,7 +89,13 @@ $rise_resize $mol_view
 	stickable? true
 	sticks_y /number
 	sticks_x /number
-	auto / <= vals_to_sticks null
+	auto /
+		<= x?
+		<= y?
+		<= left_edge_x?
+		<= right_edge_x?
+		<= top_edge_y?
+		<= bottom_edge_y?
 	-
 	style *
 		^

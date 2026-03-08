@@ -11,6 +11,7 @@ $rise_drag_view $mol_view
 			drags_synced <= drags_synced /$rise_drag
 			repos_x* <= repos_x* 1
 			repos_y* <= repos_y* 1
+			pointerdown? => pointerdown?
 	style *
 		^
 		userSelect \none

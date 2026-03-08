@@ -10,6 +10,7 @@ namespace $.$$ {
 			return val
 		}
 		
+		@ $mol_action
 		to_stick( sticks: readonly number[], val: number, shift: number ) {
 			if( !this.stickable() ) return val
 			
@@ -22,17 +23,23 @@ namespace $.$$ {
 			return val
 		}
 
+		@ $mol_action
 		to_stick_x( val: number, shift: number ) {
 			return this.to_stick( this.sticks_x(), val, shift )
 		}
 
+		@ $mol_action
 		to_stick_y( val: number, shift: number ) {
 			return this.to_stick( this.sticks_y(), val, shift )
 		}
 
 		@ $mol_mem
 		y( next?: number ): number {
+			if( !this.transforming() ) {
+				return this.y_stick() ?? 0
+			}
 			if( next === undefined ) return 0
+
 			const top_stick = this.to_stick_y( next, this.top_edge_y_stick() )
 			if( top_stick == next ) {
 				const bottom_stick = this.to_stick_y( next, this.top_edge_y_stick() + this.height() )
@@ -45,7 +52,11 @@ namespace $.$$ {
 
 		@ $mol_mem
 		x( next?: number ): number {
+			if( !this.transforming() ) {
+				return this.x_stick() ?? 0
+			}
 			if( next === undefined ) return 0
+
 			const left_stick = this.to_stick_x( next, this.left_edge_x_stick() )
 			if( left_stick == next ) {
 				const right_stick = this.to_stick_x( next, this.left_edge_x_stick() + this.width() )
@@ -58,6 +69,9 @@ namespace $.$$ {
 
 		@ $mol_mem
 		top_edge_y( next?: number ): number {
+			if( !this.transforming() ) {
+				return this.top_edge_y_stick() ?? 0
+			}
 			if( next === undefined ) return 0
 			const limit = this.bottom_edge_y_stick() - this.height_min()
 			const top_edge_y_stick = Math.min( this.to_stick_y( next, this.y_stick() ), limit )
@@ -67,6 +81,9 @@ namespace $.$$ {
 
 		@ $mol_mem
 		bottom_edge_y( next?: number ): number {
+			if( !this.transforming() ) {
+				return this.bottom_edge_y_stick() ?? 0
+			}
 			if( next === undefined ) return 0
 			const limit = this.top_edge_y_stick() + this.height_min()
 			const bottom_edge_y_stick = Math.max( this.to_stick_y( next, this.top() - this.top_edge_y_stick() ), limit )
@@ -76,6 +93,9 @@ namespace $.$$ {
 
 		@ $mol_mem
 		left_edge_x( next?: number ): number {
+			if( !this.transforming() ) {
+				return this.left_edge_x_stick() ?? 0
+			}
 			if( next === undefined ) return 0
 			const limit = this.right_edge_x_stick() - this.width_min()
 			const left_edge_x_stick = Math.min( this.to_stick_x( next, this.x_stick() ), limit )
@@ -85,6 +105,9 @@ namespace $.$$ {
 
 		@ $mol_mem
 		right_edge_x( next?: number ): number {
+			if( !this.transforming() ) {
+				return this.right_edge_x_stick() ?? 0
+			}
 			if( next === undefined ) return 0
 			const limit =  this.left_edge_x_stick() + this.width_min()
 			let right_edge_x_stick = Math.max( this.to_stick_x( next, this.left() - this.left_edge_x_stick() ), limit )
@@ -111,7 +134,6 @@ namespace $.$$ {
 		@ $mol_mem
 		width( next?: number ): number {
 			if( next !== undefined ) {
-				console.log('next', next)
 				this.right_edge_x_stick( next + this.left_edge_x_stick() )
 			}
 			return this.right_edge_x_stick() - this.left_edge_x_stick()
@@ -145,8 +167,9 @@ namespace $.$$ {
 			return this.left() + 'px'
 		}
 
-		on_drag_end() {
-			this.vals_to_sticks()
+		@ $mol_mem
+		transforming() {
+			return this.dragged() || this.resizing()
 		}
 
 		resize_start( next?: any ) {
@@ -156,17 +179,6 @@ namespace $.$$ {
 		resize_end() {
 			this.on_drag_end()
 			this.resizing( false )
-		}
-
-		@ $mol_action
-		vals_to_sticks() {
-			this.x( this.x_stick() )
-			this.y( this.y_stick() )
-			
-			this.bottom_edge_y( this.bottom_edge_y_stick() )
-			this.right_edge_x( this.right_edge_x_stick() )
-			this.top_edge_y( this.top_edge_y_stick() )
-			this.left_edge_x( this.left_edge_x_stick() )
 		}
 
 	}
