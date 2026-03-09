@@ -36,6 +36,7 @@ namespace $.$$ {
 			if( !this.use_buttons().includes( event.button ) ) return
 			
 			this.drag_start( event )
+			const drags_synced = this.drags_synced()
 			this.drags_synced().forEach( d => d.drag_start( event ) )
 			
 			const mousemove =  new $mol_dom_listener(
@@ -43,7 +44,7 @@ namespace $.$$ {
 				'mousemove',
 				$mol_wire_async( event => {
 					this.drag( event )
-					this.drags_synced().forEach( d => d.drag( event ) )
+					drags_synced.forEach( d => d.drag( event ) )
 				} ),
 			)
 
@@ -52,7 +53,7 @@ namespace $.$$ {
 				'mouseup',
 				$mol_wire_async( event => {
 					this.drag_end( event )
-					this.drags_synced().forEach( d => d.drag_end( event ) )
+					drags_synced.forEach( d => d.drag_end( event ) )
 					mouseup?.destructor()
 					mousemove?.destructor()
 				} ),
