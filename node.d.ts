@@ -2061,6 +2061,7 @@ declare namespace $ {
 		width_px( ): string
 		sub( ): readonly(any)[]
 		resizing( next?: boolean ): boolean
+		transforming( ): boolean
 		height_min( ): number
 		width_min( ): number
 		height( next?: number ): number
