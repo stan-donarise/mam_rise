@@ -1,0 +1,7 @@
+$rise_app $mol_book2_catalog
+	menu_title \$rise
+	spreads *
+		demo <= Demo $rise_demo
+			menu_title \Demo
+		bugs <= Bugs $rise_bug
+			menu_title \Bugs

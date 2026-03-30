@@ -1,0 +1,5 @@
+$rise_bug $mol_book2_catalog
+	placeholders /
+	param \bug
+	spread_classes /
+		\$rise_bug_baza_nohash

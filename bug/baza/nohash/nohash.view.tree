@@ -1,0 +1,11 @@
+$rise_bug_baza_nohash $mol_page
+	body /
+		<= Baza_status $giper_baza_status
+		<= Reset $mol_button_minor
+			click? <=> entity_reset? null
+		<= entity null
+		<= Add $mol_button_minor
+			click? <=> add? null
+		<= Items $mol_list
+			sub <= items / <= Item*0 $mol_button_minor
+				title <= id* \0
