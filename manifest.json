@@ -1,8 +1,8 @@
 {
-	"name": "rise_demo",
-	"short_name": "rise_demo",
+	"name": "rise_app",
+	"short_name": "rise_app",
 	"description": "",
-	"id": "rise_demo",
+	"id": "rise_app",
 	"start_url": ".",
 	"display": "standalone",
 	"background_color": "#000000",
