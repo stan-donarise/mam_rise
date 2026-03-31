@@ -20623,7 +20623,7 @@ var $;
             for (const kids of this._sand.values()) {
                 for (const units of kids.values()) {
                     for (const sand of units.values()) {
-                        if (this.unit_seal(sand))
+                        if (sand.signed())
                             continue;
                         signing.push(sand);
                     }
@@ -23481,11 +23481,11 @@ var $;
     ], $giper_baza_flex_peer.prototype, "urls", null);
     $.$giper_baza_flex_peer = $giper_baza_flex_peer;
     class $giper_baza_flex_user extends $giper_baza_flex_subj.with({
-        Caret: $giper_baza_list_vary,
+        Caret: $giper_baza_atom_list,
     }, 'User') {
         static meta = new $giper_baza_link(`${$.$giper_baza_flex_deck_link.str}_csm0VtAK`);
         caret(next) {
-            return this.Caret(next)?.items_vary(next) ?? null;
+            return this.Caret(next)?.val(next) ?? null;
         }
     }
     __decorate([
@@ -27993,6 +27993,9 @@ var $;
                     grow: 0,
                     basis: `7em`,
                 },
+                font: {
+                    family: 'monospace',
+                },
             },
             Gift_rate: {
                 flex: {
@@ -31640,6 +31643,123 @@ var $;
 })($ || ($ = {}));
 
 ;
+	($.$rise_bug_baza_noseal) = class $rise_bug_baza_noseal extends ($.$mol_page) {
+		Baza_status(){
+			const obj = new this.$.$giper_baza_status();
+			return obj;
+		}
+		entity_reset(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Reset(){
+			const obj = new this.$.$mol_button_minor();
+			(obj.click) = (next) => ((this.entity_reset(next)));
+			return obj;
+		}
+		entity(){
+			return null;
+		}
+		add(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Add(){
+			const obj = new this.$.$mol_button_minor();
+			(obj.click) = (next) => ((this.add(next)));
+			return obj;
+		}
+		id(id){
+			return "0";
+		}
+		Item(id){
+			const obj = new this.$.$mol_button_minor();
+			(obj.title) = () => ((this.id(id)));
+			return obj;
+		}
+		items(){
+			return [(this.Item("0"))];
+		}
+		Items(){
+			const obj = new this.$.$mol_list();
+			(obj.sub) = () => ((this.items()));
+			return obj;
+		}
+		body(){
+			return [
+				(this.Baza_status()), 
+				(this.Reset()), 
+				(this.entity()), 
+				(this.Add()), 
+				(this.Items())
+			];
+		}
+	};
+	($mol_mem(($.$rise_bug_baza_noseal.prototype), "Baza_status"));
+	($mol_mem(($.$rise_bug_baza_noseal.prototype), "entity_reset"));
+	($mol_mem(($.$rise_bug_baza_noseal.prototype), "Reset"));
+	($mol_mem(($.$rise_bug_baza_noseal.prototype), "add"));
+	($mol_mem(($.$rise_bug_baza_noseal.prototype), "Add"));
+	($mol_mem_key(($.$rise_bug_baza_noseal.prototype), "Item"));
+	($mol_mem(($.$rise_bug_baza_noseal.prototype), "Items"));
+
+
+;
+"use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $rise_bug_baza_noseal_entity extends $giper_baza_entity.with({
+            List: $giper_baza_list_link_to(() => $giper_baza_atom_text),
+        }) {
+        }
+        $$.$rise_bug_baza_noseal_entity = $rise_bug_baza_noseal_entity;
+        class $rise_bug_baza_noseal extends $.$rise_bug_baza_noseal {
+            entity_reset() {
+                this.link_str(null);
+            }
+            link_str(next) {
+                if (next) {
+                    return $mol_state_arg.value('link_str', next);
+                }
+                let str = $mol_state_arg.value('link_str');
+                if (str && next !== null)
+                    return str;
+                const land = this.$.$giper_baza_glob.land_grab([[null, $giper_baza_rank_deny]]);
+                return $mol_state_arg.value('link_str', land.link().str);
+            }
+            entity(reset) {
+                const link = new $giper_baza_link(this.link_str());
+                const land = this.$.$giper_baza_glob.Land(link);
+                return land.Data($rise_bug_baza_noseal_entity);
+            }
+            id(id) {
+                return id;
+            }
+            items() {
+                return this.entity().List()?.remote_list().map(i => this.Item(i.link().str)) ?? [];
+            }
+            add(next) {
+                const entity = this.entity();
+                const item = entity.List(null)?.make([[null, $giper_baza_rank_deny]]);
+                item?.val(item?.link().str);
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $rise_bug_baza_noseal.prototype, "link_str", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bug_baza_noseal.prototype, "entity", null);
+        $$.$rise_bug_baza_noseal = $rise_bug_baza_noseal;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
 	($.$rise_bug) = class $rise_bug extends ($.$mol_book2_catalog) {
 		placeholders(){
 			return [];
@@ -31648,7 +31768,7 @@ var $;
 			return "bug";
 		}
 		spread_classes(){
-			return ["$rise_bug_baza_nohash"];
+			return ["$rise_bug_baza_nohash", "$rise_bug_baza_noseal"];
 		}
 	};
 
