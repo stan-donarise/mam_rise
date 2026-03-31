@@ -31714,6 +31714,7 @@ var $;
     var $$;
     (function ($$) {
         class $rise_bug_baza_noseal_entity extends $giper_baza_entity.with({
+            Dict: $giper_baza_dict_to($giper_baza_atom_link_to(() => $giper_baza_atom_text)),
             List: $giper_baza_list_link_to(() => $giper_baza_atom_text),
         }) {
         }
@@ -31745,8 +31746,10 @@ var $;
             }
             add(next) {
                 const entity = this.entity();
-                const item = entity.List(null)?.make([[null, $giper_baza_rank_deny]]);
-                item?.val(item?.link().str);
+                const item = entity.List(null)?.make(entity.land());
+                const title = item?.link().toString() ?? '';
+                item?.val(title);
+                entity.Dict(null)?.key($mol_wire_sync($).$mol_guid(), 'auto');
             }
         }
         __decorate([
