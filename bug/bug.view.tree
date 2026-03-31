@@ -3,3 +3,4 @@ $rise_bug $mol_book2_catalog
 	param \bug
 	spread_classes /
 		\$rise_bug_baza_nohash
+		\$rise_bug_baza_noseal
