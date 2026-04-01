@@ -7925,13 +7925,13 @@ declare namespace $ {
         sand_add(sand: $giper_baza_unit_sand): void;
         units_reaping: Set<$giper_baza_unit_base>;
         unit_reap(unit: $giper_baza_unit_base): void;
-        unit_seal_inc(unit: $giper_baza_unit): void;
-        unit_seal_dec(unit: $giper_baza_unit): void;
+        unit_seal_inc(unit: $giper_baza_unit_base): void;
+        unit_seal_dec(unit: $giper_baza_unit_base): void;
         seal_del(seal: $giper_baza_unit_seal): void;
         gift_del(gift: $giper_baza_unit_gift): void;
         sand_del(sand: $giper_baza_unit_sand): void;
         lord_pass(lord: $giper_baza_link): $giper_baza_auth_pass | null;
-        unit_seal(unit: $giper_baza_unit): $giper_baza_unit_seal | null;
+        unit_seal(unit: $giper_baza_unit_base): $giper_baza_unit_seal | null;
         sand_get(head: $giper_baza_link, lord: $giper_baza_link, self: $giper_baza_link): $giper_baza_unit_sand | null;
         _self_all: $mol_wire_dict<string, $giper_baza_unit_sand | null>;
         self_make(idea?: number): $giper_baza_link;
@@ -8030,6 +8030,7 @@ declare namespace $ {
         salt(): Uint8Array<ArrayBuffer>;
         hash(): $giper_baza_link;
         tier_min(): $giper_baza_rank_tier;
+        encoded(): boolean;
         _land: null | $giper_baza_land;
         dump(): {};
         inspect(): string;
@@ -8117,7 +8118,7 @@ declare namespace $ {
         data(next?: Uint8Array<ArrayBuffer>): Uint8Array<ArrayBuffer>;
         _ball: Uint8Array<ArrayBuffer>;
         ball(next?: Uint8Array<ArrayBuffer>): Uint8Array<ArrayBuffer>;
-        signed(): true;
+        encoded(): true;
         hash(): $giper_baza_link;
         idea_seed(): number;
         dump(): {

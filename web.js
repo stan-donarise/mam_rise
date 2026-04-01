@@ -19955,7 +19955,7 @@ var $;
             this.faces.peer_summ_shift(peer.str, +1);
             sands.set(sand.self().str, sand);
             this.faces.peer_time(peer.str, sand.time(), sand.tick());
-            if (sand.signed())
+            if (sand.encoded())
                 this.unit_seal_inc(sand);
         }
         units_reaping = new Set();
@@ -20013,13 +20013,15 @@ var $;
             sands.delete(sand.self().str);
             this.faces.peer_summ_shift(sand.lord().peer().str, -1);
             this.unit_reap(sand);
-            if (sand.signed())
+            if (sand.encoded())
                 this.unit_seal_dec(sand);
         }
         lord_pass(lord) {
             return this._pass.get(lord.str) ?? null;
         }
         unit_seal(unit) {
+            if (!unit.encoded())
+                return null;
             const seal = this._seal_item.get(unit.hash().str);
             if (!seal)
                 return null;
@@ -20623,7 +20625,7 @@ var $;
             for (const kids of this._sand.values()) {
                 for (const units of kids.values()) {
                     for (const sand of units.values()) {
-                        if (sand.signed())
+                        if (this.unit_seal(sand))
                             continue;
                         signing.push(sand);
                     }
@@ -21024,7 +21026,7 @@ var $;
                 nodes.set(unit.lord().str, unit);
             }
             else {
-                if (unit instanceof $giper_baza_unit_sand && !unit.signed())
+                if (unit instanceof $giper_baza_unit_sand && !unit.encoded())
                     continue;
                 const self = unit.hash().str;
                 nodes.set(self, unit);
@@ -21154,6 +21156,9 @@ var $;
         }
         tier_min() {
             return $giper_baza_rank_tier.rule;
+        }
+        encoded() {
+            return true;
         }
         _land = null;
         dump() {
@@ -21486,11 +21491,11 @@ var $;
                 }
             }
         }
-        signed() {
+        encoded() {
             return !this._open || !!this._ball;
         }
         hash() {
-            if (!this.signed())
+            if (!this.encoded())
                 return $mol_fail(new Error('No Hash for incompleted Sand', { cause: { sand: this } }));
             return super.hash();
         }
