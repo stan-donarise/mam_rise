@@ -31768,6 +31768,135 @@ var $;
 })($ || ($ = {}));
 
 ;
+	($.$rise_bug_baza_decrypt) = class $rise_bug_baza_decrypt extends ($.$mol_page) {
+		Baza_status(){
+			const obj = new this.$.$giper_baza_status();
+			return obj;
+		}
+		entity_reset(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Reset(){
+			const obj = new this.$.$mol_button_minor();
+			(obj.click) = (next) => ((this.entity_reset(next)));
+			return obj;
+		}
+		entity(){
+			return null;
+		}
+		add(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Add(){
+			const obj = new this.$.$mol_button_minor();
+			(obj.click) = (next) => ((this.add(next)));
+			return obj;
+		}
+		id(id){
+			return "0";
+		}
+		cut(id, next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Item(id){
+			const obj = new this.$.$mol_button_minor();
+			(obj.title) = () => ((this.id(id)));
+			(obj.click) = (next) => ((this.cut(id, next)));
+			return obj;
+		}
+		items(){
+			return [(this.Item("0"))];
+		}
+		Items(){
+			const obj = new this.$.$mol_list();
+			(obj.sub) = () => ((this.items()));
+			return obj;
+		}
+		body(){
+			return [
+				(this.Baza_status()), 
+				(this.Reset()), 
+				(this.entity()), 
+				(this.Add()), 
+				(this.Items())
+			];
+		}
+	};
+	($mol_mem(($.$rise_bug_baza_decrypt.prototype), "Baza_status"));
+	($mol_mem(($.$rise_bug_baza_decrypt.prototype), "entity_reset"));
+	($mol_mem(($.$rise_bug_baza_decrypt.prototype), "Reset"));
+	($mol_mem(($.$rise_bug_baza_decrypt.prototype), "add"));
+	($mol_mem(($.$rise_bug_baza_decrypt.prototype), "Add"));
+	($mol_mem_key(($.$rise_bug_baza_decrypt.prototype), "cut"));
+	($mol_mem_key(($.$rise_bug_baza_decrypt.prototype), "Item"));
+	($mol_mem(($.$rise_bug_baza_decrypt.prototype), "Items"));
+
+
+;
+"use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $rise_bug_baza_decrypt_entity extends $giper_baza_entity.with({
+            Dict: $giper_baza_dict_to($giper_baza_atom_link_to(() => $giper_baza_atom_text)),
+            List: $giper_baza_list_link_to(() => $giper_baza_atom_text),
+        }) {
+        }
+        $$.$rise_bug_baza_decrypt_entity = $rise_bug_baza_decrypt_entity;
+        class $rise_bug_baza_decrypt extends $.$rise_bug_baza_decrypt {
+            entity_reset() {
+                this.link_str(null);
+            }
+            link_str(next) {
+                if (next) {
+                    return $mol_state_arg.value('link_str', next);
+                }
+                let str = $mol_state_arg.value('link_str');
+                if (str && next !== null)
+                    return str;
+                const land = this.$.$giper_baza_glob.land_grab([[null, $giper_baza_rank_deny]]);
+                return $mol_state_arg.value('link_str', land.link().str);
+            }
+            entity(reset) {
+                const link = new $giper_baza_link(this.link_str());
+                const land = this.$.$giper_baza_glob.Land(link);
+                return land.Data($rise_bug_baza_decrypt_entity);
+            }
+            id(id) {
+                return id;
+            }
+            items() {
+                return this.entity().List()?.remote_list().map(i => this.Item(i.link().str)) ?? [];
+            }
+            add(next) {
+                const entity = this.entity();
+                const item = entity.List(null)?.make([[null, $giper_baza_rank_deny]]);
+                const title = item?.link().str ?? '';
+                item?.val(title);
+                entity.Dict(null)?.key($mol_wire_sync($).$mol_guid(), 'auto');
+            }
+            cut(id, next) {
+                this.entity().List()?.cut(new $giper_baza_link(id));
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $rise_bug_baza_decrypt.prototype, "link_str", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bug_baza_decrypt.prototype, "entity", null);
+        $$.$rise_bug_baza_decrypt = $rise_bug_baza_decrypt;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
 	($.$rise_bug) = class $rise_bug extends ($.$mol_book2_catalog) {
 		placeholders(){
 			return [];
@@ -31776,7 +31905,11 @@ var $;
 			return "bug";
 		}
 		spread_classes(){
-			return ["$rise_bug_baza_nohash", "$rise_bug_baza_noseal"];
+			return [
+				"$rise_bug_baza_nohash", 
+				"$rise_bug_baza_noseal", 
+				"$rise_bug_baza_decrypt"
+			];
 		}
 	};
 
