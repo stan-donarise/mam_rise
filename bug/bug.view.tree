@@ -4,3 +4,4 @@ $rise_bug $mol_book2_catalog
 	spread_classes /
 		\$rise_bug_baza_nohash
 		\$rise_bug_baza_noseal
+		\$rise_bug_baza_decrypt
