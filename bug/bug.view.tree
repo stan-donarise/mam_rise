@@ -5,3 +5,4 @@ $rise_bug $mol_book2_catalog
 		\$rise_bug_baza_nohash
 		\$rise_bug_baza_noseal
 		\$rise_bug_baza_decrypt
+		\$rise_bug_baza_slowtext

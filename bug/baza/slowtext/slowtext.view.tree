@@ -1,0 +1,6 @@
+$rise_bug_baza_slowtext $mol_page
+	body /
+		<= Baza_status $giper_baza_status
+		<= entity null
+		<= Text $mol_textarea
+			value? <=> text? \
