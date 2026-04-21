@@ -31897,6 +31897,69 @@ var $;
 })($ || ($ = {}));
 
 ;
+	($.$rise_bug_baza_slowtext) = class $rise_bug_baza_slowtext extends ($.$mol_page) {
+		Baza_status(){
+			const obj = new this.$.$giper_baza_status();
+			return obj;
+		}
+		entity(){
+			return null;
+		}
+		text(next){
+			if(next !== undefined) return next;
+			return "";
+		}
+		Text(){
+			const obj = new this.$.$mol_textarea();
+			(obj.value) = (next) => ((this.text(next)));
+			return obj;
+		}
+		body(){
+			return [
+				(this.Baza_status()), 
+				(this.entity()), 
+				(this.Text())
+			];
+		}
+	};
+	($mol_mem(($.$rise_bug_baza_slowtext.prototype), "Baza_status"));
+	($mol_mem(($.$rise_bug_baza_slowtext.prototype), "text"));
+	($mol_mem(($.$rise_bug_baza_slowtext.prototype), "Text"));
+
+
+;
+"use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $rise_bug_baza_slowtext_entity extends $giper_baza_entity.with({
+            Text: $giper_baza_text,
+        }) {
+        }
+        $$.$rise_bug_baza_slowtext_entity = $rise_bug_baza_slowtext_entity;
+        class $rise_bug_baza_slowtext extends $.$rise_bug_baza_slowtext {
+            entity(reset) {
+                const land = this.$.$giper_baza_glob.land_grab([[null, $giper_baza_rank_deny]]);
+                const entity = land.Data($rise_bug_baza_slowtext_entity);
+                entity.Text(null);
+                return entity;
+            }
+            text(next) {
+                return this.entity().Text(next)?.value(next) ?? '';
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $rise_bug_baza_slowtext.prototype, "entity", null);
+        $$.$rise_bug_baza_slowtext = $rise_bug_baza_slowtext;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
 	($.$rise_bug) = class $rise_bug extends ($.$mol_book2_catalog) {
 		placeholders(){
 			return [];
@@ -31908,7 +31971,8 @@ var $;
 			return [
 				"$rise_bug_baza_nohash", 
 				"$rise_bug_baza_noseal", 
-				"$rise_bug_baza_decrypt"
+				"$rise_bug_baza_decrypt", 
+				"$rise_bug_baza_slowtext"
 			];
 		}
 	};

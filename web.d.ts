@@ -16591,6 +16591,46 @@ declare namespace $.$$ {
 
 declare namespace $ {
 
+	type $mol_textarea__value_rise_bug_baza_slowtext_1 = $mol_type_enforce<
+		ReturnType< $rise_bug_baza_slowtext['text'] >
+		,
+		ReturnType< $mol_textarea['value'] >
+	>
+	export class $rise_bug_baza_slowtext extends $mol_page {
+		Baza_status( ): $giper_baza_status
+		entity( ): any
+		text( next?: string ): string
+		Text( ): $mol_textarea
+		body( ): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=slowtext.view.tree.d.ts.map
+declare namespace $.$$ {
+    const $rise_bug_baza_slowtext_entity_base: Omit<typeof $giper_baza_entity, "prototype"> & {
+        new (...args: any[]): $mol_type_override<$giper_baza_entity, {
+            readonly Text: (auto?: any) => $giper_baza_text | null;
+        }>;
+        path: string;
+    } & {
+        schema: {
+            [x: string]: typeof $giper_baza_pawn;
+        } & {
+            readonly Text: typeof $giper_baza_text;
+        };
+    };
+    export class $rise_bug_baza_slowtext_entity extends $rise_bug_baza_slowtext_entity_base {
+    }
+    export class $rise_bug_baza_slowtext extends $.$rise_bug_baza_slowtext {
+        entity(reset?: null): $rise_bug_baza_slowtext_entity;
+        text(next?: string): string;
+    }
+    export {};
+}
+
+declare namespace $ {
+
 	export class $rise_bug extends $mol_book2_catalog {
 		placeholders( ): readonly(any)[]
 		param( ): string
