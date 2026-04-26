@@ -31910,6 +31910,15 @@ var $;
 			const obj = new this.$.$giper_baza_status();
 			return obj;
 		}
+		entity_reset(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Reset(){
+			const obj = new this.$.$mol_button_minor();
+			(obj.click) = (next) => ((this.entity_reset(next)));
+			return obj;
+		}
 		entity(){
 			return null;
 		}
@@ -31925,12 +31934,15 @@ var $;
 		body(){
 			return [
 				(this.Baza_status()), 
+				(this.Reset()), 
 				(this.entity()), 
 				(this.Text())
 			];
 		}
 	};
 	($mol_mem(($.$rise_bug_baza_slowtext.prototype), "Baza_status"));
+	($mol_mem(($.$rise_bug_baza_slowtext.prototype), "entity_reset"));
+	($mol_mem(($.$rise_bug_baza_slowtext.prototype), "Reset"));
 	($mol_mem(($.$rise_bug_baza_slowtext.prototype), "text"));
 	($mol_mem(($.$rise_bug_baza_slowtext.prototype), "Text"));
 
@@ -31950,8 +31962,22 @@ var $;
         }
         $$.$rise_bug_baza_slowtext_entity = $rise_bug_baza_slowtext_entity;
         class $rise_bug_baza_slowtext extends $.$rise_bug_baza_slowtext {
-            entity(reset) {
+            entity_reset() {
+                this.link_str(null);
+            }
+            link_str(next) {
+                if (next) {
+                    return $mol_state_arg.value('link_str', next);
+                }
+                let str = $mol_state_arg.value('link_str');
+                if (str && next !== null)
+                    return str;
                 const land = this.$.$giper_baza_glob.land_grab([[null, $giper_baza_rank_deny]]);
+                return $mol_state_arg.value('link_str', land.link().str);
+            }
+            entity() {
+                const link = new $giper_baza_link(this.link_str());
+                const land = this.$.$giper_baza_glob.Land(link);
                 const entity = land.Data($rise_bug_baza_slowtext_entity);
                 entity.Text(null);
                 return entity;
@@ -31960,6 +31986,9 @@ var $;
                 return this.entity().Text(next)?.value(next) ?? '';
             }
         }
+        __decorate([
+            $mol_mem
+        ], $rise_bug_baza_slowtext.prototype, "link_str", null);
         __decorate([
             $mol_mem
         ], $rise_bug_baza_slowtext.prototype, "entity", null);

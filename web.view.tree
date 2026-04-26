@@ -2839,6 +2839,8 @@ $rise_bug_baza_decrypt $mol_page
 $rise_bug_baza_slowtext $mol_page
 	body /
 		<= Baza_status $giper_baza_status
+		<= Reset $mol_button_minor
+			click? <=> entity_reset? null
 		<= entity null
 		<= Text $mol_textarea
 			value? <=> text? \

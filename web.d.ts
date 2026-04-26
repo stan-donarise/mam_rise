@@ -16604,13 +16604,20 @@ declare namespace $.$$ {
 
 declare namespace $ {
 
-	type $mol_textarea__value_rise_bug_baza_slowtext_1 = $mol_type_enforce<
+	type $mol_button_minor__click_rise_bug_baza_slowtext_1 = $mol_type_enforce<
+		ReturnType< $rise_bug_baza_slowtext['entity_reset'] >
+		,
+		ReturnType< $mol_button_minor['click'] >
+	>
+	type $mol_textarea__value_rise_bug_baza_slowtext_2 = $mol_type_enforce<
 		ReturnType< $rise_bug_baza_slowtext['text'] >
 		,
 		ReturnType< $mol_textarea['value'] >
 	>
 	export class $rise_bug_baza_slowtext extends $mol_page {
 		Baza_status( ): $giper_baza_status
+		entity_reset( next?: any ): any
+		Reset( ): $mol_button_minor
 		entity( ): any
 		text( next?: string ): string
 		Text( ): $mol_textarea
@@ -16636,7 +16643,9 @@ declare namespace $.$$ {
     export class $rise_bug_baza_slowtext_entity extends $rise_bug_baza_slowtext_entity_base {
     }
     export class $rise_bug_baza_slowtext extends $.$rise_bug_baza_slowtext {
-        entity(reset?: null): $rise_bug_baza_slowtext_entity;
+        entity_reset(): void;
+        link_str(next?: string | null): string;
+        entity(): $rise_bug_baza_slowtext_entity;
         text(next?: string): string;
     }
     export {};
