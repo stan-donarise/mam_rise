@@ -119,6 +119,7 @@ namespace $.$$ {
 		top( next?: number ): number {
 			if( next !== undefined ) {
 				this.y_stick( next - this.top_edge_y_stick() )
+				return next
 			}
 			return this.y_stick() + this.top_edge_y_stick()
 		}
@@ -127,6 +128,7 @@ namespace $.$$ {
 		left( next?: number ): number {
 			if( next !== undefined ) {
 				this.x_stick( next - this.left_edge_x_stick() )
+				return next
 			}
 			return this.x_stick() + this.left_edge_x_stick()
 		}
@@ -135,6 +137,7 @@ namespace $.$$ {
 		width( next?: number ): number {
 			if( next !== undefined ) {
 				this.right_edge_x_stick( next + this.left_edge_x_stick() )
+				return next
 			}
 			return this.right_edge_x_stick() - this.left_edge_x_stick()
 		}
@@ -143,6 +146,7 @@ namespace $.$$ {
 		height( next?: number ): number {
 			if( next !== undefined ) {
 				this.bottom_edge_y_stick( next + this.top_edge_y_stick() )
+				return next
 			}
 			return this.bottom_edge_y_stick() - this.top_edge_y_stick()
 		}
