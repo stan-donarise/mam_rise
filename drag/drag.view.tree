@@ -24,4 +24,8 @@ $rise_drag $mol_plugin
 		^
 		rise_dragged <= dragged? false
 	-
+	auto /
+		<= pointermove_listener null $mol_dom_listener
+		<= pointerup_listener null $mol_dom_listener
+	-
 	drags_synced /$rise_drag

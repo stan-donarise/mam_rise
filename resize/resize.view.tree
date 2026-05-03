@@ -6,6 +6,7 @@ $rise_resize $mol_view
 			x? <=> x? 0
 			y? <=> y? 0
 			on_drag_start? <=> on_drag_start? null
+			on_drag? <=> on_drag? null
 			on_drag_end? <=> on_drag_end? null
 			dragged => dragged
 			drags_synced <= drags_synced /$rise_drag

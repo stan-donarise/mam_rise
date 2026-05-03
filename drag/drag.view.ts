@@ -12,6 +12,7 @@ namespace $.$$ {
 
 		start_event?: PointerEvent
 		start_pos?: { x: number, y: number }
+		drags_synced_frozen: readonly $.$rise_drag[] = []
 
 		drag_start( event: PointerEvent ) {
 			this.start_event = event
@@ -36,30 +37,49 @@ namespace $.$$ {
 			if( !this.use_buttons().includes( event.button ) ) return
 			
 			this.drag_start( event )
-			const drags_synced = this.drags_synced()
-			this.drags_synced().forEach( d => d.drag_start( event ) )
-			
-			const mousemove =  new $mol_dom_listener(
-				this.$.$mol_dom_context.document,
-				'mousemove',
-				$mol_wire_async( event => {
-					this.drag( event )
-					drags_synced.forEach( d => d.drag( event ) )
-				} ),
-			)
-
-			const mouseup = new $mol_dom_listener(
-				this.$.$mol_dom_context.document,
-				'mouseup',
-				$mol_wire_async( event => {
-					this.drag_end( event )
-					drags_synced.forEach( d => d.drag_end( event ) )
-					mouseup?.destructor()
-					mousemove?.destructor()
-				} ),
-			)
+			this.drags_synced_frozen = this.drags_synced()
+			this.drags_synced_frozen.forEach( d => d.drag_start( event ) )
+			//immediate flush:
+			this.pointermove_listener()
+			this.pointerup_listener()
 			
 		}
+
+		@ $mol_mem
+		pointermove_listener() {
+			$mol_wire_solid()
+			if( !this.dragged() ) return null
+
+			return new $mol_dom_listener(
+				this.$.$mol_dom_context.document,
+				'pointermove',
+				this.handle_pointermove_async,
+			)
+		}
+		handle_pointermove_async = $mol_wire_async( ( event: PointerEvent )=> {
+			this.drag( event )
+			this.drags_synced_frozen.forEach( d => d.drag( event ) )
+		} )
+
+		@ $mol_mem
+		pointerup_listener() {
+			$mol_wire_solid()
+			if( !this.dragged() ) return null
+
+			return new $mol_dom_listener(
+				this.$.$mol_dom_context.document,
+				'pointerup',
+				this.handle_pointerup_async,
+			)
+		}
+		handle_pointerup_async = $mol_wire_async( ( event: PointerEvent )=> {
+			this.drag_end( event )
+			this.drags_synced_frozen.forEach( d => d.drag_end( event ) )
+			this.drags_synced_frozen = []
+			//immediate flush:
+			this.pointerup_listener()
+			this.pointermove_listener()
+		} )
 		
 	}
 	
