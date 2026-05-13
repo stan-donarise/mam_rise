@@ -28,56 +28,56 @@ namespace $.$$ {
 
 		@ $mol_mem
 		left_top_edge_ratio_x( next?: number ): number {
-			if( next === undefined ) return 0
+			if( next === undefined ) return this.left_edge_x()
 			this.left_edge_x( next )
 			this.top_edge_y_by_ratio()
 			return next
 		}
 		@ $mol_mem
 		left_bottom_edge_ratio_x( next?: number ): number {
-			if( next === undefined ) return 0
+			if( next === undefined ) return this.left_edge_x()
 			this.left_edge_x( next )
 			this.bottom_edge_y_by_ratio()
 			return next
 		}
 		@ $mol_mem
 		right_bottom_edge_ratio_x( next?: number ): number {
-			if( next === undefined ) return 0
+			if( next === undefined ) return this.right_edge_x()
 			this.right_edge_x( next )
 			this.bottom_edge_y_by_ratio()
 			return next
 		}
 		@ $mol_mem
 		top_left_edge_ratio_y( next?: number ): number {
-			if( next === undefined ) return 0
+			if( next === undefined ) return this.top_edge_y()
 			this.top_edge_y( next )
 			this.left_edge_x_by_ratio()
 			return next
 		}
 		@ $mol_mem
 		right_top_edge_ratio_x( next?: number ): number {
-			if( next === undefined ) return 0
+			if( next === undefined ) return this.right_edge_x()
 			this.right_edge_x( next )
 			this.top_edge_y_by_ratio()
 			return next
 		}
 		@ $mol_mem
 		top_right_edge_ratio_y( next?: number ): number {
-			if( next === undefined ) return 0
+			if( next === undefined ) return this.top_edge_y()
 			this.top_edge_y( next )
 			this.right_edge_x_by_ratio()
 			return next
 		}
 		@ $mol_mem
 		bottom_left_edge_ratio_y( next?: number ): number {
-			if( next === undefined ) return 0
+			if( next === undefined ) return this.bottom_edge_y()
 			this.bottom_edge_y( next )
 			this.left_edge_x_by_ratio()
 			return next
 		}
 		@ $mol_mem
 		bottom_right_edge_ratio_y( next?: number ): number {
-			if( next === undefined ) return 0
+			if( next === undefined ) return this.bottom_edge_y()
 			this.bottom_edge_y( next )
 			this.right_edge_x_by_ratio()
 			return next
