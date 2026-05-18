@@ -35,10 +35,7 @@ namespace $.$$ {
 
 		@ $mol_mem
 		y( next?: number ): number {
-			if( !this.transforming() ) {
-				return this.y_stick() ?? 0
-			}
-			if( next === undefined ) return 0
+			if( next === undefined ) return this.y_stick() ?? 0
 
 			const top_stick = this.to_stick_y( next, this.top_edge_y_stick() )
 			if( top_stick == next ) {
@@ -52,10 +49,7 @@ namespace $.$$ {
 
 		@ $mol_mem
 		x( next?: number ): number {
-			if( !this.transforming() ) {
-				return this.x_stick() ?? 0
-			}
-			if( next === undefined ) return 0
+			if( next === undefined ) return this.x_stick() ?? 0
 
 			const left_stick = this.to_stick_x( next, this.left_edge_x_stick() )
 			if( left_stick == next ) {
@@ -69,10 +63,7 @@ namespace $.$$ {
 
 		@ $mol_mem
 		top_edge_y( next?: number ): number {
-			if( !this.transforming() ) {
-				return this.top_edge_y_stick() ?? 0
-			}
-			if( next === undefined ) return 0
+			if( next === undefined ) return this.top_edge_y_stick() ?? 0
 			const limit = this.bottom_edge_y_stick() - this.height_min()
 			const top_edge_y_stick = Math.min( this.to_stick_y( next, this.y_stick() ), limit )
 			this.top_edge_y_stick( top_edge_y_stick )
@@ -81,10 +72,7 @@ namespace $.$$ {
 
 		@ $mol_mem
 		bottom_edge_y( next?: number ): number {
-			if( !this.transforming() ) {
-				return this.bottom_edge_y_stick() ?? 0
-			}
-			if( next === undefined ) return 0
+			if( next === undefined ) return this.bottom_edge_y_stick() ?? 0
 			const limit = this.top_edge_y_stick() + this.height_min()
 			const bottom_edge_y_stick = Math.max( this.to_stick_y( next, this.top() - this.top_edge_y_stick() ), limit )
 			this.bottom_edge_y_stick( bottom_edge_y_stick )
@@ -93,10 +81,7 @@ namespace $.$$ {
 
 		@ $mol_mem
 		left_edge_x( next?: number ): number {
-			if( !this.transforming() ) {
-				return this.left_edge_x_stick() ?? 0
-			}
-			if( next === undefined ) return 0
+			if( next === undefined ) return this.left_edge_x_stick() ?? 0
 			const limit = this.right_edge_x_stick() - this.width_min()
 			const left_edge_x_stick = Math.min( this.to_stick_x( next, this.x_stick() ), limit )
 			this.left_edge_x_stick( left_edge_x_stick )
@@ -105,10 +90,7 @@ namespace $.$$ {
 
 		@ $mol_mem
 		right_edge_x( next?: number ): number {
-			if( !this.transforming() ) {
-				return this.right_edge_x_stick() ?? 0
-			}
-			if( next === undefined ) return 0
+			if( next === undefined ) return this.right_edge_x_stick() ?? 0
 			const limit =  this.left_edge_x_stick() + this.width_min()
 			let right_edge_x_stick = Math.max( this.to_stick_x( next, this.left() - this.left_edge_x_stick() ), limit )
 			this.right_edge_x_stick( right_edge_x_stick )
