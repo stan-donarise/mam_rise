@@ -8063,6 +8063,162 @@ declare namespace $ {
 }
 
 declare namespace $ {
+    class $mol_memo_key extends $mol_wrapper {
+        static wrap<This extends object, Key, Value>(task: (this: This, key: Key, next?: Value) => Value): (this: This, key: Key, next?: Value) => Value | undefined;
+    }
+}
+
+declare namespace $ {
+    class $mol_schema_any extends Object {
+        static [Symbol.toStringTag]: string;
+        static [$mol_key_handle](): string;
+        /** Short user-readable identity. */
+        static toString(): string;
+        /** Type-guard that checks value by schema. */
+        static check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This['default'];
+        static [Symbol.hasInstance]<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This['default'];
+        /** Strict parse. Fails of wrong values. */
+        static guard<Value>(value: Value): Value;
+        /** Relaxed cast. Normalizes wrong values. */
+        static cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This['default'];
+        /** Default value which conforms schema. */
+        static default: unknown;
+    }
+}
+
+declare namespace $ {
+    let $mol_schema_maybe: <Some extends typeof $mol_schema_any>(this: void, Some: Some) => {
+        new (value?: any): {
+            constructor: Function;
+            toString(): string;
+            toLocaleString(): string;
+            valueOf(): Object;
+            hasOwnProperty(v: PropertyKey): boolean;
+            isPrototypeOf(v: Object): boolean;
+            propertyIsEnumerable(v: PropertyKey): boolean;
+        };
+        Some: Some;
+        toString(): string;
+        guard<This extends typeof $mol_schema_any, Value>(this: This, value: Value): Value & This["default"];
+        default: Some["default"] | null;
+        check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
+        cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
+        [Symbol.toStringTag]: string;
+        [$mol_key_handle](): string;
+        [Symbol.hasInstance]<This extends typeof $mol_schema_any, Val_1>(this: This, val: Val_1): val is Val_1 & This["default"];
+        getPrototypeOf(o: any): any;
+        getOwnPropertyDescriptor(o: any, p: PropertyKey): PropertyDescriptor | undefined;
+        getOwnPropertyNames(o: any): string[];
+        create(o: object | null): any;
+        create(o: object | null, properties: PropertyDescriptorMap & ThisType<any>): any;
+        defineProperty<T>(o: T, p: PropertyKey, attributes: PropertyDescriptor & ThisType<any>): T;
+        defineProperties<T>(o: T, properties: PropertyDescriptorMap & ThisType<any>): T;
+        seal<T>(o: T): T;
+        freeze<T extends Function>(f: T): T;
+        freeze<T extends {
+            [idx: string]: U | null | undefined | object;
+        }, U extends string | bigint | number | boolean | symbol>(o: T): Readonly<T>;
+        freeze<T>(o: T): Readonly<T>;
+        preventExtensions<T>(o: T): T;
+        isSealed(o: any): boolean;
+        isFrozen(o: any): boolean;
+        isExtensible(o: any): boolean;
+        keys(o: object): string[];
+        keys(o: {}): string[];
+        assign<T extends {}, U_1>(target: T, source: U_1): T & U_1;
+        assign<T extends {}, U_2, V>(target: T, source1: U_2, source2: V): T & U_2 & V;
+        assign<T extends {}, U_3, V_1, W>(target: T, source1: U_3, source2: V_1, source3: W): T & U_3 & V_1 & W;
+        assign(target: object, ...sources: any[]): any;
+        getOwnPropertySymbols(o: any): symbol[];
+        is(value1: any, value2: any): boolean;
+        setPrototypeOf(o: any, proto: object | null): any;
+        values<T>(o: {
+            [s: string]: T;
+        } | ArrayLike<T>): T[];
+        values(o: {}): any[];
+        entries<T>(o: {
+            [s: string]: T;
+        } | ArrayLike<T>): [string, T][];
+        entries(o: {}): [string, any][];
+        getOwnPropertyDescriptors<T>(o: T): { [P in keyof T]: TypedPropertyDescriptor<T[P]>; } & {
+            [x: string]: PropertyDescriptor;
+        };
+        fromEntries<T = any>(entries: Iterable<readonly [PropertyKey, T]>): {
+            [k: string]: T;
+        };
+        fromEntries(entries: Iterable<readonly any[]>): any;
+        hasOwn(o: object, v: PropertyKey): boolean;
+        groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
+    };
+}
+
+declare namespace $ {
+    let $mol_schema_instance: <Class extends new (...args: any[]) => any>(this: void, Class: Class) => Class extends typeof $mol_schema_any ? Class : {
+        new (value?: any): {
+            constructor: Function;
+            toString(): string;
+            toLocaleString(): string;
+            valueOf(): Object;
+            hasOwnProperty(v: PropertyKey): boolean;
+            isPrototypeOf(v: Object): boolean;
+            propertyIsEnumerable(v: PropertyKey): boolean;
+        };
+        Class: Class;
+        toString(): string;
+        guard<Value>(value: Value): Value & InstanceType<Class>;
+        cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
+        default: InstanceType<Class>;
+        check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
+        [Symbol.toStringTag]: string;
+        [$mol_key_handle](): string;
+        [Symbol.hasInstance]<This extends typeof $mol_schema_any, Val_1>(this: This, val: Val_1): val is Val_1 & This["default"];
+        getPrototypeOf(o: any): any;
+        getOwnPropertyDescriptor(o: any, p: PropertyKey): PropertyDescriptor | undefined;
+        getOwnPropertyNames(o: any): string[];
+        create(o: object | null): any;
+        create(o: object | null, properties: PropertyDescriptorMap & ThisType<any>): any;
+        defineProperty<T>(o: T, p: PropertyKey, attributes: PropertyDescriptor & ThisType<any>): T;
+        defineProperties<T>(o: T, properties: PropertyDescriptorMap & ThisType<any>): T;
+        seal<T>(o: T): T;
+        freeze<T extends Function>(f: T): T;
+        freeze<T extends {
+            [idx: string]: U | null | undefined | object;
+        }, U extends string | bigint | number | boolean | symbol>(o: T): Readonly<T>;
+        freeze<T>(o: T): Readonly<T>;
+        preventExtensions<T>(o: T): T;
+        isSealed(o: any): boolean;
+        isFrozen(o: any): boolean;
+        isExtensible(o: any): boolean;
+        keys(o: object): string[];
+        keys(o: {}): string[];
+        assign<T extends {}, U_1>(target: T, source: U_1): T & U_1;
+        assign<T extends {}, U_2, V>(target: T, source1: U_2, source2: V): T & U_2 & V;
+        assign<T extends {}, U_3, V_1, W>(target: T, source1: U_3, source2: V_1, source3: W): T & U_3 & V_1 & W;
+        assign(target: object, ...sources: any[]): any;
+        getOwnPropertySymbols(o: any): symbol[];
+        is(value1: any, value2: any): boolean;
+        setPrototypeOf(o: any, proto: object | null): any;
+        values<T>(o: {
+            [s: string]: T;
+        } | ArrayLike<T>): T[];
+        values(o: {}): any[];
+        entries<T>(o: {
+            [s: string]: T;
+        } | ArrayLike<T>): [string, T][];
+        entries(o: {}): [string, any][];
+        getOwnPropertyDescriptors<T>(o: T): { [P in keyof T]: TypedPropertyDescriptor<T[P]>; } & {
+            [x: string]: PropertyDescriptor;
+        };
+        fromEntries<T = any>(entries: Iterable<readonly [PropertyKey, T]>): {
+            [k: string]: T;
+        };
+        fromEntries(entries: Iterable<readonly any[]>): any;
+        hasOwn(o: object, v: PropertyKey): boolean;
+        groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
+    };
+}
+
+declare namespace $ {
     function $giper_baza_link_compare(left: $giper_baza_link, right: $giper_baza_link): 1 | -1 | 0;
     class $giper_baza_link extends Object {
         readonly str: string;
@@ -8103,6 +8259,131 @@ declare namespace $ {
         mix(mixin: Uint8Array<ArrayBuffer> | $giper_baza_link): Uint8Array<ArrayBuffer>;
     }
     function $giper_baza_link_base<Res>(base: $giper_baza_link, task: () => Res): Res;
+    let $giper_baza_link_schema: {
+        new (value?: any): {
+            constructor: Function;
+            toString(): string;
+            toLocaleString(): string;
+            valueOf(): Object;
+            hasOwnProperty(v: PropertyKey): boolean;
+            isPrototypeOf(v: Object): boolean;
+            propertyIsEnumerable(v: PropertyKey): boolean;
+        };
+        Some: {
+            new (value?: any): {
+                constructor: Function;
+                toString(): string;
+                toLocaleString(): string;
+                valueOf(): Object;
+                hasOwnProperty(v: PropertyKey): boolean;
+                isPrototypeOf(v: Object): boolean;
+                propertyIsEnumerable(v: PropertyKey): boolean;
+            };
+            Class: typeof $giper_baza_link;
+            toString(): string;
+            guard<Value>(value: Value): Value & $giper_baza_link;
+            cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
+            default: $giper_baza_link;
+            check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
+            [Symbol.toStringTag]: string;
+            [$mol_key_handle](): string;
+            [Symbol.hasInstance]<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
+            getPrototypeOf(o: any): any;
+            getOwnPropertyDescriptor(o: any, p: PropertyKey): PropertyDescriptor | undefined;
+            getOwnPropertyNames(o: any): string[];
+            create(o: object | null): any;
+            create(o: object | null, properties: PropertyDescriptorMap & ThisType<any>): any;
+            defineProperty<T>(o: T, p: PropertyKey, attributes: PropertyDescriptor & ThisType<any>): T;
+            defineProperties<T>(o: T, properties: PropertyDescriptorMap & ThisType<any>): T;
+            seal<T>(o: T): T;
+            freeze<T extends Function>(f: T): T;
+            freeze<T extends {
+                [idx: string]: U | null | undefined | object;
+            }, U extends string | bigint | number | boolean | symbol>(o: T): Readonly<T>;
+            freeze<T>(o: T): Readonly<T>;
+            preventExtensions<T>(o: T): T;
+            isSealed(o: any): boolean;
+            isFrozen(o: any): boolean;
+            isExtensible(o: any): boolean;
+            keys(o: object): string[];
+            keys(o: {}): string[];
+            assign<T extends {}, U>(target: T, source: U): T & U;
+            assign<T extends {}, U, V>(target: T, source1: U, source2: V): T & U & V;
+            assign<T extends {}, U, V, W>(target: T, source1: U, source2: V, source3: W): T & U & V & W;
+            assign(target: object, ...sources: any[]): any;
+            getOwnPropertySymbols(o: any): symbol[];
+            is(value1: any, value2: any): boolean;
+            setPrototypeOf(o: any, proto: object | null): any;
+            values<T>(o: {
+                [s: string]: T;
+            } | ArrayLike<T>): T[];
+            values(o: {}): any[];
+            entries<T>(o: {
+                [s: string]: T;
+            } | ArrayLike<T>): [string, T][];
+            entries(o: {}): [string, any][];
+            getOwnPropertyDescriptors<T>(o: T): { [P in keyof T]: TypedPropertyDescriptor<T[P]>; } & {
+                [x: string]: PropertyDescriptor;
+            };
+            fromEntries<T = any>(entries: Iterable<readonly [PropertyKey, T]>): {
+                [k: string]: T;
+            };
+            fromEntries(entries: Iterable<readonly any[]>): any;
+            hasOwn(o: object, v: PropertyKey): boolean;
+            groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
+        };
+        toString(): string;
+        guard<This extends typeof $mol_schema_any, Value>(this: This, value: Value): Value & This["default"];
+        default: $giper_baza_link | null;
+        check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
+        cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
+        [Symbol.toStringTag]: string;
+        [$mol_key_handle](): string;
+        [Symbol.hasInstance]<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
+        getPrototypeOf(o: any): any;
+        getOwnPropertyDescriptor(o: any, p: PropertyKey): PropertyDescriptor | undefined;
+        getOwnPropertyNames(o: any): string[];
+        create(o: object | null): any;
+        create(o: object | null, properties: PropertyDescriptorMap & ThisType<any>): any;
+        defineProperty<T>(o: T, p: PropertyKey, attributes: PropertyDescriptor & ThisType<any>): T;
+        defineProperties<T>(o: T, properties: PropertyDescriptorMap & ThisType<any>): T;
+        seal<T>(o: T): T;
+        freeze<T extends Function>(f: T): T;
+        freeze<T extends {
+            [idx: string]: U | null | undefined | object;
+        }, U extends string | bigint | number | boolean | symbol>(o: T): Readonly<T>;
+        freeze<T>(o: T): Readonly<T>;
+        preventExtensions<T>(o: T): T;
+        isSealed(o: any): boolean;
+        isFrozen(o: any): boolean;
+        isExtensible(o: any): boolean;
+        keys(o: object): string[];
+        keys(o: {}): string[];
+        assign<T extends {}, U>(target: T, source: U): T & U;
+        assign<T extends {}, U, V>(target: T, source1: U, source2: V): T & U & V;
+        assign<T extends {}, U, V, W>(target: T, source1: U, source2: V, source3: W): T & U & V & W;
+        assign(target: object, ...sources: any[]): any;
+        getOwnPropertySymbols(o: any): symbol[];
+        is(value1: any, value2: any): boolean;
+        setPrototypeOf(o: any, proto: object | null): any;
+        values<T>(o: {
+            [s: string]: T;
+        } | ArrayLike<T>): T[];
+        values(o: {}): any[];
+        entries<T>(o: {
+            [s: string]: T;
+        } | ArrayLike<T>): [string, T][];
+        entries(o: {}): [string, any][];
+        getOwnPropertyDescriptors<T>(o: T): { [P in keyof T]: TypedPropertyDescriptor<T[P]>; } & {
+            [x: string]: PropertyDescriptor;
+        };
+        fromEntries<T = any>(entries: Iterable<readonly [PropertyKey, T]>): {
+            [k: string]: T;
+        };
+        fromEntries(entries: Iterable<readonly any[]>): any;
+        hasOwn(o: object, v: PropertyKey): boolean;
+        groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
+    };
 }
 
 declare namespace $ {
@@ -8709,6 +8990,51 @@ declare namespace $ {
 }
 
 declare namespace $ {
+    /** Virtual Pawn that represents contained units as high-level data types. */
+    class $giper_baza_pawn extends $mol_object {
+        static tag: keyof typeof $giper_baza_unit_sand_tag;
+        static meta: null | $giper_baza_link;
+        /** Standalone part of Glob which syncs separately, have own rights, and contains Units */
+        land(): $giper_baza_land;
+        /** Land local Pawn id */
+        head(): $giper_baza_link;
+        /** Link to Land/Lord. */
+        land_link(): $giper_baza_link;
+        /** Link to Pawn/Land/Lord. */
+        link(): $giper_baza_link;
+        toJSON(): string;
+        /** Returns another representation of this Pawn. */
+        cast<Pawn extends typeof $giper_baza_pawn>(Pawn: Pawn): InstanceType<Pawn>;
+        /** Ordered inner alive Pawn. */
+        pawns<Pawn extends typeof $giper_baza_pawn>(Pawn: Pawn | null): readonly InstanceType<Pawn>[];
+        /** All ordered alive Units */
+        units(): $giper_baza_unit_sand[];
+        units_of(peer: $giper_baza_link | null): $giper_baza_unit_sand[];
+        meta(next?: $giper_baza_link): $giper_baza_link | null;
+        meta_of(peer: $giper_baza_link | null): $giper_baza_link | null;
+        filled(): boolean;
+        /** Ability to make changes by current peer. */
+        can_change(): boolean;
+        /** Time of last changed unit inside Pawn subtree */
+        last_change(): $mol_time_moment | null;
+        /** All author Passes of Pawn subtree */
+        authors(): $giper_baza_auth_pass[];
+        [$mol_dev_format_head](): any[];
+    }
+}
+
+declare namespace $ {
+    /** Registry of Pawns as Deck entities. */
+    class $giper_baza_fund<Pawn> extends $mol_object {
+        readonly item_make: (head: $giper_baza_link) => Pawn;
+        constructor(item_make: (head: $giper_baza_link) => Pawn);
+        Head(head: $giper_baza_link): Pawn;
+        Data(): Pawn;
+        Tine(): Pawn;
+    }
+}
+
+declare namespace $ {
     type $mol_time_interval_config = string | {
         start?: $mol_time_moment_config;
         end?: $mol_time_moment_config;
@@ -8810,118 +9136,6 @@ declare namespace $ {
         [key in string]: $giper_baza_vary_type;
     }>;
     let $giper_baza_vary: $mol_vary_class;
-    function $giper_baza_vary_switch<Ways extends {
-        none: (vary: null) => any;
-        blob: (vary: ArrayBufferView<ArrayBuffer>) => any;
-        bool: (vary: boolean) => any;
-        bint: (vary: bigint) => any;
-        real: (vary: number) => any;
-        link: (vary: $giper_baza_link) => any;
-        text: (vary: string) => any;
-        time: (vary: $mol_time_moment) => any;
-        dura: (vary: $mol_time_duration) => any;
-        span: (vary: $mol_time_interval) => any;
-        dict: (vary: {}) => any;
-        list: (vary: any[]) => any;
-        elem: (vary: Element) => any;
-        tree: (vary: $mol_tree2) => any;
-    }>(vary: $giper_baza_vary_type, ways: Ways): $mol_type_result<Ways[keyof Ways]>;
-}
-
-declare namespace $ {
-    function $mol_tree2_bin_to_bytes(tree: $mol_tree2): Uint8Array<ArrayBuffer>;
-    function $mol_tree2_bin_from_bytes(bytes: ArrayLike<number>, span?: $mol_span): $mol_tree2;
-    function $mol_tree2_bin_from_string(str: string, span?: $mol_span): $mol_tree2;
-}
-
-declare namespace $ {
-    function $mol_array_chunks<Item>(array: readonly Item[], rule: number | ((item: Item, index: number) => boolean)): Item[][];
-}
-
-declare namespace $ {
-    function $mol_tree2_from_json(json: any, span?: $mol_span): $mol_tree2;
-}
-
-declare namespace $ {
-    function $mol_tree2_xml_from_dom(dom: Node): $mol_tree2;
-}
-
-/** @jsx $mol_jsx */
-declare namespace $ {
-    function $giper_baza_vary_cast_blob(vary: $giper_baza_vary_type): ArrayLike<number | bigint> | null;
-    function $giper_baza_vary_cast_bool(vary: $giper_baza_vary_type): boolean | null;
-    function $giper_baza_vary_cast_bint(vary: $giper_baza_vary_type): bigint | null;
-    function $giper_baza_vary_cast_real(vary: $giper_baza_vary_type): number | null;
-    function $giper_baza_vary_cast_link(vary: $giper_baza_vary_type): $giper_baza_link | null;
-    function $giper_baza_vary_cast_text(vary: $giper_baza_vary_type): string | null;
-    function $giper_baza_vary_cast_time(vary: $giper_baza_vary_type): $mol_time_moment | null;
-    function $giper_baza_vary_cast_dura(vary: $giper_baza_vary_type): $mol_time_duration | null;
-    function $giper_baza_vary_cast_span(vary: $giper_baza_vary_type): $mol_time_interval | null;
-    function $giper_baza_vary_cast_dict(vary: $giper_baza_vary_type): {} | null;
-    function $giper_baza_vary_cast_list(vary: $giper_baza_vary_type): readonly any[] | null;
-    function $giper_baza_vary_cast_elem(vary: $giper_baza_vary_type): Element | null;
-    function $giper_baza_vary_cast_tree(vary: $giper_baza_vary_type): $mol_tree2 | null;
-    const $giper_baza_vary_cast_funcs: {
-        readonly none: () => null;
-        readonly blob: typeof $giper_baza_vary_cast_blob;
-        readonly bool: typeof $giper_baza_vary_cast_bool;
-        readonly bint: typeof $giper_baza_vary_cast_bint;
-        readonly real: typeof $giper_baza_vary_cast_real;
-        readonly link: typeof $giper_baza_vary_cast_link;
-        readonly text: typeof $giper_baza_vary_cast_text;
-        readonly time: typeof $giper_baza_vary_cast_time;
-        readonly dura: typeof $giper_baza_vary_cast_dura;
-        readonly span: typeof $giper_baza_vary_cast_span;
-        readonly dict: typeof $giper_baza_vary_cast_dict;
-        readonly list: typeof $giper_baza_vary_cast_list;
-        readonly elem: typeof $giper_baza_vary_cast_elem;
-        readonly tree: typeof $giper_baza_vary_cast_tree;
-    };
-}
-
-declare namespace $ {
-    /** Virtual Pawn that represents contained units as high-level data types. */
-    class $giper_baza_pawn extends $mol_object {
-        static tag: keyof typeof $giper_baza_unit_sand_tag;
-        static meta: null | $giper_baza_link;
-        /** Standalone part of Glob which syncs separately, have own rights, and contains Units */
-        land(): $giper_baza_land;
-        /** Land local Pawn id */
-        head(): $giper_baza_link;
-        /** Link to Land/Lord. */
-        land_link(): $giper_baza_link;
-        /** Link to Pawn/Land/Lord. */
-        link(): $giper_baza_link;
-        toJSON(): string;
-        /** Returns another representation of this Pawn. */
-        cast<Pawn extends typeof $giper_baza_pawn>(Pawn: Pawn): InstanceType<Pawn>;
-        /** Ordered inner alive Pawn. */
-        pawns<Pawn extends typeof $giper_baza_pawn>(Pawn: Pawn | null): readonly InstanceType<Pawn>[];
-        /** All ordered alive Units */
-        units(): $giper_baza_unit_sand[];
-        units_of(peer: $giper_baza_link | null): $giper_baza_unit_sand[];
-        meta(next?: $giper_baza_link): $giper_baza_link | null;
-        meta_of(peer: $giper_baza_link | null): $giper_baza_link | null;
-        filled(): boolean;
-        /** Ability to make changes by current peer. */
-        can_change(): boolean;
-        /** Time of last changed unit inside Pawn subtree */
-        last_change(): $mol_time_moment | null;
-        /** All author Passes of Pawn subtree */
-        authors(): $giper_baza_auth_pass[];
-        [$mol_dev_format_head](): any[];
-    }
-}
-
-declare namespace $ {
-    /** Registry of Pawns as Deck entities. */
-    class $giper_baza_fund<Pawn> extends $mol_object {
-        readonly item_make: (head: $giper_baza_link) => Pawn;
-        constructor(item_make: (head: $giper_baza_link) => Pawn);
-        Head(head: $giper_baza_link): Pawn;
-        Data(): Pawn;
-        Tine(): Pawn;
-    }
 }
 
 declare namespace $ {
@@ -8937,6 +9151,10 @@ declare namespace $ {
 
 declare namespace $ {
     function $giper_baza_log(this: $): boolean;
+}
+
+declare namespace $ {
+    function $mol_array_chunks<Item>(array: readonly Item[], rule: number | ((item: Item, index: number) => boolean)): Item[][];
 }
 
 declare namespace $ {
@@ -9268,96 +9486,6 @@ declare namespace $ {
         update?: (next: Next, prev: Prev, lead: Prev | null) => Prev;
         replace?: (next: Next, prev: Prev, lead: Prev | null) => Prev;
     }): void;
-}
-
-declare namespace $ {
-    class $mol_memo_key extends $mol_wrapper {
-        static wrap<This extends object, Key, Value>(task: (this: This, key: Key, next?: Value) => Value): (this: This, key: Key, next?: Value) => Value | undefined;
-    }
-}
-
-declare namespace $ {
-    class $mol_schema_any extends Object {
-        static [Symbol.toStringTag]: string;
-        static [$mol_key_handle](): string;
-        /** Short user-readable identity. */
-        static toString(): string;
-        /** Type-guard that checks value by schema. */
-        static check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This['default'];
-        static [Symbol.hasInstance]<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This['default'];
-        /** Strict parse. Fails of wrong values. */
-        static guard<Value>(value: Value): Value;
-        /** Relaxed cast. Normalizes wrong values. */
-        static cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This['default'];
-        /** Default value which conforms schema. */
-        static default: unknown;
-    }
-}
-
-declare namespace $ {
-    let $mol_schema_instance: <Class extends new (...args: any[]) => any>(this: void, Class: Class) => Class extends typeof $mol_schema_any ? Class : {
-        new (value?: any): {
-            constructor: Function;
-            toString(): string;
-            toLocaleString(): string;
-            valueOf(): Object;
-            hasOwnProperty(v: PropertyKey): boolean;
-            isPrototypeOf(v: Object): boolean;
-            propertyIsEnumerable(v: PropertyKey): boolean;
-        };
-        Class: Class;
-        toString(): string;
-        guard<Value>(value: Value): Value & InstanceType<Class>;
-        cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
-        default: InstanceType<Class>;
-        check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
-        [Symbol.toStringTag]: string;
-        [$mol_key_handle](): string;
-        [Symbol.hasInstance]<This extends typeof $mol_schema_any, Val_1>(this: This, val: Val_1): val is Val_1 & This["default"];
-        getPrototypeOf(o: any): any;
-        getOwnPropertyDescriptor(o: any, p: PropertyKey): PropertyDescriptor | undefined;
-        getOwnPropertyNames(o: any): string[];
-        create(o: object | null): any;
-        create(o: object | null, properties: PropertyDescriptorMap & ThisType<any>): any;
-        defineProperty<T>(o: T, p: PropertyKey, attributes: PropertyDescriptor & ThisType<any>): T;
-        defineProperties<T>(o: T, properties: PropertyDescriptorMap & ThisType<any>): T;
-        seal<T>(o: T): T;
-        freeze<T extends Function>(f: T): T;
-        freeze<T extends {
-            [idx: string]: U | null | undefined | object;
-        }, U extends string | bigint | number | boolean | symbol>(o: T): Readonly<T>;
-        freeze<T>(o: T): Readonly<T>;
-        preventExtensions<T>(o: T): T;
-        isSealed(o: any): boolean;
-        isFrozen(o: any): boolean;
-        isExtensible(o: any): boolean;
-        keys(o: object): string[];
-        keys(o: {}): string[];
-        assign<T extends {}, U_1>(target: T, source: U_1): T & U_1;
-        assign<T extends {}, U_2, V>(target: T, source1: U_2, source2: V): T & U_2 & V;
-        assign<T extends {}, U_3, V_1, W>(target: T, source1: U_3, source2: V_1, source3: W): T & U_3 & V_1 & W;
-        assign(target: object, ...sources: any[]): any;
-        getOwnPropertySymbols(o: any): symbol[];
-        is(value1: any, value2: any): boolean;
-        setPrototypeOf(o: any, proto: object | null): any;
-        values<T>(o: {
-            [s: string]: T;
-        } | ArrayLike<T>): T[];
-        values(o: {}): any[];
-        entries<T>(o: {
-            [s: string]: T;
-        } | ArrayLike<T>): [string, T][];
-        entries(o: {}): [string, any][];
-        getOwnPropertyDescriptors<T>(o: T): { [P in keyof T]: TypedPropertyDescriptor<T[P]>; } & {
-            [x: string]: PropertyDescriptor;
-        };
-        fromEntries<T = any>(entries: Iterable<readonly [PropertyKey, T]>): {
-            [k: string]: T;
-        };
-        fromEntries(entries: Iterable<readonly any[]>): any;
-        hasOwn(o: object, v: PropertyKey): boolean;
-        groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-    };
 }
 
 declare namespace $ {
@@ -16027,72 +16155,6 @@ declare namespace $ {
 }
 
 declare namespace $ {
-    let $mol_schema_maybe: <Some extends typeof $mol_schema_any>(this: void, Some: Some) => {
-        new (value?: any): {
-            constructor: Function;
-            toString(): string;
-            toLocaleString(): string;
-            valueOf(): Object;
-            hasOwnProperty(v: PropertyKey): boolean;
-            isPrototypeOf(v: Object): boolean;
-            propertyIsEnumerable(v: PropertyKey): boolean;
-        };
-        Some: Some;
-        toString(): string;
-        guard<Value>(value: Value): Value;
-        default: Some["default"] | null | undefined;
-        check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
-        cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
-        [Symbol.toStringTag]: string;
-        [$mol_key_handle](): string;
-        [Symbol.hasInstance]<This extends typeof $mol_schema_any, Val_1>(this: This, val: Val_1): val is Val_1 & This["default"];
-        getPrototypeOf(o: any): any;
-        getOwnPropertyDescriptor(o: any, p: PropertyKey): PropertyDescriptor | undefined;
-        getOwnPropertyNames(o: any): string[];
-        create(o: object | null): any;
-        create(o: object | null, properties: PropertyDescriptorMap & ThisType<any>): any;
-        defineProperty<T>(o: T, p: PropertyKey, attributes: PropertyDescriptor & ThisType<any>): T;
-        defineProperties<T>(o: T, properties: PropertyDescriptorMap & ThisType<any>): T;
-        seal<T>(o: T): T;
-        freeze<T extends Function>(f: T): T;
-        freeze<T extends {
-            [idx: string]: U | null | undefined | object;
-        }, U extends string | bigint | number | boolean | symbol>(o: T): Readonly<T>;
-        freeze<T>(o: T): Readonly<T>;
-        preventExtensions<T>(o: T): T;
-        isSealed(o: any): boolean;
-        isFrozen(o: any): boolean;
-        isExtensible(o: any): boolean;
-        keys(o: object): string[];
-        keys(o: {}): string[];
-        assign<T extends {}, U_1>(target: T, source: U_1): T & U_1;
-        assign<T extends {}, U_2, V>(target: T, source1: U_2, source2: V): T & U_2 & V;
-        assign<T extends {}, U_3, V_1, W>(target: T, source1: U_3, source2: V_1, source3: W): T & U_3 & V_1 & W;
-        assign(target: object, ...sources: any[]): any;
-        getOwnPropertySymbols(o: any): symbol[];
-        is(value1: any, value2: any): boolean;
-        setPrototypeOf(o: any, proto: object | null): any;
-        values<T>(o: {
-            [s: string]: T;
-        } | ArrayLike<T>): T[];
-        values(o: {}): any[];
-        entries<T>(o: {
-            [s: string]: T;
-        } | ArrayLike<T>): [string, T][];
-        entries(o: {}): [string, any][];
-        getOwnPropertyDescriptors<T>(o: T): { [P in keyof T]: TypedPropertyDescriptor<T[P]>; } & {
-            [x: string]: PropertyDescriptor;
-        };
-        fromEntries<T = any>(entries: Iterable<readonly [PropertyKey, T]>): {
-            [k: string]: T;
-        };
-        fromEntries(entries: Iterable<readonly any[]>): any;
-        hasOwn(o: object, v: PropertyKey): boolean;
-        groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-    };
-}
-
-declare namespace $ {
     /** Atomic dynamic register */
     export class $giper_baza_atom extends $giper_baza_pawn {
         static tag: keyof typeof $giper_baza_unit_sand_tag;
@@ -16167,7 +16229,7 @@ declare namespace $ {
                     fromEntries(entries: Iterable<readonly any[]>): any;
                     hasOwn(o: object, v: PropertyKey): boolean;
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                })["default"] | null | undefined): ((Init extends typeof $mol_schema_any ? Init : {
+                })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
                     new (value?: any): {
                         constructor: Function;
                         toString(): string;
@@ -16229,7 +16291,7 @@ declare namespace $ {
                     fromEntries(entries: Iterable<readonly any[]>): any;
                     hasOwn(o: object, v: PropertyKey): boolean;
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                })["default"] | null | undefined) | null;
+                })["default"] | null) | null;
                 val_of(peer: $giper_baza_link | null, next?: (Init extends typeof $mol_schema_any ? Init : {
                     new (value?: any): {
                         constructor: Function;
@@ -16292,7 +16354,7 @@ declare namespace $ {
                     fromEntries(entries: Iterable<readonly any[]>): any;
                     hasOwn(o: object, v: PropertyKey): boolean;
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                })["default"] | null | undefined): ((Init extends typeof $mol_schema_any ? Init : {
+                })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
                     new (value?: any): {
                         constructor: Function;
                         toString(): string;
@@ -16354,7 +16416,7 @@ declare namespace $ {
                     fromEntries(entries: Iterable<readonly any[]>): any;
                     hasOwn(o: object, v: PropertyKey): boolean;
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                })["default"] | null | undefined) | null;
+                })["default"] | null) | null;
                 pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
                 vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
                 vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -16457,7 +16519,7 @@ declare namespace $ {
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
                 };
                 toString(): string;
-                guard<Value>(value: Value): Value;
+                guard<This extends typeof $mol_schema_any, Value>(this: This, value: Value): Value & This["default"];
                 default: (Init extends typeof $mol_schema_any ? Init : {
                     new (value?: any): {
                         constructor: Function;
@@ -16520,7 +16582,7 @@ declare namespace $ {
                     fromEntries(entries: Iterable<readonly any[]>): any;
                     hasOwn(o: object, v: PropertyKey): boolean;
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                })["default"] | null | undefined;
+                })["default"] | null;
                 check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
                 cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                 [Symbol.toStringTag]: string;
@@ -16588,8 +16650,8 @@ declare namespace $ {
     const $giper_baza_atom_blob_base: {
         new (): {
             /** Get/Set value of Pawn field */
-            val(next?: Uint8Array<ArrayBuffer> | null | undefined): Uint8Array<ArrayBuffer> | null | undefined;
-            val_of(peer: $giper_baza_link | null, next?: Uint8Array<ArrayBuffer> | null | undefined): Uint8Array<ArrayBuffer> | null | undefined;
+            val(next?: Uint8Array<ArrayBuffer> | null | undefined): Uint8Array<ArrayBuffer> | null;
+            val_of(peer: $giper_baza_link | null, next?: Uint8Array<ArrayBuffer> | null | undefined): Uint8Array<ArrayBuffer> | null;
             pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
             vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
             vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -16692,8 +16754,8 @@ declare namespace $ {
                 groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
             };
             toString(): string;
-            guard<Value>(value: Value): Value;
-            default: Uint8Array<ArrayBuffer> | null | undefined;
+            guard<This extends typeof $mol_schema_any, Value>(this: This, value: Value): Value & This["default"];
+            default: Uint8Array<ArrayBuffer> | null;
             check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
             cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
             [Symbol.toStringTag]: string;
@@ -16811,7 +16873,7 @@ declare namespace $ {
                     fromEntries(entries: Iterable<readonly any[]>): any;
                     hasOwn(o: object, v: PropertyKey): boolean;
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                })["default"] | null | undefined): ((Init extends typeof $mol_schema_any ? Init : {
+                })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
                     new (value?: any): {
                         constructor: Function;
                         toString(): string;
@@ -16873,7 +16935,7 @@ declare namespace $ {
                     fromEntries(entries: Iterable<readonly any[]>): any;
                     hasOwn(o: object, v: PropertyKey): boolean;
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                })["default"] | null | undefined) | null;
+                })["default"] | null) | null;
                 val_of(peer: $giper_baza_link | null, next?: (Init extends typeof $mol_schema_any ? Init : {
                     new (value?: any): {
                         constructor: Function;
@@ -16936,7 +16998,7 @@ declare namespace $ {
                     fromEntries(entries: Iterable<readonly any[]>): any;
                     hasOwn(o: object, v: PropertyKey): boolean;
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                })["default"] | null | undefined): ((Init extends typeof $mol_schema_any ? Init : {
+                })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
                     new (value?: any): {
                         constructor: Function;
                         toString(): string;
@@ -16998,7 +17060,7 @@ declare namespace $ {
                     fromEntries(entries: Iterable<readonly any[]>): any;
                     hasOwn(o: object, v: PropertyKey): boolean;
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                })["default"] | null | undefined) | null;
+                })["default"] | null) | null;
                 pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
                 vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
                 vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -17101,7 +17163,7 @@ declare namespace $ {
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
                 };
                 toString(): string;
-                guard<Value>(value: Value): Value;
+                guard<This extends typeof $mol_schema_any, Value>(this: This, value: Value): Value & This["default"];
                 default: (Init extends typeof $mol_schema_any ? Init : {
                     new (value?: any): {
                         constructor: Function;
@@ -17114,7 +17176,7 @@ declare namespace $ {
                     };
                     Class: Init;
                     toString(): string;
-                    guard<Value>(value: Value): Value & InstanceType<Init>;
+                    guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
                     cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                     default: InstanceType<Init>;
                     check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -17164,7 +17226,7 @@ declare namespace $ {
                     fromEntries(entries: Iterable<readonly any[]>): any;
                     hasOwn(o: object, v: PropertyKey): boolean;
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                })["default"] | null | undefined;
+                })["default"] | null;
                 check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
                 cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                 [Symbol.toStringTag]: string;
@@ -17241,8 +17303,8 @@ declare namespace $ {
     const $giper_baza_atom_bool_base: {
         new (): {
             /** Get/Set value of Pawn field */
-            val(next?: boolean | null | undefined): boolean | null | undefined;
-            val_of(peer: $giper_baza_link | null, next?: boolean | null | undefined): boolean | null | undefined;
+            val(next?: boolean | null | undefined): boolean | null;
+            val_of(peer: $giper_baza_link | null, next?: boolean | null | undefined): boolean | null;
             pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
             vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
             vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -17283,8 +17345,8 @@ declare namespace $ {
             };
             Some: typeof $mol_schema_boolean;
             toString(): string;
-            guard<Value>(value: Value): Value;
-            default: boolean | null | undefined;
+            guard<This extends typeof $mol_schema_any, Value>(this: This, value: Value): Value & This["default"];
+            default: boolean | null;
             check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
             cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
             [Symbol.toStringTag]: string;
@@ -17402,7 +17464,7 @@ declare namespace $ {
                     fromEntries(entries: Iterable<readonly any[]>): any;
                     hasOwn(o: object, v: PropertyKey): boolean;
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                })["default"] | null | undefined): ((Init extends typeof $mol_schema_any ? Init : {
+                })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
                     new (value?: any): {
                         constructor: Function;
                         toString(): string;
@@ -17464,7 +17526,7 @@ declare namespace $ {
                     fromEntries(entries: Iterable<readonly any[]>): any;
                     hasOwn(o: object, v: PropertyKey): boolean;
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                })["default"] | null | undefined) | null;
+                })["default"] | null) | null;
                 val_of(peer: $giper_baza_link | null, next?: (Init extends typeof $mol_schema_any ? Init : {
                     new (value?: any): {
                         constructor: Function;
@@ -17527,7 +17589,7 @@ declare namespace $ {
                     fromEntries(entries: Iterable<readonly any[]>): any;
                     hasOwn(o: object, v: PropertyKey): boolean;
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                })["default"] | null | undefined): ((Init extends typeof $mol_schema_any ? Init : {
+                })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
                     new (value?: any): {
                         constructor: Function;
                         toString(): string;
@@ -17589,7 +17651,7 @@ declare namespace $ {
                     fromEntries(entries: Iterable<readonly any[]>): any;
                     hasOwn(o: object, v: PropertyKey): boolean;
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                })["default"] | null | undefined) | null;
+                })["default"] | null) | null;
                 pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
                 vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
                 vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -17692,7 +17754,7 @@ declare namespace $ {
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
                 };
                 toString(): string;
-                guard<Value>(value: Value): Value;
+                guard<This extends typeof $mol_schema_any, Value>(this: This, value: Value): Value & This["default"];
                 default: (Init extends typeof $mol_schema_any ? Init : {
                     new (value?: any): {
                         constructor: Function;
@@ -17705,7 +17767,7 @@ declare namespace $ {
                     };
                     Class: Init;
                     toString(): string;
-                    guard<Value>(value: Value): Value & InstanceType<Init>;
+                    guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
                     cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                     default: InstanceType<Init>;
                     check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -17755,7 +17817,7 @@ declare namespace $ {
                     fromEntries(entries: Iterable<readonly any[]>): any;
                     hasOwn(o: object, v: PropertyKey): boolean;
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                })["default"] | null | undefined;
+                })["default"] | null;
                 check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
                 cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                 [Symbol.toStringTag]: string;
@@ -17832,8 +17894,8 @@ declare namespace $ {
     const $giper_baza_atom_bint_base: {
         new (): {
             /** Get/Set value of Pawn field */
-            val(next?: bigint | null | undefined): bigint | null | undefined;
-            val_of(peer: $giper_baza_link | null, next?: bigint | null | undefined): bigint | null | undefined;
+            val(next?: bigint | null | undefined): bigint | null;
+            val_of(peer: $giper_baza_link | null, next?: bigint | null | undefined): bigint | null;
             pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
             vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
             vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -17874,8 +17936,8 @@ declare namespace $ {
             };
             Some: typeof $mol_schema_bigint;
             toString(): string;
-            guard<Value>(value: Value): Value;
-            default: bigint | null | undefined;
+            guard<This extends typeof $mol_schema_any, Value>(this: This, value: Value): Value & This["default"];
+            default: bigint | null;
             check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
             cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
             [Symbol.toStringTag]: string;
@@ -17993,7 +18055,7 @@ declare namespace $ {
                     fromEntries(entries: Iterable<readonly any[]>): any;
                     hasOwn(o: object, v: PropertyKey): boolean;
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                })["default"] | null | undefined): ((Init extends typeof $mol_schema_any ? Init : {
+                })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
                     new (value?: any): {
                         constructor: Function;
                         toString(): string;
@@ -18055,7 +18117,7 @@ declare namespace $ {
                     fromEntries(entries: Iterable<readonly any[]>): any;
                     hasOwn(o: object, v: PropertyKey): boolean;
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                })["default"] | null | undefined) | null;
+                })["default"] | null) | null;
                 val_of(peer: $giper_baza_link | null, next?: (Init extends typeof $mol_schema_any ? Init : {
                     new (value?: any): {
                         constructor: Function;
@@ -18118,7 +18180,7 @@ declare namespace $ {
                     fromEntries(entries: Iterable<readonly any[]>): any;
                     hasOwn(o: object, v: PropertyKey): boolean;
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                })["default"] | null | undefined): ((Init extends typeof $mol_schema_any ? Init : {
+                })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
                     new (value?: any): {
                         constructor: Function;
                         toString(): string;
@@ -18180,7 +18242,7 @@ declare namespace $ {
                     fromEntries(entries: Iterable<readonly any[]>): any;
                     hasOwn(o: object, v: PropertyKey): boolean;
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                })["default"] | null | undefined) | null;
+                })["default"] | null) | null;
                 pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
                 vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
                 vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -18283,7 +18345,7 @@ declare namespace $ {
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
                 };
                 toString(): string;
-                guard<Value>(value: Value): Value;
+                guard<This extends typeof $mol_schema_any, Value>(this: This, value: Value): Value & This["default"];
                 default: (Init extends typeof $mol_schema_any ? Init : {
                     new (value?: any): {
                         constructor: Function;
@@ -18296,7 +18358,7 @@ declare namespace $ {
                     };
                     Class: Init;
                     toString(): string;
-                    guard<Value>(value: Value): Value & InstanceType<Init>;
+                    guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
                     cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                     default: InstanceType<Init>;
                     check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -18346,7 +18408,7 @@ declare namespace $ {
                     fromEntries(entries: Iterable<readonly any[]>): any;
                     hasOwn(o: object, v: PropertyKey): boolean;
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                })["default"] | null | undefined;
+                })["default"] | null;
                 check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
                 cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                 [Symbol.toStringTag]: string;
@@ -18423,8 +18485,8 @@ declare namespace $ {
     const $giper_baza_atom_real_base: {
         new (): {
             /** Get/Set value of Pawn field */
-            val(next?: number | null | undefined): number | null | undefined;
-            val_of(peer: $giper_baza_link | null, next?: number | null | undefined): number | null | undefined;
+            val(next?: number | null | undefined): number | null;
+            val_of(peer: $giper_baza_link | null, next?: number | null | undefined): number | null;
             pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
             vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
             vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -18465,8 +18527,8 @@ declare namespace $ {
             };
             Some: typeof $mol_schema_float;
             toString(): string;
-            guard<Value>(value: Value): Value;
-            default: number | null | undefined;
+            guard<This extends typeof $mol_schema_any, Value>(this: This, value: Value): Value & This["default"];
+            default: number | null;
             check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
             cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
             [Symbol.toStringTag]: string;
@@ -18584,7 +18646,7 @@ declare namespace $ {
                     fromEntries(entries: Iterable<readonly any[]>): any;
                     hasOwn(o: object, v: PropertyKey): boolean;
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                })["default"] | null | undefined): ((Init extends typeof $mol_schema_any ? Init : {
+                })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
                     new (value?: any): {
                         constructor: Function;
                         toString(): string;
@@ -18646,7 +18708,7 @@ declare namespace $ {
                     fromEntries(entries: Iterable<readonly any[]>): any;
                     hasOwn(o: object, v: PropertyKey): boolean;
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                })["default"] | null | undefined) | null;
+                })["default"] | null) | null;
                 val_of(peer: $giper_baza_link | null, next?: (Init extends typeof $mol_schema_any ? Init : {
                     new (value?: any): {
                         constructor: Function;
@@ -18709,7 +18771,7 @@ declare namespace $ {
                     fromEntries(entries: Iterable<readonly any[]>): any;
                     hasOwn(o: object, v: PropertyKey): boolean;
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                })["default"] | null | undefined): ((Init extends typeof $mol_schema_any ? Init : {
+                })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
                     new (value?: any): {
                         constructor: Function;
                         toString(): string;
@@ -18771,7 +18833,7 @@ declare namespace $ {
                     fromEntries(entries: Iterable<readonly any[]>): any;
                     hasOwn(o: object, v: PropertyKey): boolean;
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                })["default"] | null | undefined) | null;
+                })["default"] | null) | null;
                 pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
                 vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
                 vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -18874,7 +18936,7 @@ declare namespace $ {
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
                 };
                 toString(): string;
-                guard<Value>(value: Value): Value;
+                guard<This extends typeof $mol_schema_any, Value>(this: This, value: Value): Value & This["default"];
                 default: (Init extends typeof $mol_schema_any ? Init : {
                     new (value?: any): {
                         constructor: Function;
@@ -18887,7 +18949,7 @@ declare namespace $ {
                     };
                     Class: Init;
                     toString(): string;
-                    guard<Value>(value: Value): Value & InstanceType<Init>;
+                    guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
                     cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                     default: InstanceType<Init>;
                     check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -18937,7 +18999,7 @@ declare namespace $ {
                     fromEntries(entries: Iterable<readonly any[]>): any;
                     hasOwn(o: object, v: PropertyKey): boolean;
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                })["default"] | null | undefined;
+                })["default"] | null;
                 check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
                 cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                 [Symbol.toStringTag]: string;
@@ -19014,8 +19076,8 @@ declare namespace $ {
     const $giper_baza_atom_text_base: {
         new (): {
             /** Get/Set value of Pawn field */
-            val(next?: string | null | undefined): string | null | undefined;
-            val_of(peer: $giper_baza_link | null, next?: string | null | undefined): string | null | undefined;
+            val(next?: string | null | undefined): string | null;
+            val_of(peer: $giper_baza_link | null, next?: string | null | undefined): string | null;
             pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
             vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
             vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -19056,8 +19118,8 @@ declare namespace $ {
             };
             Some: typeof $mol_schema_string;
             toString(): string;
-            guard<Value>(value: Value): Value;
-            default: string | null | undefined;
+            guard<This extends typeof $mol_schema_any, Value>(this: This, value: Value): Value & This["default"];
+            default: string | null;
             check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
             cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
             [Symbol.toStringTag]: string;
@@ -19175,7 +19237,7 @@ declare namespace $ {
                     fromEntries(entries: Iterable<readonly any[]>): any;
                     hasOwn(o: object, v: PropertyKey): boolean;
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                })["default"] | null | undefined): ((Init extends typeof $mol_schema_any ? Init : {
+                })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
                     new (value?: any): {
                         constructor: Function;
                         toString(): string;
@@ -19237,7 +19299,7 @@ declare namespace $ {
                     fromEntries(entries: Iterable<readonly any[]>): any;
                     hasOwn(o: object, v: PropertyKey): boolean;
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                })["default"] | null | undefined) | null;
+                })["default"] | null) | null;
                 val_of(peer: $giper_baza_link | null, next?: (Init extends typeof $mol_schema_any ? Init : {
                     new (value?: any): {
                         constructor: Function;
@@ -19300,7 +19362,7 @@ declare namespace $ {
                     fromEntries(entries: Iterable<readonly any[]>): any;
                     hasOwn(o: object, v: PropertyKey): boolean;
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                })["default"] | null | undefined): ((Init extends typeof $mol_schema_any ? Init : {
+                })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
                     new (value?: any): {
                         constructor: Function;
                         toString(): string;
@@ -19362,7 +19424,7 @@ declare namespace $ {
                     fromEntries(entries: Iterable<readonly any[]>): any;
                     hasOwn(o: object, v: PropertyKey): boolean;
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                })["default"] | null | undefined) | null;
+                })["default"] | null) | null;
                 pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
                 vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
                 vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -19465,7 +19527,7 @@ declare namespace $ {
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
                 };
                 toString(): string;
-                guard<Value>(value: Value): Value;
+                guard<This extends typeof $mol_schema_any, Value>(this: This, value: Value): Value & This["default"];
                 default: (Init extends typeof $mol_schema_any ? Init : {
                     new (value?: any): {
                         constructor: Function;
@@ -19478,7 +19540,7 @@ declare namespace $ {
                     };
                     Class: Init;
                     toString(): string;
-                    guard<Value>(value: Value): Value & InstanceType<Init>;
+                    guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
                     cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                     default: InstanceType<Init>;
                     check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -19528,7 +19590,7 @@ declare namespace $ {
                     fromEntries(entries: Iterable<readonly any[]>): any;
                     hasOwn(o: object, v: PropertyKey): boolean;
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                })["default"] | null | undefined;
+                })["default"] | null;
                 check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
                 cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                 [Symbol.toStringTag]: string;
@@ -19605,8 +19667,8 @@ declare namespace $ {
     const $giper_baza_atom_time_base: {
         new (): {
             /** Get/Set value of Pawn field */
-            val(next?: $mol_time_moment | null | undefined): $mol_time_moment | null | undefined;
-            val_of(peer: $giper_baza_link | null, next?: $mol_time_moment | null | undefined): $mol_time_moment | null | undefined;
+            val(next?: $mol_time_moment | null | undefined): $mol_time_moment | null;
+            val_of(peer: $giper_baza_link | null, next?: $mol_time_moment | null | undefined): $mol_time_moment | null;
             pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
             vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
             vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -19709,8 +19771,8 @@ declare namespace $ {
                 groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
             };
             toString(): string;
-            guard<Value>(value: Value): Value;
-            default: $mol_time_moment | null | undefined;
+            guard<This extends typeof $mol_schema_any, Value>(this: This, value: Value): Value & This["default"];
+            default: $mol_time_moment | null;
             check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
             cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
             [Symbol.toStringTag]: string;
@@ -19828,7 +19890,7 @@ declare namespace $ {
                     fromEntries(entries: Iterable<readonly any[]>): any;
                     hasOwn(o: object, v: PropertyKey): boolean;
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                })["default"] | null | undefined): ((Init extends typeof $mol_schema_any ? Init : {
+                })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
                     new (value?: any): {
                         constructor: Function;
                         toString(): string;
@@ -19890,7 +19952,7 @@ declare namespace $ {
                     fromEntries(entries: Iterable<readonly any[]>): any;
                     hasOwn(o: object, v: PropertyKey): boolean;
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                })["default"] | null | undefined) | null;
+                })["default"] | null) | null;
                 val_of(peer: $giper_baza_link | null, next?: (Init extends typeof $mol_schema_any ? Init : {
                     new (value?: any): {
                         constructor: Function;
@@ -19953,7 +20015,7 @@ declare namespace $ {
                     fromEntries(entries: Iterable<readonly any[]>): any;
                     hasOwn(o: object, v: PropertyKey): boolean;
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                })["default"] | null | undefined): ((Init extends typeof $mol_schema_any ? Init : {
+                })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
                     new (value?: any): {
                         constructor: Function;
                         toString(): string;
@@ -20015,7 +20077,7 @@ declare namespace $ {
                     fromEntries(entries: Iterable<readonly any[]>): any;
                     hasOwn(o: object, v: PropertyKey): boolean;
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                })["default"] | null | undefined) | null;
+                })["default"] | null) | null;
                 pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
                 vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
                 vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -20118,7 +20180,7 @@ declare namespace $ {
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
                 };
                 toString(): string;
-                guard<Value>(value: Value): Value;
+                guard<This extends typeof $mol_schema_any, Value>(this: This, value: Value): Value & This["default"];
                 default: (Init extends typeof $mol_schema_any ? Init : {
                     new (value?: any): {
                         constructor: Function;
@@ -20131,7 +20193,7 @@ declare namespace $ {
                     };
                     Class: Init;
                     toString(): string;
-                    guard<Value>(value: Value): Value & InstanceType<Init>;
+                    guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
                     cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                     default: InstanceType<Init>;
                     check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -20181,7 +20243,7 @@ declare namespace $ {
                     fromEntries(entries: Iterable<readonly any[]>): any;
                     hasOwn(o: object, v: PropertyKey): boolean;
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                })["default"] | null | undefined;
+                })["default"] | null;
                 check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
                 cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                 [Symbol.toStringTag]: string;
@@ -20258,8 +20320,8 @@ declare namespace $ {
     const $giper_baza_atom_dura_base: {
         new (): {
             /** Get/Set value of Pawn field */
-            val(next?: $mol_time_duration | null | undefined): $mol_time_duration | null | undefined;
-            val_of(peer: $giper_baza_link | null, next?: $mol_time_duration | null | undefined): $mol_time_duration | null | undefined;
+            val(next?: $mol_time_duration | null | undefined): $mol_time_duration | null;
+            val_of(peer: $giper_baza_link | null, next?: $mol_time_duration | null | undefined): $mol_time_duration | null;
             pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
             vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
             vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -20362,8 +20424,8 @@ declare namespace $ {
                 groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
             };
             toString(): string;
-            guard<Value>(value: Value): Value;
-            default: $mol_time_duration | null | undefined;
+            guard<This extends typeof $mol_schema_any, Value>(this: This, value: Value): Value & This["default"];
+            default: $mol_time_duration | null;
             check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
             cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
             [Symbol.toStringTag]: string;
@@ -20481,7 +20543,7 @@ declare namespace $ {
                     fromEntries(entries: Iterable<readonly any[]>): any;
                     hasOwn(o: object, v: PropertyKey): boolean;
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                })["default"] | null | undefined): ((Init extends typeof $mol_schema_any ? Init : {
+                })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
                     new (value?: any): {
                         constructor: Function;
                         toString(): string;
@@ -20543,7 +20605,7 @@ declare namespace $ {
                     fromEntries(entries: Iterable<readonly any[]>): any;
                     hasOwn(o: object, v: PropertyKey): boolean;
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                })["default"] | null | undefined) | null;
+                })["default"] | null) | null;
                 val_of(peer: $giper_baza_link | null, next?: (Init extends typeof $mol_schema_any ? Init : {
                     new (value?: any): {
                         constructor: Function;
@@ -20606,7 +20668,7 @@ declare namespace $ {
                     fromEntries(entries: Iterable<readonly any[]>): any;
                     hasOwn(o: object, v: PropertyKey): boolean;
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                })["default"] | null | undefined): ((Init extends typeof $mol_schema_any ? Init : {
+                })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
                     new (value?: any): {
                         constructor: Function;
                         toString(): string;
@@ -20668,7 +20730,7 @@ declare namespace $ {
                     fromEntries(entries: Iterable<readonly any[]>): any;
                     hasOwn(o: object, v: PropertyKey): boolean;
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                })["default"] | null | undefined) | null;
+                })["default"] | null) | null;
                 pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
                 vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
                 vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -20771,7 +20833,7 @@ declare namespace $ {
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
                 };
                 toString(): string;
-                guard<Value>(value: Value): Value;
+                guard<This extends typeof $mol_schema_any, Value>(this: This, value: Value): Value & This["default"];
                 default: (Init extends typeof $mol_schema_any ? Init : {
                     new (value?: any): {
                         constructor: Function;
@@ -20784,7 +20846,7 @@ declare namespace $ {
                     };
                     Class: Init;
                     toString(): string;
-                    guard<Value>(value: Value): Value & InstanceType<Init>;
+                    guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
                     cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                     default: InstanceType<Init>;
                     check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -20834,7 +20896,7 @@ declare namespace $ {
                     fromEntries(entries: Iterable<readonly any[]>): any;
                     hasOwn(o: object, v: PropertyKey): boolean;
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                })["default"] | null | undefined;
+                })["default"] | null;
                 check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
                 cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                 [Symbol.toStringTag]: string;
@@ -20911,8 +20973,8 @@ declare namespace $ {
     const $giper_baza_atom_span_base: {
         new (): {
             /** Get/Set value of Pawn field */
-            val(next?: $mol_time_interval | null | undefined): $mol_time_interval | null | undefined;
-            val_of(peer: $giper_baza_link | null, next?: $mol_time_interval | null | undefined): $mol_time_interval | null | undefined;
+            val(next?: $mol_time_interval | null | undefined): $mol_time_interval | null;
+            val_of(peer: $giper_baza_link | null, next?: $mol_time_interval | null | undefined): $mol_time_interval | null;
             pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
             vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
             vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -21015,8 +21077,8 @@ declare namespace $ {
                 groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
             };
             toString(): string;
-            guard<Value>(value: Value): Value;
-            default: $mol_time_interval | null | undefined;
+            guard<This extends typeof $mol_schema_any, Value>(this: This, value: Value): Value & This["default"];
+            default: $mol_time_interval | null;
             check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
             cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
             [Symbol.toStringTag]: string;
@@ -21134,7 +21196,7 @@ declare namespace $ {
                     fromEntries(entries: Iterable<readonly any[]>): any;
                     hasOwn(o: object, v: PropertyKey): boolean;
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                })["default"] | null | undefined): ((Init extends typeof $mol_schema_any ? Init : {
+                })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
                     new (value?: any): {
                         constructor: Function;
                         toString(): string;
@@ -21196,7 +21258,7 @@ declare namespace $ {
                     fromEntries(entries: Iterable<readonly any[]>): any;
                     hasOwn(o: object, v: PropertyKey): boolean;
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                })["default"] | null | undefined) | null;
+                })["default"] | null) | null;
                 val_of(peer: $giper_baza_link | null, next?: (Init extends typeof $mol_schema_any ? Init : {
                     new (value?: any): {
                         constructor: Function;
@@ -21259,7 +21321,7 @@ declare namespace $ {
                     fromEntries(entries: Iterable<readonly any[]>): any;
                     hasOwn(o: object, v: PropertyKey): boolean;
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                })["default"] | null | undefined): ((Init extends typeof $mol_schema_any ? Init : {
+                })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
                     new (value?: any): {
                         constructor: Function;
                         toString(): string;
@@ -21321,7 +21383,7 @@ declare namespace $ {
                     fromEntries(entries: Iterable<readonly any[]>): any;
                     hasOwn(o: object, v: PropertyKey): boolean;
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                })["default"] | null | undefined) | null;
+                })["default"] | null) | null;
                 pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
                 vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
                 vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -21424,7 +21486,7 @@ declare namespace $ {
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
                 };
                 toString(): string;
-                guard<Value>(value: Value): Value;
+                guard<This extends typeof $mol_schema_any, Value>(this: This, value: Value): Value & This["default"];
                 default: (Init extends typeof $mol_schema_any ? Init : {
                     new (value?: any): {
                         constructor: Function;
@@ -21437,7 +21499,7 @@ declare namespace $ {
                     };
                     Class: Init;
                     toString(): string;
-                    guard<Value>(value: Value): Value & InstanceType<Init>;
+                    guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
                     cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                     default: InstanceType<Init>;
                     check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -21487,7 +21549,7 @@ declare namespace $ {
                     fromEntries(entries: Iterable<readonly any[]>): any;
                     hasOwn(o: object, v: PropertyKey): boolean;
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                })["default"] | null | undefined;
+                })["default"] | null;
                 check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
                 cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                 [Symbol.toStringTag]: string;
@@ -21564,8 +21626,8 @@ declare namespace $ {
     const $giper_baza_atom_dict_base: {
         new (): {
             /** Get/Set value of Pawn field */
-            val(next?: Record<string, unknown> | null | undefined): Record<string, unknown> | null | undefined;
-            val_of(peer: $giper_baza_link | null, next?: Record<string, unknown> | null | undefined): Record<string, unknown> | null | undefined;
+            val(next?: Record<string, unknown> | null | undefined): Record<string, unknown> | null;
+            val_of(peer: $giper_baza_link | null, next?: Record<string, unknown> | null | undefined): Record<string, unknown> | null;
             pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
             vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
             vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -21668,8 +21730,8 @@ declare namespace $ {
                 groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
             };
             toString(): string;
-            guard<Value>(value: Value): Value;
-            default: Record<string, unknown> | null | undefined;
+            guard<This extends typeof $mol_schema_any, Value>(this: This, value: Value): Value & This["default"];
+            default: Record<string, unknown> | null;
             check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
             cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
             [Symbol.toStringTag]: string;
@@ -21787,7 +21849,7 @@ declare namespace $ {
                     fromEntries(entries: Iterable<readonly any[]>): any;
                     hasOwn(o: object, v: PropertyKey): boolean;
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                })["default"] | null | undefined): ((Init extends typeof $mol_schema_any ? Init : {
+                })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
                     new (value?: any): {
                         constructor: Function;
                         toString(): string;
@@ -21849,7 +21911,7 @@ declare namespace $ {
                     fromEntries(entries: Iterable<readonly any[]>): any;
                     hasOwn(o: object, v: PropertyKey): boolean;
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                })["default"] | null | undefined) | null;
+                })["default"] | null) | null;
                 val_of(peer: $giper_baza_link | null, next?: (Init extends typeof $mol_schema_any ? Init : {
                     new (value?: any): {
                         constructor: Function;
@@ -21912,7 +21974,7 @@ declare namespace $ {
                     fromEntries(entries: Iterable<readonly any[]>): any;
                     hasOwn(o: object, v: PropertyKey): boolean;
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                })["default"] | null | undefined): ((Init extends typeof $mol_schema_any ? Init : {
+                })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
                     new (value?: any): {
                         constructor: Function;
                         toString(): string;
@@ -21974,7 +22036,7 @@ declare namespace $ {
                     fromEntries(entries: Iterable<readonly any[]>): any;
                     hasOwn(o: object, v: PropertyKey): boolean;
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                })["default"] | null | undefined) | null;
+                })["default"] | null) | null;
                 pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
                 vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
                 vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -22077,7 +22139,7 @@ declare namespace $ {
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
                 };
                 toString(): string;
-                guard<Value>(value: Value): Value;
+                guard<This extends typeof $mol_schema_any, Value>(this: This, value: Value): Value & This["default"];
                 default: (Init extends typeof $mol_schema_any ? Init : {
                     new (value?: any): {
                         constructor: Function;
@@ -22090,7 +22152,7 @@ declare namespace $ {
                     };
                     Class: Init;
                     toString(): string;
-                    guard<Value>(value: Value): Value & InstanceType<Init>;
+                    guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
                     cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                     default: InstanceType<Init>;
                     check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -22140,7 +22202,7 @@ declare namespace $ {
                     fromEntries(entries: Iterable<readonly any[]>): any;
                     hasOwn(o: object, v: PropertyKey): boolean;
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                })["default"] | null | undefined;
+                })["default"] | null;
                 check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
                 cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                 [Symbol.toStringTag]: string;
@@ -22217,8 +22279,8 @@ declare namespace $ {
     const $giper_baza_atom_list_base: {
         new (): {
             /** Get/Set value of Pawn field */
-            val(next?: readonly unknown[] | null | undefined): readonly unknown[] | null | undefined;
-            val_of(peer: $giper_baza_link | null, next?: readonly unknown[] | null | undefined): readonly unknown[] | null | undefined;
+            val(next?: readonly unknown[] | null | undefined): readonly unknown[] | null;
+            val_of(peer: $giper_baza_link | null, next?: readonly unknown[] | null | undefined): readonly unknown[] | null;
             pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
             vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
             vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -22321,8 +22383,8 @@ declare namespace $ {
                 groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
             };
             toString(): string;
-            guard<Value>(value: Value): Value;
-            default: readonly unknown[] | null | undefined;
+            guard<This extends typeof $mol_schema_any, Value>(this: This, value: Value): Value & This["default"];
+            default: readonly unknown[] | null;
             check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
             cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
             [Symbol.toStringTag]: string;
@@ -22440,7 +22502,7 @@ declare namespace $ {
                     fromEntries(entries: Iterable<readonly any[]>): any;
                     hasOwn(o: object, v: PropertyKey): boolean;
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                })["default"] | null | undefined): ((Init extends typeof $mol_schema_any ? Init : {
+                })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
                     new (value?: any): {
                         constructor: Function;
                         toString(): string;
@@ -22502,7 +22564,7 @@ declare namespace $ {
                     fromEntries(entries: Iterable<readonly any[]>): any;
                     hasOwn(o: object, v: PropertyKey): boolean;
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                })["default"] | null | undefined) | null;
+                })["default"] | null) | null;
                 val_of(peer: $giper_baza_link | null, next?: (Init extends typeof $mol_schema_any ? Init : {
                     new (value?: any): {
                         constructor: Function;
@@ -22565,7 +22627,7 @@ declare namespace $ {
                     fromEntries(entries: Iterable<readonly any[]>): any;
                     hasOwn(o: object, v: PropertyKey): boolean;
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                })["default"] | null | undefined): ((Init extends typeof $mol_schema_any ? Init : {
+                })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
                     new (value?: any): {
                         constructor: Function;
                         toString(): string;
@@ -22627,7 +22689,7 @@ declare namespace $ {
                     fromEntries(entries: Iterable<readonly any[]>): any;
                     hasOwn(o: object, v: PropertyKey): boolean;
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                })["default"] | null | undefined) | null;
+                })["default"] | null) | null;
                 pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
                 vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
                 vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -22730,7 +22792,7 @@ declare namespace $ {
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
                 };
                 toString(): string;
-                guard<Value>(value: Value): Value;
+                guard<This extends typeof $mol_schema_any, Value>(this: This, value: Value): Value & This["default"];
                 default: (Init extends typeof $mol_schema_any ? Init : {
                     new (value?: any): {
                         constructor: Function;
@@ -22743,7 +22805,7 @@ declare namespace $ {
                     };
                     Class: Init;
                     toString(): string;
-                    guard<Value>(value: Value): Value & InstanceType<Init>;
+                    guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
                     cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                     default: InstanceType<Init>;
                     check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -22793,7 +22855,7 @@ declare namespace $ {
                     fromEntries(entries: Iterable<readonly any[]>): any;
                     hasOwn(o: object, v: PropertyKey): boolean;
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                })["default"] | null | undefined;
+                })["default"] | null;
                 check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
                 cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                 [Symbol.toStringTag]: string;
@@ -22870,8 +22932,8 @@ declare namespace $ {
     const $giper_baza_atom_elem_base: {
         new (): {
             /** Get/Set value of Pawn field */
-            val(next?: Element | null | undefined): Element | null | undefined;
-            val_of(peer: $giper_baza_link | null, next?: Element | null | undefined): Element | null | undefined;
+            val(next?: Element | null | undefined): Element | null;
+            val_of(peer: $giper_baza_link | null, next?: Element | null | undefined): Element | null;
             pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
             vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
             vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -22977,8 +23039,8 @@ declare namespace $ {
                 groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
             };
             toString(): string;
-            guard<Value>(value: Value): Value;
-            default: Element | null | undefined;
+            guard<This extends typeof $mol_schema_any, Value>(this: This, value: Value): Value & This["default"];
+            default: Element | null;
             check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
             cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
             [Symbol.toStringTag]: string;
@@ -23096,7 +23158,7 @@ declare namespace $ {
                     fromEntries(entries: Iterable<readonly any[]>): any;
                     hasOwn(o: object, v: PropertyKey): boolean;
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                })["default"] | null | undefined): ((Init extends typeof $mol_schema_any ? Init : {
+                })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
                     new (value?: any): {
                         constructor: Function;
                         toString(): string;
@@ -23158,7 +23220,7 @@ declare namespace $ {
                     fromEntries(entries: Iterable<readonly any[]>): any;
                     hasOwn(o: object, v: PropertyKey): boolean;
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                })["default"] | null | undefined) | null;
+                })["default"] | null) | null;
                 val_of(peer: $giper_baza_link | null, next?: (Init extends typeof $mol_schema_any ? Init : {
                     new (value?: any): {
                         constructor: Function;
@@ -23221,7 +23283,7 @@ declare namespace $ {
                     fromEntries(entries: Iterable<readonly any[]>): any;
                     hasOwn(o: object, v: PropertyKey): boolean;
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                })["default"] | null | undefined): ((Init extends typeof $mol_schema_any ? Init : {
+                })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
                     new (value?: any): {
                         constructor: Function;
                         toString(): string;
@@ -23283,7 +23345,7 @@ declare namespace $ {
                     fromEntries(entries: Iterable<readonly any[]>): any;
                     hasOwn(o: object, v: PropertyKey): boolean;
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                })["default"] | null | undefined) | null;
+                })["default"] | null) | null;
                 pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
                 vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
                 vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -23386,7 +23448,7 @@ declare namespace $ {
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
                 };
                 toString(): string;
-                guard<Value>(value: Value): Value;
+                guard<This extends typeof $mol_schema_any, Value>(this: This, value: Value): Value & This["default"];
                 default: (Init extends typeof $mol_schema_any ? Init : {
                     new (value?: any): {
                         constructor: Function;
@@ -23399,7 +23461,7 @@ declare namespace $ {
                     };
                     Class: Init;
                     toString(): string;
-                    guard<Value>(value: Value): Value & InstanceType<Init>;
+                    guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
                     cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                     default: InstanceType<Init>;
                     check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -23449,7 +23511,7 @@ declare namespace $ {
                     fromEntries(entries: Iterable<readonly any[]>): any;
                     hasOwn(o: object, v: PropertyKey): boolean;
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                })["default"] | null | undefined;
+                })["default"] | null;
                 check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
                 cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                 [Symbol.toStringTag]: string;
@@ -23526,8 +23588,8 @@ declare namespace $ {
     const $giper_baza_atom_tree_base: {
         new (): {
             /** Get/Set value of Pawn field */
-            val(next?: $mol_tree2 | null | undefined): $mol_tree2 | null | undefined;
-            val_of(peer: $giper_baza_link | null, next?: $mol_tree2 | null | undefined): $mol_tree2 | null | undefined;
+            val(next?: $mol_tree2 | null | undefined): $mol_tree2 | null;
+            val_of(peer: $giper_baza_link | null, next?: $mol_tree2 | null | undefined): $mol_tree2 | null;
             pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
             vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
             vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -23630,8 +23692,8 @@ declare namespace $ {
                 groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
             };
             toString(): string;
-            guard<Value>(value: Value): Value;
-            default: $mol_tree2 | null | undefined;
+            guard<This extends typeof $mol_schema_any, Value>(this: This, value: Value): Value & This["default"];
+            default: $mol_tree2 | null;
             check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
             cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
             [Symbol.toStringTag]: string;
@@ -23749,7 +23811,7 @@ declare namespace $ {
                     fromEntries(entries: Iterable<readonly any[]>): any;
                     hasOwn(o: object, v: PropertyKey): boolean;
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                })["default"] | null | undefined): ((Init extends typeof $mol_schema_any ? Init : {
+                })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
                     new (value?: any): {
                         constructor: Function;
                         toString(): string;
@@ -23811,7 +23873,7 @@ declare namespace $ {
                     fromEntries(entries: Iterable<readonly any[]>): any;
                     hasOwn(o: object, v: PropertyKey): boolean;
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                })["default"] | null | undefined) | null;
+                })["default"] | null) | null;
                 val_of(peer: $giper_baza_link | null, next?: (Init extends typeof $mol_schema_any ? Init : {
                     new (value?: any): {
                         constructor: Function;
@@ -23874,7 +23936,7 @@ declare namespace $ {
                     fromEntries(entries: Iterable<readonly any[]>): any;
                     hasOwn(o: object, v: PropertyKey): boolean;
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                })["default"] | null | undefined): ((Init extends typeof $mol_schema_any ? Init : {
+                })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
                     new (value?: any): {
                         constructor: Function;
                         toString(): string;
@@ -23936,7 +23998,7 @@ declare namespace $ {
                     fromEntries(entries: Iterable<readonly any[]>): any;
                     hasOwn(o: object, v: PropertyKey): boolean;
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                })["default"] | null | undefined) | null;
+                })["default"] | null) | null;
                 pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
                 vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
                 vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -24039,7 +24101,7 @@ declare namespace $ {
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
                 };
                 toString(): string;
-                guard<Value>(value: Value): Value;
+                guard<This extends typeof $mol_schema_any, Value>(this: This, value: Value): Value & This["default"];
                 default: (Init extends typeof $mol_schema_any ? Init : {
                     new (value?: any): {
                         constructor: Function;
@@ -24052,7 +24114,7 @@ declare namespace $ {
                     };
                     Class: Init;
                     toString(): string;
-                    guard<Value>(value: Value): Value & InstanceType<Init>;
+                    guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
                     cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                     default: InstanceType<Init>;
                     check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -24102,7 +24164,7 @@ declare namespace $ {
                     fromEntries(entries: Iterable<readonly any[]>): any;
                     hasOwn(o: object, v: PropertyKey): boolean;
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                })["default"] | null | undefined;
+                })["default"] | null;
                 check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
                 cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                 [Symbol.toStringTag]: string;
@@ -24179,8 +24241,8 @@ declare namespace $ {
     const $giper_baza_atom_link_base: {
         new (): {
             /** Get/Set value of Pawn field */
-            val(next?: $giper_baza_link | null | undefined): $giper_baza_link | null | undefined;
-            val_of(peer: $giper_baza_link | null, next?: $giper_baza_link | null | undefined): $giper_baza_link | null | undefined;
+            val(next?: $giper_baza_link | null | undefined): $giper_baza_link | null;
+            val_of(peer: $giper_baza_link | null, next?: $giper_baza_link | null | undefined): $giper_baza_link | null;
             pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
             vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
             vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -24283,8 +24345,8 @@ declare namespace $ {
                 groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
             };
             toString(): string;
-            guard<Value>(value: Value): Value;
-            default: $giper_baza_link | null | undefined;
+            guard<This extends typeof $mol_schema_any, Value>(this: This, value: Value): Value & This["default"];
+            default: $giper_baza_link | null;
             check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
             cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
             [Symbol.toStringTag]: string;
@@ -24402,7 +24464,7 @@ declare namespace $ {
                     fromEntries(entries: Iterable<readonly any[]>): any;
                     hasOwn(o: object, v: PropertyKey): boolean;
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                })["default"] | null | undefined): ((Init extends typeof $mol_schema_any ? Init : {
+                })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
                     new (value?: any): {
                         constructor: Function;
                         toString(): string;
@@ -24464,7 +24526,7 @@ declare namespace $ {
                     fromEntries(entries: Iterable<readonly any[]>): any;
                     hasOwn(o: object, v: PropertyKey): boolean;
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                })["default"] | null | undefined) | null;
+                })["default"] | null) | null;
                 val_of(peer: $giper_baza_link | null, next?: (Init extends typeof $mol_schema_any ? Init : {
                     new (value?: any): {
                         constructor: Function;
@@ -24527,7 +24589,7 @@ declare namespace $ {
                     fromEntries(entries: Iterable<readonly any[]>): any;
                     hasOwn(o: object, v: PropertyKey): boolean;
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                })["default"] | null | undefined): ((Init extends typeof $mol_schema_any ? Init : {
+                })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
                     new (value?: any): {
                         constructor: Function;
                         toString(): string;
@@ -24589,7 +24651,7 @@ declare namespace $ {
                     fromEntries(entries: Iterable<readonly any[]>): any;
                     hasOwn(o: object, v: PropertyKey): boolean;
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                })["default"] | null | undefined) | null;
+                })["default"] | null) | null;
                 pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
                 vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
                 vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -24692,7 +24754,7 @@ declare namespace $ {
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
                 };
                 toString(): string;
-                guard<Value>(value: Value): Value;
+                guard<This extends typeof $mol_schema_any, Value>(this: This, value: Value): Value & This["default"];
                 default: (Init extends typeof $mol_schema_any ? Init : {
                     new (value?: any): {
                         constructor: Function;
@@ -24705,7 +24767,7 @@ declare namespace $ {
                     };
                     Class: Init;
                     toString(): string;
-                    guard<Value>(value: Value): Value & InstanceType<Init>;
+                    guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
                     cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                     default: InstanceType<Init>;
                     check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -24755,7 +24817,7 @@ declare namespace $ {
                     fromEntries(entries: Iterable<readonly any[]>): any;
                     hasOwn(o: object, v: PropertyKey): boolean;
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                })["default"] | null | undefined;
+                })["default"] | null;
                 check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
                 cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                 [Symbol.toStringTag]: string;
@@ -24846,8 +24908,8 @@ declare namespace $ {
                 /** @deprecated Use ensure( null ) */
                 local_ensure(): $mol_type_result<$mol_type_result<Value>> | null;
                 /** Get/Set value of Pawn field */
-                val(next?: $giper_baza_link | null | undefined): $giper_baza_link | null | undefined;
-                val_of(peer: $giper_baza_link | null, next?: $giper_baza_link | null | undefined): $giper_baza_link | null | undefined;
+                val(next?: $giper_baza_link | null | undefined): $giper_baza_link | null;
+                val_of(peer: $giper_baza_link | null, next?: $giper_baza_link | null | undefined): $giper_baza_link | null;
                 pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
                 vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
                 vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -24952,8 +25014,8 @@ declare namespace $ {
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
                 };
                 toString(): string;
-                guard<Value_1>(value: Value_1): Value_1;
-                default: $giper_baza_link | null | undefined;
+                guard<This extends typeof $mol_schema_any, Value_1>(this: This, value: Value_1): Value_1 & This["default"];
+                default: $giper_baza_link | null;
                 check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
                 cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                 [Symbol.toStringTag]: string;
@@ -25070,7 +25132,7 @@ declare namespace $ {
                         fromEntries(entries: Iterable<readonly any[]>): any;
                         hasOwn(o: object, v: PropertyKey): boolean;
                         groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                    })["default"] | null | undefined): ((Init extends typeof $mol_schema_any ? Init : {
+                    })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
                         new (value?: any): {
                             constructor: Function;
                             toString(): string;
@@ -25132,7 +25194,7 @@ declare namespace $ {
                         fromEntries(entries: Iterable<readonly any[]>): any;
                         hasOwn(o: object, v: PropertyKey): boolean;
                         groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                    })["default"] | null | undefined) | null;
+                    })["default"] | null) | null;
                     val_of(peer: $giper_baza_link | null, next?: (Init extends typeof $mol_schema_any ? Init : {
                         new (value?: any): {
                             constructor: Function;
@@ -25195,7 +25257,7 @@ declare namespace $ {
                         fromEntries(entries: Iterable<readonly any[]>): any;
                         hasOwn(o: object, v: PropertyKey): boolean;
                         groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                    })["default"] | null | undefined): ((Init extends typeof $mol_schema_any ? Init : {
+                    })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
                         new (value?: any): {
                             constructor: Function;
                             toString(): string;
@@ -25257,7 +25319,7 @@ declare namespace $ {
                         fromEntries(entries: Iterable<readonly any[]>): any;
                         hasOwn(o: object, v: PropertyKey): boolean;
                         groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                    })["default"] | null | undefined) | null;
+                    })["default"] | null) | null;
                     pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
                     vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
                     vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -25360,7 +25422,7 @@ declare namespace $ {
                         groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
                     };
                     toString(): string;
-                    guard<Value_1>(value: Value_1): Value_1;
+                    guard<This extends typeof $mol_schema_any, Value_1>(this: This, value: Value_1): Value_1 & This["default"];
                     default: (Init extends typeof $mol_schema_any ? Init : {
                         new (value?: any): {
                             constructor: Function;
@@ -25373,7 +25435,7 @@ declare namespace $ {
                         };
                         Class: Init;
                         toString(): string;
-                        guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
+                        guard<Value_2>(value: Value_2): Value_2 & InstanceType<Init>;
                         cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                         default: InstanceType<Init>;
                         check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -25423,7 +25485,7 @@ declare namespace $ {
                         fromEntries(entries: Iterable<readonly any[]>): any;
                         hasOwn(o: object, v: PropertyKey): boolean;
                         groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                    })["default"] | null | undefined;
+                    })["default"] | null;
                     check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
                     cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                     [Symbol.toStringTag]: string;
@@ -25513,8 +25575,8 @@ declare namespace $ {
             /** @deprecated Use ensure( null ) */
             local_ensure(): $mol_type_result<$mol_type_result<Value>> | null;
             /** Get/Set value of Pawn field */
-            val(next?: $giper_baza_link | null | undefined): $giper_baza_link | null | undefined;
-            val_of(peer: $giper_baza_link | null, next?: $giper_baza_link | null | undefined): $giper_baza_link | null | undefined;
+            val(next?: $giper_baza_link | null | undefined): $giper_baza_link | null;
+            val_of(peer: $giper_baza_link | null, next?: $giper_baza_link | null | undefined): $giper_baza_link | null;
             pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
             vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
             vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -25562,8 +25624,8 @@ declare namespace $ {
                 /** @deprecated Use ensure( null ) */
                 local_ensure(): $mol_type_result<$mol_type_result<Value>> | null;
                 /** Get/Set value of Pawn field */
-                val(next?: $giper_baza_link | null | undefined): $giper_baza_link | null | undefined;
-                val_of(peer: $giper_baza_link | null, next?: $giper_baza_link | null | undefined): $giper_baza_link | null | undefined;
+                val(next?: $giper_baza_link | null | undefined): $giper_baza_link | null;
+                val_of(peer: $giper_baza_link | null, next?: $giper_baza_link | null | undefined): $giper_baza_link | null;
                 pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
                 vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
                 vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -25668,8 +25730,8 @@ declare namespace $ {
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
                 };
                 toString(): string;
-                guard<Value_1>(value: Value_1): Value_1;
-                default: $giper_baza_link | null | undefined;
+                guard<This extends typeof $mol_schema_any, Value_1>(this: This, value: Value_1): Value_1 & This["default"];
+                default: $giper_baza_link | null;
                 check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
                 cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                 [Symbol.toStringTag]: string;
@@ -25736,7 +25798,7 @@ declare namespace $ {
                         };
                         Class: Init;
                         toString(): string;
-                        guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
+                        guard<Value_2>(value: Value_2): Value_2 & InstanceType<Init>;
                         cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                         default: InstanceType<Init>;
                         check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -25786,7 +25848,7 @@ declare namespace $ {
                         fromEntries(entries: Iterable<readonly any[]>): any;
                         hasOwn(o: object, v: PropertyKey): boolean;
                         groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                    })["default"] | null | undefined): ((Init extends typeof $mol_schema_any ? Init : {
+                    })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
                         new (value?: any): {
                             constructor: Function;
                             toString(): string;
@@ -25798,7 +25860,7 @@ declare namespace $ {
                         };
                         Class: Init;
                         toString(): string;
-                        guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
+                        guard<Value_2>(value: Value_2): Value_2 & InstanceType<Init>;
                         cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                         default: InstanceType<Init>;
                         check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -25848,7 +25910,7 @@ declare namespace $ {
                         fromEntries(entries: Iterable<readonly any[]>): any;
                         hasOwn(o: object, v: PropertyKey): boolean;
                         groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                    })["default"] | null | undefined) | null;
+                    })["default"] | null) | null;
                     val_of(peer: $giper_baza_link | null, next?: (Init extends typeof $mol_schema_any ? Init : {
                         new (value?: any): {
                             constructor: Function;
@@ -25861,7 +25923,7 @@ declare namespace $ {
                         };
                         Class: Init;
                         toString(): string;
-                        guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
+                        guard<Value_2>(value: Value_2): Value_2 & InstanceType<Init>;
                         cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                         default: InstanceType<Init>;
                         check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -25911,7 +25973,7 @@ declare namespace $ {
                         fromEntries(entries: Iterable<readonly any[]>): any;
                         hasOwn(o: object, v: PropertyKey): boolean;
                         groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                    })["default"] | null | undefined): ((Init extends typeof $mol_schema_any ? Init : {
+                    })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
                         new (value?: any): {
                             constructor: Function;
                             toString(): string;
@@ -25923,7 +25985,7 @@ declare namespace $ {
                         };
                         Class: Init;
                         toString(): string;
-                        guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
+                        guard<Value_2>(value: Value_2): Value_2 & InstanceType<Init>;
                         cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                         default: InstanceType<Init>;
                         check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -25973,7 +26035,7 @@ declare namespace $ {
                         fromEntries(entries: Iterable<readonly any[]>): any;
                         hasOwn(o: object, v: PropertyKey): boolean;
                         groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                    })["default"] | null | undefined) | null;
+                    })["default"] | null) | null;
                     pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
                     vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
                     vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -26024,7 +26086,7 @@ declare namespace $ {
                         };
                         Class: Init;
                         toString(): string;
-                        guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
+                        guard<Value_2>(value: Value_2): Value_2 & InstanceType<Init>;
                         cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                         default: InstanceType<Init>;
                         check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -26076,7 +26138,7 @@ declare namespace $ {
                         groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
                     };
                     toString(): string;
-                    guard<Value_1>(value: Value_1): Value_1;
+                    guard<This extends typeof $mol_schema_any, Value_1>(this: This, value: Value_1): Value_1 & This["default"];
                     default: (Init extends typeof $mol_schema_any ? Init : {
                         new (value?: any): {
                             constructor: Function;
@@ -26089,7 +26151,7 @@ declare namespace $ {
                         };
                         Class: Init;
                         toString(): string;
-                        guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
+                        guard<Value_2>(value: Value_2): Value_2 & InstanceType<Init>;
                         cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                         default: InstanceType<Init>;
                         check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -26139,7 +26201,7 @@ declare namespace $ {
                         fromEntries(entries: Iterable<readonly any[]>): any;
                         hasOwn(o: object, v: PropertyKey): boolean;
                         groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                    })["default"] | null | undefined;
+                    })["default"] | null;
                     check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
                     cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                     [Symbol.toStringTag]: string;
@@ -26284,8 +26346,8 @@ declare namespace $ {
                 groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
             };
             toString(): string;
-            guard<Value_1>(value: Value_1): Value_1;
-            default: $giper_baza_link | null | undefined;
+            guard<This extends typeof $mol_schema_any, Value_1>(this: This, value: Value_1): Value_1 & This["default"];
+            default: $giper_baza_link | null;
             check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
             cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
             [Symbol.toStringTag]: string;
@@ -26402,7 +26464,7 @@ declare namespace $ {
                     fromEntries(entries: Iterable<readonly any[]>): any;
                     hasOwn(o: object, v: PropertyKey): boolean;
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                })["default"] | null | undefined): ((Init extends typeof $mol_schema_any ? Init : {
+                })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
                     new (value?: any): {
                         constructor: Function;
                         toString(): string;
@@ -26464,7 +26526,7 @@ declare namespace $ {
                     fromEntries(entries: Iterable<readonly any[]>): any;
                     hasOwn(o: object, v: PropertyKey): boolean;
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                })["default"] | null | undefined) | null;
+                })["default"] | null) | null;
                 val_of(peer: $giper_baza_link | null, next?: (Init extends typeof $mol_schema_any ? Init : {
                     new (value?: any): {
                         constructor: Function;
@@ -26527,7 +26589,7 @@ declare namespace $ {
                     fromEntries(entries: Iterable<readonly any[]>): any;
                     hasOwn(o: object, v: PropertyKey): boolean;
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                })["default"] | null | undefined): ((Init extends typeof $mol_schema_any ? Init : {
+                })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
                     new (value?: any): {
                         constructor: Function;
                         toString(): string;
@@ -26589,7 +26651,7 @@ declare namespace $ {
                     fromEntries(entries: Iterable<readonly any[]>): any;
                     hasOwn(o: object, v: PropertyKey): boolean;
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                })["default"] | null | undefined) | null;
+                })["default"] | null) | null;
                 pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
                 vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
                 vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -26692,7 +26754,7 @@ declare namespace $ {
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
                 };
                 toString(): string;
-                guard<Value_1>(value: Value_1): Value_1;
+                guard<This extends typeof $mol_schema_any, Value_1>(this: This, value: Value_1): Value_1 & This["default"];
                 default: (Init extends typeof $mol_schema_any ? Init : {
                     new (value?: any): {
                         constructor: Function;
@@ -26705,7 +26767,7 @@ declare namespace $ {
                     };
                     Class: Init;
                     toString(): string;
-                    guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
+                    guard<Value_2>(value: Value_2): Value_2 & InstanceType<Init>;
                     cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                     default: InstanceType<Init>;
                     check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -26755,7 +26817,7 @@ declare namespace $ {
                     fromEntries(entries: Iterable<readonly any[]>): any;
                     hasOwn(o: object, v: PropertyKey): boolean;
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                })["default"] | null | undefined;
+                })["default"] | null;
                 check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
                 cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                 [Symbol.toStringTag]: string;
@@ -26832,8 +26894,8 @@ declare namespace $ {
 declare namespace $ {
     const $giper_baza_stat_series_base: {
         new (): {
-            val(next?: readonly number[] | null | undefined): readonly number[] | null | undefined;
-            val_of(peer: $giper_baza_link | null, next?: readonly number[] | null | undefined): readonly number[] | null | undefined;
+            val(next?: readonly number[] | null | undefined): readonly number[] | null;
+            val_of(peer: $giper_baza_link | null, next?: readonly number[] | null | undefined): readonly number[] | null;
             pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
             vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
             vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -26936,8 +26998,8 @@ declare namespace $ {
                 groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
             };
             toString(): string;
-            guard<Value>(value: Value): Value;
-            default: readonly number[] | null | undefined;
+            guard<This extends typeof $mol_schema_any, Value>(this: This, value: Value): Value & This["default"];
+            default: readonly number[] | null;
             check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
             cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
             [Symbol.toStringTag]: string;
@@ -27053,7 +27115,7 @@ declare namespace $ {
                     fromEntries(entries: Iterable<readonly any[]>): any;
                     hasOwn(o: object, v: PropertyKey): boolean;
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                })["default"] | null | undefined): ((Init extends typeof $mol_schema_any ? Init : {
+                })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
                     new (value?: any): {
                         constructor: Function;
                         toString(): string;
@@ -27115,7 +27177,7 @@ declare namespace $ {
                     fromEntries(entries: Iterable<readonly any[]>): any;
                     hasOwn(o: object, v: PropertyKey): boolean;
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                })["default"] | null | undefined) | null;
+                })["default"] | null) | null;
                 val_of(peer: $giper_baza_link | null, next?: (Init extends typeof $mol_schema_any ? Init : {
                     new (value?: any): {
                         constructor: Function;
@@ -27178,7 +27240,7 @@ declare namespace $ {
                     fromEntries(entries: Iterable<readonly any[]>): any;
                     hasOwn(o: object, v: PropertyKey): boolean;
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                })["default"] | null | undefined): ((Init extends typeof $mol_schema_any ? Init : {
+                })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
                     new (value?: any): {
                         constructor: Function;
                         toString(): string;
@@ -27240,7 +27302,7 @@ declare namespace $ {
                     fromEntries(entries: Iterable<readonly any[]>): any;
                     hasOwn(o: object, v: PropertyKey): boolean;
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                })["default"] | null | undefined) | null;
+                })["default"] | null) | null;
                 pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
                 vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
                 vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -27343,7 +27405,7 @@ declare namespace $ {
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
                 };
                 toString(): string;
-                guard<Value>(value: Value): Value;
+                guard<This extends typeof $mol_schema_any, Value>(this: This, value: Value): Value & This["default"];
                 default: (Init extends typeof $mol_schema_any ? Init : {
                     new (value?: any): {
                         constructor: Function;
@@ -27356,7 +27418,7 @@ declare namespace $ {
                     };
                     Class: Init;
                     toString(): string;
-                    guard<Value>(value: Value): Value & InstanceType<Init>;
+                    guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
                     cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                     default: InstanceType<Init>;
                     check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -27406,7 +27468,7 @@ declare namespace $ {
                     fromEntries(entries: Iterable<readonly any[]>): any;
                     hasOwn(o: object, v: PropertyKey): boolean;
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                })["default"] | null | undefined;
+                })["default"] | null;
                 check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
                 cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                 [Symbol.toStringTag]: string;
@@ -27616,8 +27678,8 @@ declare namespace $ {
             ensure_lord(peer: $giper_baza_link | null, preset: $giper_baza_rank_preset): void;
             remote_ensure(preset?: $giper_baza_rank_preset): $giper_baza_flex_subj | null;
             local_ensure(): $giper_baza_flex_subj | null;
-            val(next?: $giper_baza_link | null | undefined): $giper_baza_link | null | undefined;
-            val_of(peer: $giper_baza_link | null, next?: $giper_baza_link | null | undefined): $giper_baza_link | null | undefined;
+            val(next?: $giper_baza_link | null | undefined): $giper_baza_link | null;
+            val_of(peer: $giper_baza_link | null, next?: $giper_baza_link | null | undefined): $giper_baza_link | null;
             pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
             vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
             vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -27659,8 +27721,8 @@ declare namespace $ {
                 ensure_lord(peer: $giper_baza_link | null, preset: $giper_baza_rank_preset): void;
                 remote_ensure(preset?: $giper_baza_rank_preset): $mol_type_result<$mol_type_result<Value>> | null;
                 local_ensure(): $mol_type_result<$mol_type_result<Value>> | null;
-                val(next?: $giper_baza_link | null | undefined): $giper_baza_link | null | undefined;
-                val_of(peer: $giper_baza_link | null, next?: $giper_baza_link | null | undefined): $giper_baza_link | null | undefined;
+                val(next?: $giper_baza_link | null | undefined): $giper_baza_link | null;
+                val_of(peer: $giper_baza_link | null, next?: $giper_baza_link | null | undefined): $giper_baza_link | null;
                 pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
                 vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
                 vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -27765,8 +27827,8 @@ declare namespace $ {
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
                 };
                 toString(): string;
-                guard<Value_1>(value: Value_1): Value_1;
-                default: $giper_baza_link | null | undefined;
+                guard<This extends typeof $mol_schema_any, Value_1>(this: This, value: Value_1): Value_1 & This["default"];
+                default: $giper_baza_link | null;
                 check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
                 cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                 [Symbol.toStringTag]: string;
@@ -27831,7 +27893,7 @@ declare namespace $ {
                         };
                         Class: Init;
                         toString(): string;
-                        guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
+                        guard<Value_2>(value: Value_2): Value_2 & InstanceType<Init>;
                         cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                         default: InstanceType<Init>;
                         check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -27881,7 +27943,7 @@ declare namespace $ {
                         fromEntries(entries: Iterable<readonly any[]>): any;
                         hasOwn(o: object, v: PropertyKey): boolean;
                         groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                    })["default"] | null | undefined): ((Init extends typeof $mol_schema_any ? Init : {
+                    })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
                         new (value?: any): {
                             constructor: Function;
                             toString(): string;
@@ -27893,7 +27955,7 @@ declare namespace $ {
                         };
                         Class: Init;
                         toString(): string;
-                        guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
+                        guard<Value_2>(value: Value_2): Value_2 & InstanceType<Init>;
                         cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                         default: InstanceType<Init>;
                         check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -27943,7 +28005,7 @@ declare namespace $ {
                         fromEntries(entries: Iterable<readonly any[]>): any;
                         hasOwn(o: object, v: PropertyKey): boolean;
                         groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                    })["default"] | null | undefined) | null;
+                    })["default"] | null) | null;
                     val_of(peer: $giper_baza_link | null, next?: (Init extends typeof $mol_schema_any ? Init : {
                         new (value?: any): {
                             constructor: Function;
@@ -27956,7 +28018,7 @@ declare namespace $ {
                         };
                         Class: Init;
                         toString(): string;
-                        guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
+                        guard<Value_2>(value: Value_2): Value_2 & InstanceType<Init>;
                         cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                         default: InstanceType<Init>;
                         check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -28006,7 +28068,7 @@ declare namespace $ {
                         fromEntries(entries: Iterable<readonly any[]>): any;
                         hasOwn(o: object, v: PropertyKey): boolean;
                         groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                    })["default"] | null | undefined): ((Init extends typeof $mol_schema_any ? Init : {
+                    })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
                         new (value?: any): {
                             constructor: Function;
                             toString(): string;
@@ -28018,7 +28080,7 @@ declare namespace $ {
                         };
                         Class: Init;
                         toString(): string;
-                        guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
+                        guard<Value_2>(value: Value_2): Value_2 & InstanceType<Init>;
                         cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                         default: InstanceType<Init>;
                         check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -28068,7 +28130,7 @@ declare namespace $ {
                         fromEntries(entries: Iterable<readonly any[]>): any;
                         hasOwn(o: object, v: PropertyKey): boolean;
                         groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                    })["default"] | null | undefined) | null;
+                    })["default"] | null) | null;
                     pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
                     vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
                     vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -28119,7 +28181,7 @@ declare namespace $ {
                         };
                         Class: Init;
                         toString(): string;
-                        guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
+                        guard<Value_2>(value: Value_2): Value_2 & InstanceType<Init>;
                         cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                         default: InstanceType<Init>;
                         check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -28171,7 +28233,7 @@ declare namespace $ {
                         groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
                     };
                     toString(): string;
-                    guard<Value_1>(value: Value_1): Value_1;
+                    guard<This extends typeof $mol_schema_any, Value_1>(this: This, value: Value_1): Value_1 & This["default"];
                     default: (Init extends typeof $mol_schema_any ? Init : {
                         new (value?: any): {
                             constructor: Function;
@@ -28184,7 +28246,7 @@ declare namespace $ {
                         };
                         Class: Init;
                         toString(): string;
-                        guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
+                        guard<Value_2>(value: Value_2): Value_2 & InstanceType<Init>;
                         cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                         default: InstanceType<Init>;
                         check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -28234,7 +28296,7 @@ declare namespace $ {
                         fromEntries(entries: Iterable<readonly any[]>): any;
                         hasOwn(o: object, v: PropertyKey): boolean;
                         groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                    })["default"] | null | undefined;
+                    })["default"] | null;
                     check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
                     cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                     [Symbol.toStringTag]: string;
@@ -28379,8 +28441,8 @@ declare namespace $ {
                 groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
             };
             toString(): string;
-            guard<Value>(value: Value): Value;
-            default: $giper_baza_link | null | undefined;
+            guard<This extends typeof $mol_schema_any, Value>(this: This, value: Value): Value & This["default"];
+            default: $giper_baza_link | null;
             check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
             cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
             [Symbol.toStringTag]: string;
@@ -28495,7 +28557,7 @@ declare namespace $ {
                     fromEntries(entries: Iterable<readonly any[]>): any;
                     hasOwn(o: object, v: PropertyKey): boolean;
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                })["default"] | null | undefined): ((Init extends typeof $mol_schema_any ? Init : {
+                })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
                     new (value?: any): {
                         constructor: Function;
                         toString(): string;
@@ -28557,7 +28619,7 @@ declare namespace $ {
                     fromEntries(entries: Iterable<readonly any[]>): any;
                     hasOwn(o: object, v: PropertyKey): boolean;
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                })["default"] | null | undefined) | null;
+                })["default"] | null) | null;
                 val_of(peer: $giper_baza_link | null, next?: (Init extends typeof $mol_schema_any ? Init : {
                     new (value?: any): {
                         constructor: Function;
@@ -28620,7 +28682,7 @@ declare namespace $ {
                     fromEntries(entries: Iterable<readonly any[]>): any;
                     hasOwn(o: object, v: PropertyKey): boolean;
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                })["default"] | null | undefined): ((Init extends typeof $mol_schema_any ? Init : {
+                })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
                     new (value?: any): {
                         constructor: Function;
                         toString(): string;
@@ -28682,7 +28744,7 @@ declare namespace $ {
                     fromEntries(entries: Iterable<readonly any[]>): any;
                     hasOwn(o: object, v: PropertyKey): boolean;
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                })["default"] | null | undefined) | null;
+                })["default"] | null) | null;
                 pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
                 vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
                 vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -28785,7 +28847,7 @@ declare namespace $ {
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
                 };
                 toString(): string;
-                guard<Value>(value: Value): Value;
+                guard<This extends typeof $mol_schema_any, Value>(this: This, value: Value): Value & This["default"];
                 default: (Init extends typeof $mol_schema_any ? Init : {
                     new (value?: any): {
                         constructor: Function;
@@ -28798,7 +28860,7 @@ declare namespace $ {
                     };
                     Class: Init;
                     toString(): string;
-                    guard<Value>(value: Value): Value & InstanceType<Init>;
+                    guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
                     cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                     default: InstanceType<Init>;
                     check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -28848,7 +28910,7 @@ declare namespace $ {
                     fromEntries(entries: Iterable<readonly any[]>): any;
                     hasOwn(o: object, v: PropertyKey): boolean;
                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                })["default"] | null | undefined;
+                })["default"] | null;
                 check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
                 cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                 [Symbol.toStringTag]: string;
@@ -30432,8 +30494,8 @@ declare namespace $ {
                 ensure_lord(peer: $giper_baza_link | null, preset: $giper_baza_rank_preset): void;
                 remote_ensure(preset?: $giper_baza_rank_preset): $giper_baza_flex_meta | null;
                 local_ensure(): $giper_baza_flex_meta | null;
-                val(next?: $giper_baza_link | null | undefined): $giper_baza_link | null | undefined;
-                val_of(peer: $giper_baza_link | null, next?: $giper_baza_link | null | undefined): $giper_baza_link | null | undefined;
+                val(next?: $giper_baza_link | null | undefined): $giper_baza_link | null;
+                val_of(peer: $giper_baza_link | null, next?: $giper_baza_link | null | undefined): $giper_baza_link | null;
                 pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
                 vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
                 vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -30473,8 +30535,8 @@ declare namespace $ {
                 ensure_lord(peer: $giper_baza_link | null, preset: $giper_baza_rank_preset): void;
                 remote_ensure(preset?: $giper_baza_rank_preset): $giper_baza_list | null;
                 local_ensure(): $giper_baza_list | null;
-                val(next?: $giper_baza_link | null | undefined): $giper_baza_link | null | undefined;
-                val_of(peer: $giper_baza_link | null, next?: $giper_baza_link | null | undefined): $giper_baza_link | null | undefined;
+                val(next?: $giper_baza_link | null | undefined): $giper_baza_link | null;
+                val_of(peer: $giper_baza_link | null, next?: $giper_baza_link | null | undefined): $giper_baza_link | null;
                 pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
                 vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
                 vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -30527,8 +30589,8 @@ declare namespace $ {
                     ensure_lord(peer: $giper_baza_link | null, preset: $giper_baza_rank_preset): void;
                     remote_ensure(preset?: $giper_baza_rank_preset): $giper_baza_flex_meta | null;
                     local_ensure(): $giper_baza_flex_meta | null;
-                    val(next?: $giper_baza_link | null | undefined): $giper_baza_link | null | undefined;
-                    val_of(peer: $giper_baza_link | null, next?: $giper_baza_link | null | undefined): $giper_baza_link | null | undefined;
+                    val(next?: $giper_baza_link | null | undefined): $giper_baza_link | null;
+                    val_of(peer: $giper_baza_link | null, next?: $giper_baza_link | null | undefined): $giper_baza_link | null;
                     pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
                     vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
                     vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -30570,8 +30632,8 @@ declare namespace $ {
                         ensure_lord(peer: $giper_baza_link | null, preset: $giper_baza_rank_preset): void;
                         remote_ensure(preset?: $giper_baza_rank_preset): $mol_type_result<$mol_type_result<Value>> | null;
                         local_ensure(): $mol_type_result<$mol_type_result<Value>> | null;
-                        val(next?: $giper_baza_link | null | undefined): $giper_baza_link | null | undefined;
-                        val_of(peer: $giper_baza_link | null, next?: $giper_baza_link | null | undefined): $giper_baza_link | null | undefined;
+                        val(next?: $giper_baza_link | null | undefined): $giper_baza_link | null;
+                        val_of(peer: $giper_baza_link | null, next?: $giper_baza_link | null | undefined): $giper_baza_link | null;
                         pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
                         vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
                         vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -30676,8 +30738,8 @@ declare namespace $ {
                             groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
                         };
                         toString(): string;
-                        guard<Value_1>(value: Value_1): Value_1;
-                        default: $giper_baza_link | null | undefined;
+                        guard<This extends typeof $mol_schema_any, Value_1>(this: This, value: Value_1): Value_1 & This["default"];
+                        default: $giper_baza_link | null;
                         check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
                         cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                         [Symbol.toStringTag]: string;
@@ -30742,7 +30804,7 @@ declare namespace $ {
                                 };
                                 Class: Init;
                                 toString(): string;
-                                guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
+                                guard<Value_2>(value: Value_2): Value_2 & InstanceType<Init>;
                                 cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                                 default: InstanceType<Init>;
                                 check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -30792,7 +30854,7 @@ declare namespace $ {
                                 fromEntries(entries: Iterable<readonly any[]>): any;
                                 hasOwn(o: object, v: PropertyKey): boolean;
                                 groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                            })["default"] | null | undefined): ((Init extends typeof $mol_schema_any ? Init : {
+                            })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
                                 new (value?: any): {
                                     constructor: Function;
                                     toString(): string;
@@ -30804,7 +30866,7 @@ declare namespace $ {
                                 };
                                 Class: Init;
                                 toString(): string;
-                                guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
+                                guard<Value_2>(value: Value_2): Value_2 & InstanceType<Init>;
                                 cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                                 default: InstanceType<Init>;
                                 check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -30854,7 +30916,7 @@ declare namespace $ {
                                 fromEntries(entries: Iterable<readonly any[]>): any;
                                 hasOwn(o: object, v: PropertyKey): boolean;
                                 groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                            })["default"] | null | undefined) | null;
+                            })["default"] | null) | null;
                             val_of(peer: $giper_baza_link | null, next?: (Init extends typeof $mol_schema_any ? Init : {
                                 new (value?: any): {
                                     constructor: Function;
@@ -30867,7 +30929,7 @@ declare namespace $ {
                                 };
                                 Class: Init;
                                 toString(): string;
-                                guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
+                                guard<Value_2>(value: Value_2): Value_2 & InstanceType<Init>;
                                 cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                                 default: InstanceType<Init>;
                                 check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -30917,7 +30979,7 @@ declare namespace $ {
                                 fromEntries(entries: Iterable<readonly any[]>): any;
                                 hasOwn(o: object, v: PropertyKey): boolean;
                                 groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                            })["default"] | null | undefined): ((Init extends typeof $mol_schema_any ? Init : {
+                            })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
                                 new (value?: any): {
                                     constructor: Function;
                                     toString(): string;
@@ -30929,7 +30991,7 @@ declare namespace $ {
                                 };
                                 Class: Init;
                                 toString(): string;
-                                guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
+                                guard<Value_2>(value: Value_2): Value_2 & InstanceType<Init>;
                                 cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                                 default: InstanceType<Init>;
                                 check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -30979,7 +31041,7 @@ declare namespace $ {
                                 fromEntries(entries: Iterable<readonly any[]>): any;
                                 hasOwn(o: object, v: PropertyKey): boolean;
                                 groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                            })["default"] | null | undefined) | null;
+                            })["default"] | null) | null;
                             pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
                             vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
                             vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -31030,7 +31092,7 @@ declare namespace $ {
                                 };
                                 Class: Init;
                                 toString(): string;
-                                guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
+                                guard<Value_2>(value: Value_2): Value_2 & InstanceType<Init>;
                                 cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                                 default: InstanceType<Init>;
                                 check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -31082,7 +31144,7 @@ declare namespace $ {
                                 groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
                             };
                             toString(): string;
-                            guard<Value_1>(value: Value_1): Value_1;
+                            guard<This extends typeof $mol_schema_any, Value_1>(this: This, value: Value_1): Value_1 & This["default"];
                             default: (Init extends typeof $mol_schema_any ? Init : {
                                 new (value?: any): {
                                     constructor: Function;
@@ -31095,7 +31157,7 @@ declare namespace $ {
                                 };
                                 Class: Init;
                                 toString(): string;
-                                guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
+                                guard<Value_2>(value: Value_2): Value_2 & InstanceType<Init>;
                                 cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                                 default: InstanceType<Init>;
                                 check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -31145,7 +31207,7 @@ declare namespace $ {
                                 fromEntries(entries: Iterable<readonly any[]>): any;
                                 hasOwn(o: object, v: PropertyKey): boolean;
                                 groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                            })["default"] | null | undefined;
+                            })["default"] | null;
                             check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
                             cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                             [Symbol.toStringTag]: string;
@@ -31290,8 +31352,8 @@ declare namespace $ {
                         groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
                     };
                     toString(): string;
-                    guard<Value>(value: Value): Value;
-                    default: $giper_baza_link | null | undefined;
+                    guard<This extends typeof $mol_schema_any, Value>(this: This, value: Value): Value & This["default"];
+                    default: $giper_baza_link | null;
                     check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
                     cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                     [Symbol.toStringTag]: string;
@@ -31406,7 +31468,7 @@ declare namespace $ {
                             fromEntries(entries: Iterable<readonly any[]>): any;
                             hasOwn(o: object, v: PropertyKey): boolean;
                             groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                        })["default"] | null | undefined): ((Init extends typeof $mol_schema_any ? Init : {
+                        })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
                             new (value?: any): {
                                 constructor: Function;
                                 toString(): string;
@@ -31468,7 +31530,7 @@ declare namespace $ {
                             fromEntries(entries: Iterable<readonly any[]>): any;
                             hasOwn(o: object, v: PropertyKey): boolean;
                             groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                        })["default"] | null | undefined) | null;
+                        })["default"] | null) | null;
                         val_of(peer: $giper_baza_link | null, next?: (Init extends typeof $mol_schema_any ? Init : {
                             new (value?: any): {
                                 constructor: Function;
@@ -31531,7 +31593,7 @@ declare namespace $ {
                             fromEntries(entries: Iterable<readonly any[]>): any;
                             hasOwn(o: object, v: PropertyKey): boolean;
                             groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                        })["default"] | null | undefined): ((Init extends typeof $mol_schema_any ? Init : {
+                        })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
                             new (value?: any): {
                                 constructor: Function;
                                 toString(): string;
@@ -31593,7 +31655,7 @@ declare namespace $ {
                             fromEntries(entries: Iterable<readonly any[]>): any;
                             hasOwn(o: object, v: PropertyKey): boolean;
                             groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                        })["default"] | null | undefined) | null;
+                        })["default"] | null) | null;
                         pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
                         vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
                         vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -31696,7 +31758,7 @@ declare namespace $ {
                             groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
                         };
                         toString(): string;
-                        guard<Value>(value: Value): Value;
+                        guard<This extends typeof $mol_schema_any, Value>(this: This, value: Value): Value & This["default"];
                         default: (Init extends typeof $mol_schema_any ? Init : {
                             new (value?: any): {
                                 constructor: Function;
@@ -31709,7 +31771,7 @@ declare namespace $ {
                             };
                             Class: Init;
                             toString(): string;
-                            guard<Value>(value: Value): Value & InstanceType<Init>;
+                            guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
                             cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                             default: InstanceType<Init>;
                             check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -31759,7 +31821,7 @@ declare namespace $ {
                             fromEntries(entries: Iterable<readonly any[]>): any;
                             hasOwn(o: object, v: PropertyKey): boolean;
                             groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                        })["default"] | null | undefined;
+                        })["default"] | null;
                         check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
                         cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                         [Symbol.toStringTag]: string;
@@ -31843,8 +31905,8 @@ declare namespace $ {
                     ensure_lord(peer: $giper_baza_link | null, preset: $giper_baza_rank_preset): void;
                     remote_ensure(preset?: $giper_baza_rank_preset): $giper_baza_list | null;
                     local_ensure(): $giper_baza_list | null;
-                    val(next?: $giper_baza_link | null | undefined): $giper_baza_link | null | undefined;
-                    val_of(peer: $giper_baza_link | null, next?: $giper_baza_link | null | undefined): $giper_baza_link | null | undefined;
+                    val(next?: $giper_baza_link | null | undefined): $giper_baza_link | null;
+                    val_of(peer: $giper_baza_link | null, next?: $giper_baza_link | null | undefined): $giper_baza_link | null;
                     pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
                     vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
                     vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -31886,8 +31948,8 @@ declare namespace $ {
                         ensure_lord(peer: $giper_baza_link | null, preset: $giper_baza_rank_preset): void;
                         remote_ensure(preset?: $giper_baza_rank_preset): $mol_type_result<$mol_type_result<Value>> | null;
                         local_ensure(): $mol_type_result<$mol_type_result<Value>> | null;
-                        val(next?: $giper_baza_link | null | undefined): $giper_baza_link | null | undefined;
-                        val_of(peer: $giper_baza_link | null, next?: $giper_baza_link | null | undefined): $giper_baza_link | null | undefined;
+                        val(next?: $giper_baza_link | null | undefined): $giper_baza_link | null;
+                        val_of(peer: $giper_baza_link | null, next?: $giper_baza_link | null | undefined): $giper_baza_link | null;
                         pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
                         vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
                         vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -31992,8 +32054,8 @@ declare namespace $ {
                             groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
                         };
                         toString(): string;
-                        guard<Value_1>(value: Value_1): Value_1;
-                        default: $giper_baza_link | null | undefined;
+                        guard<This extends typeof $mol_schema_any, Value_1>(this: This, value: Value_1): Value_1 & This["default"];
+                        default: $giper_baza_link | null;
                         check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
                         cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                         [Symbol.toStringTag]: string;
@@ -32058,7 +32120,7 @@ declare namespace $ {
                                 };
                                 Class: Init;
                                 toString(): string;
-                                guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
+                                guard<Value_2>(value: Value_2): Value_2 & InstanceType<Init>;
                                 cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                                 default: InstanceType<Init>;
                                 check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -32108,7 +32170,7 @@ declare namespace $ {
                                 fromEntries(entries: Iterable<readonly any[]>): any;
                                 hasOwn(o: object, v: PropertyKey): boolean;
                                 groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                            })["default"] | null | undefined): ((Init extends typeof $mol_schema_any ? Init : {
+                            })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
                                 new (value?: any): {
                                     constructor: Function;
                                     toString(): string;
@@ -32120,7 +32182,7 @@ declare namespace $ {
                                 };
                                 Class: Init;
                                 toString(): string;
-                                guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
+                                guard<Value_2>(value: Value_2): Value_2 & InstanceType<Init>;
                                 cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                                 default: InstanceType<Init>;
                                 check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -32170,7 +32232,7 @@ declare namespace $ {
                                 fromEntries(entries: Iterable<readonly any[]>): any;
                                 hasOwn(o: object, v: PropertyKey): boolean;
                                 groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                            })["default"] | null | undefined) | null;
+                            })["default"] | null) | null;
                             val_of(peer: $giper_baza_link | null, next?: (Init extends typeof $mol_schema_any ? Init : {
                                 new (value?: any): {
                                     constructor: Function;
@@ -32183,7 +32245,7 @@ declare namespace $ {
                                 };
                                 Class: Init;
                                 toString(): string;
-                                guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
+                                guard<Value_2>(value: Value_2): Value_2 & InstanceType<Init>;
                                 cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                                 default: InstanceType<Init>;
                                 check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -32233,7 +32295,7 @@ declare namespace $ {
                                 fromEntries(entries: Iterable<readonly any[]>): any;
                                 hasOwn(o: object, v: PropertyKey): boolean;
                                 groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                            })["default"] | null | undefined): ((Init extends typeof $mol_schema_any ? Init : {
+                            })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
                                 new (value?: any): {
                                     constructor: Function;
                                     toString(): string;
@@ -32245,7 +32307,7 @@ declare namespace $ {
                                 };
                                 Class: Init;
                                 toString(): string;
-                                guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
+                                guard<Value_2>(value: Value_2): Value_2 & InstanceType<Init>;
                                 cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                                 default: InstanceType<Init>;
                                 check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -32295,7 +32357,7 @@ declare namespace $ {
                                 fromEntries(entries: Iterable<readonly any[]>): any;
                                 hasOwn(o: object, v: PropertyKey): boolean;
                                 groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                            })["default"] | null | undefined) | null;
+                            })["default"] | null) | null;
                             pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
                             vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
                             vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -32346,7 +32408,7 @@ declare namespace $ {
                                 };
                                 Class: Init;
                                 toString(): string;
-                                guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
+                                guard<Value_2>(value: Value_2): Value_2 & InstanceType<Init>;
                                 cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                                 default: InstanceType<Init>;
                                 check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -32398,7 +32460,7 @@ declare namespace $ {
                                 groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
                             };
                             toString(): string;
-                            guard<Value_1>(value: Value_1): Value_1;
+                            guard<This extends typeof $mol_schema_any, Value_1>(this: This, value: Value_1): Value_1 & This["default"];
                             default: (Init extends typeof $mol_schema_any ? Init : {
                                 new (value?: any): {
                                     constructor: Function;
@@ -32411,7 +32473,7 @@ declare namespace $ {
                                 };
                                 Class: Init;
                                 toString(): string;
-                                guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
+                                guard<Value_2>(value: Value_2): Value_2 & InstanceType<Init>;
                                 cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                                 default: InstanceType<Init>;
                                 check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -32461,7 +32523,7 @@ declare namespace $ {
                                 fromEntries(entries: Iterable<readonly any[]>): any;
                                 hasOwn(o: object, v: PropertyKey): boolean;
                                 groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                            })["default"] | null | undefined;
+                            })["default"] | null;
                             check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
                             cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                             [Symbol.toStringTag]: string;
@@ -32606,8 +32668,8 @@ declare namespace $ {
                         groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
                     };
                     toString(): string;
-                    guard<Value>(value: Value): Value;
-                    default: $giper_baza_link | null | undefined;
+                    guard<This extends typeof $mol_schema_any, Value>(this: This, value: Value): Value & This["default"];
+                    default: $giper_baza_link | null;
                     check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
                     cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                     [Symbol.toStringTag]: string;
@@ -32722,7 +32784,7 @@ declare namespace $ {
                             fromEntries(entries: Iterable<readonly any[]>): any;
                             hasOwn(o: object, v: PropertyKey): boolean;
                             groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                        })["default"] | null | undefined): ((Init extends typeof $mol_schema_any ? Init : {
+                        })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
                             new (value?: any): {
                                 constructor: Function;
                                 toString(): string;
@@ -32784,7 +32846,7 @@ declare namespace $ {
                             fromEntries(entries: Iterable<readonly any[]>): any;
                             hasOwn(o: object, v: PropertyKey): boolean;
                             groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                        })["default"] | null | undefined) | null;
+                        })["default"] | null) | null;
                         val_of(peer: $giper_baza_link | null, next?: (Init extends typeof $mol_schema_any ? Init : {
                             new (value?: any): {
                                 constructor: Function;
@@ -32847,7 +32909,7 @@ declare namespace $ {
                             fromEntries(entries: Iterable<readonly any[]>): any;
                             hasOwn(o: object, v: PropertyKey): boolean;
                             groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                        })["default"] | null | undefined): ((Init extends typeof $mol_schema_any ? Init : {
+                        })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
                             new (value?: any): {
                                 constructor: Function;
                                 toString(): string;
@@ -32909,7 +32971,7 @@ declare namespace $ {
                             fromEntries(entries: Iterable<readonly any[]>): any;
                             hasOwn(o: object, v: PropertyKey): boolean;
                             groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                        })["default"] | null | undefined) | null;
+                        })["default"] | null) | null;
                         pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
                         vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
                         vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -33012,7 +33074,7 @@ declare namespace $ {
                             groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
                         };
                         toString(): string;
-                        guard<Value>(value: Value): Value;
+                        guard<This extends typeof $mol_schema_any, Value>(this: This, value: Value): Value & This["default"];
                         default: (Init extends typeof $mol_schema_any ? Init : {
                             new (value?: any): {
                                 constructor: Function;
@@ -33025,7 +33087,7 @@ declare namespace $ {
                             };
                             Class: Init;
                             toString(): string;
-                            guard<Value>(value: Value): Value & InstanceType<Init>;
+                            guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
                             cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                             default: InstanceType<Init>;
                             check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -33075,7 +33137,7 @@ declare namespace $ {
                             fromEntries(entries: Iterable<readonly any[]>): any;
                             hasOwn(o: object, v: PropertyKey): boolean;
                             groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                        })["default"] | null | undefined;
+                        })["default"] | null;
                         check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
                         cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                         [Symbol.toStringTag]: string;
@@ -33930,8 +33992,8 @@ declare namespace $ {
                 ensure_lord(peer: $giper_baza_link | null, preset: $giper_baza_rank_preset): void;
                 remote_ensure(preset?: $giper_baza_rank_preset): $giper_baza_flex_deck | null;
                 local_ensure(): $giper_baza_flex_deck | null;
-                val(next?: $giper_baza_link | null | undefined): $giper_baza_link | null | undefined;
-                val_of(peer: $giper_baza_link | null, next?: $giper_baza_link | null | undefined): $giper_baza_link | null | undefined;
+                val(next?: $giper_baza_link | null | undefined): $giper_baza_link | null;
+                val_of(peer: $giper_baza_link | null, next?: $giper_baza_link | null | undefined): $giper_baza_link | null;
                 pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
                 vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
                 vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -34017,8 +34079,8 @@ declare namespace $ {
                     ensure_lord(peer: $giper_baza_link | null, preset: $giper_baza_rank_preset): void;
                     remote_ensure(preset?: $giper_baza_rank_preset): $giper_baza_flex_deck | null;
                     local_ensure(): $giper_baza_flex_deck | null;
-                    val(next?: $giper_baza_link | null | undefined): $giper_baza_link | null | undefined;
-                    val_of(peer: $giper_baza_link | null, next?: $giper_baza_link | null | undefined): $giper_baza_link | null | undefined;
+                    val(next?: $giper_baza_link | null | undefined): $giper_baza_link | null;
+                    val_of(peer: $giper_baza_link | null, next?: $giper_baza_link | null | undefined): $giper_baza_link | null;
                     pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
                     vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
                     vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -34060,8 +34122,8 @@ declare namespace $ {
                         ensure_lord(peer: $giper_baza_link | null, preset: $giper_baza_rank_preset): void;
                         remote_ensure(preset?: $giper_baza_rank_preset): $mol_type_result<$mol_type_result<Value>> | null;
                         local_ensure(): $mol_type_result<$mol_type_result<Value>> | null;
-                        val(next?: $giper_baza_link | null | undefined): $giper_baza_link | null | undefined;
-                        val_of(peer: $giper_baza_link | null, next?: $giper_baza_link | null | undefined): $giper_baza_link | null | undefined;
+                        val(next?: $giper_baza_link | null | undefined): $giper_baza_link | null;
+                        val_of(peer: $giper_baza_link | null, next?: $giper_baza_link | null | undefined): $giper_baza_link | null;
                         pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
                         vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
                         vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -34166,8 +34228,8 @@ declare namespace $ {
                             groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
                         };
                         toString(): string;
-                        guard<Value_1>(value: Value_1): Value_1;
-                        default: $giper_baza_link | null | undefined;
+                        guard<This extends typeof $mol_schema_any, Value_1>(this: This, value: Value_1): Value_1 & This["default"];
+                        default: $giper_baza_link | null;
                         check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
                         cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                         [Symbol.toStringTag]: string;
@@ -34232,7 +34294,7 @@ declare namespace $ {
                                 };
                                 Class: Init;
                                 toString(): string;
-                                guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
+                                guard<Value_2>(value: Value_2): Value_2 & InstanceType<Init>;
                                 cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                                 default: InstanceType<Init>;
                                 check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -34282,7 +34344,7 @@ declare namespace $ {
                                 fromEntries(entries: Iterable<readonly any[]>): any;
                                 hasOwn(o: object, v: PropertyKey): boolean;
                                 groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                            })["default"] | null | undefined): ((Init extends typeof $mol_schema_any ? Init : {
+                            })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
                                 new (value?: any): {
                                     constructor: Function;
                                     toString(): string;
@@ -34294,7 +34356,7 @@ declare namespace $ {
                                 };
                                 Class: Init;
                                 toString(): string;
-                                guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
+                                guard<Value_2>(value: Value_2): Value_2 & InstanceType<Init>;
                                 cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                                 default: InstanceType<Init>;
                                 check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -34344,7 +34406,7 @@ declare namespace $ {
                                 fromEntries(entries: Iterable<readonly any[]>): any;
                                 hasOwn(o: object, v: PropertyKey): boolean;
                                 groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                            })["default"] | null | undefined) | null;
+                            })["default"] | null) | null;
                             val_of(peer: $giper_baza_link | null, next?: (Init extends typeof $mol_schema_any ? Init : {
                                 new (value?: any): {
                                     constructor: Function;
@@ -34357,7 +34419,7 @@ declare namespace $ {
                                 };
                                 Class: Init;
                                 toString(): string;
-                                guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
+                                guard<Value_2>(value: Value_2): Value_2 & InstanceType<Init>;
                                 cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                                 default: InstanceType<Init>;
                                 check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -34407,7 +34469,7 @@ declare namespace $ {
                                 fromEntries(entries: Iterable<readonly any[]>): any;
                                 hasOwn(o: object, v: PropertyKey): boolean;
                                 groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                            })["default"] | null | undefined): ((Init extends typeof $mol_schema_any ? Init : {
+                            })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
                                 new (value?: any): {
                                     constructor: Function;
                                     toString(): string;
@@ -34419,7 +34481,7 @@ declare namespace $ {
                                 };
                                 Class: Init;
                                 toString(): string;
-                                guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
+                                guard<Value_2>(value: Value_2): Value_2 & InstanceType<Init>;
                                 cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                                 default: InstanceType<Init>;
                                 check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -34469,7 +34531,7 @@ declare namespace $ {
                                 fromEntries(entries: Iterable<readonly any[]>): any;
                                 hasOwn(o: object, v: PropertyKey): boolean;
                                 groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                            })["default"] | null | undefined) | null;
+                            })["default"] | null) | null;
                             pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
                             vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
                             vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -34520,7 +34582,7 @@ declare namespace $ {
                                 };
                                 Class: Init;
                                 toString(): string;
-                                guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
+                                guard<Value_2>(value: Value_2): Value_2 & InstanceType<Init>;
                                 cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                                 default: InstanceType<Init>;
                                 check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -34572,7 +34634,7 @@ declare namespace $ {
                                 groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
                             };
                             toString(): string;
-                            guard<Value_1>(value: Value_1): Value_1;
+                            guard<This extends typeof $mol_schema_any, Value_1>(this: This, value: Value_1): Value_1 & This["default"];
                             default: (Init extends typeof $mol_schema_any ? Init : {
                                 new (value?: any): {
                                     constructor: Function;
@@ -34585,7 +34647,7 @@ declare namespace $ {
                                 };
                                 Class: Init;
                                 toString(): string;
-                                guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
+                                guard<Value_2>(value: Value_2): Value_2 & InstanceType<Init>;
                                 cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                                 default: InstanceType<Init>;
                                 check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -34635,7 +34697,7 @@ declare namespace $ {
                                 fromEntries(entries: Iterable<readonly any[]>): any;
                                 hasOwn(o: object, v: PropertyKey): boolean;
                                 groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                            })["default"] | null | undefined;
+                            })["default"] | null;
                             check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
                             cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                             [Symbol.toStringTag]: string;
@@ -34780,8 +34842,8 @@ declare namespace $ {
                         groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
                     };
                     toString(): string;
-                    guard<Value>(value: Value): Value;
-                    default: $giper_baza_link | null | undefined;
+                    guard<This extends typeof $mol_schema_any, Value>(this: This, value: Value): Value & This["default"];
+                    default: $giper_baza_link | null;
                     check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
                     cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                     [Symbol.toStringTag]: string;
@@ -34896,7 +34958,7 @@ declare namespace $ {
                             fromEntries(entries: Iterable<readonly any[]>): any;
                             hasOwn(o: object, v: PropertyKey): boolean;
                             groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                        })["default"] | null | undefined): ((Init extends typeof $mol_schema_any ? Init : {
+                        })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
                             new (value?: any): {
                                 constructor: Function;
                                 toString(): string;
@@ -34958,7 +35020,7 @@ declare namespace $ {
                             fromEntries(entries: Iterable<readonly any[]>): any;
                             hasOwn(o: object, v: PropertyKey): boolean;
                             groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                        })["default"] | null | undefined) | null;
+                        })["default"] | null) | null;
                         val_of(peer: $giper_baza_link | null, next?: (Init extends typeof $mol_schema_any ? Init : {
                             new (value?: any): {
                                 constructor: Function;
@@ -35021,7 +35083,7 @@ declare namespace $ {
                             fromEntries(entries: Iterable<readonly any[]>): any;
                             hasOwn(o: object, v: PropertyKey): boolean;
                             groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                        })["default"] | null | undefined): ((Init extends typeof $mol_schema_any ? Init : {
+                        })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
                             new (value?: any): {
                                 constructor: Function;
                                 toString(): string;
@@ -35083,7 +35145,7 @@ declare namespace $ {
                             fromEntries(entries: Iterable<readonly any[]>): any;
                             hasOwn(o: object, v: PropertyKey): boolean;
                             groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                        })["default"] | null | undefined) | null;
+                        })["default"] | null) | null;
                         pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
                         vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
                         vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -35186,7 +35248,7 @@ declare namespace $ {
                             groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
                         };
                         toString(): string;
-                        guard<Value>(value: Value): Value;
+                        guard<This extends typeof $mol_schema_any, Value>(this: This, value: Value): Value & This["default"];
                         default: (Init extends typeof $mol_schema_any ? Init : {
                             new (value?: any): {
                                 constructor: Function;
@@ -35199,7 +35261,7 @@ declare namespace $ {
                             };
                             Class: Init;
                             toString(): string;
-                            guard<Value>(value: Value): Value & InstanceType<Init>;
+                            guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
                             cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                             default: InstanceType<Init>;
                             check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -35249,7 +35311,7 @@ declare namespace $ {
                             fromEntries(entries: Iterable<readonly any[]>): any;
                             hasOwn(o: object, v: PropertyKey): boolean;
                             groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                        })["default"] | null | undefined;
+                        })["default"] | null;
                         check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
                         cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                         [Symbol.toStringTag]: string;
@@ -36041,8 +36103,8 @@ declare namespace $ {
                 ensure_lord(peer: $giper_baza_link | null, preset: $giper_baza_rank_preset): void;
                 remote_ensure(preset?: $giper_baza_rank_preset): $giper_baza_app_stat | null;
                 local_ensure(): $giper_baza_app_stat | null;
-                val(next?: $giper_baza_link | null | undefined): $giper_baza_link | null | undefined;
-                val_of(peer: $giper_baza_link | null, next?: $giper_baza_link | null | undefined): $giper_baza_link | null | undefined;
+                val(next?: $giper_baza_link | null | undefined): $giper_baza_link | null;
+                val_of(peer: $giper_baza_link | null, next?: $giper_baza_link | null | undefined): $giper_baza_link | null;
                 pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
                 vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
                 vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -36090,8 +36152,8 @@ declare namespace $ {
                     ensure_lord(peer: $giper_baza_link | null, preset: $giper_baza_rank_preset): void;
                     remote_ensure(preset?: $giper_baza_rank_preset): $giper_baza_app_stat | null;
                     local_ensure(): $giper_baza_app_stat | null;
-                    val(next?: $giper_baza_link | null | undefined): $giper_baza_link | null | undefined;
-                    val_of(peer: $giper_baza_link | null, next?: $giper_baza_link | null | undefined): $giper_baza_link | null | undefined;
+                    val(next?: $giper_baza_link | null | undefined): $giper_baza_link | null;
+                    val_of(peer: $giper_baza_link | null, next?: $giper_baza_link | null | undefined): $giper_baza_link | null;
                     pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
                     vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
                     vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -36133,8 +36195,8 @@ declare namespace $ {
                         ensure_lord(peer: $giper_baza_link | null, preset: $giper_baza_rank_preset): void;
                         remote_ensure(preset?: $giper_baza_rank_preset): $mol_type_result<$mol_type_result<Value>> | null;
                         local_ensure(): $mol_type_result<$mol_type_result<Value>> | null;
-                        val(next?: $giper_baza_link | null | undefined): $giper_baza_link | null | undefined;
-                        val_of(peer: $giper_baza_link | null, next?: $giper_baza_link | null | undefined): $giper_baza_link | null | undefined;
+                        val(next?: $giper_baza_link | null | undefined): $giper_baza_link | null;
+                        val_of(peer: $giper_baza_link | null, next?: $giper_baza_link | null | undefined): $giper_baza_link | null;
                         pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
                         vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
                         vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -36239,8 +36301,8 @@ declare namespace $ {
                             groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
                         };
                         toString(): string;
-                        guard<Value_1>(value: Value_1): Value_1;
-                        default: $giper_baza_link | null | undefined;
+                        guard<This extends typeof $mol_schema_any, Value_1>(this: This, value: Value_1): Value_1 & This["default"];
+                        default: $giper_baza_link | null;
                         check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
                         cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                         [Symbol.toStringTag]: string;
@@ -36305,7 +36367,7 @@ declare namespace $ {
                                 };
                                 Class: Init;
                                 toString(): string;
-                                guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
+                                guard<Value_2>(value: Value_2): Value_2 & InstanceType<Init>;
                                 cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                                 default: InstanceType<Init>;
                                 check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -36355,7 +36417,7 @@ declare namespace $ {
                                 fromEntries(entries: Iterable<readonly any[]>): any;
                                 hasOwn(o: object, v: PropertyKey): boolean;
                                 groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                            })["default"] | null | undefined): ((Init extends typeof $mol_schema_any ? Init : {
+                            })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
                                 new (value?: any): {
                                     constructor: Function;
                                     toString(): string;
@@ -36367,7 +36429,7 @@ declare namespace $ {
                                 };
                                 Class: Init;
                                 toString(): string;
-                                guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
+                                guard<Value_2>(value: Value_2): Value_2 & InstanceType<Init>;
                                 cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                                 default: InstanceType<Init>;
                                 check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -36417,7 +36479,7 @@ declare namespace $ {
                                 fromEntries(entries: Iterable<readonly any[]>): any;
                                 hasOwn(o: object, v: PropertyKey): boolean;
                                 groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                            })["default"] | null | undefined) | null;
+                            })["default"] | null) | null;
                             val_of(peer: $giper_baza_link | null, next?: (Init extends typeof $mol_schema_any ? Init : {
                                 new (value?: any): {
                                     constructor: Function;
@@ -36430,7 +36492,7 @@ declare namespace $ {
                                 };
                                 Class: Init;
                                 toString(): string;
-                                guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
+                                guard<Value_2>(value: Value_2): Value_2 & InstanceType<Init>;
                                 cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                                 default: InstanceType<Init>;
                                 check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -36480,7 +36542,7 @@ declare namespace $ {
                                 fromEntries(entries: Iterable<readonly any[]>): any;
                                 hasOwn(o: object, v: PropertyKey): boolean;
                                 groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                            })["default"] | null | undefined): ((Init extends typeof $mol_schema_any ? Init : {
+                            })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
                                 new (value?: any): {
                                     constructor: Function;
                                     toString(): string;
@@ -36492,7 +36554,7 @@ declare namespace $ {
                                 };
                                 Class: Init;
                                 toString(): string;
-                                guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
+                                guard<Value_2>(value: Value_2): Value_2 & InstanceType<Init>;
                                 cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                                 default: InstanceType<Init>;
                                 check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -36542,7 +36604,7 @@ declare namespace $ {
                                 fromEntries(entries: Iterable<readonly any[]>): any;
                                 hasOwn(o: object, v: PropertyKey): boolean;
                                 groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                            })["default"] | null | undefined) | null;
+                            })["default"] | null) | null;
                             pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
                             vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
                             vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -36593,7 +36655,7 @@ declare namespace $ {
                                 };
                                 Class: Init;
                                 toString(): string;
-                                guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
+                                guard<Value_2>(value: Value_2): Value_2 & InstanceType<Init>;
                                 cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                                 default: InstanceType<Init>;
                                 check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -36645,7 +36707,7 @@ declare namespace $ {
                                 groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
                             };
                             toString(): string;
-                            guard<Value_1>(value: Value_1): Value_1;
+                            guard<This extends typeof $mol_schema_any, Value_1>(this: This, value: Value_1): Value_1 & This["default"];
                             default: (Init extends typeof $mol_schema_any ? Init : {
                                 new (value?: any): {
                                     constructor: Function;
@@ -36658,7 +36720,7 @@ declare namespace $ {
                                 };
                                 Class: Init;
                                 toString(): string;
-                                guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
+                                guard<Value_2>(value: Value_2): Value_2 & InstanceType<Init>;
                                 cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                                 default: InstanceType<Init>;
                                 check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -36708,7 +36770,7 @@ declare namespace $ {
                                 fromEntries(entries: Iterable<readonly any[]>): any;
                                 hasOwn(o: object, v: PropertyKey): boolean;
                                 groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                            })["default"] | null | undefined;
+                            })["default"] | null;
                             check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
                             cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                             [Symbol.toStringTag]: string;
@@ -36853,8 +36915,8 @@ declare namespace $ {
                         groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
                     };
                     toString(): string;
-                    guard<Value>(value: Value): Value;
-                    default: $giper_baza_link | null | undefined;
+                    guard<This extends typeof $mol_schema_any, Value>(this: This, value: Value): Value & This["default"];
+                    default: $giper_baza_link | null;
                     check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
                     cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                     [Symbol.toStringTag]: string;
@@ -36969,7 +37031,7 @@ declare namespace $ {
                             fromEntries(entries: Iterable<readonly any[]>): any;
                             hasOwn(o: object, v: PropertyKey): boolean;
                             groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                        })["default"] | null | undefined): ((Init extends typeof $mol_schema_any ? Init : {
+                        })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
                             new (value?: any): {
                                 constructor: Function;
                                 toString(): string;
@@ -37031,7 +37093,7 @@ declare namespace $ {
                             fromEntries(entries: Iterable<readonly any[]>): any;
                             hasOwn(o: object, v: PropertyKey): boolean;
                             groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                        })["default"] | null | undefined) | null;
+                        })["default"] | null) | null;
                         val_of(peer: $giper_baza_link | null, next?: (Init extends typeof $mol_schema_any ? Init : {
                             new (value?: any): {
                                 constructor: Function;
@@ -37094,7 +37156,7 @@ declare namespace $ {
                             fromEntries(entries: Iterable<readonly any[]>): any;
                             hasOwn(o: object, v: PropertyKey): boolean;
                             groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                        })["default"] | null | undefined): ((Init extends typeof $mol_schema_any ? Init : {
+                        })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
                             new (value?: any): {
                                 constructor: Function;
                                 toString(): string;
@@ -37156,7 +37218,7 @@ declare namespace $ {
                             fromEntries(entries: Iterable<readonly any[]>): any;
                             hasOwn(o: object, v: PropertyKey): boolean;
                             groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                        })["default"] | null | undefined) | null;
+                        })["default"] | null) | null;
                         pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
                         vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
                         vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -37259,7 +37321,7 @@ declare namespace $ {
                             groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
                         };
                         toString(): string;
-                        guard<Value>(value: Value): Value;
+                        guard<This extends typeof $mol_schema_any, Value>(this: This, value: Value): Value & This["default"];
                         default: (Init extends typeof $mol_schema_any ? Init : {
                             new (value?: any): {
                                 constructor: Function;
@@ -37272,7 +37334,7 @@ declare namespace $ {
                             };
                             Class: Init;
                             toString(): string;
-                            guard<Value>(value: Value): Value & InstanceType<Init>;
+                            guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
                             cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                             default: InstanceType<Init>;
                             check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -37322,7 +37384,7 @@ declare namespace $ {
                             fromEntries(entries: Iterable<readonly any[]>): any;
                             hasOwn(o: object, v: PropertyKey): boolean;
                             groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                        })["default"] | null | undefined;
+                        })["default"] | null;
                         check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
                         cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                         [Symbol.toStringTag]: string;
@@ -37406,8 +37468,8 @@ declare namespace $ {
     const $giper_baza_flex_user_base: Omit<typeof $giper_baza_flex_subj, "prototype"> & {
         new (...args: any[]): $mol_type_override<$giper_baza_flex_subj, {
             readonly Caret: (auto?: any) => {
-                val(next?: readonly unknown[] | null | undefined): readonly unknown[] | null | undefined;
-                val_of(peer: $giper_baza_link | null, next?: readonly unknown[] | null | undefined): readonly unknown[] | null | undefined;
+                val(next?: readonly unknown[] | null | undefined): readonly unknown[] | null;
+                val_of(peer: $giper_baza_link | null, next?: readonly unknown[] | null | undefined): readonly unknown[] | null;
                 pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
                 vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
                 vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -37444,8 +37506,8 @@ declare namespace $ {
         } & {
             readonly Caret: {
                 new (): {
-                    val(next?: readonly unknown[] | null | undefined): readonly unknown[] | null | undefined;
-                    val_of(peer: $giper_baza_link | null, next?: readonly unknown[] | null | undefined): readonly unknown[] | null | undefined;
+                    val(next?: readonly unknown[] | null | undefined): readonly unknown[] | null;
+                    val_of(peer: $giper_baza_link | null, next?: readonly unknown[] | null | undefined): readonly unknown[] | null;
                     pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
                     vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
                     vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -37548,8 +37610,8 @@ declare namespace $ {
                         groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
                     };
                     toString(): string;
-                    guard<Value>(value: Value): Value;
-                    default: readonly unknown[] | null | undefined;
+                    guard<This extends typeof $mol_schema_any, Value>(this: This, value: Value): Value & This["default"];
+                    default: readonly unknown[] | null;
                     check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
                     cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                     [Symbol.toStringTag]: string;
@@ -37665,7 +37727,7 @@ declare namespace $ {
                             fromEntries(entries: Iterable<readonly any[]>): any;
                             hasOwn(o: object, v: PropertyKey): boolean;
                             groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                        })["default"] | null | undefined): ((Init extends typeof $mol_schema_any ? Init : {
+                        })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
                             new (value?: any): {
                                 constructor: Function;
                                 toString(): string;
@@ -37727,7 +37789,7 @@ declare namespace $ {
                             fromEntries(entries: Iterable<readonly any[]>): any;
                             hasOwn(o: object, v: PropertyKey): boolean;
                             groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                        })["default"] | null | undefined) | null;
+                        })["default"] | null) | null;
                         val_of(peer: $giper_baza_link | null, next?: (Init extends typeof $mol_schema_any ? Init : {
                             new (value?: any): {
                                 constructor: Function;
@@ -37790,7 +37852,7 @@ declare namespace $ {
                             fromEntries(entries: Iterable<readonly any[]>): any;
                             hasOwn(o: object, v: PropertyKey): boolean;
                             groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                        })["default"] | null | undefined): ((Init extends typeof $mol_schema_any ? Init : {
+                        })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
                             new (value?: any): {
                                 constructor: Function;
                                 toString(): string;
@@ -37852,7 +37914,7 @@ declare namespace $ {
                             fromEntries(entries: Iterable<readonly any[]>): any;
                             hasOwn(o: object, v: PropertyKey): boolean;
                             groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                        })["default"] | null | undefined) | null;
+                        })["default"] | null) | null;
                         pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
                         vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
                         vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -37955,7 +38017,7 @@ declare namespace $ {
                             groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
                         };
                         toString(): string;
-                        guard<Value>(value: Value): Value;
+                        guard<This extends typeof $mol_schema_any, Value>(this: This, value: Value): Value & This["default"];
                         default: (Init extends typeof $mol_schema_any ? Init : {
                             new (value?: any): {
                                 constructor: Function;
@@ -37968,7 +38030,7 @@ declare namespace $ {
                             };
                             Class: Init;
                             toString(): string;
-                            guard<Value>(value: Value): Value & InstanceType<Init>;
+                            guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
                             cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                             default: InstanceType<Init>;
                             check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -38018,7 +38080,7 @@ declare namespace $ {
                             fromEntries(entries: Iterable<readonly any[]>): any;
                             hasOwn(o: object, v: PropertyKey): boolean;
                             groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                        })["default"] | null | undefined;
+                        })["default"] | null;
                         check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
                         cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                         [Symbol.toStringTag]: string;
@@ -42524,8 +42586,8 @@ declare namespace $.$$ {
                         ensure_lord(peer: $giper_baza_link | null, preset: $giper_baza_rank_preset): void;
                         remote_ensure(preset?: $giper_baza_rank_preset): $giper_baza_atom_text | null;
                         local_ensure(): $giper_baza_atom_text | null;
-                        val(next?: $giper_baza_link | null | undefined): $giper_baza_link | null | undefined;
-                        val_of(peer: $giper_baza_link | null, next?: $giper_baza_link | null | undefined): $giper_baza_link | null | undefined;
+                        val(next?: $giper_baza_link | null | undefined): $giper_baza_link | null;
+                        val_of(peer: $giper_baza_link | null, next?: $giper_baza_link | null | undefined): $giper_baza_link | null;
                         pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
                         vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
                         vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -42567,8 +42629,8 @@ declare namespace $.$$ {
                             ensure_lord(peer: $giper_baza_link | null, preset: $giper_baza_rank_preset): void;
                             remote_ensure(preset?: $giper_baza_rank_preset): $mol_type_result<$mol_type_result<Value>> | null;
                             local_ensure(): $mol_type_result<$mol_type_result<Value>> | null;
-                            val(next?: $giper_baza_link | null | undefined): $giper_baza_link | null | undefined;
-                            val_of(peer: $giper_baza_link | null, next?: $giper_baza_link | null | undefined): $giper_baza_link | null | undefined;
+                            val(next?: $giper_baza_link | null | undefined): $giper_baza_link | null;
+                            val_of(peer: $giper_baza_link | null, next?: $giper_baza_link | null | undefined): $giper_baza_link | null;
                             pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
                             vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
                             vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -42673,8 +42735,8 @@ declare namespace $.$$ {
                                 groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
                             };
                             toString(): string;
-                            guard<Value_1>(value: Value_1): Value_1;
-                            default: $giper_baza_link | null | undefined;
+                            guard<This extends typeof $mol_schema_any, Value_1>(this: This, value: Value_1): Value_1 & This["default"];
+                            default: $giper_baza_link | null;
                             check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
                             cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                             [Symbol.toStringTag]: string;
@@ -42739,7 +42801,7 @@ declare namespace $.$$ {
                                     };
                                     Class: Init;
                                     toString(): string;
-                                    guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
+                                    guard<Value_2>(value: Value_2): Value_2 & InstanceType<Init>;
                                     cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                                     default: InstanceType<Init>;
                                     check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -42789,7 +42851,7 @@ declare namespace $.$$ {
                                     fromEntries(entries: Iterable<readonly any[]>): any;
                                     hasOwn(o: object, v: PropertyKey): boolean;
                                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                                })["default"] | null | undefined): ((Init extends typeof $mol_schema_any ? Init : {
+                                })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
                                     new (value?: any): {
                                         constructor: Function;
                                         toString(): string;
@@ -42801,7 +42863,7 @@ declare namespace $.$$ {
                                     };
                                     Class: Init;
                                     toString(): string;
-                                    guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
+                                    guard<Value_2>(value: Value_2): Value_2 & InstanceType<Init>;
                                     cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                                     default: InstanceType<Init>;
                                     check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -42851,7 +42913,7 @@ declare namespace $.$$ {
                                     fromEntries(entries: Iterable<readonly any[]>): any;
                                     hasOwn(o: object, v: PropertyKey): boolean;
                                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                                })["default"] | null | undefined) | null;
+                                })["default"] | null) | null;
                                 val_of(peer: $giper_baza_link | null, next?: (Init extends typeof $mol_schema_any ? Init : {
                                     new (value?: any): {
                                         constructor: Function;
@@ -42864,7 +42926,7 @@ declare namespace $.$$ {
                                     };
                                     Class: Init;
                                     toString(): string;
-                                    guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
+                                    guard<Value_2>(value: Value_2): Value_2 & InstanceType<Init>;
                                     cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                                     default: InstanceType<Init>;
                                     check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -42914,7 +42976,7 @@ declare namespace $.$$ {
                                     fromEntries(entries: Iterable<readonly any[]>): any;
                                     hasOwn(o: object, v: PropertyKey): boolean;
                                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                                })["default"] | null | undefined): ((Init extends typeof $mol_schema_any ? Init : {
+                                })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
                                     new (value?: any): {
                                         constructor: Function;
                                         toString(): string;
@@ -42926,7 +42988,7 @@ declare namespace $.$$ {
                                     };
                                     Class: Init;
                                     toString(): string;
-                                    guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
+                                    guard<Value_2>(value: Value_2): Value_2 & InstanceType<Init>;
                                     cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                                     default: InstanceType<Init>;
                                     check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -42976,7 +43038,7 @@ declare namespace $.$$ {
                                     fromEntries(entries: Iterable<readonly any[]>): any;
                                     hasOwn(o: object, v: PropertyKey): boolean;
                                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                                })["default"] | null | undefined) | null;
+                                })["default"] | null) | null;
                                 pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
                                 vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
                                 vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -43027,7 +43089,7 @@ declare namespace $.$$ {
                                     };
                                     Class: Init;
                                     toString(): string;
-                                    guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
+                                    guard<Value_2>(value: Value_2): Value_2 & InstanceType<Init>;
                                     cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                                     default: InstanceType<Init>;
                                     check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -43079,7 +43141,7 @@ declare namespace $.$$ {
                                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
                                 };
                                 toString(): string;
-                                guard<Value_1>(value: Value_1): Value_1;
+                                guard<This extends typeof $mol_schema_any, Value_1>(this: This, value: Value_1): Value_1 & This["default"];
                                 default: (Init extends typeof $mol_schema_any ? Init : {
                                     new (value?: any): {
                                         constructor: Function;
@@ -43092,7 +43154,7 @@ declare namespace $.$$ {
                                     };
                                     Class: Init;
                                     toString(): string;
-                                    guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
+                                    guard<Value_2>(value: Value_2): Value_2 & InstanceType<Init>;
                                     cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                                     default: InstanceType<Init>;
                                     check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -43142,7 +43204,7 @@ declare namespace $.$$ {
                                     fromEntries(entries: Iterable<readonly any[]>): any;
                                     hasOwn(o: object, v: PropertyKey): boolean;
                                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                                })["default"] | null | undefined;
+                                })["default"] | null;
                                 check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
                                 cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                                 [Symbol.toStringTag]: string;
@@ -43287,8 +43349,8 @@ declare namespace $.$$ {
                             groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
                         };
                         toString(): string;
-                        guard<Value>(value: Value): Value;
-                        default: $giper_baza_link | null | undefined;
+                        guard<This extends typeof $mol_schema_any, Value>(this: This, value: Value): Value & This["default"];
+                        default: $giper_baza_link | null;
                         check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
                         cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                         [Symbol.toStringTag]: string;
@@ -43403,7 +43465,7 @@ declare namespace $.$$ {
                                 fromEntries(entries: Iterable<readonly any[]>): any;
                                 hasOwn(o: object, v: PropertyKey): boolean;
                                 groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                            })["default"] | null | undefined): ((Init extends typeof $mol_schema_any ? Init : {
+                            })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
                                 new (value?: any): {
                                     constructor: Function;
                                     toString(): string;
@@ -43465,7 +43527,7 @@ declare namespace $.$$ {
                                 fromEntries(entries: Iterable<readonly any[]>): any;
                                 hasOwn(o: object, v: PropertyKey): boolean;
                                 groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                            })["default"] | null | undefined) | null;
+                            })["default"] | null) | null;
                             val_of(peer: $giper_baza_link | null, next?: (Init extends typeof $mol_schema_any ? Init : {
                                 new (value?: any): {
                                     constructor: Function;
@@ -43528,7 +43590,7 @@ declare namespace $.$$ {
                                 fromEntries(entries: Iterable<readonly any[]>): any;
                                 hasOwn(o: object, v: PropertyKey): boolean;
                                 groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                            })["default"] | null | undefined): ((Init extends typeof $mol_schema_any ? Init : {
+                            })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
                                 new (value?: any): {
                                     constructor: Function;
                                     toString(): string;
@@ -43590,7 +43652,7 @@ declare namespace $.$$ {
                                 fromEntries(entries: Iterable<readonly any[]>): any;
                                 hasOwn(o: object, v: PropertyKey): boolean;
                                 groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                            })["default"] | null | undefined) | null;
+                            })["default"] | null) | null;
                             pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
                             vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
                             vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -43693,7 +43755,7 @@ declare namespace $.$$ {
                                 groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
                             };
                             toString(): string;
-                            guard<Value>(value: Value): Value;
+                            guard<This extends typeof $mol_schema_any, Value>(this: This, value: Value): Value & This["default"];
                             default: (Init extends typeof $mol_schema_any ? Init : {
                                 new (value?: any): {
                                     constructor: Function;
@@ -43706,7 +43768,7 @@ declare namespace $.$$ {
                                 };
                                 Class: Init;
                                 toString(): string;
-                                guard<Value>(value: Value): Value & InstanceType<Init>;
+                                guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
                                 cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                                 default: InstanceType<Init>;
                                 check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -43756,7 +43818,7 @@ declare namespace $.$$ {
                                 fromEntries(entries: Iterable<readonly any[]>): any;
                                 hasOwn(o: object, v: PropertyKey): boolean;
                                 groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                            })["default"] | null | undefined;
+                            })["default"] | null;
                             check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
                             cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                             [Symbol.toStringTag]: string;
@@ -43838,8 +43900,8 @@ declare namespace $.$$ {
                     ensure_lord(peer: $giper_baza_link | null, preset: $giper_baza_rank_preset): void;
                     remote_ensure(preset?: $giper_baza_rank_preset): $giper_baza_atom_text | null;
                     local_ensure(): $giper_baza_atom_text | null;
-                    val(next?: $giper_baza_link | null | undefined): $giper_baza_link | null | undefined;
-                    val_of(peer: $giper_baza_link | null, next?: $giper_baza_link | null | undefined): $giper_baza_link | null | undefined;
+                    val(next?: $giper_baza_link | null | undefined): $giper_baza_link | null;
+                    val_of(peer: $giper_baza_link | null, next?: $giper_baza_link | null | undefined): $giper_baza_link | null;
                     pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
                     vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
                     vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -43962,8 +44024,8 @@ declare namespace $.$$ {
                             ensure_lord(peer: $giper_baza_link | null, preset: $giper_baza_rank_preset): void;
                             remote_ensure(preset?: $giper_baza_rank_preset): $giper_baza_atom_text | null;
                             local_ensure(): $giper_baza_atom_text | null;
-                            val(next?: $giper_baza_link | null | undefined): $giper_baza_link | null | undefined;
-                            val_of(peer: $giper_baza_link | null, next?: $giper_baza_link | null | undefined): $giper_baza_link | null | undefined;
+                            val(next?: $giper_baza_link | null | undefined): $giper_baza_link | null;
+                            val_of(peer: $giper_baza_link | null, next?: $giper_baza_link | null | undefined): $giper_baza_link | null;
                             pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
                             vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
                             vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -44005,8 +44067,8 @@ declare namespace $.$$ {
                                 ensure_lord(peer: $giper_baza_link | null, preset: $giper_baza_rank_preset): void;
                                 remote_ensure(preset?: $giper_baza_rank_preset): $mol_type_result<$mol_type_result<Value>> | null;
                                 local_ensure(): $mol_type_result<$mol_type_result<Value>> | null;
-                                val(next?: $giper_baza_link | null | undefined): $giper_baza_link | null | undefined;
-                                val_of(peer: $giper_baza_link | null, next?: $giper_baza_link | null | undefined): $giper_baza_link | null | undefined;
+                                val(next?: $giper_baza_link | null | undefined): $giper_baza_link | null;
+                                val_of(peer: $giper_baza_link | null, next?: $giper_baza_link | null | undefined): $giper_baza_link | null;
                                 pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
                                 vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
                                 vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -44111,8 +44173,8 @@ declare namespace $.$$ {
                                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
                                 };
                                 toString(): string;
-                                guard<Value_1>(value: Value_1): Value_1;
-                                default: $giper_baza_link | null | undefined;
+                                guard<This extends typeof $mol_schema_any, Value_1>(this: This, value: Value_1): Value_1 & This["default"];
+                                default: $giper_baza_link | null;
                                 check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
                                 cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                                 [Symbol.toStringTag]: string;
@@ -44177,7 +44239,7 @@ declare namespace $.$$ {
                                         };
                                         Class: Init;
                                         toString(): string;
-                                        guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
+                                        guard<Value_2>(value: Value_2): Value_2 & InstanceType<Init>;
                                         cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                                         default: InstanceType<Init>;
                                         check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -44227,7 +44289,7 @@ declare namespace $.$$ {
                                         fromEntries(entries: Iterable<readonly any[]>): any;
                                         hasOwn(o: object, v: PropertyKey): boolean;
                                         groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                                    })["default"] | null | undefined): ((Init extends typeof $mol_schema_any ? Init : {
+                                    })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
                                         new (value?: any): {
                                             constructor: Function;
                                             toString(): string;
@@ -44239,7 +44301,7 @@ declare namespace $.$$ {
                                         };
                                         Class: Init;
                                         toString(): string;
-                                        guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
+                                        guard<Value_2>(value: Value_2): Value_2 & InstanceType<Init>;
                                         cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                                         default: InstanceType<Init>;
                                         check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -44289,7 +44351,7 @@ declare namespace $.$$ {
                                         fromEntries(entries: Iterable<readonly any[]>): any;
                                         hasOwn(o: object, v: PropertyKey): boolean;
                                         groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                                    })["default"] | null | undefined) | null;
+                                    })["default"] | null) | null;
                                     val_of(peer: $giper_baza_link | null, next?: (Init extends typeof $mol_schema_any ? Init : {
                                         new (value?: any): {
                                             constructor: Function;
@@ -44302,7 +44364,7 @@ declare namespace $.$$ {
                                         };
                                         Class: Init;
                                         toString(): string;
-                                        guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
+                                        guard<Value_2>(value: Value_2): Value_2 & InstanceType<Init>;
                                         cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                                         default: InstanceType<Init>;
                                         check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -44352,7 +44414,7 @@ declare namespace $.$$ {
                                         fromEntries(entries: Iterable<readonly any[]>): any;
                                         hasOwn(o: object, v: PropertyKey): boolean;
                                         groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                                    })["default"] | null | undefined): ((Init extends typeof $mol_schema_any ? Init : {
+                                    })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
                                         new (value?: any): {
                                             constructor: Function;
                                             toString(): string;
@@ -44364,7 +44426,7 @@ declare namespace $.$$ {
                                         };
                                         Class: Init;
                                         toString(): string;
-                                        guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
+                                        guard<Value_2>(value: Value_2): Value_2 & InstanceType<Init>;
                                         cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                                         default: InstanceType<Init>;
                                         check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -44414,7 +44476,7 @@ declare namespace $.$$ {
                                         fromEntries(entries: Iterable<readonly any[]>): any;
                                         hasOwn(o: object, v: PropertyKey): boolean;
                                         groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                                    })["default"] | null | undefined) | null;
+                                    })["default"] | null) | null;
                                     pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
                                     vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
                                     vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -44465,7 +44527,7 @@ declare namespace $.$$ {
                                         };
                                         Class: Init;
                                         toString(): string;
-                                        guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
+                                        guard<Value_2>(value: Value_2): Value_2 & InstanceType<Init>;
                                         cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                                         default: InstanceType<Init>;
                                         check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -44517,7 +44579,7 @@ declare namespace $.$$ {
                                         groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
                                     };
                                     toString(): string;
-                                    guard<Value_1>(value: Value_1): Value_1;
+                                    guard<This extends typeof $mol_schema_any, Value_1>(this: This, value: Value_1): Value_1 & This["default"];
                                     default: (Init extends typeof $mol_schema_any ? Init : {
                                         new (value?: any): {
                                             constructor: Function;
@@ -44530,7 +44592,7 @@ declare namespace $.$$ {
                                         };
                                         Class: Init;
                                         toString(): string;
-                                        guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
+                                        guard<Value_2>(value: Value_2): Value_2 & InstanceType<Init>;
                                         cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                                         default: InstanceType<Init>;
                                         check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -44580,7 +44642,7 @@ declare namespace $.$$ {
                                         fromEntries(entries: Iterable<readonly any[]>): any;
                                         hasOwn(o: object, v: PropertyKey): boolean;
                                         groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                                    })["default"] | null | undefined;
+                                    })["default"] | null;
                                     check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
                                     cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                                     [Symbol.toStringTag]: string;
@@ -44725,8 +44787,8 @@ declare namespace $.$$ {
                                 groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
                             };
                             toString(): string;
-                            guard<Value>(value: Value): Value;
-                            default: $giper_baza_link | null | undefined;
+                            guard<This extends typeof $mol_schema_any, Value>(this: This, value: Value): Value & This["default"];
+                            default: $giper_baza_link | null;
                             check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
                             cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                             [Symbol.toStringTag]: string;
@@ -44841,7 +44903,7 @@ declare namespace $.$$ {
                                     fromEntries(entries: Iterable<readonly any[]>): any;
                                     hasOwn(o: object, v: PropertyKey): boolean;
                                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                                })["default"] | null | undefined): ((Init extends typeof $mol_schema_any ? Init : {
+                                })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
                                     new (value?: any): {
                                         constructor: Function;
                                         toString(): string;
@@ -44903,7 +44965,7 @@ declare namespace $.$$ {
                                     fromEntries(entries: Iterable<readonly any[]>): any;
                                     hasOwn(o: object, v: PropertyKey): boolean;
                                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                                })["default"] | null | undefined) | null;
+                                })["default"] | null) | null;
                                 val_of(peer: $giper_baza_link | null, next?: (Init extends typeof $mol_schema_any ? Init : {
                                     new (value?: any): {
                                         constructor: Function;
@@ -44966,7 +45028,7 @@ declare namespace $.$$ {
                                     fromEntries(entries: Iterable<readonly any[]>): any;
                                     hasOwn(o: object, v: PropertyKey): boolean;
                                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                                })["default"] | null | undefined): ((Init extends typeof $mol_schema_any ? Init : {
+                                })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
                                     new (value?: any): {
                                         constructor: Function;
                                         toString(): string;
@@ -45028,7 +45090,7 @@ declare namespace $.$$ {
                                     fromEntries(entries: Iterable<readonly any[]>): any;
                                     hasOwn(o: object, v: PropertyKey): boolean;
                                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                                })["default"] | null | undefined) | null;
+                                })["default"] | null) | null;
                                 pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
                                 vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
                                 vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -45131,7 +45193,7 @@ declare namespace $.$$ {
                                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
                                 };
                                 toString(): string;
-                                guard<Value>(value: Value): Value;
+                                guard<This extends typeof $mol_schema_any, Value>(this: This, value: Value): Value & This["default"];
                                 default: (Init extends typeof $mol_schema_any ? Init : {
                                     new (value?: any): {
                                         constructor: Function;
@@ -45144,7 +45206,7 @@ declare namespace $.$$ {
                                     };
                                     Class: Init;
                                     toString(): string;
-                                    guard<Value>(value: Value): Value & InstanceType<Init>;
+                                    guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
                                     cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                                     default: InstanceType<Init>;
                                     check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -45194,7 +45256,7 @@ declare namespace $.$$ {
                                     fromEntries(entries: Iterable<readonly any[]>): any;
                                     hasOwn(o: object, v: PropertyKey): boolean;
                                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                                })["default"] | null | undefined;
+                                })["default"] | null;
                                 check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
                                 cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                                 [Symbol.toStringTag]: string;
@@ -45276,8 +45338,8 @@ declare namespace $.$$ {
                         ensure_lord(peer: $giper_baza_link | null, preset: $giper_baza_rank_preset): void;
                         remote_ensure(preset?: $giper_baza_rank_preset): $giper_baza_atom_text | null;
                         local_ensure(): $giper_baza_atom_text | null;
-                        val(next?: $giper_baza_link | null | undefined): $giper_baza_link | null | undefined;
-                        val_of(peer: $giper_baza_link | null, next?: $giper_baza_link | null | undefined): $giper_baza_link | null | undefined;
+                        val(next?: $giper_baza_link | null | undefined): $giper_baza_link | null;
+                        val_of(peer: $giper_baza_link | null, next?: $giper_baza_link | null | undefined): $giper_baza_link | null;
                         pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
                         vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
                         vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -46367,8 +46429,8 @@ declare namespace $.$$ {
                         ensure_lord(peer: $giper_baza_link | null, preset: $giper_baza_rank_preset): void;
                         remote_ensure(preset?: $giper_baza_rank_preset): $giper_baza_atom_text | null;
                         local_ensure(): $giper_baza_atom_text | null;
-                        val(next?: $giper_baza_link | null | undefined): $giper_baza_link | null | undefined;
-                        val_of(peer: $giper_baza_link | null, next?: $giper_baza_link | null | undefined): $giper_baza_link | null | undefined;
+                        val(next?: $giper_baza_link | null | undefined): $giper_baza_link | null;
+                        val_of(peer: $giper_baza_link | null, next?: $giper_baza_link | null | undefined): $giper_baza_link | null;
                         pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
                         vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
                         vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -46410,8 +46472,8 @@ declare namespace $.$$ {
                             ensure_lord(peer: $giper_baza_link | null, preset: $giper_baza_rank_preset): void;
                             remote_ensure(preset?: $giper_baza_rank_preset): $mol_type_result<$mol_type_result<Value>> | null;
                             local_ensure(): $mol_type_result<$mol_type_result<Value>> | null;
-                            val(next?: $giper_baza_link | null | undefined): $giper_baza_link | null | undefined;
-                            val_of(peer: $giper_baza_link | null, next?: $giper_baza_link | null | undefined): $giper_baza_link | null | undefined;
+                            val(next?: $giper_baza_link | null | undefined): $giper_baza_link | null;
+                            val_of(peer: $giper_baza_link | null, next?: $giper_baza_link | null | undefined): $giper_baza_link | null;
                             pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
                             vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
                             vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -46516,8 +46578,8 @@ declare namespace $.$$ {
                                 groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
                             };
                             toString(): string;
-                            guard<Value_1>(value: Value_1): Value_1;
-                            default: $giper_baza_link | null | undefined;
+                            guard<This extends typeof $mol_schema_any, Value_1>(this: This, value: Value_1): Value_1 & This["default"];
+                            default: $giper_baza_link | null;
                             check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
                             cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                             [Symbol.toStringTag]: string;
@@ -46582,7 +46644,7 @@ declare namespace $.$$ {
                                     };
                                     Class: Init;
                                     toString(): string;
-                                    guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
+                                    guard<Value_2>(value: Value_2): Value_2 & InstanceType<Init>;
                                     cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                                     default: InstanceType<Init>;
                                     check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -46632,7 +46694,7 @@ declare namespace $.$$ {
                                     fromEntries(entries: Iterable<readonly any[]>): any;
                                     hasOwn(o: object, v: PropertyKey): boolean;
                                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                                })["default"] | null | undefined): ((Init extends typeof $mol_schema_any ? Init : {
+                                })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
                                     new (value?: any): {
                                         constructor: Function;
                                         toString(): string;
@@ -46644,7 +46706,7 @@ declare namespace $.$$ {
                                     };
                                     Class: Init;
                                     toString(): string;
-                                    guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
+                                    guard<Value_2>(value: Value_2): Value_2 & InstanceType<Init>;
                                     cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                                     default: InstanceType<Init>;
                                     check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -46694,7 +46756,7 @@ declare namespace $.$$ {
                                     fromEntries(entries: Iterable<readonly any[]>): any;
                                     hasOwn(o: object, v: PropertyKey): boolean;
                                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                                })["default"] | null | undefined) | null;
+                                })["default"] | null) | null;
                                 val_of(peer: $giper_baza_link | null, next?: (Init extends typeof $mol_schema_any ? Init : {
                                     new (value?: any): {
                                         constructor: Function;
@@ -46707,7 +46769,7 @@ declare namespace $.$$ {
                                     };
                                     Class: Init;
                                     toString(): string;
-                                    guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
+                                    guard<Value_2>(value: Value_2): Value_2 & InstanceType<Init>;
                                     cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                                     default: InstanceType<Init>;
                                     check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -46757,7 +46819,7 @@ declare namespace $.$$ {
                                     fromEntries(entries: Iterable<readonly any[]>): any;
                                     hasOwn(o: object, v: PropertyKey): boolean;
                                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                                })["default"] | null | undefined): ((Init extends typeof $mol_schema_any ? Init : {
+                                })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
                                     new (value?: any): {
                                         constructor: Function;
                                         toString(): string;
@@ -46769,7 +46831,7 @@ declare namespace $.$$ {
                                     };
                                     Class: Init;
                                     toString(): string;
-                                    guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
+                                    guard<Value_2>(value: Value_2): Value_2 & InstanceType<Init>;
                                     cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                                     default: InstanceType<Init>;
                                     check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -46819,7 +46881,7 @@ declare namespace $.$$ {
                                     fromEntries(entries: Iterable<readonly any[]>): any;
                                     hasOwn(o: object, v: PropertyKey): boolean;
                                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                                })["default"] | null | undefined) | null;
+                                })["default"] | null) | null;
                                 pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
                                 vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
                                 vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -46870,7 +46932,7 @@ declare namespace $.$$ {
                                     };
                                     Class: Init;
                                     toString(): string;
-                                    guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
+                                    guard<Value_2>(value: Value_2): Value_2 & InstanceType<Init>;
                                     cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                                     default: InstanceType<Init>;
                                     check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -46922,7 +46984,7 @@ declare namespace $.$$ {
                                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
                                 };
                                 toString(): string;
-                                guard<Value_1>(value: Value_1): Value_1;
+                                guard<This extends typeof $mol_schema_any, Value_1>(this: This, value: Value_1): Value_1 & This["default"];
                                 default: (Init extends typeof $mol_schema_any ? Init : {
                                     new (value?: any): {
                                         constructor: Function;
@@ -46935,7 +46997,7 @@ declare namespace $.$$ {
                                     };
                                     Class: Init;
                                     toString(): string;
-                                    guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
+                                    guard<Value_2>(value: Value_2): Value_2 & InstanceType<Init>;
                                     cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                                     default: InstanceType<Init>;
                                     check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -46985,7 +47047,7 @@ declare namespace $.$$ {
                                     fromEntries(entries: Iterable<readonly any[]>): any;
                                     hasOwn(o: object, v: PropertyKey): boolean;
                                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                                })["default"] | null | undefined;
+                                })["default"] | null;
                                 check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
                                 cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                                 [Symbol.toStringTag]: string;
@@ -47130,8 +47192,8 @@ declare namespace $.$$ {
                             groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
                         };
                         toString(): string;
-                        guard<Value>(value: Value): Value;
-                        default: $giper_baza_link | null | undefined;
+                        guard<This extends typeof $mol_schema_any, Value>(this: This, value: Value): Value & This["default"];
+                        default: $giper_baza_link | null;
                         check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
                         cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                         [Symbol.toStringTag]: string;
@@ -47246,7 +47308,7 @@ declare namespace $.$$ {
                                 fromEntries(entries: Iterable<readonly any[]>): any;
                                 hasOwn(o: object, v: PropertyKey): boolean;
                                 groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                            })["default"] | null | undefined): ((Init extends typeof $mol_schema_any ? Init : {
+                            })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
                                 new (value?: any): {
                                     constructor: Function;
                                     toString(): string;
@@ -47308,7 +47370,7 @@ declare namespace $.$$ {
                                 fromEntries(entries: Iterable<readonly any[]>): any;
                                 hasOwn(o: object, v: PropertyKey): boolean;
                                 groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                            })["default"] | null | undefined) | null;
+                            })["default"] | null) | null;
                             val_of(peer: $giper_baza_link | null, next?: (Init extends typeof $mol_schema_any ? Init : {
                                 new (value?: any): {
                                     constructor: Function;
@@ -47371,7 +47433,7 @@ declare namespace $.$$ {
                                 fromEntries(entries: Iterable<readonly any[]>): any;
                                 hasOwn(o: object, v: PropertyKey): boolean;
                                 groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                            })["default"] | null | undefined): ((Init extends typeof $mol_schema_any ? Init : {
+                            })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
                                 new (value?: any): {
                                     constructor: Function;
                                     toString(): string;
@@ -47433,7 +47495,7 @@ declare namespace $.$$ {
                                 fromEntries(entries: Iterable<readonly any[]>): any;
                                 hasOwn(o: object, v: PropertyKey): boolean;
                                 groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                            })["default"] | null | undefined) | null;
+                            })["default"] | null) | null;
                             pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
                             vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
                             vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -47536,7 +47598,7 @@ declare namespace $.$$ {
                                 groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
                             };
                             toString(): string;
-                            guard<Value>(value: Value): Value;
+                            guard<This extends typeof $mol_schema_any, Value>(this: This, value: Value): Value & This["default"];
                             default: (Init extends typeof $mol_schema_any ? Init : {
                                 new (value?: any): {
                                     constructor: Function;
@@ -47549,7 +47611,7 @@ declare namespace $.$$ {
                                 };
                                 Class: Init;
                                 toString(): string;
-                                guard<Value>(value: Value): Value & InstanceType<Init>;
+                                guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
                                 cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                                 default: InstanceType<Init>;
                                 check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -47599,7 +47661,7 @@ declare namespace $.$$ {
                                 fromEntries(entries: Iterable<readonly any[]>): any;
                                 hasOwn(o: object, v: PropertyKey): boolean;
                                 groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                            })["default"] | null | undefined;
+                            })["default"] | null;
                             check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
                             cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                             [Symbol.toStringTag]: string;
@@ -47681,8 +47743,8 @@ declare namespace $.$$ {
                     ensure_lord(peer: $giper_baza_link | null, preset: $giper_baza_rank_preset): void;
                     remote_ensure(preset?: $giper_baza_rank_preset): $giper_baza_atom_text | null;
                     local_ensure(): $giper_baza_atom_text | null;
-                    val(next?: $giper_baza_link | null | undefined): $giper_baza_link | null | undefined;
-                    val_of(peer: $giper_baza_link | null, next?: $giper_baza_link | null | undefined): $giper_baza_link | null | undefined;
+                    val(next?: $giper_baza_link | null | undefined): $giper_baza_link | null;
+                    val_of(peer: $giper_baza_link | null, next?: $giper_baza_link | null | undefined): $giper_baza_link | null;
                     pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
                     vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
                     vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -47805,8 +47867,8 @@ declare namespace $.$$ {
                             ensure_lord(peer: $giper_baza_link | null, preset: $giper_baza_rank_preset): void;
                             remote_ensure(preset?: $giper_baza_rank_preset): $giper_baza_atom_text | null;
                             local_ensure(): $giper_baza_atom_text | null;
-                            val(next?: $giper_baza_link | null | undefined): $giper_baza_link | null | undefined;
-                            val_of(peer: $giper_baza_link | null, next?: $giper_baza_link | null | undefined): $giper_baza_link | null | undefined;
+                            val(next?: $giper_baza_link | null | undefined): $giper_baza_link | null;
+                            val_of(peer: $giper_baza_link | null, next?: $giper_baza_link | null | undefined): $giper_baza_link | null;
                             pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
                             vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
                             vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -47848,8 +47910,8 @@ declare namespace $.$$ {
                                 ensure_lord(peer: $giper_baza_link | null, preset: $giper_baza_rank_preset): void;
                                 remote_ensure(preset?: $giper_baza_rank_preset): $mol_type_result<$mol_type_result<Value>> | null;
                                 local_ensure(): $mol_type_result<$mol_type_result<Value>> | null;
-                                val(next?: $giper_baza_link | null | undefined): $giper_baza_link | null | undefined;
-                                val_of(peer: $giper_baza_link | null, next?: $giper_baza_link | null | undefined): $giper_baza_link | null | undefined;
+                                val(next?: $giper_baza_link | null | undefined): $giper_baza_link | null;
+                                val_of(peer: $giper_baza_link | null, next?: $giper_baza_link | null | undefined): $giper_baza_link | null;
                                 pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
                                 vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
                                 vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -47954,8 +48016,8 @@ declare namespace $.$$ {
                                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
                                 };
                                 toString(): string;
-                                guard<Value_1>(value: Value_1): Value_1;
-                                default: $giper_baza_link | null | undefined;
+                                guard<This extends typeof $mol_schema_any, Value_1>(this: This, value: Value_1): Value_1 & This["default"];
+                                default: $giper_baza_link | null;
                                 check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
                                 cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                                 [Symbol.toStringTag]: string;
@@ -48020,7 +48082,7 @@ declare namespace $.$$ {
                                         };
                                         Class: Init;
                                         toString(): string;
-                                        guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
+                                        guard<Value_2>(value: Value_2): Value_2 & InstanceType<Init>;
                                         cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                                         default: InstanceType<Init>;
                                         check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -48070,7 +48132,7 @@ declare namespace $.$$ {
                                         fromEntries(entries: Iterable<readonly any[]>): any;
                                         hasOwn(o: object, v: PropertyKey): boolean;
                                         groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                                    })["default"] | null | undefined): ((Init extends typeof $mol_schema_any ? Init : {
+                                    })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
                                         new (value?: any): {
                                             constructor: Function;
                                             toString(): string;
@@ -48082,7 +48144,7 @@ declare namespace $.$$ {
                                         };
                                         Class: Init;
                                         toString(): string;
-                                        guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
+                                        guard<Value_2>(value: Value_2): Value_2 & InstanceType<Init>;
                                         cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                                         default: InstanceType<Init>;
                                         check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -48132,7 +48194,7 @@ declare namespace $.$$ {
                                         fromEntries(entries: Iterable<readonly any[]>): any;
                                         hasOwn(o: object, v: PropertyKey): boolean;
                                         groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                                    })["default"] | null | undefined) | null;
+                                    })["default"] | null) | null;
                                     val_of(peer: $giper_baza_link | null, next?: (Init extends typeof $mol_schema_any ? Init : {
                                         new (value?: any): {
                                             constructor: Function;
@@ -48145,7 +48207,7 @@ declare namespace $.$$ {
                                         };
                                         Class: Init;
                                         toString(): string;
-                                        guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
+                                        guard<Value_2>(value: Value_2): Value_2 & InstanceType<Init>;
                                         cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                                         default: InstanceType<Init>;
                                         check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -48195,7 +48257,7 @@ declare namespace $.$$ {
                                         fromEntries(entries: Iterable<readonly any[]>): any;
                                         hasOwn(o: object, v: PropertyKey): boolean;
                                         groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                                    })["default"] | null | undefined): ((Init extends typeof $mol_schema_any ? Init : {
+                                    })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
                                         new (value?: any): {
                                             constructor: Function;
                                             toString(): string;
@@ -48207,7 +48269,7 @@ declare namespace $.$$ {
                                         };
                                         Class: Init;
                                         toString(): string;
-                                        guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
+                                        guard<Value_2>(value: Value_2): Value_2 & InstanceType<Init>;
                                         cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                                         default: InstanceType<Init>;
                                         check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -48257,7 +48319,7 @@ declare namespace $.$$ {
                                         fromEntries(entries: Iterable<readonly any[]>): any;
                                         hasOwn(o: object, v: PropertyKey): boolean;
                                         groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                                    })["default"] | null | undefined) | null;
+                                    })["default"] | null) | null;
                                     pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
                                     vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
                                     vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -48308,7 +48370,7 @@ declare namespace $.$$ {
                                         };
                                         Class: Init;
                                         toString(): string;
-                                        guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
+                                        guard<Value_2>(value: Value_2): Value_2 & InstanceType<Init>;
                                         cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                                         default: InstanceType<Init>;
                                         check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -48360,7 +48422,7 @@ declare namespace $.$$ {
                                         groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
                                     };
                                     toString(): string;
-                                    guard<Value_1>(value: Value_1): Value_1;
+                                    guard<This extends typeof $mol_schema_any, Value_1>(this: This, value: Value_1): Value_1 & This["default"];
                                     default: (Init extends typeof $mol_schema_any ? Init : {
                                         new (value?: any): {
                                             constructor: Function;
@@ -48373,7 +48435,7 @@ declare namespace $.$$ {
                                         };
                                         Class: Init;
                                         toString(): string;
-                                        guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
+                                        guard<Value_2>(value: Value_2): Value_2 & InstanceType<Init>;
                                         cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                                         default: InstanceType<Init>;
                                         check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -48423,7 +48485,7 @@ declare namespace $.$$ {
                                         fromEntries(entries: Iterable<readonly any[]>): any;
                                         hasOwn(o: object, v: PropertyKey): boolean;
                                         groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                                    })["default"] | null | undefined;
+                                    })["default"] | null;
                                     check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
                                     cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                                     [Symbol.toStringTag]: string;
@@ -48568,8 +48630,8 @@ declare namespace $.$$ {
                                 groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
                             };
                             toString(): string;
-                            guard<Value>(value: Value): Value;
-                            default: $giper_baza_link | null | undefined;
+                            guard<This extends typeof $mol_schema_any, Value>(this: This, value: Value): Value & This["default"];
+                            default: $giper_baza_link | null;
                             check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
                             cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                             [Symbol.toStringTag]: string;
@@ -48684,7 +48746,7 @@ declare namespace $.$$ {
                                     fromEntries(entries: Iterable<readonly any[]>): any;
                                     hasOwn(o: object, v: PropertyKey): boolean;
                                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                                })["default"] | null | undefined): ((Init extends typeof $mol_schema_any ? Init : {
+                                })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
                                     new (value?: any): {
                                         constructor: Function;
                                         toString(): string;
@@ -48746,7 +48808,7 @@ declare namespace $.$$ {
                                     fromEntries(entries: Iterable<readonly any[]>): any;
                                     hasOwn(o: object, v: PropertyKey): boolean;
                                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                                })["default"] | null | undefined) | null;
+                                })["default"] | null) | null;
                                 val_of(peer: $giper_baza_link | null, next?: (Init extends typeof $mol_schema_any ? Init : {
                                     new (value?: any): {
                                         constructor: Function;
@@ -48809,7 +48871,7 @@ declare namespace $.$$ {
                                     fromEntries(entries: Iterable<readonly any[]>): any;
                                     hasOwn(o: object, v: PropertyKey): boolean;
                                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                                })["default"] | null | undefined): ((Init extends typeof $mol_schema_any ? Init : {
+                                })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
                                     new (value?: any): {
                                         constructor: Function;
                                         toString(): string;
@@ -48871,7 +48933,7 @@ declare namespace $.$$ {
                                     fromEntries(entries: Iterable<readonly any[]>): any;
                                     hasOwn(o: object, v: PropertyKey): boolean;
                                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                                })["default"] | null | undefined) | null;
+                                })["default"] | null) | null;
                                 pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
                                 vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
                                 vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -48974,7 +49036,7 @@ declare namespace $.$$ {
                                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
                                 };
                                 toString(): string;
-                                guard<Value>(value: Value): Value;
+                                guard<This extends typeof $mol_schema_any, Value>(this: This, value: Value): Value & This["default"];
                                 default: (Init extends typeof $mol_schema_any ? Init : {
                                     new (value?: any): {
                                         constructor: Function;
@@ -48987,7 +49049,7 @@ declare namespace $.$$ {
                                     };
                                     Class: Init;
                                     toString(): string;
-                                    guard<Value>(value: Value): Value & InstanceType<Init>;
+                                    guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
                                     cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                                     default: InstanceType<Init>;
                                     check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -49037,7 +49099,7 @@ declare namespace $.$$ {
                                     fromEntries(entries: Iterable<readonly any[]>): any;
                                     hasOwn(o: object, v: PropertyKey): boolean;
                                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                                })["default"] | null | undefined;
+                                })["default"] | null;
                                 check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
                                 cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                                 [Symbol.toStringTag]: string;
@@ -49119,8 +49181,8 @@ declare namespace $.$$ {
                         ensure_lord(peer: $giper_baza_link | null, preset: $giper_baza_rank_preset): void;
                         remote_ensure(preset?: $giper_baza_rank_preset): $giper_baza_atom_text | null;
                         local_ensure(): $giper_baza_atom_text | null;
-                        val(next?: $giper_baza_link | null | undefined): $giper_baza_link | null | undefined;
-                        val_of(peer: $giper_baza_link | null, next?: $giper_baza_link | null | undefined): $giper_baza_link | null | undefined;
+                        val(next?: $giper_baza_link | null | undefined): $giper_baza_link | null;
+                        val_of(peer: $giper_baza_link | null, next?: $giper_baza_link | null | undefined): $giper_baza_link | null;
                         pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
                         vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
                         vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -50217,8 +50279,8 @@ declare namespace $.$$ {
                         ensure_lord(peer: $giper_baza_link | null, preset: $giper_baza_rank_preset): void;
                         remote_ensure(preset?: $giper_baza_rank_preset): $giper_baza_atom_text | null;
                         local_ensure(): $giper_baza_atom_text | null;
-                        val(next?: $giper_baza_link | null | undefined): $giper_baza_link | null | undefined;
-                        val_of(peer: $giper_baza_link | null, next?: $giper_baza_link | null | undefined): $giper_baza_link | null | undefined;
+                        val(next?: $giper_baza_link | null | undefined): $giper_baza_link | null;
+                        val_of(peer: $giper_baza_link | null, next?: $giper_baza_link | null | undefined): $giper_baza_link | null;
                         pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
                         vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
                         vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -50260,8 +50322,8 @@ declare namespace $.$$ {
                             ensure_lord(peer: $giper_baza_link | null, preset: $giper_baza_rank_preset): void;
                             remote_ensure(preset?: $giper_baza_rank_preset): $mol_type_result<$mol_type_result<Value>> | null;
                             local_ensure(): $mol_type_result<$mol_type_result<Value>> | null;
-                            val(next?: $giper_baza_link | null | undefined): $giper_baza_link | null | undefined;
-                            val_of(peer: $giper_baza_link | null, next?: $giper_baza_link | null | undefined): $giper_baza_link | null | undefined;
+                            val(next?: $giper_baza_link | null | undefined): $giper_baza_link | null;
+                            val_of(peer: $giper_baza_link | null, next?: $giper_baza_link | null | undefined): $giper_baza_link | null;
                             pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
                             vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
                             vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -50366,8 +50428,8 @@ declare namespace $.$$ {
                                 groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
                             };
                             toString(): string;
-                            guard<Value_1>(value: Value_1): Value_1;
-                            default: $giper_baza_link | null | undefined;
+                            guard<This extends typeof $mol_schema_any, Value_1>(this: This, value: Value_1): Value_1 & This["default"];
+                            default: $giper_baza_link | null;
                             check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
                             cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                             [Symbol.toStringTag]: string;
@@ -50432,7 +50494,7 @@ declare namespace $.$$ {
                                     };
                                     Class: Init;
                                     toString(): string;
-                                    guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
+                                    guard<Value_2>(value: Value_2): Value_2 & InstanceType<Init>;
                                     cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                                     default: InstanceType<Init>;
                                     check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -50482,7 +50544,7 @@ declare namespace $.$$ {
                                     fromEntries(entries: Iterable<readonly any[]>): any;
                                     hasOwn(o: object, v: PropertyKey): boolean;
                                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                                })["default"] | null | undefined): ((Init extends typeof $mol_schema_any ? Init : {
+                                })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
                                     new (value?: any): {
                                         constructor: Function;
                                         toString(): string;
@@ -50494,7 +50556,7 @@ declare namespace $.$$ {
                                     };
                                     Class: Init;
                                     toString(): string;
-                                    guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
+                                    guard<Value_2>(value: Value_2): Value_2 & InstanceType<Init>;
                                     cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                                     default: InstanceType<Init>;
                                     check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -50544,7 +50606,7 @@ declare namespace $.$$ {
                                     fromEntries(entries: Iterable<readonly any[]>): any;
                                     hasOwn(o: object, v: PropertyKey): boolean;
                                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                                })["default"] | null | undefined) | null;
+                                })["default"] | null) | null;
                                 val_of(peer: $giper_baza_link | null, next?: (Init extends typeof $mol_schema_any ? Init : {
                                     new (value?: any): {
                                         constructor: Function;
@@ -50557,7 +50619,7 @@ declare namespace $.$$ {
                                     };
                                     Class: Init;
                                     toString(): string;
-                                    guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
+                                    guard<Value_2>(value: Value_2): Value_2 & InstanceType<Init>;
                                     cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                                     default: InstanceType<Init>;
                                     check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -50607,7 +50669,7 @@ declare namespace $.$$ {
                                     fromEntries(entries: Iterable<readonly any[]>): any;
                                     hasOwn(o: object, v: PropertyKey): boolean;
                                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                                })["default"] | null | undefined): ((Init extends typeof $mol_schema_any ? Init : {
+                                })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
                                     new (value?: any): {
                                         constructor: Function;
                                         toString(): string;
@@ -50619,7 +50681,7 @@ declare namespace $.$$ {
                                     };
                                     Class: Init;
                                     toString(): string;
-                                    guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
+                                    guard<Value_2>(value: Value_2): Value_2 & InstanceType<Init>;
                                     cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                                     default: InstanceType<Init>;
                                     check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -50669,7 +50731,7 @@ declare namespace $.$$ {
                                     fromEntries(entries: Iterable<readonly any[]>): any;
                                     hasOwn(o: object, v: PropertyKey): boolean;
                                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                                })["default"] | null | undefined) | null;
+                                })["default"] | null) | null;
                                 pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
                                 vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
                                 vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -50720,7 +50782,7 @@ declare namespace $.$$ {
                                     };
                                     Class: Init;
                                     toString(): string;
-                                    guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
+                                    guard<Value_2>(value: Value_2): Value_2 & InstanceType<Init>;
                                     cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                                     default: InstanceType<Init>;
                                     check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -50772,7 +50834,7 @@ declare namespace $.$$ {
                                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
                                 };
                                 toString(): string;
-                                guard<Value_1>(value: Value_1): Value_1;
+                                guard<This extends typeof $mol_schema_any, Value_1>(this: This, value: Value_1): Value_1 & This["default"];
                                 default: (Init extends typeof $mol_schema_any ? Init : {
                                     new (value?: any): {
                                         constructor: Function;
@@ -50785,7 +50847,7 @@ declare namespace $.$$ {
                                     };
                                     Class: Init;
                                     toString(): string;
-                                    guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
+                                    guard<Value_2>(value: Value_2): Value_2 & InstanceType<Init>;
                                     cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                                     default: InstanceType<Init>;
                                     check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -50835,7 +50897,7 @@ declare namespace $.$$ {
                                     fromEntries(entries: Iterable<readonly any[]>): any;
                                     hasOwn(o: object, v: PropertyKey): boolean;
                                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                                })["default"] | null | undefined;
+                                })["default"] | null;
                                 check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
                                 cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                                 [Symbol.toStringTag]: string;
@@ -50980,8 +51042,8 @@ declare namespace $.$$ {
                             groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
                         };
                         toString(): string;
-                        guard<Value>(value: Value): Value;
-                        default: $giper_baza_link | null | undefined;
+                        guard<This extends typeof $mol_schema_any, Value>(this: This, value: Value): Value & This["default"];
+                        default: $giper_baza_link | null;
                         check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
                         cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                         [Symbol.toStringTag]: string;
@@ -51096,7 +51158,7 @@ declare namespace $.$$ {
                                 fromEntries(entries: Iterable<readonly any[]>): any;
                                 hasOwn(o: object, v: PropertyKey): boolean;
                                 groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                            })["default"] | null | undefined): ((Init extends typeof $mol_schema_any ? Init : {
+                            })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
                                 new (value?: any): {
                                     constructor: Function;
                                     toString(): string;
@@ -51158,7 +51220,7 @@ declare namespace $.$$ {
                                 fromEntries(entries: Iterable<readonly any[]>): any;
                                 hasOwn(o: object, v: PropertyKey): boolean;
                                 groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                            })["default"] | null | undefined) | null;
+                            })["default"] | null) | null;
                             val_of(peer: $giper_baza_link | null, next?: (Init extends typeof $mol_schema_any ? Init : {
                                 new (value?: any): {
                                     constructor: Function;
@@ -51221,7 +51283,7 @@ declare namespace $.$$ {
                                 fromEntries(entries: Iterable<readonly any[]>): any;
                                 hasOwn(o: object, v: PropertyKey): boolean;
                                 groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                            })["default"] | null | undefined): ((Init extends typeof $mol_schema_any ? Init : {
+                            })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
                                 new (value?: any): {
                                     constructor: Function;
                                     toString(): string;
@@ -51283,7 +51345,7 @@ declare namespace $.$$ {
                                 fromEntries(entries: Iterable<readonly any[]>): any;
                                 hasOwn(o: object, v: PropertyKey): boolean;
                                 groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                            })["default"] | null | undefined) | null;
+                            })["default"] | null) | null;
                             pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
                             vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
                             vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -51386,7 +51448,7 @@ declare namespace $.$$ {
                                 groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
                             };
                             toString(): string;
-                            guard<Value>(value: Value): Value;
+                            guard<This extends typeof $mol_schema_any, Value>(this: This, value: Value): Value & This["default"];
                             default: (Init extends typeof $mol_schema_any ? Init : {
                                 new (value?: any): {
                                     constructor: Function;
@@ -51399,7 +51461,7 @@ declare namespace $.$$ {
                                 };
                                 Class: Init;
                                 toString(): string;
-                                guard<Value>(value: Value): Value & InstanceType<Init>;
+                                guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
                                 cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                                 default: InstanceType<Init>;
                                 check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -51449,7 +51511,7 @@ declare namespace $.$$ {
                                 fromEntries(entries: Iterable<readonly any[]>): any;
                                 hasOwn(o: object, v: PropertyKey): boolean;
                                 groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                            })["default"] | null | undefined;
+                            })["default"] | null;
                             check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
                             cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                             [Symbol.toStringTag]: string;
@@ -51531,8 +51593,8 @@ declare namespace $.$$ {
                     ensure_lord(peer: $giper_baza_link | null, preset: $giper_baza_rank_preset): void;
                     remote_ensure(preset?: $giper_baza_rank_preset): $giper_baza_atom_text | null;
                     local_ensure(): $giper_baza_atom_text | null;
-                    val(next?: $giper_baza_link | null | undefined): $giper_baza_link | null | undefined;
-                    val_of(peer: $giper_baza_link | null, next?: $giper_baza_link | null | undefined): $giper_baza_link | null | undefined;
+                    val(next?: $giper_baza_link | null | undefined): $giper_baza_link | null;
+                    val_of(peer: $giper_baza_link | null, next?: $giper_baza_link | null | undefined): $giper_baza_link | null;
                     pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
                     vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
                     vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -51655,8 +51717,8 @@ declare namespace $.$$ {
                             ensure_lord(peer: $giper_baza_link | null, preset: $giper_baza_rank_preset): void;
                             remote_ensure(preset?: $giper_baza_rank_preset): $giper_baza_atom_text | null;
                             local_ensure(): $giper_baza_atom_text | null;
-                            val(next?: $giper_baza_link | null | undefined): $giper_baza_link | null | undefined;
-                            val_of(peer: $giper_baza_link | null, next?: $giper_baza_link | null | undefined): $giper_baza_link | null | undefined;
+                            val(next?: $giper_baza_link | null | undefined): $giper_baza_link | null;
+                            val_of(peer: $giper_baza_link | null, next?: $giper_baza_link | null | undefined): $giper_baza_link | null;
                             pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
                             vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
                             vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -51698,8 +51760,8 @@ declare namespace $.$$ {
                                 ensure_lord(peer: $giper_baza_link | null, preset: $giper_baza_rank_preset): void;
                                 remote_ensure(preset?: $giper_baza_rank_preset): $mol_type_result<$mol_type_result<Value>> | null;
                                 local_ensure(): $mol_type_result<$mol_type_result<Value>> | null;
-                                val(next?: $giper_baza_link | null | undefined): $giper_baza_link | null | undefined;
-                                val_of(peer: $giper_baza_link | null, next?: $giper_baza_link | null | undefined): $giper_baza_link | null | undefined;
+                                val(next?: $giper_baza_link | null | undefined): $giper_baza_link | null;
+                                val_of(peer: $giper_baza_link | null, next?: $giper_baza_link | null | undefined): $giper_baza_link | null;
                                 pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
                                 vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
                                 vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -51804,8 +51866,8 @@ declare namespace $.$$ {
                                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
                                 };
                                 toString(): string;
-                                guard<Value_1>(value: Value_1): Value_1;
-                                default: $giper_baza_link | null | undefined;
+                                guard<This extends typeof $mol_schema_any, Value_1>(this: This, value: Value_1): Value_1 & This["default"];
+                                default: $giper_baza_link | null;
                                 check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
                                 cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                                 [Symbol.toStringTag]: string;
@@ -51870,7 +51932,7 @@ declare namespace $.$$ {
                                         };
                                         Class: Init;
                                         toString(): string;
-                                        guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
+                                        guard<Value_2>(value: Value_2): Value_2 & InstanceType<Init>;
                                         cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                                         default: InstanceType<Init>;
                                         check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -51920,7 +51982,7 @@ declare namespace $.$$ {
                                         fromEntries(entries: Iterable<readonly any[]>): any;
                                         hasOwn(o: object, v: PropertyKey): boolean;
                                         groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                                    })["default"] | null | undefined): ((Init extends typeof $mol_schema_any ? Init : {
+                                    })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
                                         new (value?: any): {
                                             constructor: Function;
                                             toString(): string;
@@ -51932,7 +51994,7 @@ declare namespace $.$$ {
                                         };
                                         Class: Init;
                                         toString(): string;
-                                        guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
+                                        guard<Value_2>(value: Value_2): Value_2 & InstanceType<Init>;
                                         cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                                         default: InstanceType<Init>;
                                         check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -51982,7 +52044,7 @@ declare namespace $.$$ {
                                         fromEntries(entries: Iterable<readonly any[]>): any;
                                         hasOwn(o: object, v: PropertyKey): boolean;
                                         groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                                    })["default"] | null | undefined) | null;
+                                    })["default"] | null) | null;
                                     val_of(peer: $giper_baza_link | null, next?: (Init extends typeof $mol_schema_any ? Init : {
                                         new (value?: any): {
                                             constructor: Function;
@@ -51995,7 +52057,7 @@ declare namespace $.$$ {
                                         };
                                         Class: Init;
                                         toString(): string;
-                                        guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
+                                        guard<Value_2>(value: Value_2): Value_2 & InstanceType<Init>;
                                         cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                                         default: InstanceType<Init>;
                                         check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -52045,7 +52107,7 @@ declare namespace $.$$ {
                                         fromEntries(entries: Iterable<readonly any[]>): any;
                                         hasOwn(o: object, v: PropertyKey): boolean;
                                         groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                                    })["default"] | null | undefined): ((Init extends typeof $mol_schema_any ? Init : {
+                                    })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
                                         new (value?: any): {
                                             constructor: Function;
                                             toString(): string;
@@ -52057,7 +52119,7 @@ declare namespace $.$$ {
                                         };
                                         Class: Init;
                                         toString(): string;
-                                        guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
+                                        guard<Value_2>(value: Value_2): Value_2 & InstanceType<Init>;
                                         cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                                         default: InstanceType<Init>;
                                         check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -52107,7 +52169,7 @@ declare namespace $.$$ {
                                         fromEntries(entries: Iterable<readonly any[]>): any;
                                         hasOwn(o: object, v: PropertyKey): boolean;
                                         groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                                    })["default"] | null | undefined) | null;
+                                    })["default"] | null) | null;
                                     pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
                                     vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
                                     vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -52158,7 +52220,7 @@ declare namespace $.$$ {
                                         };
                                         Class: Init;
                                         toString(): string;
-                                        guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
+                                        guard<Value_2>(value: Value_2): Value_2 & InstanceType<Init>;
                                         cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                                         default: InstanceType<Init>;
                                         check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -52210,7 +52272,7 @@ declare namespace $.$$ {
                                         groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
                                     };
                                     toString(): string;
-                                    guard<Value_1>(value: Value_1): Value_1;
+                                    guard<This extends typeof $mol_schema_any, Value_1>(this: This, value: Value_1): Value_1 & This["default"];
                                     default: (Init extends typeof $mol_schema_any ? Init : {
                                         new (value?: any): {
                                             constructor: Function;
@@ -52223,7 +52285,7 @@ declare namespace $.$$ {
                                         };
                                         Class: Init;
                                         toString(): string;
-                                        guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
+                                        guard<Value_2>(value: Value_2): Value_2 & InstanceType<Init>;
                                         cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                                         default: InstanceType<Init>;
                                         check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -52273,7 +52335,7 @@ declare namespace $.$$ {
                                         fromEntries(entries: Iterable<readonly any[]>): any;
                                         hasOwn(o: object, v: PropertyKey): boolean;
                                         groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                                    })["default"] | null | undefined;
+                                    })["default"] | null;
                                     check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
                                     cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                                     [Symbol.toStringTag]: string;
@@ -52418,8 +52480,8 @@ declare namespace $.$$ {
                                 groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
                             };
                             toString(): string;
-                            guard<Value>(value: Value): Value;
-                            default: $giper_baza_link | null | undefined;
+                            guard<This extends typeof $mol_schema_any, Value>(this: This, value: Value): Value & This["default"];
+                            default: $giper_baza_link | null;
                             check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
                             cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                             [Symbol.toStringTag]: string;
@@ -52534,7 +52596,7 @@ declare namespace $.$$ {
                                     fromEntries(entries: Iterable<readonly any[]>): any;
                                     hasOwn(o: object, v: PropertyKey): boolean;
                                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                                })["default"] | null | undefined): ((Init extends typeof $mol_schema_any ? Init : {
+                                })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
                                     new (value?: any): {
                                         constructor: Function;
                                         toString(): string;
@@ -52596,7 +52658,7 @@ declare namespace $.$$ {
                                     fromEntries(entries: Iterable<readonly any[]>): any;
                                     hasOwn(o: object, v: PropertyKey): boolean;
                                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                                })["default"] | null | undefined) | null;
+                                })["default"] | null) | null;
                                 val_of(peer: $giper_baza_link | null, next?: (Init extends typeof $mol_schema_any ? Init : {
                                     new (value?: any): {
                                         constructor: Function;
@@ -52659,7 +52721,7 @@ declare namespace $.$$ {
                                     fromEntries(entries: Iterable<readonly any[]>): any;
                                     hasOwn(o: object, v: PropertyKey): boolean;
                                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                                })["default"] | null | undefined): ((Init extends typeof $mol_schema_any ? Init : {
+                                })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
                                     new (value?: any): {
                                         constructor: Function;
                                         toString(): string;
@@ -52721,7 +52783,7 @@ declare namespace $.$$ {
                                     fromEntries(entries: Iterable<readonly any[]>): any;
                                     hasOwn(o: object, v: PropertyKey): boolean;
                                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                                })["default"] | null | undefined) | null;
+                                })["default"] | null) | null;
                                 pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
                                 vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
                                 vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
@@ -52824,7 +52886,7 @@ declare namespace $.$$ {
                                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
                                 };
                                 toString(): string;
-                                guard<Value>(value: Value): Value;
+                                guard<This extends typeof $mol_schema_any, Value>(this: This, value: Value): Value & This["default"];
                                 default: (Init extends typeof $mol_schema_any ? Init : {
                                     new (value?: any): {
                                         constructor: Function;
@@ -52837,7 +52899,7 @@ declare namespace $.$$ {
                                     };
                                     Class: Init;
                                     toString(): string;
-                                    guard<Value>(value: Value): Value & InstanceType<Init>;
+                                    guard<Value_1>(value: Value_1): Value_1 & InstanceType<Init>;
                                     cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                                     default: InstanceType<Init>;
                                     check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
@@ -52887,7 +52949,7 @@ declare namespace $.$$ {
                                     fromEntries(entries: Iterable<readonly any[]>): any;
                                     hasOwn(o: object, v: PropertyKey): boolean;
                                     groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                                })["default"] | null | undefined;
+                                })["default"] | null;
                                 check<This extends typeof $mol_schema_any, Val>(this: This, val: Val): val is Val & This["default"];
                                 cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
                                 [Symbol.toStringTag]: string;
@@ -52969,8 +53031,8 @@ declare namespace $.$$ {
                         ensure_lord(peer: $giper_baza_link | null, preset: $giper_baza_rank_preset): void;
                         remote_ensure(preset?: $giper_baza_rank_preset): $giper_baza_atom_text | null;
                         local_ensure(): $giper_baza_atom_text | null;
-                        val(next?: $giper_baza_link | null | undefined): $giper_baza_link | null | undefined;
-                        val_of(peer: $giper_baza_link | null, next?: $giper_baza_link | null | undefined): $giper_baza_link | null | undefined;
+                        val(next?: $giper_baza_link | null | undefined): $giper_baza_link | null;
+                        val_of(peer: $giper_baza_link | null, next?: $giper_baza_link | null | undefined): $giper_baza_link | null;
                         pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
                         vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
                         vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
