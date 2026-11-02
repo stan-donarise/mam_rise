@@ -1,0 +1,40 @@
+$rise_bench_baza_goods_table $mol_list_demo_table
+	count 1000
+	products /$rise_bench_baza_goods_product
+	links /$giper_baza_link
+	dataset null
+	indexed false
+	compact false
+	query \
+	color_filter \all
+	status_filter \all
+	Compact_id_labeler* $mol_labeler
+		title \ID
+		content /
+			<= Compact_id* $mol_view
+				sub / <= row_id*?
+	Details* $mol_view
+		sub /
+			<= Description_labeler* $mol_labeler
+				title \Description
+				content /
+					<= Description* $mol_view
+						sub / <= row_description* \
+			<= Tags_labeler* $mol_labeler
+				title \Tags
+				content /
+					<= Tags* $mol_view
+						sub <= row_tags* /string
+	Row* $mol_view
+		minimal_height 96
+		sub <= row_content*
+	Title* $mol_link_iconed
+		uri <= row_uri*
+		title <= row_title*
+		content /
+			<= Name* $mol_dimmer
+				haystack <= row_title*
+				needle <= query
+	Date* $mol_date
+		value_moment? <=> row_moment*?
+		trigger_content / <= row_date* \

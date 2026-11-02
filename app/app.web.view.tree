@@ -3,5 +3,5 @@ $rise_app $mol_book2_catalog
 	spreads *
 		demo <= Demo $rise_demo
 			menu_title \Demo
-		bugs <= Bugs $rise_bug
-			menu_title \Bugs
+		bench <= Bench $rise_bench
+			menu_title \Bench
