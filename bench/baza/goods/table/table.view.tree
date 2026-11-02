@@ -3,7 +3,6 @@ $rise_bench_baza_goods_table $mol_list_demo_table
 	products /$rise_bench_baza_goods_product
 	links /$giper_baza_link
 	dataset null
-	indexed false
 	compact false
 	query \
 	color_filter \all

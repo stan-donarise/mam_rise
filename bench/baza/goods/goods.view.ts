@@ -28,34 +28,22 @@ namespace $.$$ {
 		}
 
 		@ $mol_mem
-		dataset_config() { return { area: this.area_mode(), count: this.record_count(), compact: this.compact_mode(), shard_size: this.shard_size() } }
+		dataset_config() { return { count: this.record_count(), compact: this.compact_mode() } }
 
 		@ $mol_action
-		prepare_dataset( config: { area: boolean, count: number, compact: boolean, shard_size: number } ) {
+		prepare_dataset( config: { count: number, compact: boolean } ) {
 			// Resolve the local author before allocating another signing key. On a
 			// fresh profile, interleaving both initializations can strand king_grab.
 			this.$.$giper_baza_auth.current().pass()
 			const land = $mol_wire_sync( $giper_baza_glob ).land_grab( this.preset )
 			const dataset = land.Data( $rise_bench_baza_goods_dataset )
 			dataset.Products( null )!
-			return new $rise_bench_baza_goods_preparation( dataset, config.area, config.count, config.compact, config.shard_size )
-		}
-
-		@ $mol_mem_key
-		shard_land( key: readonly [ $rise_bench_baza_goods_preparation, number ] ) {
-			const [ state, shard ] = key
-			return state.dataset.land().area_make( shard + 1 )
+			return new $rise_bench_baza_goods_preparation( dataset, config.count, config.compact )
 		}
 
 		@ $mol_action
-		prepare_product( state: ReturnType< $rise_bench_baza_goods['prepare_dataset'] >, index: number, unlisted = false ) {
-			const product = state.shard_size
-				? this.shard_land( [ state, Math.floor( index / state.shard_size ) ] ).Pawn( $rise_bench_baza_goods_product ).Head( $mol_wire_sync( this.shard_land( [ state, Math.floor( index / state.shard_size ) ] ) ).self_make() )
-				: state.area
-				? $mol_wire_sync( state.dataset.land() ).area_make( index + 1 ).Data( $rise_bench_baza_goods_product )
-				: unlisted
-					? state.dataset.land().Pawn( $rise_bench_baza_goods_product ).Head( $mol_wire_sync( state.dataset.land() ).self_make() )
-					: $mol_wire_sync( state.dataset.Products()! ).make( null )!
+		prepare_product( state: $rise_bench_baza_goods_preparation, index: number ) {
+			const product = $mol_wire_sync( state.dataset.land() ).area_make( index + 1 ).Data( $rise_bench_baza_goods_product )
 			product.Id( null )!.val( String( index ).padStart( 5, '0' ) )
 			product.Title( null )!.val( $rise_bench_baza_goods_product_name( index ) )
 			product.Color( null )!.val( [ 'red', 'green', 'blue' ][ index % 3 ] )
@@ -80,7 +68,7 @@ namespace $.$$ {
 			const [ state, index ] = key
 			// This initializer is only invoked by Create. A completed record has no
 			// remaining write dependencies and is never recreated on async replay.
-			return state.products[ index ] ??= this.prepare_product( state, index, true )
+			return state.products[ index ] ??= this.prepare_product( state, index )
 		}
 
 		@ $mol_mem_key
@@ -91,10 +79,6 @@ namespace $.$$ {
 			} else {
 				const middle = Math.floor( ( from + to ) / 2 )
 				this.initialize_products( [ state, from, middle ] )
-				// Let wire reap unused CRDT read channels between completed batches.
-				// Otherwise all reads of Land._sand remain subscribed until the long
-				// synchronous creation ends and each new field invalidates all of them.
-				if( !state.area ) this.$.$mol_wait_rest()
 				this.initialize_products( [ state, middle, to ] )
 			}
 			return true
@@ -118,16 +102,6 @@ namespace $.$$ {
 		}
 
 		@ $mol_mem
-		storage_mode( next?: string ) {
-			const mode = $mol_state_arg.value( 'storage', next )
-			return mode && Object.hasOwn( this.Storage().options(), mode ) ? mode : 'single'
-		}
-
-		area_mode() { return this.storage_mode() === 'area' }
-		shard_size() { return this.storage_mode() === 'shard64' ? 64 : this.storage_mode() === 'shard256' ? 256 : 0 }
-		indexed_mode() { return this.area_mode() || this.shard_size() > 0 }
-
-		@ $mol_mem
 		schema_mode( next?: string ) {
 			return $mol_state_arg.value( 'schema', next ) === 'compact' ? 'compact' : 'full'
 		}
@@ -145,7 +119,8 @@ namespace $.$$ {
 
 		@ $mol_mem
 		dataset_link( next?: string ) {
-			const key = '$rise_bug_listbaza_dataset_names2' + ( this.storage_mode() === 'single' ? '' : '_' + this.storage_mode() ) + ( this.record_count() === 1000 ? '' : '_' + this.record_count() ) + ( this.compact_mode() ? '_compact' : '' )
+			// Keep existing Area datasets; retired single/shard datasets stay untouched.
+			const key = '$rise_bug_listbaza_dataset_names2_area' + ( this.record_count() === 1000 ? '' : '_' + this.record_count() ) + ( this.compact_mode() ? '_compact' : '' )
 			return $mol_state_local.value< string >( key, next ) ?? ''
 		}
 
@@ -208,14 +183,13 @@ namespace $.$$ {
 
 		@ $mol_action
 		rebuild_indexes() {
-			if( !this.indexed_mode() ) return
 			const dataset = this.dataset()
 			if( !dataset ) return
 			$mol_wire_sync( this ).build_index( dataset, 'Color' )
 			$mol_wire_sync( this ).build_index( dataset, 'Status' )
 		}
 
-		index_rebuild_enabled() { return this.indexed_mode() && !!this.dataset_link() && !$mol_promise_like( this.Add().status()?.[0] ) && !$mol_promise_like( this.Create().status()?.[0] ) }
+		index_rebuild_enabled() { return !!this.dataset_link() && !$mol_promise_like( this.Add().status()?.[0] ) && !$mol_promise_like( this.Create().status()?.[0] ) }
 
 		@ $mol_action
 		extend_index( dataset: $rise_bench_baza_goods_dataset, product: $rise_bench_baza_goods_product, field: 'Color' | 'Status' ) {
@@ -232,25 +206,23 @@ namespace $.$$ {
 		add_enabled() { return !$mol_promise_like( this.Create().status()?.[0] ) && !$mol_promise_like( this.Rebuild_indexes().status()?.[0] ) }
 		create_enabled() { return !this.dataset_link() && !$mol_promise_like( this.Add().status()?.[0] ) && !$mol_promise_like( this.Rebuild_indexes().status()?.[0] ) }
 
-		prepare_append( dataset: $rise_bench_baza_goods_dataset, area: boolean ) {
-			return new $rise_bench_baza_goods_preparation( dataset, area, dataset.Products()!.items().length, this.compact_mode(), this.shard_size() )
+		prepare_append( dataset: $rise_bench_baza_goods_dataset ) {
+			return new $rise_bench_baza_goods_preparation( dataset, dataset.Products()!.items().length, this.compact_mode() )
 		}
 
 		@ $mol_action
 		add_one() {
 			const dataset = this.dataset() ?? $mol_wire_sync( this ).prepare_dataset( this.dataset_config() ).dataset
 			// Freeze the insertion index before any writes or suspension.
-			const state = $mol_wire_sync( this ).prepare_append( dataset, this.area_mode() )
-			const product = $mol_wire_sync( this ).prepare_product( state, state.count, true )
+			const state = $mol_wire_sync( this ).prepare_append( dataset )
+			const product = $mol_wire_sync( this ).prepare_product( state, state.count )
 			$mol_wire_sync( dataset.Products()! ).splice( state.links ??= [ product.link() ] )
-			if( state.area || state.shard_size ) {
-				if( state.indexes_ready ) {
-					$mol_wire_sync( this ).extend_index( dataset, product, 'Color' )
-					$mol_wire_sync( this ).extend_index( dataset, product, 'Status' )
-				} else {
-					$mol_wire_sync( this ).build_index( dataset, 'Color' )
-					$mol_wire_sync( this ).build_index( dataset, 'Status' )
-				}
+			if( state.indexes_ready ) {
+				$mol_wire_sync( this ).extend_index( dataset, product, 'Color' )
+				$mol_wire_sync( this ).extend_index( dataset, product, 'Status' )
+			} else {
+				$mol_wire_sync( this ).build_index( dataset, 'Color' )
+				$mol_wire_sync( this ).build_index( dataset, 'Status' )
 			}
 			this.dataset_link( dataset.link().str )
 			this.body_scroll_top( 0 )
@@ -272,12 +244,10 @@ namespace $.$$ {
 			if( this.dataset_link() ) return
 			const state = $mol_wire_sync( this ).prepare_dataset( this.dataset_config() )
 			this.initialize_products( [ state, 0, state.count ] )
-			// Publish fully initialized records once in both storage modes.
+			// Publish only fully initialized records.
 			this.initialize_links( state.dataset.Products()!, state.links ??= state.products.map( product => product.link() ) )
-			if( state.area || state.shard_size ) {
-				$mol_wire_sync( this ).build_index( state.dataset, 'Color' )
-				$mol_wire_sync( this ).build_index( state.dataset, 'Status' )
-			}
+			$mol_wire_sync( this ).build_index( state.dataset, 'Color' )
+			$mol_wire_sync( this ).build_index( state.dataset, 'Status' )
 			this.creation_ms( performance.now() - state.started )
 			this.dataset_link( state.dataset.link().str )
 		}

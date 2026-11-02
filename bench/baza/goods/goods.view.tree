@@ -8,21 +8,11 @@ $rise_bench_baza_goods $mol_book2
 			<= Schema_label $mol_labeler
 				title \Состав записи
 				Content <= Schema $mol_switch
-					enabled <= controls_enabled
+					enabled <= controls_enabled true
 					value? <=> schema_mode? \full
 					options *
 						compact \4 свойства
 						full \10 свойств
-			<= Storage_label $mol_labeler
-				title \Схема хранения
-				Content <= Storage $mol_switch
-					enabled <= controls_enabled true
-					value? <=> storage_mode? \single
-					options *
-						single \Один Land на все записи
-						area \Своя Area на каждую запись
-						shard64 \Шарды по 64 записи
-						shard256 \Шарды по 256 записей
 			<= Count_label $mol_labeler
 				title \Количество записей
 				Content <= Count $mol_switch
@@ -87,7 +77,6 @@ $rise_bench_baza_goods $mol_book2
 				products <= products /$rise_bench_baza_goods_product
 				links <= product_links /$giper_baza_link
 				dataset <= dataset null
-				indexed <= indexed_mode false
 				compact <= compact_mode false
 				query <= search_query?
 				color_filter <= color_filter?

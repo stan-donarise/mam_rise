@@ -38,7 +38,7 @@ namespace $.$$ {
 		@ $mol_mem_key
 		index_matches( selection: readonly [ 'Color' | 'Status', string ] ): Set< string > | null {
 			const [ field, key ] = selection
-			if( !this.indexed() || key === 'all' ) return null
+			if( key === 'all' ) return null
 			const dataset = this.dataset() as $rise_bench_baza_goods_dataset | null
 			const index = field === 'Color' ? dataset?.Color_index()?.remote() : dataset?.Status_index()?.remote()
 			if( !index?.Ready()?.val() ) return null
@@ -54,7 +54,7 @@ namespace $.$$ {
 		change_field( id: number, field: 'Color' | 'Status', next: string ) {
 			const product = this.products()[ id ]
 			const dataset = this.dataset() as $rise_bench_baza_goods_dataset | null
-			const index = !this.indexed() ? null : field === 'Color' ? dataset?.Color_index()?.remote() : dataset?.Status_index()?.remote()
+			const index = field === 'Color' ? dataset?.Color_index()?.remote() : dataset?.Status_index()?.remote()
 			// A suspended/interrupted update leaves the index unready: readers fall back to a scan.
 			if( index ) index.Ready( null )!.val( false )
 			product[ field ]( null )!.val( next )

@@ -11,12 +11,10 @@ namespace $ {
 
 		constructor(
 			readonly dataset: $rise_bench_baza_goods_dataset,
-			readonly area: boolean,
 			readonly count: number,
 			readonly compact = false,
-			readonly shard_size = 0,
 		) {
-			this.indexes_ready = ( area || shard_size > 0 ) && !!dataset.Color_index()?.remote()?.Ready()?.val() && !!dataset.Status_index()?.remote()?.Ready()?.val()
+			this.indexes_ready = !!dataset.Color_index()?.remote()?.Ready()?.val() && !!dataset.Status_index()?.remote()?.Ready()?.val()
 		}
 	}
 
