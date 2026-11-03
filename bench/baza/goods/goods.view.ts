@@ -238,8 +238,13 @@ namespace $.$$ {
 				}
 				const ready = new ( $mol_wire_sync( $rise_bench_baza_goods_reload_ready ) )( this.Table().dom_node(), $rise_bench_baza_goods_product_name( ticket.count ) )
 				const finished = $mol_wire_sync( ready ).wait()
-				this.reload_done = true
 				run.metric( 'F5, с', ( finished - ticket.started ) / 1000 )
+				const search = new ( $mol_wire_sync( $rise_bench_measure ) )( 'Поиск после F5' )
+				if( $mol_wire_sync( this ).benchmark_search() !== 1 ) throw new Error( 'Поиск после F5 должен найти один товар' )
+				search.finish()
+				run.metric( 'Поиск после F5, с', search.duration! / 1000 )
+				this.search_query( '' )
+				this.reload_done = true
 				run.state( 'Готово' )
 				this.reload_store().save( this.Metrics().runs(), this.Metrics().operations(), null )
 			}, error => {

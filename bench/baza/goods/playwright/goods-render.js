@@ -105,12 +105,12 @@ async function main() {
 		const metrics = await page.evaluate( ()=> globalThis.$.$rise_app.Root( 0 ).Bench().Goods().Metrics().records() )
 		assert.equal( metrics.length, 1 )
 		assert.equal( metrics[ 0 ][ 'Состояние' ], 'Готово' )
-		for( const column of [ 'Создание, с', 'Поиск, с', 'Добавить 1, с', 'F5, с' ] ) {
+		for( const column of [ 'Создание, с', 'Поиск, с', 'Добавить 1, с', 'F5, с', 'Поиск после F5, с' ] ) {
 			assert.notEqual( metrics[ 0 ][ column ], '—' )
 			assert.ok( Number( metrics[ 0 ][ column ] ) >= 0 )
 			assert.match( metrics[ 0 ][ column ], /^\d+\.\d{3}$/ )
 		}
-		assert.equal( await page.locator( '[rise_bench_baza_goods_metrics] [mol_grid_col_head]' ).count(), 9 )
+		assert.equal( await page.locator( '[rise_bench_baza_goods_metrics] [mol_grid_col_head]' ).count(), 10 )
 		assert.equal( await page.getByRole( 'button', { name: 'Перестроить индексы', exact: true } ).count(), 0 )
 		const keys = await page.evaluate( ()=> globalThis.$.$mol_wire_async( ()=> globalThis.$.$rise_app.Root( 0 ).Bench().Goods().dataset().keys() )() )
 		assert.ok( !keys.includes( 'Color_index' ) && !keys.includes( 'Status_index' ) )
@@ -169,7 +169,10 @@ async function main() {
 		}
 		assert.ok( trace[ 0 ].attempts > 1, 'Creation must exercise real asynchronous replay' )
 		console.log( 'Native timing boundaries', JSON.stringify({ trace, measured }) )
-		for( const column of [ 'Создание, с', 'Поиск, с', 'Добавить 1, с', 'F5, с' ] ) resultBenchmarkValue( `500 × 10: ${column}`, Number( measured[ column ] ), 's' )
+		for( const column of [ 'Создание, с', 'Поиск, с', 'Добавить 1, с', 'F5, с', 'Поиск после F5, с' ] ) {
+			assert.match( measured[ column ], /^\d+\.\d{3}$/ )
+			resultBenchmarkValue( `500 × 10: ${column}`, Number( measured[ column ] ), 's' )
+		}
 		const persisted = await page.evaluate( ()=> globalThis.$.$mol_wire_async( ()=> {
 			const app = globalThis.$.$rise_app.Root( 0 ).Bench().Goods()
 			return Array.from( app.products(), product => ({ title: product.Title().val(), description: product.Description().val(), tags: product.Tags().items().length }) )
