@@ -74,6 +74,8 @@ async function main() {
 			const metrics = await page.evaluate( ()=> globalThis.$.$rise_app.Root( 0 ).Bench().Crdttext().Metrics().records() )
 			assert.equal( metrics.length, index + 1 )
 			assert.equal( metrics[ 0 ][ 'Объём' ], lines )
+			assert.equal( metrics[ 0 ][ 'Версия Гипербазы' ], '2e6100b2' )
+			assert.equal( metrics[ 0 ][ 'Версия бенчмарка' ], '0.1.0' )
 			for( const column of [ 'Вставка, с', 'Добавить символ, с', 'F5, с' ] ) {
 				assert.match( metrics[ 0 ][ column ], /^\d+\.\d{3}$/ )
 				resultBenchmarkValue( `${lines} строк: ${column}`, Number( metrics[ 0 ][ column ] ), 's' )
@@ -89,7 +91,7 @@ async function main() {
 		}
 		const expected = await editor.inputValue()
 		const completed = await page.evaluate( ()=> globalThis.$.$rise_app.Root( 0 ).Bench().Crdttext().Metrics().records() )
-		assert.equal( await page.locator( '[rise_bench_baza_crdttext_metrics] [mol_grid_col_head]' ).count(), 8 )
+		assert.equal( await page.locator( '[rise_bench_baza_crdttext_metrics] [mol_grid_col_head]' ).count(), 10 )
 		await page.locator( '[rise_bench_baza_crdttext_metrics]' ).scrollIntoViewIfNeeded()
 		console.log( '[metrics screenshot]', await screenshot( page, 'crdttext-metrics.png' ) )
 		assert.ok( expected.startsWith( '!Строка 1:' ) )

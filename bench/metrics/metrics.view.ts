@@ -9,13 +9,15 @@ namespace $.$$ {
 			this.runs( [ run, ...rows ] )
 		}
 
-		col_ids() { return [ '№', 'Дата и время', 'Объём', 'Полей', 'Состояние', ...this.operations() ] }
+		col_ids() { return [ '№', 'Дата и время', 'Версия Гипербазы', 'Версия бенчмарка', 'Объём', 'Полей', 'Состояние', ...this.operations() ] }
 
 		@ $mol_mem
 		records() {
 			return this.runs().map( ( run, index, rows ) => ({
 				'№': rows.length - index,
 				'Дата и время': run.stamp,
+				'Версия Гипербазы': run.baza_version.slice( 0, 8 ),
+				'Версия бенчмарка': run.benchmark_version,
 				'Объём': run.count,
 				'Полей': run.properties || '—',
 				'Состояние': run.state(),

@@ -204,7 +204,7 @@ namespace $.$$ {
 		restore_runs() {
 			if( this.runs_restored ) return
 			const rows = this.reload_store().snapshot.rows.map( row => {
-				const run = new $rise_bench_run( row.count, row.properties, row.stamp )
+				const run = new $rise_bench_run( row.count, row.properties, row.stamp, row.baza_version ?? '—', row.benchmark_version ?? '—' )
 				run.state( row.state )
 				for( const [ name, value ] of Object.entries( row.metrics ) ) if( value !== null ) run.metric( name, value )
 				return run

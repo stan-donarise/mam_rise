@@ -5,6 +5,8 @@ $rise_bench_baza_goods $mol_book2
 		title \Настройки
 		minimal_width 320
 		body /
+			<= Storage_label $mol_view
+				sub / \Хранение: одна Area на запись
 			<= Schema_label $mol_labeler
 				title \Состав записи
 				Content <= Schema $mol_switch
