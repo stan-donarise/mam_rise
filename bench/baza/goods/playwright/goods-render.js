@@ -1,6 +1,7 @@
 const assert = require( 'node:assert/strict' )
 const { chromium, headless, isolateUnitTests, resultScenario, resultStep, resultBenchmark, screenshot } = require( '../../../../../shm/hitalama/playwright/harness' )
 const { closeTestContext } = require( '../../../../../shm/hitalama/playwright/unit-isolation' )
+const { observeOffline, targetUrl } = require( '../../../playwright/offline' )
 
 resultScenario({ title: 'Товары: Area на запись', group: 'entities' })
 
@@ -12,6 +13,8 @@ async function main() {
 		context = await browser.newContext({ viewport: { width: 1440, height: 900 } })
 		await isolateUnitTests( context )
 		const page = await context.newPage()
+		const url = targetUrl()
+		const assertOffline = observeOffline( page, url )
 		page.setDefaultTimeout( 60_000 )
 		const errors = []
 		page.on( 'pageerror', error => errors.push( error.message ) )
@@ -27,7 +30,7 @@ async function main() {
 		} )() )
 
 		resultStep( 'Открыть бенчмарк через каталог', [ '$rise_bench', '$rise_bench_baza_goods' ] )
-		await page.goto( 'http://localhost:9080/rise/app/-/test.html', { waitUntil: 'domcontentloaded' } )
+		await page.goto( url, { waitUntil: 'domcontentloaded' } )
 		await page.getByRole( 'link', { name: 'Bench', exact: true } ).click()
 		await page.getByRole( 'link', { name: '$rise_bench_baza_goods', exact: true } ).click()
 		await page.getByRole( 'button', { name: 'Добавить запись', exact: true } ).waitFor()
@@ -89,6 +92,7 @@ async function main() {
 		const rows = await page.locator( '[rise_bench_baza_goods_table_row]' ).count()
 		assert.ok( rows > 0 && rows < 100, `Expected virtualized rows, got ${rows}` )
 		assert.deepEqual( errors, [] )
+		await assertOffline()
 		console.log( 'Area goods: catalog, add, search, edit, reload, create 500, virtualization passed' )
 	} finally {
 		clearTimeout( deadline )

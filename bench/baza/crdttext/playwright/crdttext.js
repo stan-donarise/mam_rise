@@ -1,6 +1,7 @@
 const assert = require( 'node:assert/strict' )
 const { chromium, headless, isolateUnitTests, resultScenario, resultStep, resultBenchmark, screenshot } = require( '../../../../../shm/hitalama/playwright/harness' )
 const { closeTestContext } = require( '../../../../../shm/hitalama/playwright/unit-isolation' )
+const { observeOffline, targetUrl } = require( '../../../playwright/offline' )
 
 resultScenario({ title: 'CRDT-текст: запись и метрики', group: 'entities' })
 
@@ -12,6 +13,8 @@ async function main() {
 		context = await browser.newContext({ viewport: { width: 1440, height: 900 } })
 		await isolateUnitTests( context )
 		const page = await context.newPage()
+		const url = targetUrl()
+		const assertOffline = observeOffline( page, url )
 		page.setDefaultTimeout( 60_000 )
 		const errors = []
 		page.on( 'pageerror', error => errors.push( error.message ) )
@@ -19,7 +22,7 @@ async function main() {
 			if( /Different (host|args|task) on restart/.test( message.text() ) ) errors.push( message.text() )
 		} )
 		resultStep( 'Открыть CRDT-текст в каталоге', [ '$rise_bench.Crdttext' ] )
-		await page.goto( 'http://localhost:9080/rise/app/-/test.html', { waitUntil: 'domcontentloaded' } )
+		await page.goto( url, { waitUntil: 'domcontentloaded' } )
 		await page.getByRole( 'link', { name: 'Bench', exact: true } ).click()
 		await page.getByRole( 'link', { name: '$rise_bench_baza_crdttext', exact: true } ).click()
 		const editor = page.locator( '[rise_bench_baza_crdttext_editor] textarea' )
@@ -57,6 +60,7 @@ async function main() {
 		await page.waitForFunction( ()=> document.querySelector( '[rise_bench_baza_crdttext_editor] textarea' )?.value === '' )
 		assert.equal( await page.evaluate( ()=> globalThis.$.$rise_app.Root( 0 ).Bench().Crdttext().Metrics().measurements().length ), 0 )
 		assert.deepEqual( errors, [] )
+		await assertOffline()
 		console.log( 'CRDT text: 500/1000 lines, metrics, native storage, F5, edit and reset passed' )
 	} finally {
 		clearTimeout( deadline )
