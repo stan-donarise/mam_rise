@@ -19,7 +19,7 @@ $rise_bench_baza_crdttext $mol_book2
 			body /
 				<= Metrics $rise_bench_metrics
 					operations /
-						\Вставка, мс
+						\Вставка, с
 						\Скорость, симв./с
 				<= Editor $mol_textarea
 					hint \Введите текст или вставьте 500 строк

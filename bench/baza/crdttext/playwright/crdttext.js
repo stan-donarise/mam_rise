@@ -43,7 +43,7 @@ async function main() {
 			}, lines / 500 )
 			const metrics = await page.evaluate( ()=> globalThis.$.$rise_app.Root( 0 ).Bench().Crdttext().Metrics().records() )
 			assert.equal( metrics.length, lines / 500 )
-			assert.ok( metrics.every( row => row[ 'Вставка, мс' ] !== '—' && Number( row[ 'Вставка, мс' ] ) >= 0 ) )
+			assert.ok( metrics.every( row => /^\d+\.\d{3}$/.test( row[ 'Вставка, с' ] ) ) )
 		}
 		const expected = await editor.inputValue()
 		assert.equal( await page.locator( '[rise_bench_baza_crdttext_metrics] [mol_grid_col_head]' ).count(), 7 )

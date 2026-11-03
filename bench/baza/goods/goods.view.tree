@@ -75,12 +75,12 @@ $rise_bench_baza_goods $mol_book2
 		body /
 			<= Metrics $rise_bench_metrics
 				operations /
-					\Создание, мс
-					\Заполнение, мс
-					\Список, мс
-					\Индексы, мс
-					\Поиск, мс
-					\Добавить 1, мс
+					\Создание, с
+					\Заполнение, с
+					\Список, с
+					\Индексы, с
+					\Поиск, с
+					\Добавить 1, с
 			<= Table $rise_bench_baza_goods_table
 				products <= products /$rise_bench_baza_goods_product
 				links <= product_links /$giper_baza_link

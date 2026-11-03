@@ -87,9 +87,10 @@ async function main() {
 		const metrics = await page.evaluate( ()=> globalThis.$.$rise_app.Root( 0 ).Bench().Goods().Metrics().records() )
 		assert.equal( metrics.length, 1 )
 		assert.equal( metrics[ 0 ][ 'Состояние' ], 'Готово' )
-		for( const column of [ 'Создание, мс', 'Заполнение, мс', 'Список, мс', 'Индексы, мс', 'Поиск, мс', 'Добавить 1, мс' ] ) {
+		for( const column of [ 'Создание, с', 'Заполнение, с', 'Список, с', 'Индексы, с', 'Поиск, с', 'Добавить 1, с' ] ) {
 			assert.notEqual( metrics[ 0 ][ column ], '—' )
 			assert.ok( Number( metrics[ 0 ][ column ] ) >= 0 )
+			assert.match( metrics[ 0 ][ column ], /^\d+\.\d{3}$/ )
 		}
 		assert.equal( await page.locator( '[rise_bench_baza_goods_metrics] [mol_grid_col_head]' ).count(), 11 )
 		resultStep( 'Ручное добавление не создаёт прогон', [ '$rise_bench_baza_goods.add_one' ] )

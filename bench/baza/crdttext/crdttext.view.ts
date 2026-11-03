@@ -52,7 +52,7 @@ namespace $.$$ {
 				const measure = new ( $mol_wire_sync( $rise_bench_measure ) )( 'Вставка' )
 				$mol_wire_sync( this ).write_text( next )
 				measure.finish()
-				run.metric( 'Вставка, мс', measure.duration! )
+				run.metric( 'Вставка, с', measure.duration! / 1000 )
 				run.metric( 'Скорость, симв./с', measure.duration ? next.length * 1000 / measure.duration : 0 )
 				run.state( 'Готово' )
 			}, error => { run.state( 'Ошибка' ); return error } )

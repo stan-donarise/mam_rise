@@ -21,7 +21,7 @@ namespace $.$$ {
 				'Состояние': run.state(),
 				...Object.fromEntries( this.operations().map( operation => {
 					const time = run.metric( operation )
-					return [ operation, time === null ? '—' : time.toFixed( 2 ) ]
+					return [ operation, time === null ? '—' : time.toFixed( 3 ) ]
 				}) ),
 			}) )
 		}
