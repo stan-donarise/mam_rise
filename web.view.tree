@@ -2144,6 +2144,506 @@ $giper_baza_app $mol_book2_catalog
 				<= Spread_close
 	placeholders /
 
+$mol_check_list $mol_view
+	dictionary *
+	Option* $mol_check
+		checked? <=> option_checked*? false
+		label <= option_label* /
+			<= option_title* \
+		enabled <= option_enabled* <= enabled true
+		hint <= option_hint* \
+		minimal_height 24
+	options *
+	keys /string
+	sub <= items /$mol_check
+
+$mol_switch $mol_check_list
+	value? \
+
+$mol_button_major $mol_button_minor
+	theme \$mol_theme_base
+
+$mol_grid $mol_view
+	row_height 32
+	row_ids /string[]
+	row_id* null
+	col_ids /
+	records *
+	record* null
+	hierarchy null
+	hierarchy_col \
+	minimal_width 0
+	-
+	sub /
+		<= Head
+		<= Table $mol_grid_table
+			sub <= rows /$mol_view
+	Head $mol_grid_row
+		cells <= head_cells /$mol_view
+	Row* $mol_grid_row
+		minimal_height <= row_height
+		minimal_width <= minimal_width
+		cells <= cells* /$mol_view
+	-
+	Cell* $mol_view
+	cell* null
+	Cell_text* $mol_grid_cell
+		sub <= cell_content_text* <= cell_content* /$mol_view_content
+	Cell_number* $mol_grid_number
+		sub <= cell_content_number* <= cell_content* /$mol_view_content
+	Col_head* $mol_float
+		dom_name \th
+		sub <= col_head_content* /$mol_view_content
+	Cell_branch* $mol_check_expand
+		level <= cell_level* 0
+		label <= cell_content* /$mol_view_content
+		expanded? <=> cell_expanded*? false
+	Cell_content* /
+		<= Cell_dimmer* $mol_dimmer
+			needle <= needle \
+			haystack <= cell_value* \
+
+$mol_grid_table $mol_list
+	- dom_name \table
+
+$mol_grid_row $mol_view
+	- dom_name \tr
+	sub <= cells /$mol_view
+
+$mol_grid_cell $mol_view
+	- dom_name \td
+	minimal_height 40
+
+$mol_grid_number $mol_grid_cell
+
+$rise_bench_metrics $mol_grid
+	attr *
+		^
+		embedded <= embedded false
+	runs? /$rise_bench_run
+	run_add? null
+	operations /string
+
+$mol_example $mol_view
+	tags /string
+	aspects /string
+
+$mol_example_small $mol_example
+
+$mol_list_demo $mol_example_small
+	sub /
+		<= Items_count_label $mol_labeler
+			title \Items count
+			content /
+				<= Items_count $mol_number
+					value? <=> items_count? 50
+					value_min 0
+					value_max 100000
+		<= Items $mol_list
+			rows <= list_items /
+				<= Item*0 $mol_link
+					title <= item_title* \
+			-
+			Empty <= List_empty $mol_paragraph
+				title \No items in this list
+	tags /
+		\list
+		\rows
+		\stack
+	aspects /
+		\Widget/Layout
+
+$mol_image $mol_view
+	dom_name \img
+	attr *any
+		^
+		src <= uri \
+		title <= hint
+		alt <= title \
+		loading <= loading \lazy
+		decoding <= decoding \async
+		crossOrigin <= cors null
+		width <= natural_width 0
+		height <= natural_height 0
+	event *any
+		load? <=> load? null
+	minimal_width 16
+	minimal_height 16
+
+$mol_link_iconed $mol_link
+	sub /
+		<= Icon $mol_image
+			uri <= icon \
+			title \
+	content /
+		<= title <= uri
+	host \
+
+$mol_row $mol_view
+
+$mol_list_demo_table $mol_example
+	title \Large list of rows with dynamic content
+	count 100000
+	sub /
+		- <= Head $mol_row sub /
+			<= Check $mol_check_group
+				checks <= check_list /$mol_check
+				title \Good Goods
+		<= Rows $mol_list
+			item_width_min* 200
+			item_height_min* 96
+			rows <= rows /
+				<= Row*0 $mol_row
+					sub <= row_content* /
+						<= Id_labeler* $mol_labeler
+							title \ID
+							Content <= Id* $mol_check_box
+								title <= row_id*? \0000
+								checked? <=> row_checked*? false
+						<= Title_labeler* $mol_labeler
+							title \Product Name
+							Content <= Title* $mol_link_iconed
+								uri <= row_uri* \
+								title <= row_title* \
+						<= Color_labeler* $mol_labeler
+							title \Color
+							Content <= Color* $mol_select
+								value? <=> row_color*? \
+								options <= colors /
+						<= Status_labeler* $mol_labeler
+							title \Status
+							Content <= Status* $mol_switch
+								value? <=> row_status*? \
+								options <= status_options *
+									minor \Store
+									major \Sale
+									critical \Support
+						<= Quantity_labeler* $mol_labeler
+							title \Quantity
+							Content <= Quantity* $mol_number
+								value? <=> row_quantity*? 0
+						<= Date_labeler* $mol_labeler
+							title \Supply Time
+							Content <= Date* $mol_date
+								value_moment? <=> row_moment*? $mol_time_moment
+	tags /
+		\list
+		\table
+		\scroll
+		\divider
+		\grid
+	aspects /
+		\Widget/Layout
+
+$rise_bench_baza_goods_table $mol_list_demo_table
+	count 1000
+	products /$rise_bench_baza_goods_product
+	compact false
+	query \
+	color_filter \all
+	status_filter \all
+	Compact_id_labeler* $mol_labeler
+		title \ID
+		content /
+			<= Compact_id* $mol_view
+				sub / <= row_id*?
+	Details* $mol_view
+		sub /
+			<= Description_labeler* $mol_labeler
+				title \Description
+				content /
+					<= Description* $mol_view
+						sub / <= row_description* \
+			<= Tags_labeler* $mol_labeler
+				title \Tags
+				content /
+					<= Tags* $mol_view
+						sub <= row_tags* /string
+	Row* $mol_view
+		minimal_height 96
+		sub <= row_content*
+	Title* $mol_link_iconed
+		uri <= row_uri*
+		title <= row_title*
+		content /
+			<= Name* $mol_dimmer
+				haystack <= row_title*
+				needle <= query
+	Date* $mol_date
+		value_moment? <=> row_moment*?
+		trigger_content / <= row_date* \
+
+$rise_bench_baza_goods $mol_book2
+	menu_title <= title \Сущности
+	pages <= content /$mol_view
+	Settings $mol_page
+		title \Настройки
+		minimal_width 320
+		body /
+			<= Storage_label $mol_view
+				sub / \Хранение: одна Area на запись
+			<= Schema_label $mol_labeler
+				title \Состав записи
+				Content <= Schema $mol_switch
+					enabled <= controls_enabled true
+					value? <=> schema_mode? \compact
+					options *
+						compact \4 свойства
+						full \10 свойств
+			<= Count_label $mol_labeler
+				title \Количество записей
+				Content <= Count $mol_switch
+					enabled <= controls_enabled
+					value? <=> count_mode? \100
+					options *
+						100 \100
+						500 \500
+						1000 \1000
+						2000 \2000
+						3000 \3000
+						4000 \4000
+						5000 \5000
+						10000 \10000
+			<= Actions $mol_view
+				sub /
+					<= Create $mol_button_major
+						title \Запустить бенчмарк
+						enabled <= create_enabled true
+						click? <=> benchmark? null
+					<= Add $mol_button_minor
+						title \Добавить запись
+						enabled <= add_enabled true
+						click? <=> add_one? null
+					<= Reset $mol_button_minor
+						title \Сбросить
+						enabled <= controls_enabled
+						click? <=> reset? null
+			<= Search_label $mol_labeler
+				title \Поиск по названию
+				content /
+					<= Search $mol_search
+						hint \Название товара
+						query? => search_query? \
+			<= Color_label $mol_labeler
+				title \Color
+				Content <= Color_filter $mol_select
+					value? <=> color_filter? \all
+					dictionary *
+						all \All colors
+						red \red
+						green \green
+						blue \blue
+			<= Status_label $mol_labeler
+				title \Status
+				Content <= Status_filter $mol_select
+					value? <=> status_filter? \all
+					dictionary *
+						all \All statuses
+						minor \Store
+						major \Sale
+						critical \Support
+	Records $mol_page
+		title <= app_title \Товары
+		minimal_width 640
+		body_scroll_top? => body_scroll_top?
+		body /
+			<= Metrics $rise_bench_metrics
+				operations /
+					\Создание, с
+					\Поиск, с
+					\Добавить 1, с
+					\F5, с
+					\Поиск после F5, с
+			<= Table $rise_bench_baza_goods_table
+				products <= products /$rise_bench_baza_goods_product
+				compact <= compact_mode false
+				query <= search_query?
+				color_filter <= color_filter?
+				status_filter <= status_filter?
+
+$rise_bug_baza_nohash $mol_page
+	body /
+		<= Baza_status $giper_baza_status
+		<= Reset $mol_button_minor
+			click? <=> entity_reset? null
+		<= entity null
+		<= Add $mol_button_minor
+			click? <=> add? null
+		<= Items $mol_list
+			sub <= items / <= Item*0 $mol_button_minor
+				title <= id* \0
+
+$rise_bug_baza_noseal $mol_page
+	body /
+		<= Baza_status $giper_baza_status
+		<= Reset $mol_button_minor
+			click? <=> entity_reset? null
+		<= entity null
+		<= Add $mol_button_minor
+			click? <=> add? null
+		<= Items $mol_list
+			sub <= items / <= Item*0 $mol_button_minor
+				title <= id* \0
+
+$rise_bug_baza_decrypt $mol_page
+	body /
+		<= Baza_status $giper_baza_status
+		<= Reset $mol_button_minor
+			click? <=> entity_reset? null
+		<= entity null
+		<= Add $mol_button_minor
+			click? <=> add? null
+		<= Items $mol_list
+			sub <= items / <= Item*0 $mol_button_minor
+				title <= id* \0
+				click? <=> cut*? null
+
+$rise_bug_baza_slowtext $mol_page
+	body /
+		<= Baza_status $giper_baza_status
+		<= Reset $mol_button_minor
+			click? <=> entity_reset? null
+		<= entity null
+		<= Text $mol_textarea
+			value? <=> text? \
+
+$rise_bug $mol_book2_catalog
+	placeholders /
+	param \bug
+	spread_classes /
+		\$rise_bug_baza_nohash
+		\$rise_bug_baza_noseal
+		\$rise_bug_baza_decrypt
+		\$rise_bug_baza_slowtext
+
+$rise_bench_baza_crdttext $mol_book2
+	menu_title <= title \Текст
+	pages /
+		<= Menu $mol_page
+			title \CRDT text
+			minimal_width 240
+			body /
+				<= Count_label $mol_labeler
+					title \Количество строк
+					Content <= Count $mol_switch
+						value? <=> count_mode? \100
+						enabled <= controls_enabled true
+						options *
+							100 \100
+							500 \500
+							1000 \1000
+							2000 \2000
+							5000 \5000
+				<= Run $mol_button_major
+					title \Запустить бенчмарк
+					click? <=> benchmark? null
+					enabled <= controls_enabled true
+				<= Reset $mol_button_minor
+					title \Очистить
+					click? <=> reset? null
+					enabled <= controls_enabled
+		<= Page $mol_page
+			title <= page_title \CRDT-текст
+			minimal_width 640
+			body /
+				<= Metrics $rise_bench_metrics
+					operations /
+						\Вставка, с
+						\Добавить символ, с
+						\F5, с
+				<= Editor $mol_textarea
+					hint \Введите текст или запустите бенчмарк
+					value? <=> text? \
+					enabled <= controls_enabled
+					spellcheck false
+
+$rise_bench_idb $mol_book2
+	menu_title <= title \Сущности IDB
+	pages /
+		<= Settings $mol_page
+			title \Настройки IDB
+			minimal_width 320
+			body /
+				<= Storage_label $mol_view
+					sub / \Хранение: IndexedDB через $mol_db, без индексов
+				<= Schema_label $mol_labeler
+					title \Состав записи
+					Content <= Schema $mol_switch
+						value? <=> schema_mode? \compact
+						enabled <= controls_enabled true
+						options *
+							compact \4 свойства
+							full \10 свойств
+				<= Count_label $mol_labeler
+					title \Количество записей
+					Content <= Count $mol_switch
+						value? <=> count_mode? \100
+						enabled <= controls_enabled
+						options *
+							100 \100
+							500 \500
+							1000 \1000
+							2000 \2000
+							3000 \3000
+							4000 \4000
+							5000 \5000
+							10000 \10000
+				<= Run $mol_button_major
+					title \Запустить бенчмарк
+					click? <=> benchmark? null
+					enabled <= controls_enabled
+				<= Reset $mol_button_minor
+					title \Очистить
+					click? <=> reset? null
+					enabled <= controls_enabled
+		<= Page $mol_page
+			title \IndexedDB
+			minimal_width 640
+			body /
+				<= Metrics $rise_bench_metrics
+					operations /
+						\Создание, с
+						\Поиск, с
+						\Добавить 1, с
+						\F5, с
+						\Поиск после F5, с
+				<= Table $mol_grid
+					records <= rows /any
+
+$rise_bench $mol_book2_catalog
+	placeholders /
+	param \bench
+	spreads *
+		$rise_bench_baza_goods <= Goods_host $rise_bench_host
+			title \Сущности
+			kind \goods
+		$rise_bench_baza_crdttext <= Text_host $rise_bench_host
+			title \Текст
+			kind \text
+		$rise_bench_idb <= Idb_host $rise_bench_host
+			title \Сущности IDB
+			kind \idb
+	Goods $rise_bench_baza_goods
+	Crdttext $rise_bench_baza_crdttext
+	Idb $rise_bench_idb
+
+$rise_bench_host $mol_page
+	kind \goods
+	minimal_width 640
+	body /
+		<= Status $mol_view
+			sub / <= status? \
+		<= Retry $mol_button_minor
+			title \Повторить сохранение
+			click? <=> retry? null
+		<= Metrics $rise_bench_metrics
+			operations <= operations /string
+			runs <= runs /$rise_bench_run
+		<= Frame $mol_frame
+			uri <= fixture_uri \
+			clipboard_read false
+			clipboard_write false
+
 $rise_drag $mol_plugin
 	x? 0
 	y? 0
@@ -2175,12 +2675,6 @@ $rise_drag $mol_plugin
 		<= pointerup_listener null $mol_dom_listener
 	-
 	drags_synced /$rise_drag
-
-$mol_example $mol_view
-	tags /string
-	aspects /string
-
-$mol_example_small $mol_example
 
 $mol_card $mol_list
 	attr *
@@ -2351,85 +2845,6 @@ $rise_resize $mol_view
 		width <= width_px \20px
 
 $rise_resize_edge $rise_drag_view
-
-$mol_grid $mol_view
-	row_height 32
-	row_ids /string[]
-	row_id* null
-	col_ids /
-	records *
-	record* null
-	hierarchy null
-	hierarchy_col \
-	minimal_width 0
-	-
-	sub /
-		<= Head
-		<= Table $mol_grid_table
-			sub <= rows /$mol_view
-	Head $mol_grid_row
-		cells <= head_cells /$mol_view
-	Row* $mol_grid_row
-		minimal_height <= row_height
-		minimal_width <= minimal_width
-		cells <= cells* /$mol_view
-	-
-	Cell* $mol_view
-	cell* null
-	Cell_text* $mol_grid_cell
-		sub <= cell_content_text* <= cell_content* /$mol_view_content
-	Cell_number* $mol_grid_number
-		sub <= cell_content_number* <= cell_content* /$mol_view_content
-	Col_head* $mol_float
-		dom_name \th
-		sub <= col_head_content* /$mol_view_content
-	Cell_branch* $mol_check_expand
-		level <= cell_level* 0
-		label <= cell_content* /$mol_view_content
-		expanded? <=> cell_expanded*? false
-	Cell_content* /
-		<= Cell_dimmer* $mol_dimmer
-			needle <= needle \
-			haystack <= cell_value* \
-
-$mol_grid_table $mol_list
-	- dom_name \table
-
-$mol_grid_row $mol_view
-	- dom_name \tr
-	sub <= cells /$mol_view
-
-$mol_grid_cell $mol_view
-	- dom_name \td
-	minimal_height 40
-
-$mol_grid_number $mol_grid_cell
-
-$mol_image $mol_view
-	dom_name \img
-	attr *any
-		^
-		src <= uri \
-		title <= hint
-		alt <= title \
-		loading <= loading \lazy
-		decoding <= decoding \async
-		crossOrigin <= cors null
-		width <= natural_width 0
-		height <= natural_height 0
-	event *any
-		load? <=> load? null
-	minimal_width 16
-	minimal_height 16
-
-$mol_link_iconed $mol_link
-	sub /
-		<= Icon $mol_image
-			uri <= icon \
-			title \
-	content /
-		<= title <= uri
-	host \
 
 $mol_icon_youtube $mol_icon path \M10,15L15.19,12L10,9V15M21.56,7.17C21.69,7.64 21.78,8.27 21.84,9.07C21.91,9.87 21.94,10.56 21.94,11.16L22,12C22,14.19 21.84,15.8 21.56,16.83C21.31,17.73 20.73,18.31 19.83,18.56C19.36,18.69 18.5,18.78 17.18,18.84C15.88,18.91 14.69,18.94 13.59,18.94L12,19C7.81,19 5.2,18.84 4.17,18.56C3.27,18.31 2.69,17.73 2.44,16.83C2.31,16.36 2.22,15.73 2.16,14.93C2.09,14.13 2.06,13.44 2.06,12.84L2,12C2,9.81 2.16,8.2 2.44,7.17C2.69,6.27 3.27,5.69 4.17,5.44C4.64,5.31 5.5,5.22 6.82,5.16C8.12,5.09 9.31,5.06 10.41,5.06L12,5C16.19,5 18.8,5.16 19.83,5.44C20.73,5.69 21.31,6.27 21.56,7.17Z
 
@@ -2831,22 +3246,6 @@ $rise_range_demo $mol_example_small
 	aspects /
 		\Widget
 
-$mol_check_list $mol_view
-	dictionary *
-	Option* $mol_check
-		checked? <=> option_checked*? false
-		label <= option_label* /
-			<= option_title* \
-		enabled <= option_enabled* <= enabled true
-		hint <= option_hint* \
-		minimal_height 24
-	options *
-	keys /string
-	sub <= items /$mol_check
-
-$mol_switch $mol_check_list
-	value? \
-
 $rise_radio $mol_switch
 	option_label* /
 		<= Circle* $mol_view
@@ -3073,324 +3472,12 @@ $rise_demo $mol_app_demo
 	menu_title \$rise
 	sources_uri \https://github.com/stan-donarise/mam_rise
 
-$mol_button_major $mol_button_minor
-	theme \$mol_theme_base
-
-$rise_bench_metrics $mol_grid
-	runs? /$rise_bench_run
-	run_add? null
-	operations /string
-
-$mol_list_demo $mol_example_small
-	sub /
-		<= Items_count_label $mol_labeler
-			title \Items count
-			content /
-				<= Items_count $mol_number
-					value? <=> items_count? 50
-					value_min 0
-					value_max 100000
-		<= Items $mol_list
-			rows <= list_items /
-				<= Item*0 $mol_link
-					title <= item_title* \
-			-
-			Empty <= List_empty $mol_paragraph
-				title \No items in this list
-	tags /
-		\list
-		\rows
-		\stack
-	aspects /
-		\Widget/Layout
-
-$mol_row $mol_view
-
-$mol_list_demo_table $mol_example
-	title \Large list of rows with dynamic content
-	count 100000
-	sub /
-		- <= Head $mol_row sub /
-			<= Check $mol_check_group
-				checks <= check_list /$mol_check
-				title \Good Goods
-		<= Rows $mol_list
-			item_width_min* 200
-			item_height_min* 96
-			rows <= rows /
-				<= Row*0 $mol_row
-					sub <= row_content* /
-						<= Id_labeler* $mol_labeler
-							title \ID
-							Content <= Id* $mol_check_box
-								title <= row_id*? \0000
-								checked? <=> row_checked*? false
-						<= Title_labeler* $mol_labeler
-							title \Product Name
-							Content <= Title* $mol_link_iconed
-								uri <= row_uri* \
-								title <= row_title* \
-						<= Color_labeler* $mol_labeler
-							title \Color
-							Content <= Color* $mol_select
-								value? <=> row_color*? \
-								options <= colors /
-						<= Status_labeler* $mol_labeler
-							title \Status
-							Content <= Status* $mol_switch
-								value? <=> row_status*? \
-								options <= status_options *
-									minor \Store
-									major \Sale
-									critical \Support
-						<= Quantity_labeler* $mol_labeler
-							title \Quantity
-							Content <= Quantity* $mol_number
-								value? <=> row_quantity*? 0
-						<= Date_labeler* $mol_labeler
-							title \Supply Time
-							Content <= Date* $mol_date
-								value_moment? <=> row_moment*? $mol_time_moment
-	tags /
-		\list
-		\table
-		\scroll
-		\divider
-		\grid
-	aspects /
-		\Widget/Layout
-
-$rise_bench_baza_goods_table $mol_list_demo_table
-	count 1000
-	products /$rise_bench_baza_goods_product
-	compact false
-	query \
-	color_filter \all
-	status_filter \all
-	Compact_id_labeler* $mol_labeler
-		title \ID
-		content /
-			<= Compact_id* $mol_view
-				sub / <= row_id*?
-	Details* $mol_view
-		sub /
-			<= Description_labeler* $mol_labeler
-				title \Description
-				content /
-					<= Description* $mol_view
-						sub / <= row_description* \
-			<= Tags_labeler* $mol_labeler
-				title \Tags
-				content /
-					<= Tags* $mol_view
-						sub <= row_tags* /string
-	Row* $mol_view
-		minimal_height 96
-		sub <= row_content*
-	Title* $mol_link_iconed
-		uri <= row_uri*
-		title <= row_title*
-		content /
-			<= Name* $mol_dimmer
-				haystack <= row_title*
-				needle <= query
-	Date* $mol_date
-		value_moment? <=> row_moment*?
-		trigger_content / <= row_date* \
-
-$rise_bench_baza_goods $mol_book2
-	menu_title <= title \Сущности
-	pages <= content /$mol_view
-	Settings $mol_page
-		title \Настройки
-		minimal_width 320
-		body /
-			<= Schema_label $mol_labeler
-				title \Состав записи
-				Content <= Schema $mol_switch
-					enabled <= controls_enabled true
-					value? <=> schema_mode? \compact
-					options *
-						compact \4 свойства
-						full \10 свойств
-			<= Count_label $mol_labeler
-				title \Количество записей
-				Content <= Count $mol_switch
-					enabled <= controls_enabled
-					value? <=> count_mode? \100
-					options *
-						100 \100
-						500 \500
-						1000 \1000
-						2000 \2000
-						3000 \3000
-						4000 \4000
-						5000 \5000
-						10000 \10000
-			<= Actions $mol_view
-				sub /
-					<= Create $mol_button_major
-						title \Запустить бенчмарк
-						enabled <= create_enabled true
-						click? <=> benchmark? null
-					<= Add $mol_button_minor
-						title \Добавить запись
-						enabled <= add_enabled true
-						click? <=> add_one? null
-					<= Reset $mol_button_minor
-						title \Сбросить
-						enabled <= controls_enabled
-						click? <=> reset? null
-			<= Search_label $mol_labeler
-				title \Поиск по названию
-				content /
-					<= Search $mol_search
-						hint \Название товара
-						query? => search_query? \
-			<= Color_label $mol_labeler
-				title \Color
-				Content <= Color_filter $mol_select
-					value? <=> color_filter? \all
-					dictionary *
-						all \All colors
-						red \red
-						green \green
-						blue \blue
-			<= Status_label $mol_labeler
-				title \Status
-				Content <= Status_filter $mol_select
-					value? <=> status_filter? \all
-					dictionary *
-						all \All statuses
-						minor \Store
-						major \Sale
-						critical \Support
-	Records $mol_page
-		title <= app_title \Товары
-		minimal_width 640
-		body_scroll_top? => body_scroll_top?
-		body /
-			<= Metrics $rise_bench_metrics
-				operations /
-					\Создание, с
-					\Поиск, с
-					\Добавить 1, с
-					\F5, с
-					\Поиск после F5, с
-			<= Table $rise_bench_baza_goods_table
-				products <= products /$rise_bench_baza_goods_product
-				compact <= compact_mode false
-				query <= search_query?
-				color_filter <= color_filter?
-				status_filter <= status_filter?
-
-$rise_bug_baza_nohash $mol_page
-	body /
-		<= Baza_status $giper_baza_status
-		<= Reset $mol_button_minor
-			click? <=> entity_reset? null
-		<= entity null
-		<= Add $mol_button_minor
-			click? <=> add? null
-		<= Items $mol_list
-			sub <= items / <= Item*0 $mol_button_minor
-				title <= id* \0
-
-$rise_bug_baza_noseal $mol_page
-	body /
-		<= Baza_status $giper_baza_status
-		<= Reset $mol_button_minor
-			click? <=> entity_reset? null
-		<= entity null
-		<= Add $mol_button_minor
-			click? <=> add? null
-		<= Items $mol_list
-			sub <= items / <= Item*0 $mol_button_minor
-				title <= id* \0
-
-$rise_bug_baza_decrypt $mol_page
-	body /
-		<= Baza_status $giper_baza_status
-		<= Reset $mol_button_minor
-			click? <=> entity_reset? null
-		<= entity null
-		<= Add $mol_button_minor
-			click? <=> add? null
-		<= Items $mol_list
-			sub <= items / <= Item*0 $mol_button_minor
-				title <= id* \0
-				click? <=> cut*? null
-
-$rise_bug_baza_slowtext $mol_page
-	body /
-		<= Baza_status $giper_baza_status
-		<= Reset $mol_button_minor
-			click? <=> entity_reset? null
-		<= entity null
-		<= Text $mol_textarea
-			value? <=> text? \
-
-$rise_bug $mol_book2_catalog
-	placeholders /
-	param \bug
-	spread_classes /
-		\$rise_bug_baza_nohash
-		\$rise_bug_baza_noseal
-		\$rise_bug_baza_decrypt
-		\$rise_bug_baza_slowtext
-
-$rise_bench_baza_crdttext $mol_book2
-	menu_title <= title \Текст
-	pages /
-		<= Menu $mol_page
-			title \CRDT text
-			minimal_width 240
-			body /
-				<= Count_label $mol_labeler
-					title \Количество строк
-					Content <= Count $mol_switch
-						value? <=> count_mode? \100
-						enabled <= controls_enabled true
-						options *
-							100 \100
-							500 \500
-							1000 \1000
-							2000 \2000
-							5000 \5000
-				<= Run $mol_button_major
-					title \Запустить бенчмарк
-					click? <=> benchmark? null
-					enabled <= controls_enabled true
-				<= Reset $mol_button_minor
-					title \Очистить
-					click? <=> reset? null
-					enabled <= controls_enabled
-		<= Page $mol_page
-			title <= page_title \CRDT-текст
-			minimal_width 640
-			body /
-				<= Metrics $rise_bench_metrics
-					operations /
-						\Вставка, с
-						\Добавить символ, с
-						\F5, с
-				<= Editor $mol_textarea
-					hint \Введите текст или запустите бенчмарк
-					value? <=> text? \
-					enabled <= controls_enabled
-					spellcheck false
-
-$rise_bench $mol_book2_catalog
-	placeholders /
-	param \bench
-	spreads *
-		$rise_bench_baza_goods <= Goods $rise_bench_baza_goods
-		$rise_bench_baza_crdttext <= Crdttext $rise_bench_baza_crdttext
-
 $rise_app $mol_book2_catalog
 	menu_title \$rise
 	spreads *
-		demo <= Demo $rise_demo
-			menu_title \Demo
+		demo <= Demo_host $rise_bench_host
+			title \Demo
+			kind \demo
 		bench <= Bench $rise_bench
 			menu_title \Bench
+	Demo $rise_demo

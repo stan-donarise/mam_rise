@@ -30772,13 +30772,4356 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    /** Rise demos and benchmarks never read from or publish to Baza servers.
-     * Keep yard.sync(): it also drains local IndexedDB saves.
-     * Override the final selector, not just defaults: URL/seed peers stay disabled.
-     */
-    function $rise_baza_masters() { return []; }
-    $.$rise_baza_masters = $rise_baza_masters;
-    $giper_baza_yard.masters = $rise_baza_masters;
+    // Only the embedded workload disables transport. The outer application keeps
+    // the native selector (including the localhost override in yard.test.ts).
+    if (new URL(location.href).searchParams.has('rise_fixture')) {
+        $.$giper_baza_yard.masters = () => [];
+    }
+})($ || ($ = {}));
+
+;
+	($.$mol_check_list) = class $mol_check_list extends ($.$mol_view) {
+		option_checked(id, next){
+			if(next !== undefined) return next;
+			return false;
+		}
+		option_title(id){
+			return "";
+		}
+		option_label(id){
+			return [(this.option_title(id))];
+		}
+		enabled(){
+			return true;
+		}
+		option_enabled(id){
+			return (this.enabled());
+		}
+		option_hint(id){
+			return "";
+		}
+		items(){
+			return [];
+		}
+		dictionary(){
+			return {};
+		}
+		Option(id){
+			const obj = new this.$.$mol_check();
+			(obj.checked) = (next) => ((this.option_checked(id, next)));
+			(obj.label) = () => ((this.option_label(id)));
+			(obj.enabled) = () => ((this.option_enabled(id)));
+			(obj.hint) = () => ((this.option_hint(id)));
+			(obj.minimal_height) = () => (24);
+			return obj;
+		}
+		options(){
+			return {};
+		}
+		keys(){
+			return [];
+		}
+		sub(){
+			return (this.items());
+		}
+	};
+	($mol_mem_key(($.$mol_check_list.prototype), "option_checked"));
+	($mol_mem_key(($.$mol_check_list.prototype), "Option"));
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        /**
+         * List of checkboxes
+         * @see https://mol.hyoo.ru/#!section=demos/demo=mol_check_list_demo
+         */
+        class $mol_check_list extends $.$mol_check_list {
+            options() {
+                return {};
+            }
+            dictionary(next) {
+                return next ?? {};
+            }
+            option_checked(id, next) {
+                const prev = this.dictionary();
+                if (next === undefined)
+                    return prev[id] ?? null;
+                const next_rec = { ...prev, [id]: next };
+                if (next === null)
+                    delete next_rec[id];
+                return this.dictionary(next_rec)[id] ?? null;
+            }
+            keys() {
+                return Object.keys(this.options());
+            }
+            items() {
+                return this.keys().map(key => this.Option(key));
+            }
+            option_title(key) {
+                return this.options()[key] || key;
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $mol_check_list.prototype, "keys", null);
+        __decorate([
+            $mol_mem
+        ], $mol_check_list.prototype, "items", null);
+        $$.$mol_check_list = $mol_check_list;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/check/list/list.view.css", "[mol_check_list] {\n\tdisplay: flex;\n\tflex-wrap: wrap;\n\tflex: 1 1 auto;\n\tborder-radius: var(--mol_gap_round);\n\tgap: 1px;\n}\n\n[mol_check_list_option] {\n\tflex: 0 1 auto;\n}\n\n[mol_check_list_option]:where([mol_check_checked=\"true\"]) {\n\ttext-shadow: 0 0;\n\tcolor: var(--mol_theme_current);\n}\n\n[mol_check_list_option]:where([mol_check_checked=\"true\"][disabled]) {\n\tcolor: var(--mol_theme_text);\n}\n");
+})($ || ($ = {}));
+
+;
+	($.$mol_switch) = class $mol_switch extends ($.$mol_check_list) {
+		value(next){
+			if(next !== undefined) return next;
+			return "";
+		}
+	};
+	($mol_mem(($.$mol_switch.prototype), "value"));
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        /**
+         * Buttons which switching the state
+         * @see https://mol.hyoo.ru/#!section=demos/demo=mol_switch_demo
+         */
+        class $mol_switch extends $.$mol_switch {
+            value(next) {
+                return $mol_state_session.value(`${this}.value()`, next) ?? '';
+            }
+            option_checked(key, next) {
+                if (next === undefined)
+                    return this.value() == key;
+                this.value(next ? key : '');
+                return next;
+            }
+        }
+        $$.$mol_switch = $mol_switch;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+	($.$mol_button_major) = class $mol_button_major extends ($.$mol_button_minor) {
+		theme(){
+			return "$mol_theme_base";
+		}
+	};
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/button/major/major.view.css", "[mol_button_major] {\n\tbackground-color: var(--mol_theme_back);\n\tcolor: var(--mol_theme_text);\n}\n");
+})($ || ($ = {}));
+
+;
+"use strict";
+
+
+;
+	($.$mol_grid) = class $mol_grid extends ($.$mol_view) {
+		rows(){
+			return [];
+		}
+		Table(){
+			const obj = new this.$.$mol_grid_table();
+			(obj.sub) = () => ((this.rows()));
+			return obj;
+		}
+		head_cells(){
+			return [];
+		}
+		cells(id){
+			return [];
+		}
+		cell_content(id){
+			return [];
+		}
+		cell_content_text(id){
+			return (this.cell_content(id));
+		}
+		cell_content_number(id){
+			return (this.cell_content(id));
+		}
+		col_head_content(id){
+			return [];
+		}
+		cell_level(id){
+			return 0;
+		}
+		cell_expanded(id, next){
+			if(next !== undefined) return next;
+			return false;
+		}
+		needle(){
+			return "";
+		}
+		cell_value(id){
+			return "";
+		}
+		Cell_dimmer(id){
+			const obj = new this.$.$mol_dimmer();
+			(obj.needle) = () => ((this.needle()));
+			(obj.haystack) = () => ((this.cell_value(id)));
+			return obj;
+		}
+		row_height(){
+			return 32;
+		}
+		row_ids(){
+			return [];
+		}
+		row_id(id){
+			return null;
+		}
+		col_ids(){
+			return [];
+		}
+		records(){
+			return {};
+		}
+		record(id){
+			return null;
+		}
+		hierarchy(){
+			return null;
+		}
+		hierarchy_col(){
+			return "";
+		}
+		minimal_width(){
+			return 0;
+		}
+		sub(){
+			return [(this.Head()), (this.Table())];
+		}
+		Head(){
+			const obj = new this.$.$mol_grid_row();
+			(obj.cells) = () => ((this.head_cells()));
+			return obj;
+		}
+		Row(id){
+			const obj = new this.$.$mol_grid_row();
+			(obj.minimal_height) = () => ((this.row_height()));
+			(obj.minimal_width) = () => ((this.minimal_width()));
+			(obj.cells) = () => ((this.cells(id)));
+			return obj;
+		}
+		Cell(id){
+			const obj = new this.$.$mol_view();
+			return obj;
+		}
+		cell(id){
+			return null;
+		}
+		Cell_text(id){
+			const obj = new this.$.$mol_grid_cell();
+			(obj.sub) = () => ((this.cell_content_text(id)));
+			return obj;
+		}
+		Cell_number(id){
+			const obj = new this.$.$mol_grid_number();
+			(obj.sub) = () => ((this.cell_content_number(id)));
+			return obj;
+		}
+		Col_head(id){
+			const obj = new this.$.$mol_float();
+			(obj.dom_name) = () => ("th");
+			(obj.sub) = () => ((this.col_head_content(id)));
+			return obj;
+		}
+		Cell_branch(id){
+			const obj = new this.$.$mol_check_expand();
+			(obj.level) = () => ((this.cell_level(id)));
+			(obj.label) = () => ((this.cell_content(id)));
+			(obj.expanded) = (next) => ((this.cell_expanded(id, next)));
+			return obj;
+		}
+		Cell_content(id){
+			return [(this.Cell_dimmer(id))];
+		}
+	};
+	($mol_mem(($.$mol_grid.prototype), "Table"));
+	($mol_mem_key(($.$mol_grid.prototype), "cell_expanded"));
+	($mol_mem_key(($.$mol_grid.prototype), "Cell_dimmer"));
+	($mol_mem(($.$mol_grid.prototype), "Head"));
+	($mol_mem_key(($.$mol_grid.prototype), "Row"));
+	($mol_mem_key(($.$mol_grid.prototype), "Cell"));
+	($mol_mem_key(($.$mol_grid.prototype), "Cell_text"));
+	($mol_mem_key(($.$mol_grid.prototype), "Cell_number"));
+	($mol_mem_key(($.$mol_grid.prototype), "Col_head"));
+	($mol_mem_key(($.$mol_grid.prototype), "Cell_branch"));
+	($.$mol_grid_table) = class $mol_grid_table extends ($.$mol_list) {};
+	($.$mol_grid_row) = class $mol_grid_row extends ($.$mol_view) {
+		cells(){
+			return [];
+		}
+		sub(){
+			return (this.cells());
+		}
+	};
+	($.$mol_grid_cell) = class $mol_grid_cell extends ($.$mol_view) {
+		minimal_height(){
+			return 40;
+		}
+	};
+	($.$mol_grid_number) = class $mol_grid_number extends ($.$mol_grid_cell) {};
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $mol_grid extends $.$mol_grid {
+            head_cells() {
+                return this.col_ids().map(colId => this.Col_head(colId));
+            }
+            col_head_content(colId) {
+                return [colId];
+            }
+            rows() {
+                return this.row_ids().map(id => this.Row(id));
+            }
+            cells(row_id) {
+                return this.col_ids().map(col_id => this.Cell({ row: row_id, col: col_id }));
+            }
+            col_type(col_id) {
+                if (col_id === this.hierarchy_col())
+                    return 'branch';
+                const rowFirst = this.row_id(0);
+                const val = this.record(rowFirst[rowFirst.length - 1])[col_id];
+                if (typeof val === 'number')
+                    return 'number';
+                return 'text';
+            }
+            Cell(id) {
+                switch (this.col_type(id.col).valueOf()) {
+                    case 'branch': return this.Cell_branch(id);
+                    case 'number': return this.Cell_number(id);
+                }
+                return this.Cell_text(id);
+            }
+            cell_content(id) {
+                return [this.record(id.row[id.row.length - 1])[id.col]];
+            }
+            cell_content_text(id) {
+                return this.cell_content(id).map(val => typeof val === 'object' ? JSON.stringify(val) : val);
+            }
+            records() {
+                return [];
+            }
+            record(id) {
+                return this.records()[id];
+            }
+            record_ids() {
+                return Object.keys(this.records());
+            }
+            row_id(index) {
+                return this.row_ids().slice(index, index + 1).valueOf()[0];
+            }
+            col_ids() {
+                const rowFirst = this.row_id(0);
+                if (rowFirst === void 0)
+                    return [];
+                const record = this.record(rowFirst[rowFirst.length - 1]);
+                if (!record)
+                    return [];
+                return Object.keys(record);
+            }
+            hierarchy() {
+                const hierarchy = {};
+                const root = hierarchy[''] = {
+                    id: '',
+                    parent: null,
+                    sub: [],
+                };
+                this.record_ids().map(id => {
+                    root.sub.push(hierarchy[id] = {
+                        id,
+                        parent: root,
+                        sub: [],
+                    });
+                });
+                return hierarchy;
+            }
+            row_sub_ids(row) {
+                return this.hierarchy()[row[row.length - 1]].sub.map(child => row.concat(child.id));
+            }
+            row_root_id() {
+                return [''];
+            }
+            cell_level(id) {
+                return id.row.length - 1;
+            }
+            row_ids() {
+                const next = [];
+                const add = (row) => {
+                    next.push(row);
+                    if (this.row_expanded(row)) {
+                        this.row_sub_ids(row).forEach(child => add(child));
+                    }
+                };
+                this.row_sub_ids(this.row_root_id()).forEach(child => add(child));
+                return next;
+            }
+            row_expanded(row_id, next) {
+                if (!this.row_sub_ids(row_id).length)
+                    return null;
+                const key = `row_expanded(${JSON.stringify(row_id)})`;
+                const next2 = $mol_state_session.value(key, next);
+                return (next2 == null) ? this.row_expanded_default(row_id) : next2;
+            }
+            row_expanded_default(row_id) {
+                return true;
+            }
+            cell_expanded(id, next) {
+                return this.row_expanded(id.row, next);
+            }
+            sub() {
+                this.head_cells();
+                this.rows();
+                return super.sub();
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $mol_grid.prototype, "head_cells", null);
+        __decorate([
+            $mol_mem
+        ], $mol_grid.prototype, "rows", null);
+        __decorate([
+            $mol_mem_key
+        ], $mol_grid.prototype, "col_type", null);
+        __decorate([
+            $mol_mem
+        ], $mol_grid.prototype, "record_ids", null);
+        __decorate([
+            $mol_mem
+        ], $mol_grid.prototype, "hierarchy", null);
+        __decorate([
+            $mol_mem
+        ], $mol_grid.prototype, "row_ids", null);
+        $$.$mol_grid = $mol_grid;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/grid/grid.view.css", "[mol_grid] {\n\tdisplay: block;\n\tflex: 0 1 auto;\n\tposition: relative;\n\toverflow-x: auto;\n}\n\n[mol_grid_gap] {\n\tposition: absolute;\n\tpadding: .1px;\n\ttop: 0;\n\ttransform: translateZ(0);\n}\n\n[mol_grid_table] {\n\tborder-spacing: 0;\n\tdisplay: table-row-group;\n\tposition: relative;\n}\n\n[mol_grid_table] > * {\n\tdisplay: table-row;\n\ttransition: none;\n}\n\n[mol_grid_head] > *,\n[mol_grid_table] > * > * {\n\tdisplay: table-cell;\n\tpadding: var(--mol_gap_text);\n\twhite-space: nowrap;\n\tvertical-align: middle;\n\tbox-shadow: inset 2px 2px 0 -1px var(--mol_theme_line);\n}\n\n[mol_grid_row]:where(:first-child) > * {\n\tbox-shadow: inset 2px 0 0 -1px var(--mol_theme_line);\n}\n\n[mol_grid_table] > * > *:where(:first-child) {\n\tbox-shadow: inset 0px 2px 0 -1px var(--mol_theme_line);\n}\n\n[mol_grid_head] > * {\n\tbox-shadow: inset 2px -2px 0 -1px var(--mol_theme_line);\n}\n\n[mol_grid_head] > *:where(:first-child) {\n\tbox-shadow: inset 0px -2px 0 -1px var(--mol_theme_line);\n}\n\n[mol_grid_table] > [mol_grid_row]:where(:first-child) > *:where(:first-child) {\n\tbox-shadow: none;\n}\t\n\n[mol_grid_head] {\n\tdisplay: table-row;\n\ttransform: none !important;\n}\n\n/* [mol_grid_cell_number] {\n\ttext-align: end;\n} */\n\n[mol_grid_col_head] {\n\tfont-weight: inherit;\n\ttext-align: inherit;\n\tdisplay: table-cell;\n\tcolor: var(--mol_theme_shade);\n}\n\n[mol_grid_cell_dimmer] {\n\tdisplay: inline-block;\n\tvertical-align: inherit;\n}\n");
+})($ || ($ = {}));
+
+;
+	($.$rise_bench_metrics) = class $rise_bench_metrics extends ($.$mol_grid) {
+		embedded(){
+			return false;
+		}
+		attr(){
+			return {...(super.attr()), "embedded": (this.embedded())};
+		}
+		runs(next){
+			if(next !== undefined) return next;
+			return [];
+		}
+		run_add(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		operations(){
+			return [];
+		}
+	};
+	($mol_mem(($.$rise_bench_metrics.prototype), "runs"));
+	($mol_mem(($.$rise_bench_metrics.prototype), "run_add"));
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    $.$rise_bench_run_baza_version = '2e6100b225c8d4fb3a5b5d14e8568223e8a8c785';
+    $.$rise_bench_run_benchmark_version = '0.2.0';
+    class $rise_bench_run extends $mol_object {
+        count;
+        properties;
+        stamp;
+        baza_version;
+        benchmark_version;
+        id;
+        constructor(count, properties = 0, stamp = new $mol_time_moment().toString('DD.MM.YYYY hh:mm:ss'), baza_version = $.$rise_bench_run_baza_version, benchmark_version = $.$rise_bench_run_benchmark_version, id = crypto.randomUUID()) {
+            super();
+            this.count = count;
+            this.properties = properties;
+            this.stamp = stamp;
+            this.baza_version = baza_version;
+            this.benchmark_version = benchmark_version;
+            this.id = id;
+        }
+        state(next = 'Выполняется') { return next; }
+        metric(operation, next) { return next ?? null; }
+    }
+    __decorate([
+        $mol_mem
+    ], $rise_bench_run.prototype, "state", null);
+    __decorate([
+        $mol_mem_key
+    ], $rise_bench_run.prototype, "metric", null);
+    $.$rise_bench_run = $rise_bench_run;
+})($ || ($ = {}));
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $rise_bench_metrics extends $.$rise_bench_metrics {
+            embedded() { return window.parent !== window; }
+            run_add(run) {
+                const rows = this.runs();
+                if (rows.includes(run))
+                    return;
+                this.runs([run, ...rows]);
+            }
+            col_ids() { return ['№', 'Дата и время', 'Версия Гипербазы', 'Версия бенчмарка', 'Объём', 'Полей', 'Состояние', ...this.operations()]; }
+            records() {
+                return this.runs().map((run, index, rows) => ({
+                    '№': rows.length - index,
+                    'Дата и время': run.stamp,
+                    'Версия Гипербазы': run.baza_version.slice(0, 8),
+                    'Версия бенчмарка': run.benchmark_version,
+                    'Объём': run.count,
+                    'Полей': run.properties || '—',
+                    'Состояние': run.state(),
+                    ...Object.fromEntries(this.operations().map(operation => {
+                        const time = run.metric(operation);
+                        return [operation, time === null ? '—' : time.toFixed(3)];
+                    })),
+                }));
+            }
+        }
+        __decorate([
+            $mol_action
+        ], $rise_bench_metrics.prototype, "run_add", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bench_metrics.prototype, "records", null);
+        $$.$rise_bench_metrics = $rise_bench_metrics;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_define($rise_bench_metrics, { '[embedded]': { true: { display: 'none' } } });
+})($ || ($ = {}));
+
+;
+	($.$mol_example) = class $mol_example extends ($.$mol_view) {
+		tags(){
+			return [];
+		}
+		aspects(){
+			return [];
+		}
+	};
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/example/example.view.css", "[mol_example] {\n\tmax-width: 100%;\n}\n");
+})($ || ($ = {}));
+
+;
+"use strict";
+
+
+;
+	($.$mol_example_small) = class $mol_example_small extends ($.$mol_example) {};
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/example/small/small.view.css", "[mol_example_small] {\n\tdisplay: flex;\n\tflex-wrap: wrap;\n\talign-items: flex-start;\n\talign-content: flex-start;\n\tjustify-content: flex-start;\n\tflex: 0 0 auto;\n\tbox-sizing: border-box;\n\tmax-width: 100%;\n\tgap: var(--mol_gap_block);\n}\n\n[mol_example_small] > * {\n\tmax-width: 100%;\n}\n");
+})($ || ($ = {}));
+
+;
+"use strict";
+
+
+;
+	($.$mol_list_demo) = class $mol_list_demo extends ($.$mol_example_small) {
+		items_count(next){
+			if(next !== undefined) return next;
+			return 50;
+		}
+		Items_count(){
+			const obj = new this.$.$mol_number();
+			(obj.value) = (next) => ((this.items_count(next)));
+			(obj.value_min) = () => (0);
+			(obj.value_max) = () => (100000);
+			return obj;
+		}
+		Items_count_label(){
+			const obj = new this.$.$mol_labeler();
+			(obj.title) = () => ("Items count");
+			(obj.content) = () => ([(this.Items_count())]);
+			return obj;
+		}
+		item_title(id){
+			return "";
+		}
+		Item(id){
+			const obj = new this.$.$mol_link();
+			(obj.title) = () => ((this.item_title(id)));
+			return obj;
+		}
+		list_items(){
+			return [(this.Item("0"))];
+		}
+		List_empty(){
+			const obj = new this.$.$mol_paragraph();
+			(obj.title) = () => ("No items in this list");
+			return obj;
+		}
+		Items(){
+			const obj = new this.$.$mol_list();
+			(obj.rows) = () => ((this.list_items()));
+			(obj.Empty) = () => ((this.List_empty()));
+			return obj;
+		}
+		sub(){
+			return [(this.Items_count_label()), (this.Items())];
+		}
+		tags(){
+			return [
+				"list", 
+				"rows", 
+				"stack"
+			];
+		}
+		aspects(){
+			return ["Widget/Layout"];
+		}
+	};
+	($mol_mem(($.$mol_list_demo.prototype), "items_count"));
+	($mol_mem(($.$mol_list_demo.prototype), "Items_count"));
+	($mol_mem(($.$mol_list_demo.prototype), "Items_count_label"));
+	($mol_mem_key(($.$mol_list_demo.prototype), "Item"));
+	($mol_mem(($.$mol_list_demo.prototype), "List_empty"));
+	($mol_mem(($.$mol_list_demo.prototype), "Items"));
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $mol_list_demo extends $.$mol_list_demo {
+            item_title(id) {
+                return `Item #${id + 1}`;
+            }
+            list_items() {
+                const rows = [];
+                for (let key = 0; key < this.items_count(); key++) {
+                    rows.push(this.Item(key));
+                }
+                return rows;
+            }
+        }
+        $$.$mol_list_demo = $mol_list_demo;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+	($.$mol_image) = class $mol_image extends ($.$mol_view) {
+		uri(){
+			return "";
+		}
+		title(){
+			return "";
+		}
+		loading(){
+			return "lazy";
+		}
+		decoding(){
+			return "async";
+		}
+		cors(){
+			return null;
+		}
+		natural_width(){
+			return 0;
+		}
+		natural_height(){
+			return 0;
+		}
+		load(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		dom_name(){
+			return "img";
+		}
+		attr(){
+			return {
+				...(super.attr()), 
+				"src": (this.uri()), 
+				"title": (this.hint()), 
+				"alt": (this.title()), 
+				"loading": (this.loading()), 
+				"decoding": (this.decoding()), 
+				"crossOrigin": (this.cors()), 
+				"width": (this.natural_width()), 
+				"height": (this.natural_height())
+			};
+		}
+		event(){
+			return {"load": (next) => (this.load(next))};
+		}
+		minimal_width(){
+			return 16;
+		}
+		minimal_height(){
+			return 16;
+		}
+	};
+	($mol_mem(($.$mol_image.prototype), "load"));
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $mol_image extends $.$mol_image {
+            natural_width(next) {
+                const dom = this.dom_node();
+                if (dom.naturalWidth)
+                    return dom.naturalWidth;
+                const found = this.uri().match(/\bwidth=(\d+)/);
+                return found ? Number(found[1]) : null;
+            }
+            natural_height(next) {
+                const dom = this.dom_node();
+                if (dom.naturalHeight)
+                    return dom.naturalHeight;
+                const found = this.uri().match(/\bheight=(\d+)/);
+                return found ? Number(found[1]) : null;
+            }
+            load() {
+                this.natural_width(null);
+                this.natural_height(null);
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $mol_image.prototype, "natural_width", null);
+        __decorate([
+            $mol_mem
+        ], $mol_image.prototype, "natural_height", null);
+        $$.$mol_image = $mol_image;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/image/image.view.css", "[mol_image] {\n\tborder-radius: var(--mol_gap_round);\n\toverflow: hidden;\n\tflex: 0 1 auto;\n\tmax-width: 100%;\n\tobject-fit: cover;\n\theight: fit-content;\n}\n");
+})($ || ($ = {}));
+
+;
+	($.$mol_link_iconed) = class $mol_link_iconed extends ($.$mol_link) {
+		icon(){
+			return "";
+		}
+		Icon(){
+			const obj = new this.$.$mol_image();
+			(obj.uri) = () => ((this.icon()));
+			(obj.title) = () => ("");
+			return obj;
+		}
+		title(){
+			return (this.uri());
+		}
+		sub(){
+			return [(this.Icon())];
+		}
+		content(){
+			return [(this.title())];
+		}
+		host(){
+			return "";
+		}
+	};
+	($mol_mem(($.$mol_link_iconed.prototype), "Icon"));
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $mol_link_iconed extends $.$mol_link_iconed {
+            icon() {
+                return `https://favicon.yandex.net/favicon/${this.host()}?color=0,0,0,0&size=32&stub=1`;
+                // return `https://api.faviconkit.com/${ this.host() }/16`
+            }
+            host() {
+                const base = this.$.$mol_state_arg.href();
+                const url = new URL(this.uri(), base);
+                return url.hostname;
+            }
+            title() {
+                const uri = this.uri();
+                const host = this.host();
+                const suffix = (host ? uri.split(this.host(), 2)[1] : uri)?.replace(/^[\/\?#!]+/, '');
+                return decodeURIComponent(suffix || host).replace(/^\//, ' ');
+            }
+            sub() {
+                return [
+                    ...this.host() ? [this.Icon()] : [],
+                    ...this.content() ? [' ', ...this.content()] : [],
+                ];
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $mol_link_iconed.prototype, "icon", null);
+        __decorate([
+            $mol_mem
+        ], $mol_link_iconed.prototype, "host", null);
+        __decorate([
+            $mol_mem
+        ], $mol_link_iconed.prototype, "title", null);
+        __decorate([
+            $mol_mem
+        ], $mol_link_iconed.prototype, "sub", null);
+        $$.$mol_link_iconed = $mol_link_iconed;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/link/iconed/iconed.view.css", "[mol_link_iconed] {\n\talign-items: baseline;\n\tdisplay: inline-flex;\n\tpadding: var(--mol_gap_text);\n}\n\n[mol_link_iconed_icon] {\n\tbox-shadow: none;\n\theight: 1.5em;\n\twidth: 1em;\n\tflex: 0 0 auto;\n\tdisplay: inline-block;\n\talign-self: normal;\n\tvertical-align: top;\n\tborder-radius: 0;\n\tobject-fit: scale-down;\n\topacity: .75;\n}\n\n[mol_theme=\"$mol_theme_dark\"] [mol_link_iconed_icon] {\n\tfilter: var(--mol_theme_image);\n}\n");
+})($ || ($ = {}));
+
+;
+	($.$mol_row) = class $mol_row extends ($.$mol_view) {};
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/row/row.view.css", "[mol_row] {\n\tdisplay: flex;\n\tflex-wrap: wrap;\n\talign-items: flex-start;\n\talign-content: flex-start;\n\tjustify-content: flex-start;\n\tpadding: var(--mol_gap_block);\n\tgap: var(--mol_gap_block);\n\tflex: 0 0 auto;\n\tbox-sizing: border-box;\n\tmax-width: 100%;\n}\n\n[mol_row] > * {\n\tmax-width: 100%;\n}\n");
+})($ || ($ = {}));
+
+;
+"use strict";
+
+
+;
+	($.$mol_list_demo_table) = class $mol_list_demo_table extends ($.$mol_example) {
+		row_id(id, next){
+			if(next !== undefined) return next;
+			return "0000";
+		}
+		row_checked(id, next){
+			if(next !== undefined) return next;
+			return false;
+		}
+		Id(id){
+			const obj = new this.$.$mol_check_box();
+			(obj.title) = () => ((this.row_id(id)));
+			(obj.checked) = (next) => ((this.row_checked(id, next)));
+			return obj;
+		}
+		Id_labeler(id){
+			const obj = new this.$.$mol_labeler();
+			(obj.title) = () => ("ID");
+			(obj.Content) = () => ((this.Id(id)));
+			return obj;
+		}
+		row_uri(id){
+			return "";
+		}
+		row_title(id){
+			return "";
+		}
+		Title(id){
+			const obj = new this.$.$mol_link_iconed();
+			(obj.uri) = () => ((this.row_uri(id)));
+			(obj.title) = () => ((this.row_title(id)));
+			return obj;
+		}
+		Title_labeler(id){
+			const obj = new this.$.$mol_labeler();
+			(obj.title) = () => ("Product Name");
+			(obj.Content) = () => ((this.Title(id)));
+			return obj;
+		}
+		row_color(id, next){
+			if(next !== undefined) return next;
+			return "";
+		}
+		colors(){
+			return [];
+		}
+		Color(id){
+			const obj = new this.$.$mol_select();
+			(obj.value) = (next) => ((this.row_color(id, next)));
+			(obj.options) = () => ((this.colors()));
+			return obj;
+		}
+		Color_labeler(id){
+			const obj = new this.$.$mol_labeler();
+			(obj.title) = () => ("Color");
+			(obj.Content) = () => ((this.Color(id)));
+			return obj;
+		}
+		row_status(id, next){
+			if(next !== undefined) return next;
+			return "";
+		}
+		status_options(){
+			return {
+				"minor": "Store", 
+				"major": "Sale", 
+				"critical": "Support"
+			};
+		}
+		Status(id){
+			const obj = new this.$.$mol_switch();
+			(obj.value) = (next) => ((this.row_status(id, next)));
+			(obj.options) = () => ((this.status_options()));
+			return obj;
+		}
+		Status_labeler(id){
+			const obj = new this.$.$mol_labeler();
+			(obj.title) = () => ("Status");
+			(obj.Content) = () => ((this.Status(id)));
+			return obj;
+		}
+		row_quantity(id, next){
+			if(next !== undefined) return next;
+			return 0;
+		}
+		Quantity(id){
+			const obj = new this.$.$mol_number();
+			(obj.value) = (next) => ((this.row_quantity(id, next)));
+			return obj;
+		}
+		Quantity_labeler(id){
+			const obj = new this.$.$mol_labeler();
+			(obj.title) = () => ("Quantity");
+			(obj.Content) = () => ((this.Quantity(id)));
+			return obj;
+		}
+		row_moment(id, next){
+			if(next !== undefined) return next;
+			const obj = new this.$.$mol_time_moment();
+			return obj;
+		}
+		Date(id){
+			const obj = new this.$.$mol_date();
+			(obj.value_moment) = (next) => ((this.row_moment(id, next)));
+			return obj;
+		}
+		Date_labeler(id){
+			const obj = new this.$.$mol_labeler();
+			(obj.title) = () => ("Supply Time");
+			(obj.Content) = () => ((this.Date(id)));
+			return obj;
+		}
+		row_content(id){
+			return [
+				(this.Id_labeler(id)), 
+				(this.Title_labeler(id)), 
+				(this.Color_labeler(id)), 
+				(this.Status_labeler(id)), 
+				(this.Quantity_labeler(id)), 
+				(this.Date_labeler(id))
+			];
+		}
+		Row(id){
+			const obj = new this.$.$mol_row();
+			(obj.sub) = () => ((this.row_content(id)));
+			return obj;
+		}
+		rows(){
+			return [(this.Row("0"))];
+		}
+		Rows(){
+			const obj = new this.$.$mol_list();
+			(obj.item_width_min) = (id) => (200);
+			(obj.item_height_min) = (id) => (96);
+			(obj.rows) = () => ((this.rows()));
+			return obj;
+		}
+		title(){
+			return "Large list of rows with dynamic content";
+		}
+		count(){
+			return 100000;
+		}
+		sub(){
+			return [(this.Rows())];
+		}
+		tags(){
+			return [
+				"list", 
+				"table", 
+				"scroll", 
+				"divider", 
+				"grid"
+			];
+		}
+		aspects(){
+			return ["Widget/Layout"];
+		}
+	};
+	($mol_mem_key(($.$mol_list_demo_table.prototype), "row_id"));
+	($mol_mem_key(($.$mol_list_demo_table.prototype), "row_checked"));
+	($mol_mem_key(($.$mol_list_demo_table.prototype), "Id"));
+	($mol_mem_key(($.$mol_list_demo_table.prototype), "Id_labeler"));
+	($mol_mem_key(($.$mol_list_demo_table.prototype), "Title"));
+	($mol_mem_key(($.$mol_list_demo_table.prototype), "Title_labeler"));
+	($mol_mem_key(($.$mol_list_demo_table.prototype), "row_color"));
+	($mol_mem_key(($.$mol_list_demo_table.prototype), "Color"));
+	($mol_mem_key(($.$mol_list_demo_table.prototype), "Color_labeler"));
+	($mol_mem_key(($.$mol_list_demo_table.prototype), "row_status"));
+	($mol_mem_key(($.$mol_list_demo_table.prototype), "Status"));
+	($mol_mem_key(($.$mol_list_demo_table.prototype), "Status_labeler"));
+	($mol_mem_key(($.$mol_list_demo_table.prototype), "row_quantity"));
+	($mol_mem_key(($.$mol_list_demo_table.prototype), "Quantity"));
+	($mol_mem_key(($.$mol_list_demo_table.prototype), "Quantity_labeler"));
+	($mol_mem_key(($.$mol_list_demo_table.prototype), "row_moment"));
+	($mol_mem_key(($.$mol_list_demo_table.prototype), "Date"));
+	($mol_mem_key(($.$mol_list_demo_table.prototype), "Date_labeler"));
+	($mol_mem_key(($.$mol_list_demo_table.prototype), "Row"));
+	($mol_mem(($.$mol_list_demo_table.prototype), "Rows"));
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    /** Lazy computed lists with native Array interface. $mol_range2_array is mutable but all derived ranges are immutable. */
+    function $mol_range2(item = index => index, size = () => Number.POSITIVE_INFINITY) {
+        const source = typeof item === 'function' ? new $mol_range2_array() : item;
+        if (typeof item !== 'function') {
+            item = index => source[index];
+            size = () => source.length;
+        }
+        return new Proxy(source, {
+            get(target, field) {
+                if (typeof field === 'string') {
+                    if (field === 'length')
+                        return size();
+                    const index = Number(field);
+                    if (index < 0)
+                        return undefined;
+                    if (index >= size())
+                        return undefined;
+                    if (index === Math.trunc(index))
+                        return item(index);
+                }
+                return $mol_range2_array.prototype[field];
+            },
+            set(target, field) {
+                return $mol_fail(new TypeError(`Lazy range is read only (trying to set field ${JSON.stringify(field)})`));
+            },
+            ownKeys(target) {
+                return [...Array(size())].map((v, i) => String(i)).concat('length');
+            },
+            getOwnPropertyDescriptor(target, field) {
+                if (field === "length")
+                    return {
+                        value: size(),
+                        writable: true,
+                        enumerable: false,
+                        configurable: false,
+                    };
+                const index = Number(field);
+                if (index === Math.trunc(index))
+                    return {
+                        get: () => this.get(target, field, this),
+                        enumerable: true,
+                        configurable: true,
+                    };
+                return Object.getOwnPropertyDescriptor(target, field);
+            }
+        });
+    }
+    $.$mol_range2 = $mol_range2;
+    class $mol_range2_array extends Array {
+        // Lazy
+        concat(...tail) {
+            if (tail.length === 0)
+                return this;
+            if (tail.length > 1) {
+                let list = this;
+                for (let item of tail)
+                    list = list.concat(item);
+                return list;
+            }
+            return $mol_range2(index => index < this.length ? this[index] : tail[0][index - this.length], () => this.length + tail[0].length);
+        }
+        // Lazy
+        filter(check, context) {
+            const filtered = [];
+            let cursor = -1;
+            return $mol_range2(index => {
+                while (cursor < this.length && index >= filtered.length - 1) {
+                    const val = this[++cursor];
+                    if (check(val, cursor, this))
+                        filtered.push(val);
+                }
+                return filtered[index];
+            }, () => cursor < this.length ? Number.POSITIVE_INFINITY : filtered.length);
+        }
+        // Diligent
+        forEach(proceed, context) {
+            for (let [key, value] of this.entries())
+                proceed.call(context, value, key, this);
+        }
+        // Lazy
+        map(proceed, context) {
+            return $mol_range2(index => proceed.call(context, this[index], index, this), () => this.length);
+        }
+        // Diligent
+        reduce(merge, result) {
+            let index = 0;
+            if (arguments.length === 1) {
+                result = this[index++];
+            }
+            for (; index < this.length; ++index) {
+                result = merge(result, this[index], index, this);
+            }
+            return result;
+        }
+        // Lazy
+        toReversed() {
+            return $mol_range2(index => this[this.length - 1 - index], () => this.length);
+        }
+        // Lazy
+        slice(from = 0, to = this.length) {
+            return $mol_range2(index => this[from + index], () => Math.min(to, this.length) - from);
+        }
+        // Lazy
+        some(check, context) {
+            for (let index = 0; index < this.length; ++index) {
+                if (check.call(context, this[index], index, this))
+                    return true;
+            }
+            return false;
+        }
+        every(check, context) {
+            for (let index = 0; index < this.length; ++index) {
+                if (!check.call(context, this[index], index, this))
+                    return false;
+            }
+            return true;
+        }
+        reverse() {
+            return $mol_fail(new TypeError(`Mutable reverse is forbidden. Use toReversed instead.`));
+        }
+        sort() {
+            return $mol_fail(new TypeError(`Mutable sort is forbidden. Use toSorted instead.`));
+        }
+        indexOf(needle) {
+            return this.findIndex(item => item === needle);
+        }
+        [Symbol.toPrimitive]() {
+            return $mol_guid();
+        }
+    }
+    $.$mol_range2_array = $mol_range2_array;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    function $mol_array_lottery(list) {
+        return list[Math.floor(Math.random() * list.length)];
+    }
+    $.$mol_array_lottery = $mol_array_lottery;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    class $mol_unit extends $mol_object {
+        'valueOf()';
+        constructor(value) {
+            super();
+            if (value !== undefined)
+                this['valueOf()'] = value;
+        }
+        prefix() {
+            return '';
+        }
+        postfix() {
+            return '';
+        }
+        [Symbol.toPrimitive](hint) {
+            switch (hint) {
+                case 'number': return this.valueOf();
+                case 'string': return this.toString();
+                default: return this.toString();
+            }
+        }
+        valueOf() {
+            return this['valueOf()'];
+        }
+        delimiter() {
+            return ' ';
+        }
+        value_view() {
+            return this.valueOf().toLocaleString();
+        }
+        toString() {
+            return this.prefix() + this.value_view() + this.postfix();
+        }
+        static summ(a, b) {
+            var Class = a.constructor;
+            if (Class !== b.constructor)
+                throw new Error(`Not same measure: ${Class} , ${b.constructor}`);
+            return new Class(a.valueOf() + b.valueOf());
+        }
+        mult(m) {
+            var Class = this.constructor;
+            return new Class(this.valueOf() * m);
+        }
+    }
+    $.$mol_unit = $mol_unit;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    class $mol_unit_money extends $mol_unit {
+    }
+    $.$mol_unit_money = $mol_unit_money;
+    class $mol_unit_money_usd extends $mol_unit_money {
+        prefix() {
+            return '$';
+        }
+    }
+    $.$mol_unit_money_usd = $mol_unit_money_usd;
+    class $mol_unit_money_rub extends $mol_unit_money {
+        postfix() {
+            return ' ₽';
+        }
+    }
+    $.$mol_unit_money_rub = $mol_unit_money_rub;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    function $mol_stub_strings(prefix = '', count = 10, length = 10) {
+        if (prefix.length >= length)
+            return [];
+        let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz".split('');
+        let strings = [];
+        for (let i = 0; i < count; i++) {
+            let text = prefix;
+            for (let j = prefix.length; j < length; j++) {
+                text += $mol_array_lottery(possible);
+            }
+            strings.push(text);
+        }
+        return strings;
+    }
+    $.$mol_stub_strings = $mol_stub_strings;
+    function $mol_stub_code(length = 8) {
+        var max = Math.pow(16, length);
+        var min = Math.pow(16, length - 1);
+        var value = min + Math.floor(Math.random() * (max - min));
+        return value.toString(16).toUpperCase();
+    }
+    $.$mol_stub_code = $mol_stub_code;
+    function $mol_stub_price(max = 1000) {
+        var min = Math.floor(max / 16 / 16);
+        var value = min + Math.floor(Math.random() * (max - min));
+        return new $mol_unit_money_usd(value);
+    }
+    $.$mol_stub_price = $mol_stub_price;
+    function $mol_stub_product_name() {
+        var name = $mol_array_lottery([
+            'Monitor 15"',
+            'Monitor 17"',
+            'Monitor 19"',
+            'Graphics card',
+            'Frame grabber card'
+        ]);
+        var port = $mol_array_lottery(['D-SUB', 'DVI', 'HDMI']);
+        var resolution = $mol_array_lottery(['VGA', 'Full HD', '4K']);
+        return [name, port, resolution].join(', ');
+    }
+    $.$mol_stub_product_name = $mol_stub_product_name;
+    function $mol_stub_company_name_big() {
+        var product = $mol_array_lottery(['Everything', 'Something', 'Anything', 'Nothing']);
+        var type = $mol_array_lottery(['Company', 'Corporation', 'Holding']);
+        return `A ${type} that makes ${product}`;
+    }
+    $.$mol_stub_company_name_big = $mol_stub_company_name_big;
+    function $mol_stub_company_name_small() {
+        return $mol_array_lottery(['ACME inc.', 'Dream Company', 'Just Company']);
+    }
+    $.$mol_stub_company_name_small = $mol_stub_company_name_small;
+    function $mol_stub_company_name() {
+        return $mol_array_lottery([$mol_stub_company_name_small, $mol_stub_company_name_big])();
+    }
+    $.$mol_stub_company_name = $mol_stub_company_name;
+    function $mol_stub_person_name() {
+        var first = $mol_array_lottery(['Ivan', 'Petr', 'Sidor', 'John', 'Sam']);
+        var last = $mol_array_lottery(['Ivanov', 'Petrov', 'Sidorov', 'Johnson', 'Smith']);
+        return `${first} ${last}`;
+    }
+    $.$mol_stub_person_name = $mol_stub_person_name;
+    function $mol_stub_person_avatar(size = 80) {
+        const id = Math.random().toString(16).slice(2);
+        return `https://gravatar.com/avatar/${id}?d=robohash&s=${size}`;
+    }
+    $.$mol_stub_person_avatar = $mol_stub_person_avatar;
+    function $mol_stub_city() {
+        return $mol_array_lottery(['Moscow', 'London', 'Washington', 'Buenos Aires']);
+    }
+    $.$mol_stub_city = $mol_stub_city;
+    function $mol_stub_time(maxShift = 60 * 24 * 365) {
+        return new $mol_time_moment().shift({ minute: Math.round(Math.random() * maxShift) });
+    }
+    $.$mol_stub_time = $mol_stub_time;
+    function $mol_stub_message(max_length) {
+        const text = ' Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris. Maecenas congue ligula ac quam viverra nec consectetur ante hendrerit. Donec et mollis dolor. Praesent et diam eget libero egestas mattis sit amet vitae augue. Nam tincidunt congue enim, ut porta lorem lacinia consectetur. Donec ut libero sed arcu vehicula ultricies a non tortor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ut gravida lorem. Ut turpis felis, pulvinar a semper sed, adipiscing id dolor. Pellentesque auctor nisi id magna consequat sagittis. Curabitur dapibus enim sit amet elit pharetra tincidunt feugiat nisl imperdiet. Ut convallis libero in urna ultrices accumsan. Donec sed odio eros. Donec viverra mi quis quam pulvinar at malesuada arcu rhoncus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. In rutrum accumsan ultricies. Mauris vitae nisi at sem facilisis semper ac in est.';
+        return text.substring(0, Math.ceil(Math.random() * max_length - 5) + 5);
+    }
+    $.$mol_stub_message = $mol_stub_message;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $.$mol_colors = {
+        aliceblue: "#f0f8ff",
+        antiquewhite: "#faebd7",
+        aqua: "#00ffff",
+        aquamarine: "#7fffd4",
+        azure: "#f0ffff",
+        beige: "#f5f5dc",
+        bisque: "#ffe4c4",
+        black: "#000000",
+        blanchedalmond: "#ffebcd",
+        blue: "#0000ff",
+        blueviolet: "#8a2be2",
+        brown: "#a52a2a",
+        burlywood: "#deb887",
+        cadetblue: "#5f9ea0",
+        chartreuse: "#7fff00",
+        chocolate: "#d2691e",
+        coral: "#ff7f50",
+        cornflowerblue: "#6495ed",
+        cornsilk: "#fff8dc",
+        crimson: "#dc143c",
+        cyan: "#00ffff",
+        darkblue: "#00008b",
+        darkcyan: "#008b8b",
+        darkgoldenrod: "#b8860b",
+        darkgray: "#a9a9a9",
+        darkgreen: "#006400",
+        darkgrey: "#a9a9a9",
+        darkkhaki: "#bdb76b",
+        darkmagenta: "#8b008b",
+        darkolivegreen: "#556b2f",
+        darkorange: "#ff8c00",
+        darkorchid: "#9932cc",
+        darkred: "#8b0000",
+        darksalmon: "#e9967a",
+        darkseagreen: "#8fbc8f",
+        darkslateblue: "#483d8b",
+        darkslategrey: "#2f4f4f",
+        darkturquoise: "#00ced1",
+        darkviolet: "#9400d3",
+        deeppink: "#ff1493",
+        deepskyblue: "#00bfff",
+        dimgray: "#696969",
+        dimgrey: "#696969",
+        dodgerblue: "#1e90ff",
+        firebrick: "#b22222",
+        floralwhite: "#fffaf0",
+        forestgreen: "#228b22",
+        fuchsia: "#ff00ff",
+        gainsboro: "#dcdcdc",
+        ghostwhite: "#f8f8ff",
+        gold: "#ffd700",
+        goldenrod: "#daa520",
+        gray: "#808080",
+        green: "#008000",
+        greenyellow: "#adff2f",
+        grey: "#808080",
+        honeydew: "#f0fff0",
+        hotpink: "#ff69b4",
+        indianred: "#cd5c5c",
+        indigo: "#4b0082",
+        ivory: "#fffff0",
+        khaki: "#f0e68c",
+        lavender: "#e6e6fa",
+        lavenderblush: "#fff0f5",
+        lawngreen: "#7cfc00",
+        lemonchiffon: "#fffacd",
+        lightblue: "#add8e6",
+        lightcoral: "#f08080",
+        lightcyan: "#e0ffff",
+        lightgoldenrodyellow: "#fafad2",
+        lightgray: "#d3d3d3",
+        lightgreen: "#90ee90",
+        lightgrey: "#d3d3d3",
+        lightpink: "#ffb6c1",
+        lightsalmon: "#ffa07a",
+        lightseagreen: "#20b2aa",
+        lightskyblue: "#87cefa",
+        lightslategray: "#778899",
+        lightslategrey: "#778899",
+        lightsteelblue: "#b0c4de",
+        lightyellow: "#ffffe0",
+        lime: "#00ff00",
+        limegreen: "#32cd32",
+        linen: "#faf0e6",
+        magenta: "#ff00ff",
+        maroon: "#800000",
+        mediumaquamarine: "#66cdaa",
+        mediumblue: "#0000cd",
+        mediumorchid: "#ba55d3",
+        mediumpurple: "#9370db",
+        mediumseagreen: "#3cb371",
+        mediumslateblue: "#7b68ee",
+        mediumspringgreen: "#00fa9a",
+        mediumturquoise: "#48d1cc",
+        mediumvioletred: "#c71585",
+        midnightblue: "#191970",
+        mintcream: "#f5fffa",
+        mistyrose: "#ffe4e1",
+        moccasin: "#ffe4b5",
+        navajowhite: "#ffdead",
+        navy: "#000080",
+        oldlace: "#fdf5e6",
+        olive: "#808000",
+        olivedrab: "#6b8e23",
+        orange: "#ffa500",
+        orangered: "#ff4500",
+        orchid: "#da70d6",
+        palegoldenrod: "#eee8aa",
+        palegreen: "#98fb98",
+        paleturquoise: "#afeeee",
+        palevioletred: "#db7093",
+        papayawhip: "#ffefd5",
+        peachpuff: "#ffdab9",
+        peru: "#cd853f",
+        pink: "#ffc0cb",
+        plum: "#dda0dd",
+        powderblue: "#b0e0e6",
+        purple: "#800080",
+        rebeccapurple: "#663399",
+        red: "#ff0000",
+        rosybrown: "#bc8f8f",
+        royalblue: "#4169e1",
+        saddlebrown: "#8b4513",
+        salmon: "#fa8072",
+        sandybrown: "#f4a460",
+        seagreen: "#2e8b57",
+        seashell: "#fff5ee",
+        sienna: "#a0522d",
+        silver: "#c0c0c0",
+        skyblue: "#87ceeb",
+        slateblue: "#6a5acd",
+        slategray: "#708090",
+        slategrey: "#708090",
+        snow: "#fffafa",
+        springgreen: "#00ff7f",
+        steelblue: "#4682b4",
+        tan: "#d2b48c",
+        teal: "#008080",
+        thistle: "#d8bfd8",
+        tomato: "#ff6347",
+        turquoise: "#40e0d0",
+        violet: "#ee82ee",
+        wheat: "#f5deb3",
+        white: "#ffffff",
+        whitesmoke: "#f5f5f5",
+        yellow: "#ffff00",
+        yellowgreen: "#9acd32",
+    };
+})($ || ($ = {}));
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $mol_list_demo_table extends $.$mol_list_demo_table {
+            rows() {
+                return $mol_range2(index => this.Row(index), () => this.count());
+            }
+            check_list() {
+                return Array.from({ length: this.count() }, (_, i) => this.Id(i));
+            }
+            row_id(id) {
+                return String(id).padStart(5, '0');
+            }
+            row_title(id) {
+                $mol_wire_solid();
+                return $mol_stub_product_name();
+            }
+            row_quantity(id, next = Math.floor(Math.random() * 100)) {
+                $mol_wire_solid();
+                return next;
+            }
+            row_status(id, next = $mol_array_lottery(Object.keys(this.status_options()))) {
+                $mol_wire_solid();
+                return next;
+            }
+            row_uri(id) {
+                return `http://xkcd.com/${this.row_id(id)}`;
+            }
+            row_moment(id, next = new $mol_time_moment().shift({
+                day: Math.floor(Math.random() * 100)
+            })) {
+                $mol_wire_solid();
+                return next;
+            }
+            colors() {
+                return Object.keys($mol_colors);
+            }
+            row_color(id, next) {
+                $mol_wire_solid();
+                return next ?? $mol_array_lottery(this.colors());
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $mol_list_demo_table.prototype, "rows", null);
+        __decorate([
+            $mol_mem
+        ], $mol_list_demo_table.prototype, "check_list", null);
+        __decorate([
+            $mol_mem_key
+        ], $mol_list_demo_table.prototype, "row_title", null);
+        __decorate([
+            $mol_mem_key
+        ], $mol_list_demo_table.prototype, "row_quantity", null);
+        __decorate([
+            $mol_mem_key
+        ], $mol_list_demo_table.prototype, "row_status", null);
+        __decorate([
+            $mol_mem_key
+        ], $mol_list_demo_table.prototype, "row_uri", null);
+        __decorate([
+            $mol_mem_key
+        ], $mol_list_demo_table.prototype, "row_moment", null);
+        __decorate([
+            $mol_mem
+        ], $mol_list_demo_table.prototype, "colors", null);
+        __decorate([
+            $mol_mem_key
+        ], $mol_list_demo_table.prototype, "row_color", null);
+        $$.$mol_list_demo_table = $mol_list_demo_table;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        const { rem } = $mol_style_unit;
+        $mol_style_define($mol_list_demo_table, {
+            flex: {
+                direction: 'column',
+            },
+            Rows: {
+                flex: {
+                    grow: 1,
+                },
+            },
+            Row: {
+                boxShadow: `0 -1px 0 0 ${$mol_theme.line}`,
+            },
+            Title_labeler: {
+                flex: {
+                    basis: rem(15),
+                },
+            },
+            Color_labeler: {
+                flex: {
+                    basis: rem(10),
+                },
+            },
+            Id_labeler: {
+                flex: {
+                    basis: rem(5),
+                },
+                Label: {
+                    padding: {
+                        inlineStart: '2rem',
+                    },
+                },
+            },
+            Id: {
+                padding: $mol_gap.text,
+            },
+        });
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+	($.$rise_bench_baza_goods_table) = class $rise_bench_baza_goods_table extends ($.$mol_list_demo_table) {
+		Compact_id(id){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.row_id(id))]);
+			return obj;
+		}
+		row_description(id){
+			return "";
+		}
+		Description(id){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.row_description(id))]);
+			return obj;
+		}
+		Description_labeler(id){
+			const obj = new this.$.$mol_labeler();
+			(obj.title) = () => ("Description");
+			(obj.content) = () => ([(this.Description(id))]);
+			return obj;
+		}
+		row_tags(id){
+			return [];
+		}
+		Tags(id){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ((this.row_tags(id)));
+			return obj;
+		}
+		Tags_labeler(id){
+			const obj = new this.$.$mol_labeler();
+			(obj.title) = () => ("Tags");
+			(obj.content) = () => ([(this.Tags(id))]);
+			return obj;
+		}
+		Name(id){
+			const obj = new this.$.$mol_dimmer();
+			(obj.haystack) = () => ((this.row_title(id)));
+			(obj.needle) = () => ((this.query()));
+			return obj;
+		}
+		row_date(id){
+			return "";
+		}
+		count(){
+			return 1000;
+		}
+		products(){
+			return [];
+		}
+		compact(){
+			return false;
+		}
+		query(){
+			return "";
+		}
+		color_filter(){
+			return "all";
+		}
+		status_filter(){
+			return "all";
+		}
+		Compact_id_labeler(id){
+			const obj = new this.$.$mol_labeler();
+			(obj.title) = () => ("ID");
+			(obj.content) = () => ([(this.Compact_id(id))]);
+			return obj;
+		}
+		Details(id){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.Description_labeler(id)), (this.Tags_labeler(id))]);
+			return obj;
+		}
+		Row(id){
+			const obj = new this.$.$mol_view();
+			(obj.minimal_height) = () => (96);
+			(obj.sub) = () => ((this.row_content(id)));
+			return obj;
+		}
+		Title(id){
+			const obj = new this.$.$mol_link_iconed();
+			(obj.uri) = () => ((this.row_uri(id)));
+			(obj.title) = () => ((this.row_title(id)));
+			(obj.content) = () => ([(this.Name(id))]);
+			return obj;
+		}
+		Date(id){
+			const obj = new this.$.$mol_date();
+			(obj.value_moment) = (next) => ((this.row_moment(id, next)));
+			(obj.trigger_content) = () => ([(this.row_date(id))]);
+			return obj;
+		}
+	};
+	($mol_mem_key(($.$rise_bench_baza_goods_table.prototype), "Compact_id"));
+	($mol_mem_key(($.$rise_bench_baza_goods_table.prototype), "Description"));
+	($mol_mem_key(($.$rise_bench_baza_goods_table.prototype), "Description_labeler"));
+	($mol_mem_key(($.$rise_bench_baza_goods_table.prototype), "Tags"));
+	($mol_mem_key(($.$rise_bench_baza_goods_table.prototype), "Tags_labeler"));
+	($mol_mem_key(($.$rise_bench_baza_goods_table.prototype), "Name"));
+	($mol_mem_key(($.$rise_bench_baza_goods_table.prototype), "Compact_id_labeler"));
+	($mol_mem_key(($.$rise_bench_baza_goods_table.prototype), "Details"));
+	($mol_mem_key(($.$rise_bench_baza_goods_table.prototype), "Row"));
+	($mol_mem_key(($.$rise_bench_baza_goods_table.prototype), "Title"));
+	($mol_mem_key(($.$rise_bench_baza_goods_table.prototype), "Date"));
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    class $rise_bench_baza_goods_tag extends $giper_baza_entity {
+    }
+    $.$rise_bench_baza_goods_tag = $rise_bench_baza_goods_tag;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    class $rise_bench_baza_goods_product extends $giper_baza_entity.with({
+        Id: $giper_baza_atom_text,
+        Checked: $giper_baza_atom_bool,
+        Uri: $giper_baza_atom_text,
+        Color: $giper_baza_atom_text,
+        Status: $giper_baza_atom_text,
+        Quantity: $giper_baza_atom_real,
+        Supply: $giper_baza_atom_time,
+        Description: $giper_baza_atom_text,
+        Tags: $giper_baza_list_link.to(() => $rise_bench_baza_goods_tag),
+    }) {
+    }
+    $.$rise_bench_baza_goods_product = $rise_bench_baza_goods_product;
+})($ || ($ = {}));
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $rise_bench_baza_goods_table extends $.$rise_bench_baza_goods_table {
+            count() { return this.products().length; }
+            row_content(id) {
+                return this.compact()
+                    ? [this.Compact_id_labeler(id), this.Title_labeler(id), this.Color_labeler(id), this.Status_labeler(id)]
+                    : [...super.row_content(id), this.Details(id)];
+            }
+            row_description(id) { return this.products()[id].Description()?.val() ?? ''; }
+            row_tags(id) {
+                const tags = this.products()[id].Tags()?.remote_list() ?? [];
+                return [tags.map(tag => tag.Title()?.val() ?? '').join(', ')];
+            }
+            rows() {
+                const count = this.count();
+                const color = this.color_filter();
+                const status = this.status_filter();
+                const terms = this.query().trim().toLowerCase().split(/\s+/).filter(Boolean);
+                if (!terms.length && color === 'all' && status === 'all')
+                    return $mol_range2(index => this.Row(count - index - 1), () => count);
+                const matches = [];
+                for (let index = count - 1; index >= 0; --index) {
+                    if (color !== 'all' && this.row_color(index) !== color)
+                        continue;
+                    if (status !== 'all' && this.row_status(index) !== status)
+                        continue;
+                    if (terms.length && !terms.every(term => this.row_title(index).toLowerCase().includes(term)))
+                        continue;
+                    matches.push(index);
+                }
+                return $mol_range2(index => this.Row(matches[index]), () => matches.length);
+            }
+            row_id(id) { return this.products()[id].Id().val(); }
+            row_title(id) { return this.products()[id].Title().val(); }
+            row_uri(id) { return this.compact() ? `https://xkcd.com/${Number(this.row_id(id)) + 1}/` : this.products()[id].Uri().val(); }
+            row_checked(id, next) {
+                return this.products()[id].Checked().val(next) ?? false;
+            }
+            row_color(id, next) {
+                return this.products()[id].Color().val(next) ?? '';
+            }
+            row_status(id, next) {
+                return this.products()[id].Status().val(next) ?? '';
+            }
+            row_quantity(id, next) {
+                return this.products()[id].Quantity().val(next) ?? 0;
+            }
+            row_moment(id, next) {
+                return this.products()[id].Supply().val(next);
+            }
+            row_date(id) { return this.row_moment(id).toString('DD.MM.YYYY'); }
+        }
+        __decorate([
+            $mol_mem
+        ], $rise_bench_baza_goods_table.prototype, "rows", null);
+        __decorate([
+            $mol_mem_key
+        ], $rise_bench_baza_goods_table.prototype, "row_title", null);
+        $$.$rise_bench_baza_goods_table = $rise_bench_baza_goods_table;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        $mol_style_define($rise_bench_baza_goods_table, {
+            Compact_id_labeler: { flex: { basis: $mol_style_unit.rem(5) } },
+            Row: {
+                // Restore the spacing visible in the original table, requested by the user.
+                minHeight: $mol_style_unit.px(96),
+                flex: { wrap: 'wrap' },
+                padding: $mol_gap.block,
+                gap: $mol_gap.block,
+                alignItems: 'flex-start',
+            },
+            Details: { flex: { basis: '100%', wrap: 'wrap' }, gap: $mol_gap.block },
+            Description_labeler: { flex: { basis: $mol_style_unit.rem(30), shrink: 1 } },
+            Description: { flex: { shrink: 1 }, minWidth: 0 },
+        });
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+	($.$rise_bench_baza_goods) = class $rise_bench_baza_goods extends ($.$mol_book2) {
+		title(){
+			return "Сущности";
+		}
+		content(){
+			return [];
+		}
+		Storage_label(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => (["Хранение: одна Area на запись"]);
+			return obj;
+		}
+		controls_enabled(){
+			return true;
+		}
+		schema_mode(next){
+			if(next !== undefined) return next;
+			return "compact";
+		}
+		Schema(){
+			const obj = new this.$.$mol_switch();
+			(obj.enabled) = () => ((this.controls_enabled()));
+			(obj.value) = (next) => ((this.schema_mode(next)));
+			(obj.options) = () => ({"compact": "4 свойства", "full": "10 свойств"});
+			return obj;
+		}
+		Schema_label(){
+			const obj = new this.$.$mol_labeler();
+			(obj.title) = () => ("Состав записи");
+			(obj.Content) = () => ((this.Schema()));
+			return obj;
+		}
+		count_mode(next){
+			if(next !== undefined) return next;
+			return "100";
+		}
+		Count(){
+			const obj = new this.$.$mol_switch();
+			(obj.enabled) = () => ((this.controls_enabled()));
+			(obj.value) = (next) => ((this.count_mode(next)));
+			(obj.options) = () => ({
+				"100": "100", 
+				"500": "500", 
+				"1000": "1000", 
+				"2000": "2000", 
+				"3000": "3000", 
+				"4000": "4000", 
+				"5000": "5000", 
+				"10000": "10000"
+			});
+			return obj;
+		}
+		Count_label(){
+			const obj = new this.$.$mol_labeler();
+			(obj.title) = () => ("Количество записей");
+			(obj.Content) = () => ((this.Count()));
+			return obj;
+		}
+		create_enabled(){
+			return true;
+		}
+		benchmark(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Create(){
+			const obj = new this.$.$mol_button_major();
+			(obj.title) = () => ("Запустить бенчмарк");
+			(obj.enabled) = () => ((this.create_enabled()));
+			(obj.click) = (next) => ((this.benchmark(next)));
+			return obj;
+		}
+		add_enabled(){
+			return true;
+		}
+		add_one(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Add(){
+			const obj = new this.$.$mol_button_minor();
+			(obj.title) = () => ("Добавить запись");
+			(obj.enabled) = () => ((this.add_enabled()));
+			(obj.click) = (next) => ((this.add_one(next)));
+			return obj;
+		}
+		reset(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Reset(){
+			const obj = new this.$.$mol_button_minor();
+			(obj.title) = () => ("Сбросить");
+			(obj.enabled) = () => ((this.controls_enabled()));
+			(obj.click) = (next) => ((this.reset(next)));
+			return obj;
+		}
+		Actions(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([
+				(this.Create()), 
+				(this.Add()), 
+				(this.Reset())
+			]);
+			return obj;
+		}
+		search_query(next){
+			return (this.Search().query(next));
+		}
+		Search(){
+			const obj = new this.$.$mol_search();
+			(obj.hint) = () => ("Название товара");
+			return obj;
+		}
+		Search_label(){
+			const obj = new this.$.$mol_labeler();
+			(obj.title) = () => ("Поиск по названию");
+			(obj.content) = () => ([(this.Search())]);
+			return obj;
+		}
+		color_filter(next){
+			if(next !== undefined) return next;
+			return "all";
+		}
+		Color_filter(){
+			const obj = new this.$.$mol_select();
+			(obj.value) = (next) => ((this.color_filter(next)));
+			(obj.dictionary) = () => ({
+				"all": "All colors", 
+				"red": "red", 
+				"green": "green", 
+				"blue": "blue"
+			});
+			return obj;
+		}
+		Color_label(){
+			const obj = new this.$.$mol_labeler();
+			(obj.title) = () => ("Color");
+			(obj.Content) = () => ((this.Color_filter()));
+			return obj;
+		}
+		status_filter(next){
+			if(next !== undefined) return next;
+			return "all";
+		}
+		Status_filter(){
+			const obj = new this.$.$mol_select();
+			(obj.value) = (next) => ((this.status_filter(next)));
+			(obj.dictionary) = () => ({
+				"all": "All statuses", 
+				"minor": "Store", 
+				"major": "Sale", 
+				"critical": "Support"
+			});
+			return obj;
+		}
+		Status_label(){
+			const obj = new this.$.$mol_labeler();
+			(obj.title) = () => ("Status");
+			(obj.Content) = () => ((this.Status_filter()));
+			return obj;
+		}
+		app_title(){
+			return "Товары";
+		}
+		body_scroll_top(next){
+			return (this.Records().body_scroll_top(next));
+		}
+		Metrics(){
+			const obj = new this.$.$rise_bench_metrics();
+			(obj.operations) = () => ([
+				"Создание, с", 
+				"Поиск, с", 
+				"Добавить 1, с", 
+				"F5, с", 
+				"Поиск после F5, с"
+			]);
+			return obj;
+		}
+		products(){
+			return [];
+		}
+		compact_mode(){
+			return false;
+		}
+		Table(){
+			const obj = new this.$.$rise_bench_baza_goods_table();
+			(obj.products) = () => ((this.products()));
+			(obj.compact) = () => ((this.compact_mode()));
+			(obj.query) = () => ((this.search_query()));
+			(obj.color_filter) = () => ((this.color_filter()));
+			(obj.status_filter) = () => ((this.status_filter()));
+			return obj;
+		}
+		menu_title(){
+			return (this.title());
+		}
+		pages(){
+			return (this.content());
+		}
+		Settings(){
+			const obj = new this.$.$mol_page();
+			(obj.title) = () => ("Настройки");
+			(obj.minimal_width) = () => (320);
+			(obj.body) = () => ([
+				(this.Storage_label()), 
+				(this.Schema_label()), 
+				(this.Count_label()), 
+				(this.Actions()), 
+				(this.Search_label()), 
+				(this.Color_label()), 
+				(this.Status_label())
+			]);
+			return obj;
+		}
+		Records(){
+			const obj = new this.$.$mol_page();
+			(obj.title) = () => ((this.app_title()));
+			(obj.minimal_width) = () => (640);
+			(obj.body) = () => ([(this.Metrics()), (this.Table())]);
+			return obj;
+		}
+	};
+	($mol_mem(($.$rise_bench_baza_goods.prototype), "Storage_label"));
+	($mol_mem(($.$rise_bench_baza_goods.prototype), "schema_mode"));
+	($mol_mem(($.$rise_bench_baza_goods.prototype), "Schema"));
+	($mol_mem(($.$rise_bench_baza_goods.prototype), "Schema_label"));
+	($mol_mem(($.$rise_bench_baza_goods.prototype), "count_mode"));
+	($mol_mem(($.$rise_bench_baza_goods.prototype), "Count"));
+	($mol_mem(($.$rise_bench_baza_goods.prototype), "Count_label"));
+	($mol_mem(($.$rise_bench_baza_goods.prototype), "benchmark"));
+	($mol_mem(($.$rise_bench_baza_goods.prototype), "Create"));
+	($mol_mem(($.$rise_bench_baza_goods.prototype), "add_one"));
+	($mol_mem(($.$rise_bench_baza_goods.prototype), "Add"));
+	($mol_mem(($.$rise_bench_baza_goods.prototype), "reset"));
+	($mol_mem(($.$rise_bench_baza_goods.prototype), "Reset"));
+	($mol_mem(($.$rise_bench_baza_goods.prototype), "Actions"));
+	($mol_mem(($.$rise_bench_baza_goods.prototype), "Search"));
+	($mol_mem(($.$rise_bench_baza_goods.prototype), "Search_label"));
+	($mol_mem(($.$rise_bench_baza_goods.prototype), "color_filter"));
+	($mol_mem(($.$rise_bench_baza_goods.prototype), "Color_filter"));
+	($mol_mem(($.$rise_bench_baza_goods.prototype), "Color_label"));
+	($mol_mem(($.$rise_bench_baza_goods.prototype), "status_filter"));
+	($mol_mem(($.$rise_bench_baza_goods.prototype), "Status_filter"));
+	($mol_mem(($.$rise_bench_baza_goods.prototype), "Status_label"));
+	($mol_mem(($.$rise_bench_baza_goods.prototype), "Metrics"));
+	($mol_mem(($.$rise_bench_baza_goods.prototype), "Table"));
+	($mol_mem(($.$rise_bench_baza_goods.prototype), "Settings"));
+	($mol_mem(($.$rise_bench_baza_goods.prototype), "Records"));
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    class $rise_bench_baza_goods_dataset extends $giper_baza_entity.with({
+        Products: $giper_baza_list_link.to(() => $rise_bench_baza_goods_product),
+        Tags: $giper_baza_list_link.to(() => $rise_bench_baza_goods_tag),
+    }) {
+    }
+    $.$rise_bench_baza_goods_dataset = $rise_bench_baza_goods_dataset;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    // A stable host identity: wire must not serialize a growing products array as a task argument.
+    class $rise_bench_baza_goods_preparation {
+        dataset;
+        count;
+        compact;
+        products = [];
+        links;
+        date = new $mol_time_moment('2026-10-05');
+        tag_links = [];
+        constructor(dataset, count, compact = false) {
+            this.dataset = dataset;
+            this.count = count;
+            this.compact = compact;
+        }
+    }
+    $.$rise_bench_baza_goods_preparation = $rise_bench_baza_goods_preparation;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    function $rise_bench_product_name(index) {
+        const brands = ['Aurora', 'Orion', 'Vega', 'Nova', 'Atlas', 'Pixel', 'Aero', 'Terra', 'Lumen', 'Zen'];
+        const models = ['Wireless', 'Compact', 'Pro', 'Mini', 'Classic', 'Smart', 'Portable', 'Studio', 'Premium', 'Travel'];
+        const types = ['Notebook', 'Headphones', 'Monitor', 'Mouse', 'Keyboard', 'Camera', 'Printer', 'Router', 'Speaker', 'Watch'];
+        return `${brands[Math.floor(index / 10) % 10]} ${models[Math.floor(index / 100) % 10]} ${types[index % 10]} ${String(index).padStart(5, '0')}`;
+    }
+    $.$rise_bench_product_name = $rise_bench_product_name;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    function $rise_bench_baza_goods_product_name(index) {
+        return $rise_bench_product_name(index);
+    }
+    $.$rise_bench_baza_goods_product_name = $rise_bench_baza_goods_product_name;
+})($ || ($ = {}));
+
+;
+	($.$rise_bug_baza_nohash) = class $rise_bug_baza_nohash extends ($.$mol_page) {
+		Baza_status(){
+			const obj = new this.$.$giper_baza_status();
+			return obj;
+		}
+		entity_reset(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Reset(){
+			const obj = new this.$.$mol_button_minor();
+			(obj.click) = (next) => ((this.entity_reset(next)));
+			return obj;
+		}
+		entity(){
+			return null;
+		}
+		add(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Add(){
+			const obj = new this.$.$mol_button_minor();
+			(obj.click) = (next) => ((this.add(next)));
+			return obj;
+		}
+		id(id){
+			return "0";
+		}
+		Item(id){
+			const obj = new this.$.$mol_button_minor();
+			(obj.title) = () => ((this.id(id)));
+			return obj;
+		}
+		items(){
+			return [(this.Item("0"))];
+		}
+		Items(){
+			const obj = new this.$.$mol_list();
+			(obj.sub) = () => ((this.items()));
+			return obj;
+		}
+		body(){
+			return [
+				(this.Baza_status()), 
+				(this.Reset()), 
+				(this.entity()), 
+				(this.Add()), 
+				(this.Items())
+			];
+		}
+	};
+	($mol_mem(($.$rise_bug_baza_nohash.prototype), "Baza_status"));
+	($mol_mem(($.$rise_bug_baza_nohash.prototype), "entity_reset"));
+	($mol_mem(($.$rise_bug_baza_nohash.prototype), "Reset"));
+	($mol_mem(($.$rise_bug_baza_nohash.prototype), "add"));
+	($mol_mem(($.$rise_bug_baza_nohash.prototype), "Add"));
+	($mol_mem_key(($.$rise_bug_baza_nohash.prototype), "Item"));
+	($mol_mem(($.$rise_bug_baza_nohash.prototype), "Items"));
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $rise_bug_baza_nohash_entity extends $giper_baza_entity.with({
+            Dict: $giper_baza_dict_to($giper_baza_atom_link_to(() => $giper_baza_atom_text)),
+            List: $giper_baza_list_link_to(() => $giper_baza_atom_text),
+        }) {
+        }
+        $$.$rise_bug_baza_nohash_entity = $rise_bug_baza_nohash_entity;
+        class $rise_bug_baza_nohash extends $.$rise_bug_baza_nohash {
+            entity_reset() {
+                this.entity(null);
+            }
+            entity(reset) {
+                const land = this.$.$giper_baza_glob.land_grab([[null, $giper_baza_rank_deny]]);
+                return land.Data($rise_bug_baza_nohash_entity);
+            }
+            id(id) {
+                return id;
+            }
+            items() {
+                return this.entity().List()?.remote_list().map(i => this.Item(i.link().str)) ?? [];
+            }
+            add(next) {
+                const entity = this.entity();
+                const item = entity.List(null)?.make(entity.land());
+                const title = item?.link().toString() ?? '';
+                item?.val(title);
+                entity.Dict(null)?.key(title, 'auto');
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $rise_bug_baza_nohash.prototype, "entity", null);
+        $$.$rise_bug_baza_nohash = $rise_bug_baza_nohash;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+	($.$rise_bug_baza_noseal) = class $rise_bug_baza_noseal extends ($.$mol_page) {
+		Baza_status(){
+			const obj = new this.$.$giper_baza_status();
+			return obj;
+		}
+		entity_reset(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Reset(){
+			const obj = new this.$.$mol_button_minor();
+			(obj.click) = (next) => ((this.entity_reset(next)));
+			return obj;
+		}
+		entity(){
+			return null;
+		}
+		add(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Add(){
+			const obj = new this.$.$mol_button_minor();
+			(obj.click) = (next) => ((this.add(next)));
+			return obj;
+		}
+		id(id){
+			return "0";
+		}
+		Item(id){
+			const obj = new this.$.$mol_button_minor();
+			(obj.title) = () => ((this.id(id)));
+			return obj;
+		}
+		items(){
+			return [(this.Item("0"))];
+		}
+		Items(){
+			const obj = new this.$.$mol_list();
+			(obj.sub) = () => ((this.items()));
+			return obj;
+		}
+		body(){
+			return [
+				(this.Baza_status()), 
+				(this.Reset()), 
+				(this.entity()), 
+				(this.Add()), 
+				(this.Items())
+			];
+		}
+	};
+	($mol_mem(($.$rise_bug_baza_noseal.prototype), "Baza_status"));
+	($mol_mem(($.$rise_bug_baza_noseal.prototype), "entity_reset"));
+	($mol_mem(($.$rise_bug_baza_noseal.prototype), "Reset"));
+	($mol_mem(($.$rise_bug_baza_noseal.prototype), "add"));
+	($mol_mem(($.$rise_bug_baza_noseal.prototype), "Add"));
+	($mol_mem_key(($.$rise_bug_baza_noseal.prototype), "Item"));
+	($mol_mem(($.$rise_bug_baza_noseal.prototype), "Items"));
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $rise_bug_baza_noseal_entity extends $giper_baza_entity.with({
+            Dict: $giper_baza_dict_to($giper_baza_atom_link_to(() => $giper_baza_atom_text)),
+            List: $giper_baza_list_link_to(() => $giper_baza_atom_text),
+        }) {
+        }
+        $$.$rise_bug_baza_noseal_entity = $rise_bug_baza_noseal_entity;
+        class $rise_bug_baza_noseal extends $.$rise_bug_baza_noseal {
+            entity_reset() {
+                this.link_str(null);
+            }
+            link_str(next) {
+                if (next) {
+                    return $mol_state_arg.value('link_str', next);
+                }
+                let str = $mol_state_arg.value('link_str');
+                if (str && next !== null)
+                    return str;
+                const land = this.$.$giper_baza_glob.land_grab([[null, $giper_baza_rank_deny]]);
+                return $mol_state_arg.value('link_str', land.link().str);
+            }
+            entity(reset) {
+                const link = new $giper_baza_link(this.link_str());
+                const land = this.$.$giper_baza_glob.Land(link);
+                return land.Data($rise_bug_baza_noseal_entity);
+            }
+            id(id) {
+                return id;
+            }
+            items() {
+                return this.entity().List()?.remote_list().map(i => this.Item(i.link().str)) ?? [];
+            }
+            add(next) {
+                const entity = this.entity();
+                const item = entity.List(null)?.make(entity.land());
+                const title = item?.link().toString() ?? '';
+                item?.val(title);
+                entity.Dict(null)?.key($mol_wire_sync($).$mol_guid(), 'auto');
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $rise_bug_baza_noseal.prototype, "link_str", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bug_baza_noseal.prototype, "entity", null);
+        $$.$rise_bug_baza_noseal = $rise_bug_baza_noseal;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+	($.$rise_bug_baza_decrypt) = class $rise_bug_baza_decrypt extends ($.$mol_page) {
+		Baza_status(){
+			const obj = new this.$.$giper_baza_status();
+			return obj;
+		}
+		entity_reset(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Reset(){
+			const obj = new this.$.$mol_button_minor();
+			(obj.click) = (next) => ((this.entity_reset(next)));
+			return obj;
+		}
+		entity(){
+			return null;
+		}
+		add(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Add(){
+			const obj = new this.$.$mol_button_minor();
+			(obj.click) = (next) => ((this.add(next)));
+			return obj;
+		}
+		id(id){
+			return "0";
+		}
+		cut(id, next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Item(id){
+			const obj = new this.$.$mol_button_minor();
+			(obj.title) = () => ((this.id(id)));
+			(obj.click) = (next) => ((this.cut(id, next)));
+			return obj;
+		}
+		items(){
+			return [(this.Item("0"))];
+		}
+		Items(){
+			const obj = new this.$.$mol_list();
+			(obj.sub) = () => ((this.items()));
+			return obj;
+		}
+		body(){
+			return [
+				(this.Baza_status()), 
+				(this.Reset()), 
+				(this.entity()), 
+				(this.Add()), 
+				(this.Items())
+			];
+		}
+	};
+	($mol_mem(($.$rise_bug_baza_decrypt.prototype), "Baza_status"));
+	($mol_mem(($.$rise_bug_baza_decrypt.prototype), "entity_reset"));
+	($mol_mem(($.$rise_bug_baza_decrypt.prototype), "Reset"));
+	($mol_mem(($.$rise_bug_baza_decrypt.prototype), "add"));
+	($mol_mem(($.$rise_bug_baza_decrypt.prototype), "Add"));
+	($mol_mem_key(($.$rise_bug_baza_decrypt.prototype), "cut"));
+	($mol_mem_key(($.$rise_bug_baza_decrypt.prototype), "Item"));
+	($mol_mem(($.$rise_bug_baza_decrypt.prototype), "Items"));
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $rise_bug_baza_decrypt_entity extends $giper_baza_entity.with({
+            Dict: $giper_baza_dict_to($giper_baza_atom_link_to(() => $giper_baza_atom_text)),
+            List: $giper_baza_list_link_to(() => $giper_baza_atom_text),
+        }) {
+        }
+        $$.$rise_bug_baza_decrypt_entity = $rise_bug_baza_decrypt_entity;
+        class $rise_bug_baza_decrypt extends $.$rise_bug_baza_decrypt {
+            entity_reset() {
+                this.link_str(null);
+            }
+            link_str(next) {
+                if (next) {
+                    return $mol_state_arg.value('link_str', next);
+                }
+                let str = $mol_state_arg.value('link_str');
+                if (str && next !== null)
+                    return str;
+                const land = this.$.$giper_baza_glob.land_grab([[null, $giper_baza_rank_deny]]);
+                return $mol_state_arg.value('link_str', land.link().str);
+            }
+            entity(reset) {
+                const link = new $giper_baza_link(this.link_str());
+                const land = this.$.$giper_baza_glob.Land(link);
+                return land.Data($rise_bug_baza_decrypt_entity);
+            }
+            id(id) {
+                return id;
+            }
+            items() {
+                return this.entity().List()?.remote_list().map(i => this.Item(i.link().str)) ?? [];
+            }
+            add(next) {
+                const entity = this.entity();
+                const item = entity.List(null)?.make([[null, $giper_baza_rank_deny]]);
+                const title = item?.link().str ?? '';
+                item?.val(title);
+                entity.Dict(null)?.key($mol_wire_sync($).$mol_guid(), 'auto');
+            }
+            cut(id, next) {
+                this.entity().List()?.cut(new $giper_baza_link(id));
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $rise_bug_baza_decrypt.prototype, "link_str", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bug_baza_decrypt.prototype, "entity", null);
+        $$.$rise_bug_baza_decrypt = $rise_bug_baza_decrypt;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+	($.$rise_bug_baza_slowtext) = class $rise_bug_baza_slowtext extends ($.$mol_page) {
+		Baza_status(){
+			const obj = new this.$.$giper_baza_status();
+			return obj;
+		}
+		entity_reset(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Reset(){
+			const obj = new this.$.$mol_button_minor();
+			(obj.click) = (next) => ((this.entity_reset(next)));
+			return obj;
+		}
+		entity(){
+			return null;
+		}
+		text(next){
+			if(next !== undefined) return next;
+			return "";
+		}
+		Text(){
+			const obj = new this.$.$mol_textarea();
+			(obj.value) = (next) => ((this.text(next)));
+			return obj;
+		}
+		body(){
+			return [
+				(this.Baza_status()), 
+				(this.Reset()), 
+				(this.entity()), 
+				(this.Text())
+			];
+		}
+	};
+	($mol_mem(($.$rise_bug_baza_slowtext.prototype), "Baza_status"));
+	($mol_mem(($.$rise_bug_baza_slowtext.prototype), "entity_reset"));
+	($mol_mem(($.$rise_bug_baza_slowtext.prototype), "Reset"));
+	($mol_mem(($.$rise_bug_baza_slowtext.prototype), "text"));
+	($mol_mem(($.$rise_bug_baza_slowtext.prototype), "Text"));
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $rise_bug_baza_slowtext_entity extends $giper_baza_entity.with({
+            Text: $giper_baza_text,
+        }) {
+        }
+        $$.$rise_bug_baza_slowtext_entity = $rise_bug_baza_slowtext_entity;
+        class $rise_bug_baza_slowtext extends $.$rise_bug_baza_slowtext {
+            entity_reset() {
+                this.link_str(null);
+            }
+            link_str(next) {
+                if (next) {
+                    return $mol_state_arg.value('link_str', next);
+                }
+                let str = $mol_state_arg.value('link_str');
+                if (str && next !== null)
+                    return str;
+                const land = this.$.$giper_baza_glob.land_grab([[null, $giper_baza_rank_deny]]);
+                return $mol_state_arg.value('link_str', land.link().str);
+            }
+            entity() {
+                const link = new $giper_baza_link(this.link_str());
+                const land = this.$.$giper_baza_glob.Land(link);
+                const entity = land.Data($rise_bug_baza_slowtext_entity);
+                entity.Text(null);
+                return entity;
+            }
+            text(next) {
+                return this.entity().Text(next)?.value(next) ?? '';
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $rise_bug_baza_slowtext.prototype, "link_str", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bug_baza_slowtext.prototype, "entity", null);
+        $$.$rise_bug_baza_slowtext = $rise_bug_baza_slowtext;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+	($.$rise_bug) = class $rise_bug extends ($.$mol_book2_catalog) {
+		placeholders(){
+			return [];
+		}
+		param(){
+			return "bug";
+		}
+		spread_classes(){
+			return [
+				"$rise_bug_baza_nohash", 
+				"$rise_bug_baza_noseal", 
+				"$rise_bug_baza_decrypt", 
+				"$rise_bug_baza_slowtext"
+			];
+		}
+	};
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $rise_bug extends $.$rise_bug {
+            spreads() {
+                const dict = Object.fromEntries(this.spread_classes().map(name => {
+                    return [name, new (this.$[name])];
+                }));
+                return dict;
+            }
+        }
+        $$.$rise_bug = $rise_bug;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    /** Stable operation identity and clock across wire suspension/replay. */
+    class $rise_bench_measure {
+        title;
+        count;
+        unit;
+        started = performance.now();
+        duration = null;
+        constructor(title, count = 0, unit = 'зап.') {
+            this.title = title;
+            this.count = count;
+            this.unit = unit;
+        }
+        finish() { this.duration ??= performance.now() - this.started; }
+    }
+    $.$rise_bench_measure = $rise_bench_measure;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    /** Small result metadata only. Never stores a workload Land or database name. */
+    class $rise_bench_archive extends $mol_object {
+        static link = 'CdQsmv8O_YAqIGknH';
+        static operations(kind) {
+            return kind === 'text' ? ['Вставка, с', 'Добавить символ, с', 'F5, с']
+                : ['Создание, с', 'Поиск, с', 'Добавить 1, с', 'F5, с', 'Поиск после F5, с'];
+        }
+        static preset = [[null, $giper_baza_rank_post('just')]];
+        static provision() {
+            this.$.$giper_baza_auth.current().pass();
+            const land = $mol_wire_sync($giper_baza_glob).land_grab(this.preset);
+            land.Data($giper_baza_dict).dive('title', $giper_baza_atom_text, null).val('Rise benchmark results');
+            $mol_wire_sync(land).units_saving();
+            return land.link().str;
+        }
+        static root() {
+            if (!this.link)
+                throw new Error('Не настроен общий Land результатов');
+            return $giper_baza_glob.Land(new $giper_baza_link(this.link)).Data($giper_baza_dict);
+        }
+        static validate(value, operations) {
+            if (!value || typeof value !== 'object')
+                return null;
+            const row = value;
+            if (typeof row.id !== 'string' || !/^[\da-f-]{36}$/.test(row.id))
+                return null;
+            if (!Number.isSafeInteger(row.count) || row.count < 1 || row.count > 10000)
+                return null;
+            if (![0, 4, 10].includes(row.properties) || !['Готово', 'Ошибка'].includes(row.state))
+                return null;
+            if (typeof row.stamp !== 'string' || !/^\d{2}\.\d{2}\.\d{4} \d{2}:\d{2}:\d{2}$/.test(row.stamp))
+                return null;
+            if (typeof row.baza_version !== 'string' || !/^(?:[\da-f]{40}|—)$/.test(row.baza_version))
+                return null;
+            if (typeof row.benchmark_version !== 'string' || !/^\d+\.\d+\.\d+$/.test(row.benchmark_version))
+                return null;
+            if (!row.metrics || typeof row.metrics !== 'object')
+                return null;
+            const metrics = {};
+            for (const name of operations) {
+                const time = row.metrics[name];
+                if (time !== null && (typeof time !== 'number' || !Number.isFinite(time) || time < 0))
+                    return null;
+                metrics[name] = time;
+            }
+            return { id: row.id, count: row.count, properties: row.properties, stamp: row.stamp, state: row.state,
+                baza_version: row.baza_version, benchmark_version: row.benchmark_version, metrics };
+        }
+        static save(kind, row) {
+            if (!['goods', 'text', 'idb'].includes(kind))
+                throw new Error('Неизвестный бенчмарк');
+            const validated = this.validate(row, this.operations(kind));
+            if (!validated)
+                throw new Error('Некорректный результат бенчмарка');
+            const atom = this.root().dive(kind + ':' + row.id, $giper_baza_atom_text, null);
+            if (!atom)
+                throw new Error('Нет доступа к результатам');
+            atom.val(JSON.stringify(validated));
+            $mol_wire_sync(this.root().land()).units_saving();
+        }
+        static rows(kind) {
+            const root = this.root();
+            return root.keys().filter(key => typeof key === 'string' && key.startsWith(kind + ':')).flatMap(key => {
+                const text = root.dive(key, $giper_baza_atom_text)?.val();
+                const row = text && $mol_error_fence(() => this.validate(JSON.parse(text), this.operations(kind)), () => null);
+                if (!row)
+                    return [];
+                if (key !== kind + ':' + row.id)
+                    return [];
+                const run = new $rise_bench_run(row.count, row.properties, row.stamp, row.baza_version ?? '—', row.benchmark_version ?? '—', row.id);
+                run.state(row.state);
+                for (const [operation, value] of Object.entries(row.metrics))
+                    if (typeof value === 'number')
+                        run.metric(operation, value);
+                return [run];
+            });
+        }
+    }
+    __decorate([
+        $mol_action
+    ], $rise_bench_archive, "provision", null);
+    __decorate([
+        $mol_mem
+    ], $rise_bench_archive, "root", null);
+    __decorate([
+        $mol_action
+    ], $rise_bench_archive, "save", null);
+    __decorate([
+        $mol_mem_key
+    ], $rise_bench_archive, "rows", null);
+    $.$rise_bench_archive = $rise_bench_archive;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    /** Per-tab run history; the pending ticket belongs only to the next page. */
+    class $rise_bench_reload {
+        key;
+        snapshot;
+        constructor(key) {
+            this.key = key;
+            const saved = $mol_error_fence(() => JSON.parse(sessionStorage.getItem(key) || 'null'), () => null);
+            this.snapshot = Array.isArray(saved?.rows) ? saved : { rows: [], pending: null };
+        }
+        save(runs, operations, pending) {
+            const rows = runs.map(run => ({
+                count: run.count, properties: run.properties, stamp: run.stamp, state: run.state(),
+                baza_version: run.baza_version, benchmark_version: run.benchmark_version,
+                id: run.id,
+                metrics: Object.fromEntries(operations.map(operation => [operation, run.metric(operation)])),
+            }));
+            sessionStorage.setItem(this.key, JSON.stringify({ rows, pending }));
+            const kind = new URL(location.href).searchParams.get('rise_fixture');
+            if (window.parent !== window && !pending && ['Готово', 'Ошибка'].includes(rows[0]?.state)) {
+                window.parent.postMessage({ type: 'rise-bench-result', kind, row: rows[0] }, location.origin);
+            }
+        }
+    }
+    $.$rise_bench_reload = $rise_bench_reload;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    class $rise_bench_baza_goods_reload extends $rise_bench_reload {
+        constructor() { super('$rise_bench_baza_goods_runs'); }
+    }
+    $.$rise_bench_baza_goods_reload = $rise_bench_baza_goods_reload;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    /** Observe the real rendered viewport, then allow a paint before completing. */
+    class $rise_bench_baza_goods_reload_ready extends $mol_object {
+        table;
+        title;
+        constructor(table, title) {
+            super();
+            this.table = table;
+            this.title = title;
+        }
+        observer;
+        timer;
+        frame = 0;
+        pending;
+        visible() {
+            if (!this.table.isConnected)
+                return false;
+            const rows = [...this.table.querySelectorAll('[rise_bench_baza_goods_table_row]')].filter(row => {
+                const rect = row.getBoundingClientRect();
+                return rect.top < innerHeight && rect.bottom > 0;
+            });
+            return rows.length > 0
+                && rows[0].textContent.includes(this.title)
+                && rows.every(row => !row.querySelector('[mol_view_error]')
+                    && !!row.querySelector('[rise_bench_baza_goods_table_title]')?.textContent?.trim());
+        }
+        wait() {
+            return this.pending ??= new Promise((resolve, reject) => {
+                const check = () => {
+                    if (this.frame || !this.visible())
+                        return;
+                    this.frame = requestAnimationFrame(() => {
+                        this.frame = requestAnimationFrame(() => {
+                            this.frame = 0;
+                            if (!this.visible())
+                                return;
+                            this.destructor();
+                            resolve(performance.timeOrigin + performance.now());
+                        });
+                    });
+                };
+                this.observer = new MutationObserver(check);
+                this.observer.observe(this.table, { childList: true, subtree: true, attributes: true, characterData: true });
+                this.timer = setTimeout(() => {
+                    this.destructor();
+                    reject(new Error('После F5 товары не появились за 45 секунд'));
+                }, 45_000);
+                check();
+            });
+        }
+        destructor() {
+            this.observer?.disconnect();
+            if (this.timer)
+                clearTimeout(this.timer);
+            if (this.frame)
+                cancelAnimationFrame(this.frame);
+            super.destructor();
+        }
+    }
+    $.$rise_bench_baza_goods_reload_ready = $rise_bench_baza_goods_reload_ready;
+})($ || ($ = {}));
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $rise_bench_baza_goods extends $.$rise_bench_baza_goods {
+            preset = [[null, $giper_baza_rank_read]];
+            tag_names = ['Office', 'Home', 'Travel', 'Studio', 'Gaming', 'Portable', 'Wireless', 'Compact', 'Premium', 'Classic', 'New', 'Popular', 'Eco', 'Gift', 'Work', 'Creative', 'Audio', 'Video', 'Network', 'Accessories'];
+            prepare_tags(dataset) {
+                const list = dataset.Tags(null);
+                const existing = list.items();
+                if (existing.length === this.tag_names.length)
+                    return existing;
+                // Publish the catalog only after every referenced tag is fully initialized.
+                list.items($mol_wire_sync(this).prepare_catalog_links(dataset));
+                return list.items();
+            }
+            prepare_tag(dataset, index) {
+                const tag = dataset.land().Pawn($rise_bench_baza_goods_tag).Head($mol_wire_sync(dataset.land()).self_make());
+                tag.Title(null).val(this.tag_names[index]);
+                return tag;
+            }
+            prepare_catalog_links(dataset) {
+                return this.tag_names.map((_, index) => $mol_wire_sync(this).prepare_tag(dataset, index).link());
+            }
+            dataset_config() { return { count: this.record_count(), compact: this.compact_mode() }; }
+            prepare_dataset(config) {
+                // Resolve the local author before allocating another signing key. On a
+                // fresh profile, interleaving both initializations can strand king_grab.
+                this.$.$giper_baza_auth.current().pass();
+                const land = $mol_wire_sync($giper_baza_glob).land_grab(this.preset);
+                const dataset = land.Data($rise_bench_baza_goods_dataset);
+                dataset.Products(null);
+                return new $rise_bench_baza_goods_preparation(dataset, config.count, config.compact);
+            }
+            fill_product(state, index, product) {
+                product.Id(null).val(String(index).padStart(5, '0'));
+                product.Title(null).val($rise_bench_baza_goods_product_name(index));
+                product.Color(null).val(['red', 'green', 'blue'][index % 3]);
+                product.Status(null).val(['minor', 'major', 'critical'][index % 3]);
+                if (state.compact)
+                    return product;
+                product.Checked(null).val(false);
+                product.Uri(null).val(`https://xkcd.com/${index + 1}/`);
+                product.Quantity(null).val(index % 100);
+                product.Supply(null).val(state.date);
+                product.Description(null).val(`${$rise_bench_baza_goods_product_name(index)} — sample product for the local CRDT benchmark.`);
+                const tags = $mol_wire_sync(this).prepare_tags(state.dataset);
+                // Link.toBin caches bytes relative to its first Land; do not reuse catalog
+                // link instances when serializing the references into another Area.
+                product.Tags(null).items(state.tag_links[index] ??= Array.from({ length: 5 }, (_, offset) => new $giper_baza_link(tags[(index + offset * 3) % tags.length].str)));
+                return product;
+            }
+            initialize_product(key) {
+                const [state, index] = key;
+                // This initializer is only invoked by Create. A completed record has no
+                // remaining write dependencies and is never recreated on async replay.
+                if (state.products[index])
+                    return state.products[index];
+                const product = $mol_wire_sync(state.dataset.land()).area_make().Data($rise_bench_baza_goods_product);
+                return state.products[index] = this.fill_product(state, index, product);
+            }
+            schema_mode(next) {
+                return $mol_state_arg.value('schema', next) === 'full' ? 'full' : 'compact';
+            }
+            compact_mode() { return this.schema_mode() === 'compact'; }
+            count_mode(next) {
+                const count = $mol_state_arg.value('count', next);
+                return count && Object.hasOwn(this.Count().options(), count) ? count : '100';
+            }
+            record_count() { return Number(this.count_mode()); }
+            app_title() { return `Товары: ${this.record_count()} записей`; }
+            dataset_link(next) {
+                // Keep existing Area datasets; retired single/shard datasets stay untouched.
+                const key = '$rise_bug_listbaza_dataset_names2_area' + (this.record_count() === 1000 ? '' : '_' + this.record_count()) + (this.compact_mode() ? '_compact' : '');
+                return $mol_state_local.value(key, next) ?? '';
+            }
+            dataset() {
+                const link = this.dataset_link();
+                return link ? $giper_baza_glob.Pawn(new $giper_baza_link(link), $rise_bench_baza_goods_dataset) : null;
+            }
+            products() {
+                const links = this.product_links();
+                return $mol_range2(index => $giper_baza_glob.Pawn(links[index], $rise_bench_baza_goods_product), () => links.length);
+            }
+            product_links() { return this.dataset()?.Products()?.items() ?? []; }
+            controls_enabled() { return this.add_enabled() && !$mol_promise_like(this.Add().status()?.[0]); }
+            add_enabled() {
+                return this.Metrics().runs()[0]?.state() !== 'Перезагрузка'
+                    && !$mol_promise_like(this.Create().status()?.[0]);
+            }
+            create_enabled() { return this.controls_enabled() && !$mol_promise_like(this.Create().status()?.[0]); }
+            prepare_append(dataset) {
+                return new $rise_bench_baza_goods_preparation(dataset, dataset.Products().items().length, this.compact_mode());
+            }
+            add_one() {
+                const total = new ($mol_wire_sync($rise_bench_measure))('Добавление');
+                const dataset = this.dataset() ?? $mol_wire_sync(this).prepare_dataset(this.dataset_config()).dataset;
+                // Freeze the insertion index before any writes or suspension.
+                const state = $mol_wire_sync(this).prepare_append(dataset);
+                const product = $mol_wire_sync(dataset.Products()).make(dataset.land());
+                $mol_wire_sync(this).fill_product(state, state.count, product);
+                this.dataset_link(dataset.link().str);
+                this.body_scroll_top(0);
+                total.finish();
+                return total.duration;
+            }
+            reset() {
+                // Detach only this selected benchmark dataset, not the whole local database.
+                this.dataset_link('');
+                this.search_query('');
+                this.color_filter('all');
+                this.status_filter('all');
+                this.body_scroll_top(0);
+            }
+            create() {
+                const total = new ($mol_wire_sync($rise_bench_measure))('Создание набора: всего', this.record_count());
+                const state = $mol_wire_sync(this).prepare_dataset(this.dataset_config());
+                for (let index = 0; index < state.count; ++index)
+                    this.initialize_product([state, index]);
+                // Publish once, after all Areas are filled. Publishing on each make()
+                // forces the next Area to save an increasingly large parent list.
+                $mol_wire_sync(state.dataset.Products()).items(state.links ??= state.products.map(product => product.link()));
+                this.dataset_link(state.dataset.link().str);
+                total.finish();
+                return total.duration;
+            }
+            start_run(run) {
+                if (this.Metrics().runs().includes(run))
+                    return;
+                this.reset();
+                this.Metrics().run_add(run);
+            }
+            benchmark_search() {
+                this.search_query('Notebook 00000');
+                return this.Table().rows().length;
+            }
+            benchmark() {
+                this.restore_runs();
+                const run = new ($mol_wire_sync($rise_bench_run))(this.record_count(), this.compact_mode() ? 4 : 10);
+                $mol_wire_sync(this).start_run(run);
+                return $mol_error_fence(() => {
+                    const created = $mol_wire_sync(this).create();
+                    run.metric('Создание, с', created / 1000);
+                    // Drain the previous writes before measuring another operation.
+                    $mol_wire_sync(this).save_dataset();
+                    const search = new ($mol_wire_sync($rise_bench_measure))('Поиск');
+                    if ($mol_wire_sync(this).benchmark_search() !== 1)
+                        throw new Error('Поиск должен найти один товар');
+                    search.finish();
+                    run.metric('Поиск, с', search.duration / 1000);
+                    this.search_query('');
+                    const added = $mol_wire_sync(this).add_one();
+                    run.metric('Добавить 1, с', added / 1000);
+                    $mol_wire_sync(this).save_dataset();
+                    $mol_wire_sync(this).request_reload(run);
+                }, error => {
+                    run.state('Ошибка');
+                    this.reload_store().save(this.Metrics().runs(), this.Metrics().operations(), null);
+                    return error;
+                });
+            }
+            reload_store() { return new $rise_bench_baza_goods_reload; }
+            runs_restored = false;
+            restore_runs() {
+                if (this.runs_restored)
+                    return;
+                const rows = this.reload_store().snapshot.rows.map(row => {
+                    const run = new $rise_bench_run(row.count, row.properties, row.stamp, row.baza_version ?? '—', row.benchmark_version ?? '—', row.id);
+                    run.state(row.state);
+                    for (const [name, value] of Object.entries(row.metrics))
+                        if (value !== null)
+                            run.metric(name, value);
+                    return run;
+                });
+                this.Metrics().runs(rows);
+                this.runs_restored = true;
+            }
+            save_dataset() {
+                const lands = new Set([this.dataset().land(), ...this.products().map(product => product.land())]);
+                // Native units_saving suspends until signing and IDB commits finish.
+                for (const land of lands)
+                    $mol_wire_sync(land).units_saving();
+            }
+            request_reload(run) {
+                run.state('Перезагрузка');
+                this.reload_store().save(this.Metrics().runs(), this.Metrics().operations(), {
+                    link: this.dataset_link(), count: run.count,
+                    started: performance.timeOrigin + performance.now(),
+                });
+                this.$.$mol_dom_context.location.reload();
+            }
+            reload_done = false;
+            resume_reload() {
+                if (this.reload_done)
+                    return;
+                const ticket = this.reload_store().snapshot.pending;
+                if (!ticket)
+                    return;
+                const run = this.Metrics().runs()[0];
+                return $mol_error_fence(() => {
+                    if (this.dataset_link() !== ticket.link || this.product_links().length !== ticket.count + 1) {
+                        throw new Error('После F5 открыт другой или неполный набор товаров');
+                    }
+                    const ready = new ($mol_wire_sync($rise_bench_baza_goods_reload_ready))(this.Table().dom_node(), $rise_bench_baza_goods_product_name(ticket.count));
+                    const finished = $mol_wire_sync(ready).wait();
+                    run.metric('F5, с', (finished - ticket.started) / 1000);
+                    const search = new ($mol_wire_sync($rise_bench_measure))('Поиск после F5');
+                    if ($mol_wire_sync(this).benchmark_search() !== 1)
+                        throw new Error('Поиск после F5 должен найти один товар');
+                    search.finish();
+                    run.metric('Поиск после F5, с', search.duration / 1000);
+                    this.search_query('');
+                    this.reload_done = true;
+                    run.state('Готово');
+                    this.reload_store().save(this.Metrics().runs(), this.Metrics().operations(), null);
+                }, error => {
+                    this.reload_done = true;
+                    run.state('Ошибка');
+                    this.reload_store().save(this.Metrics().runs(), this.Metrics().operations(), null);
+                    return error;
+                });
+            }
+            auto() {
+                this.restore_runs();
+                this.resume_reload();
+                return [];
+            }
+            content() {
+                // Keep the synchronizer subscribed for the lifetime of the application.
+                $giper_baza_glob.yard().sync();
+                return [this.Settings(), this.Records()];
+            }
+        }
+        __decorate([
+            $mol_action
+        ], $rise_bench_baza_goods.prototype, "prepare_tags", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_baza_goods.prototype, "prepare_tag", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_baza_goods.prototype, "prepare_catalog_links", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bench_baza_goods.prototype, "dataset_config", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_baza_goods.prototype, "prepare_dataset", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_baza_goods.prototype, "fill_product", null);
+        __decorate([
+            $mol_mem_key
+        ], $rise_bench_baza_goods.prototype, "initialize_product", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bench_baza_goods.prototype, "schema_mode", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bench_baza_goods.prototype, "count_mode", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bench_baza_goods.prototype, "dataset_link", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bench_baza_goods.prototype, "dataset", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bench_baza_goods.prototype, "products", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bench_baza_goods.prototype, "product_links", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_baza_goods.prototype, "add_one", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_baza_goods.prototype, "reset", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_baza_goods.prototype, "create", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_baza_goods.prototype, "start_run", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_baza_goods.prototype, "benchmark_search", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_baza_goods.prototype, "benchmark", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bench_baza_goods.prototype, "reload_store", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_baza_goods.prototype, "restore_runs", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_baza_goods.prototype, "save_dataset", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_baza_goods.prototype, "request_reload", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bench_baza_goods.prototype, "resume_reload", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bench_baza_goods.prototype, "content", null);
+        $$.$rise_bench_baza_goods = $rise_bench_baza_goods;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        $mol_style_define($rise_bench_baza_goods, {
+            Settings: { flex: { grow: 0, basis: $mol_style_unit.rem(20) } },
+            Records: {
+                flex: { grow: 1, shrink: 1 },
+                minWidth: $mol_style_unit.px(640),
+                '@media': {
+                    '(max-width: 640px)': { minWidth: $mol_style_unit.per(100) },
+                },
+            },
+            Actions: { flex: { wrap: 'wrap' } },
+        });
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+	($.$rise_bench_baza_crdttext) = class $rise_bench_baza_crdttext extends ($.$mol_book2) {
+		title(){
+			return "Текст";
+		}
+		count_mode(next){
+			if(next !== undefined) return next;
+			return "100";
+		}
+		controls_enabled(){
+			return true;
+		}
+		Count(){
+			const obj = new this.$.$mol_switch();
+			(obj.value) = (next) => ((this.count_mode(next)));
+			(obj.enabled) = () => ((this.controls_enabled()));
+			(obj.options) = () => ({
+				"100": "100", 
+				"500": "500", 
+				"1000": "1000", 
+				"2000": "2000", 
+				"5000": "5000"
+			});
+			return obj;
+		}
+		Count_label(){
+			const obj = new this.$.$mol_labeler();
+			(obj.title) = () => ("Количество строк");
+			(obj.Content) = () => ((this.Count()));
+			return obj;
+		}
+		benchmark(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Run(){
+			const obj = new this.$.$mol_button_major();
+			(obj.title) = () => ("Запустить бенчмарк");
+			(obj.click) = (next) => ((this.benchmark(next)));
+			(obj.enabled) = () => ((this.controls_enabled()));
+			return obj;
+		}
+		reset(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Reset(){
+			const obj = new this.$.$mol_button_minor();
+			(obj.title) = () => ("Очистить");
+			(obj.click) = (next) => ((this.reset(next)));
+			(obj.enabled) = () => ((this.controls_enabled()));
+			return obj;
+		}
+		Menu(){
+			const obj = new this.$.$mol_page();
+			(obj.title) = () => ("CRDT text");
+			(obj.minimal_width) = () => (240);
+			(obj.body) = () => ([
+				(this.Count_label()), 
+				(this.Run()), 
+				(this.Reset())
+			]);
+			return obj;
+		}
+		page_title(){
+			return "CRDT-текст";
+		}
+		Metrics(){
+			const obj = new this.$.$rise_bench_metrics();
+			(obj.operations) = () => ([
+				"Вставка, с", 
+				"Добавить символ, с", 
+				"F5, с"
+			]);
+			return obj;
+		}
+		text(next){
+			if(next !== undefined) return next;
+			return "";
+		}
+		Editor(){
+			const obj = new this.$.$mol_textarea();
+			(obj.hint) = () => ("Введите текст или запустите бенчмарк");
+			(obj.value) = (next) => ((this.text(next)));
+			(obj.enabled) = () => ((this.controls_enabled()));
+			(obj.spellcheck) = () => (false);
+			return obj;
+		}
+		Page(){
+			const obj = new this.$.$mol_page();
+			(obj.title) = () => ((this.page_title()));
+			(obj.minimal_width) = () => (640);
+			(obj.body) = () => ([(this.Metrics()), (this.Editor())]);
+			return obj;
+		}
+		menu_title(){
+			return (this.title());
+		}
+		pages(){
+			return [(this.Menu()), (this.Page())];
+		}
+	};
+	($mol_mem(($.$rise_bench_baza_crdttext.prototype), "count_mode"));
+	($mol_mem(($.$rise_bench_baza_crdttext.prototype), "Count"));
+	($mol_mem(($.$rise_bench_baza_crdttext.prototype), "Count_label"));
+	($mol_mem(($.$rise_bench_baza_crdttext.prototype), "benchmark"));
+	($mol_mem(($.$rise_bench_baza_crdttext.prototype), "Run"));
+	($mol_mem(($.$rise_bench_baza_crdttext.prototype), "reset"));
+	($mol_mem(($.$rise_bench_baza_crdttext.prototype), "Reset"));
+	($mol_mem(($.$rise_bench_baza_crdttext.prototype), "Menu"));
+	($mol_mem(($.$rise_bench_baza_crdttext.prototype), "Metrics"));
+	($mol_mem(($.$rise_bench_baza_crdttext.prototype), "text"));
+	($mol_mem(($.$rise_bench_baza_crdttext.prototype), "Editor"));
+	($mol_mem(($.$rise_bench_baza_crdttext.prototype), "Page"));
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    /** Native textarea plus its visible text layer, followed by a paint opportunity. */
+    class $rise_bench_baza_crdttext_render_ready extends $mol_object {
+        editor;
+        expected;
+        page;
+        constructor(editor, expected, page) {
+            super();
+            this.editor = editor;
+            this.expected = expected;
+            this.page = page;
+        }
+        pending;
+        observer;
+        frame = 0;
+        timer;
+        visible() {
+            const input = this.editor.Edit().dom_node();
+            const row = this.editor.View().Row(1).dom_node();
+            const rect = row.getBoundingClientRect();
+            const viewport = this.page.Body().dom_node().getBoundingClientRect();
+            return input.isConnected && input.value === this.expected
+                && this.editor.View().dom_node().contains(row)
+                && rect.height > 0 && rect.bottom > viewport.top && rect.bottom <= viewport.bottom + 1
+                && row.textContent.endsWith(this.expected.split('\n', 1)[0]);
+        }
+        wait() {
+            return this.pending ??= new Promise((resolve, reject) => {
+                const check = () => {
+                    // Show the first line through native scrolling, never force render.
+                    this.page.body_scroll_top(0);
+                    if (this.frame || !this.visible())
+                        return;
+                    this.frame = requestAnimationFrame(() => {
+                        this.frame = requestAnimationFrame(() => {
+                            this.frame = 0;
+                            if (!this.visible())
+                                return;
+                            this.destructor();
+                            resolve(performance.timeOrigin + performance.now());
+                        });
+                    });
+                };
+                this.observer = new MutationObserver(check);
+                this.observer.observe(this.editor.dom_node(), { childList: true, subtree: true, characterData: true });
+                this.timer = setTimeout(() => {
+                    this.destructor();
+                    reject(new Error('Текст не появился в редакторе за 45 секунд'));
+                }, 45_000);
+                check();
+            });
+        }
+        destructor() {
+            this.observer?.disconnect();
+            if (this.frame)
+                cancelAnimationFrame(this.frame);
+            if (this.timer)
+                clearTimeout(this.timer);
+            super.destructor();
+        }
+    }
+    $.$rise_bench_baza_crdttext_render_ready = $rise_bench_baza_crdttext_render_ready;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    class $rise_bench_baza_crdttext_reload extends $rise_bench_reload {
+        constructor() { super('$rise_bench_baza_crdttext_runs'); }
+    }
+    $.$rise_bench_baza_crdttext_reload = $rise_bench_baza_crdttext_reload;
+})($ || ($ = {}));
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $rise_bench_baza_crdttext extends $.$rise_bench_baza_crdttext {
+            preset = [[null, $giper_baza_rank_read]];
+            count_mode(next) {
+                const count = $mol_state_arg.value('lines', next);
+                return count && Object.hasOwn(this.Count().options(), count) ? count : '100';
+            }
+            line_count() { return Number(this.count_mode()); }
+            page_title() { return `CRDT-текст: ${this.line_count()} строк`; }
+            text_link(next) {
+                return $mol_state_local.value('$rise_bench_baza_crdttext', next) ?? '';
+            }
+            document() {
+                const link = this.text_link();
+                return link ? $giper_baza_glob.Pawn(new $giper_baza_link(link), $giper_baza_text) : null;
+            }
+            prepare_document() {
+                this.$.$giper_baza_auth.current().pass();
+                return $mol_wire_sync($giper_baza_glob).land_grab(this.preset).Data($giper_baza_text);
+            }
+            write_text(next) {
+                const document = this.document() ?? $mol_wire_sync(this).prepare_document();
+                $mol_wire_sync(document).text(next);
+                this.text_link(document.link().str);
+            }
+            text(next) {
+                if (next !== undefined)
+                    this.write_text(next);
+                $giper_baza_glob.yard().sync();
+                return this.document()?.text() ?? '';
+            }
+            sample_text(lines) {
+                return Array.from({ length: lines }, (_, index) => `Строка ${index + 1}: проверяем запись и редактирование текста в Гипербазе.`).join('\n');
+            }
+            insert(next) {
+                const measure = new ($mol_wire_sync($rise_bench_measure))('Вставка');
+                $mol_wire_sync(this).write_text(next);
+                measure.finish();
+                return measure.duration;
+            }
+            appended_text() { return '!' + this.text(); }
+            append_one() {
+                const measure = new ($mol_wire_sync($rise_bench_measure))('Добавление символа');
+                const next = $mol_wire_sync(this).appended_text();
+                $mol_wire_sync(this).write_text(next);
+                const ready = new ($mol_wire_sync($rise_bench_baza_crdttext_render_ready))(this.Editor(), next, this.Page());
+                $mol_wire_sync(ready).wait();
+                measure.finish();
+                return measure.duration;
+            }
+            start_run(run) {
+                if (this.Metrics().runs().includes(run))
+                    return;
+                $mol_wire_sync(this).reset();
+                this.Metrics().run_add(run);
+            }
+            benchmark() {
+                this.restore_runs();
+                const run = new ($mol_wire_sync($rise_bench_run))(this.line_count());
+                const block = this.sample_text(run.count);
+                $mol_wire_sync(this).start_run(run);
+                return $mol_error_fence(() => {
+                    const inserted = $mol_wire_sync(this).insert(block);
+                    run.metric('Вставка, с', inserted / 1000);
+                    $mol_wire_sync(this).save_document();
+                    const appended = $mol_wire_sync(this).append_one();
+                    run.metric('Добавить символ, с', appended / 1000);
+                    $mol_wire_sync(this).save_document();
+                    $mol_wire_sync(this).request_reload(run);
+                }, error => {
+                    run.state('Ошибка');
+                    this.reload_store().save(this.Metrics().runs(), this.Metrics().operations(), null);
+                    return error;
+                });
+            }
+            reset() {
+                const document = $mol_wire_sync(this).prepare_document();
+                this.text_link(document.link().str);
+            }
+            controls_enabled() {
+                return this.Metrics().runs()[0]?.state() !== 'Перезагрузка'
+                    && !$mol_promise_like(this.Run().status()?.[0])
+                    && !$mol_promise_like(this.Reset().status()?.[0]);
+            }
+            reload_store() { return new $rise_bench_baza_crdttext_reload; }
+            runs_restored = false;
+            restore_runs() {
+                if (this.runs_restored)
+                    return;
+                this.Metrics().runs(this.reload_store().snapshot.rows.map(row => {
+                    const run = new $rise_bench_run(row.count, row.properties, row.stamp, row.baza_version ?? '—', row.benchmark_version ?? '—', row.id);
+                    run.state(row.state);
+                    for (const [name, value] of Object.entries(row.metrics))
+                        if (value !== null)
+                            run.metric(name, value);
+                    return run;
+                }));
+                this.runs_restored = true;
+            }
+            save_document() { $mol_wire_sync(this.document().land()).units_saving(); }
+            request_reload(run) {
+                run.state('Перезагрузка');
+                this.reload_store().save(this.Metrics().runs(), this.Metrics().operations(), {
+                    link: this.text_link(), count: run.count, started: performance.timeOrigin + performance.now(),
+                });
+                this.$.$mol_dom_context.location.reload();
+            }
+            reload_done = false;
+            resume_reload() {
+                if (this.reload_done)
+                    return;
+                const ticket = this.reload_store().snapshot.pending;
+                if (!ticket)
+                    return;
+                const run = this.Metrics().runs()[0];
+                return $mol_error_fence(() => {
+                    const expected = '!' + this.sample_text(ticket.count);
+                    if (this.text_link() !== ticket.link || this.text() !== expected)
+                        throw new Error('После F5 открыт другой или неполный CRDT-текст');
+                    const ready = new ($mol_wire_sync($rise_bench_baza_crdttext_render_ready))(this.Editor(), expected, this.Page());
+                    const finished = $mol_wire_sync(ready).wait();
+                    if (this.Editor().Edit().dom_node().value !== expected)
+                        throw new Error('После F5 текст не появился в textarea');
+                    run.metric('F5, с', (finished - ticket.started) / 1000);
+                    this.reload_done = true;
+                    run.state('Готово');
+                    this.reload_store().save(this.Metrics().runs(), this.Metrics().operations(), null);
+                }, error => {
+                    this.reload_done = true;
+                    run.state('Ошибка');
+                    this.reload_store().save(this.Metrics().runs(), this.Metrics().operations(), null);
+                    return error;
+                });
+            }
+            auto() {
+                this.restore_runs();
+                this.resume_reload();
+                return [];
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $rise_bench_baza_crdttext.prototype, "count_mode", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bench_baza_crdttext.prototype, "text_link", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bench_baza_crdttext.prototype, "document", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_baza_crdttext.prototype, "prepare_document", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_baza_crdttext.prototype, "write_text", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bench_baza_crdttext.prototype, "text", null);
+        __decorate([
+            $mol_mem_key
+        ], $rise_bench_baza_crdttext.prototype, "sample_text", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_baza_crdttext.prototype, "insert", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_baza_crdttext.prototype, "appended_text", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_baza_crdttext.prototype, "append_one", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_baza_crdttext.prototype, "start_run", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_baza_crdttext.prototype, "benchmark", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_baza_crdttext.prototype, "reset", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bench_baza_crdttext.prototype, "reload_store", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_baza_crdttext.prototype, "restore_runs", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_baza_crdttext.prototype, "save_document", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_baza_crdttext.prototype, "request_reload", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bench_baza_crdttext.prototype, "resume_reload", null);
+        $$.$rise_bench_baza_crdttext = $rise_bench_baza_crdttext;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        $mol_style_define($rise_bench_baza_crdttext, {
+            Menu: { flex: { grow: 0, basis: $mol_style_unit.rem(15) } },
+            Page: { flex: { grow: 1 } },
+        });
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+	($.$rise_bench_idb) = class $rise_bench_idb extends ($.$mol_book2) {
+		title(){
+			return "Сущности IDB";
+		}
+		Storage_label(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => (["Хранение: IndexedDB через $mol_db, без индексов"]);
+			return obj;
+		}
+		schema_mode(next){
+			if(next !== undefined) return next;
+			return "compact";
+		}
+		controls_enabled(){
+			return true;
+		}
+		Schema(){
+			const obj = new this.$.$mol_switch();
+			(obj.value) = (next) => ((this.schema_mode(next)));
+			(obj.enabled) = () => ((this.controls_enabled()));
+			(obj.options) = () => ({"compact": "4 свойства", "full": "10 свойств"});
+			return obj;
+		}
+		Schema_label(){
+			const obj = new this.$.$mol_labeler();
+			(obj.title) = () => ("Состав записи");
+			(obj.Content) = () => ((this.Schema()));
+			return obj;
+		}
+		count_mode(next){
+			if(next !== undefined) return next;
+			return "100";
+		}
+		Count(){
+			const obj = new this.$.$mol_switch();
+			(obj.value) = (next) => ((this.count_mode(next)));
+			(obj.enabled) = () => ((this.controls_enabled()));
+			(obj.options) = () => ({
+				"100": "100", 
+				"500": "500", 
+				"1000": "1000", 
+				"2000": "2000", 
+				"3000": "3000", 
+				"4000": "4000", 
+				"5000": "5000", 
+				"10000": "10000"
+			});
+			return obj;
+		}
+		Count_label(){
+			const obj = new this.$.$mol_labeler();
+			(obj.title) = () => ("Количество записей");
+			(obj.Content) = () => ((this.Count()));
+			return obj;
+		}
+		benchmark(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Run(){
+			const obj = new this.$.$mol_button_major();
+			(obj.title) = () => ("Запустить бенчмарк");
+			(obj.click) = (next) => ((this.benchmark(next)));
+			(obj.enabled) = () => ((this.controls_enabled()));
+			return obj;
+		}
+		reset(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Reset(){
+			const obj = new this.$.$mol_button_minor();
+			(obj.title) = () => ("Очистить");
+			(obj.click) = (next) => ((this.reset(next)));
+			(obj.enabled) = () => ((this.controls_enabled()));
+			return obj;
+		}
+		Settings(){
+			const obj = new this.$.$mol_page();
+			(obj.title) = () => ("Настройки IDB");
+			(obj.minimal_width) = () => (320);
+			(obj.body) = () => ([
+				(this.Storage_label()), 
+				(this.Schema_label()), 
+				(this.Count_label()), 
+				(this.Run()), 
+				(this.Reset())
+			]);
+			return obj;
+		}
+		Metrics(){
+			const obj = new this.$.$rise_bench_metrics();
+			(obj.operations) = () => ([
+				"Создание, с", 
+				"Поиск, с", 
+				"Добавить 1, с", 
+				"F5, с", 
+				"Поиск после F5, с"
+			]);
+			return obj;
+		}
+		rows(){
+			return [];
+		}
+		Table(){
+			const obj = new this.$.$mol_grid();
+			(obj.records) = () => ((this.rows()));
+			return obj;
+		}
+		Page(){
+			const obj = new this.$.$mol_page();
+			(obj.title) = () => ("IndexedDB");
+			(obj.minimal_width) = () => (640);
+			(obj.body) = () => ([(this.Metrics()), (this.Table())]);
+			return obj;
+		}
+		menu_title(){
+			return (this.title());
+		}
+		pages(){
+			return [(this.Settings()), (this.Page())];
+		}
+	};
+	($mol_mem(($.$rise_bench_idb.prototype), "Storage_label"));
+	($mol_mem(($.$rise_bench_idb.prototype), "schema_mode"));
+	($mol_mem(($.$rise_bench_idb.prototype), "Schema"));
+	($mol_mem(($.$rise_bench_idb.prototype), "Schema_label"));
+	($mol_mem(($.$rise_bench_idb.prototype), "count_mode"));
+	($mol_mem(($.$rise_bench_idb.prototype), "Count"));
+	($mol_mem(($.$rise_bench_idb.prototype), "Count_label"));
+	($mol_mem(($.$rise_bench_idb.prototype), "benchmark"));
+	($mol_mem(($.$rise_bench_idb.prototype), "Run"));
+	($mol_mem(($.$rise_bench_idb.prototype), "reset"));
+	($mol_mem(($.$rise_bench_idb.prototype), "Reset"));
+	($mol_mem(($.$rise_bench_idb.prototype), "Settings"));
+	($mol_mem(($.$rise_bench_idb.prototype), "Metrics"));
+	($mol_mem(($.$rise_bench_idb.prototype), "Table"));
+	($mol_mem(($.$rise_bench_idb.prototype), "Page"));
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    /** Native IndexedDB through $mol_db. No indexes or CRDT fixture entities. */
+    class $rise_bench_idb_storage extends $mol_object {
+        name;
+        constructor(name) {
+            super();
+            this.name = name;
+        }
+        migration = (tx) => { tx.store_make('Product'); };
+        async db() { return this.$.$mol_db(this.name, this.migration); }
+        product(index, compact) {
+            const product = {
+                id: String(index).padStart(5, '0'), title: $rise_bench_product_name(index),
+                color: ['red', 'green', 'blue'][index % 3], status: ['minor', 'major', 'critical'][index % 3],
+            };
+            return compact ? product : {
+                ...product, checked: false, uri: `https://xkcd.com/${index + 1}/`, quantity: index % 100, supply: '2026-10-05',
+                description: `${product.title} — sample product for the local CRDT benchmark.`,
+                tags: Array.from({ length: 5 }, (_, offset) => ['Office', 'Home', 'Travel', 'Studio', 'Gaming', 'Portable', 'Wireless', 'Compact', 'Premium', 'Classic', 'New', 'Popular', 'Eco', 'Gift', 'Work', 'Creative', 'Audio', 'Video', 'Network', 'Accessories'][(index + offset * 3) % 20]),
+            };
+        }
+        async create(count, compact) {
+            const db = await this.db();
+            const tx = db.change('Product');
+            const products = tx.stores.Product;
+            const requests = Array.from({ length: count }, (_, index) => products.put(this.product(index, compact), index));
+            await Promise.all([...requests, tx.commit()]);
+        }
+        async count() { return (await this.db()).read('Product').Product.count(); }
+        async search() {
+            const products = await (await this.db()).read('Product').Product.select();
+            return products.filter(product => product.title.toLowerCase().includes('notebook 00000')).length;
+        }
+        async add(compact) {
+            const index = await this.count();
+            const tx = (await this.db()).change('Product');
+            await Promise.all([tx.stores.Product.put(this.product(index, compact), index), tx.commit()]);
+        }
+        async rows() {
+            const count = await this.count();
+            if (!count)
+                return [];
+            const range = IDBKeyRange.bound(Math.max(0, count - 24), count - 1);
+            return (await (await this.db()).read('Product').Product.select(range)).reverse();
+        }
+        destructor() { $mol_wire_async(this).close(); }
+        async close() { (await this.db()).destructor(); }
+    }
+    __decorate([
+        $mol_memo.method
+    ], $rise_bench_idb_storage.prototype, "db", null);
+    $.$rise_bench_idb_storage = $rise_bench_idb_storage;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    class $rise_bench_idb_ready extends $mol_object {
+        table;
+        title;
+        constructor(table, title) {
+            super();
+            this.table = table;
+            this.title = title;
+        }
+        pending;
+        observer;
+        timer;
+        frame = 0;
+        visible() { return this.table.isConnected && this.table.textContent.includes(this.title) && !this.table.querySelector('[mol_view_error]'); }
+        wait() {
+            return this.pending ??= new Promise((resolve, reject) => {
+                const check = () => {
+                    if (this.frame || !this.visible())
+                        return;
+                    this.frame = requestAnimationFrame(() => {
+                        this.frame = requestAnimationFrame(() => {
+                            this.frame = 0;
+                            if (!this.visible())
+                                return;
+                            this.destructor();
+                            resolve(performance.timeOrigin + performance.now());
+                        });
+                    });
+                };
+                this.observer = new MutationObserver(check);
+                this.observer.observe(this.table, { childList: true, subtree: true, characterData: true, attributes: true });
+                this.timer = setTimeout(() => { this.destructor(); reject(new Error('После F5 записи IDB не появились за 45 секунд')); }, 45_000);
+                check();
+            });
+        }
+        destructor() {
+            this.observer?.disconnect();
+            if (this.timer)
+                clearTimeout(this.timer);
+            if (this.frame)
+                cancelAnimationFrame(this.frame);
+            super.destructor();
+        }
+    }
+    $.$rise_bench_idb_ready = $rise_bench_idb_ready;
+})($ || ($ = {}));
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $rise_bench_idb extends $.$rise_bench_idb {
+            count_mode(next) {
+                const count = $mol_state_arg.value('count', next);
+                return count && Object.hasOwn(this.Count().options(), count) ? count : '100';
+            }
+            schema_mode(next) { return $mol_state_arg.value('schema', next) === 'full' ? 'full' : 'compact'; }
+            compact() { return this.schema_mode() === 'compact'; }
+            dataset_name(next) { return $mol_state_local.value('$rise_bench_idb_dataset', next) ?? ''; }
+            storage() { return new $rise_bench_idb_storage(this.dataset_name()); }
+            revision(next = 0) { return next; }
+            rows() {
+                this.revision();
+                if (!this.dataset_name())
+                    return [];
+                return $mol_wire_sync(this.storage()).rows().map(product => ({ ID: product.id, Название: product.title, Цвет: product.color, Статус: product.status }));
+            }
+            refresh() { this.revision(this.revision() + 1); }
+            reset() { this.dataset_name('$rise_bench_idb_' + $mol_wire_sync(crypto).randomUUID()); this.refresh(); }
+            controls_enabled() { return this.Metrics().runs()[0]?.state() !== 'Перезагрузка' && !$mol_promise_like(this.Run().status()?.[0]); }
+            reload_store() { return new $rise_bench_reload('$rise_bench_idb_runs'); }
+            restored = false;
+            restore_runs() {
+                if (this.restored)
+                    return;
+                this.Metrics().runs(this.reload_store().snapshot.rows.map(row => {
+                    const run = new $rise_bench_run(row.count, row.properties, row.stamp, row.baza_version ?? '—', row.benchmark_version ?? '—', row.id);
+                    run.state(row.state);
+                    for (const [name, value] of Object.entries(row.metrics))
+                        if (value !== null)
+                            run.metric(name, value);
+                    return run;
+                }));
+                this.restored = true;
+            }
+            start_run(run) {
+                if (this.Metrics().runs().includes(run))
+                    return;
+                this.reset();
+                this.Metrics().run_add(run);
+            }
+            benchmark() {
+                this.restore_runs();
+                const run = new ($mol_wire_sync($rise_bench_run))(Number(this.count_mode()), this.compact() ? 4 : 10, undefined, '—');
+                $mol_wire_sync(this).start_run(run);
+                return $mol_error_fence(() => {
+                    const create = new ($mol_wire_sync($rise_bench_measure))('Создание IDB');
+                    $mol_wire_sync(this.storage()).create(run.count, this.compact());
+                    create.finish();
+                    run.metric('Создание, с', create.duration / 1000);
+                    const search = new ($mol_wire_sync($rise_bench_measure))('Поиск IDB');
+                    if ($mol_wire_sync(this.storage()).search() !== 1)
+                        throw new Error('Поиск IDB должен найти один товар');
+                    search.finish();
+                    run.metric('Поиск, с', search.duration / 1000);
+                    const add = new ($mol_wire_sync($rise_bench_measure))('Добавление IDB');
+                    $mol_wire_sync(this.storage()).add(this.compact());
+                    add.finish();
+                    run.metric('Добавить 1, с', add.duration / 1000);
+                    $mol_wire_sync(this).refresh();
+                    run.state('Перезагрузка');
+                    this.reload_store().save(this.Metrics().runs(), this.Metrics().operations(), { name: this.dataset_name(), count: run.count, started: performance.timeOrigin + performance.now() });
+                    this.$.$mol_dom_context.location.reload();
+                }, error => {
+                    run.state('Ошибка');
+                    this.reload_store().save(this.Metrics().runs(), this.Metrics().operations(), null);
+                    return error;
+                });
+            }
+            resumed = false;
+            resume_reload() {
+                if (this.resumed)
+                    return;
+                const ticket = this.reload_store().snapshot.pending;
+                if (!ticket)
+                    return;
+                const run = this.Metrics().runs()[0];
+                return $mol_error_fence(() => {
+                    if (this.dataset_name() !== ticket.name || $mol_wire_sync(this.storage()).count() !== ticket.count + 1)
+                        throw new Error('После F5 открыт неполный набор IDB');
+                    const ready = new ($mol_wire_sync($rise_bench_idb_ready))(this.Table().dom_node(), $rise_bench_product_name(ticket.count));
+                    run.metric('F5, с', ($mol_wire_sync(ready).wait() - ticket.started) / 1000);
+                    const search = new ($mol_wire_sync($rise_bench_measure))('Поиск IDB после F5');
+                    if ($mol_wire_sync(this.storage()).search() !== 1)
+                        throw new Error('Поиск IDB после F5 должен найти один товар');
+                    search.finish();
+                    run.metric('Поиск после F5, с', search.duration / 1000);
+                    this.resumed = true;
+                    run.state('Готово');
+                    this.reload_store().save(this.Metrics().runs(), this.Metrics().operations(), null);
+                }, error => {
+                    this.resumed = true;
+                    run.state('Ошибка');
+                    this.reload_store().save(this.Metrics().runs(), this.Metrics().operations(), null);
+                    return error;
+                });
+            }
+            auto() { this.restore_runs(); this.resume_reload(); return []; }
+        }
+        __decorate([
+            $mol_mem
+        ], $rise_bench_idb.prototype, "count_mode", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bench_idb.prototype, "schema_mode", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bench_idb.prototype, "dataset_name", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bench_idb.prototype, "storage", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bench_idb.prototype, "revision", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bench_idb.prototype, "rows", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_idb.prototype, "refresh", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_idb.prototype, "reset", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bench_idb.prototype, "reload_store", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_idb.prototype, "restore_runs", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_idb.prototype, "start_run", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_idb.prototype, "benchmark", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bench_idb.prototype, "resume_reload", null);
+        $$.$rise_bench_idb = $rise_bench_idb;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+	($.$rise_bench) = class $rise_bench extends ($.$mol_book2_catalog) {
+		Goods_host(){
+			const obj = new this.$.$rise_bench_host();
+			(obj.title) = () => ("Сущности");
+			(obj.kind) = () => ("goods");
+			return obj;
+		}
+		Text_host(){
+			const obj = new this.$.$rise_bench_host();
+			(obj.title) = () => ("Текст");
+			(obj.kind) = () => ("text");
+			return obj;
+		}
+		Idb_host(){
+			const obj = new this.$.$rise_bench_host();
+			(obj.title) = () => ("Сущности IDB");
+			(obj.kind) = () => ("idb");
+			return obj;
+		}
+		placeholders(){
+			return [];
+		}
+		param(){
+			return "bench";
+		}
+		spreads(){
+			return {
+				"$rise_bench_baza_goods": (this.Goods_host()), 
+				"$rise_bench_baza_crdttext": (this.Text_host()), 
+				"$rise_bench_idb": (this.Idb_host())
+			};
+		}
+		Goods(){
+			const obj = new this.$.$rise_bench_baza_goods();
+			return obj;
+		}
+		Crdttext(){
+			const obj = new this.$.$rise_bench_baza_crdttext();
+			return obj;
+		}
+		Idb(){
+			const obj = new this.$.$rise_bench_idb();
+			return obj;
+		}
+	};
+	($mol_mem(($.$rise_bench.prototype), "Goods_host"));
+	($mol_mem(($.$rise_bench.prototype), "Text_host"));
+	($mol_mem(($.$rise_bench.prototype), "Idb_host"));
+	($mol_mem(($.$rise_bench.prototype), "Goods"));
+	($mol_mem(($.$rise_bench.prototype), "Crdttext"));
+	($mol_mem(($.$rise_bench.prototype), "Idb"));
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $rise_bench extends $.$rise_bench {
+            Spread(id) {
+                // Offline regression entry point exercises the same raw workload views.
+                if (new URL(location.href).searchParams.get('rise_fixture') === 'tests') {
+                    if (id === '$rise_bench_baza_goods')
+                        return this.Goods();
+                    if (id === '$rise_bench_baza_crdttext')
+                        return this.Crdttext();
+                    if (id === '$rise_bench_idb')
+                        return this.Idb();
+                }
+                return super.Spread(id);
+            }
+        }
+        $$.$rise_bench = $rise_bench;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+	($.$rise_bench_host) = class $rise_bench_host extends ($.$mol_page) {
+		status(next){
+			if(next !== undefined) return next;
+			return "";
+		}
+		Status(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.status())]);
+			return obj;
+		}
+		retry(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Retry(){
+			const obj = new this.$.$mol_button_minor();
+			(obj.title) = () => ("Повторить сохранение");
+			(obj.click) = (next) => ((this.retry(next)));
+			return obj;
+		}
+		operations(){
+			return [];
+		}
+		runs(){
+			return [];
+		}
+		Metrics(){
+			const obj = new this.$.$rise_bench_metrics();
+			(obj.operations) = () => ((this.operations()));
+			(obj.runs) = () => ((this.runs()));
+			return obj;
+		}
+		fixture_uri(){
+			return "";
+		}
+		Frame(){
+			const obj = new this.$.$mol_frame();
+			(obj.uri) = () => ((this.fixture_uri()));
+			(obj.clipboard_read) = () => (false);
+			(obj.clipboard_write) = () => (false);
+			return obj;
+		}
+		kind(){
+			return "goods";
+		}
+		minimal_width(){
+			return 640;
+		}
+		body(){
+			return [
+				(this.Status()), 
+				(this.Retry()), 
+				(this.Metrics()), 
+				(this.Frame())
+			];
+		}
+	};
+	($mol_mem(($.$rise_bench_host.prototype), "status"));
+	($mol_mem(($.$rise_bench_host.prototype), "Status"));
+	($mol_mem(($.$rise_bench_host.prototype), "retry"));
+	($mol_mem(($.$rise_bench_host.prototype), "Retry"));
+	($mol_mem(($.$rise_bench_host.prototype), "Metrics"));
+	($mol_mem(($.$rise_bench_host.prototype), "Frame"));
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    /** Retain every seed Land until peer URLs have live reactive consumers. */
+    class $rise_bench_seed extends $mol_object {
+        static lands() {
+            const pack = $mol_wire_sync($giper_baza_pack).from($mol_file.relative('web.baza').buffer());
+            const parts = $mol_wire_sync(pack).parts();
+            const lands = parts.map(([id]) => $giper_baza_glob.Land(new $giper_baza_link(id)));
+            $mol_wire_sync($giper_baza_glob).apply_parts(parts);
+            return lands;
+        }
+    }
+    __decorate([
+        $mol_mem
+    ], $rise_bench_seed, "lands", null);
+    $.$rise_bench_seed = $rise_bench_seed;
+})($ || ($ = {}));
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $rise_bench_host extends $.$rise_bench_host {
+            operations() {
+                return $rise_bench_archive.operations(this.kind());
+            }
+            fixture_uri() {
+                const url = new URL(location.href);
+                url.searchParams.set('rise_fixture', this.kind());
+                url.hash = '';
+                return url.href;
+            }
+            runs() { return $rise_bench_archive.rows(this.kind()); }
+            body() { return this.kind() === 'demo' ? [this.Frame()] : [this.Status(), ...this.outbox().length ? [this.Retry()] : [], this.Metrics(), this.Frame()]; }
+            outbox(next) {
+                return $mol_state_local.value('$rise_bench_outbox_' + this.kind(), next) ?? [];
+            }
+            accept(row) {
+                if (!this.outbox().some(item => item.id === row.id))
+                    this.outbox([...this.outbox(), row]);
+                return this.retry();
+            }
+            retry() {
+                return $mol_error_fence(() => {
+                    for (const row of this.outbox()) {
+                        $mol_wire_sync($rise_bench_archive).save(this.kind(), row);
+                        this.outbox(this.outbox().filter(item => item.id !== row.id));
+                    }
+                    this.status('Результаты сохранены');
+                }, error => { this.status('Не удалось сохранить результат. Нажмите «Повторить сохранение».'); return error; });
+            }
+            restored = false;
+            restore_outbox() {
+                if (this.restored)
+                    return;
+                this.restored = true;
+                if (this.outbox().length)
+                    $mol_wire_async(this).retry().catch(error => $mol_fail_log(error));
+            }
+            listener() {
+                const receive = (event) => {
+                    if (event.origin !== location.origin || event.source !== this.Frame().dom_node().contentWindow)
+                        return;
+                    if (event.data?.type !== 'rise-bench-result' || event.data.kind !== this.kind())
+                        return;
+                    const row = $rise_bench_archive.validate(event.data.row, this.operations());
+                    if (!row)
+                        return;
+                    $mol_wire_async(this).accept(row).catch(error => $mol_fail_log(error));
+                };
+                window.addEventListener('message', receive);
+                return { destructor: () => window.removeEventListener('message', receive) };
+            }
+            auto() {
+                if (this.kind() === 'demo')
+                    return [];
+                this.listener();
+                this.restore_outbox();
+                $rise_bench_seed.lands();
+                $giper_baza_glob.yard().sync();
+                return [];
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $rise_bench_host.prototype, "fixture_uri", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bench_host.prototype, "runs", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bench_host.prototype, "outbox", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_host.prototype, "accept", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_host.prototype, "retry", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_host.prototype, "restore_outbox", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bench_host.prototype, "listener", null);
+        $$.$rise_bench_host = $rise_bench_host;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_define($rise_bench_host, {
+        flex: { grow: 1, shrink: 1 },
+        Frame: { width: $mol_style_unit.per(100), height: $mol_style_unit.vh(75), flex: { shrink: 0 } },
+        '@media': { '(max-width: 640px)': { minWidth: $mol_style_unit.per(100) } },
+    });
 })($ || ($ = {}));
 
 ;
@@ -30942,43 +35285,6 @@ var $;
         $$.$rise_drag = $rise_drag;
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
-
-;
-	($.$mol_example) = class $mol_example extends ($.$mol_view) {
-		tags(){
-			return [];
-		}
-		aspects(){
-			return [];
-		}
-	};
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_attach("mol/example/example.view.css", "[mol_example] {\n\tmax-width: 100%;\n}\n");
-})($ || ($ = {}));
-
-;
-"use strict";
-
-
-;
-	($.$mol_example_small) = class $mol_example_small extends ($.$mol_example) {};
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_attach("mol/example/small/small.view.css", "[mol_example_small] {\n\tdisplay: flex;\n\tflex-wrap: wrap;\n\talign-items: flex-start;\n\talign-content: flex-start;\n\tjustify-content: flex-start;\n\tflex: 0 0 auto;\n\tbox-sizing: border-box;\n\tmax-width: 100%;\n\tgap: var(--mol_gap_block);\n}\n\n[mol_example_small] > * {\n\tmax-width: 100%;\n}\n");
-})($ || ($ = {}));
-
-;
-"use strict";
-
 
 ;
 	($.$mol_card) = class $mol_card extends ($.$mol_list) {
@@ -31860,492 +36166,6 @@ var $;
             },
         });
     })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-	($.$mol_grid) = class $mol_grid extends ($.$mol_view) {
-		rows(){
-			return [];
-		}
-		Table(){
-			const obj = new this.$.$mol_grid_table();
-			(obj.sub) = () => ((this.rows()));
-			return obj;
-		}
-		head_cells(){
-			return [];
-		}
-		cells(id){
-			return [];
-		}
-		cell_content(id){
-			return [];
-		}
-		cell_content_text(id){
-			return (this.cell_content(id));
-		}
-		cell_content_number(id){
-			return (this.cell_content(id));
-		}
-		col_head_content(id){
-			return [];
-		}
-		cell_level(id){
-			return 0;
-		}
-		cell_expanded(id, next){
-			if(next !== undefined) return next;
-			return false;
-		}
-		needle(){
-			return "";
-		}
-		cell_value(id){
-			return "";
-		}
-		Cell_dimmer(id){
-			const obj = new this.$.$mol_dimmer();
-			(obj.needle) = () => ((this.needle()));
-			(obj.haystack) = () => ((this.cell_value(id)));
-			return obj;
-		}
-		row_height(){
-			return 32;
-		}
-		row_ids(){
-			return [];
-		}
-		row_id(id){
-			return null;
-		}
-		col_ids(){
-			return [];
-		}
-		records(){
-			return {};
-		}
-		record(id){
-			return null;
-		}
-		hierarchy(){
-			return null;
-		}
-		hierarchy_col(){
-			return "";
-		}
-		minimal_width(){
-			return 0;
-		}
-		sub(){
-			return [(this.Head()), (this.Table())];
-		}
-		Head(){
-			const obj = new this.$.$mol_grid_row();
-			(obj.cells) = () => ((this.head_cells()));
-			return obj;
-		}
-		Row(id){
-			const obj = new this.$.$mol_grid_row();
-			(obj.minimal_height) = () => ((this.row_height()));
-			(obj.minimal_width) = () => ((this.minimal_width()));
-			(obj.cells) = () => ((this.cells(id)));
-			return obj;
-		}
-		Cell(id){
-			const obj = new this.$.$mol_view();
-			return obj;
-		}
-		cell(id){
-			return null;
-		}
-		Cell_text(id){
-			const obj = new this.$.$mol_grid_cell();
-			(obj.sub) = () => ((this.cell_content_text(id)));
-			return obj;
-		}
-		Cell_number(id){
-			const obj = new this.$.$mol_grid_number();
-			(obj.sub) = () => ((this.cell_content_number(id)));
-			return obj;
-		}
-		Col_head(id){
-			const obj = new this.$.$mol_float();
-			(obj.dom_name) = () => ("th");
-			(obj.sub) = () => ((this.col_head_content(id)));
-			return obj;
-		}
-		Cell_branch(id){
-			const obj = new this.$.$mol_check_expand();
-			(obj.level) = () => ((this.cell_level(id)));
-			(obj.label) = () => ((this.cell_content(id)));
-			(obj.expanded) = (next) => ((this.cell_expanded(id, next)));
-			return obj;
-		}
-		Cell_content(id){
-			return [(this.Cell_dimmer(id))];
-		}
-	};
-	($mol_mem(($.$mol_grid.prototype), "Table"));
-	($mol_mem_key(($.$mol_grid.prototype), "cell_expanded"));
-	($mol_mem_key(($.$mol_grid.prototype), "Cell_dimmer"));
-	($mol_mem(($.$mol_grid.prototype), "Head"));
-	($mol_mem_key(($.$mol_grid.prototype), "Row"));
-	($mol_mem_key(($.$mol_grid.prototype), "Cell"));
-	($mol_mem_key(($.$mol_grid.prototype), "Cell_text"));
-	($mol_mem_key(($.$mol_grid.prototype), "Cell_number"));
-	($mol_mem_key(($.$mol_grid.prototype), "Col_head"));
-	($mol_mem_key(($.$mol_grid.prototype), "Cell_branch"));
-	($.$mol_grid_table) = class $mol_grid_table extends ($.$mol_list) {};
-	($.$mol_grid_row) = class $mol_grid_row extends ($.$mol_view) {
-		cells(){
-			return [];
-		}
-		sub(){
-			return (this.cells());
-		}
-	};
-	($.$mol_grid_cell) = class $mol_grid_cell extends ($.$mol_view) {
-		minimal_height(){
-			return 40;
-		}
-	};
-	($.$mol_grid_number) = class $mol_grid_number extends ($.$mol_grid_cell) {};
-
-
-;
-"use strict";
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $mol_grid extends $.$mol_grid {
-            head_cells() {
-                return this.col_ids().map(colId => this.Col_head(colId));
-            }
-            col_head_content(colId) {
-                return [colId];
-            }
-            rows() {
-                return this.row_ids().map(id => this.Row(id));
-            }
-            cells(row_id) {
-                return this.col_ids().map(col_id => this.Cell({ row: row_id, col: col_id }));
-            }
-            col_type(col_id) {
-                if (col_id === this.hierarchy_col())
-                    return 'branch';
-                const rowFirst = this.row_id(0);
-                const val = this.record(rowFirst[rowFirst.length - 1])[col_id];
-                if (typeof val === 'number')
-                    return 'number';
-                return 'text';
-            }
-            Cell(id) {
-                switch (this.col_type(id.col).valueOf()) {
-                    case 'branch': return this.Cell_branch(id);
-                    case 'number': return this.Cell_number(id);
-                }
-                return this.Cell_text(id);
-            }
-            cell_content(id) {
-                return [this.record(id.row[id.row.length - 1])[id.col]];
-            }
-            cell_content_text(id) {
-                return this.cell_content(id).map(val => typeof val === 'object' ? JSON.stringify(val) : val);
-            }
-            records() {
-                return [];
-            }
-            record(id) {
-                return this.records()[id];
-            }
-            record_ids() {
-                return Object.keys(this.records());
-            }
-            row_id(index) {
-                return this.row_ids().slice(index, index + 1).valueOf()[0];
-            }
-            col_ids() {
-                const rowFirst = this.row_id(0);
-                if (rowFirst === void 0)
-                    return [];
-                const record = this.record(rowFirst[rowFirst.length - 1]);
-                if (!record)
-                    return [];
-                return Object.keys(record);
-            }
-            hierarchy() {
-                const hierarchy = {};
-                const root = hierarchy[''] = {
-                    id: '',
-                    parent: null,
-                    sub: [],
-                };
-                this.record_ids().map(id => {
-                    root.sub.push(hierarchy[id] = {
-                        id,
-                        parent: root,
-                        sub: [],
-                    });
-                });
-                return hierarchy;
-            }
-            row_sub_ids(row) {
-                return this.hierarchy()[row[row.length - 1]].sub.map(child => row.concat(child.id));
-            }
-            row_root_id() {
-                return [''];
-            }
-            cell_level(id) {
-                return id.row.length - 1;
-            }
-            row_ids() {
-                const next = [];
-                const add = (row) => {
-                    next.push(row);
-                    if (this.row_expanded(row)) {
-                        this.row_sub_ids(row).forEach(child => add(child));
-                    }
-                };
-                this.row_sub_ids(this.row_root_id()).forEach(child => add(child));
-                return next;
-            }
-            row_expanded(row_id, next) {
-                if (!this.row_sub_ids(row_id).length)
-                    return null;
-                const key = `row_expanded(${JSON.stringify(row_id)})`;
-                const next2 = $mol_state_session.value(key, next);
-                return (next2 == null) ? this.row_expanded_default(row_id) : next2;
-            }
-            row_expanded_default(row_id) {
-                return true;
-            }
-            cell_expanded(id, next) {
-                return this.row_expanded(id.row, next);
-            }
-            sub() {
-                this.head_cells();
-                this.rows();
-                return super.sub();
-            }
-        }
-        __decorate([
-            $mol_mem
-        ], $mol_grid.prototype, "head_cells", null);
-        __decorate([
-            $mol_mem
-        ], $mol_grid.prototype, "rows", null);
-        __decorate([
-            $mol_mem_key
-        ], $mol_grid.prototype, "col_type", null);
-        __decorate([
-            $mol_mem
-        ], $mol_grid.prototype, "record_ids", null);
-        __decorate([
-            $mol_mem
-        ], $mol_grid.prototype, "hierarchy", null);
-        __decorate([
-            $mol_mem
-        ], $mol_grid.prototype, "row_ids", null);
-        $$.$mol_grid = $mol_grid;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_attach("mol/grid/grid.view.css", "[mol_grid] {\n\tdisplay: block;\n\tflex: 0 1 auto;\n\tposition: relative;\n\toverflow-x: auto;\n}\n\n[mol_grid_gap] {\n\tposition: absolute;\n\tpadding: .1px;\n\ttop: 0;\n\ttransform: translateZ(0);\n}\n\n[mol_grid_table] {\n\tborder-spacing: 0;\n\tdisplay: table-row-group;\n\tposition: relative;\n}\n\n[mol_grid_table] > * {\n\tdisplay: table-row;\n\ttransition: none;\n}\n\n[mol_grid_head] > *,\n[mol_grid_table] > * > * {\n\tdisplay: table-cell;\n\tpadding: var(--mol_gap_text);\n\twhite-space: nowrap;\n\tvertical-align: middle;\n\tbox-shadow: inset 2px 2px 0 -1px var(--mol_theme_line);\n}\n\n[mol_grid_row]:where(:first-child) > * {\n\tbox-shadow: inset 2px 0 0 -1px var(--mol_theme_line);\n}\n\n[mol_grid_table] > * > *:where(:first-child) {\n\tbox-shadow: inset 0px 2px 0 -1px var(--mol_theme_line);\n}\n\n[mol_grid_head] > * {\n\tbox-shadow: inset 2px -2px 0 -1px var(--mol_theme_line);\n}\n\n[mol_grid_head] > *:where(:first-child) {\n\tbox-shadow: inset 0px -2px 0 -1px var(--mol_theme_line);\n}\n\n[mol_grid_table] > [mol_grid_row]:where(:first-child) > *:where(:first-child) {\n\tbox-shadow: none;\n}\t\n\n[mol_grid_head] {\n\tdisplay: table-row;\n\ttransform: none !important;\n}\n\n/* [mol_grid_cell_number] {\n\ttext-align: end;\n} */\n\n[mol_grid_col_head] {\n\tfont-weight: inherit;\n\ttext-align: inherit;\n\tdisplay: table-cell;\n\tcolor: var(--mol_theme_shade);\n}\n\n[mol_grid_cell_dimmer] {\n\tdisplay: inline-block;\n\tvertical-align: inherit;\n}\n");
-})($ || ($ = {}));
-
-;
-	($.$mol_image) = class $mol_image extends ($.$mol_view) {
-		uri(){
-			return "";
-		}
-		title(){
-			return "";
-		}
-		loading(){
-			return "lazy";
-		}
-		decoding(){
-			return "async";
-		}
-		cors(){
-			return null;
-		}
-		natural_width(){
-			return 0;
-		}
-		natural_height(){
-			return 0;
-		}
-		load(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		dom_name(){
-			return "img";
-		}
-		attr(){
-			return {
-				...(super.attr()), 
-				"src": (this.uri()), 
-				"title": (this.hint()), 
-				"alt": (this.title()), 
-				"loading": (this.loading()), 
-				"decoding": (this.decoding()), 
-				"crossOrigin": (this.cors()), 
-				"width": (this.natural_width()), 
-				"height": (this.natural_height())
-			};
-		}
-		event(){
-			return {"load": (next) => (this.load(next))};
-		}
-		minimal_width(){
-			return 16;
-		}
-		minimal_height(){
-			return 16;
-		}
-	};
-	($mol_mem(($.$mol_image.prototype), "load"));
-
-
-;
-"use strict";
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $mol_image extends $.$mol_image {
-            natural_width(next) {
-                const dom = this.dom_node();
-                if (dom.naturalWidth)
-                    return dom.naturalWidth;
-                const found = this.uri().match(/\bwidth=(\d+)/);
-                return found ? Number(found[1]) : null;
-            }
-            natural_height(next) {
-                const dom = this.dom_node();
-                if (dom.naturalHeight)
-                    return dom.naturalHeight;
-                const found = this.uri().match(/\bheight=(\d+)/);
-                return found ? Number(found[1]) : null;
-            }
-            load() {
-                this.natural_width(null);
-                this.natural_height(null);
-            }
-        }
-        __decorate([
-            $mol_mem
-        ], $mol_image.prototype, "natural_width", null);
-        __decorate([
-            $mol_mem
-        ], $mol_image.prototype, "natural_height", null);
-        $$.$mol_image = $mol_image;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_attach("mol/image/image.view.css", "[mol_image] {\n\tborder-radius: var(--mol_gap_round);\n\toverflow: hidden;\n\tflex: 0 1 auto;\n\tmax-width: 100%;\n\tobject-fit: cover;\n\theight: fit-content;\n}\n");
-})($ || ($ = {}));
-
-;
-	($.$mol_link_iconed) = class $mol_link_iconed extends ($.$mol_link) {
-		icon(){
-			return "";
-		}
-		Icon(){
-			const obj = new this.$.$mol_image();
-			(obj.uri) = () => ((this.icon()));
-			(obj.title) = () => ("");
-			return obj;
-		}
-		title(){
-			return (this.uri());
-		}
-		sub(){
-			return [(this.Icon())];
-		}
-		content(){
-			return [(this.title())];
-		}
-		host(){
-			return "";
-		}
-	};
-	($mol_mem(($.$mol_link_iconed.prototype), "Icon"));
-
-
-;
-"use strict";
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $mol_link_iconed extends $.$mol_link_iconed {
-            icon() {
-                return `https://favicon.yandex.net/favicon/${this.host()}?color=0,0,0,0&size=32&stub=1`;
-                // return `https://api.faviconkit.com/${ this.host() }/16`
-            }
-            host() {
-                const base = this.$.$mol_state_arg.href();
-                const url = new URL(this.uri(), base);
-                return url.hostname;
-            }
-            title() {
-                const uri = this.uri();
-                const host = this.host();
-                const suffix = (host ? uri.split(this.host(), 2)[1] : uri)?.replace(/^[\/\?#!]+/, '');
-                return decodeURIComponent(suffix || host).replace(/^\//, ' ');
-            }
-            sub() {
-                return [
-                    ...this.host() ? [this.Icon()] : [],
-                    ...this.content() ? [' ', ...this.content()] : [],
-                ];
-            }
-        }
-        __decorate([
-            $mol_mem
-        ], $mol_link_iconed.prototype, "icon", null);
-        __decorate([
-            $mol_mem
-        ], $mol_link_iconed.prototype, "host", null);
-        __decorate([
-            $mol_mem
-        ], $mol_link_iconed.prototype, "title", null);
-        __decorate([
-            $mol_mem
-        ], $mol_link_iconed.prototype, "sub", null);
-        $$.$mol_link_iconed = $mol_link_iconed;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_attach("mol/link/iconed/iconed.view.css", "[mol_link_iconed] {\n\talign-items: baseline;\n\tdisplay: inline-flex;\n\tpadding: var(--mol_gap_text);\n}\n\n[mol_link_iconed_icon] {\n\tbox-shadow: none;\n\theight: 1.5em;\n\twidth: 1em;\n\tflex: 0 0 auto;\n\tdisplay: inline-block;\n\talign-self: normal;\n\tvertical-align: top;\n\tborder-radius: 0;\n\tobject-fit: scale-down;\n\topacity: .75;\n}\n\n[mol_theme=\"$mol_theme_dark\"] [mol_link_iconed_icon] {\n\tfilter: var(--mol_theme_image);\n}\n");
 })($ || ($ = {}));
 
 ;
@@ -34566,152 +38386,6 @@ var $;
 
 
 ;
-	($.$mol_check_list) = class $mol_check_list extends ($.$mol_view) {
-		option_checked(id, next){
-			if(next !== undefined) return next;
-			return false;
-		}
-		option_title(id){
-			return "";
-		}
-		option_label(id){
-			return [(this.option_title(id))];
-		}
-		enabled(){
-			return true;
-		}
-		option_enabled(id){
-			return (this.enabled());
-		}
-		option_hint(id){
-			return "";
-		}
-		items(){
-			return [];
-		}
-		dictionary(){
-			return {};
-		}
-		Option(id){
-			const obj = new this.$.$mol_check();
-			(obj.checked) = (next) => ((this.option_checked(id, next)));
-			(obj.label) = () => ((this.option_label(id)));
-			(obj.enabled) = () => ((this.option_enabled(id)));
-			(obj.hint) = () => ((this.option_hint(id)));
-			(obj.minimal_height) = () => (24);
-			return obj;
-		}
-		options(){
-			return {};
-		}
-		keys(){
-			return [];
-		}
-		sub(){
-			return (this.items());
-		}
-	};
-	($mol_mem_key(($.$mol_check_list.prototype), "option_checked"));
-	($mol_mem_key(($.$mol_check_list.prototype), "Option"));
-
-
-;
-"use strict";
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        /**
-         * List of checkboxes
-         * @see https://mol.hyoo.ru/#!section=demos/demo=mol_check_list_demo
-         */
-        class $mol_check_list extends $.$mol_check_list {
-            options() {
-                return {};
-            }
-            dictionary(next) {
-                return next ?? {};
-            }
-            option_checked(id, next) {
-                const prev = this.dictionary();
-                if (next === undefined)
-                    return prev[id] ?? null;
-                const next_rec = { ...prev, [id]: next };
-                if (next === null)
-                    delete next_rec[id];
-                return this.dictionary(next_rec)[id] ?? null;
-            }
-            keys() {
-                return Object.keys(this.options());
-            }
-            items() {
-                return this.keys().map(key => this.Option(key));
-            }
-            option_title(key) {
-                return this.options()[key] || key;
-            }
-        }
-        __decorate([
-            $mol_mem
-        ], $mol_check_list.prototype, "keys", null);
-        __decorate([
-            $mol_mem
-        ], $mol_check_list.prototype, "items", null);
-        $$.$mol_check_list = $mol_check_list;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_attach("mol/check/list/list.view.css", "[mol_check_list] {\n\tdisplay: flex;\n\tflex-wrap: wrap;\n\tflex: 1 1 auto;\n\tborder-radius: var(--mol_gap_round);\n\tgap: 1px;\n}\n\n[mol_check_list_option] {\n\tflex: 0 1 auto;\n}\n\n[mol_check_list_option]:where([mol_check_checked=\"true\"]) {\n\ttext-shadow: 0 0;\n\tcolor: var(--mol_theme_current);\n}\n\n[mol_check_list_option]:where([mol_check_checked=\"true\"][disabled]) {\n\tcolor: var(--mol_theme_text);\n}\n");
-})($ || ($ = {}));
-
-;
-	($.$mol_switch) = class $mol_switch extends ($.$mol_check_list) {
-		value(next){
-			if(next !== undefined) return next;
-			return "";
-		}
-	};
-	($mol_mem(($.$mol_switch.prototype), "value"));
-
-
-;
-"use strict";
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        /**
-         * Buttons which switching the state
-         * @see https://mol.hyoo.ru/#!section=demos/demo=mol_switch_demo
-         */
-        class $mol_switch extends $.$mol_switch {
-            value(next) {
-                return $mol_state_session.value(`${this}.value()`, next) ?? '';
-            }
-            option_checked(key, next) {
-                if (next === undefined)
-                    return this.value() == key;
-                this.value(next ? key : '');
-                return next;
-            }
-        }
-        $$.$mol_switch = $mol_switch;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
 	($.$rise_radio) = class $rise_radio extends ($.$mol_switch) {
 		Circle_inner(id){
 			const obj = new this.$.$mol_view();
@@ -36295,2888 +39969,11 @@ var $;
 
 
 ;
-	($.$mol_button_major) = class $mol_button_major extends ($.$mol_button_minor) {
-		theme(){
-			return "$mol_theme_base";
-		}
-	};
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_attach("mol/button/major/major.view.css", "[mol_button_major] {\n\tbackground-color: var(--mol_theme_back);\n\tcolor: var(--mol_theme_text);\n}\n");
-})($ || ($ = {}));
-
-;
-"use strict";
-
-
-;
-	($.$rise_bench_metrics) = class $rise_bench_metrics extends ($.$mol_grid) {
-		runs(next){
-			if(next !== undefined) return next;
-			return [];
-		}
-		run_add(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		operations(){
-			return [];
-		}
-	};
-	($mol_mem(($.$rise_bench_metrics.prototype), "runs"));
-	($mol_mem(($.$rise_bench_metrics.prototype), "run_add"));
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    class $rise_bench_run extends $mol_object {
-        count;
-        properties;
-        stamp;
-        constructor(count, properties = 0, stamp = new $mol_time_moment().toString('DD.MM.YYYY hh:mm:ss')) {
-            super();
-            this.count = count;
-            this.properties = properties;
-            this.stamp = stamp;
-        }
-        state(next = 'Выполняется') { return next; }
-        metric(operation, next) { return next ?? null; }
-    }
-    __decorate([
-        $mol_mem
-    ], $rise_bench_run.prototype, "state", null);
-    __decorate([
-        $mol_mem_key
-    ], $rise_bench_run.prototype, "metric", null);
-    $.$rise_bench_run = $rise_bench_run;
-})($ || ($ = {}));
-
-;
-"use strict";
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $rise_bench_metrics extends $.$rise_bench_metrics {
-            run_add(run) {
-                const rows = this.runs();
-                if (rows.includes(run))
-                    return;
-                this.runs([run, ...rows]);
-            }
-            col_ids() { return ['№', 'Дата и время', 'Объём', 'Полей', 'Состояние', ...this.operations()]; }
-            records() {
-                return this.runs().map((run, index, rows) => ({
-                    '№': rows.length - index,
-                    'Дата и время': run.stamp,
-                    'Объём': run.count,
-                    'Полей': run.properties || '—',
-                    'Состояние': run.state(),
-                    ...Object.fromEntries(this.operations().map(operation => {
-                        const time = run.metric(operation);
-                        return [operation, time === null ? '—' : time.toFixed(3)];
-                    })),
-                }));
-            }
-        }
-        __decorate([
-            $mol_action
-        ], $rise_bench_metrics.prototype, "run_add", null);
-        __decorate([
-            $mol_mem
-        ], $rise_bench_metrics.prototype, "records", null);
-        $$.$rise_bench_metrics = $rise_bench_metrics;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-	($.$mol_list_demo) = class $mol_list_demo extends ($.$mol_example_small) {
-		items_count(next){
-			if(next !== undefined) return next;
-			return 50;
-		}
-		Items_count(){
-			const obj = new this.$.$mol_number();
-			(obj.value) = (next) => ((this.items_count(next)));
-			(obj.value_min) = () => (0);
-			(obj.value_max) = () => (100000);
-			return obj;
-		}
-		Items_count_label(){
-			const obj = new this.$.$mol_labeler();
-			(obj.title) = () => ("Items count");
-			(obj.content) = () => ([(this.Items_count())]);
-			return obj;
-		}
-		item_title(id){
-			return "";
-		}
-		Item(id){
-			const obj = new this.$.$mol_link();
-			(obj.title) = () => ((this.item_title(id)));
-			return obj;
-		}
-		list_items(){
-			return [(this.Item("0"))];
-		}
-		List_empty(){
-			const obj = new this.$.$mol_paragraph();
-			(obj.title) = () => ("No items in this list");
-			return obj;
-		}
-		Items(){
-			const obj = new this.$.$mol_list();
-			(obj.rows) = () => ((this.list_items()));
-			(obj.Empty) = () => ((this.List_empty()));
-			return obj;
-		}
-		sub(){
-			return [(this.Items_count_label()), (this.Items())];
-		}
-		tags(){
-			return [
-				"list", 
-				"rows", 
-				"stack"
-			];
-		}
-		aspects(){
-			return ["Widget/Layout"];
-		}
-	};
-	($mol_mem(($.$mol_list_demo.prototype), "items_count"));
-	($mol_mem(($.$mol_list_demo.prototype), "Items_count"));
-	($mol_mem(($.$mol_list_demo.prototype), "Items_count_label"));
-	($mol_mem_key(($.$mol_list_demo.prototype), "Item"));
-	($mol_mem(($.$mol_list_demo.prototype), "List_empty"));
-	($mol_mem(($.$mol_list_demo.prototype), "Items"));
-
-
-;
-"use strict";
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $mol_list_demo extends $.$mol_list_demo {
-            item_title(id) {
-                return `Item #${id + 1}`;
-            }
-            list_items() {
-                const rows = [];
-                for (let key = 0; key < this.items_count(); key++) {
-                    rows.push(this.Item(key));
-                }
-                return rows;
-            }
-        }
-        $$.$mol_list_demo = $mol_list_demo;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-	($.$mol_row) = class $mol_row extends ($.$mol_view) {};
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_attach("mol/row/row.view.css", "[mol_row] {\n\tdisplay: flex;\n\tflex-wrap: wrap;\n\talign-items: flex-start;\n\talign-content: flex-start;\n\tjustify-content: flex-start;\n\tpadding: var(--mol_gap_block);\n\tgap: var(--mol_gap_block);\n\tflex: 0 0 auto;\n\tbox-sizing: border-box;\n\tmax-width: 100%;\n}\n\n[mol_row] > * {\n\tmax-width: 100%;\n}\n");
-})($ || ($ = {}));
-
-;
-"use strict";
-
-
-;
-	($.$mol_list_demo_table) = class $mol_list_demo_table extends ($.$mol_example) {
-		row_id(id, next){
-			if(next !== undefined) return next;
-			return "0000";
-		}
-		row_checked(id, next){
-			if(next !== undefined) return next;
-			return false;
-		}
-		Id(id){
-			const obj = new this.$.$mol_check_box();
-			(obj.title) = () => ((this.row_id(id)));
-			(obj.checked) = (next) => ((this.row_checked(id, next)));
-			return obj;
-		}
-		Id_labeler(id){
-			const obj = new this.$.$mol_labeler();
-			(obj.title) = () => ("ID");
-			(obj.Content) = () => ((this.Id(id)));
-			return obj;
-		}
-		row_uri(id){
-			return "";
-		}
-		row_title(id){
-			return "";
-		}
-		Title(id){
-			const obj = new this.$.$mol_link_iconed();
-			(obj.uri) = () => ((this.row_uri(id)));
-			(obj.title) = () => ((this.row_title(id)));
-			return obj;
-		}
-		Title_labeler(id){
-			const obj = new this.$.$mol_labeler();
-			(obj.title) = () => ("Product Name");
-			(obj.Content) = () => ((this.Title(id)));
-			return obj;
-		}
-		row_color(id, next){
-			if(next !== undefined) return next;
-			return "";
-		}
-		colors(){
-			return [];
-		}
-		Color(id){
-			const obj = new this.$.$mol_select();
-			(obj.value) = (next) => ((this.row_color(id, next)));
-			(obj.options) = () => ((this.colors()));
-			return obj;
-		}
-		Color_labeler(id){
-			const obj = new this.$.$mol_labeler();
-			(obj.title) = () => ("Color");
-			(obj.Content) = () => ((this.Color(id)));
-			return obj;
-		}
-		row_status(id, next){
-			if(next !== undefined) return next;
-			return "";
-		}
-		status_options(){
-			return {
-				"minor": "Store", 
-				"major": "Sale", 
-				"critical": "Support"
-			};
-		}
-		Status(id){
-			const obj = new this.$.$mol_switch();
-			(obj.value) = (next) => ((this.row_status(id, next)));
-			(obj.options) = () => ((this.status_options()));
-			return obj;
-		}
-		Status_labeler(id){
-			const obj = new this.$.$mol_labeler();
-			(obj.title) = () => ("Status");
-			(obj.Content) = () => ((this.Status(id)));
-			return obj;
-		}
-		row_quantity(id, next){
-			if(next !== undefined) return next;
-			return 0;
-		}
-		Quantity(id){
-			const obj = new this.$.$mol_number();
-			(obj.value) = (next) => ((this.row_quantity(id, next)));
-			return obj;
-		}
-		Quantity_labeler(id){
-			const obj = new this.$.$mol_labeler();
-			(obj.title) = () => ("Quantity");
-			(obj.Content) = () => ((this.Quantity(id)));
-			return obj;
-		}
-		row_moment(id, next){
-			if(next !== undefined) return next;
-			const obj = new this.$.$mol_time_moment();
-			return obj;
-		}
-		Date(id){
-			const obj = new this.$.$mol_date();
-			(obj.value_moment) = (next) => ((this.row_moment(id, next)));
-			return obj;
-		}
-		Date_labeler(id){
-			const obj = new this.$.$mol_labeler();
-			(obj.title) = () => ("Supply Time");
-			(obj.Content) = () => ((this.Date(id)));
-			return obj;
-		}
-		row_content(id){
-			return [
-				(this.Id_labeler(id)), 
-				(this.Title_labeler(id)), 
-				(this.Color_labeler(id)), 
-				(this.Status_labeler(id)), 
-				(this.Quantity_labeler(id)), 
-				(this.Date_labeler(id))
-			];
-		}
-		Row(id){
-			const obj = new this.$.$mol_row();
-			(obj.sub) = () => ((this.row_content(id)));
-			return obj;
-		}
-		rows(){
-			return [(this.Row("0"))];
-		}
-		Rows(){
-			const obj = new this.$.$mol_list();
-			(obj.item_width_min) = (id) => (200);
-			(obj.item_height_min) = (id) => (96);
-			(obj.rows) = () => ((this.rows()));
-			return obj;
-		}
-		title(){
-			return "Large list of rows with dynamic content";
-		}
-		count(){
-			return 100000;
-		}
-		sub(){
-			return [(this.Rows())];
-		}
-		tags(){
-			return [
-				"list", 
-				"table", 
-				"scroll", 
-				"divider", 
-				"grid"
-			];
-		}
-		aspects(){
-			return ["Widget/Layout"];
-		}
-	};
-	($mol_mem_key(($.$mol_list_demo_table.prototype), "row_id"));
-	($mol_mem_key(($.$mol_list_demo_table.prototype), "row_checked"));
-	($mol_mem_key(($.$mol_list_demo_table.prototype), "Id"));
-	($mol_mem_key(($.$mol_list_demo_table.prototype), "Id_labeler"));
-	($mol_mem_key(($.$mol_list_demo_table.prototype), "Title"));
-	($mol_mem_key(($.$mol_list_demo_table.prototype), "Title_labeler"));
-	($mol_mem_key(($.$mol_list_demo_table.prototype), "row_color"));
-	($mol_mem_key(($.$mol_list_demo_table.prototype), "Color"));
-	($mol_mem_key(($.$mol_list_demo_table.prototype), "Color_labeler"));
-	($mol_mem_key(($.$mol_list_demo_table.prototype), "row_status"));
-	($mol_mem_key(($.$mol_list_demo_table.prototype), "Status"));
-	($mol_mem_key(($.$mol_list_demo_table.prototype), "Status_labeler"));
-	($mol_mem_key(($.$mol_list_demo_table.prototype), "row_quantity"));
-	($mol_mem_key(($.$mol_list_demo_table.prototype), "Quantity"));
-	($mol_mem_key(($.$mol_list_demo_table.prototype), "Quantity_labeler"));
-	($mol_mem_key(($.$mol_list_demo_table.prototype), "row_moment"));
-	($mol_mem_key(($.$mol_list_demo_table.prototype), "Date"));
-	($mol_mem_key(($.$mol_list_demo_table.prototype), "Date_labeler"));
-	($mol_mem_key(($.$mol_list_demo_table.prototype), "Row"));
-	($mol_mem(($.$mol_list_demo_table.prototype), "Rows"));
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    /** Lazy computed lists with native Array interface. $mol_range2_array is mutable but all derived ranges are immutable. */
-    function $mol_range2(item = index => index, size = () => Number.POSITIVE_INFINITY) {
-        const source = typeof item === 'function' ? new $mol_range2_array() : item;
-        if (typeof item !== 'function') {
-            item = index => source[index];
-            size = () => source.length;
-        }
-        return new Proxy(source, {
-            get(target, field) {
-                if (typeof field === 'string') {
-                    if (field === 'length')
-                        return size();
-                    const index = Number(field);
-                    if (index < 0)
-                        return undefined;
-                    if (index >= size())
-                        return undefined;
-                    if (index === Math.trunc(index))
-                        return item(index);
-                }
-                return $mol_range2_array.prototype[field];
-            },
-            set(target, field) {
-                return $mol_fail(new TypeError(`Lazy range is read only (trying to set field ${JSON.stringify(field)})`));
-            },
-            ownKeys(target) {
-                return [...Array(size())].map((v, i) => String(i)).concat('length');
-            },
-            getOwnPropertyDescriptor(target, field) {
-                if (field === "length")
-                    return {
-                        value: size(),
-                        writable: true,
-                        enumerable: false,
-                        configurable: false,
-                    };
-                const index = Number(field);
-                if (index === Math.trunc(index))
-                    return {
-                        get: () => this.get(target, field, this),
-                        enumerable: true,
-                        configurable: true,
-                    };
-                return Object.getOwnPropertyDescriptor(target, field);
-            }
-        });
-    }
-    $.$mol_range2 = $mol_range2;
-    class $mol_range2_array extends Array {
-        // Lazy
-        concat(...tail) {
-            if (tail.length === 0)
-                return this;
-            if (tail.length > 1) {
-                let list = this;
-                for (let item of tail)
-                    list = list.concat(item);
-                return list;
-            }
-            return $mol_range2(index => index < this.length ? this[index] : tail[0][index - this.length], () => this.length + tail[0].length);
-        }
-        // Lazy
-        filter(check, context) {
-            const filtered = [];
-            let cursor = -1;
-            return $mol_range2(index => {
-                while (cursor < this.length && index >= filtered.length - 1) {
-                    const val = this[++cursor];
-                    if (check(val, cursor, this))
-                        filtered.push(val);
-                }
-                return filtered[index];
-            }, () => cursor < this.length ? Number.POSITIVE_INFINITY : filtered.length);
-        }
-        // Diligent
-        forEach(proceed, context) {
-            for (let [key, value] of this.entries())
-                proceed.call(context, value, key, this);
-        }
-        // Lazy
-        map(proceed, context) {
-            return $mol_range2(index => proceed.call(context, this[index], index, this), () => this.length);
-        }
-        // Diligent
-        reduce(merge, result) {
-            let index = 0;
-            if (arguments.length === 1) {
-                result = this[index++];
-            }
-            for (; index < this.length; ++index) {
-                result = merge(result, this[index], index, this);
-            }
-            return result;
-        }
-        // Lazy
-        toReversed() {
-            return $mol_range2(index => this[this.length - 1 - index], () => this.length);
-        }
-        // Lazy
-        slice(from = 0, to = this.length) {
-            return $mol_range2(index => this[from + index], () => Math.min(to, this.length) - from);
-        }
-        // Lazy
-        some(check, context) {
-            for (let index = 0; index < this.length; ++index) {
-                if (check.call(context, this[index], index, this))
-                    return true;
-            }
-            return false;
-        }
-        every(check, context) {
-            for (let index = 0; index < this.length; ++index) {
-                if (!check.call(context, this[index], index, this))
-                    return false;
-            }
-            return true;
-        }
-        reverse() {
-            return $mol_fail(new TypeError(`Mutable reverse is forbidden. Use toReversed instead.`));
-        }
-        sort() {
-            return $mol_fail(new TypeError(`Mutable sort is forbidden. Use toSorted instead.`));
-        }
-        indexOf(needle) {
-            return this.findIndex(item => item === needle);
-        }
-        [Symbol.toPrimitive]() {
-            return $mol_guid();
-        }
-    }
-    $.$mol_range2_array = $mol_range2_array;
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    function $mol_array_lottery(list) {
-        return list[Math.floor(Math.random() * list.length)];
-    }
-    $.$mol_array_lottery = $mol_array_lottery;
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    class $mol_unit extends $mol_object {
-        'valueOf()';
-        constructor(value) {
-            super();
-            if (value !== undefined)
-                this['valueOf()'] = value;
-        }
-        prefix() {
-            return '';
-        }
-        postfix() {
-            return '';
-        }
-        [Symbol.toPrimitive](hint) {
-            switch (hint) {
-                case 'number': return this.valueOf();
-                case 'string': return this.toString();
-                default: return this.toString();
-            }
-        }
-        valueOf() {
-            return this['valueOf()'];
-        }
-        delimiter() {
-            return ' ';
-        }
-        value_view() {
-            return this.valueOf().toLocaleString();
-        }
-        toString() {
-            return this.prefix() + this.value_view() + this.postfix();
-        }
-        static summ(a, b) {
-            var Class = a.constructor;
-            if (Class !== b.constructor)
-                throw new Error(`Not same measure: ${Class} , ${b.constructor}`);
-            return new Class(a.valueOf() + b.valueOf());
-        }
-        mult(m) {
-            var Class = this.constructor;
-            return new Class(this.valueOf() * m);
-        }
-    }
-    $.$mol_unit = $mol_unit;
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    class $mol_unit_money extends $mol_unit {
-    }
-    $.$mol_unit_money = $mol_unit_money;
-    class $mol_unit_money_usd extends $mol_unit_money {
-        prefix() {
-            return '$';
-        }
-    }
-    $.$mol_unit_money_usd = $mol_unit_money_usd;
-    class $mol_unit_money_rub extends $mol_unit_money {
-        postfix() {
-            return ' ₽';
-        }
-    }
-    $.$mol_unit_money_rub = $mol_unit_money_rub;
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    function $mol_stub_strings(prefix = '', count = 10, length = 10) {
-        if (prefix.length >= length)
-            return [];
-        let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz".split('');
-        let strings = [];
-        for (let i = 0; i < count; i++) {
-            let text = prefix;
-            for (let j = prefix.length; j < length; j++) {
-                text += $mol_array_lottery(possible);
-            }
-            strings.push(text);
-        }
-        return strings;
-    }
-    $.$mol_stub_strings = $mol_stub_strings;
-    function $mol_stub_code(length = 8) {
-        var max = Math.pow(16, length);
-        var min = Math.pow(16, length - 1);
-        var value = min + Math.floor(Math.random() * (max - min));
-        return value.toString(16).toUpperCase();
-    }
-    $.$mol_stub_code = $mol_stub_code;
-    function $mol_stub_price(max = 1000) {
-        var min = Math.floor(max / 16 / 16);
-        var value = min + Math.floor(Math.random() * (max - min));
-        return new $mol_unit_money_usd(value);
-    }
-    $.$mol_stub_price = $mol_stub_price;
-    function $mol_stub_product_name() {
-        var name = $mol_array_lottery([
-            'Monitor 15"',
-            'Monitor 17"',
-            'Monitor 19"',
-            'Graphics card',
-            'Frame grabber card'
-        ]);
-        var port = $mol_array_lottery(['D-SUB', 'DVI', 'HDMI']);
-        var resolution = $mol_array_lottery(['VGA', 'Full HD', '4K']);
-        return [name, port, resolution].join(', ');
-    }
-    $.$mol_stub_product_name = $mol_stub_product_name;
-    function $mol_stub_company_name_big() {
-        var product = $mol_array_lottery(['Everything', 'Something', 'Anything', 'Nothing']);
-        var type = $mol_array_lottery(['Company', 'Corporation', 'Holding']);
-        return `A ${type} that makes ${product}`;
-    }
-    $.$mol_stub_company_name_big = $mol_stub_company_name_big;
-    function $mol_stub_company_name_small() {
-        return $mol_array_lottery(['ACME inc.', 'Dream Company', 'Just Company']);
-    }
-    $.$mol_stub_company_name_small = $mol_stub_company_name_small;
-    function $mol_stub_company_name() {
-        return $mol_array_lottery([$mol_stub_company_name_small, $mol_stub_company_name_big])();
-    }
-    $.$mol_stub_company_name = $mol_stub_company_name;
-    function $mol_stub_person_name() {
-        var first = $mol_array_lottery(['Ivan', 'Petr', 'Sidor', 'John', 'Sam']);
-        var last = $mol_array_lottery(['Ivanov', 'Petrov', 'Sidorov', 'Johnson', 'Smith']);
-        return `${first} ${last}`;
-    }
-    $.$mol_stub_person_name = $mol_stub_person_name;
-    function $mol_stub_person_avatar(size = 80) {
-        const id = Math.random().toString(16).slice(2);
-        return `https://gravatar.com/avatar/${id}?d=robohash&s=${size}`;
-    }
-    $.$mol_stub_person_avatar = $mol_stub_person_avatar;
-    function $mol_stub_city() {
-        return $mol_array_lottery(['Moscow', 'London', 'Washington', 'Buenos Aires']);
-    }
-    $.$mol_stub_city = $mol_stub_city;
-    function $mol_stub_time(maxShift = 60 * 24 * 365) {
-        return new $mol_time_moment().shift({ minute: Math.round(Math.random() * maxShift) });
-    }
-    $.$mol_stub_time = $mol_stub_time;
-    function $mol_stub_message(max_length) {
-        const text = ' Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris. Maecenas congue ligula ac quam viverra nec consectetur ante hendrerit. Donec et mollis dolor. Praesent et diam eget libero egestas mattis sit amet vitae augue. Nam tincidunt congue enim, ut porta lorem lacinia consectetur. Donec ut libero sed arcu vehicula ultricies a non tortor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ut gravida lorem. Ut turpis felis, pulvinar a semper sed, adipiscing id dolor. Pellentesque auctor nisi id magna consequat sagittis. Curabitur dapibus enim sit amet elit pharetra tincidunt feugiat nisl imperdiet. Ut convallis libero in urna ultrices accumsan. Donec sed odio eros. Donec viverra mi quis quam pulvinar at malesuada arcu rhoncus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. In rutrum accumsan ultricies. Mauris vitae nisi at sem facilisis semper ac in est.';
-        return text.substring(0, Math.ceil(Math.random() * max_length - 5) + 5);
-    }
-    $.$mol_stub_message = $mol_stub_message;
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    $.$mol_colors = {
-        aliceblue: "#f0f8ff",
-        antiquewhite: "#faebd7",
-        aqua: "#00ffff",
-        aquamarine: "#7fffd4",
-        azure: "#f0ffff",
-        beige: "#f5f5dc",
-        bisque: "#ffe4c4",
-        black: "#000000",
-        blanchedalmond: "#ffebcd",
-        blue: "#0000ff",
-        blueviolet: "#8a2be2",
-        brown: "#a52a2a",
-        burlywood: "#deb887",
-        cadetblue: "#5f9ea0",
-        chartreuse: "#7fff00",
-        chocolate: "#d2691e",
-        coral: "#ff7f50",
-        cornflowerblue: "#6495ed",
-        cornsilk: "#fff8dc",
-        crimson: "#dc143c",
-        cyan: "#00ffff",
-        darkblue: "#00008b",
-        darkcyan: "#008b8b",
-        darkgoldenrod: "#b8860b",
-        darkgray: "#a9a9a9",
-        darkgreen: "#006400",
-        darkgrey: "#a9a9a9",
-        darkkhaki: "#bdb76b",
-        darkmagenta: "#8b008b",
-        darkolivegreen: "#556b2f",
-        darkorange: "#ff8c00",
-        darkorchid: "#9932cc",
-        darkred: "#8b0000",
-        darksalmon: "#e9967a",
-        darkseagreen: "#8fbc8f",
-        darkslateblue: "#483d8b",
-        darkslategrey: "#2f4f4f",
-        darkturquoise: "#00ced1",
-        darkviolet: "#9400d3",
-        deeppink: "#ff1493",
-        deepskyblue: "#00bfff",
-        dimgray: "#696969",
-        dimgrey: "#696969",
-        dodgerblue: "#1e90ff",
-        firebrick: "#b22222",
-        floralwhite: "#fffaf0",
-        forestgreen: "#228b22",
-        fuchsia: "#ff00ff",
-        gainsboro: "#dcdcdc",
-        ghostwhite: "#f8f8ff",
-        gold: "#ffd700",
-        goldenrod: "#daa520",
-        gray: "#808080",
-        green: "#008000",
-        greenyellow: "#adff2f",
-        grey: "#808080",
-        honeydew: "#f0fff0",
-        hotpink: "#ff69b4",
-        indianred: "#cd5c5c",
-        indigo: "#4b0082",
-        ivory: "#fffff0",
-        khaki: "#f0e68c",
-        lavender: "#e6e6fa",
-        lavenderblush: "#fff0f5",
-        lawngreen: "#7cfc00",
-        lemonchiffon: "#fffacd",
-        lightblue: "#add8e6",
-        lightcoral: "#f08080",
-        lightcyan: "#e0ffff",
-        lightgoldenrodyellow: "#fafad2",
-        lightgray: "#d3d3d3",
-        lightgreen: "#90ee90",
-        lightgrey: "#d3d3d3",
-        lightpink: "#ffb6c1",
-        lightsalmon: "#ffa07a",
-        lightseagreen: "#20b2aa",
-        lightskyblue: "#87cefa",
-        lightslategray: "#778899",
-        lightslategrey: "#778899",
-        lightsteelblue: "#b0c4de",
-        lightyellow: "#ffffe0",
-        lime: "#00ff00",
-        limegreen: "#32cd32",
-        linen: "#faf0e6",
-        magenta: "#ff00ff",
-        maroon: "#800000",
-        mediumaquamarine: "#66cdaa",
-        mediumblue: "#0000cd",
-        mediumorchid: "#ba55d3",
-        mediumpurple: "#9370db",
-        mediumseagreen: "#3cb371",
-        mediumslateblue: "#7b68ee",
-        mediumspringgreen: "#00fa9a",
-        mediumturquoise: "#48d1cc",
-        mediumvioletred: "#c71585",
-        midnightblue: "#191970",
-        mintcream: "#f5fffa",
-        mistyrose: "#ffe4e1",
-        moccasin: "#ffe4b5",
-        navajowhite: "#ffdead",
-        navy: "#000080",
-        oldlace: "#fdf5e6",
-        olive: "#808000",
-        olivedrab: "#6b8e23",
-        orange: "#ffa500",
-        orangered: "#ff4500",
-        orchid: "#da70d6",
-        palegoldenrod: "#eee8aa",
-        palegreen: "#98fb98",
-        paleturquoise: "#afeeee",
-        palevioletred: "#db7093",
-        papayawhip: "#ffefd5",
-        peachpuff: "#ffdab9",
-        peru: "#cd853f",
-        pink: "#ffc0cb",
-        plum: "#dda0dd",
-        powderblue: "#b0e0e6",
-        purple: "#800080",
-        rebeccapurple: "#663399",
-        red: "#ff0000",
-        rosybrown: "#bc8f8f",
-        royalblue: "#4169e1",
-        saddlebrown: "#8b4513",
-        salmon: "#fa8072",
-        sandybrown: "#f4a460",
-        seagreen: "#2e8b57",
-        seashell: "#fff5ee",
-        sienna: "#a0522d",
-        silver: "#c0c0c0",
-        skyblue: "#87ceeb",
-        slateblue: "#6a5acd",
-        slategray: "#708090",
-        slategrey: "#708090",
-        snow: "#fffafa",
-        springgreen: "#00ff7f",
-        steelblue: "#4682b4",
-        tan: "#d2b48c",
-        teal: "#008080",
-        thistle: "#d8bfd8",
-        tomato: "#ff6347",
-        turquoise: "#40e0d0",
-        violet: "#ee82ee",
-        wheat: "#f5deb3",
-        white: "#ffffff",
-        whitesmoke: "#f5f5f5",
-        yellow: "#ffff00",
-        yellowgreen: "#9acd32",
-    };
-})($ || ($ = {}));
-
-;
-"use strict";
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $mol_list_demo_table extends $.$mol_list_demo_table {
-            rows() {
-                return $mol_range2(index => this.Row(index), () => this.count());
-            }
-            check_list() {
-                return Array.from({ length: this.count() }, (_, i) => this.Id(i));
-            }
-            row_id(id) {
-                return String(id).padStart(5, '0');
-            }
-            row_title(id) {
-                $mol_wire_solid();
-                return $mol_stub_product_name();
-            }
-            row_quantity(id, next = Math.floor(Math.random() * 100)) {
-                $mol_wire_solid();
-                return next;
-            }
-            row_status(id, next = $mol_array_lottery(Object.keys(this.status_options()))) {
-                $mol_wire_solid();
-                return next;
-            }
-            row_uri(id) {
-                return `http://xkcd.com/${this.row_id(id)}`;
-            }
-            row_moment(id, next = new $mol_time_moment().shift({
-                day: Math.floor(Math.random() * 100)
-            })) {
-                $mol_wire_solid();
-                return next;
-            }
-            colors() {
-                return Object.keys($mol_colors);
-            }
-            row_color(id, next) {
-                $mol_wire_solid();
-                return next ?? $mol_array_lottery(this.colors());
-            }
-        }
-        __decorate([
-            $mol_mem
-        ], $mol_list_demo_table.prototype, "rows", null);
-        __decorate([
-            $mol_mem
-        ], $mol_list_demo_table.prototype, "check_list", null);
-        __decorate([
-            $mol_mem_key
-        ], $mol_list_demo_table.prototype, "row_title", null);
-        __decorate([
-            $mol_mem_key
-        ], $mol_list_demo_table.prototype, "row_quantity", null);
-        __decorate([
-            $mol_mem_key
-        ], $mol_list_demo_table.prototype, "row_status", null);
-        __decorate([
-            $mol_mem_key
-        ], $mol_list_demo_table.prototype, "row_uri", null);
-        __decorate([
-            $mol_mem_key
-        ], $mol_list_demo_table.prototype, "row_moment", null);
-        __decorate([
-            $mol_mem
-        ], $mol_list_demo_table.prototype, "colors", null);
-        __decorate([
-            $mol_mem_key
-        ], $mol_list_demo_table.prototype, "row_color", null);
-        $$.$mol_list_demo_table = $mol_list_demo_table;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        const { rem } = $mol_style_unit;
-        $mol_style_define($mol_list_demo_table, {
-            flex: {
-                direction: 'column',
-            },
-            Rows: {
-                flex: {
-                    grow: 1,
-                },
-            },
-            Row: {
-                boxShadow: `0 -1px 0 0 ${$mol_theme.line}`,
-            },
-            Title_labeler: {
-                flex: {
-                    basis: rem(15),
-                },
-            },
-            Color_labeler: {
-                flex: {
-                    basis: rem(10),
-                },
-            },
-            Id_labeler: {
-                flex: {
-                    basis: rem(5),
-                },
-                Label: {
-                    padding: {
-                        inlineStart: '2rem',
-                    },
-                },
-            },
-            Id: {
-                padding: $mol_gap.text,
-            },
-        });
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-	($.$rise_bench_baza_goods_table) = class $rise_bench_baza_goods_table extends ($.$mol_list_demo_table) {
-		Compact_id(id){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([(this.row_id(id))]);
-			return obj;
-		}
-		row_description(id){
-			return "";
-		}
-		Description(id){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([(this.row_description(id))]);
-			return obj;
-		}
-		Description_labeler(id){
-			const obj = new this.$.$mol_labeler();
-			(obj.title) = () => ("Description");
-			(obj.content) = () => ([(this.Description(id))]);
-			return obj;
-		}
-		row_tags(id){
-			return [];
-		}
-		Tags(id){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ((this.row_tags(id)));
-			return obj;
-		}
-		Tags_labeler(id){
-			const obj = new this.$.$mol_labeler();
-			(obj.title) = () => ("Tags");
-			(obj.content) = () => ([(this.Tags(id))]);
-			return obj;
-		}
-		Name(id){
-			const obj = new this.$.$mol_dimmer();
-			(obj.haystack) = () => ((this.row_title(id)));
-			(obj.needle) = () => ((this.query()));
-			return obj;
-		}
-		row_date(id){
-			return "";
-		}
-		count(){
-			return 1000;
-		}
-		products(){
-			return [];
-		}
-		compact(){
-			return false;
-		}
-		query(){
-			return "";
-		}
-		color_filter(){
-			return "all";
-		}
-		status_filter(){
-			return "all";
-		}
-		Compact_id_labeler(id){
-			const obj = new this.$.$mol_labeler();
-			(obj.title) = () => ("ID");
-			(obj.content) = () => ([(this.Compact_id(id))]);
-			return obj;
-		}
-		Details(id){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([(this.Description_labeler(id)), (this.Tags_labeler(id))]);
-			return obj;
-		}
-		Row(id){
-			const obj = new this.$.$mol_view();
-			(obj.minimal_height) = () => (96);
-			(obj.sub) = () => ((this.row_content(id)));
-			return obj;
-		}
-		Title(id){
-			const obj = new this.$.$mol_link_iconed();
-			(obj.uri) = () => ((this.row_uri(id)));
-			(obj.title) = () => ((this.row_title(id)));
-			(obj.content) = () => ([(this.Name(id))]);
-			return obj;
-		}
-		Date(id){
-			const obj = new this.$.$mol_date();
-			(obj.value_moment) = (next) => ((this.row_moment(id, next)));
-			(obj.trigger_content) = () => ([(this.row_date(id))]);
-			return obj;
-		}
-	};
-	($mol_mem_key(($.$rise_bench_baza_goods_table.prototype), "Compact_id"));
-	($mol_mem_key(($.$rise_bench_baza_goods_table.prototype), "Description"));
-	($mol_mem_key(($.$rise_bench_baza_goods_table.prototype), "Description_labeler"));
-	($mol_mem_key(($.$rise_bench_baza_goods_table.prototype), "Tags"));
-	($mol_mem_key(($.$rise_bench_baza_goods_table.prototype), "Tags_labeler"));
-	($mol_mem_key(($.$rise_bench_baza_goods_table.prototype), "Name"));
-	($mol_mem_key(($.$rise_bench_baza_goods_table.prototype), "Compact_id_labeler"));
-	($mol_mem_key(($.$rise_bench_baza_goods_table.prototype), "Details"));
-	($mol_mem_key(($.$rise_bench_baza_goods_table.prototype), "Row"));
-	($mol_mem_key(($.$rise_bench_baza_goods_table.prototype), "Title"));
-	($mol_mem_key(($.$rise_bench_baza_goods_table.prototype), "Date"));
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    class $rise_bench_baza_goods_tag extends $giper_baza_entity {
-    }
-    $.$rise_bench_baza_goods_tag = $rise_bench_baza_goods_tag;
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    class $rise_bench_baza_goods_product extends $giper_baza_entity.with({
-        Id: $giper_baza_atom_text,
-        Checked: $giper_baza_atom_bool,
-        Uri: $giper_baza_atom_text,
-        Color: $giper_baza_atom_text,
-        Status: $giper_baza_atom_text,
-        Quantity: $giper_baza_atom_real,
-        Supply: $giper_baza_atom_time,
-        Description: $giper_baza_atom_text,
-        Tags: $giper_baza_list_link.to(() => $rise_bench_baza_goods_tag),
-    }) {
-    }
-    $.$rise_bench_baza_goods_product = $rise_bench_baza_goods_product;
-})($ || ($ = {}));
-
-;
-"use strict";
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $rise_bench_baza_goods_table extends $.$rise_bench_baza_goods_table {
-            count() { return this.products().length; }
-            row_content(id) {
-                return this.compact()
-                    ? [this.Compact_id_labeler(id), this.Title_labeler(id), this.Color_labeler(id), this.Status_labeler(id)]
-                    : [...super.row_content(id), this.Details(id)];
-            }
-            row_description(id) { return this.products()[id].Description()?.val() ?? ''; }
-            row_tags(id) {
-                const tags = this.products()[id].Tags()?.remote_list() ?? [];
-                return [tags.map(tag => tag.Title()?.val() ?? '').join(', ')];
-            }
-            rows() {
-                const count = this.count();
-                const color = this.color_filter();
-                const status = this.status_filter();
-                const terms = this.query().trim().toLowerCase().split(/\s+/).filter(Boolean);
-                if (!terms.length && color === 'all' && status === 'all')
-                    return $mol_range2(index => this.Row(count - index - 1), () => count);
-                const matches = [];
-                for (let index = count - 1; index >= 0; --index) {
-                    if (color !== 'all' && this.row_color(index) !== color)
-                        continue;
-                    if (status !== 'all' && this.row_status(index) !== status)
-                        continue;
-                    if (terms.length && !terms.every(term => this.row_title(index).toLowerCase().includes(term)))
-                        continue;
-                    matches.push(index);
-                }
-                return $mol_range2(index => this.Row(matches[index]), () => matches.length);
-            }
-            row_id(id) { return this.products()[id].Id().val(); }
-            row_title(id) { return this.products()[id].Title().val(); }
-            row_uri(id) { return this.compact() ? `https://xkcd.com/${Number(this.row_id(id)) + 1}/` : this.products()[id].Uri().val(); }
-            row_checked(id, next) {
-                return this.products()[id].Checked().val(next) ?? false;
-            }
-            row_color(id, next) {
-                return this.products()[id].Color().val(next) ?? '';
-            }
-            row_status(id, next) {
-                return this.products()[id].Status().val(next) ?? '';
-            }
-            row_quantity(id, next) {
-                return this.products()[id].Quantity().val(next) ?? 0;
-            }
-            row_moment(id, next) {
-                return this.products()[id].Supply().val(next);
-            }
-            row_date(id) { return this.row_moment(id).toString('DD.MM.YYYY'); }
-        }
-        __decorate([
-            $mol_mem
-        ], $rise_bench_baza_goods_table.prototype, "rows", null);
-        __decorate([
-            $mol_mem_key
-        ], $rise_bench_baza_goods_table.prototype, "row_title", null);
-        $$.$rise_bench_baza_goods_table = $rise_bench_baza_goods_table;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        $mol_style_define($rise_bench_baza_goods_table, {
-            Compact_id_labeler: { flex: { basis: $mol_style_unit.rem(5) } },
-            Row: {
-                // Restore the spacing visible in the original table, requested by the user.
-                minHeight: $mol_style_unit.px(96),
-                flex: { wrap: 'wrap' },
-                padding: $mol_gap.block,
-                gap: $mol_gap.block,
-                alignItems: 'flex-start',
-            },
-            Details: { flex: { basis: '100%', wrap: 'wrap' }, gap: $mol_gap.block },
-            Description_labeler: { flex: { basis: $mol_style_unit.rem(30), shrink: 1 } },
-            Description: { flex: { shrink: 1 }, minWidth: 0 },
-        });
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-	($.$rise_bench_baza_goods) = class $rise_bench_baza_goods extends ($.$mol_book2) {
-		title(){
-			return "Сущности";
-		}
-		content(){
-			return [];
-		}
-		controls_enabled(){
-			return true;
-		}
-		schema_mode(next){
-			if(next !== undefined) return next;
-			return "compact";
-		}
-		Schema(){
-			const obj = new this.$.$mol_switch();
-			(obj.enabled) = () => ((this.controls_enabled()));
-			(obj.value) = (next) => ((this.schema_mode(next)));
-			(obj.options) = () => ({"compact": "4 свойства", "full": "10 свойств"});
-			return obj;
-		}
-		Schema_label(){
-			const obj = new this.$.$mol_labeler();
-			(obj.title) = () => ("Состав записи");
-			(obj.Content) = () => ((this.Schema()));
-			return obj;
-		}
-		count_mode(next){
-			if(next !== undefined) return next;
-			return "100";
-		}
-		Count(){
-			const obj = new this.$.$mol_switch();
-			(obj.enabled) = () => ((this.controls_enabled()));
-			(obj.value) = (next) => ((this.count_mode(next)));
-			(obj.options) = () => ({
-				"100": "100", 
-				"500": "500", 
-				"1000": "1000", 
-				"2000": "2000", 
-				"3000": "3000", 
-				"4000": "4000", 
-				"5000": "5000", 
-				"10000": "10000"
-			});
-			return obj;
-		}
-		Count_label(){
-			const obj = new this.$.$mol_labeler();
-			(obj.title) = () => ("Количество записей");
-			(obj.Content) = () => ((this.Count()));
-			return obj;
-		}
-		create_enabled(){
-			return true;
-		}
-		benchmark(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		Create(){
-			const obj = new this.$.$mol_button_major();
-			(obj.title) = () => ("Запустить бенчмарк");
-			(obj.enabled) = () => ((this.create_enabled()));
-			(obj.click) = (next) => ((this.benchmark(next)));
-			return obj;
-		}
-		add_enabled(){
-			return true;
-		}
-		add_one(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		Add(){
-			const obj = new this.$.$mol_button_minor();
-			(obj.title) = () => ("Добавить запись");
-			(obj.enabled) = () => ((this.add_enabled()));
-			(obj.click) = (next) => ((this.add_one(next)));
-			return obj;
-		}
-		reset(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		Reset(){
-			const obj = new this.$.$mol_button_minor();
-			(obj.title) = () => ("Сбросить");
-			(obj.enabled) = () => ((this.controls_enabled()));
-			(obj.click) = (next) => ((this.reset(next)));
-			return obj;
-		}
-		Actions(){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([
-				(this.Create()), 
-				(this.Add()), 
-				(this.Reset())
-			]);
-			return obj;
-		}
-		search_query(next){
-			return (this.Search().query(next));
-		}
-		Search(){
-			const obj = new this.$.$mol_search();
-			(obj.hint) = () => ("Название товара");
-			return obj;
-		}
-		Search_label(){
-			const obj = new this.$.$mol_labeler();
-			(obj.title) = () => ("Поиск по названию");
-			(obj.content) = () => ([(this.Search())]);
-			return obj;
-		}
-		color_filter(next){
-			if(next !== undefined) return next;
-			return "all";
-		}
-		Color_filter(){
-			const obj = new this.$.$mol_select();
-			(obj.value) = (next) => ((this.color_filter(next)));
-			(obj.dictionary) = () => ({
-				"all": "All colors", 
-				"red": "red", 
-				"green": "green", 
-				"blue": "blue"
-			});
-			return obj;
-		}
-		Color_label(){
-			const obj = new this.$.$mol_labeler();
-			(obj.title) = () => ("Color");
-			(obj.Content) = () => ((this.Color_filter()));
-			return obj;
-		}
-		status_filter(next){
-			if(next !== undefined) return next;
-			return "all";
-		}
-		Status_filter(){
-			const obj = new this.$.$mol_select();
-			(obj.value) = (next) => ((this.status_filter(next)));
-			(obj.dictionary) = () => ({
-				"all": "All statuses", 
-				"minor": "Store", 
-				"major": "Sale", 
-				"critical": "Support"
-			});
-			return obj;
-		}
-		Status_label(){
-			const obj = new this.$.$mol_labeler();
-			(obj.title) = () => ("Status");
-			(obj.Content) = () => ((this.Status_filter()));
-			return obj;
-		}
-		app_title(){
-			return "Товары";
-		}
-		body_scroll_top(next){
-			return (this.Records().body_scroll_top(next));
-		}
-		Metrics(){
-			const obj = new this.$.$rise_bench_metrics();
-			(obj.operations) = () => ([
-				"Создание, с", 
-				"Поиск, с", 
-				"Добавить 1, с", 
-				"F5, с", 
-				"Поиск после F5, с"
-			]);
-			return obj;
-		}
-		products(){
-			return [];
-		}
-		compact_mode(){
-			return false;
-		}
-		Table(){
-			const obj = new this.$.$rise_bench_baza_goods_table();
-			(obj.products) = () => ((this.products()));
-			(obj.compact) = () => ((this.compact_mode()));
-			(obj.query) = () => ((this.search_query()));
-			(obj.color_filter) = () => ((this.color_filter()));
-			(obj.status_filter) = () => ((this.status_filter()));
-			return obj;
-		}
-		menu_title(){
-			return (this.title());
-		}
-		pages(){
-			return (this.content());
-		}
-		Settings(){
-			const obj = new this.$.$mol_page();
-			(obj.title) = () => ("Настройки");
-			(obj.minimal_width) = () => (320);
-			(obj.body) = () => ([
-				(this.Schema_label()), 
-				(this.Count_label()), 
-				(this.Actions()), 
-				(this.Search_label()), 
-				(this.Color_label()), 
-				(this.Status_label())
-			]);
-			return obj;
-		}
-		Records(){
-			const obj = new this.$.$mol_page();
-			(obj.title) = () => ((this.app_title()));
-			(obj.minimal_width) = () => (640);
-			(obj.body) = () => ([(this.Metrics()), (this.Table())]);
-			return obj;
-		}
-	};
-	($mol_mem(($.$rise_bench_baza_goods.prototype), "schema_mode"));
-	($mol_mem(($.$rise_bench_baza_goods.prototype), "Schema"));
-	($mol_mem(($.$rise_bench_baza_goods.prototype), "Schema_label"));
-	($mol_mem(($.$rise_bench_baza_goods.prototype), "count_mode"));
-	($mol_mem(($.$rise_bench_baza_goods.prototype), "Count"));
-	($mol_mem(($.$rise_bench_baza_goods.prototype), "Count_label"));
-	($mol_mem(($.$rise_bench_baza_goods.prototype), "benchmark"));
-	($mol_mem(($.$rise_bench_baza_goods.prototype), "Create"));
-	($mol_mem(($.$rise_bench_baza_goods.prototype), "add_one"));
-	($mol_mem(($.$rise_bench_baza_goods.prototype), "Add"));
-	($mol_mem(($.$rise_bench_baza_goods.prototype), "reset"));
-	($mol_mem(($.$rise_bench_baza_goods.prototype), "Reset"));
-	($mol_mem(($.$rise_bench_baza_goods.prototype), "Actions"));
-	($mol_mem(($.$rise_bench_baza_goods.prototype), "Search"));
-	($mol_mem(($.$rise_bench_baza_goods.prototype), "Search_label"));
-	($mol_mem(($.$rise_bench_baza_goods.prototype), "color_filter"));
-	($mol_mem(($.$rise_bench_baza_goods.prototype), "Color_filter"));
-	($mol_mem(($.$rise_bench_baza_goods.prototype), "Color_label"));
-	($mol_mem(($.$rise_bench_baza_goods.prototype), "status_filter"));
-	($mol_mem(($.$rise_bench_baza_goods.prototype), "Status_filter"));
-	($mol_mem(($.$rise_bench_baza_goods.prototype), "Status_label"));
-	($mol_mem(($.$rise_bench_baza_goods.prototype), "Metrics"));
-	($mol_mem(($.$rise_bench_baza_goods.prototype), "Table"));
-	($mol_mem(($.$rise_bench_baza_goods.prototype), "Settings"));
-	($mol_mem(($.$rise_bench_baza_goods.prototype), "Records"));
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    class $rise_bench_baza_goods_dataset extends $giper_baza_entity.with({
-        Products: $giper_baza_list_link.to(() => $rise_bench_baza_goods_product),
-        Tags: $giper_baza_list_link.to(() => $rise_bench_baza_goods_tag),
-    }) {
-    }
-    $.$rise_bench_baza_goods_dataset = $rise_bench_baza_goods_dataset;
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    // A stable host identity: wire must not serialize a growing products array as a task argument.
-    class $rise_bench_baza_goods_preparation {
-        dataset;
-        count;
-        compact;
-        products = [];
-        links;
-        date = new $mol_time_moment('2026-10-05');
-        tag_links = [];
-        constructor(dataset, count, compact = false) {
-            this.dataset = dataset;
-            this.count = count;
-            this.compact = compact;
-        }
-    }
-    $.$rise_bench_baza_goods_preparation = $rise_bench_baza_goods_preparation;
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    function $rise_bench_baza_goods_product_name(index) {
-        const brands = ['Aurora', 'Orion', 'Vega', 'Nova', 'Atlas', 'Pixel', 'Aero', 'Terra', 'Lumen', 'Zen'];
-        const models = ['Wireless', 'Compact', 'Pro', 'Mini', 'Classic', 'Smart', 'Portable', 'Studio', 'Premium', 'Travel'];
-        const types = ['Notebook', 'Headphones', 'Monitor', 'Mouse', 'Keyboard', 'Camera', 'Printer', 'Router', 'Speaker', 'Watch'];
-        return `${brands[Math.floor(index / 10) % 10]} ${models[Math.floor(index / 100) % 10]} ${types[index % 10]} ${String(index).padStart(5, '0')}`;
-    }
-    $.$rise_bench_baza_goods_product_name = $rise_bench_baza_goods_product_name;
-})($ || ($ = {}));
-
-;
-	($.$rise_bug_baza_nohash) = class $rise_bug_baza_nohash extends ($.$mol_page) {
-		Baza_status(){
-			const obj = new this.$.$giper_baza_status();
-			return obj;
-		}
-		entity_reset(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		Reset(){
-			const obj = new this.$.$mol_button_minor();
-			(obj.click) = (next) => ((this.entity_reset(next)));
-			return obj;
-		}
-		entity(){
-			return null;
-		}
-		add(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		Add(){
-			const obj = new this.$.$mol_button_minor();
-			(obj.click) = (next) => ((this.add(next)));
-			return obj;
-		}
-		id(id){
-			return "0";
-		}
-		Item(id){
-			const obj = new this.$.$mol_button_minor();
-			(obj.title) = () => ((this.id(id)));
-			return obj;
-		}
-		items(){
-			return [(this.Item("0"))];
-		}
-		Items(){
-			const obj = new this.$.$mol_list();
-			(obj.sub) = () => ((this.items()));
-			return obj;
-		}
-		body(){
-			return [
-				(this.Baza_status()), 
-				(this.Reset()), 
-				(this.entity()), 
-				(this.Add()), 
-				(this.Items())
-			];
-		}
-	};
-	($mol_mem(($.$rise_bug_baza_nohash.prototype), "Baza_status"));
-	($mol_mem(($.$rise_bug_baza_nohash.prototype), "entity_reset"));
-	($mol_mem(($.$rise_bug_baza_nohash.prototype), "Reset"));
-	($mol_mem(($.$rise_bug_baza_nohash.prototype), "add"));
-	($mol_mem(($.$rise_bug_baza_nohash.prototype), "Add"));
-	($mol_mem_key(($.$rise_bug_baza_nohash.prototype), "Item"));
-	($mol_mem(($.$rise_bug_baza_nohash.prototype), "Items"));
-
-
-;
-"use strict";
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $rise_bug_baza_nohash_entity extends $giper_baza_entity.with({
-            Dict: $giper_baza_dict_to($giper_baza_atom_link_to(() => $giper_baza_atom_text)),
-            List: $giper_baza_list_link_to(() => $giper_baza_atom_text),
-        }) {
-        }
-        $$.$rise_bug_baza_nohash_entity = $rise_bug_baza_nohash_entity;
-        class $rise_bug_baza_nohash extends $.$rise_bug_baza_nohash {
-            entity_reset() {
-                this.entity(null);
-            }
-            entity(reset) {
-                const land = this.$.$giper_baza_glob.land_grab([[null, $giper_baza_rank_deny]]);
-                return land.Data($rise_bug_baza_nohash_entity);
-            }
-            id(id) {
-                return id;
-            }
-            items() {
-                return this.entity().List()?.remote_list().map(i => this.Item(i.link().str)) ?? [];
-            }
-            add(next) {
-                const entity = this.entity();
-                const item = entity.List(null)?.make(entity.land());
-                const title = item?.link().toString() ?? '';
-                item?.val(title);
-                entity.Dict(null)?.key(title, 'auto');
-            }
-        }
-        __decorate([
-            $mol_mem
-        ], $rise_bug_baza_nohash.prototype, "entity", null);
-        $$.$rise_bug_baza_nohash = $rise_bug_baza_nohash;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-	($.$rise_bug_baza_noseal) = class $rise_bug_baza_noseal extends ($.$mol_page) {
-		Baza_status(){
-			const obj = new this.$.$giper_baza_status();
-			return obj;
-		}
-		entity_reset(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		Reset(){
-			const obj = new this.$.$mol_button_minor();
-			(obj.click) = (next) => ((this.entity_reset(next)));
-			return obj;
-		}
-		entity(){
-			return null;
-		}
-		add(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		Add(){
-			const obj = new this.$.$mol_button_minor();
-			(obj.click) = (next) => ((this.add(next)));
-			return obj;
-		}
-		id(id){
-			return "0";
-		}
-		Item(id){
-			const obj = new this.$.$mol_button_minor();
-			(obj.title) = () => ((this.id(id)));
-			return obj;
-		}
-		items(){
-			return [(this.Item("0"))];
-		}
-		Items(){
-			const obj = new this.$.$mol_list();
-			(obj.sub) = () => ((this.items()));
-			return obj;
-		}
-		body(){
-			return [
-				(this.Baza_status()), 
-				(this.Reset()), 
-				(this.entity()), 
-				(this.Add()), 
-				(this.Items())
-			];
-		}
-	};
-	($mol_mem(($.$rise_bug_baza_noseal.prototype), "Baza_status"));
-	($mol_mem(($.$rise_bug_baza_noseal.prototype), "entity_reset"));
-	($mol_mem(($.$rise_bug_baza_noseal.prototype), "Reset"));
-	($mol_mem(($.$rise_bug_baza_noseal.prototype), "add"));
-	($mol_mem(($.$rise_bug_baza_noseal.prototype), "Add"));
-	($mol_mem_key(($.$rise_bug_baza_noseal.prototype), "Item"));
-	($mol_mem(($.$rise_bug_baza_noseal.prototype), "Items"));
-
-
-;
-"use strict";
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $rise_bug_baza_noseal_entity extends $giper_baza_entity.with({
-            Dict: $giper_baza_dict_to($giper_baza_atom_link_to(() => $giper_baza_atom_text)),
-            List: $giper_baza_list_link_to(() => $giper_baza_atom_text),
-        }) {
-        }
-        $$.$rise_bug_baza_noseal_entity = $rise_bug_baza_noseal_entity;
-        class $rise_bug_baza_noseal extends $.$rise_bug_baza_noseal {
-            entity_reset() {
-                this.link_str(null);
-            }
-            link_str(next) {
-                if (next) {
-                    return $mol_state_arg.value('link_str', next);
-                }
-                let str = $mol_state_arg.value('link_str');
-                if (str && next !== null)
-                    return str;
-                const land = this.$.$giper_baza_glob.land_grab([[null, $giper_baza_rank_deny]]);
-                return $mol_state_arg.value('link_str', land.link().str);
-            }
-            entity(reset) {
-                const link = new $giper_baza_link(this.link_str());
-                const land = this.$.$giper_baza_glob.Land(link);
-                return land.Data($rise_bug_baza_noseal_entity);
-            }
-            id(id) {
-                return id;
-            }
-            items() {
-                return this.entity().List()?.remote_list().map(i => this.Item(i.link().str)) ?? [];
-            }
-            add(next) {
-                const entity = this.entity();
-                const item = entity.List(null)?.make(entity.land());
-                const title = item?.link().toString() ?? '';
-                item?.val(title);
-                entity.Dict(null)?.key($mol_wire_sync($).$mol_guid(), 'auto');
-            }
-        }
-        __decorate([
-            $mol_mem
-        ], $rise_bug_baza_noseal.prototype, "link_str", null);
-        __decorate([
-            $mol_mem
-        ], $rise_bug_baza_noseal.prototype, "entity", null);
-        $$.$rise_bug_baza_noseal = $rise_bug_baza_noseal;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-	($.$rise_bug_baza_decrypt) = class $rise_bug_baza_decrypt extends ($.$mol_page) {
-		Baza_status(){
-			const obj = new this.$.$giper_baza_status();
-			return obj;
-		}
-		entity_reset(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		Reset(){
-			const obj = new this.$.$mol_button_minor();
-			(obj.click) = (next) => ((this.entity_reset(next)));
-			return obj;
-		}
-		entity(){
-			return null;
-		}
-		add(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		Add(){
-			const obj = new this.$.$mol_button_minor();
-			(obj.click) = (next) => ((this.add(next)));
-			return obj;
-		}
-		id(id){
-			return "0";
-		}
-		cut(id, next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		Item(id){
-			const obj = new this.$.$mol_button_minor();
-			(obj.title) = () => ((this.id(id)));
-			(obj.click) = (next) => ((this.cut(id, next)));
-			return obj;
-		}
-		items(){
-			return [(this.Item("0"))];
-		}
-		Items(){
-			const obj = new this.$.$mol_list();
-			(obj.sub) = () => ((this.items()));
-			return obj;
-		}
-		body(){
-			return [
-				(this.Baza_status()), 
-				(this.Reset()), 
-				(this.entity()), 
-				(this.Add()), 
-				(this.Items())
-			];
-		}
-	};
-	($mol_mem(($.$rise_bug_baza_decrypt.prototype), "Baza_status"));
-	($mol_mem(($.$rise_bug_baza_decrypt.prototype), "entity_reset"));
-	($mol_mem(($.$rise_bug_baza_decrypt.prototype), "Reset"));
-	($mol_mem(($.$rise_bug_baza_decrypt.prototype), "add"));
-	($mol_mem(($.$rise_bug_baza_decrypt.prototype), "Add"));
-	($mol_mem_key(($.$rise_bug_baza_decrypt.prototype), "cut"));
-	($mol_mem_key(($.$rise_bug_baza_decrypt.prototype), "Item"));
-	($mol_mem(($.$rise_bug_baza_decrypt.prototype), "Items"));
-
-
-;
-"use strict";
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $rise_bug_baza_decrypt_entity extends $giper_baza_entity.with({
-            Dict: $giper_baza_dict_to($giper_baza_atom_link_to(() => $giper_baza_atom_text)),
-            List: $giper_baza_list_link_to(() => $giper_baza_atom_text),
-        }) {
-        }
-        $$.$rise_bug_baza_decrypt_entity = $rise_bug_baza_decrypt_entity;
-        class $rise_bug_baza_decrypt extends $.$rise_bug_baza_decrypt {
-            entity_reset() {
-                this.link_str(null);
-            }
-            link_str(next) {
-                if (next) {
-                    return $mol_state_arg.value('link_str', next);
-                }
-                let str = $mol_state_arg.value('link_str');
-                if (str && next !== null)
-                    return str;
-                const land = this.$.$giper_baza_glob.land_grab([[null, $giper_baza_rank_deny]]);
-                return $mol_state_arg.value('link_str', land.link().str);
-            }
-            entity(reset) {
-                const link = new $giper_baza_link(this.link_str());
-                const land = this.$.$giper_baza_glob.Land(link);
-                return land.Data($rise_bug_baza_decrypt_entity);
-            }
-            id(id) {
-                return id;
-            }
-            items() {
-                return this.entity().List()?.remote_list().map(i => this.Item(i.link().str)) ?? [];
-            }
-            add(next) {
-                const entity = this.entity();
-                const item = entity.List(null)?.make([[null, $giper_baza_rank_deny]]);
-                const title = item?.link().str ?? '';
-                item?.val(title);
-                entity.Dict(null)?.key($mol_wire_sync($).$mol_guid(), 'auto');
-            }
-            cut(id, next) {
-                this.entity().List()?.cut(new $giper_baza_link(id));
-            }
-        }
-        __decorate([
-            $mol_mem
-        ], $rise_bug_baza_decrypt.prototype, "link_str", null);
-        __decorate([
-            $mol_mem
-        ], $rise_bug_baza_decrypt.prototype, "entity", null);
-        $$.$rise_bug_baza_decrypt = $rise_bug_baza_decrypt;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-	($.$rise_bug_baza_slowtext) = class $rise_bug_baza_slowtext extends ($.$mol_page) {
-		Baza_status(){
-			const obj = new this.$.$giper_baza_status();
-			return obj;
-		}
-		entity_reset(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		Reset(){
-			const obj = new this.$.$mol_button_minor();
-			(obj.click) = (next) => ((this.entity_reset(next)));
-			return obj;
-		}
-		entity(){
-			return null;
-		}
-		text(next){
-			if(next !== undefined) return next;
-			return "";
-		}
-		Text(){
-			const obj = new this.$.$mol_textarea();
-			(obj.value) = (next) => ((this.text(next)));
-			return obj;
-		}
-		body(){
-			return [
-				(this.Baza_status()), 
-				(this.Reset()), 
-				(this.entity()), 
-				(this.Text())
-			];
-		}
-	};
-	($mol_mem(($.$rise_bug_baza_slowtext.prototype), "Baza_status"));
-	($mol_mem(($.$rise_bug_baza_slowtext.prototype), "entity_reset"));
-	($mol_mem(($.$rise_bug_baza_slowtext.prototype), "Reset"));
-	($mol_mem(($.$rise_bug_baza_slowtext.prototype), "text"));
-	($mol_mem(($.$rise_bug_baza_slowtext.prototype), "Text"));
-
-
-;
-"use strict";
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $rise_bug_baza_slowtext_entity extends $giper_baza_entity.with({
-            Text: $giper_baza_text,
-        }) {
-        }
-        $$.$rise_bug_baza_slowtext_entity = $rise_bug_baza_slowtext_entity;
-        class $rise_bug_baza_slowtext extends $.$rise_bug_baza_slowtext {
-            entity_reset() {
-                this.link_str(null);
-            }
-            link_str(next) {
-                if (next) {
-                    return $mol_state_arg.value('link_str', next);
-                }
-                let str = $mol_state_arg.value('link_str');
-                if (str && next !== null)
-                    return str;
-                const land = this.$.$giper_baza_glob.land_grab([[null, $giper_baza_rank_deny]]);
-                return $mol_state_arg.value('link_str', land.link().str);
-            }
-            entity() {
-                const link = new $giper_baza_link(this.link_str());
-                const land = this.$.$giper_baza_glob.Land(link);
-                const entity = land.Data($rise_bug_baza_slowtext_entity);
-                entity.Text(null);
-                return entity;
-            }
-            text(next) {
-                return this.entity().Text(next)?.value(next) ?? '';
-            }
-        }
-        __decorate([
-            $mol_mem
-        ], $rise_bug_baza_slowtext.prototype, "link_str", null);
-        __decorate([
-            $mol_mem
-        ], $rise_bug_baza_slowtext.prototype, "entity", null);
-        $$.$rise_bug_baza_slowtext = $rise_bug_baza_slowtext;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-	($.$rise_bug) = class $rise_bug extends ($.$mol_book2_catalog) {
-		placeholders(){
-			return [];
-		}
-		param(){
-			return "bug";
-		}
-		spread_classes(){
-			return [
-				"$rise_bug_baza_nohash", 
-				"$rise_bug_baza_noseal", 
-				"$rise_bug_baza_decrypt", 
-				"$rise_bug_baza_slowtext"
-			];
-		}
-	};
-
-
-;
-"use strict";
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $rise_bug extends $.$rise_bug {
-            spreads() {
-                const dict = Object.fromEntries(this.spread_classes().map(name => {
-                    return [name, new (this.$[name])];
-                }));
-                return dict;
-            }
-        }
-        $$.$rise_bug = $rise_bug;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    /** Stable operation identity and clock across wire suspension/replay. */
-    class $rise_bench_measure {
-        title;
-        count;
-        unit;
-        started = performance.now();
-        duration = null;
-        constructor(title, count = 0, unit = 'зап.') {
-            this.title = title;
-            this.count = count;
-            this.unit = unit;
-        }
-        finish() { this.duration ??= performance.now() - this.started; }
-    }
-    $.$rise_bench_measure = $rise_bench_measure;
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    /** Per-tab run history; the pending ticket belongs only to the next page. */
-    class $rise_bench_reload {
-        key;
-        snapshot;
-        constructor(key) {
-            this.key = key;
-            const saved = $mol_error_fence(() => JSON.parse(sessionStorage.getItem(key) || 'null'), () => null);
-            this.snapshot = Array.isArray(saved?.rows) ? saved : { rows: [], pending: null };
-        }
-        save(runs, operations, pending) {
-            const rows = runs.map(run => ({
-                count: run.count, properties: run.properties, stamp: run.stamp, state: run.state(),
-                metrics: Object.fromEntries(operations.map(operation => [operation, run.metric(operation)])),
-            }));
-            sessionStorage.setItem(this.key, JSON.stringify({ rows, pending }));
-        }
-    }
-    $.$rise_bench_reload = $rise_bench_reload;
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    class $rise_bench_baza_goods_reload extends $rise_bench_reload {
-        constructor() { super('$rise_bench_baza_goods_runs'); }
-    }
-    $.$rise_bench_baza_goods_reload = $rise_bench_baza_goods_reload;
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    /** Observe the real rendered viewport, then allow a paint before completing. */
-    class $rise_bench_baza_goods_reload_ready extends $mol_object {
-        table;
-        title;
-        constructor(table, title) {
-            super();
-            this.table = table;
-            this.title = title;
-        }
-        observer;
-        timer;
-        frame = 0;
-        pending;
-        visible() {
-            if (!this.table.isConnected)
-                return false;
-            const rows = [...this.table.querySelectorAll('[rise_bench_baza_goods_table_row]')].filter(row => {
-                const rect = row.getBoundingClientRect();
-                return rect.top < innerHeight && rect.bottom > 0;
-            });
-            return rows.length > 0
-                && rows[0].textContent.includes(this.title)
-                && rows.every(row => !row.querySelector('[mol_view_error]')
-                    && !!row.querySelector('[rise_bench_baza_goods_table_title]')?.textContent?.trim());
-        }
-        wait() {
-            return this.pending ??= new Promise((resolve, reject) => {
-                const check = () => {
-                    if (this.frame || !this.visible())
-                        return;
-                    this.frame = requestAnimationFrame(() => {
-                        this.frame = requestAnimationFrame(() => {
-                            this.frame = 0;
-                            if (!this.visible())
-                                return;
-                            this.destructor();
-                            resolve(performance.timeOrigin + performance.now());
-                        });
-                    });
-                };
-                this.observer = new MutationObserver(check);
-                this.observer.observe(this.table, { childList: true, subtree: true, attributes: true, characterData: true });
-                this.timer = setTimeout(() => {
-                    this.destructor();
-                    reject(new Error('После F5 товары не появились за 45 секунд'));
-                }, 45_000);
-                check();
-            });
-        }
-        destructor() {
-            this.observer?.disconnect();
-            if (this.timer)
-                clearTimeout(this.timer);
-            if (this.frame)
-                cancelAnimationFrame(this.frame);
-            super.destructor();
-        }
-    }
-    $.$rise_bench_baza_goods_reload_ready = $rise_bench_baza_goods_reload_ready;
-})($ || ($ = {}));
-
-;
-"use strict";
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $rise_bench_baza_goods extends $.$rise_bench_baza_goods {
-            preset = [[null, $giper_baza_rank_read]];
-            tag_names = ['Office', 'Home', 'Travel', 'Studio', 'Gaming', 'Portable', 'Wireless', 'Compact', 'Premium', 'Classic', 'New', 'Popular', 'Eco', 'Gift', 'Work', 'Creative', 'Audio', 'Video', 'Network', 'Accessories'];
-            prepare_tags(dataset) {
-                const list = dataset.Tags(null);
-                const existing = list.items();
-                if (existing.length === this.tag_names.length)
-                    return existing;
-                // Publish the catalog only after every referenced tag is fully initialized.
-                list.items($mol_wire_sync(this).prepare_catalog_links(dataset));
-                return list.items();
-            }
-            prepare_tag(dataset, index) {
-                const tag = dataset.land().Pawn($rise_bench_baza_goods_tag).Head($mol_wire_sync(dataset.land()).self_make());
-                tag.Title(null).val(this.tag_names[index]);
-                return tag;
-            }
-            prepare_catalog_links(dataset) {
-                return this.tag_names.map((_, index) => $mol_wire_sync(this).prepare_tag(dataset, index).link());
-            }
-            dataset_config() { return { count: this.record_count(), compact: this.compact_mode() }; }
-            prepare_dataset(config) {
-                // Resolve the local author before allocating another signing key. On a
-                // fresh profile, interleaving both initializations can strand king_grab.
-                this.$.$giper_baza_auth.current().pass();
-                const land = $mol_wire_sync($giper_baza_glob).land_grab(this.preset);
-                const dataset = land.Data($rise_bench_baza_goods_dataset);
-                dataset.Products(null);
-                return new $rise_bench_baza_goods_preparation(dataset, config.count, config.compact);
-            }
-            fill_product(state, index, product) {
-                product.Id(null).val(String(index).padStart(5, '0'));
-                product.Title(null).val($rise_bench_baza_goods_product_name(index));
-                product.Color(null).val(['red', 'green', 'blue'][index % 3]);
-                product.Status(null).val(['minor', 'major', 'critical'][index % 3]);
-                if (state.compact)
-                    return product;
-                product.Checked(null).val(false);
-                product.Uri(null).val(`https://xkcd.com/${index + 1}/`);
-                product.Quantity(null).val(index % 100);
-                product.Supply(null).val(state.date);
-                product.Description(null).val(`${$rise_bench_baza_goods_product_name(index)} — sample product for the local CRDT benchmark.`);
-                const tags = $mol_wire_sync(this).prepare_tags(state.dataset);
-                // Link.toBin caches bytes relative to its first Land; do not reuse catalog
-                // link instances when serializing the references into another Area.
-                product.Tags(null).items(state.tag_links[index] ??= Array.from({ length: 5 }, (_, offset) => new $giper_baza_link(tags[(index + offset * 3) % tags.length].str)));
-                return product;
-            }
-            initialize_product(key) {
-                const [state, index] = key;
-                // This initializer is only invoked by Create. A completed record has no
-                // remaining write dependencies and is never recreated on async replay.
-                if (state.products[index])
-                    return state.products[index];
-                const product = $mol_wire_sync(state.dataset.land()).area_make().Data($rise_bench_baza_goods_product);
-                return state.products[index] = this.fill_product(state, index, product);
-            }
-            schema_mode(next) {
-                return $mol_state_arg.value('schema', next) === 'full' ? 'full' : 'compact';
-            }
-            compact_mode() { return this.schema_mode() === 'compact'; }
-            count_mode(next) {
-                const count = $mol_state_arg.value('count', next);
-                return count && Object.hasOwn(this.Count().options(), count) ? count : '100';
-            }
-            record_count() { return Number(this.count_mode()); }
-            app_title() { return `Товары: ${this.record_count()} записей`; }
-            dataset_link(next) {
-                // Keep existing Area datasets; retired single/shard datasets stay untouched.
-                const key = '$rise_bug_listbaza_dataset_names2_area' + (this.record_count() === 1000 ? '' : '_' + this.record_count()) + (this.compact_mode() ? '_compact' : '');
-                return $mol_state_local.value(key, next) ?? '';
-            }
-            dataset() {
-                const link = this.dataset_link();
-                return link ? $giper_baza_glob.Pawn(new $giper_baza_link(link), $rise_bench_baza_goods_dataset) : null;
-            }
-            products() {
-                const links = this.product_links();
-                return $mol_range2(index => $giper_baza_glob.Pawn(links[index], $rise_bench_baza_goods_product), () => links.length);
-            }
-            product_links() { return this.dataset()?.Products()?.items() ?? []; }
-            controls_enabled() { return this.add_enabled() && !$mol_promise_like(this.Add().status()?.[0]); }
-            add_enabled() {
-                return this.Metrics().runs()[0]?.state() !== 'Перезагрузка'
-                    && !$mol_promise_like(this.Create().status()?.[0]);
-            }
-            create_enabled() { return this.controls_enabled() && !$mol_promise_like(this.Create().status()?.[0]); }
-            prepare_append(dataset) {
-                return new $rise_bench_baza_goods_preparation(dataset, dataset.Products().items().length, this.compact_mode());
-            }
-            add_one() {
-                const total = new ($mol_wire_sync($rise_bench_measure))('Добавление');
-                const dataset = this.dataset() ?? $mol_wire_sync(this).prepare_dataset(this.dataset_config()).dataset;
-                // Freeze the insertion index before any writes or suspension.
-                const state = $mol_wire_sync(this).prepare_append(dataset);
-                const product = $mol_wire_sync(dataset.Products()).make(dataset.land());
-                $mol_wire_sync(this).fill_product(state, state.count, product);
-                this.dataset_link(dataset.link().str);
-                this.body_scroll_top(0);
-                total.finish();
-                return total.duration;
-            }
-            reset() {
-                // Detach only this selected benchmark dataset, not the whole local database.
-                this.dataset_link('');
-                this.search_query('');
-                this.color_filter('all');
-                this.status_filter('all');
-                this.body_scroll_top(0);
-            }
-            create() {
-                const total = new ($mol_wire_sync($rise_bench_measure))('Создание набора: всего', this.record_count());
-                const state = $mol_wire_sync(this).prepare_dataset(this.dataset_config());
-                for (let index = 0; index < state.count; ++index)
-                    this.initialize_product([state, index]);
-                // Publish once, after all Areas are filled. Publishing on each make()
-                // forces the next Area to save an increasingly large parent list.
-                $mol_wire_sync(state.dataset.Products()).items(state.links ??= state.products.map(product => product.link()));
-                this.dataset_link(state.dataset.link().str);
-                total.finish();
-                return total.duration;
-            }
-            start_run(run) {
-                if (this.Metrics().runs().includes(run))
-                    return;
-                this.reset();
-                this.Metrics().run_add(run);
-            }
-            benchmark_search() {
-                this.search_query('Notebook 00000');
-                return this.Table().rows().length;
-            }
-            benchmark() {
-                this.restore_runs();
-                const run = new ($mol_wire_sync($rise_bench_run))(this.record_count(), this.compact_mode() ? 4 : 10);
-                $mol_wire_sync(this).start_run(run);
-                return $mol_error_fence(() => {
-                    const created = $mol_wire_sync(this).create();
-                    run.metric('Создание, с', created / 1000);
-                    // Drain the previous writes before measuring another operation.
-                    $mol_wire_sync(this).save_dataset();
-                    const search = new ($mol_wire_sync($rise_bench_measure))('Поиск');
-                    if ($mol_wire_sync(this).benchmark_search() !== 1)
-                        throw new Error('Поиск должен найти один товар');
-                    search.finish();
-                    run.metric('Поиск, с', search.duration / 1000);
-                    this.search_query('');
-                    const added = $mol_wire_sync(this).add_one();
-                    run.metric('Добавить 1, с', added / 1000);
-                    $mol_wire_sync(this).save_dataset();
-                    $mol_wire_sync(this).request_reload(run);
-                }, error => { run.state('Ошибка'); return error; });
-            }
-            reload_store() { return new $rise_bench_baza_goods_reload; }
-            runs_restored = false;
-            restore_runs() {
-                if (this.runs_restored)
-                    return;
-                const rows = this.reload_store().snapshot.rows.map(row => {
-                    const run = new $rise_bench_run(row.count, row.properties, row.stamp);
-                    run.state(row.state);
-                    for (const [name, value] of Object.entries(row.metrics))
-                        if (value !== null)
-                            run.metric(name, value);
-                    return run;
-                });
-                this.Metrics().runs(rows);
-                this.runs_restored = true;
-            }
-            save_dataset() {
-                const lands = new Set([this.dataset().land(), ...this.products().map(product => product.land())]);
-                // Native units_saving suspends until signing and IDB commits finish.
-                for (const land of lands)
-                    $mol_wire_sync(land).units_saving();
-            }
-            request_reload(run) {
-                run.state('Перезагрузка');
-                this.reload_store().save(this.Metrics().runs(), this.Metrics().operations(), {
-                    link: this.dataset_link(), count: run.count,
-                    started: performance.timeOrigin + performance.now(),
-                });
-                this.$.$mol_dom_context.location.reload();
-            }
-            reload_done = false;
-            resume_reload() {
-                if (this.reload_done)
-                    return;
-                const ticket = this.reload_store().snapshot.pending;
-                if (!ticket)
-                    return;
-                const run = this.Metrics().runs()[0];
-                return $mol_error_fence(() => {
-                    if (this.dataset_link() !== ticket.link || this.product_links().length !== ticket.count + 1) {
-                        throw new Error('После F5 открыт другой или неполный набор товаров');
-                    }
-                    const ready = new ($mol_wire_sync($rise_bench_baza_goods_reload_ready))(this.Table().dom_node(), $rise_bench_baza_goods_product_name(ticket.count));
-                    const finished = $mol_wire_sync(ready).wait();
-                    run.metric('F5, с', (finished - ticket.started) / 1000);
-                    const search = new ($mol_wire_sync($rise_bench_measure))('Поиск после F5');
-                    if ($mol_wire_sync(this).benchmark_search() !== 1)
-                        throw new Error('Поиск после F5 должен найти один товар');
-                    search.finish();
-                    run.metric('Поиск после F5, с', search.duration / 1000);
-                    this.search_query('');
-                    this.reload_done = true;
-                    run.state('Готово');
-                    this.reload_store().save(this.Metrics().runs(), this.Metrics().operations(), null);
-                }, error => {
-                    this.reload_done = true;
-                    run.state('Ошибка');
-                    this.reload_store().save(this.Metrics().runs(), this.Metrics().operations(), null);
-                    return error;
-                });
-            }
-            auto() {
-                this.restore_runs();
-                this.resume_reload();
-                return [];
-            }
-            content() {
-                // Keep the synchronizer subscribed for the lifetime of the application.
-                $giper_baza_glob.yard().sync();
-                return [this.Settings(), this.Records()];
-            }
-        }
-        __decorate([
-            $mol_action
-        ], $rise_bench_baza_goods.prototype, "prepare_tags", null);
-        __decorate([
-            $mol_action
-        ], $rise_bench_baza_goods.prototype, "prepare_tag", null);
-        __decorate([
-            $mol_action
-        ], $rise_bench_baza_goods.prototype, "prepare_catalog_links", null);
-        __decorate([
-            $mol_mem
-        ], $rise_bench_baza_goods.prototype, "dataset_config", null);
-        __decorate([
-            $mol_action
-        ], $rise_bench_baza_goods.prototype, "prepare_dataset", null);
-        __decorate([
-            $mol_action
-        ], $rise_bench_baza_goods.prototype, "fill_product", null);
-        __decorate([
-            $mol_mem_key
-        ], $rise_bench_baza_goods.prototype, "initialize_product", null);
-        __decorate([
-            $mol_mem
-        ], $rise_bench_baza_goods.prototype, "schema_mode", null);
-        __decorate([
-            $mol_mem
-        ], $rise_bench_baza_goods.prototype, "count_mode", null);
-        __decorate([
-            $mol_mem
-        ], $rise_bench_baza_goods.prototype, "dataset_link", null);
-        __decorate([
-            $mol_mem
-        ], $rise_bench_baza_goods.prototype, "dataset", null);
-        __decorate([
-            $mol_mem
-        ], $rise_bench_baza_goods.prototype, "products", null);
-        __decorate([
-            $mol_mem
-        ], $rise_bench_baza_goods.prototype, "product_links", null);
-        __decorate([
-            $mol_action
-        ], $rise_bench_baza_goods.prototype, "add_one", null);
-        __decorate([
-            $mol_action
-        ], $rise_bench_baza_goods.prototype, "reset", null);
-        __decorate([
-            $mol_action
-        ], $rise_bench_baza_goods.prototype, "create", null);
-        __decorate([
-            $mol_action
-        ], $rise_bench_baza_goods.prototype, "start_run", null);
-        __decorate([
-            $mol_action
-        ], $rise_bench_baza_goods.prototype, "benchmark_search", null);
-        __decorate([
-            $mol_action
-        ], $rise_bench_baza_goods.prototype, "benchmark", null);
-        __decorate([
-            $mol_mem
-        ], $rise_bench_baza_goods.prototype, "reload_store", null);
-        __decorate([
-            $mol_action
-        ], $rise_bench_baza_goods.prototype, "restore_runs", null);
-        __decorate([
-            $mol_action
-        ], $rise_bench_baza_goods.prototype, "save_dataset", null);
-        __decorate([
-            $mol_action
-        ], $rise_bench_baza_goods.prototype, "request_reload", null);
-        __decorate([
-            $mol_mem
-        ], $rise_bench_baza_goods.prototype, "resume_reload", null);
-        __decorate([
-            $mol_mem
-        ], $rise_bench_baza_goods.prototype, "content", null);
-        $$.$rise_bench_baza_goods = $rise_bench_baza_goods;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        $mol_style_define($rise_bench_baza_goods, {
-            Settings: { flex: { grow: 0, basis: $mol_style_unit.rem(20) } },
-            Records: {
-                flex: { grow: 1, shrink: 1 },
-                minWidth: $mol_style_unit.px(640),
-                '@media': {
-                    '(max-width: 640px)': { minWidth: $mol_style_unit.per(100) },
-                },
-            },
-            Actions: { flex: { wrap: 'wrap' } },
-        });
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-	($.$rise_bench_baza_crdttext) = class $rise_bench_baza_crdttext extends ($.$mol_book2) {
-		title(){
-			return "Текст";
-		}
-		count_mode(next){
-			if(next !== undefined) return next;
-			return "100";
-		}
-		controls_enabled(){
-			return true;
-		}
-		Count(){
-			const obj = new this.$.$mol_switch();
-			(obj.value) = (next) => ((this.count_mode(next)));
-			(obj.enabled) = () => ((this.controls_enabled()));
-			(obj.options) = () => ({
-				"100": "100", 
-				"500": "500", 
-				"1000": "1000", 
-				"2000": "2000", 
-				"5000": "5000"
-			});
-			return obj;
-		}
-		Count_label(){
-			const obj = new this.$.$mol_labeler();
-			(obj.title) = () => ("Количество строк");
-			(obj.Content) = () => ((this.Count()));
-			return obj;
-		}
-		benchmark(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		Run(){
-			const obj = new this.$.$mol_button_major();
-			(obj.title) = () => ("Запустить бенчмарк");
-			(obj.click) = (next) => ((this.benchmark(next)));
-			(obj.enabled) = () => ((this.controls_enabled()));
-			return obj;
-		}
-		reset(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		Reset(){
-			const obj = new this.$.$mol_button_minor();
-			(obj.title) = () => ("Очистить");
-			(obj.click) = (next) => ((this.reset(next)));
-			(obj.enabled) = () => ((this.controls_enabled()));
-			return obj;
-		}
-		Menu(){
-			const obj = new this.$.$mol_page();
-			(obj.title) = () => ("CRDT text");
-			(obj.minimal_width) = () => (240);
-			(obj.body) = () => ([
-				(this.Count_label()), 
-				(this.Run()), 
-				(this.Reset())
-			]);
-			return obj;
-		}
-		page_title(){
-			return "CRDT-текст";
-		}
-		Metrics(){
-			const obj = new this.$.$rise_bench_metrics();
-			(obj.operations) = () => ([
-				"Вставка, с", 
-				"Добавить символ, с", 
-				"F5, с"
-			]);
-			return obj;
-		}
-		text(next){
-			if(next !== undefined) return next;
-			return "";
-		}
-		Editor(){
-			const obj = new this.$.$mol_textarea();
-			(obj.hint) = () => ("Введите текст или запустите бенчмарк");
-			(obj.value) = (next) => ((this.text(next)));
-			(obj.enabled) = () => ((this.controls_enabled()));
-			(obj.spellcheck) = () => (false);
-			return obj;
-		}
-		Page(){
-			const obj = new this.$.$mol_page();
-			(obj.title) = () => ((this.page_title()));
-			(obj.minimal_width) = () => (640);
-			(obj.body) = () => ([(this.Metrics()), (this.Editor())]);
-			return obj;
-		}
-		menu_title(){
-			return (this.title());
-		}
-		pages(){
-			return [(this.Menu()), (this.Page())];
-		}
-	};
-	($mol_mem(($.$rise_bench_baza_crdttext.prototype), "count_mode"));
-	($mol_mem(($.$rise_bench_baza_crdttext.prototype), "Count"));
-	($mol_mem(($.$rise_bench_baza_crdttext.prototype), "Count_label"));
-	($mol_mem(($.$rise_bench_baza_crdttext.prototype), "benchmark"));
-	($mol_mem(($.$rise_bench_baza_crdttext.prototype), "Run"));
-	($mol_mem(($.$rise_bench_baza_crdttext.prototype), "reset"));
-	($mol_mem(($.$rise_bench_baza_crdttext.prototype), "Reset"));
-	($mol_mem(($.$rise_bench_baza_crdttext.prototype), "Menu"));
-	($mol_mem(($.$rise_bench_baza_crdttext.prototype), "Metrics"));
-	($mol_mem(($.$rise_bench_baza_crdttext.prototype), "text"));
-	($mol_mem(($.$rise_bench_baza_crdttext.prototype), "Editor"));
-	($mol_mem(($.$rise_bench_baza_crdttext.prototype), "Page"));
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    /** Native textarea plus its visible text layer, followed by a paint opportunity. */
-    class $rise_bench_baza_crdttext_render_ready extends $mol_object {
-        editor;
-        expected;
-        page;
-        constructor(editor, expected, page) {
-            super();
-            this.editor = editor;
-            this.expected = expected;
-            this.page = page;
-        }
-        pending;
-        observer;
-        frame = 0;
-        timer;
-        visible() {
-            const input = this.editor.Edit().dom_node();
-            const row = this.editor.View().Row(1).dom_node();
-            const rect = row.getBoundingClientRect();
-            const viewport = this.page.Body().dom_node().getBoundingClientRect();
-            return input.isConnected && input.value === this.expected
-                && this.editor.View().dom_node().contains(row)
-                && rect.height > 0 && rect.bottom > viewport.top && rect.bottom <= viewport.bottom + 1
-                && row.textContent.endsWith(this.expected.split('\n', 1)[0]);
-        }
-        wait() {
-            return this.pending ??= new Promise((resolve, reject) => {
-                const check = () => {
-                    // Show the first line through native scrolling, never force render.
-                    this.page.body_scroll_top(0);
-                    if (this.frame || !this.visible())
-                        return;
-                    this.frame = requestAnimationFrame(() => {
-                        this.frame = requestAnimationFrame(() => {
-                            this.frame = 0;
-                            if (!this.visible())
-                                return;
-                            this.destructor();
-                            resolve(performance.timeOrigin + performance.now());
-                        });
-                    });
-                };
-                this.observer = new MutationObserver(check);
-                this.observer.observe(this.editor.dom_node(), { childList: true, subtree: true, characterData: true });
-                this.timer = setTimeout(() => {
-                    this.destructor();
-                    reject(new Error('Текст не появился в редакторе за 45 секунд'));
-                }, 45_000);
-                check();
-            });
-        }
-        destructor() {
-            this.observer?.disconnect();
-            if (this.frame)
-                cancelAnimationFrame(this.frame);
-            if (this.timer)
-                clearTimeout(this.timer);
-            super.destructor();
-        }
-    }
-    $.$rise_bench_baza_crdttext_render_ready = $rise_bench_baza_crdttext_render_ready;
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    class $rise_bench_baza_crdttext_reload extends $rise_bench_reload {
-        constructor() { super('$rise_bench_baza_crdttext_runs'); }
-    }
-    $.$rise_bench_baza_crdttext_reload = $rise_bench_baza_crdttext_reload;
-})($ || ($ = {}));
-
-;
-"use strict";
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $rise_bench_baza_crdttext extends $.$rise_bench_baza_crdttext {
-            preset = [[null, $giper_baza_rank_read]];
-            count_mode(next) {
-                const count = $mol_state_arg.value('lines', next);
-                return count && Object.hasOwn(this.Count().options(), count) ? count : '100';
-            }
-            line_count() { return Number(this.count_mode()); }
-            page_title() { return `CRDT-текст: ${this.line_count()} строк`; }
-            text_link(next) {
-                return $mol_state_local.value('$rise_bench_baza_crdttext', next) ?? '';
-            }
-            document() {
-                const link = this.text_link();
-                return link ? $giper_baza_glob.Pawn(new $giper_baza_link(link), $giper_baza_text) : null;
-            }
-            prepare_document() {
-                this.$.$giper_baza_auth.current().pass();
-                return $mol_wire_sync($giper_baza_glob).land_grab(this.preset).Data($giper_baza_text);
-            }
-            write_text(next) {
-                const document = this.document() ?? $mol_wire_sync(this).prepare_document();
-                $mol_wire_sync(document).text(next);
-                this.text_link(document.link().str);
-            }
-            text(next) {
-                if (next !== undefined)
-                    this.write_text(next);
-                $giper_baza_glob.yard().sync();
-                return this.document()?.text() ?? '';
-            }
-            sample_text(lines) {
-                return Array.from({ length: lines }, (_, index) => `Строка ${index + 1}: проверяем запись и редактирование текста в Гипербазе.`).join('\n');
-            }
-            insert(next) {
-                const measure = new ($mol_wire_sync($rise_bench_measure))('Вставка');
-                $mol_wire_sync(this).write_text(next);
-                measure.finish();
-                return measure.duration;
-            }
-            appended_text() { return '!' + this.text(); }
-            append_one() {
-                const measure = new ($mol_wire_sync($rise_bench_measure))('Добавление символа');
-                const next = $mol_wire_sync(this).appended_text();
-                $mol_wire_sync(this).write_text(next);
-                const ready = new ($mol_wire_sync($rise_bench_baza_crdttext_render_ready))(this.Editor(), next, this.Page());
-                $mol_wire_sync(ready).wait();
-                measure.finish();
-                return measure.duration;
-            }
-            start_run(run) {
-                if (this.Metrics().runs().includes(run))
-                    return;
-                $mol_wire_sync(this).reset();
-                this.Metrics().run_add(run);
-            }
-            benchmark() {
-                this.restore_runs();
-                const run = new ($mol_wire_sync($rise_bench_run))(this.line_count());
-                const block = this.sample_text(run.count);
-                $mol_wire_sync(this).start_run(run);
-                return $mol_error_fence(() => {
-                    const inserted = $mol_wire_sync(this).insert(block);
-                    run.metric('Вставка, с', inserted / 1000);
-                    $mol_wire_sync(this).save_document();
-                    const appended = $mol_wire_sync(this).append_one();
-                    run.metric('Добавить символ, с', appended / 1000);
-                    $mol_wire_sync(this).save_document();
-                    $mol_wire_sync(this).request_reload(run);
-                }, error => { run.state('Ошибка'); return error; });
-            }
-            reset() {
-                const document = $mol_wire_sync(this).prepare_document();
-                this.text_link(document.link().str);
-            }
-            controls_enabled() {
-                return this.Metrics().runs()[0]?.state() !== 'Перезагрузка'
-                    && !$mol_promise_like(this.Run().status()?.[0])
-                    && !$mol_promise_like(this.Reset().status()?.[0]);
-            }
-            reload_store() { return new $rise_bench_baza_crdttext_reload; }
-            runs_restored = false;
-            restore_runs() {
-                if (this.runs_restored)
-                    return;
-                this.Metrics().runs(this.reload_store().snapshot.rows.map(row => {
-                    const run = new $rise_bench_run(row.count, row.properties, row.stamp);
-                    run.state(row.state);
-                    for (const [name, value] of Object.entries(row.metrics))
-                        if (value !== null)
-                            run.metric(name, value);
-                    return run;
-                }));
-                this.runs_restored = true;
-            }
-            save_document() { $mol_wire_sync(this.document().land()).units_saving(); }
-            request_reload(run) {
-                run.state('Перезагрузка');
-                this.reload_store().save(this.Metrics().runs(), this.Metrics().operations(), {
-                    link: this.text_link(), count: run.count, started: performance.timeOrigin + performance.now(),
-                });
-                this.$.$mol_dom_context.location.reload();
-            }
-            reload_done = false;
-            resume_reload() {
-                if (this.reload_done)
-                    return;
-                const ticket = this.reload_store().snapshot.pending;
-                if (!ticket)
-                    return;
-                const run = this.Metrics().runs()[0];
-                return $mol_error_fence(() => {
-                    const expected = '!' + this.sample_text(ticket.count);
-                    if (this.text_link() !== ticket.link || this.text() !== expected)
-                        throw new Error('После F5 открыт другой или неполный CRDT-текст');
-                    const ready = new ($mol_wire_sync($rise_bench_baza_crdttext_render_ready))(this.Editor(), expected, this.Page());
-                    const finished = $mol_wire_sync(ready).wait();
-                    if (this.Editor().Edit().dom_node().value !== expected)
-                        throw new Error('После F5 текст не появился в textarea');
-                    run.metric('F5, с', (finished - ticket.started) / 1000);
-                    this.reload_done = true;
-                    run.state('Готово');
-                    this.reload_store().save(this.Metrics().runs(), this.Metrics().operations(), null);
-                }, error => {
-                    this.reload_done = true;
-                    run.state('Ошибка');
-                    this.reload_store().save(this.Metrics().runs(), this.Metrics().operations(), null);
-                    return error;
-                });
-            }
-            auto() {
-                this.restore_runs();
-                this.resume_reload();
-                return [];
-            }
-        }
-        __decorate([
-            $mol_mem
-        ], $rise_bench_baza_crdttext.prototype, "count_mode", null);
-        __decorate([
-            $mol_mem
-        ], $rise_bench_baza_crdttext.prototype, "text_link", null);
-        __decorate([
-            $mol_mem
-        ], $rise_bench_baza_crdttext.prototype, "document", null);
-        __decorate([
-            $mol_action
-        ], $rise_bench_baza_crdttext.prototype, "prepare_document", null);
-        __decorate([
-            $mol_action
-        ], $rise_bench_baza_crdttext.prototype, "write_text", null);
-        __decorate([
-            $mol_mem
-        ], $rise_bench_baza_crdttext.prototype, "text", null);
-        __decorate([
-            $mol_mem_key
-        ], $rise_bench_baza_crdttext.prototype, "sample_text", null);
-        __decorate([
-            $mol_action
-        ], $rise_bench_baza_crdttext.prototype, "insert", null);
-        __decorate([
-            $mol_action
-        ], $rise_bench_baza_crdttext.prototype, "appended_text", null);
-        __decorate([
-            $mol_action
-        ], $rise_bench_baza_crdttext.prototype, "append_one", null);
-        __decorate([
-            $mol_action
-        ], $rise_bench_baza_crdttext.prototype, "start_run", null);
-        __decorate([
-            $mol_action
-        ], $rise_bench_baza_crdttext.prototype, "benchmark", null);
-        __decorate([
-            $mol_action
-        ], $rise_bench_baza_crdttext.prototype, "reset", null);
-        __decorate([
-            $mol_mem
-        ], $rise_bench_baza_crdttext.prototype, "reload_store", null);
-        __decorate([
-            $mol_action
-        ], $rise_bench_baza_crdttext.prototype, "restore_runs", null);
-        __decorate([
-            $mol_action
-        ], $rise_bench_baza_crdttext.prototype, "save_document", null);
-        __decorate([
-            $mol_action
-        ], $rise_bench_baza_crdttext.prototype, "request_reload", null);
-        __decorate([
-            $mol_mem
-        ], $rise_bench_baza_crdttext.prototype, "resume_reload", null);
-        $$.$rise_bench_baza_crdttext = $rise_bench_baza_crdttext;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        $mol_style_define($rise_bench_baza_crdttext, {
-            Menu: { flex: { grow: 0, basis: $mol_style_unit.rem(15) } },
-            Page: { flex: { grow: 1 } },
-        });
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-	($.$rise_bench) = class $rise_bench extends ($.$mol_book2_catalog) {
-		Goods(){
-			const obj = new this.$.$rise_bench_baza_goods();
-			return obj;
-		}
-		Crdttext(){
-			const obj = new this.$.$rise_bench_baza_crdttext();
-			return obj;
-		}
-		placeholders(){
-			return [];
-		}
-		param(){
-			return "bench";
-		}
-		spreads(){
-			return {"$rise_bench_baza_goods": (this.Goods()), "$rise_bench_baza_crdttext": (this.Crdttext())};
-		}
-	};
-	($mol_mem(($.$rise_bench.prototype), "Goods"));
-	($mol_mem(($.$rise_bench.prototype), "Crdttext"));
-
-
-;
-"use strict";
-
-
-;
 	($.$rise_app) = class $rise_app extends ($.$mol_book2_catalog) {
-		Demo(){
-			const obj = new this.$.$rise_demo();
-			(obj.menu_title) = () => ("Demo");
+		Demo_host(){
+			const obj = new this.$.$rise_bench_host();
+			(obj.title) = () => ("Demo");
+			(obj.kind) = () => ("demo");
 			return obj;
 		}
 		Bench(){
@@ -39188,16 +39985,74 @@ var $;
 			return "$rise";
 		}
 		spreads(){
-			return {"demo": (this.Demo()), "bench": (this.Bench())};
+			return {"demo": (this.Demo_host()), "bench": (this.Bench())};
+		}
+		Demo(){
+			const obj = new this.$.$rise_demo();
+			return obj;
 		}
 	};
-	($mol_mem(($.$rise_app.prototype), "Demo"));
+	($mol_mem(($.$rise_app.prototype), "Demo_host"));
 	($mol_mem(($.$rise_app.prototype), "Bench"));
+	($mol_mem(($.$rise_app.prototype), "Demo"));
 
 
 ;
 "use strict";
+var $;
+(function ($) {
+    class $rise_storage extends $mol_object {
+        static configure() { this.$.$giper_baza_mine_idb.db = () => this.db(); return true; }
+        static db() {
+            const fixture = new URL(location.href).searchParams.get('rise_fixture');
+            return this.$.$mol_db(fixture ? '$rise_workload_' + fixture : '$rise_results', mig => mig.store_make('Unit'), mig => mig.store_make('Ball'));
+        }
+    }
+    __decorate([
+        $mol_memo.method
+    ], $rise_storage, "configure", null);
+    __decorate([
+        $mol_memo.method
+    ], $rise_storage, "db", null);
+    $.$rise_storage = $rise_storage;
+})($ || ($ = {}));
 
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $rise_app extends $.$rise_app {
+            fixture_kind() { return new URL(location.href).searchParams.get('rise_fixture'); }
+            fixture() {
+                switch (this.fixture_kind()) {
+                    case 'goods': return this.Bench().Goods();
+                    case 'text': return this.Bench().Crdttext();
+                    case 'idb': return this.Bench().Idb();
+                    case 'demo': return this.Demo();
+                }
+                return null;
+            }
+            pages() {
+                $rise_storage.configure();
+                return this.fixture()?.pages_deep() ?? super.pages();
+            }
+            auto() {
+                $rise_storage.configure();
+                return this.fixture()?.auto() ?? super.auto();
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $rise_app.prototype, "pages", null);
+        $$.$rise_app = $rise_app;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
 
 
 export default $
