@@ -19,19 +19,6 @@
 	pack mws git \https://github.com/reatailret/milkywaystd_mol.git
 	pack raggu git \https://github.com/RaguTeam/raggu.git
 	pack vsqla git \https://github.com/vsqla/vsqla.git
-\/mol
-	pack icon git \https://github.com/nin-jin/mol_icon.git
-\/mol/view
-	include \/mol/view/tree/test
-\/mol/app/demo/main
-	deploy \/mol/readme.md
-\/rise/demo
-	include \/rise/drag/demo
-	include \/rise/resize/demo
-	include \/rise/resize/ratio/demo
-	include \/rise/toggle/demo
-	include \/rise/range/demo
-	include \/rise/radio/demo
 \/giper
 	pack balls git \https://github.com/giper-dev/balls.git
 	pack baza git \https://github.com/giper-dev/baza.git
@@ -43,8 +30,12 @@
 	pack player git \https://github.com/giper-dev/player.git
 	pack search git \https://github.com/giper-dev/search.git
 	pack web git \https://github.com/giper-dev/web.git
+\/mol
+	pack icon git \https://github.com/nin-jin/mol_icon.git
 \/giper/baza/glob
 	deploy \giper/baza/glob/glob.baza
+\/mol/view
+	include \/mol/view/tree/test
 \/hyoo
 	pack about git \https://github.com/hyoo-ru/about.hyoo.ru.git
 	pack artist git \https://github.com/hyoo-ru/artist.hyoo.ru.git
@@ -134,3 +125,12 @@
 	deploy \/giper/baza/diagram/files.png
 	deploy \/giper/baza/diagram/network.png
 	deploy \/giper/baza/diagram/jepsen.png
+\/mol/app/demo/main
+	deploy \/mol/readme.md
+\/rise/demo
+	include \/rise/drag/demo
+	include \/rise/resize/demo
+	include \/rise/resize/ratio/demo
+	include \/rise/toggle/demo
+	include \/rise/range/demo
+	include \/rise/radio/demo
