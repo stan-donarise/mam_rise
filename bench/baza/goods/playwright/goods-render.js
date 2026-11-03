@@ -100,7 +100,7 @@ async function main() {
 		const beforeRun = navigations
 		await resultBenchmark( 'Создать 500 записей до отображения', async()=> {
 			await page.getByRole( 'button', { name: 'Запустить бенчмарк', exact: true } ).click()
-			await page.waitForFunction( ()=> globalThis.$.$rise_app.Root( 0 ).Bench().Goods().Metrics().runs()[ 0 ]?.state() === 'Готово' )
+			await page.waitForFunction( ()=> globalThis.$?.$rise_app.Root( 0 ).Bench().Goods().Metrics().runs()[ 0 ]?.state() === 'Готово' )
 		} )
 		const lands = await page.evaluate( ()=> globalThis.$.$rise_app.Root( 0 ).Bench().Goods().product_links().map( link => link.land().str ) )
 		assert.ok( navigations > beforeRun, 'The benchmark must really reload the whole page' )
@@ -125,8 +125,8 @@ async function main() {
 		resultStep( 'Повторить прогон на новом наборе', [ '$rise_bench_baza_goods.benchmark', '$rise_bench_baza_goods.start_run' ] )
 		await page.getByRole( 'button', { name: 'Запустить бенчмарк', exact: true } ).click()
 		await page.waitForFunction( ()=> {
-			const app = globalThis.$.$rise_app.Root( 0 ).Bench().Goods()
-			return app.Metrics().runs().length === 2 && app.Metrics().runs()[ 0 ].state() === 'Готово'
+			const app = globalThis.$?.$rise_app.Root( 0 ).Bench().Goods()
+			return app?.Metrics().runs().length === 2 && app.Metrics().runs()[ 0 ].state() === 'Готово'
 		} )
 		assert.equal( await page.evaluate( ()=> globalThis.$.$rise_app.Root( 0 ).Bench().Goods().product_links().length ), 501 )
 		const completed = await page.evaluate( ()=> globalThis.$.$rise_app.Root( 0 ).Bench().Goods().Metrics().records() )
