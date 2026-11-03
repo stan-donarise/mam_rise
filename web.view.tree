@@ -3077,13 +3077,9 @@ $mol_button_major $mol_button_minor
 	theme \$mol_theme_base
 
 $rise_bench_metrics $mol_grid
-	measurements? /$rise_bench_measure
-	measure_add? null
-	col_ids /
-		\Операция
-		\Время, мс
-		\Объём
-		\Скорость
+	runs? /$rise_bench_run
+	run_add? null
+	operations /string
 
 $mol_list_demo $mol_example_small
 	sub /
@@ -3167,8 +3163,6 @@ $mol_list_demo_table $mol_example
 $rise_bench_baza_goods_table $mol_list_demo_table
 	count 1000
 	products /$rise_bench_baza_goods_product
-	links /$giper_baza_link
-	dataset null
 	compact false
 	query \
 	color_filter \all
@@ -3205,7 +3199,7 @@ $rise_bench_baza_goods_table $mol_list_demo_table
 		trigger_content / <= row_date* \
 
 $rise_bench_baza_goods $mol_book2
-	menu_title \$rise_bench_baza_goods
+	menu_title <= title \Сущности
 	pages <= content /$mol_view
 	Settings $mol_page
 		title \Настройки
@@ -3215,7 +3209,7 @@ $rise_bench_baza_goods $mol_book2
 				title \Состав записи
 				Content <= Schema $mol_switch
 					enabled <= controls_enabled true
-					value? <=> schema_mode? \full
+					value? <=> schema_mode? \compact
 					options *
 						compact \4 свойства
 						full \10 свойств
@@ -3223,21 +3217,22 @@ $rise_bench_baza_goods $mol_book2
 				title \Количество записей
 				Content <= Count $mol_switch
 					enabled <= controls_enabled
-					value? <=> count_mode? \1000
+					value? <=> count_mode? \100
 					options *
+						100 \100
 						500 \500
 						1000 \1000
 						2000 \2000
 						3000 \3000
 						4000 \4000
-						8000 \8000
+						5000 \5000
 						10000 \10000
 			<= Actions $mol_view
 				sub /
 					<= Create $mol_button_major
-						title \Создать записи
+						title \Запустить бенчмарк
 						enabled <= create_enabled true
-						click? <=> create? null
+						click? <=> benchmark? null
 					<= Add $mol_button_minor
 						title \Добавить запись
 						enabled <= add_enabled true
@@ -3246,10 +3241,6 @@ $rise_bench_baza_goods $mol_book2
 						title \Сбросить
 						enabled <= controls_enabled
 						click? <=> reset? null
-					<= Rebuild_indexes $mol_button_minor
-						title \Перестроить индексы
-						enabled <= index_rebuild_enabled true
-						click? <=> rebuild_indexes? null
 			<= Search_label $mol_labeler
 				title \Поиск по названию
 				content /
@@ -3280,10 +3271,14 @@ $rise_bench_baza_goods $mol_book2
 		body_scroll_top? => body_scroll_top?
 		body /
 			<= Metrics $rise_bench_metrics
+				operations /
+					\Создание, с
+					\Поиск, с
+					\Добавить 1, с
+					\F5, с
+					\Поиск после F5, с
 			<= Table $rise_bench_baza_goods_table
 				products <= products /$rise_bench_baza_goods_product
-				links <= product_links /$giper_baza_link
-				dataset <= dataset null
 				compact <= compact_mode false
 				query <= search_query?
 				color_filter <= color_filter?
@@ -3345,27 +3340,42 @@ $rise_bug $mol_book2_catalog
 		\$rise_bug_baza_slowtext
 
 $rise_bench_baza_crdttext $mol_book2
-	menu_title \$rise_bench_baza_crdttext
+	menu_title <= title \Текст
 	pages /
 		<= Menu $mol_page
 			title \CRDT text
 			minimal_width 240
 			body /
-				<= Insert $mol_button_major
-					title \Вставить 500 строк
-					click? <=> insert? null
+				<= Count_label $mol_labeler
+					title \Количество строк
+					Content <= Count $mol_switch
+						value? <=> count_mode? \100
+						enabled <= controls_enabled true
+						options *
+							100 \100
+							500 \500
+							1000 \1000
+							2000 \2000
+							5000 \5000
+				<= Run $mol_button_major
+					title \Запустить бенчмарк
+					click? <=> benchmark? null
 					enabled <= controls_enabled true
 				<= Reset $mol_button_minor
-					title \Сбросить
+					title \Очистить
 					click? <=> reset? null
 					enabled <= controls_enabled
 		<= Page $mol_page
-			title \Текст
+			title <= page_title \CRDT-текст
 			minimal_width 640
 			body /
 				<= Metrics $rise_bench_metrics
+					operations /
+						\Вставка, с
+						\Добавить символ, с
+						\F5, с
 				<= Editor $mol_textarea
-					hint \Введите текст или вставьте 500 строк
+					hint \Введите текст или запустите бенчмарк
 					value? <=> text? \
 					enabled <= controls_enabled
 					spellcheck false

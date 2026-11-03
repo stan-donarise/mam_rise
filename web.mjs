@@ -36315,46 +36315,46 @@ var $;
 
 ;
 	($.$rise_bench_metrics) = class $rise_bench_metrics extends ($.$mol_grid) {
-		measurements(next){
+		runs(next){
 			if(next !== undefined) return next;
 			return [];
 		}
-		measure_add(next){
+		run_add(next){
 			if(next !== undefined) return next;
 			return null;
 		}
-		col_ids(){
-			return [
-				"Операция", 
-				"Время, мс", 
-				"Объём", 
-				"Скорость"
-			];
+		operations(){
+			return [];
 		}
 	};
-	($mol_mem(($.$rise_bench_metrics.prototype), "measurements"));
-	($mol_mem(($.$rise_bench_metrics.prototype), "measure_add"));
+	($mol_mem(($.$rise_bench_metrics.prototype), "runs"));
+	($mol_mem(($.$rise_bench_metrics.prototype), "run_add"));
 
 
 ;
 "use strict";
 var $;
 (function ($) {
-    /** Stable operation identity and clock across wire suspension/replay. */
-    class $rise_bench_measure {
-        title;
+    class $rise_bench_run extends $mol_object {
         count;
-        unit;
-        started = performance.now();
-        duration = null;
-        constructor(title, count = 0, unit = 'зап.') {
-            this.title = title;
+        properties;
+        stamp;
+        constructor(count, properties = 0, stamp = new $mol_time_moment().toString('DD.MM.YYYY hh:mm:ss')) {
+            super();
             this.count = count;
-            this.unit = unit;
+            this.properties = properties;
+            this.stamp = stamp;
         }
-        finish() { this.duration ??= performance.now() - this.started; }
+        state(next = 'Выполняется') { return next; }
+        metric(operation, next) { return next ?? null; }
     }
-    $.$rise_bench_measure = $rise_bench_measure;
+    __decorate([
+        $mol_mem
+    ], $rise_bench_run.prototype, "state", null);
+    __decorate([
+        $mol_mem_key
+    ], $rise_bench_run.prototype, "metric", null);
+    $.$rise_bench_run = $rise_bench_run;
 })($ || ($ = {}));
 
 ;
@@ -36368,26 +36368,30 @@ var $;
     var $$;
     (function ($$) {
         class $rise_bench_metrics extends $.$rise_bench_metrics {
-            measure_add(measure) {
-                measure.finish();
-                const rows = this.measurements();
-                if (rows.includes(measure))
+            run_add(run) {
+                const rows = this.runs();
+                if (rows.includes(run))
                     return;
-                this.measurements([measure, ...rows].slice(0, 100));
+                this.runs([run, ...rows]);
             }
+            col_ids() { return ['№', 'Дата и время', 'Объём', 'Полей', 'Состояние', ...this.operations()]; }
             records() {
-                return this.measurements().map(measure => ({
-                    'Операция': measure.title,
-                    'Время, мс': (measure.duration ?? 0).toFixed(2),
-                    'Объём': measure.count ? `${measure.count} ${measure.unit}` : '—',
-                    'Скорость': measure.count && measure.duration
-                        ? `${Math.round(measure.count * 1000 / measure.duration)} ${measure.unit}/с` : '—',
+                return this.runs().map((run, index, rows) => ({
+                    '№': rows.length - index,
+                    'Дата и время': run.stamp,
+                    'Объём': run.count,
+                    'Полей': run.properties || '—',
+                    'Состояние': run.state(),
+                    ...Object.fromEntries(this.operations().map(operation => {
+                        const time = run.metric(operation);
+                        return [operation, time === null ? '—' : time.toFixed(3)];
+                    })),
                 }));
             }
         }
         __decorate([
             $mol_action
-        ], $rise_bench_metrics.prototype, "measure_add", null);
+        ], $rise_bench_metrics.prototype, "run_add", null);
         __decorate([
             $mol_mem
         ], $rise_bench_metrics.prototype, "records", null);
@@ -37315,12 +37319,6 @@ var $;
 		products(){
 			return [];
 		}
-		links(){
-			return [];
-		}
-		dataset(){
-			return null;
-		}
 		compact(){
 			return false;
 		}
@@ -37407,37 +37405,6 @@ var $;
 
 ;
 "use strict";
-var $;
-(function ($) {
-    class $rise_bench_baza_goods_index extends $giper_baza_dict.with({ Ready: $giper_baza_atom_bool }) {
-        bucket(key, auto) { return this.dive('bucket:' + key, $giper_baza_list_link, auto); }
-        set_member(link, key, included) {
-            const serialized = new ($mol_wire_sync($giper_baza_link))(link.str);
-            this.bucket(key, null).has(serialized, included);
-        }
-    }
-    __decorate([
-        $mol_action
-    ], $rise_bench_baza_goods_index.prototype, "set_member", null);
-    $.$rise_bench_baza_goods_index = $rise_bench_baza_goods_index;
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    class $rise_bench_baza_goods_dataset extends $giper_baza_entity.with({
-        Products: $giper_baza_list_link.to(() => $rise_bench_baza_goods_product),
-        Tags: $giper_baza_list_link.to(() => $rise_bench_baza_goods_tag),
-        Color_index: $giper_baza_atom_link.to(() => $rise_bench_baza_goods_index),
-        Status_index: $giper_baza_atom_link.to(() => $rise_bench_baza_goods_index),
-    }) {
-    }
-    $.$rise_bench_baza_goods_dataset = $rise_bench_baza_goods_dataset;
-})($ || ($ = {}));
-
-;
-"use strict";
 
 
 ;
@@ -37465,49 +37432,17 @@ var $;
                 const terms = this.query().trim().toLowerCase().split(/\s+/).filter(Boolean);
                 if (!terms.length && color === 'all' && status === 'all')
                     return $mol_range2(index => this.Row(count - index - 1), () => count);
-                const color_index = this.index_matches(['Color', color]);
-                const status_index = this.index_matches(['Status', status]);
-                const links = this.links();
                 const matches = [];
                 for (let index = count - 1; index >= 0; --index) {
-                    if (color_index ? !color_index.has(links[index].str) : color !== 'all' && this.row_color(index) !== color)
+                    if (color !== 'all' && this.row_color(index) !== color)
                         continue;
-                    if (status_index ? !status_index.has(links[index].str) : status !== 'all' && this.row_status(index) !== status)
+                    if (status !== 'all' && this.row_status(index) !== status)
                         continue;
                     if (terms.length && !terms.every(term => this.row_title(index).toLowerCase().includes(term)))
                         continue;
                     matches.push(index);
                 }
                 return $mol_range2(index => this.Row(matches[index]), () => matches.length);
-            }
-            index_matches(selection) {
-                const [field, key] = selection;
-                if (key === 'all')
-                    return null;
-                const dataset = this.dataset();
-                const index = field === 'Color' ? dataset?.Color_index()?.remote() : dataset?.Status_index()?.remote();
-                if (!index?.Ready()?.val())
-                    return null;
-                return new Set(index.bucket(key)?.items().map(link => link.str) ?? []);
-            }
-            index_keys(index, next) {
-                return [...new Set([...index.keys().filter(key => typeof key === 'string' && key.startsWith('bucket:')).map(key => String(key).slice(7)), next])].sort();
-            }
-            change_field(id, field, next) {
-                const product = this.products()[id];
-                const dataset = this.dataset();
-                const index = field === 'Color' ? dataset?.Color_index()?.remote() : dataset?.Status_index()?.remote();
-                // A suspended/interrupted update leaves the index unready: readers fall back to a scan.
-                if (index)
-                    index.Ready(null).val(false);
-                product[field](null).val(next);
-                if (index) {
-                    const keys = $mol_wire_sync(this).index_keys(index, next);
-                    for (const key of keys)
-                        $mol_wire_sync(index).set_member(product.link(), key, key === next);
-                    index.Ready(null).val(true);
-                }
-                return next;
             }
             row_id(id) { return this.products()[id].Id().val(); }
             row_title(id) { return this.products()[id].Title().val(); }
@@ -37516,10 +37451,10 @@ var $;
                 return this.products()[id].Checked().val(next) ?? false;
             }
             row_color(id, next) {
-                return next === undefined ? this.products()[id].Color().val() ?? '' : this.change_field(id, 'Color', next);
+                return this.products()[id].Color().val(next) ?? '';
             }
             row_status(id, next) {
-                return next === undefined ? this.products()[id].Status().val() ?? '' : this.change_field(id, 'Status', next);
+                return this.products()[id].Status().val(next) ?? '';
             }
             row_quantity(id, next) {
                 return this.products()[id].Quantity().val(next) ?? 0;
@@ -37532,15 +37467,6 @@ var $;
         __decorate([
             $mol_mem
         ], $rise_bench_baza_goods_table.prototype, "rows", null);
-        __decorate([
-            $mol_mem_key
-        ], $rise_bench_baza_goods_table.prototype, "index_matches", null);
-        __decorate([
-            $mol_action
-        ], $rise_bench_baza_goods_table.prototype, "index_keys", null);
-        __decorate([
-            $mol_action
-        ], $rise_bench_baza_goods_table.prototype, "change_field", null);
         __decorate([
             $mol_mem_key
         ], $rise_bench_baza_goods_table.prototype, "row_title", null);
@@ -37573,6 +37499,9 @@ var $;
 
 ;
 	($.$rise_bench_baza_goods) = class $rise_bench_baza_goods extends ($.$mol_book2) {
+		title(){
+			return "Сущности";
+		}
 		content(){
 			return [];
 		}
@@ -37581,7 +37510,7 @@ var $;
 		}
 		schema_mode(next){
 			if(next !== undefined) return next;
-			return "full";
+			return "compact";
 		}
 		Schema(){
 			const obj = new this.$.$mol_switch();
@@ -37598,19 +37527,20 @@ var $;
 		}
 		count_mode(next){
 			if(next !== undefined) return next;
-			return "1000";
+			return "100";
 		}
 		Count(){
 			const obj = new this.$.$mol_switch();
 			(obj.enabled) = () => ((this.controls_enabled()));
 			(obj.value) = (next) => ((this.count_mode(next)));
 			(obj.options) = () => ({
+				"100": "100", 
 				"500": "500", 
 				"1000": "1000", 
 				"2000": "2000", 
 				"3000": "3000", 
 				"4000": "4000", 
-				"8000": "8000", 
+				"5000": "5000", 
 				"10000": "10000"
 			});
 			return obj;
@@ -37624,15 +37554,15 @@ var $;
 		create_enabled(){
 			return true;
 		}
-		create(next){
+		benchmark(next){
 			if(next !== undefined) return next;
 			return null;
 		}
 		Create(){
 			const obj = new this.$.$mol_button_major();
-			(obj.title) = () => ("Создать записи");
+			(obj.title) = () => ("Запустить бенчмарк");
 			(obj.enabled) = () => ((this.create_enabled()));
-			(obj.click) = (next) => ((this.create(next)));
+			(obj.click) = (next) => ((this.benchmark(next)));
 			return obj;
 		}
 		add_enabled(){
@@ -37660,27 +37590,12 @@ var $;
 			(obj.click) = (next) => ((this.reset(next)));
 			return obj;
 		}
-		index_rebuild_enabled(){
-			return true;
-		}
-		rebuild_indexes(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		Rebuild_indexes(){
-			const obj = new this.$.$mol_button_minor();
-			(obj.title) = () => ("Перестроить индексы");
-			(obj.enabled) = () => ((this.index_rebuild_enabled()));
-			(obj.click) = (next) => ((this.rebuild_indexes(next)));
-			return obj;
-		}
 		Actions(){
 			const obj = new this.$.$mol_view();
 			(obj.sub) = () => ([
 				(this.Create()), 
 				(this.Add()), 
-				(this.Reset()), 
-				(this.Rebuild_indexes())
+				(this.Reset())
 			]);
 			return obj;
 		}
@@ -37748,16 +37663,17 @@ var $;
 		}
 		Metrics(){
 			const obj = new this.$.$rise_bench_metrics();
+			(obj.operations) = () => ([
+				"Создание, с", 
+				"Поиск, с", 
+				"Добавить 1, с", 
+				"F5, с", 
+				"Поиск после F5, с"
+			]);
 			return obj;
 		}
 		products(){
 			return [];
-		}
-		product_links(){
-			return [];
-		}
-		dataset(){
-			return null;
 		}
 		compact_mode(){
 			return false;
@@ -37765,8 +37681,6 @@ var $;
 		Table(){
 			const obj = new this.$.$rise_bench_baza_goods_table();
 			(obj.products) = () => ((this.products()));
-			(obj.links) = () => ((this.product_links()));
-			(obj.dataset) = () => ((this.dataset()));
 			(obj.compact) = () => ((this.compact_mode()));
 			(obj.query) = () => ((this.search_query()));
 			(obj.color_filter) = () => ((this.color_filter()));
@@ -37774,7 +37688,7 @@ var $;
 			return obj;
 		}
 		menu_title(){
-			return "$rise_bench_baza_goods";
+			return (this.title());
 		}
 		pages(){
 			return (this.content());
@@ -37807,14 +37721,12 @@ var $;
 	($mol_mem(($.$rise_bench_baza_goods.prototype), "count_mode"));
 	($mol_mem(($.$rise_bench_baza_goods.prototype), "Count"));
 	($mol_mem(($.$rise_bench_baza_goods.prototype), "Count_label"));
-	($mol_mem(($.$rise_bench_baza_goods.prototype), "create"));
+	($mol_mem(($.$rise_bench_baza_goods.prototype), "benchmark"));
 	($mol_mem(($.$rise_bench_baza_goods.prototype), "Create"));
 	($mol_mem(($.$rise_bench_baza_goods.prototype), "add_one"));
 	($mol_mem(($.$rise_bench_baza_goods.prototype), "Add"));
 	($mol_mem(($.$rise_bench_baza_goods.prototype), "reset"));
 	($mol_mem(($.$rise_bench_baza_goods.prototype), "Reset"));
-	($mol_mem(($.$rise_bench_baza_goods.prototype), "rebuild_indexes"));
-	($mol_mem(($.$rise_bench_baza_goods.prototype), "Rebuild_indexes"));
 	($mol_mem(($.$rise_bench_baza_goods.prototype), "Actions"));
 	($mol_mem(($.$rise_bench_baza_goods.prototype), "Search"));
 	($mol_mem(($.$rise_bench_baza_goods.prototype), "Search_label"));
@@ -37834,22 +37746,31 @@ var $;
 "use strict";
 var $;
 (function ($) {
+    class $rise_bench_baza_goods_dataset extends $giper_baza_entity.with({
+        Products: $giper_baza_list_link.to(() => $rise_bench_baza_goods_product),
+        Tags: $giper_baza_list_link.to(() => $rise_bench_baza_goods_tag),
+    }) {
+    }
+    $.$rise_bench_baza_goods_dataset = $rise_bench_baza_goods_dataset;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
     // A stable host identity: wire must not serialize a growing products array as a task argument.
     class $rise_bench_baza_goods_preparation {
         dataset;
         count;
         compact;
         products = [];
-        started = performance.now();
+        links;
         date = new $mol_time_moment('2026-10-05');
-        links = null;
         tag_links = [];
-        indexes_ready;
         constructor(dataset, count, compact = false) {
             this.dataset = dataset;
             this.count = count;
             this.compact = compact;
-            this.indexes_ready = !!dataset.Color_index()?.remote()?.Ready()?.val() && !!dataset.Status_index()?.remote()?.Ready()?.val();
         }
     }
     $.$rise_bench_baza_goods_preparation = $rise_bench_baza_goods_preparation;
@@ -37866,41 +37787,6 @@ var $;
         return `${brands[Math.floor(index / 10) % 10]} ${models[Math.floor(index / 100) % 10]} ${types[index % 10]} ${String(index).padStart(5, '0')}`;
     }
     $.$rise_bench_baza_goods_product_name = $rise_bench_baza_goods_product_name;
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    /** Explicit initialization of an unpublished, empty CRDT list. */
-    class $rise_bench_baza_goods_initialization {
-        list;
-        links;
-        chunks;
-        constructor(list, links) {
-            this.list = list;
-            this.links = links;
-            this.chunks = Array.from({ length: Math.ceil(links.length / 32) }, (_, index) => links.slice(index * 32, index * 32 + 32));
-        }
-        append(index) {
-            // Fixed insertion positions and stable chunks survive partial async replay.
-            // Finishing this channel releases the completed action's write dependencies.
-            this.list.splice(this.chunks[index], index * 32, index * 32);
-            return true;
-        }
-        run() {
-            for (let index = 0; index < this.chunks.length; ++index)
-                this.append(index);
-            return this.list;
-        }
-    }
-    __decorate([
-        $mol_mem_key
-    ], $rise_bench_baza_goods_initialization.prototype, "append", null);
-    __decorate([
-        $mol_action
-    ], $rise_bench_baza_goods_initialization.prototype, "run", null);
-    $.$rise_bench_baza_goods_initialization = $rise_bench_baza_goods_initialization;
 })($ || ($ = {}));
 
 ;
@@ -38397,6 +38283,126 @@ var $;
 
 ;
 "use strict";
+var $;
+(function ($) {
+    /** Stable operation identity and clock across wire suspension/replay. */
+    class $rise_bench_measure {
+        title;
+        count;
+        unit;
+        started = performance.now();
+        duration = null;
+        constructor(title, count = 0, unit = 'зап.') {
+            this.title = title;
+            this.count = count;
+            this.unit = unit;
+        }
+        finish() { this.duration ??= performance.now() - this.started; }
+    }
+    $.$rise_bench_measure = $rise_bench_measure;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    /** Per-tab run history; the pending ticket belongs only to the next page. */
+    class $rise_bench_reload {
+        key;
+        snapshot;
+        constructor(key) {
+            this.key = key;
+            const saved = $mol_error_fence(() => JSON.parse(sessionStorage.getItem(key) || 'null'), () => null);
+            this.snapshot = Array.isArray(saved?.rows) ? saved : { rows: [], pending: null };
+        }
+        save(runs, operations, pending) {
+            const rows = runs.map(run => ({
+                count: run.count, properties: run.properties, stamp: run.stamp, state: run.state(),
+                metrics: Object.fromEntries(operations.map(operation => [operation, run.metric(operation)])),
+            }));
+            sessionStorage.setItem(this.key, JSON.stringify({ rows, pending }));
+        }
+    }
+    $.$rise_bench_reload = $rise_bench_reload;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    class $rise_bench_baza_goods_reload extends $rise_bench_reload {
+        constructor() { super('$rise_bench_baza_goods_runs'); }
+    }
+    $.$rise_bench_baza_goods_reload = $rise_bench_baza_goods_reload;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    /** Observe the real rendered viewport, then allow a paint before completing. */
+    class $rise_bench_baza_goods_reload_ready extends $mol_object {
+        table;
+        title;
+        constructor(table, title) {
+            super();
+            this.table = table;
+            this.title = title;
+        }
+        observer;
+        timer;
+        frame = 0;
+        pending;
+        visible() {
+            if (!this.table.isConnected)
+                return false;
+            const rows = [...this.table.querySelectorAll('[rise_bench_baza_goods_table_row]')].filter(row => {
+                const rect = row.getBoundingClientRect();
+                return rect.top < innerHeight && rect.bottom > 0;
+            });
+            return rows.length > 0
+                && rows[0].textContent.includes(this.title)
+                && rows.every(row => !row.querySelector('[mol_view_error]')
+                    && !!row.querySelector('[rise_bench_baza_goods_table_title]')?.textContent?.trim());
+        }
+        wait() {
+            return this.pending ??= new Promise((resolve, reject) => {
+                const check = () => {
+                    if (this.frame || !this.visible())
+                        return;
+                    this.frame = requestAnimationFrame(() => {
+                        this.frame = requestAnimationFrame(() => {
+                            this.frame = 0;
+                            if (!this.visible())
+                                return;
+                            this.destructor();
+                            resolve(performance.timeOrigin + performance.now());
+                        });
+                    });
+                };
+                this.observer = new MutationObserver(check);
+                this.observer.observe(this.table, { childList: true, subtree: true, attributes: true, characterData: true });
+                this.timer = setTimeout(() => {
+                    this.destructor();
+                    reject(new Error('После F5 товары не появились за 45 секунд'));
+                }, 45_000);
+                check();
+            });
+        }
+        destructor() {
+            this.observer?.disconnect();
+            if (this.timer)
+                clearTimeout(this.timer);
+            if (this.frame)
+                cancelAnimationFrame(this.frame);
+            super.destructor();
+        }
+    }
+    $.$rise_bench_baza_goods_reload_ready = $rise_bench_baza_goods_reload_ready;
+})($ || ($ = {}));
+
+;
+"use strict";
 
 
 ;
@@ -38435,8 +38441,7 @@ var $;
                 dataset.Products(null);
                 return new $rise_bench_baza_goods_preparation(dataset, config.count, config.compact);
             }
-            prepare_product(state, index) {
-                const product = $mol_wire_sync(state.dataset.land()).area_make(index + 1).Data($rise_bench_baza_goods_product);
+            fill_product(state, index, product) {
                 product.Id(null).val(String(index).padStart(5, '0'));
                 product.Title(null).val($rise_bench_baza_goods_product_name(index));
                 product.Color(null).val(['red', 'green', 'blue'][index % 3]);
@@ -38458,44 +38463,18 @@ var $;
                 const [state, index] = key;
                 // This initializer is only invoked by Create. A completed record has no
                 // remaining write dependencies and is never recreated on async replay.
-                return state.products[index] ??= this.prepare_product(state, index);
-            }
-            initialize_products(key) {
-                const [state, from, to] = key;
-                if (to - from <= 32) {
-                    for (let index = from; index < to; ++index)
-                        this.initialize_product([state, index]);
-                }
-                else {
-                    const middle = Math.floor((from + to) / 2);
-                    this.initialize_products([state, from, middle]);
-                    this.initialize_products([state, middle, to]);
-                }
-                return true;
-            }
-            initialize_links(list, links) {
-                const init = new ($mol_wire_sync($rise_bench_baza_goods_initialization))(list, links);
-                $mol_wire_sync(init).run();
-            }
-            reconcile_bucket(bucket, links) {
-                const existing = bucket.items();
-                const members = new Set(existing.map(link => link.str));
-                // Index buckets represent membership, not ordering. Avoid rewriting a
-                // valid bucket merely because Add inserts its new member at the front.
-                if (existing.length === links.length && members.size === links.length && links.every(link => members.has(link.str)))
-                    return;
-                if (!existing.length)
-                    this.initialize_links(bucket, links);
-                else
-                    bucket.items(links);
+                if (state.products[index])
+                    return state.products[index];
+                const product = $mol_wire_sync(state.dataset.land()).area_make().Data($rise_bench_baza_goods_product);
+                return state.products[index] = this.fill_product(state, index, product);
             }
             schema_mode(next) {
-                return $mol_state_arg.value('schema', next) === 'compact' ? 'compact' : 'full';
+                return $mol_state_arg.value('schema', next) === 'full' ? 'full' : 'compact';
             }
             compact_mode() { return this.schema_mode() === 'compact'; }
             count_mode(next) {
                 const count = $mol_state_arg.value('count', next);
-                return count && Object.hasOwn(this.Count().options(), count) ? count : '1000';
+                return count && Object.hasOwn(this.Count().options(), count) ? count : '100';
             }
             record_count() { return Number(this.count_mode()); }
             app_title() { return `Товары: ${this.record_count()} записей`; }
@@ -38513,115 +38492,143 @@ var $;
                 return $mol_range2(index => $giper_baza_glob.Pawn(links[index], $rise_bench_baza_goods_product), () => links.length);
             }
             product_links() { return this.dataset()?.Products()?.items() ?? []; }
-            collect_index(dataset, field) {
-                const result = field === 'Color'
-                    ? { red: [], green: [], blue: [] } : { minor: [], major: [], critical: [] };
-                for (const [key, link] of this.index_values([dataset, field, 0, dataset.Products().items().length])) {
-                    ;
-                    (result[key] ??= []).push(new $giper_baza_link(link.str));
-                }
-                return result;
-            }
-            index_values(key) {
-                const [dataset, field, from, to] = key;
-                if (to - from > 32) {
-                    const middle = Math.floor((from + to) / 2);
-                    return [...this.index_values([dataset, field, from, middle]), ...this.index_values([dataset, field, middle, to])];
-                }
-                const links = dataset.Products().items();
-                const result = [];
-                for (let index = from; index < to; ++index) {
-                    const product = $giper_baza_glob.Pawn(links[index], $rise_bench_baza_goods_product);
-                    result.push([product[field]()?.val() ?? '', links[index]]);
-                }
-                return result;
-            }
-            build_index(dataset, field) {
-                const atom = field === 'Color' ? dataset.Color_index(null) : dataset.Status_index(null);
-                const index = $mol_wire_sync(atom).ensure(dataset.land());
-                index.Ready(null).val(false);
-                const buckets = $mol_wire_sync(this).collect_index(dataset, field);
-                for (const key of index.keys()) {
-                    if (typeof key === 'string' && key.startsWith('bucket:'))
-                        buckets[key.slice(7)] ??= [];
-                }
-                for (const [key, links] of Object.entries(buckets))
-                    $mol_wire_sync(this).reconcile_bucket(index.bucket(key, null), links);
-                index.Ready(null).val(true);
-            }
-            rebuild_indexes() {
-                const dataset = this.dataset();
-                if (!dataset)
-                    return;
-                const measure = new ($mol_wire_sync($rise_bench_measure))('Перестроение индексов', dataset.Products().items().length);
-                $mol_wire_sync(this).build_index(dataset, 'Color');
-                $mol_wire_sync(this).build_index(dataset, 'Status');
-                this.Metrics().measure_add(measure);
-            }
-            index_rebuild_enabled() { return !!this.dataset_link() && !$mol_promise_like(this.Add().status()?.[0]) && !$mol_promise_like(this.Create().status()?.[0]); }
-            extend_index(dataset, product, field) {
-                const index = (field === 'Color' ? dataset.Color_index() : dataset.Status_index()).remote();
-                index.Ready().val(false);
-                $mol_wire_sync(index).set_member(product.link(), product[field]().val(), true);
-                index.Ready().val(true);
-            }
-            creation_ms(next = 0) { return next; }
             controls_enabled() { return this.add_enabled() && !$mol_promise_like(this.Add().status()?.[0]); }
-            add_enabled() { return !$mol_promise_like(this.Create().status()?.[0]) && !$mol_promise_like(this.Rebuild_indexes().status()?.[0]); }
-            create_enabled() { return !this.dataset_link() && !$mol_promise_like(this.Add().status()?.[0]) && !$mol_promise_like(this.Rebuild_indexes().status()?.[0]); }
+            add_enabled() {
+                return this.Metrics().runs()[0]?.state() !== 'Перезагрузка'
+                    && !$mol_promise_like(this.Create().status()?.[0]);
+            }
+            create_enabled() { return this.controls_enabled() && !$mol_promise_like(this.Create().status()?.[0]); }
             prepare_append(dataset) {
                 return new $rise_bench_baza_goods_preparation(dataset, dataset.Products().items().length, this.compact_mode());
             }
             add_one() {
-                const measure = new ($mol_wire_sync($rise_bench_measure))('Добавление товара', 1);
+                const total = new ($mol_wire_sync($rise_bench_measure))('Добавление');
                 const dataset = this.dataset() ?? $mol_wire_sync(this).prepare_dataset(this.dataset_config()).dataset;
                 // Freeze the insertion index before any writes or suspension.
                 const state = $mol_wire_sync(this).prepare_append(dataset);
-                const product = $mol_wire_sync(this).prepare_product(state, state.count);
-                $mol_wire_sync(dataset.Products()).splice(state.links ??= [product.link()]);
-                if (state.indexes_ready) {
-                    $mol_wire_sync(this).extend_index(dataset, product, 'Color');
-                    $mol_wire_sync(this).extend_index(dataset, product, 'Status');
-                }
-                else {
-                    $mol_wire_sync(this).build_index(dataset, 'Color');
-                    $mol_wire_sync(this).build_index(dataset, 'Status');
-                }
+                const product = $mol_wire_sync(dataset.Products()).make(dataset.land());
+                $mol_wire_sync(this).fill_product(state, state.count, product);
                 this.dataset_link(dataset.link().str);
-                this.Metrics().measure_add(measure);
                 this.body_scroll_top(0);
+                total.finish();
+                return total.duration;
             }
             reset() {
                 // Detach only this selected benchmark dataset, not the whole local database.
                 this.dataset_link('');
-                this.creation_ms(0);
-                this.Metrics().measurements([]);
                 this.search_query('');
                 this.color_filter('all');
                 this.status_filter('all');
                 this.body_scroll_top(0);
             }
             create() {
-                if (this.dataset_link())
-                    return;
                 const total = new ($mol_wire_sync($rise_bench_measure))('Создание набора: всего', this.record_count());
                 const state = $mol_wire_sync(this).prepare_dataset(this.dataset_config());
-                const records = new ($mol_wire_sync($rise_bench_measure))('Заполнение товаров', state.count);
-                this.initialize_products([state, 0, state.count]);
-                records.finish();
-                const links = new ($mol_wire_sync($rise_bench_measure))('Публикация списка', state.count);
-                // Publish only fully initialized records.
-                this.initialize_links(state.dataset.Products(), state.links ??= state.products.map(product => product.link()));
-                links.finish();
-                const indexes = new ($mol_wire_sync($rise_bench_measure))('Построение индексов', state.count);
-                $mol_wire_sync(this).build_index(state.dataset, 'Color');
-                $mol_wire_sync(this).build_index(state.dataset, 'Status');
-                indexes.finish();
-                this.creation_ms(performance.now() - state.started);
+                for (let index = 0; index < state.count; ++index)
+                    this.initialize_product([state, index]);
+                // Publish once, after all Areas are filled. Publishing on each make()
+                // forces the next Area to save an increasingly large parent list.
+                $mol_wire_sync(state.dataset.Products()).items(state.links ??= state.products.map(product => product.link()));
                 this.dataset_link(state.dataset.link().str);
                 total.finish();
-                for (const measure of [records, links, indexes, total])
-                    this.Metrics().measure_add(measure);
+                return total.duration;
+            }
+            start_run(run) {
+                if (this.Metrics().runs().includes(run))
+                    return;
+                this.reset();
+                this.Metrics().run_add(run);
+            }
+            benchmark_search() {
+                this.search_query('Notebook 00000');
+                return this.Table().rows().length;
+            }
+            benchmark() {
+                this.restore_runs();
+                const run = new ($mol_wire_sync($rise_bench_run))(this.record_count(), this.compact_mode() ? 4 : 10);
+                $mol_wire_sync(this).start_run(run);
+                return $mol_error_fence(() => {
+                    const created = $mol_wire_sync(this).create();
+                    run.metric('Создание, с', created / 1000);
+                    // Drain the previous writes before measuring another operation.
+                    $mol_wire_sync(this).save_dataset();
+                    const search = new ($mol_wire_sync($rise_bench_measure))('Поиск');
+                    if ($mol_wire_sync(this).benchmark_search() !== 1)
+                        throw new Error('Поиск должен найти один товар');
+                    search.finish();
+                    run.metric('Поиск, с', search.duration / 1000);
+                    this.search_query('');
+                    const added = $mol_wire_sync(this).add_one();
+                    run.metric('Добавить 1, с', added / 1000);
+                    $mol_wire_sync(this).save_dataset();
+                    $mol_wire_sync(this).request_reload(run);
+                }, error => { run.state('Ошибка'); return error; });
+            }
+            reload_store() { return new $rise_bench_baza_goods_reload; }
+            runs_restored = false;
+            restore_runs() {
+                if (this.runs_restored)
+                    return;
+                const rows = this.reload_store().snapshot.rows.map(row => {
+                    const run = new $rise_bench_run(row.count, row.properties, row.stamp);
+                    run.state(row.state);
+                    for (const [name, value] of Object.entries(row.metrics))
+                        if (value !== null)
+                            run.metric(name, value);
+                    return run;
+                });
+                this.Metrics().runs(rows);
+                this.runs_restored = true;
+            }
+            save_dataset() {
+                const lands = new Set([this.dataset().land(), ...this.products().map(product => product.land())]);
+                // Native units_saving suspends until signing and IDB commits finish.
+                for (const land of lands)
+                    $mol_wire_sync(land).units_saving();
+            }
+            request_reload(run) {
+                run.state('Перезагрузка');
+                this.reload_store().save(this.Metrics().runs(), this.Metrics().operations(), {
+                    link: this.dataset_link(), count: run.count,
+                    started: performance.timeOrigin + performance.now(),
+                });
+                this.$.$mol_dom_context.location.reload();
+            }
+            reload_done = false;
+            resume_reload() {
+                if (this.reload_done)
+                    return;
+                const ticket = this.reload_store().snapshot.pending;
+                if (!ticket)
+                    return;
+                const run = this.Metrics().runs()[0];
+                return $mol_error_fence(() => {
+                    if (this.dataset_link() !== ticket.link || this.product_links().length !== ticket.count + 1) {
+                        throw new Error('После F5 открыт другой или неполный набор товаров');
+                    }
+                    const ready = new ($mol_wire_sync($rise_bench_baza_goods_reload_ready))(this.Table().dom_node(), $rise_bench_baza_goods_product_name(ticket.count));
+                    const finished = $mol_wire_sync(ready).wait();
+                    run.metric('F5, с', (finished - ticket.started) / 1000);
+                    const search = new ($mol_wire_sync($rise_bench_measure))('Поиск после F5');
+                    if ($mol_wire_sync(this).benchmark_search() !== 1)
+                        throw new Error('Поиск после F5 должен найти один товар');
+                    search.finish();
+                    run.metric('Поиск после F5, с', search.duration / 1000);
+                    this.search_query('');
+                    this.reload_done = true;
+                    run.state('Готово');
+                    this.reload_store().save(this.Metrics().runs(), this.Metrics().operations(), null);
+                }, error => {
+                    this.reload_done = true;
+                    run.state('Ошибка');
+                    this.reload_store().save(this.Metrics().runs(), this.Metrics().operations(), null);
+                    return error;
+                });
+            }
+            auto() {
+                this.restore_runs();
+                this.resume_reload();
+                return [];
             }
             content() {
                 // Keep the synchronizer subscribed for the lifetime of the application.
@@ -38646,19 +38653,10 @@ var $;
         ], $rise_bench_baza_goods.prototype, "prepare_dataset", null);
         __decorate([
             $mol_action
-        ], $rise_bench_baza_goods.prototype, "prepare_product", null);
+        ], $rise_bench_baza_goods.prototype, "fill_product", null);
         __decorate([
             $mol_mem_key
         ], $rise_bench_baza_goods.prototype, "initialize_product", null);
-        __decorate([
-            $mol_mem_key
-        ], $rise_bench_baza_goods.prototype, "initialize_products", null);
-        __decorate([
-            $mol_action
-        ], $rise_bench_baza_goods.prototype, "initialize_links", null);
-        __decorate([
-            $mol_action
-        ], $rise_bench_baza_goods.prototype, "reconcile_bucket", null);
         __decorate([
             $mol_mem
         ], $rise_bench_baza_goods.prototype, "schema_mode", null);
@@ -38679,24 +38677,6 @@ var $;
         ], $rise_bench_baza_goods.prototype, "product_links", null);
         __decorate([
             $mol_action
-        ], $rise_bench_baza_goods.prototype, "collect_index", null);
-        __decorate([
-            $mol_mem_key
-        ], $rise_bench_baza_goods.prototype, "index_values", null);
-        __decorate([
-            $mol_action
-        ], $rise_bench_baza_goods.prototype, "build_index", null);
-        __decorate([
-            $mol_action
-        ], $rise_bench_baza_goods.prototype, "rebuild_indexes", null);
-        __decorate([
-            $mol_action
-        ], $rise_bench_baza_goods.prototype, "extend_index", null);
-        __decorate([
-            $mol_mem
-        ], $rise_bench_baza_goods.prototype, "creation_ms", null);
-        __decorate([
-            $mol_action
         ], $rise_bench_baza_goods.prototype, "add_one", null);
         __decorate([
             $mol_action
@@ -38704,6 +38684,30 @@ var $;
         __decorate([
             $mol_action
         ], $rise_bench_baza_goods.prototype, "create", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_baza_goods.prototype, "start_run", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_baza_goods.prototype, "benchmark_search", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_baza_goods.prototype, "benchmark", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bench_baza_goods.prototype, "reload_store", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_baza_goods.prototype, "restore_runs", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_baza_goods.prototype, "save_dataset", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_baza_goods.prototype, "request_reload", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bench_baza_goods.prototype, "resume_reload", null);
         __decorate([
             $mol_mem
         ], $rise_bench_baza_goods.prototype, "content", null);
@@ -38727,17 +38731,43 @@ var $;
 
 ;
 	($.$rise_bench_baza_crdttext) = class $rise_bench_baza_crdttext extends ($.$mol_book2) {
-		insert(next){
+		title(){
+			return "Текст";
+		}
+		count_mode(next){
 			if(next !== undefined) return next;
-			return null;
+			return "100";
 		}
 		controls_enabled(){
 			return true;
 		}
-		Insert(){
+		Count(){
+			const obj = new this.$.$mol_switch();
+			(obj.value) = (next) => ((this.count_mode(next)));
+			(obj.enabled) = () => ((this.controls_enabled()));
+			(obj.options) = () => ({
+				"100": "100", 
+				"500": "500", 
+				"1000": "1000", 
+				"2000": "2000", 
+				"5000": "5000"
+			});
+			return obj;
+		}
+		Count_label(){
+			const obj = new this.$.$mol_labeler();
+			(obj.title) = () => ("Количество строк");
+			(obj.Content) = () => ((this.Count()));
+			return obj;
+		}
+		benchmark(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Run(){
 			const obj = new this.$.$mol_button_major();
-			(obj.title) = () => ("Вставить 500 строк");
-			(obj.click) = (next) => ((this.insert(next)));
+			(obj.title) = () => ("Запустить бенчмарк");
+			(obj.click) = (next) => ((this.benchmark(next)));
 			(obj.enabled) = () => ((this.controls_enabled()));
 			return obj;
 		}
@@ -38747,7 +38777,7 @@ var $;
 		}
 		Reset(){
 			const obj = new this.$.$mol_button_minor();
-			(obj.title) = () => ("Сбросить");
+			(obj.title) = () => ("Очистить");
 			(obj.click) = (next) => ((this.reset(next)));
 			(obj.enabled) = () => ((this.controls_enabled()));
 			return obj;
@@ -38756,11 +38786,23 @@ var $;
 			const obj = new this.$.$mol_page();
 			(obj.title) = () => ("CRDT text");
 			(obj.minimal_width) = () => (240);
-			(obj.body) = () => ([(this.Insert()), (this.Reset())]);
+			(obj.body) = () => ([
+				(this.Count_label()), 
+				(this.Run()), 
+				(this.Reset())
+			]);
 			return obj;
+		}
+		page_title(){
+			return "CRDT-текст";
 		}
 		Metrics(){
 			const obj = new this.$.$rise_bench_metrics();
+			(obj.operations) = () => ([
+				"Вставка, с", 
+				"Добавить символ, с", 
+				"F5, с"
+			]);
 			return obj;
 		}
 		text(next){
@@ -38769,7 +38811,7 @@ var $;
 		}
 		Editor(){
 			const obj = new this.$.$mol_textarea();
-			(obj.hint) = () => ("Введите текст или вставьте 500 строк");
+			(obj.hint) = () => ("Введите текст или запустите бенчмарк");
 			(obj.value) = (next) => ((this.text(next)));
 			(obj.enabled) = () => ((this.controls_enabled()));
 			(obj.spellcheck) = () => (false);
@@ -38777,20 +38819,23 @@ var $;
 		}
 		Page(){
 			const obj = new this.$.$mol_page();
-			(obj.title) = () => ("Текст");
+			(obj.title) = () => ((this.page_title()));
 			(obj.minimal_width) = () => (640);
 			(obj.body) = () => ([(this.Metrics()), (this.Editor())]);
 			return obj;
 		}
 		menu_title(){
-			return "$rise_bench_baza_crdttext";
+			return (this.title());
 		}
 		pages(){
 			return [(this.Menu()), (this.Page())];
 		}
 	};
-	($mol_mem(($.$rise_bench_baza_crdttext.prototype), "insert"));
-	($mol_mem(($.$rise_bench_baza_crdttext.prototype), "Insert"));
+	($mol_mem(($.$rise_bench_baza_crdttext.prototype), "count_mode"));
+	($mol_mem(($.$rise_bench_baza_crdttext.prototype), "Count"));
+	($mol_mem(($.$rise_bench_baza_crdttext.prototype), "Count_label"));
+	($mol_mem(($.$rise_bench_baza_crdttext.prototype), "benchmark"));
+	($mol_mem(($.$rise_bench_baza_crdttext.prototype), "Run"));
 	($mol_mem(($.$rise_bench_baza_crdttext.prototype), "reset"));
 	($mol_mem(($.$rise_bench_baza_crdttext.prototype), "Reset"));
 	($mol_mem(($.$rise_bench_baza_crdttext.prototype), "Menu"));
@@ -38799,6 +38844,83 @@ var $;
 	($mol_mem(($.$rise_bench_baza_crdttext.prototype), "Editor"));
 	($mol_mem(($.$rise_bench_baza_crdttext.prototype), "Page"));
 
+
+;
+"use strict";
+var $;
+(function ($) {
+    /** Native textarea plus its visible text layer, followed by a paint opportunity. */
+    class $rise_bench_baza_crdttext_render_ready extends $mol_object {
+        editor;
+        expected;
+        page;
+        constructor(editor, expected, page) {
+            super();
+            this.editor = editor;
+            this.expected = expected;
+            this.page = page;
+        }
+        pending;
+        observer;
+        frame = 0;
+        timer;
+        visible() {
+            const input = this.editor.Edit().dom_node();
+            const row = this.editor.View().Row(1).dom_node();
+            const rect = row.getBoundingClientRect();
+            const viewport = this.page.Body().dom_node().getBoundingClientRect();
+            return input.isConnected && input.value === this.expected
+                && this.editor.View().dom_node().contains(row)
+                && rect.height > 0 && rect.bottom > viewport.top && rect.bottom <= viewport.bottom + 1
+                && row.textContent.endsWith(this.expected.split('\n', 1)[0]);
+        }
+        wait() {
+            return this.pending ??= new Promise((resolve, reject) => {
+                const check = () => {
+                    // Show the first line through native scrolling, never force render.
+                    this.page.body_scroll_top(0);
+                    if (this.frame || !this.visible())
+                        return;
+                    this.frame = requestAnimationFrame(() => {
+                        this.frame = requestAnimationFrame(() => {
+                            this.frame = 0;
+                            if (!this.visible())
+                                return;
+                            this.destructor();
+                            resolve(performance.timeOrigin + performance.now());
+                        });
+                    });
+                };
+                this.observer = new MutationObserver(check);
+                this.observer.observe(this.editor.dom_node(), { childList: true, subtree: true, characterData: true });
+                this.timer = setTimeout(() => {
+                    this.destructor();
+                    reject(new Error('Текст не появился в редакторе за 45 секунд'));
+                }, 45_000);
+                check();
+            });
+        }
+        destructor() {
+            this.observer?.disconnect();
+            if (this.frame)
+                cancelAnimationFrame(this.frame);
+            if (this.timer)
+                clearTimeout(this.timer);
+            super.destructor();
+        }
+    }
+    $.$rise_bench_baza_crdttext_render_ready = $rise_bench_baza_crdttext_render_ready;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    class $rise_bench_baza_crdttext_reload extends $rise_bench_reload {
+        constructor() { super('$rise_bench_baza_crdttext_runs'); }
+    }
+    $.$rise_bench_baza_crdttext_reload = $rise_bench_baza_crdttext_reload;
+})($ || ($ = {}));
 
 ;
 "use strict";
@@ -38811,6 +38933,13 @@ var $;
     var $$;
     (function ($$) {
         class $rise_bench_baza_crdttext extends $.$rise_bench_baza_crdttext {
+            preset = [[null, $giper_baza_rank_read]];
+            count_mode(next) {
+                const count = $mol_state_arg.value('lines', next);
+                return count && Object.hasOwn(this.Count().options(), count) ? count : '100';
+            }
+            line_count() { return Number(this.count_mode()); }
+            page_title() { return `CRDT-текст: ${this.line_count()} строк`; }
             text_link(next) {
                 return $mol_state_local.value('$rise_bench_baza_crdttext', next) ?? '';
             }
@@ -38820,15 +38949,12 @@ var $;
             }
             prepare_document() {
                 this.$.$giper_baza_auth.current().pass();
-                return $mol_wire_sync($giper_baza_glob).land_grab([[null, $giper_baza_rank_read]]).Data($giper_baza_text);
+                return $mol_wire_sync($giper_baza_glob).land_grab(this.preset).Data($giper_baza_text);
             }
             write_text(next) {
                 const document = this.document() ?? $mol_wire_sync(this).prepare_document();
-                const measure = new ($mol_wire_sync($rise_bench_measure))('Запись CRDT-текста', next.length, 'симв.');
                 $mol_wire_sync(document).text(next);
-                measure.finish();
                 this.text_link(document.link().str);
-                this.Metrics().measure_add(measure);
             }
             text(next) {
                 if (next !== undefined)
@@ -38836,23 +38962,114 @@ var $;
                 $giper_baza_glob.yard().sync();
                 return this.document()?.text() ?? '';
             }
-            insertion_text() {
-                const prev = this.text();
-                const lines = prev ? prev.split('\n').length : 0;
-                const block = Array.from({ length: 500 }, (_, index) => `Строка ${lines + index + 1}: проверяем запись и редактирование текста в Гипербазе.`).join('\n');
-                return prev ? prev + '\n' + block : block;
+            sample_text(lines) {
+                return Array.from({ length: lines }, (_, index) => `Строка ${index + 1}: проверяем запись и редактирование текста в Гипербазе.`).join('\n');
             }
-            insert() { this.write_text($mol_wire_sync(this).insertion_text()); }
+            insert(next) {
+                const measure = new ($mol_wire_sync($rise_bench_measure))('Вставка');
+                $mol_wire_sync(this).write_text(next);
+                measure.finish();
+                return measure.duration;
+            }
+            appended_text() { return '!' + this.text(); }
+            append_one() {
+                const measure = new ($mol_wire_sync($rise_bench_measure))('Добавление символа');
+                const next = $mol_wire_sync(this).appended_text();
+                $mol_wire_sync(this).write_text(next);
+                const ready = new ($mol_wire_sync($rise_bench_baza_crdttext_render_ready))(this.Editor(), next, this.Page());
+                $mol_wire_sync(ready).wait();
+                measure.finish();
+                return measure.duration;
+            }
+            start_run(run) {
+                if (this.Metrics().runs().includes(run))
+                    return;
+                $mol_wire_sync(this).reset();
+                this.Metrics().run_add(run);
+            }
+            benchmark() {
+                this.restore_runs();
+                const run = new ($mol_wire_sync($rise_bench_run))(this.line_count());
+                const block = this.sample_text(run.count);
+                $mol_wire_sync(this).start_run(run);
+                return $mol_error_fence(() => {
+                    const inserted = $mol_wire_sync(this).insert(block);
+                    run.metric('Вставка, с', inserted / 1000);
+                    $mol_wire_sync(this).save_document();
+                    const appended = $mol_wire_sync(this).append_one();
+                    run.metric('Добавить символ, с', appended / 1000);
+                    $mol_wire_sync(this).save_document();
+                    $mol_wire_sync(this).request_reload(run);
+                }, error => { run.state('Ошибка'); return error; });
+            }
             reset() {
-                const document = this.document();
-                if (document)
-                    $mol_wire_sync(document).text('');
-                this.Metrics().measurements([]);
+                const document = $mol_wire_sync(this).prepare_document();
+                this.text_link(document.link().str);
             }
             controls_enabled() {
-                return !$mol_promise_like(this.Insert().status()?.[0]) && !$mol_promise_like(this.Reset().status()?.[0]);
+                return this.Metrics().runs()[0]?.state() !== 'Перезагрузка'
+                    && !$mol_promise_like(this.Run().status()?.[0])
+                    && !$mol_promise_like(this.Reset().status()?.[0]);
+            }
+            reload_store() { return new $rise_bench_baza_crdttext_reload; }
+            runs_restored = false;
+            restore_runs() {
+                if (this.runs_restored)
+                    return;
+                this.Metrics().runs(this.reload_store().snapshot.rows.map(row => {
+                    const run = new $rise_bench_run(row.count, row.properties, row.stamp);
+                    run.state(row.state);
+                    for (const [name, value] of Object.entries(row.metrics))
+                        if (value !== null)
+                            run.metric(name, value);
+                    return run;
+                }));
+                this.runs_restored = true;
+            }
+            save_document() { $mol_wire_sync(this.document().land()).units_saving(); }
+            request_reload(run) {
+                run.state('Перезагрузка');
+                this.reload_store().save(this.Metrics().runs(), this.Metrics().operations(), {
+                    link: this.text_link(), count: run.count, started: performance.timeOrigin + performance.now(),
+                });
+                this.$.$mol_dom_context.location.reload();
+            }
+            reload_done = false;
+            resume_reload() {
+                if (this.reload_done)
+                    return;
+                const ticket = this.reload_store().snapshot.pending;
+                if (!ticket)
+                    return;
+                const run = this.Metrics().runs()[0];
+                return $mol_error_fence(() => {
+                    const expected = '!' + this.sample_text(ticket.count);
+                    if (this.text_link() !== ticket.link || this.text() !== expected)
+                        throw new Error('После F5 открыт другой или неполный CRDT-текст');
+                    const ready = new ($mol_wire_sync($rise_bench_baza_crdttext_render_ready))(this.Editor(), expected, this.Page());
+                    const finished = $mol_wire_sync(ready).wait();
+                    if (this.Editor().Edit().dom_node().value !== expected)
+                        throw new Error('После F5 текст не появился в textarea');
+                    run.metric('F5, с', (finished - ticket.started) / 1000);
+                    this.reload_done = true;
+                    run.state('Готово');
+                    this.reload_store().save(this.Metrics().runs(), this.Metrics().operations(), null);
+                }, error => {
+                    this.reload_done = true;
+                    run.state('Ошибка');
+                    this.reload_store().save(this.Metrics().runs(), this.Metrics().operations(), null);
+                    return error;
+                });
+            }
+            auto() {
+                this.restore_runs();
+                this.resume_reload();
+                return [];
             }
         }
+        __decorate([
+            $mol_mem
+        ], $rise_bench_baza_crdttext.prototype, "count_mode", null);
         __decorate([
             $mol_mem
         ], $rise_bench_baza_crdttext.prototype, "text_link", null);
@@ -38869,14 +39086,41 @@ var $;
             $mol_mem
         ], $rise_bench_baza_crdttext.prototype, "text", null);
         __decorate([
-            $mol_action
-        ], $rise_bench_baza_crdttext.prototype, "insertion_text", null);
+            $mol_mem_key
+        ], $rise_bench_baza_crdttext.prototype, "sample_text", null);
         __decorate([
             $mol_action
         ], $rise_bench_baza_crdttext.prototype, "insert", null);
         __decorate([
             $mol_action
+        ], $rise_bench_baza_crdttext.prototype, "appended_text", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_baza_crdttext.prototype, "append_one", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_baza_crdttext.prototype, "start_run", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_baza_crdttext.prototype, "benchmark", null);
+        __decorate([
+            $mol_action
         ], $rise_bench_baza_crdttext.prototype, "reset", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bench_baza_crdttext.prototype, "reload_store", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_baza_crdttext.prototype, "restore_runs", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_baza_crdttext.prototype, "save_document", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_baza_crdttext.prototype, "request_reload", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bench_baza_crdttext.prototype, "resume_reload", null);
         $$.$rise_bench_baza_crdttext = $rise_bench_baza_crdttext;
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
