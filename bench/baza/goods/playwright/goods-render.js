@@ -1,7 +1,7 @@
 const assert = require( 'node:assert/strict' )
 const { chromium, headless, isolateUnitTests, resultScenario, resultStep, resultBenchmark, screenshot } = require( '../../../../../shm/hitalama/playwright/harness' )
 const { closeTestContext } = require( '../../../../../shm/hitalama/playwright/unit-isolation' )
-const { observeOffline, targetUrl } = require( '../../../playwright/offline' )
+const { observeOffline, targetUrl, openBenchmark } = require( '../../../playwright/offline' )
 
 resultScenario({ title: 'Товары: Area на запись', group: 'entities' })
 
@@ -30,7 +30,7 @@ async function main() {
 		} )() )
 
 		resultStep( 'Открыть бенчмарк через каталог', [ '$rise_bench', '$rise_bench_baza_goods' ] )
-		await page.goto( url, { waitUntil: 'domcontentloaded' } )
+		await openBenchmark( page, url )
 		await page.getByRole( 'link', { name: 'Bench', exact: true } ).click()
 		await page.getByRole( 'link', { name: '$rise_bench_baza_goods', exact: true } ).click()
 		await page.getByRole( 'button', { name: 'Добавить запись', exact: true } ).waitFor()

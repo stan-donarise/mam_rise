@@ -1,7 +1,7 @@
 const assert = require( 'node:assert/strict' )
 const { chromium, headless, isolateUnitTests, resultScenario, resultStep, resultBenchmark, screenshot } = require( '../../../../../shm/hitalama/playwright/harness' )
 const { closeTestContext } = require( '../../../../../shm/hitalama/playwright/unit-isolation' )
-const { observeOffline, targetUrl } = require( '../../../playwright/offline' )
+const { observeOffline, targetUrl, openBenchmark } = require( '../../../playwright/offline' )
 
 resultScenario({ title: 'CRDT-текст: запись и метрики', group: 'entities' })
 
@@ -17,12 +17,12 @@ async function main() {
 		const assertOffline = observeOffline( page, url )
 		page.setDefaultTimeout( 60_000 )
 		const errors = []
-		page.on( 'pageerror', error => errors.push( error.message ) )
+		page.on( 'pageerror', error => { errors.push( error.message ); console.error( '[pageerror]', error.message ) } )
 		page.on( 'console', message => {
 			if( /Different (host|args|task) on restart/.test( message.text() ) ) errors.push( message.text() )
 		} )
 		resultStep( 'Открыть CRDT-текст в каталоге', [ '$rise_bench.Crdttext' ] )
-		await page.goto( url, { waitUntil: 'domcontentloaded' } )
+		await openBenchmark( page, url )
 		await page.getByRole( 'link', { name: 'Bench', exact: true } ).click()
 		await page.getByRole( 'link', { name: '$rise_bench_baza_crdttext', exact: true } ).click()
 		const editor = page.locator( '[rise_bench_baza_crdttext_editor] textarea' )
@@ -37,6 +37,10 @@ async function main() {
 					return input?.value.split( '\n' ).length === lines
 				}, lines )
 			} )
+			await page.waitForFunction( count => {
+				const app = globalThis.$.$rise_app.Root( 0 ).Bench().Crdttext()
+				return app.Metrics().measurements().length === count && !globalThis.$.$mol_promise_like( app.Insert().status()?.[ 0 ] )
+			}, lines / 500 )
 			const metrics = await page.evaluate( ()=> globalThis.$.$rise_app.Root( 0 ).Bench().Crdttext().Metrics().records() )
 			assert.equal( metrics.length, lines / 500 )
 			assert.ok( metrics.every( row => Number( row[ 'Время, мс' ] ) >= 0 && row[ 'Скорость' ] !== '—' ) )
