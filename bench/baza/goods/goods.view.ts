@@ -125,12 +125,15 @@ namespace $.$$ {
 
 		@ $mol_action
 		add_one() {
+			const total = new ( $mol_wire_sync( $rise_bench_measure ) )( 'Добавление' )
 			const dataset = this.dataset() ?? $mol_wire_sync( this ).prepare_dataset( this.dataset_config() ).dataset
 			// Freeze the insertion index before any writes or suspension.
 			const state = $mol_wire_sync( this ).prepare_append( dataset )
 			$mol_wire_sync( this ).prepare_product( state, state.count )
 			this.dataset_link( dataset.link().str )
 			this.body_scroll_top( 0 )
+			total.finish()
+			return total.duration!
 		}
 
 		@ $mol_action
@@ -174,15 +177,16 @@ namespace $.$$ {
 			return $mol_error_fence( ()=> {
 				const created = $mol_wire_sync( this ).create()
 				run.metric( 'Создание, с', created / 1000 )
+				// Drain the previous writes before measuring another operation.
+				$mol_wire_sync( this ).save_dataset()
 				const search = new ( $mol_wire_sync( $rise_bench_measure ) )( 'Поиск' )
 				if( $mol_wire_sync( this ).benchmark_search() !== 1 ) throw new Error( 'Поиск должен найти один товар' )
 				search.finish()
 				run.metric( 'Поиск, с', search.duration! / 1000 )
 				this.search_query( '' )
-				const add = new ( $mol_wire_sync( $rise_bench_measure ) )( 'Добавление' )
-				$mol_wire_sync( this ).add_one()
-				add.finish()
-				run.metric( 'Добавить 1, с', add.duration! / 1000 )
+				const added = $mol_wire_sync( this ).add_one()
+				run.metric( 'Добавить 1, с', added / 1000 )
+				$mol_wire_sync( this ).save_dataset()
 				$mol_wire_sync( this ).request_reload( run )
 			}, error => { run.state( 'Ошибка' ); return error } )
 		}
@@ -208,13 +212,11 @@ namespace $.$$ {
 		save_dataset() {
 			const lands = new Set( [ this.dataset()!.land(), ...this.products().map( product => product.land() ) ] )
 			// Native units_saving suspends until signing and IDB commits finish.
-			// This preparation is outside all reported operation/F5 timings.
 			for( const land of lands ) $mol_wire_sync( land ).units_saving()
 		}
 
 		@ $mol_action
 		request_reload( run: $rise_bench_run ) {
-			$mol_wire_sync( this ).save_dataset()
 			run.state( 'Перезагрузка' )
 			this.reload_store().save( this.Metrics().runs(), this.Metrics().operations(), {
 				link: this.dataset_link(), count: run.count,

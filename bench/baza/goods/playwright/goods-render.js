@@ -1,5 +1,5 @@
 const assert = require( 'node:assert/strict' )
-const { chromium, headless, isolateUnitTests, resultScenario, resultStep, resultBenchmark, screenshot } = require( '../../../../../shm/hitalama/playwright/harness' )
+const { chromium, headless, isolateUnitTests, resultScenario, resultStep, resultBenchmark, resultBenchmarkValue, screenshot } = require( '../../../../../shm/hitalama/playwright/harness' )
 const { closeTestContext } = require( '../../../../../shm/hitalama/playwright/unit-isolation' )
 const { observeOffline, targetUrl, openBenchmark } = require( '../../../playwright/offline' )
 
@@ -25,7 +25,7 @@ async function main() {
 		} )
 		const fields = ()=> page.evaluate( ()=> globalThis.$.$mol_wire_async( ()=> {
 			const app = globalThis.$.$rise_app.Root( 0 ).Bench().Goods()
-			return app.products().map( product => ({
+			return Array.from( app.products(), product => ({
 				id: product.Id().val(), title: product.Title().val(),
 				land: product.land().link().str, color: product.Color().val(),
 			}) )
@@ -130,6 +130,52 @@ async function main() {
 		await page.reload({ waitUntil: 'domcontentloaded' })
 		await page.getByText( 'Aurora Smart Notebook 00500', { exact: true } ).waitFor()
 		assert.deepEqual( await page.evaluate( ()=> globalThis.$.$rise_app.Root( 0 ).Bench().Goods().Metrics().records() ), completed )
+
+		resultStep( 'Сверить границы замеров на 500 записях по 10 полей', [ '$rise_bench_baza_goods.benchmark', '$rise_bench_baza_goods.save_dataset', '$rise_bench_baza_goods.add_one' ] )
+		await page.getByRole( 'checkbox', { name: '10 свойств', exact: true } ).click()
+		await page.evaluate( ()=> {
+			const app = globalThis.$.$rise_app.Root( 0 ).Bench().Goods()
+			const trace = []
+			for( const name of [ 'create', 'save_dataset', 'benchmark_search', 'add_one' ] ) {
+				const original = app[ name ]
+				let entry
+				// Observe native method calls without changing their work or clocks.
+				app[ name ] = function( ...args ) {
+					if( !entry || entry.end !== undefined ) trace.push( entry = { name, start: performance.now(), attempts: 0 } )
+					++entry.attempts
+					const value = original.apply( this, args )
+					entry.end = performance.now()
+					entry.value = value
+					return value
+				}
+			}
+			const reload = app.request_reload
+			app.request_reload = function( ...args ) {
+				sessionStorage.setItem( 'rise-goods-timing-check', JSON.stringify( trace ) )
+				return reload.apply( this, args )
+			}
+		} )
+		await page.getByRole( 'button', { name: 'Запустить бенчмарк', exact: true } ).click()
+		await page.waitForFunction( ()=> globalThis.$?.$rise_app.Root( 0 ).Bench().Goods().Metrics().runs()[ 0 ]?.state() === 'Готово' )
+		const trace = await page.evaluate( ()=> JSON.parse( sessionStorage.getItem( 'rise-goods-timing-check' ) ) )
+		assert.deepEqual( trace.map( entry => entry.name ), [ 'create', 'save_dataset', 'benchmark_search', 'add_one', 'save_dataset' ] )
+		for( let index = 1; index < trace.length; ++index ) assert.ok( trace[ index ].start >= trace[ index - 1 ].end, 'Stages must not overlap' )
+		const measured = await page.evaluate( ()=> globalThis.$.$rise_app.Root( 0 ).Bench().Goods().Metrics().records()[ 0 ] )
+		assert.equal( measured[ 'Полей' ], 10 )
+		for( const [ index, column ] of [ [ 0, 'Создание, с' ], [ 3, 'Добавить 1, с' ] ] ) {
+			const entry = trace[ index ]
+			assert.equal( measured[ column ], ( entry.value / 1000 ).toFixed( 3 ) )
+			assert.ok( Math.abs( entry.end - entry.start - entry.value ) < 30, `${column}: native call and reported clock must agree` )
+		}
+		assert.ok( trace[ 0 ].attempts > 1, 'Creation must exercise real asynchronous replay' )
+		console.log( 'Native timing boundaries', JSON.stringify({ trace, measured }) )
+		for( const column of [ 'Создание, с', 'Поиск, с', 'Добавить 1, с', 'F5, с' ] ) resultBenchmarkValue( `500 × 10: ${column}`, Number( measured[ column ] ), 's' )
+		const persisted = await page.evaluate( ()=> globalThis.$.$mol_wire_async( ()=> {
+			const app = globalThis.$.$rise_app.Root( 0 ).Bench().Goods()
+			return Array.from( app.products(), product => ({ title: product.Title().val(), description: product.Description().val(), tags: product.Tags().items().length }) )
+		} )() )
+		assert.equal( persisted.length, 501 )
+		assert.ok( persisted.every( product => product.title && product.description && product.tags === 5 ) )
 		console.log( '[metrics screenshot]', await screenshot( page, 'goods-metrics.png' ) )
 		const rows = await page.locator( '[rise_bench_baza_goods_table_row]' ).count()
 		assert.ok( rows > 0 && rows < 100, `Expected virtualized rows, got ${rows}` )
