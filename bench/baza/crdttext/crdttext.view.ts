@@ -85,7 +85,6 @@ namespace $.$$ {
 			return $mol_error_fence( ()=> {
 				const inserted = $mol_wire_sync( this ).insert( block )
 				run.metric( 'Вставка, с', inserted / 1000 )
-				run.metric( 'Скорость, симв./с', inserted ? block.length * 1000 / inserted : 0 )
 				$mol_wire_sync( this ).save_document()
 				const appended = $mol_wire_sync( this ).append_one()
 				run.metric( 'Добавить символ, с', appended / 1000 )

@@ -31,7 +31,6 @@ $rise_bench_baza_crdttext $mol_book2
 				<= Metrics $rise_bench_metrics
 					operations /
 						\Вставка, с
-						\Скорость, симв./с
 						\Добавить символ, с
 						\F5, с
 				<= Editor $mol_textarea

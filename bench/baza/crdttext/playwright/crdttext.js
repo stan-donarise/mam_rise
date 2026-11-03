@@ -34,6 +34,24 @@ async function main() {
 		for( const [ index, lines ] of [ 500, 1000, 5000 ].entries() ) {
 			resultStep( `Прогон ${lines} строк: вставка, символ и F5`, [ '$rise_bench_baza_crdttext.benchmark', '$rise_bench_baza_crdttext.append_one', '$rise_bench_baza_crdttext.resume_reload' ] )
 			await page.getByRole( 'checkbox', { name: String( lines ), exact: true } ).click()
+			await page.evaluate( ()=> {
+				const app = globalThis.$.$rise_app.Root( 0 ).Bench().Crdttext()
+				const original = app.append_one
+				const trace = { attempts: 0 }
+				app.append_one = function( ...args ) {
+					if( trace.start === undefined ) trace.start = performance.now()
+					++trace.attempts
+					const duration = original.apply( this, args )
+					trace.end = performance.now()
+					trace.duration = duration
+					return duration
+				}
+				const reload = app.request_reload
+				app.request_reload = function( ...args ) {
+					sessionStorage.setItem( 'rise-crdt-append-timing', JSON.stringify( trace ) )
+					return reload.apply( this, args )
+				}
+			} )
 			const before = navigations
 			await resultBenchmark( `Полный прогон ${lines} строк`, async()=> {
 				await page.getByRole( 'button', { name: 'Запустить бенчмарк', exact: true } ).click()
@@ -57,12 +75,16 @@ async function main() {
 				assert.match( metrics[ 0 ][ column ], /^\d+\.\d{3}$/ )
 				resultBenchmarkValue( `${lines} строк: ${column}`, Number( metrics[ 0 ][ column ] ), 's' )
 			}
-			assert.ok( Number( metrics[ 0 ][ 'Скорость, симв./с' ] ) > 0 )
+			assert.ok( !Object.hasOwn( metrics[ 0 ], 'Скорость, симв./с' ) )
+			const timing = await page.evaluate( ()=> JSON.parse( sessionStorage.getItem( 'rise-crdt-append-timing' ) ) )
+			assert.equal( metrics[ 0 ][ 'Добавить символ, с' ], ( timing.duration / 1000 ).toFixed( 3 ) )
+			assert.ok( Math.abs( timing.end - timing.start - timing.duration ) < 10, 'Reported append time must cover the complete native call including replay' )
+			console.log( 'Append timing check', JSON.stringify( timing ) )
 			console.log( 'CRDT metrics', JSON.stringify( metrics[ 0 ] ) )
 		}
 		const expected = await editor.inputValue()
 		const completed = await page.evaluate( ()=> globalThis.$.$rise_app.Root( 0 ).Bench().Crdttext().Metrics().records() )
-		assert.equal( await page.locator( '[rise_bench_baza_crdttext_metrics] [mol_grid_col_head]' ).count(), 9 )
+		assert.equal( await page.locator( '[rise_bench_baza_crdttext_metrics] [mol_grid_col_head]' ).count(), 8 )
 		console.log( '[metrics screenshot]', await screenshot( page, 'crdttext-metrics.png' ) )
 		assert.ok( expected.startsWith( 'Строка 1:' ) )
 		assert.ok( expected.includes( 'Строка 1000:' ) )
