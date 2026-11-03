@@ -45438,8 +45438,83 @@ declare namespace $ {
 }
 
 declare namespace $ {
+
+	export class $mol_icon_information extends $mol_icon {
+		path( ): string
+	}
+	
+}
+
+//# sourceMappingURL=information.view.tree.d.ts.map
+declare namespace $ {
+
+	export class $mol_icon_information_outline extends $mol_icon {
+		path( ): string
+	}
+	
+}
+
+//# sourceMappingURL=outline.view.tree.d.ts.map
+declare namespace $ {
+
+	type $mol_view__sub_rise_bench_metrics_details_1 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_labeler__title_rise_bench_metrics_details_2 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_labeler['title'] >
+	>
+	type $mol_labeler__Content_rise_bench_metrics_details_3 = $mol_type_enforce<
+		ReturnType< $rise_bench_metrics_details['Computer'] >
+		,
+		ReturnType< $mol_labeler['Content'] >
+	>
+	type $mol_view__sub_rise_bench_metrics_details_4 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_labeler__title_rise_bench_metrics_details_5 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_labeler['title'] >
+	>
+	type $mol_labeler__Content_rise_bench_metrics_details_6 = $mol_type_enforce<
+		ReturnType< $rise_bench_metrics_details['Browser'] >
+		,
+		ReturnType< $mol_labeler['Content'] >
+	>
+	type $mol_view__sub_rise_bench_metrics_details_7 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	export class $rise_bench_metrics_details extends $mol_pick {
+		Icon( ): $mol_icon_information_outline
+		computer( ): string
+		Computer( ): $mol_view
+		Computer_label( ): $mol_labeler
+		browser( ): string
+		Browser( ): $mol_view
+		Browser_label( ): $mol_labeler
+		Text( ): $mol_view
+		hint( ): string
+		trigger_content( ): readonly(any)[]
+		bubble_content( ): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=details.view.tree.d.ts.map
+declare namespace $ {
+}
+
+declare namespace $ {
     const $rise_bench_run_baza_version = "2e6100b225c8d4fb3a5b5d14e8568223e8a8c785";
-    const $rise_bench_run_benchmark_version = "0.2.0";
+    const $rise_bench_run_benchmark_version = "0.3.0";
     class $rise_bench_run extends $mol_object {
         readonly count: number;
         readonly properties: number;
@@ -45447,22 +45522,40 @@ declare namespace $ {
         readonly baza_version: string;
         readonly benchmark_version: string;
         readonly id: string;
-        constructor(count: number, properties?: number, stamp?: string, baza_version?: string, benchmark_version?: string, id?: string);
+        readonly computer: string;
+        readonly browser: string;
+        constructor(count: number, properties?: number, stamp?: string, baza_version?: string, benchmark_version?: string, id?: string, computer?: string, browser?: string);
         state(next?: string): string;
+        bytes(next?: number | null): number | null;
         metric(operation: string, next?: number): number | null;
     }
 }
 
 declare namespace $ {
 
+	type $rise_bench_metrics_details__computer_rise_bench_metrics_1 = $mol_type_enforce<
+		ReturnType< $rise_bench_metrics['details_computer'] >
+		,
+		ReturnType< $rise_bench_metrics_details['computer'] >
+	>
+	type $rise_bench_metrics_details__browser_rise_bench_metrics_2 = $mol_type_enforce<
+		ReturnType< $rise_bench_metrics['details_browser'] >
+		,
+		ReturnType< $rise_bench_metrics_details['browser'] >
+	>
 	export class $rise_bench_metrics extends $mol_grid {
 		embedded( ): boolean
+		details_computer( id: any): string
+		details_browser( id: any): string
 		attr( ): ({ 
 			'embedded': ReturnType< $rise_bench_metrics['embedded'] >,
 		})  & ReturnType< $mol_grid['attr'] >
 		runs( next?: readonly($rise_bench_run)[] ): readonly($rise_bench_run)[]
 		run_add( next?: any ): any
 		operations( ): readonly(string)[]
+		compare( ): boolean
+		text_mode( ): boolean
+		Details( id: any): $rise_bench_metrics_details
 	}
 	
 }
@@ -45471,14 +45564,29 @@ declare namespace $ {
 declare namespace $.$$ {
     class $rise_bench_metrics extends $.$rise_bench_metrics {
         embedded(): boolean;
+        Cell(id: {
+            row: string[];
+            col: string;
+        }): $mol_view | $rise_bench_metrics_details;
+        details_computer(id: {
+            row: string[];
+            col: string;
+        }): string;
+        details_browser(id: {
+            row: string[];
+            col: string;
+        }): string;
         run_add(run: $rise_bench_run): void;
         col_ids(): string[];
         records(): {
             '\u2116': number;
             '\u0414\u0430\u0442\u0430 \u0438 \u0432\u0440\u0435\u043C\u044F': string;
+            Хранилище: string;
             '\u0412\u0435\u0440\u0441\u0438\u044F \u0413\u0438\u043F\u0435\u0440\u0431\u0430\u0437\u044B': string;
             '\u0412\u0435\u0440\u0441\u0438\u044F \u0431\u0435\u043D\u0447\u043C\u0430\u0440\u043A\u0430': string;
             Объём: number;
+            Строк: number;
+            '\u0420\u0430\u0437\u043C\u0435\u0440, \u041A\u0411': string;
             Полей: string | number;
             Состояние: string;
         }[];
@@ -46069,6 +46177,21 @@ declare namespace $.$$ {
 }
 
 declare namespace $.$$ {
+}
+
+declare namespace $ {
+
+	export class $rise_bench_baza_goods_rows extends $mol_list {
+	}
+	
+}
+
+//# sourceMappingURL=rows.view.tree.d.ts.map
+declare namespace $.$$ {
+    /** Search replaces the set: preserve the viewport, not the previous row identity. */
+    class $rise_bench_baza_goods_rows extends $.$rise_bench_baza_goods_rows {
+        sub(): readonly $mol_view[];
+    }
 }
 
 declare namespace $ {
@@ -46893,52 +47016,67 @@ declare namespace $ {
 		,
 		ReturnType< $mol_dimmer['needle'] >
 	>
-	type $mol_labeler__title_rise_bench_baza_goods_table_10 = $mol_type_enforce<
+	type $rise_bench_baza_goods_rows__item_width_min_rise_bench_baza_goods_table_10 = $mol_type_enforce<
+		number
+		,
+		ReturnType< $rise_bench_baza_goods_rows['item_width_min'] >
+	>
+	type $rise_bench_baza_goods_rows__item_height_min_rise_bench_baza_goods_table_11 = $mol_type_enforce<
+		number
+		,
+		ReturnType< $rise_bench_baza_goods_rows['item_height_min'] >
+	>
+	type $rise_bench_baza_goods_rows__rows_rise_bench_baza_goods_table_12 = $mol_type_enforce<
+		ReturnType< $rise_bench_baza_goods_table['rows'] >
+		,
+		ReturnType< $rise_bench_baza_goods_rows['rows'] >
+	>
+	type $mol_labeler__title_rise_bench_baza_goods_table_13 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_labeler['title'] >
 	>
-	type $mol_labeler__content_rise_bench_baza_goods_table_11 = $mol_type_enforce<
+	type $mol_labeler__content_rise_bench_baza_goods_table_14 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_labeler['content'] >
 	>
-	type $mol_view__sub_rise_bench_baza_goods_table_12 = $mol_type_enforce<
+	type $mol_view__sub_rise_bench_baza_goods_table_15 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $mol_view__minimal_height_rise_bench_baza_goods_table_13 = $mol_type_enforce<
+	type $mol_view__minimal_height_rise_bench_baza_goods_table_16 = $mol_type_enforce<
 		number
 		,
 		ReturnType< $mol_view['minimal_height'] >
 	>
-	type $mol_view__sub_rise_bench_baza_goods_table_14 = $mol_type_enforce<
+	type $mol_view__sub_rise_bench_baza_goods_table_17 = $mol_type_enforce<
 		ReturnType< $rise_bench_baza_goods_table['row_content'] >
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $mol_link_iconed__uri_rise_bench_baza_goods_table_15 = $mol_type_enforce<
+	type $mol_link_iconed__uri_rise_bench_baza_goods_table_18 = $mol_type_enforce<
 		ReturnType< $rise_bench_baza_goods_table['row_uri'] >
 		,
 		ReturnType< $mol_link_iconed['uri'] >
 	>
-	type $mol_link_iconed__title_rise_bench_baza_goods_table_16 = $mol_type_enforce<
+	type $mol_link_iconed__title_rise_bench_baza_goods_table_19 = $mol_type_enforce<
 		ReturnType< $rise_bench_baza_goods_table['row_title'] >
 		,
 		ReturnType< $mol_link_iconed['title'] >
 	>
-	type $mol_link_iconed__content_rise_bench_baza_goods_table_17 = $mol_type_enforce<
+	type $mol_link_iconed__content_rise_bench_baza_goods_table_20 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_link_iconed['content'] >
 	>
-	type $mol_date__value_moment_rise_bench_baza_goods_table_18 = $mol_type_enforce<
+	type $mol_date__value_moment_rise_bench_baza_goods_table_21 = $mol_type_enforce<
 		ReturnType< $rise_bench_baza_goods_table['row_moment'] >
 		,
 		ReturnType< $mol_date['value_moment'] >
 	>
-	type $mol_date__trigger_content_rise_bench_baza_goods_table_19 = $mol_type_enforce<
+	type $mol_date__trigger_content_rise_bench_baza_goods_table_22 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_date['trigger_content'] >
@@ -46959,6 +47097,7 @@ declare namespace $ {
 		query( ): string
 		color_filter( ): string
 		status_filter( ): string
+		Rows( ): $rise_bench_baza_goods_rows
 		Compact_id_labeler( id: any): $mol_labeler
 		Details( id: any): $mol_view
 		Row( id: any): $mol_view
@@ -46989,6 +47128,29 @@ declare namespace $.$$ {
 }
 
 declare namespace $.$$ {
+}
+
+declare namespace $ {
+
+	export class $rise_bench_surface extends $mol_page {
+		embedded( ): boolean
+		attr( ): ({ 
+			'embedded': ReturnType< $rise_bench_surface['embedded'] >,
+		})  & ReturnType< $mol_page['attr'] >
+	}
+	
+}
+
+//# sourceMappingURL=surface.view.tree.d.ts.map
+declare namespace $.$$ {
+    /** Workload surface: keep the native scroll/virtualization, not page chrome. */
+    class $rise_bench_surface extends $.$rise_bench_surface {
+        embedded(): boolean;
+        sub(): readonly any[];
+    }
+}
+
+declare namespace $ {
 }
 
 declare namespace $ {
@@ -60122,6 +60284,14 @@ declare namespace $ {
 }
 
 declare namespace $ {
+    /** Signed public post/just grant for the result Land, not a private key or data. */
+    class $rise_bench_archive_seed extends $mol_object {
+        private static readonly bytes;
+        static apply(): boolean;
+    }
+}
+
+declare namespace $ {
     type $rise_bench_archive_row = {
         id?: string;
         count: number;
@@ -60130,6 +60300,9 @@ declare namespace $ {
         state: string;
         baza_version?: string;
         benchmark_version?: string;
+        computer?: string;
+        browser?: string;
+        bytes?: number | null;
         metrics: Record<string, number | null>;
     };
     /** Small result metadata only. Never stores a workload Land or database name. */
@@ -60142,6 +60315,7 @@ declare namespace $ {
         static validate(value: unknown, operations: readonly string[]): $rise_bench_archive_row | null;
         static save(kind: string, row: $rise_bench_archive_row): void;
         static rows(kind: string): $rise_bench_run[];
+        static row(key: string): $rise_bench_run | null;
     }
 }
 
@@ -60269,67 +60443,57 @@ declare namespace $ {
 		,
 		ReturnType< $mol_button_major['click'] >
 	>
-	type $mol_button_minor__title_rise_bench_baza_goods_15 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $mol_button_minor['title'] >
-	>
-	type $mol_button_minor__enabled_rise_bench_baza_goods_16 = $mol_type_enforce<
-		ReturnType< $rise_bench_baza_goods['add_enabled'] >
-		,
-		ReturnType< $mol_button_minor['enabled'] >
-	>
-	type $mol_button_minor__click_rise_bench_baza_goods_17 = $mol_type_enforce<
-		ReturnType< $rise_bench_baza_goods['add_one'] >
-		,
-		ReturnType< $mol_button_minor['click'] >
-	>
-	type $mol_button_minor__title_rise_bench_baza_goods_18 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $mol_button_minor['title'] >
-	>
-	type $mol_button_minor__enabled_rise_bench_baza_goods_19 = $mol_type_enforce<
-		ReturnType< $rise_bench_baza_goods['controls_enabled'] >
-		,
-		ReturnType< $mol_button_minor['enabled'] >
-	>
-	type $mol_button_minor__click_rise_bench_baza_goods_20 = $mol_type_enforce<
-		ReturnType< $rise_bench_baza_goods['reset'] >
-		,
-		ReturnType< $mol_button_minor['click'] >
-	>
-	type $mol_view__sub_rise_bench_baza_goods_21 = $mol_type_enforce<
+	type $mol_view__sub_rise_bench_baza_goods_15 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type __rise_bench_baza_goods_22 = $mol_type_enforce<
+	type __rise_bench_baza_goods_16 = $mol_type_enforce<
+		Parameters< $rise_bench_baza_goods['body_scroll_top'] >[0]
+		,
+		Parameters< ReturnType< $rise_bench_baza_goods['Records'] >['body_scroll_top'] >[0]
+	>
+	type $rise_bench_metrics__operations_rise_bench_baza_goods_17 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $rise_bench_metrics['operations'] >
+	>
+	type __rise_bench_baza_goods_18 = $mol_type_enforce<
 		Parameters< $rise_bench_baza_goods['search_query'] >[0]
 		,
 		Parameters< ReturnType< $rise_bench_baza_goods['Search'] >['query'] >[0]
 	>
-	type $mol_search__hint_rise_bench_baza_goods_23 = $mol_type_enforce<
+	type $mol_search__hint_rise_bench_baza_goods_19 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_search['hint'] >
 	>
-	type $mol_labeler__title_rise_bench_baza_goods_24 = $mol_type_enforce<
+	type $mol_search__enabled_rise_bench_baza_goods_20 = $mol_type_enforce<
+		ReturnType< $rise_bench_baza_goods['filters_enabled'] >
+		,
+		ReturnType< $mol_search['enabled'] >
+	>
+	type $mol_labeler__title_rise_bench_baza_goods_21 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_labeler['title'] >
 	>
-	type $mol_labeler__content_rise_bench_baza_goods_25 = $mol_type_enforce<
-		readonly(any)[]
+	type $mol_labeler__Content_rise_bench_baza_goods_22 = $mol_type_enforce<
+		ReturnType< $rise_bench_baza_goods['Search'] >
 		,
-		ReturnType< $mol_labeler['content'] >
+		ReturnType< $mol_labeler['Content'] >
 	>
-	type $mol_select__value_rise_bench_baza_goods_26 = $mol_type_enforce<
+	type $mol_select__enabled_rise_bench_baza_goods_23 = $mol_type_enforce<
+		ReturnType< $rise_bench_baza_goods['filters_enabled'] >
+		,
+		ReturnType< $mol_select['enabled'] >
+	>
+	type $mol_select__value_rise_bench_baza_goods_24 = $mol_type_enforce<
 		ReturnType< $rise_bench_baza_goods['color_filter'] >
 		,
 		ReturnType< $mol_select['value'] >
 	>
-	type $mol_select__dictionary_rise_bench_baza_goods_27 = $mol_type_enforce<
+	type $mol_select__dictionary_rise_bench_baza_goods_25 = $mol_type_enforce<
 		({ 
 			'all': string,
 			'red': string,
@@ -60339,22 +60503,27 @@ declare namespace $ {
 		,
 		ReturnType< $mol_select['dictionary'] >
 	>
-	type $mol_labeler__title_rise_bench_baza_goods_28 = $mol_type_enforce<
+	type $mol_labeler__title_rise_bench_baza_goods_26 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_labeler['title'] >
 	>
-	type $mol_labeler__Content_rise_bench_baza_goods_29 = $mol_type_enforce<
+	type $mol_labeler__Content_rise_bench_baza_goods_27 = $mol_type_enforce<
 		ReturnType< $rise_bench_baza_goods['Color_filter'] >
 		,
 		ReturnType< $mol_labeler['Content'] >
 	>
-	type $mol_select__value_rise_bench_baza_goods_30 = $mol_type_enforce<
+	type $mol_select__enabled_rise_bench_baza_goods_28 = $mol_type_enforce<
+		ReturnType< $rise_bench_baza_goods['filters_enabled'] >
+		,
+		ReturnType< $mol_select['enabled'] >
+	>
+	type $mol_select__value_rise_bench_baza_goods_29 = $mol_type_enforce<
 		ReturnType< $rise_bench_baza_goods['status_filter'] >
 		,
 		ReturnType< $mol_select['value'] >
 	>
-	type $mol_select__dictionary_rise_bench_baza_goods_31 = $mol_type_enforce<
+	type $mol_select__dictionary_rise_bench_baza_goods_30 = $mol_type_enforce<
 		({ 
 			'all': string,
 			'minor': string,
@@ -60364,80 +60533,110 @@ declare namespace $ {
 		,
 		ReturnType< $mol_select['dictionary'] >
 	>
-	type $mol_labeler__title_rise_bench_baza_goods_32 = $mol_type_enforce<
+	type $mol_labeler__title_rise_bench_baza_goods_31 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_labeler['title'] >
 	>
-	type $mol_labeler__Content_rise_bench_baza_goods_33 = $mol_type_enforce<
+	type $mol_labeler__Content_rise_bench_baza_goods_32 = $mol_type_enforce<
 		ReturnType< $rise_bench_baza_goods['Status_filter'] >
 		,
 		ReturnType< $mol_labeler['Content'] >
 	>
-	type __rise_bench_baza_goods_34 = $mol_type_enforce<
-		Parameters< $rise_bench_baza_goods['body_scroll_top'] >[0]
+	type $mol_button_minor__title_rise_bench_baza_goods_33 = $mol_type_enforce<
+		string
 		,
-		Parameters< ReturnType< $rise_bench_baza_goods['Records'] >['body_scroll_top'] >[0]
+		ReturnType< $mol_button_minor['title'] >
 	>
-	type $rise_bench_metrics__operations_rise_bench_baza_goods_35 = $mol_type_enforce<
+	type $mol_button_minor__enabled_rise_bench_baza_goods_34 = $mol_type_enforce<
+		ReturnType< $rise_bench_baza_goods['controls_enabled'] >
+		,
+		ReturnType< $mol_button_minor['enabled'] >
+	>
+	type $mol_button_minor__click_rise_bench_baza_goods_35 = $mol_type_enforce<
+		ReturnType< $rise_bench_baza_goods['add_one'] >
+		,
+		ReturnType< $mol_button_minor['click'] >
+	>
+	type $mol_button_minor__title_rise_bench_baza_goods_36 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_button_minor['title'] >
+	>
+	type $mol_button_minor__enabled_rise_bench_baza_goods_37 = $mol_type_enforce<
+		ReturnType< $rise_bench_baza_goods['controls_enabled'] >
+		,
+		ReturnType< $mol_button_minor['enabled'] >
+	>
+	type $mol_button_minor__click_rise_bench_baza_goods_38 = $mol_type_enforce<
+		ReturnType< $rise_bench_baza_goods['reset'] >
+		,
+		ReturnType< $mol_button_minor['click'] >
+	>
+	type $mol_view__sub_rise_bench_baza_goods_39 = $mol_type_enforce<
 		readonly(any)[]
 		,
-		ReturnType< $rise_bench_metrics['operations'] >
+		ReturnType< $mol_view['sub'] >
 	>
-	type $rise_bench_baza_goods_table__products_rise_bench_baza_goods_36 = $mol_type_enforce<
+	type $mol_view__sub_rise_bench_baza_goods_40 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $rise_bench_baza_goods_table__products_rise_bench_baza_goods_41 = $mol_type_enforce<
 		ReturnType< $rise_bench_baza_goods['products'] >
 		,
 		ReturnType< $rise_bench_baza_goods_table['products'] >
 	>
-	type $rise_bench_baza_goods_table__compact_rise_bench_baza_goods_37 = $mol_type_enforce<
+	type $rise_bench_baza_goods_table__compact_rise_bench_baza_goods_42 = $mol_type_enforce<
 		ReturnType< $rise_bench_baza_goods['compact_mode'] >
 		,
 		ReturnType< $rise_bench_baza_goods_table['compact'] >
 	>
-	type $rise_bench_baza_goods_table__query_rise_bench_baza_goods_38 = $mol_type_enforce<
+	type $rise_bench_baza_goods_table__query_rise_bench_baza_goods_43 = $mol_type_enforce<
 		ReturnType< $rise_bench_baza_goods['search_query'] >
 		,
 		ReturnType< $rise_bench_baza_goods_table['query'] >
 	>
-	type $rise_bench_baza_goods_table__color_filter_rise_bench_baza_goods_39 = $mol_type_enforce<
+	type $rise_bench_baza_goods_table__color_filter_rise_bench_baza_goods_44 = $mol_type_enforce<
 		ReturnType< $rise_bench_baza_goods['color_filter'] >
 		,
 		ReturnType< $rise_bench_baza_goods_table['color_filter'] >
 	>
-	type $rise_bench_baza_goods_table__status_filter_rise_bench_baza_goods_40 = $mol_type_enforce<
+	type $rise_bench_baza_goods_table__status_filter_rise_bench_baza_goods_45 = $mol_type_enforce<
 		ReturnType< $rise_bench_baza_goods['status_filter'] >
 		,
 		ReturnType< $rise_bench_baza_goods_table['status_filter'] >
 	>
-	type $mol_page__title_rise_bench_baza_goods_41 = $mol_type_enforce<
+	type $mol_page__title_rise_bench_baza_goods_46 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_page['title'] >
 	>
-	type $mol_page__minimal_width_rise_bench_baza_goods_42 = $mol_type_enforce<
+	type $mol_page__minimal_width_rise_bench_baza_goods_47 = $mol_type_enforce<
 		number
 		,
 		ReturnType< $mol_page['minimal_width'] >
 	>
-	type $mol_page__body_rise_bench_baza_goods_43 = $mol_type_enforce<
+	type $mol_page__body_rise_bench_baza_goods_48 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_page['body'] >
 	>
-	type $mol_page__title_rise_bench_baza_goods_44 = $mol_type_enforce<
+	type $rise_bench_surface__title_rise_bench_baza_goods_49 = $mol_type_enforce<
 		ReturnType< $rise_bench_baza_goods['app_title'] >
 		,
-		ReturnType< $mol_page['title'] >
+		ReturnType< $rise_bench_surface['title'] >
 	>
-	type $mol_page__minimal_width_rise_bench_baza_goods_45 = $mol_type_enforce<
+	type $rise_bench_surface__minimal_width_rise_bench_baza_goods_50 = $mol_type_enforce<
 		number
 		,
-		ReturnType< $mol_page['minimal_width'] >
+		ReturnType< $rise_bench_surface['minimal_width'] >
 	>
-	type $mol_page__body_rise_bench_baza_goods_46 = $mol_type_enforce<
+	type $rise_bench_surface__body_rise_bench_baza_goods_51 = $mol_type_enforce<
 		readonly(any)[]
 		,
-		ReturnType< $mol_page['body'] >
+		ReturnType< $rise_bench_surface['body'] >
 	>
 	export class $rise_bench_baza_goods extends $mol_book2 {
 		title( ): string
@@ -60453,12 +60652,11 @@ declare namespace $ {
 		create_enabled( ): boolean
 		benchmark( next?: any ): any
 		Create( ): $mol_button_major
-		add_enabled( ): boolean
-		add_one( next?: any ): any
-		Add( ): $mol_button_minor
-		reset( next?: any ): any
-		Reset( ): $mol_button_minor
 		Actions( ): $mol_view
+		app_title( ): string
+		body_scroll_top( next?: ReturnType< ReturnType< $rise_bench_baza_goods['Records'] >['body_scroll_top'] > ): ReturnType< ReturnType< $rise_bench_baza_goods['Records'] >['body_scroll_top'] >
+		Metrics( ): $rise_bench_metrics
+		filters_enabled( ): boolean
 		search_query( next?: ReturnType< ReturnType< $rise_bench_baza_goods['Search'] >['query'] > ): ReturnType< ReturnType< $rise_bench_baza_goods['Search'] >['query'] >
 		Search( ): $mol_search
 		Search_label( ): $mol_labeler
@@ -60468,16 +60666,19 @@ declare namespace $ {
 		status_filter( next?: string ): string
 		Status_filter( ): $mol_select
 		Status_label( ): $mol_labeler
-		app_title( ): string
-		body_scroll_top( next?: ReturnType< ReturnType< $rise_bench_baza_goods['Records'] >['body_scroll_top'] > ): ReturnType< ReturnType< $rise_bench_baza_goods['Records'] >['body_scroll_top'] >
-		Metrics( ): $rise_bench_metrics
+		add_one( next?: any ): any
+		Add( ): $mol_button_minor
+		reset( next?: any ): any
+		Reset( ): $mol_button_minor
+		Manual_actions( ): $mol_view
+		Manual( ): $mol_view
 		products( ): readonly($rise_bench_baza_goods_product)[]
 		compact_mode( ): boolean
 		Table( ): $rise_bench_baza_goods_table
 		menu_title( ): ReturnType< $rise_bench_baza_goods['title'] >
 		pages( ): ReturnType< $rise_bench_baza_goods['content'] >
 		Settings( ): $mol_page
-		Records( ): $mol_page
+		Records( ): $rise_bench_surface
 	}
 	
 }
@@ -60510,6 +60711,7 @@ declare namespace $.$$ {
         products(): $rise_bench_baza_goods_product[];
         product_links(): readonly $giper_baza_link[];
         controls_enabled(): boolean;
+        filters_enabled(): boolean;
         add_enabled(): boolean;
         create_enabled(): boolean;
         prepare_append(dataset: $rise_bench_baza_goods_dataset): $rise_bench_baza_goods_preparation;
@@ -60534,6 +60736,120 @@ declare namespace $.$$ {
 declare namespace $.$$ {
 }
 
+declare namespace $ {
+
+	export class $rise_bench_textarea_input extends $mol_textarea_edit {
+	}
+	
+}
+
+//# sourceMappingURL=input.view.tree.d.ts.map
+declare namespace $.$$ {
+    /** Native selection is applied as a command, never replayed by unrelated renders. */
+    class $rise_bench_textarea_input extends $.$rise_bench_textarea_input {
+        private applied?;
+        field(): ReturnType<$.$rise_bench_textarea_input['field']>;
+        render(): void;
+        /** CRDT writes may suspend; a Promise is not an invalid-input error. */
+        value_changed(next?: string): string;
+    }
+}
+
+declare namespace $ {
+
+	export class $rise_bench_textarea_view extends $mol_text_code {
+	}
+	
+}
+
+//# sourceMappingURL=view.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $rise_bench_textarea_view extends $.$rise_bench_textarea_view {
+        text_lines(): string[];
+    }
+}
+
+declare namespace $ {
+
+	type $rise_bench_textarea_input__value_rise_bench_textarea_1 = $mol_type_enforce<
+		ReturnType< $rise_bench_textarea['value'] >
+		,
+		ReturnType< $rise_bench_textarea_input['value'] >
+	>
+	type $rise_bench_textarea_input__hint_rise_bench_textarea_2 = $mol_type_enforce<
+		ReturnType< $rise_bench_textarea['hint'] >
+		,
+		ReturnType< $rise_bench_textarea_input['hint'] >
+	>
+	type $rise_bench_textarea_input__enabled_rise_bench_textarea_3 = $mol_type_enforce<
+		ReturnType< $rise_bench_textarea['enabled'] >
+		,
+		ReturnType< $rise_bench_textarea_input['enabled'] >
+	>
+	type $rise_bench_textarea_input__spellcheck_rise_bench_textarea_4 = $mol_type_enforce<
+		ReturnType< $rise_bench_textarea['spellcheck'] >
+		,
+		ReturnType< $rise_bench_textarea_input['spellcheck'] >
+	>
+	type $rise_bench_textarea_input__length_max_rise_bench_textarea_5 = $mol_type_enforce<
+		ReturnType< $rise_bench_textarea['length_max'] >
+		,
+		ReturnType< $rise_bench_textarea_input['length_max'] >
+	>
+	type $rise_bench_textarea_input__selection_rise_bench_textarea_6 = $mol_type_enforce<
+		ReturnType< $rise_bench_textarea['selection'] >
+		,
+		ReturnType< $rise_bench_textarea_input['selection'] >
+	>
+	type $rise_bench_textarea_input__submit_rise_bench_textarea_7 = $mol_type_enforce<
+		ReturnType< $rise_bench_textarea['submit'] >
+		,
+		ReturnType< $rise_bench_textarea_input['submit'] >
+	>
+	type $rise_bench_textarea_input__submit_with_ctrl_rise_bench_textarea_8 = $mol_type_enforce<
+		ReturnType< $rise_bench_textarea['submit_with_ctrl'] >
+		,
+		ReturnType< $rise_bench_textarea_input['submit_with_ctrl'] >
+	>
+	type $rise_bench_textarea_view__text_rise_bench_textarea_9 = $mol_type_enforce<
+		ReturnType< $rise_bench_textarea['value'] >
+		,
+		ReturnType< $rise_bench_textarea_view['text'] >
+	>
+	type $rise_bench_textarea_view__render_visible_only_rise_bench_textarea_10 = $mol_type_enforce<
+		boolean
+		,
+		ReturnType< $rise_bench_textarea_view['render_visible_only'] >
+	>
+	type $rise_bench_textarea_view__row_numb_rise_bench_textarea_11 = $mol_type_enforce<
+		ReturnType< $rise_bench_textarea['row_numb'] >
+		,
+		ReturnType< $rise_bench_textarea_view['row_numb'] >
+	>
+	type $rise_bench_textarea_view__sidebar_showed_rise_bench_textarea_12 = $mol_type_enforce<
+		ReturnType< $rise_bench_textarea['sidebar_showed'] >
+		,
+		ReturnType< $rise_bench_textarea_view['sidebar_showed'] >
+	>
+	type $rise_bench_textarea_view__highlight_rise_bench_textarea_13 = $mol_type_enforce<
+		ReturnType< $rise_bench_textarea['highlight'] >
+		,
+		ReturnType< $rise_bench_textarea_view['highlight'] >
+	>
+	type $rise_bench_textarea_view__syntax_rise_bench_textarea_14 = $mol_type_enforce<
+		ReturnType< $rise_bench_textarea['syntax'] >
+		,
+		ReturnType< $rise_bench_textarea_view['syntax'] >
+	>
+	export class $rise_bench_textarea extends $mol_textarea {
+		bring( ): ReturnType< ReturnType< $rise_bench_textarea['Edit'] >['bring'] >
+		Edit( ): $rise_bench_textarea_input
+		View( ): $rise_bench_textarea_view
+	}
+	
+}
+
+//# sourceMappingURL=textarea.view.tree.d.ts.map
 declare namespace $ {
     /** Native textarea plus its visible text layer, followed by a paint opportunity. */
     class $rise_bench_baza_crdttext_render_ready extends $mol_object {
@@ -60610,75 +60926,80 @@ declare namespace $ {
 		,
 		ReturnType< $mol_button_major['enabled'] >
 	>
-	type $mol_button_minor__title_rise_bench_baza_crdttext_9 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $mol_button_minor['title'] >
-	>
-	type $mol_button_minor__click_rise_bench_baza_crdttext_10 = $mol_type_enforce<
-		ReturnType< $rise_bench_baza_crdttext['reset'] >
-		,
-		ReturnType< $mol_button_minor['click'] >
-	>
-	type $mol_button_minor__enabled_rise_bench_baza_crdttext_11 = $mol_type_enforce<
-		ReturnType< $rise_bench_baza_crdttext['controls_enabled'] >
-		,
-		ReturnType< $mol_button_minor['enabled'] >
-	>
-	type $mol_page__title_rise_bench_baza_crdttext_12 = $mol_type_enforce<
+	type $mol_page__title_rise_bench_baza_crdttext_9 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_page['title'] >
 	>
-	type $mol_page__minimal_width_rise_bench_baza_crdttext_13 = $mol_type_enforce<
+	type $mol_page__minimal_width_rise_bench_baza_crdttext_10 = $mol_type_enforce<
 		number
 		,
 		ReturnType< $mol_page['minimal_width'] >
 	>
-	type $mol_page__body_rise_bench_baza_crdttext_14 = $mol_type_enforce<
+	type $mol_page__body_rise_bench_baza_crdttext_11 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_page['body'] >
 	>
-	type $rise_bench_metrics__operations_rise_bench_baza_crdttext_15 = $mol_type_enforce<
+	type $rise_bench_metrics__text_mode_rise_bench_baza_crdttext_12 = $mol_type_enforce<
+		boolean
+		,
+		ReturnType< $rise_bench_metrics['text_mode'] >
+	>
+	type $rise_bench_metrics__operations_rise_bench_baza_crdttext_13 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $rise_bench_metrics['operations'] >
 	>
-	type $mol_textarea__hint_rise_bench_baza_crdttext_16 = $mol_type_enforce<
+	type $mol_button_minor__title_rise_bench_baza_crdttext_14 = $mol_type_enforce<
 		string
 		,
-		ReturnType< $mol_textarea['hint'] >
+		ReturnType< $mol_button_minor['title'] >
 	>
-	type $mol_textarea__value_rise_bench_baza_crdttext_17 = $mol_type_enforce<
-		ReturnType< $rise_bench_baza_crdttext['text'] >
+	type $mol_button_minor__click_rise_bench_baza_crdttext_15 = $mol_type_enforce<
+		ReturnType< $rise_bench_baza_crdttext['reset'] >
 		,
-		ReturnType< $mol_textarea['value'] >
+		ReturnType< $mol_button_minor['click'] >
 	>
-	type $mol_textarea__enabled_rise_bench_baza_crdttext_18 = $mol_type_enforce<
+	type $mol_button_minor__enabled_rise_bench_baza_crdttext_16 = $mol_type_enforce<
 		ReturnType< $rise_bench_baza_crdttext['controls_enabled'] >
 		,
-		ReturnType< $mol_textarea['enabled'] >
+		ReturnType< $mol_button_minor['enabled'] >
 	>
-	type $mol_textarea__spellcheck_rise_bench_baza_crdttext_19 = $mol_type_enforce<
+	type $rise_bench_textarea__hint_rise_bench_baza_crdttext_17 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $rise_bench_textarea['hint'] >
+	>
+	type $rise_bench_textarea__value_rise_bench_baza_crdttext_18 = $mol_type_enforce<
+		ReturnType< $rise_bench_baza_crdttext['text'] >
+		,
+		ReturnType< $rise_bench_textarea['value'] >
+	>
+	type $rise_bench_textarea__enabled_rise_bench_baza_crdttext_19 = $mol_type_enforce<
+		ReturnType< $rise_bench_baza_crdttext['controls_enabled'] >
+		,
+		ReturnType< $rise_bench_textarea['enabled'] >
+	>
+	type $rise_bench_textarea__spellcheck_rise_bench_baza_crdttext_20 = $mol_type_enforce<
 		boolean
 		,
-		ReturnType< $mol_textarea['spellcheck'] >
+		ReturnType< $rise_bench_textarea['spellcheck'] >
 	>
-	type $mol_page__title_rise_bench_baza_crdttext_20 = $mol_type_enforce<
+	type $rise_bench_surface__title_rise_bench_baza_crdttext_21 = $mol_type_enforce<
 		ReturnType< $rise_bench_baza_crdttext['page_title'] >
 		,
-		ReturnType< $mol_page['title'] >
+		ReturnType< $rise_bench_surface['title'] >
 	>
-	type $mol_page__minimal_width_rise_bench_baza_crdttext_21 = $mol_type_enforce<
+	type $rise_bench_surface__minimal_width_rise_bench_baza_crdttext_22 = $mol_type_enforce<
 		number
 		,
-		ReturnType< $mol_page['minimal_width'] >
+		ReturnType< $rise_bench_surface['minimal_width'] >
 	>
-	type $mol_page__body_rise_bench_baza_crdttext_22 = $mol_type_enforce<
+	type $rise_bench_surface__body_rise_bench_baza_crdttext_23 = $mol_type_enforce<
 		readonly(any)[]
 		,
-		ReturnType< $mol_page['body'] >
+		ReturnType< $rise_bench_surface['body'] >
 	>
 	export class $rise_bench_baza_crdttext extends $mol_book2 {
 		title( ): string
@@ -60688,14 +61009,14 @@ declare namespace $ {
 		Count_label( ): $mol_labeler
 		benchmark( next?: any ): any
 		Run( ): $mol_button_major
-		reset( next?: any ): any
-		Reset( ): $mol_button_minor
 		Menu( ): $mol_page
 		page_title( ): string
 		Metrics( ): $rise_bench_metrics
+		reset( next?: any ): any
+		Reset( ): $mol_button_minor
 		text( next?: string ): string
-		Editor( ): $mol_textarea
-		Page( ): $mol_page
+		Editor( ): $rise_bench_textarea
+		Page( ): $rise_bench_surface
 		menu_title( ): ReturnType< $rise_bench_baza_crdttext['title'] >
 		pages( ): readonly(any)[]
 	}
@@ -60768,8 +61089,36 @@ declare namespace $ {
         search(): Promise<number>;
         add(compact: boolean): Promise<void>;
         rows(): Promise<$rise_bench_idb_storage_product[]>;
+        change(index: number, field: keyof $rise_bench_idb_storage_product, value: string | number | boolean): Promise<void>;
         destructor(): void;
         close(): Promise<void>;
+    }
+}
+
+declare namespace $ {
+
+	export class $rise_bench_idb_table extends $rise_bench_baza_goods_table {
+		records( ): readonly($rise_bench_idb_storage_product)[]
+		change( id: any, next?: any ): any
+	}
+	
+}
+
+//# sourceMappingURL=table.view.tree.d.ts.map
+declare namespace $.$$ {
+    /** Same cards and virtualization; only field access differs from CRDT storage. */
+    class $rise_bench_idb_table extends $.$rise_bench_idb_table {
+        count(): number;
+        row_id(id: number): string;
+        row_title(id: number): string;
+        row_uri(id: number): string;
+        row_description(id: number): string;
+        row_tags(id: number): string[];
+        row_color(id: number, next?: string): string;
+        row_status(id: number, next?: string): string;
+        row_checked(id: number, next?: boolean): boolean;
+        row_quantity(id: number, next?: number): number;
+        row_moment(id: number, next?: $mol_time_moment): $mol_time_moment;
     }
 }
 
@@ -60872,60 +61221,200 @@ declare namespace $ {
 		,
 		ReturnType< $mol_button_major['enabled'] >
 	>
-	type $mol_button_minor__title_rise_bench_idb_15 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $mol_button_minor['title'] >
-	>
-	type $mol_button_minor__click_rise_bench_idb_16 = $mol_type_enforce<
-		ReturnType< $rise_bench_idb['reset'] >
-		,
-		ReturnType< $mol_button_minor['click'] >
-	>
-	type $mol_button_minor__enabled_rise_bench_idb_17 = $mol_type_enforce<
-		ReturnType< $rise_bench_idb['controls_enabled'] >
-		,
-		ReturnType< $mol_button_minor['enabled'] >
-	>
-	type $mol_page__title_rise_bench_idb_18 = $mol_type_enforce<
+	type $mol_page__title_rise_bench_idb_15 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_page['title'] >
 	>
-	type $mol_page__minimal_width_rise_bench_idb_19 = $mol_type_enforce<
+	type $mol_page__minimal_width_rise_bench_idb_16 = $mol_type_enforce<
 		number
 		,
 		ReturnType< $mol_page['minimal_width'] >
 	>
-	type $mol_page__body_rise_bench_idb_20 = $mol_type_enforce<
+	type $mol_page__body_rise_bench_idb_17 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_page['body'] >
 	>
-	type $rise_bench_metrics__operations_rise_bench_idb_21 = $mol_type_enforce<
+	type __rise_bench_idb_18 = $mol_type_enforce<
+		Parameters< $rise_bench_idb['body_scroll_top'] >[0]
+		,
+		Parameters< ReturnType< $rise_bench_idb['Page'] >['body_scroll_top'] >[0]
+	>
+	type $rise_bench_metrics__operations_rise_bench_idb_19 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $rise_bench_metrics['operations'] >
 	>
-	type $mol_grid__records_rise_bench_idb_22 = $mol_type_enforce<
-		ReturnType< $rise_bench_idb['rows'] >
+	type __rise_bench_idb_20 = $mol_type_enforce<
+		Parameters< $rise_bench_idb['search_query'] >[0]
 		,
-		ReturnType< $mol_grid['records'] >
+		Parameters< ReturnType< $rise_bench_idb['Search'] >['query'] >[0]
 	>
-	type $mol_page__title_rise_bench_idb_23 = $mol_type_enforce<
+	type $mol_search__hint_rise_bench_idb_21 = $mol_type_enforce<
 		string
 		,
-		ReturnType< $mol_page['title'] >
+		ReturnType< $mol_search['hint'] >
 	>
-	type $mol_page__minimal_width_rise_bench_idb_24 = $mol_type_enforce<
-		number
+	type $mol_search__enabled_rise_bench_idb_22 = $mol_type_enforce<
+		ReturnType< $rise_bench_idb['filters_enabled'] >
 		,
-		ReturnType< $mol_page['minimal_width'] >
+		ReturnType< $mol_search['enabled'] >
 	>
-	type $mol_page__body_rise_bench_idb_25 = $mol_type_enforce<
+	type $mol_labeler__title_rise_bench_idb_23 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_labeler['title'] >
+	>
+	type $mol_labeler__Content_rise_bench_idb_24 = $mol_type_enforce<
+		ReturnType< $rise_bench_idb['Search'] >
+		,
+		ReturnType< $mol_labeler['Content'] >
+	>
+	type $mol_select__enabled_rise_bench_idb_25 = $mol_type_enforce<
+		ReturnType< $rise_bench_idb['filters_enabled'] >
+		,
+		ReturnType< $mol_select['enabled'] >
+	>
+	type $mol_select__value_rise_bench_idb_26 = $mol_type_enforce<
+		ReturnType< $rise_bench_idb['color_filter'] >
+		,
+		ReturnType< $mol_select['value'] >
+	>
+	type $mol_select__dictionary_rise_bench_idb_27 = $mol_type_enforce<
+		({ 
+			'all': string,
+			'red': string,
+			'green': string,
+			'blue': string,
+		}) 
+		,
+		ReturnType< $mol_select['dictionary'] >
+	>
+	type $mol_labeler__title_rise_bench_idb_28 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_labeler['title'] >
+	>
+	type $mol_labeler__Content_rise_bench_idb_29 = $mol_type_enforce<
+		ReturnType< $rise_bench_idb['Color_filter'] >
+		,
+		ReturnType< $mol_labeler['Content'] >
+	>
+	type $mol_select__enabled_rise_bench_idb_30 = $mol_type_enforce<
+		ReturnType< $rise_bench_idb['filters_enabled'] >
+		,
+		ReturnType< $mol_select['enabled'] >
+	>
+	type $mol_select__value_rise_bench_idb_31 = $mol_type_enforce<
+		ReturnType< $rise_bench_idb['status_filter'] >
+		,
+		ReturnType< $mol_select['value'] >
+	>
+	type $mol_select__dictionary_rise_bench_idb_32 = $mol_type_enforce<
+		({ 
+			'all': string,
+			'minor': string,
+			'major': string,
+			'critical': string,
+		}) 
+		,
+		ReturnType< $mol_select['dictionary'] >
+	>
+	type $mol_labeler__title_rise_bench_idb_33 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_labeler['title'] >
+	>
+	type $mol_labeler__Content_rise_bench_idb_34 = $mol_type_enforce<
+		ReturnType< $rise_bench_idb['Status_filter'] >
+		,
+		ReturnType< $mol_labeler['Content'] >
+	>
+	type $mol_button_minor__title_rise_bench_idb_35 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_button_minor['title'] >
+	>
+	type $mol_button_minor__enabled_rise_bench_idb_36 = $mol_type_enforce<
+		ReturnType< $rise_bench_idb['controls_enabled'] >
+		,
+		ReturnType< $mol_button_minor['enabled'] >
+	>
+	type $mol_button_minor__click_rise_bench_idb_37 = $mol_type_enforce<
+		ReturnType< $rise_bench_idb['add_one'] >
+		,
+		ReturnType< $mol_button_minor['click'] >
+	>
+	type $mol_button_minor__title_rise_bench_idb_38 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_button_minor['title'] >
+	>
+	type $mol_button_minor__click_rise_bench_idb_39 = $mol_type_enforce<
+		ReturnType< $rise_bench_idb['reset'] >
+		,
+		ReturnType< $mol_button_minor['click'] >
+	>
+	type $mol_button_minor__enabled_rise_bench_idb_40 = $mol_type_enforce<
+		ReturnType< $rise_bench_idb['controls_enabled'] >
+		,
+		ReturnType< $mol_button_minor['enabled'] >
+	>
+	type $mol_view__sub_rise_bench_idb_41 = $mol_type_enforce<
 		readonly(any)[]
 		,
-		ReturnType< $mol_page['body'] >
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_view__sub_rise_bench_idb_42 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $rise_bench_idb_table__records_rise_bench_idb_43 = $mol_type_enforce<
+		ReturnType< $rise_bench_idb['products'] >
+		,
+		ReturnType< $rise_bench_idb_table['records'] >
+	>
+	type $rise_bench_idb_table__compact_rise_bench_idb_44 = $mol_type_enforce<
+		ReturnType< $rise_bench_idb['compact'] >
+		,
+		ReturnType< $rise_bench_idb_table['compact'] >
+	>
+	type $rise_bench_idb_table__query_rise_bench_idb_45 = $mol_type_enforce<
+		ReturnType< $rise_bench_idb['search_query'] >
+		,
+		ReturnType< $rise_bench_idb_table['query'] >
+	>
+	type $rise_bench_idb_table__color_filter_rise_bench_idb_46 = $mol_type_enforce<
+		ReturnType< $rise_bench_idb['color_filter'] >
+		,
+		ReturnType< $rise_bench_idb_table['color_filter'] >
+	>
+	type $rise_bench_idb_table__status_filter_rise_bench_idb_47 = $mol_type_enforce<
+		ReturnType< $rise_bench_idb['status_filter'] >
+		,
+		ReturnType< $rise_bench_idb_table['status_filter'] >
+	>
+	type $rise_bench_idb_table__change_rise_bench_idb_48 = $mol_type_enforce<
+		ReturnType< $rise_bench_idb['change'] >
+		,
+		ReturnType< $rise_bench_idb_table['change'] >
+	>
+	type $rise_bench_surface__title_rise_bench_idb_49 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $rise_bench_surface['title'] >
+	>
+	type $rise_bench_surface__minimal_width_rise_bench_idb_50 = $mol_type_enforce<
+		number
+		,
+		ReturnType< $rise_bench_surface['minimal_width'] >
+	>
+	type $rise_bench_surface__body_rise_bench_idb_51 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $rise_bench_surface['body'] >
 	>
 	export class $rise_bench_idb extends $mol_book2 {
 		title( ): string
@@ -60939,13 +61428,30 @@ declare namespace $ {
 		Count_label( ): $mol_labeler
 		benchmark( next?: any ): any
 		Run( ): $mol_button_major
+		Settings( ): $mol_page
+		body_scroll_top( next?: ReturnType< ReturnType< $rise_bench_idb['Page'] >['body_scroll_top'] > ): ReturnType< ReturnType< $rise_bench_idb['Page'] >['body_scroll_top'] >
+		Metrics( ): $rise_bench_metrics
+		filters_enabled( ): boolean
+		search_query( next?: ReturnType< ReturnType< $rise_bench_idb['Search'] >['query'] > ): ReturnType< ReturnType< $rise_bench_idb['Search'] >['query'] >
+		Search( ): $mol_search
+		Search_label( ): $mol_labeler
+		color_filter( next?: string ): string
+		Color_filter( ): $mol_select
+		Color_label( ): $mol_labeler
+		status_filter( next?: string ): string
+		Status_filter( ): $mol_select
+		Status_label( ): $mol_labeler
+		add_one( next?: any ): any
+		Add( ): $mol_button_minor
 		reset( next?: any ): any
 		Reset( ): $mol_button_minor
-		Settings( ): $mol_page
-		Metrics( ): $rise_bench_metrics
-		rows( ): readonly(any)[]
-		Table( ): $mol_grid
-		Page( ): $mol_page
+		Manual_actions( ): $mol_view
+		Manual( ): $mol_view
+		products( ): readonly($rise_bench_idb_storage_product)[]
+		compact( ): boolean
+		change( id: any, next?: any ): any
+		Table( ): $rise_bench_idb_table
+		Page( ): $rise_bench_surface
 		menu_title( ): ReturnType< $rise_bench_idb['title'] >
 		pages( ): readonly(any)[]
 	}
@@ -60961,15 +61467,13 @@ declare namespace $.$$ {
         dataset_name(next?: string): string;
         storage(): $rise_bench_idb_storage;
         revision(next?: number): number;
-        rows(): {
-            ID: string;
-            Название: string;
-            Цвет: string;
-            Статус: string;
-        }[];
+        products(): $rise_bench_idb_storage_product[];
         refresh(): void;
+        change(key: string, next?: string | number | boolean): string | number | boolean | null;
         reset(): void;
+        add_one(): void;
         controls_enabled(): boolean;
+        filters_enabled(): boolean;
         reload_store(): $rise_bench_reload<{
             name: string;
             count: number;
@@ -60983,6 +61487,9 @@ declare namespace $.$$ {
         resume_reload(): void;
         auto(): never[];
     }
+}
+
+declare namespace $ {
 }
 
 declare namespace $ {
@@ -61007,26 +61514,14 @@ declare namespace $ {
 		,
 		ReturnType< $rise_bench_host['kind'] >
 	>
-	type $rise_bench_host__title_rise_bench_5 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $rise_bench_host['title'] >
-	>
-	type $rise_bench_host__kind_rise_bench_6 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $rise_bench_host['kind'] >
-	>
 	export class $rise_bench extends $mol_book2_catalog {
 		Goods_host( ): $rise_bench_host
 		Text_host( ): $rise_bench_host
-		Idb_host( ): $rise_bench_host
 		placeholders( ): readonly(any)[]
 		param( ): string
 		spreads( ): ({ 
 			'$rise_bench_baza_goods': ReturnType< $rise_bench['Goods_host'] >,
 			'$rise_bench_baza_crdttext': ReturnType< $rise_bench['Text_host'] >,
-			'$rise_bench_idb': ReturnType< $rise_bench['Idb_host'] >,
 		}) 
 		Goods( ): $rise_bench_baza_goods
 		Crdttext( ): $rise_bench_baza_crdttext
@@ -61038,9 +61533,493 @@ declare namespace $ {
 //# sourceMappingURL=bench.view.tree.d.ts.map
 declare namespace $.$$ {
     class $rise_bench extends $.$rise_bench {
+        spread_ids(): readonly string[];
         Spread(id: string): $mol_view;
     }
 }
+
+declare namespace $ {
+
+	type $mol_switch__enabled_rise_bench_host_controls_1 = $mol_type_enforce<
+		ReturnType< $rise_bench_host_controls['enabled'] >
+		,
+		ReturnType< $mol_switch['enabled'] >
+	>
+	type $mol_switch__value_rise_bench_host_controls_2 = $mol_type_enforce<
+		ReturnType< $rise_bench_host_controls['engine'] >
+		,
+		ReturnType< $mol_switch['value'] >
+	>
+	type $mol_switch__options_rise_bench_host_controls_3 = $mol_type_enforce<
+		({ 
+			'goods': string,
+			'idb': string,
+		}) 
+		,
+		ReturnType< $mol_switch['options'] >
+	>
+	type $mol_labeler__title_rise_bench_host_controls_4 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_labeler['title'] >
+	>
+	type $mol_labeler__Content_rise_bench_host_controls_5 = $mol_type_enforce<
+		ReturnType< $rise_bench_host_controls['Engine'] >
+		,
+		ReturnType< $mol_labeler['Content'] >
+	>
+	type $mol_view__sub_rise_bench_host_controls_6 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_switch__enabled_rise_bench_host_controls_7 = $mol_type_enforce<
+		ReturnType< $rise_bench_host_controls['enabled'] >
+		,
+		ReturnType< $mol_switch['enabled'] >
+	>
+	type $mol_switch__value_rise_bench_host_controls_8 = $mol_type_enforce<
+		ReturnType< $rise_bench_host_controls['schema'] >
+		,
+		ReturnType< $mol_switch['value'] >
+	>
+	type $mol_switch__options_rise_bench_host_controls_9 = $mol_type_enforce<
+		({ 
+			'compact': string,
+			'full': string,
+		}) 
+		,
+		ReturnType< $mol_switch['options'] >
+	>
+	type $mol_labeler__title_rise_bench_host_controls_10 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_labeler['title'] >
+	>
+	type $mol_labeler__Content_rise_bench_host_controls_11 = $mol_type_enforce<
+		ReturnType< $rise_bench_host_controls['Schema'] >
+		,
+		ReturnType< $mol_labeler['Content'] >
+	>
+	type $mol_switch__enabled_rise_bench_host_controls_12 = $mol_type_enforce<
+		ReturnType< $rise_bench_host_controls['enabled'] >
+		,
+		ReturnType< $mol_switch['enabled'] >
+	>
+	type $mol_switch__value_rise_bench_host_controls_13 = $mol_type_enforce<
+		ReturnType< $rise_bench_host_controls['count'] >
+		,
+		ReturnType< $mol_switch['value'] >
+	>
+	type $mol_switch__options_rise_bench_host_controls_14 = $mol_type_enforce<
+		ReturnType< $rise_bench_host_controls['counts'] >
+		,
+		ReturnType< $mol_switch['options'] >
+	>
+	type $mol_labeler__title_rise_bench_host_controls_15 = $mol_type_enforce<
+		ReturnType< $rise_bench_host_controls['count_title'] >
+		,
+		ReturnType< $mol_labeler['title'] >
+	>
+	type $mol_labeler__Content_rise_bench_host_controls_16 = $mol_type_enforce<
+		ReturnType< $rise_bench_host_controls['Count'] >
+		,
+		ReturnType< $mol_labeler['Content'] >
+	>
+	type $rise_bench_textarea__length_max_rise_bench_host_controls_17 = $mol_type_enforce<
+		number
+		,
+		ReturnType< $rise_bench_textarea['length_max'] >
+	>
+	type $rise_bench_textarea__hint_rise_bench_host_controls_18 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $rise_bench_textarea['hint'] >
+	>
+	type $rise_bench_textarea__value_rise_bench_host_controls_19 = $mol_type_enforce<
+		ReturnType< $rise_bench_host_controls['computer'] >
+		,
+		ReturnType< $rise_bench_textarea['value'] >
+	>
+	type $rise_bench_textarea__enabled_rise_bench_host_controls_20 = $mol_type_enforce<
+		ReturnType< $rise_bench_host_controls['enabled'] >
+		,
+		ReturnType< $rise_bench_textarea['enabled'] >
+	>
+	type $mol_labeler__title_rise_bench_host_controls_21 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_labeler['title'] >
+	>
+	type $mol_labeler__Content_rise_bench_host_controls_22 = $mol_type_enforce<
+		ReturnType< $rise_bench_host_controls['Computer'] >
+		,
+		ReturnType< $mol_labeler['Content'] >
+	>
+	type $mol_button_major__title_rise_bench_host_controls_23 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_button_major['title'] >
+	>
+	type $mol_button_major__enabled_rise_bench_host_controls_24 = $mol_type_enforce<
+		ReturnType< $rise_bench_host_controls['enabled'] >
+		,
+		ReturnType< $mol_button_major['enabled'] >
+	>
+	type $mol_button_major__click_rise_bench_host_controls_25 = $mol_type_enforce<
+		ReturnType< $rise_bench_host_controls['run'] >
+		,
+		ReturnType< $mol_button_major['click'] >
+	>
+	type $mol_view__sub_rise_bench_host_controls_26 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_button_minor__title_rise_bench_host_controls_27 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_button_minor['title'] >
+	>
+	type $mol_button_minor__click_rise_bench_host_controls_28 = $mol_type_enforce<
+		ReturnType< $rise_bench_host_controls['retry'] >
+		,
+		ReturnType< $mol_button_minor['click'] >
+	>
+	export class $rise_bench_host_controls extends $mol_page {
+		engine( next?: string ): string
+		Engine( ): $mol_switch
+		Engine_label( ): $mol_labeler
+		storage_label( ): string
+		Storage_label( ): $mol_view
+		schema( next?: string ): string
+		Schema( ): $mol_switch
+		Schema_label( ): $mol_labeler
+		count_title( ): string
+		count( next?: string ): string
+		counts( ): Record<string, any>
+		Count( ): $mol_switch
+		Count_label( ): $mol_labeler
+		computer( next?: string ): string
+		Computer( ): $rise_bench_textarea
+		Computer_label( ): $mol_labeler
+		run( next?: any ): any
+		Run( ): $mol_button_major
+		status( ): string
+		Status( ): $mol_view
+		retry( next?: any ): any
+		Retry( ): $mol_button_minor
+		controls( ): readonly($mol_view)[]
+		title( ): string
+		minimal_width( ): number
+		kind( ): string
+		enabled( ): boolean
+		body( ): ReturnType< $rise_bench_host_controls['controls'] >
+		retry_visible( ): boolean
+	}
+	
+}
+
+//# sourceMappingURL=controls.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $rise_bench_host_controls extends $.$rise_bench_host_controls {
+        /** Persist the draft locally; each run takes its own immutable snapshot. */
+        computer(next?: string): string;
+        count_title(): "Количество строк" | "Количество записей";
+        counts(): {
+            [k: string]: string;
+        };
+        storage_label(): "CRDT-текст" | "IndexedDB через $mol_db, без индексов" | "Хранение: одна Area на запись";
+        controls(): $mol_view[];
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+    function $mol_coord_pack(high: number, low: number): number;
+    function $mol_coord_high(pack: number): number;
+    function $mol_coord_low(pack: number): number;
+}
+
+declare namespace $ {
+
+	type $mol_svg_path__geometry_mol_plot_dot_1 = $mol_type_enforce<
+		ReturnType< $mol_plot_dot['curve'] >
+		,
+		ReturnType< $mol_svg_path['geometry'] >
+	>
+	type $mol_plot_graph_sample__color_mol_plot_dot_2 = $mol_type_enforce<
+		ReturnType< $mol_plot_dot['color'] >
+		,
+		ReturnType< $mol_plot_graph_sample['color'] >
+	>
+	export class $mol_plot_dot extends $mol_plot_graph {
+		diameter( ): number
+		curve( ): string
+		Curve( ): $mol_svg_path
+		points_max( ): number
+		aspect( ): number
+		style( ): ({ 
+			'stroke-width': ReturnType< $mol_plot_dot['diameter'] >,
+		})  & ReturnType< $mol_plot_graph['style'] >
+		sub( ): readonly(any)[]
+		Sample( ): $mol_plot_graph_sample
+	}
+	
+}
+
+//# sourceMappingURL=dot.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $mol_plot_dot extends $.$mol_plot_dot {
+        filled(): Set<number>;
+        indexes(): number[];
+        curve(): string;
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	export class $rise_bench_charts_operation_plot extends $mol_plot_pane {
+	}
+	
+}
+
+//# sourceMappingURL=plot.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $rise_bench_charts_operation_plot extends $.$rise_bench_charts_operation_plot {
+        dimensions(): $mol_vector_2d<$mol_vector_range<number>>;
+    }
+}
+
+declare namespace $ {
+
+	type $mol_plot_graph_sample__sub_mol_plot_group_1 = $mol_type_enforce<
+		ReturnType< $mol_plot_group['graph_samples'] >
+		,
+		ReturnType< $mol_plot_graph_sample['sub'] >
+	>
+	export class $mol_plot_group extends $mol_plot_graph {
+		graphs( ): readonly($mol_plot_graph)[]
+		graphs_enriched( ): ReturnType< $mol_plot_group['graphs'] >
+		graph_samples( ): readonly($mol_view)[]
+		sub( ): ReturnType< $mol_plot_group['graphs_enriched'] >
+		Sample( ): $mol_plot_graph_sample
+	}
+	
+}
+
+//# sourceMappingURL=group.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $mol_plot_group extends $.$mol_plot_group {
+        graphs_enriched(): readonly $.$mol_plot_graph[];
+        dimensions(): $mol_vector_2d<$mol_vector_range<number>>;
+        graph_samples(): any[];
+        back(): $mol_plot_graph[];
+        front(): $mol_plot_graph[];
+    }
+}
+
+declare namespace $ {
+
+	export class $mol_plot_ruler_hor extends $mol_plot_ruler {
+		title_align( ): string
+		label_align( ): string
+		title_pos_x( ): string
+		title_pos_y( ): string
+		label_pos_y( id: any): ReturnType< $mol_plot_ruler_hor['title_pos_y'] >
+		background_width( ): string
+	}
+	
+}
+
+//# sourceMappingURL=hor.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $mol_plot_ruler_hor extends $.$mol_plot_ruler_hor {
+        dimensions_axis(): $mol_vector_range<number>;
+        viewport_axis(): $mol_vector_range<number>;
+        scale_axis(): number;
+        scale_step(): number;
+        shift_axis(): number;
+        curve(): string;
+        label_pos_x(index: number): string;
+        background_y(): string;
+        title_pos_y(): string;
+        background_height(): string;
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	type $mol_view__dom_name_rise_bench_charts_operation_1 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_view['dom_name'] >
+	>
+	type $mol_view__sub_rise_bench_charts_operation_2 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_view__sub_rise_bench_charts_operation_3 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_view__sub_rise_bench_charts_operation_4 = $mol_type_enforce<
+		ReturnType< $rise_bench_charts_operation['legends'] >
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_view__sub_rise_bench_charts_operation_5 = $mol_type_enforce<
+		ReturnType< $rise_bench_charts_operation['legend_content'] >
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_view__sub_rise_bench_charts_operation_6 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_view__sub_rise_bench_charts_operation_7 = $mol_type_enforce<
+		ReturnType< $rise_bench_charts_operation['legend_sample'] >
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $rise_bench_charts_operation_plot__hue_base_rise_bench_charts_operation_8 = $mol_type_enforce<
+		number
+		,
+		ReturnType< $rise_bench_charts_operation_plot['hue_base'] >
+	>
+	type $rise_bench_charts_operation_plot__graphs_rise_bench_charts_operation_9 = $mol_type_enforce<
+		ReturnType< $rise_bench_charts_operation['graphs'] >
+		,
+		ReturnType< $rise_bench_charts_operation_plot['graphs'] >
+	>
+	type $mol_plot_group__title_rise_bench_charts_operation_10 = $mol_type_enforce<
+		ReturnType< $rise_bench_charts_operation['series_title'] >
+		,
+		ReturnType< $mol_plot_group['title'] >
+	>
+	type $mol_plot_group__series_x_rise_bench_charts_operation_11 = $mol_type_enforce<
+		ReturnType< $rise_bench_charts_operation['series_x'] >
+		,
+		ReturnType< $mol_plot_group['series_x'] >
+	>
+	type $mol_plot_group__series_y_rise_bench_charts_operation_12 = $mol_type_enforce<
+		ReturnType< $rise_bench_charts_operation['series_y'] >
+		,
+		ReturnType< $mol_plot_group['series_y'] >
+	>
+	type $mol_plot_group__graphs_rise_bench_charts_operation_13 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_plot_group['graphs'] >
+	>
+	type $mol_plot_ruler_hor__title_rise_bench_charts_operation_14 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_plot_ruler_hor['title'] >
+	>
+	type $mol_plot_ruler_vert__title_rise_bench_charts_operation_15 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_plot_ruler_vert['title'] >
+	>
+	type $mol_view__sub_rise_bench_charts_operation_16 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	export class $rise_bench_charts_operation extends $mol_view {
+		content( ): readonly($mol_view)[]
+		legends( ): readonly($mol_view)[]
+		legend_content( id: any): readonly($mol_view_content)[]
+		series_title( id: any): string
+		legend_sample( id: any): readonly($mol_view)[]
+		graphs( ): readonly($mol_plot_graph)[]
+		series_x( id: any): readonly(number)[]
+		series_y( id: any): readonly(number)[]
+		Line( id: any): $mol_plot_line
+		Dots( id: any): $mol_plot_dot
+		operation( ): string
+		runs( ): readonly($rise_bench_run)[]
+		sub( ): ReturnType< $rise_bench_charts_operation['content'] >
+		Title( ): $mol_view
+		Empty( ): $mol_view
+		Legend( ): $mol_view
+		Legend_item( id: any): $mol_view
+		Legend_text( id: any): $mol_view
+		Legend_sample( id: any): $mol_view
+		Plot( ): $rise_bench_charts_operation_plot
+		Series( id: any): $mol_plot_group
+		X( ): $mol_plot_ruler_hor
+		Y( ): $mol_plot_ruler_vert
+		Note( ): $mol_view
+	}
+	
+}
+
+//# sourceMappingURL=operation.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $rise_bench_charts_operation extends $.$rise_bench_charts_operation {
+        groups(): {
+            title: string;
+            points: number[][];
+        }[];
+        content(): ($mol_view | $.$rise_bench_charts_operation_plot)[];
+        series_title(id: number): string;
+        series_x(id: number): number[];
+        series_y(id: number): number[];
+        graphs(): ($.$mol_plot_ruler_vert | $.$mol_plot_group | $.$mol_plot_ruler_hor)[];
+        legends(): $mol_view[];
+        legend_content(id: number): $mol_view[];
+        legend_sample(id: number): $mol_plot_graph_sample[];
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	type $rise_bench_charts_operation__operation_rise_bench_charts_1 = $mol_type_enforce<
+		ReturnType< $rise_bench_charts['operation'] >
+		,
+		ReturnType< $rise_bench_charts_operation['operation'] >
+	>
+	type $rise_bench_charts_operation__runs_rise_bench_charts_2 = $mol_type_enforce<
+		ReturnType< $rise_bench_charts['runs'] >
+		,
+		ReturnType< $rise_bench_charts_operation['runs'] >
+	>
+	export class $rise_bench_charts extends $mol_view {
+		charts( ): readonly($mol_view)[]
+		operation( id: any): string
+		runs( ): readonly($rise_bench_run)[]
+		operations( ): readonly(string)[]
+		sub( ): ReturnType< $rise_bench_charts['charts'] >
+		Chart( id: any): $rise_bench_charts_operation
+	}
+	
+}
+
+//# sourceMappingURL=charts.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $rise_bench_charts extends $.$rise_bench_charts {
+        charts(): $.$rise_bench_charts_operation[];
+        operation(index: number): string;
+    }
+}
+
+declare namespace $ { }
 
 declare namespace $ {
     /** Retain every seed Land until peer URLs have live reactive consumers. */
@@ -61051,72 +62030,202 @@ declare namespace $ {
 
 declare namespace $ {
 
-	type $mol_view__sub_rise_bench_host_1 = $mol_type_enforce<
-		readonly(any)[]
+	type $rise_bench_host_controls__kind_rise_bench_host_1 = $mol_type_enforce<
+		ReturnType< $rise_bench_host['kind'] >
 		,
-		ReturnType< $mol_view['sub'] >
+		ReturnType< $rise_bench_host_controls['kind'] >
 	>
-	type $mol_button_minor__title_rise_bench_host_2 = $mol_type_enforce<
-		string
+	type $rise_bench_host_controls__enabled_rise_bench_host_2 = $mol_type_enforce<
+		ReturnType< $rise_bench_host['controls_enabled'] >
 		,
-		ReturnType< $mol_button_minor['title'] >
+		ReturnType< $rise_bench_host_controls['enabled'] >
 	>
-	type $mol_button_minor__click_rise_bench_host_3 = $mol_type_enforce<
+	type $rise_bench_host_controls__engine_rise_bench_host_3 = $mol_type_enforce<
+		ReturnType< $rise_bench_host['engine'] >
+		,
+		ReturnType< $rise_bench_host_controls['engine'] >
+	>
+	type $rise_bench_host_controls__count_rise_bench_host_4 = $mol_type_enforce<
+		ReturnType< $rise_bench_host['count'] >
+		,
+		ReturnType< $rise_bench_host_controls['count'] >
+	>
+	type $rise_bench_host_controls__schema_rise_bench_host_5 = $mol_type_enforce<
+		ReturnType< $rise_bench_host['schema'] >
+		,
+		ReturnType< $rise_bench_host_controls['schema'] >
+	>
+	type $rise_bench_host_controls__run_rise_bench_host_6 = $mol_type_enforce<
+		ReturnType< $rise_bench_host['run'] >
+		,
+		ReturnType< $rise_bench_host_controls['run'] >
+	>
+	type $rise_bench_host_controls__status_rise_bench_host_7 = $mol_type_enforce<
+		ReturnType< $rise_bench_host['status'] >
+		,
+		ReturnType< $rise_bench_host_controls['status'] >
+	>
+	type $rise_bench_host_controls__retry_visible_rise_bench_host_8 = $mol_type_enforce<
+		ReturnType< $rise_bench_host['retry_visible'] >
+		,
+		ReturnType< $rise_bench_host_controls['retry_visible'] >
+	>
+	type $rise_bench_host_controls__retry_rise_bench_host_9 = $mol_type_enforce<
 		ReturnType< $rise_bench_host['retry'] >
 		,
-		ReturnType< $mol_button_minor['click'] >
+		ReturnType< $rise_bench_host_controls['retry'] >
 	>
-	type $rise_bench_metrics__operations_rise_bench_host_4 = $mol_type_enforce<
+	type $mol_switch__value_rise_bench_host_10 = $mol_type_enforce<
+		ReturnType< $rise_bench_host['mode'] >
+		,
+		ReturnType< $mol_switch['value'] >
+	>
+	type $mol_switch__options_rise_bench_host_11 = $mol_type_enforce<
+		({ 
+			'table': string,
+			'charts': string,
+		}) 
+		,
+		ReturnType< $mol_switch['options'] >
+	>
+	type $rise_bench_metrics__operations_rise_bench_host_12 = $mol_type_enforce<
 		ReturnType< $rise_bench_host['operations'] >
 		,
 		ReturnType< $rise_bench_metrics['operations'] >
 	>
-	type $rise_bench_metrics__runs_rise_bench_host_5 = $mol_type_enforce<
+	type $rise_bench_metrics__runs_rise_bench_host_13 = $mol_type_enforce<
 		ReturnType< $rise_bench_host['runs'] >
 		,
 		ReturnType< $rise_bench_metrics['runs'] >
 	>
-	type $mol_frame__uri_rise_bench_host_6 = $mol_type_enforce<
+	type $rise_bench_metrics__compare_rise_bench_host_14 = $mol_type_enforce<
+		ReturnType< $rise_bench_host['compare'] >
+		,
+		ReturnType< $rise_bench_metrics['compare'] >
+	>
+	type $rise_bench_metrics__text_mode_rise_bench_host_15 = $mol_type_enforce<
+		ReturnType< $rise_bench_host['text_mode'] >
+		,
+		ReturnType< $rise_bench_metrics['text_mode'] >
+	>
+	type $mol_scroll__sub_rise_bench_host_16 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_scroll['sub'] >
+	>
+	type $mol_frame__uri_rise_bench_host_17 = $mol_type_enforce<
 		ReturnType< $rise_bench_host['fixture_uri'] >
 		,
 		ReturnType< $mol_frame['uri'] >
 	>
-	type $mol_frame__clipboard_read_rise_bench_host_7 = $mol_type_enforce<
+	type $mol_frame__clipboard_read_rise_bench_host_18 = $mol_type_enforce<
 		boolean
 		,
 		ReturnType< $mol_frame['clipboard_read'] >
 	>
-	type $mol_frame__clipboard_write_rise_bench_host_8 = $mol_type_enforce<
+	type $mol_frame__clipboard_write_rise_bench_host_19 = $mol_type_enforce<
 		boolean
 		,
 		ReturnType< $mol_frame['clipboard_write'] >
 	>
-	export class $rise_bench_host extends $mol_page {
+	type $mol_frame__attr_rise_bench_host_20 = $mol_type_enforce<
+		({ 
+			'inert': ReturnType< $rise_bench_host['busy'] >,
+		})  & ReturnType< $mol_frame['attr'] >
+		,
+		ReturnType< $mol_frame['attr'] >
+	>
+	type $mol_page__title_rise_bench_host_21 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_page['title'] >
+	>
+	type $mol_page__minimal_width_rise_bench_host_22 = $mol_type_enforce<
+		number
+		,
+		ReturnType< $mol_page['minimal_width'] >
+	>
+	type $mol_page__tools_rise_bench_host_23 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_page['tools'] >
+	>
+	type $mol_page__body_rise_bench_host_24 = $mol_type_enforce<
+		ReturnType< $rise_bench_host['results_body'] >
+		,
+		ReturnType< $mol_page['body'] >
+	>
+	type $rise_bench_charts__runs_rise_bench_host_25 = $mol_type_enforce<
+		ReturnType< $rise_bench_host['runs'] >
+		,
+		ReturnType< $rise_bench_charts['runs'] >
+	>
+	type $rise_bench_charts__operations_rise_bench_host_26 = $mol_type_enforce<
+		ReturnType< $rise_bench_host['operations'] >
+		,
+		ReturnType< $rise_bench_charts['operations'] >
+	>
+	export class $rise_bench_host extends $mol_book2 {
+		controls_enabled( ): boolean
+		engine( next?: string ): string
+		count( next?: string ): string
+		schema( next?: string ): string
+		run( next?: any ): any
 		status( next?: string ): string
-		Status( ): $mol_view
+		retry_visible( ): boolean
 		retry( next?: any ): any
-		Retry( ): $mol_button_minor
+		Controls( ): $rise_bench_host_controls
+		mode( next?: string ): string
+		Mode( ): $mol_switch
 		operations( ): readonly(string)[]
 		runs( ): readonly($rise_bench_run)[]
+		compare( ): boolean
+		text_mode( ): boolean
 		Metrics( ): $rise_bench_metrics
+		History( ): $mol_scroll
 		fixture_uri( ): string
+		busy( ): boolean
 		Frame( ): $mol_frame
+		results_body( ): readonly($mol_view)[]
+		Results( ): $mol_page
 		kind( ): string
-		minimal_width( ): number
-		body( ): readonly(any)[]
+		pages( ): readonly(any)[]
+		Charts( ): $rise_bench_charts
 	}
 	
 }
 
 //# sourceMappingURL=host.view.tree.d.ts.map
 declare namespace $.$$ {
-    class $rise_bench_host extends $.$rise_bench_host {
+    type $rise_bench_host_pending = $rise_bench_archive_row & {
+        kind?: string;
+    };
+    export class $rise_bench_host extends $.$rise_bench_host {
+        menu_title(): string;
+        compare(): boolean;
+        text_mode(): boolean;
+        mode(next?: string): "charts" | "table";
+        fixture_kind(): string;
+        engine(next?: string): "idb" | "goods";
+        count(next?: string): string;
+        schema(next?: string): "full" | "compact";
+        ready(next?: boolean): boolean;
+        busy(next?: boolean): boolean;
+        controls_enabled(): boolean;
+        config(): {
+            count: string;
+            schema: string;
+        };
+        send(command: string, data: object): void;
+        run(): void;
         operations(): string[];
         fixture_uri(): string;
         runs(): $rise_bench_run[];
-        body(): ($mol_view | $.$mol_frame | $.$rise_bench_metrics)[];
-        outbox(next?: readonly $rise_bench_archive_row[]): readonly $rise_bench_archive_row[];
-        accept(row: $rise_bench_archive_row): void;
+        pages(): readonly any[];
+        results_body(): ($.$mol_scroll | $.$mol_frame | $.$rise_bench_charts)[];
+        retry_visible(): boolean;
+        outbox(next?: readonly $rise_bench_host_pending[]): readonly $rise_bench_host_pending[];
+        accept(row: $rise_bench_archive_row, kind: string): void;
         retry(): void;
         private restored;
         restore_outbox(): void;
@@ -61125,6 +62234,7 @@ declare namespace $.$$ {
         };
         auto(): never[];
     }
+    export {};
 }
 
 declare namespace $ {
@@ -63485,24 +64595,6 @@ declare namespace $.$$ {
 
 declare namespace $ {
 
-	export class $mol_icon_information extends $mol_icon {
-		path( ): string
-	}
-	
-}
-
-//# sourceMappingURL=information.view.tree.d.ts.map
-declare namespace $ {
-
-	export class $mol_icon_information_outline extends $mol_icon {
-		path( ): string
-	}
-	
-}
-
-//# sourceMappingURL=outline.view.tree.d.ts.map
-declare namespace $ {
-
 	export class $mol_icon_forum extends $mol_icon {
 		path( ): string
 	}
@@ -64048,6 +65140,25 @@ declare namespace $ {
 }
 
 //# sourceMappingURL=demo.view.tree.d.ts.map
+declare namespace $.$$ {
+    /** Commands carry settings only; the online host never instantiates datasets. */
+    class $rise_bench_fixture extends $mol_object {
+        readonly kind: string;
+        readonly bench: $rise_bench_baza_goods | $rise_bench_baza_crdttext | $rise_bench_idb;
+        constructor(kind: string, bench: $rise_bench_baza_goods | $rise_bench_baza_crdttext | $rise_bench_idb);
+        private readonly completed;
+        active(next?: string | null): string | null;
+        listener(): $mol_dom_listener;
+        configure(data: {
+            count?: string;
+            schema?: string;
+        }): void;
+        receive(event: MessageEvent): void;
+        private last_state;
+        report(): void;
+    }
+}
+
 declare namespace $ {
     class $rise_storage extends $mol_object {
         static configure(): boolean;
@@ -64101,6 +65212,7 @@ declare namespace $.$$ {
     class $rise_app extends $.$rise_app {
         fixture_kind(): string | null;
         fixture(): $.$rise_bench_baza_goods | $.$rise_bench_baza_crdttext | $.$rise_bench_idb | $rise_demo | null;
+        bridge(): $rise_bench_fixture | null;
         pages(): readonly any[];
         auto(): any;
     }
