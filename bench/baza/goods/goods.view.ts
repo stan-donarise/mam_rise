@@ -42,8 +42,7 @@ namespace $.$$ {
 		}
 
 		@ $mol_action
-		prepare_product( state: $rise_bench_baza_goods_preparation, index: number ) {
-			const product = $mol_wire_sync( state.dataset.Products()! ).make( state.dataset.land() )
+		fill_product( state: $rise_bench_baza_goods_preparation, index: number, product: $rise_bench_baza_goods_product ) {
 			product.Id( null )!.val( String( index ).padStart( 5, '0' ) )
 			product.Title( null )!.val( $rise_bench_baza_goods_product_name( index ) )
 			product.Color( null )!.val( [ 'red', 'green', 'blue' ][ index % 3 ] )
@@ -68,7 +67,9 @@ namespace $.$$ {
 			const [ state, index ] = key
 			// This initializer is only invoked by Create. A completed record has no
 			// remaining write dependencies and is never recreated on async replay.
-			return state.products[ index ] ??= this.prepare_product( state, index )
+			if( state.products[ index ] ) return state.products[ index ]
+			const product = $mol_wire_sync( state.dataset.land() ).area_make().Data( $rise_bench_baza_goods_product )
+			return state.products[ index ] = this.fill_product( state, index, product )
 		}
 
 		@ $mol_mem
@@ -129,7 +130,8 @@ namespace $.$$ {
 			const dataset = this.dataset() ?? $mol_wire_sync( this ).prepare_dataset( this.dataset_config() ).dataset
 			// Freeze the insertion index before any writes or suspension.
 			const state = $mol_wire_sync( this ).prepare_append( dataset )
-			$mol_wire_sync( this ).prepare_product( state, state.count )
+			const product = $mol_wire_sync( dataset.Products()! ).make( dataset.land() )
+			$mol_wire_sync( this ).fill_product( state, state.count, product )
 			this.dataset_link( dataset.link().str )
 			this.body_scroll_top( 0 )
 			total.finish()
@@ -151,6 +153,9 @@ namespace $.$$ {
 			const total = new ( $mol_wire_sync( $rise_bench_measure ) )( 'Создание набора: всего', this.record_count() )
 			const state = $mol_wire_sync( this ).prepare_dataset( this.dataset_config() )
 			for( let index = 0; index < state.count; ++index ) this.initialize_product( [ state, index ] )
+			// Publish once, after all Areas are filled. Publishing on each make()
+			// forces the next Area to save an increasingly large parent list.
+			$mol_wire_sync( state.dataset.Products()! ).items( state.links ??= state.products.map( product => product.link() ) )
 			this.dataset_link( state.dataset.link().str )
 			total.finish()
 			return total.duration!

@@ -3,6 +3,7 @@ namespace $ {
 	// A stable host identity: wire must not serialize a growing products array as a task argument.
 	export class $rise_bench_baza_goods_preparation {
 		readonly products: $rise_bench_baza_goods_product[] = []
+		links?: $giper_baza_link[]
 		readonly date = new $mol_time_moment( '2026-10-05' )
 		readonly tag_links: $giper_baza_link[][] = []
 

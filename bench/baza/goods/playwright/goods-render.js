@@ -136,6 +136,12 @@ async function main() {
 		await page.evaluate( ()=> {
 			const app = globalThis.$.$rise_app.Root( 0 ).Bench().Goods()
 			const trace = []
+			const fill = app.fill_product
+			app.fill_product = function( state, index, product ) {
+				const count = state.dataset.Products().items().length
+				if( count !== ( index < 500 ? 0 : 501 ) ) throw new Error( 'Bulk references must be published only after initialization; single make must append immediately' )
+				return fill.call( this, state, index, product )
+			}
 			for( const name of [ 'create', 'save_dataset', 'benchmark_search', 'add_one' ] ) {
 				const original = app[ name ]
 				let entry
