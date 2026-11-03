@@ -19,12 +19,13 @@ $rise_bench_baza_goods $mol_book2
 					enabled <= controls_enabled
 					value? <=> count_mode? \1000
 					options *
+						100 \100
 						500 \500
 						1000 \1000
 						2000 \2000
 						3000 \3000
 						4000 \4000
-						8000 \8000
+						5000 \5000
 						10000 \10000
 			<= Actions $mol_view
 				sub /
