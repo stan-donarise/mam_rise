@@ -1,0 +1,16 @@
+$rise_bench_host $mol_page
+	kind \goods
+	minimal_width 640
+	body /
+		<= Status $mol_view
+			sub / <= status? \
+		<= Retry $mol_button_minor
+			title \Повторить сохранение
+			click? <=> retry? null
+		<= Metrics $rise_bench_metrics
+			operations <= operations /string
+			runs <= runs /$rise_bench_run
+		<= Frame $mol_frame
+			uri <= fixture_uri \
+			clipboard_read false
+			clipboard_write false

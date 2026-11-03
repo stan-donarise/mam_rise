@@ -1,0 +1,52 @@
+$rise_bench_idb $mol_book2
+	menu_title <= title \Сущности IDB
+	pages /
+		<= Settings $mol_page
+			title \Настройки IDB
+			minimal_width 320
+			body /
+				<= Storage_label $mol_view
+					sub / \Хранение: IndexedDB через $mol_db, без индексов
+				<= Schema_label $mol_labeler
+					title \Состав записи
+					Content <= Schema $mol_switch
+						value? <=> schema_mode? \compact
+						enabled <= controls_enabled true
+						options *
+							compact \4 свойства
+							full \10 свойств
+				<= Count_label $mol_labeler
+					title \Количество записей
+					Content <= Count $mol_switch
+						value? <=> count_mode? \100
+						enabled <= controls_enabled
+						options *
+							100 \100
+							500 \500
+							1000 \1000
+							2000 \2000
+							3000 \3000
+							4000 \4000
+							5000 \5000
+							10000 \10000
+				<= Run $mol_button_major
+					title \Запустить бенчмарк
+					click? <=> benchmark? null
+					enabled <= controls_enabled
+				<= Reset $mol_button_minor
+					title \Очистить
+					click? <=> reset? null
+					enabled <= controls_enabled
+		<= Page $mol_page
+			title \IndexedDB
+			minimal_width 640
+			body /
+				<= Metrics $rise_bench_metrics
+					operations /
+						\Создание, с
+						\Поиск, с
+						\Добавить 1, с
+						\F5, с
+						\Поиск после F5, с
+				<= Table $mol_grid
+					records <= rows /any

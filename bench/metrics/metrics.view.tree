@@ -1,4 +1,7 @@
 $rise_bench_metrics $mol_grid
+	attr *
+		^
+		embedded <= embedded false
 	runs? /$rise_bench_run
 	run_add? null
 	operations /string

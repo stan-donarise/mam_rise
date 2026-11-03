@@ -1,7 +1,9 @@
 $rise_app $mol_book2_catalog
 	menu_title \$rise
 	spreads *
-		demo <= Demo $rise_demo
-			menu_title \Demo
+		demo <= Demo_host $rise_bench_host
+			title \Demo
+			kind \demo
 		bench <= Bench $rise_bench
 			menu_title \Bench
+	Demo $rise_demo

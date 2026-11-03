@@ -2,5 +2,15 @@ $rise_bench $mol_book2_catalog
 	placeholders /
 	param \bench
 	spreads *
-		$rise_bench_baza_goods <= Goods $rise_bench_baza_goods
-		$rise_bench_baza_crdttext <= Crdttext $rise_bench_baza_crdttext
+		$rise_bench_baza_goods <= Goods_host $rise_bench_host
+			title \Сущности
+			kind \goods
+		$rise_bench_baza_crdttext <= Text_host $rise_bench_host
+			title \Текст
+			kind \text
+		$rise_bench_idb <= Idb_host $rise_bench_host
+			title \Сущности IDB
+			kind \idb
+	Goods $rise_bench_baza_goods
+	Crdttext $rise_bench_baza_crdttext
+	Idb $rise_bench_idb

@@ -92,7 +92,11 @@ namespace $.$$ {
 				run.metric( 'Добавить символ, с', appended / 1000 )
 				$mol_wire_sync( this ).save_document()
 				$mol_wire_sync( this ).request_reload( run )
-			}, error => { run.state( 'Ошибка' ); return error } )
+			}, error => {
+				run.state( 'Ошибка' )
+				this.reload_store().save( this.Metrics().runs(), this.Metrics().operations(), null )
+				return error
+			} )
 		}
 
 		@ $mol_action
@@ -115,7 +119,7 @@ namespace $.$$ {
 		restore_runs() {
 			if( this.runs_restored ) return
 			this.Metrics().runs( this.reload_store().snapshot.rows.map( row => {
-				const run = new $rise_bench_run( row.count, row.properties, row.stamp, row.baza_version ?? '—', row.benchmark_version ?? '—' )
+				const run = new $rise_bench_run( row.count, row.properties, row.stamp, row.baza_version ?? '—', row.benchmark_version ?? '—', row.id )
 				run.state( row.state )
 				for( const [ name, value ] of Object.entries( row.metrics ) ) if( value !== null ) run.metric( name, value )
 				return run

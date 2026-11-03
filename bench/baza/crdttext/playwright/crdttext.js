@@ -27,9 +27,9 @@ async function main() {
 		await openBenchmark( page, url )
 		await page.getByRole( 'link', { name: 'Bench', exact: true } ).click()
 		await page.getByRole( 'link', { name: 'Текст', exact: true } ).click()
-		assert.equal( await page.evaluate( ()=> globalThis.$.$rise_app.Root( 0 ).Bench().Crdttext().line_count() ), 100 )
 		const editor = page.locator( '[rise_bench_baza_crdttext_editor] textarea' )
 		await editor.waitFor()
+		await page.waitForFunction( ()=> globalThis.$?.$rise_app.Root( 0 ).Bench().Crdttext().line_count() === 100 )
 
 		let previousLink = ''
 		for( const [ index, lines ] of [ 500, 1000, 5000 ].entries() ) {
@@ -75,7 +75,7 @@ async function main() {
 			assert.equal( metrics.length, index + 1 )
 			assert.equal( metrics[ 0 ][ 'Объём' ], lines )
 			assert.equal( metrics[ 0 ][ 'Версия Гипербазы' ], '2e6100b2' )
-			assert.equal( metrics[ 0 ][ 'Версия бенчмарка' ], '0.1.0' )
+			assert.equal( metrics[ 0 ][ 'Версия бенчмарка' ], '0.2.0' )
 			for( const column of [ 'Вставка, с', 'Добавить символ, с', 'F5, с' ] ) {
 				assert.match( metrics[ 0 ][ column ], /^\d+\.\d{3}$/ )
 				resultBenchmarkValue( `${lines} строк: ${column}`, Number( metrics[ 0 ][ column ] ), 's' )

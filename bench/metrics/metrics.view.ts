@@ -1,6 +1,7 @@
 namespace $.$$ {
 
 	export class $rise_bench_metrics extends $.$rise_bench_metrics {
+		embedded() { return window.parent !== window }
 
 		@ $mol_action
 		run_add( run: $rise_bench_run ) {

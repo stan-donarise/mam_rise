@@ -24,6 +24,7 @@ function observeOffline( page, target ) {
 
 function targetUrl() {
 	const url = new URL( process.env.RISE_TEST_URL || 'http://localhost:9080/rise/app/-/test.html' )
+	url.searchParams.set( 'rise_fixture', 'tests' )
 	// An explicit endpoint must not bypass Rise's local-only policy.
 	url.hash = '!giper_baza_yard_masters=' + encodeURIComponent( 'http://127.0.0.1:9/' )
 	return url.toString()
