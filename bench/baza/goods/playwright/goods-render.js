@@ -87,7 +87,7 @@ async function main() {
 		} )
 		assert.deepEqual( await fields(), changed )
 
-		resultStep( 'Создать 500 записей и проверить виртуализацию', [ '$rise_bench_baza_goods.create', '$rise_bench_baza_goods.initialize_products', '$rise_bench_baza_goods_table.rows' ] )
+		resultStep( 'Создать 500 записей и проверить виртуализацию', [ '$rise_bench_baza_goods.create', '$rise_bench_baza_goods.initialize_product', '$rise_bench_baza_goods_table.rows' ] )
 		await page.getByRole( 'button', { name: 'Сбросить', exact: true } ).click()
 		await page.getByRole( 'checkbox', { name: '4 свойства', exact: true } ).click()
 		await page.getByRole( 'checkbox', { name: '500', exact: true } ).click()
@@ -101,12 +101,12 @@ async function main() {
 		const metrics = await page.evaluate( ()=> globalThis.$.$rise_app.Root( 0 ).Bench().Goods().Metrics().records() )
 		assert.equal( metrics.length, 1 )
 		assert.equal( metrics[ 0 ][ 'Состояние' ], 'Готово' )
-		for( const column of [ 'Создание, с', 'Заполнение, с', 'Список, с', 'Поиск, с', 'Добавить 1, с' ] ) {
+		for( const column of [ 'Создание, с', 'Заполнение, с', 'Поиск, с', 'Добавить 1, с' ] ) {
 			assert.notEqual( metrics[ 0 ][ column ], '—' )
 			assert.ok( Number( metrics[ 0 ][ column ] ) >= 0 )
 			assert.match( metrics[ 0 ][ column ], /^\d+\.\d{3}$/ )
 		}
-		assert.equal( await page.locator( '[rise_bench_baza_goods_metrics] [mol_grid_col_head]' ).count(), 10 )
+		assert.equal( await page.locator( '[rise_bench_baza_goods_metrics] [mol_grid_col_head]' ).count(), 9 )
 		assert.equal( await page.getByRole( 'button', { name: 'Перестроить индексы', exact: true } ).count(), 0 )
 		const keys = await page.evaluate( ()=> globalThis.$.$mol_wire_async( ()=> globalThis.$.$rise_app.Root( 0 ).Bench().Goods().dataset().keys() )() )
 		assert.ok( !keys.includes( 'Color_index' ) && !keys.includes( 'Status_index' ) )

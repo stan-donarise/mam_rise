@@ -73,7 +73,6 @@ $rise_bench_baza_goods $mol_book2
 				operations /
 					\Создание, с
 					\Заполнение, с
-					\Список, с
 					\Поиск, с
 					\Добавить 1, с
 			<= Table $rise_bench_baza_goods_table

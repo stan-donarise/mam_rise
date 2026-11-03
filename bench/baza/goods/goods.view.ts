@@ -43,7 +43,7 @@ namespace $.$$ {
 
 		@ $mol_action
 		prepare_product( state: $rise_bench_baza_goods_preparation, index: number ) {
-			const product = $mol_wire_sync( state.dataset.land() ).area_make( index + 1 ).Data( $rise_bench_baza_goods_product )
+			const product = $mol_wire_sync( state.dataset.Products()! ).make( state.dataset.land() )
 			product.Id( null )!.val( String( index ).padStart( 5, '0' ) )
 			product.Title( null )!.val( $rise_bench_baza_goods_product_name( index ) )
 			product.Color( null )!.val( [ 'red', 'green', 'blue' ][ index % 3 ] )
@@ -69,25 +69,6 @@ namespace $.$$ {
 			// This initializer is only invoked by Create. A completed record has no
 			// remaining write dependencies and is never recreated on async replay.
 			return state.products[ index ] ??= this.prepare_product( state, index )
-		}
-
-		@ $mol_mem_key
-		initialize_products( key: readonly [ $rise_bench_baza_goods_preparation, number, number ] ): boolean {
-			const [ state, from, to ] = key
-			if( to - from <= 32 ) {
-				for( let index = from; index < to; ++index ) this.initialize_product( [ state, index ] )
-			} else {
-				const middle = Math.floor( ( from + to ) / 2 )
-				this.initialize_products( [ state, from, middle ] )
-				this.initialize_products( [ state, middle, to ] )
-			}
-			return true
-		}
-
-		@ $mol_action
-		initialize_links( list: $giper_baza_list_link, links: readonly $giper_baza_link[] ) {
-			const init = new ( $mol_wire_sync( $rise_bench_baza_goods_initialization ) )( list, links )
-			$mol_wire_sync( init ).run()
 		}
 
 		@ $mol_mem
@@ -144,8 +125,7 @@ namespace $.$$ {
 			const dataset = this.dataset() ?? $mol_wire_sync( this ).prepare_dataset( this.dataset_config() ).dataset
 			// Freeze the insertion index before any writes or suspension.
 			const state = $mol_wire_sync( this ).prepare_append( dataset )
-			const product = $mol_wire_sync( this ).prepare_product( state, state.count )
-			$mol_wire_sync( dataset.Products()! ).splice( state.links ??= [ product.link() ] )
+			$mol_wire_sync( this ).prepare_product( state, state.count )
 			this.dataset_link( dataset.link().str )
 			this.body_scroll_top( 0 )
 		}
@@ -165,15 +145,11 @@ namespace $.$$ {
 			const total = new ( $mol_wire_sync( $rise_bench_measure ) )( 'Создание набора: всего', this.record_count() )
 			const state = $mol_wire_sync( this ).prepare_dataset( this.dataset_config() )
 			const records = new ( $mol_wire_sync( $rise_bench_measure ) )( 'Заполнение товаров', state.count )
-			this.initialize_products( [ state, 0, state.count ] )
+			for( let index = 0; index < state.count; ++index ) this.initialize_product( [ state, index ] )
 			records.finish()
-			const links = new ( $mol_wire_sync( $rise_bench_measure ) )( 'Публикация списка', state.count )
-			// Publish only fully initialized records.
-			this.initialize_links( state.dataset.Products()!, state.links ??= state.products.map( product => product.link() ) )
-			links.finish()
 			this.dataset_link( state.dataset.link().str )
 			total.finish()
-			return { total: total.duration!, records: records.duration!, links: links.duration! }
+			return { total: total.duration!, records: records.duration! }
 		}
 
 		@ $mol_action
@@ -197,7 +173,6 @@ namespace $.$$ {
 				const created = $mol_wire_sync( this ).create()
 				run.metric( 'Создание, с', created.total / 1000 )
 				run.metric( 'Заполнение, с', created.records / 1000 )
-				run.metric( 'Список, с', created.links / 1000 )
 				const search = new ( $mol_wire_sync( $rise_bench_measure ) )( 'Поиск' )
 				if( $mol_wire_sync( this ).benchmark_search() !== 1 ) throw new Error( 'Поиск должен найти один товар' )
 				search.finish()
