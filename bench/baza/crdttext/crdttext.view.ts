@@ -6,7 +6,7 @@ namespace $.$$ {
 		@ $mol_mem
 		count_mode( next?: string ) {
 			const count = $mol_state_arg.value( 'lines', next )
-			return count && Object.hasOwn( this.Count().options(), count ) ? count : '500'
+			return count && Object.hasOwn( this.Count().options(), count ) ? count : '100'
 		}
 		line_count() { return Number( this.count_mode() ) }
 		page_title() { return `CRDT-текст: ${ this.line_count() } строк` }
@@ -58,13 +58,15 @@ namespace $.$$ {
 		}
 
 		@ $mol_action
-		appended_text() { return this.text() + '!' }
+		appended_text() { return '!' + this.text() }
 
 		@ $mol_action
 		append_one() {
 			const measure = new ( $mol_wire_sync( $rise_bench_measure ) )( 'Добавление символа' )
 			const next = $mol_wire_sync( this ).appended_text()
 			$mol_wire_sync( this ).write_text( next )
+			const ready = new ( $mol_wire_sync( $rise_bench_baza_crdttext_render_ready ) )( this.Editor(), next, this.Page() )
+			$mol_wire_sync( ready ).wait()
 			measure.finish()
 			return measure.duration!
 		}
@@ -141,9 +143,9 @@ namespace $.$$ {
 			if( !ticket ) return
 			const run = this.Metrics().runs()[ 0 ]
 			return $mol_error_fence( ()=> {
-				const expected = this.sample_text( ticket.count ) + '!'
+				const expected = '!' + this.sample_text( ticket.count )
 				if( this.text_link() !== ticket.link || this.text() !== expected ) throw new Error( 'После F5 открыт другой или неполный CRDT-текст' )
-				const ready = new ( $mol_wire_sync( $rise_bench_baza_crdttext_reload_ready ) )()
+				const ready = new ( $mol_wire_sync( $rise_bench_baza_crdttext_render_ready ) )( this.Editor(), expected, this.Page() )
 				const finished = $mol_wire_sync( ready ).wait()
 				if( ( this.Editor().Edit().dom_node() as HTMLTextAreaElement ).value !== expected ) throw new Error( 'После F5 текст не появился в textarea' )
 				run.metric( 'F5, с', ( finished - ticket.started ) / 1000 )

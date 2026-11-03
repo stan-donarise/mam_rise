@@ -26,7 +26,8 @@ async function main() {
 		resultStep( 'Открыть CRDT-текст в каталоге', [ '$rise_bench.Crdttext' ] )
 		await openBenchmark( page, url )
 		await page.getByRole( 'link', { name: 'Bench', exact: true } ).click()
-		await page.getByRole( 'link', { name: '$rise_bench_baza_crdttext', exact: true } ).click()
+		await page.getByRole( 'link', { name: 'Текст', exact: true } ).click()
+		assert.equal( await page.evaluate( ()=> globalThis.$.$rise_app.Root( 0 ).Bench().Crdttext().line_count() ), 100 )
 		const editor = page.locator( '[rise_bench_baza_crdttext_editor] textarea' )
 		await editor.waitFor()
 
@@ -44,6 +45,8 @@ async function main() {
 					const duration = original.apply( this, args )
 					trace.end = performance.now()
 					trace.duration = duration
+					const value = this.Editor().Edit().dom_node().value
+					trace.rendered = value.startsWith( '!' ) && this.Editor().View().Row( 1 ).dom_node().textContent.includes( '!Строка 1:' )
 					return duration
 				}
 				const reload = app.request_reload
@@ -63,8 +66,8 @@ async function main() {
 			assert.ok( navigations > before, 'The benchmark must reload the whole page' )
 			const content = await editor.inputValue()
 			assert.equal( content.split( '\n' ).length, lines )
-			assert.ok( content.startsWith( 'Строка 1:' ) && content.includes( `Строка ${lines}:` ) )
-			assert.ok( content.endsWith( '.!' ) && !content.endsWith( '!!' ), 'Exactly one symbol must be appended across replay' )
+			assert.ok( content.startsWith( '!Строка 1:' ) && content.includes( `Строка ${lines}:` ) )
+			assert.ok( !content.startsWith( '!!' ) && content.endsWith( '.' ), 'Exactly one symbol must be inserted at the beginning across replay' )
 			const link = await page.evaluate( ()=> globalThis.$.$rise_app.Root( 0 ).Bench().Crdttext().text_link() )
 			assert.notEqual( link, previousLink, 'Each run must use a fresh Land' )
 			previousLink = link
@@ -78,6 +81,8 @@ async function main() {
 			assert.ok( !Object.hasOwn( metrics[ 0 ], 'Скорость, симв./с' ) )
 			const timing = await page.evaluate( ()=> JSON.parse( sessionStorage.getItem( 'rise-crdt-append-timing' ) ) )
 			assert.equal( metrics[ 0 ][ 'Добавить символ, с' ], ( timing.duration / 1000 ).toFixed( 3 ) )
+			assert.ok( timing.rendered, 'The symbol must be present in both native textarea and rendered text before the measured call returns' )
+			assert.ok( timing.attempts > 1, 'The measurement must await actual rendering, not only the synchronous CRDT write' )
 			assert.ok( Math.abs( timing.end - timing.start - timing.duration ) < 10, 'Reported append time must cover the complete native call including replay' )
 			console.log( 'Append timing check', JSON.stringify( timing ) )
 			console.log( 'CRDT metrics', JSON.stringify( metrics[ 0 ] ) )
@@ -85,8 +90,9 @@ async function main() {
 		const expected = await editor.inputValue()
 		const completed = await page.evaluate( ()=> globalThis.$.$rise_app.Root( 0 ).Bench().Crdttext().Metrics().records() )
 		assert.equal( await page.locator( '[rise_bench_baza_crdttext_metrics] [mol_grid_col_head]' ).count(), 8 )
+		await page.locator( '[rise_bench_baza_crdttext_metrics]' ).scrollIntoViewIfNeeded()
 		console.log( '[metrics screenshot]', await screenshot( page, 'crdttext-metrics.png' ) )
-		assert.ok( expected.startsWith( 'Строка 1:' ) )
+		assert.ok( expected.startsWith( '!Строка 1:' ) )
 		assert.ok( expected.includes( 'Строка 1000:' ) )
 		resultStep( 'Проверить CRDT-хранение и F5', [ '$rise_bench_baza_crdttext.document', '$rise_bench_baza_crdttext.text_link' ] )
 		assert.equal( await page.evaluate( ()=> {

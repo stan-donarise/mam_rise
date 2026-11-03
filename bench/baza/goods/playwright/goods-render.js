@@ -34,7 +34,11 @@ async function main() {
 		resultStep( 'Открыть бенчмарк через каталог', [ '$rise_bench', '$rise_bench_baza_goods' ] )
 		await openBenchmark( page, url )
 		await page.getByRole( 'link', { name: 'Bench', exact: true } ).click()
-		await page.getByRole( 'link', { name: '$rise_bench_baza_goods', exact: true } ).click()
+		await page.getByRole( 'link', { name: 'Сущности', exact: true } ).click()
+		assert.deepEqual( await page.evaluate( ()=> {
+			const app = globalThis.$.$rise_app.Root( 0 ).Bench().Goods()
+			return [ app.record_count(), app.compact_mode() ]
+		} ), [ 100, true ] )
 		await page.getByRole( 'button', { name: 'Добавить запись', exact: true } ).waitFor()
 		assert.equal( await page.locator( '[rise_bench_baza_goods_storage]' ).count(), 0 )
 

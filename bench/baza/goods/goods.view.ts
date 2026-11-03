@@ -74,7 +74,7 @@ namespace $.$$ {
 
 		@ $mol_mem
 		schema_mode( next?: string ) {
-			return $mol_state_arg.value( 'schema', next ) === 'compact' ? 'compact' : 'full'
+			return $mol_state_arg.value( 'schema', next ) === 'full' ? 'full' : 'compact'
 		}
 
 		compact_mode() { return this.schema_mode() === 'compact' }
@@ -82,7 +82,7 @@ namespace $.$$ {
 		@ $mol_mem
 		count_mode( next?: string ) {
 			const count = $mol_state_arg.value( 'count', next )
-			return count && Object.hasOwn( this.Count().options(), count ) ? count : '1000'
+			return count && Object.hasOwn( this.Count().options(), count ) ? count : '100'
 		}
 
 		record_count() { return Number( this.count_mode() ) }

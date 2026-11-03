@@ -1,5 +1,5 @@
 $rise_bench_baza_goods $mol_book2
-	menu_title \$rise_bench_baza_goods
+	menu_title <= title \Сущности
 	pages <= content /$mol_view
 	Settings $mol_page
 		title \Настройки
@@ -9,7 +9,7 @@ $rise_bench_baza_goods $mol_book2
 				title \Состав записи
 				Content <= Schema $mol_switch
 					enabled <= controls_enabled true
-					value? <=> schema_mode? \full
+					value? <=> schema_mode? \compact
 					options *
 						compact \4 свойства
 						full \10 свойств
@@ -17,7 +17,7 @@ $rise_bench_baza_goods $mol_book2
 				title \Количество записей
 				Content <= Count $mol_switch
 					enabled <= controls_enabled
-					value? <=> count_mode? \1000
+					value? <=> count_mode? \100
 					options *
 						100 \100
 						500 \500

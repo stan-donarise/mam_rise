@@ -1,5 +1,5 @@
 $rise_bench_baza_crdttext $mol_book2
-	menu_title \$rise_bench_baza_crdttext
+	menu_title <= title \Текст
 	pages /
 		<= Menu $mol_page
 			title \CRDT text
@@ -8,7 +8,7 @@ $rise_bench_baza_crdttext $mol_book2
 				<= Count_label $mol_labeler
 					title \Количество строк
 					Content <= Count $mol_switch
-						value? <=> count_mode? \500
+						value? <=> count_mode? \100
 						enabled <= controls_enabled true
 						options *
 							100 \100
