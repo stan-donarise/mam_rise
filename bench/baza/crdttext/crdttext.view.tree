@@ -1,0 +1,25 @@
+$rise_bench_baza_crdttext $mol_book2
+	menu_title \$rise_bench_baza_crdttext
+	pages /
+		<= Menu $mol_page
+			title \CRDT text
+			minimal_width 240
+			body /
+				<= Insert $mol_button_major
+					title \Вставить 500 строк
+					click? <=> insert? null
+					enabled <= controls_enabled true
+				<= Reset $mol_button_minor
+					title \Сбросить
+					click? <=> reset? null
+					enabled <= controls_enabled
+		<= Page $mol_page
+			title \Текст
+			minimal_width 640
+			body /
+				<= Metrics $rise_bench_metrics
+				<= Editor $mol_textarea
+					hint \Введите текст или вставьте 500 строк
+					value? <=> text? \
+					enabled <= controls_enabled
+					spellcheck false

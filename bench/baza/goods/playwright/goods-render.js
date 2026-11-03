@@ -1,5 +1,5 @@
 const assert = require( 'node:assert/strict' )
-const { chromium, headless, isolateUnitTests, resultScenario, resultStep, resultBenchmark } = require( '../../../../../shm/hitalama/playwright/harness' )
+const { chromium, headless, isolateUnitTests, resultScenario, resultStep, resultBenchmark, screenshot } = require( '../../../../../shm/hitalama/playwright/harness' )
 const { closeTestContext } = require( '../../../../../shm/hitalama/playwright/unit-isolation' )
 
 resultScenario({ title: 'Товары: Area на запись', group: 'entities' })
@@ -81,6 +81,11 @@ async function main() {
 		const lands = await page.evaluate( ()=> globalThis.$.$rise_app.Root( 0 ).Bench().Goods().product_links().map( link => link.land().str ) )
 		assert.equal( lands.length, 500 )
 		assert.equal( new Set( lands ).size, 500 )
+		const metrics = await page.evaluate( ()=> globalThis.$.$rise_app.Root( 0 ).Bench().Goods().Metrics().records() )
+		assert.deepEqual( metrics.map( row => row[ 'Операция' ] ), [ 'Создание набора: всего', 'Построение индексов', 'Публикация списка', 'Заполнение товаров' ] )
+		assert.ok( metrics.every( row => Number( row[ 'Время, мс' ] ) >= 0 ) )
+		assert.equal( await page.locator( '[rise_bench_baza_goods_metrics] [mol_grid_col_head]' ).count(), 4 )
+		console.log( '[metrics screenshot]', await screenshot( page, 'goods-metrics.png' ) )
 		const rows = await page.locator( '[rise_bench_baza_goods_table_row]' ).count()
 		assert.ok( rows > 0 && rows < 100, `Expected virtualized rows, got ${rows}` )
 		assert.deepEqual( errors, [] )

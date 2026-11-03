@@ -185,8 +185,10 @@ namespace $.$$ {
 		rebuild_indexes() {
 			const dataset = this.dataset()
 			if( !dataset ) return
+			const measure = new ( $mol_wire_sync( $rise_bench_measure ) )( 'Перестроение индексов', dataset.Products()!.items().length )
 			$mol_wire_sync( this ).build_index( dataset, 'Color' )
 			$mol_wire_sync( this ).build_index( dataset, 'Status' )
+			this.Metrics().measure_add( measure )
 		}
 
 		index_rebuild_enabled() { return !!this.dataset_link() && !$mol_promise_like( this.Add().status()?.[0] ) && !$mol_promise_like( this.Create().status()?.[0] ) }
@@ -212,6 +214,7 @@ namespace $.$$ {
 
 		@ $mol_action
 		add_one() {
+			const measure = new ( $mol_wire_sync( $rise_bench_measure ) )( 'Добавление товара', 1 )
 			const dataset = this.dataset() ?? $mol_wire_sync( this ).prepare_dataset( this.dataset_config() ).dataset
 			// Freeze the insertion index before any writes or suspension.
 			const state = $mol_wire_sync( this ).prepare_append( dataset )
@@ -225,6 +228,7 @@ namespace $.$$ {
 				$mol_wire_sync( this ).build_index( dataset, 'Status' )
 			}
 			this.dataset_link( dataset.link().str )
+			this.Metrics().measure_add( measure )
 			this.body_scroll_top( 0 )
 		}
 
@@ -233,6 +237,7 @@ namespace $.$$ {
 			// Detach only this selected benchmark dataset, not the whole local database.
 			this.dataset_link( '' )
 			this.creation_ms( 0 )
+			this.Metrics().measurements( [] )
 			this.search_query( '' )
 			this.color_filter( 'all' )
 			this.status_filter( 'all' )
@@ -242,14 +247,23 @@ namespace $.$$ {
 		@ $mol_action
 		create() {
 			if( this.dataset_link() ) return
+			const total = new ( $mol_wire_sync( $rise_bench_measure ) )( 'Создание набора: всего', this.record_count() )
 			const state = $mol_wire_sync( this ).prepare_dataset( this.dataset_config() )
+			const records = new ( $mol_wire_sync( $rise_bench_measure ) )( 'Заполнение товаров', state.count )
 			this.initialize_products( [ state, 0, state.count ] )
+			records.finish()
+			const links = new ( $mol_wire_sync( $rise_bench_measure ) )( 'Публикация списка', state.count )
 			// Publish only fully initialized records.
 			this.initialize_links( state.dataset.Products()!, state.links ??= state.products.map( product => product.link() ) )
+			links.finish()
+			const indexes = new ( $mol_wire_sync( $rise_bench_measure ) )( 'Построение индексов', state.count )
 			$mol_wire_sync( this ).build_index( state.dataset, 'Color' )
 			$mol_wire_sync( this ).build_index( state.dataset, 'Status' )
+			indexes.finish()
 			this.creation_ms( performance.now() - state.started )
 			this.dataset_link( state.dataset.link().str )
+			total.finish()
+			for( const measure of [ records, links, indexes, total ] ) this.Metrics().measure_add( measure )
 		}
 
 		@ $mol_mem

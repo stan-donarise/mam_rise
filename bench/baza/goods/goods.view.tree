@@ -73,6 +73,7 @@ $rise_bench_baza_goods $mol_book2
 		minimal_width 640
 		body_scroll_top? => body_scroll_top?
 		body /
+			<= Metrics $rise_bench_metrics
 			<= Table $rise_bench_baza_goods_table
 				products <= products /$rise_bench_baza_goods_product
 				links <= product_links /$giper_baza_link

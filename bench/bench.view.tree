@@ -3,3 +3,4 @@ $rise_bench $mol_book2_catalog
 	param \bench
 	spreads *
 		$rise_bench_baza_goods <= Goods $rise_bench_baza_goods
+		$rise_bench_baza_crdttext <= Crdttext $rise_bench_baza_crdttext

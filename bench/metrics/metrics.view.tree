@@ -1,0 +1,8 @@
+$rise_bench_metrics $mol_grid
+	measurements? /$rise_bench_measure
+	measure_add? null
+	col_ids /
+		\Операция
+		\Время, мс
+		\Объём
+		\Скорость
