@@ -192,6 +192,21 @@ async function main() {
 		console.log( '[metrics screenshot]', await screenshot( page, 'goods-metrics.png' ) )
 		const rows = await page.locator( '[rise_bench_baza_goods_table_row]' ).count()
 		assert.ok( rows > 0 && rows < 100, `Expected virtualized rows, got ${rows}` )
+		resultStep( 'Правая страница помещается в широком и узком окне', [ '$rise_bench_baza_goods.Records' ] )
+		for( const width of [ 2048, 700, 320 ] ) {
+			await page.setViewportSize({ width, height: 900 })
+			await page.waitForFunction( width => {
+				const app = globalThis.$.$rise_app.Root( 0 )
+				const root = app.dom_node()
+				const records = app.Bench().Goods().Records().dom_node()
+				return width === 2048
+					? root.scrollWidth <= root.clientWidth + 1
+					: records.getBoundingClientRect().width <= width + 1
+						&& records.getBoundingClientRect().width >= Math.min( 640, width ) - 1
+			}, width )
+			await page.locator( '[rise_bench_baza_goods_records]' ).scrollIntoViewIfNeeded()
+			console.log( '[layout screenshot]', await screenshot( page, `goods-layout-${width}.png` ) )
+		}
 		assert.deepEqual( errors, [] )
 		await assertOffline()
 		console.log( 'Area goods: catalog, add, search, edit, reload, create 500, virtualization passed' )
