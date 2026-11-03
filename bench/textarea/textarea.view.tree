@@ -1,0 +1,18 @@
+$rise_bench_textarea $mol_textarea
+	Edit $rise_bench_textarea_input
+		value? <=> value?
+		hint <= hint
+		enabled <= enabled
+		spellcheck <= spellcheck
+		length_max <= length_max
+		selection? <=> selection?
+		bring => bring
+		submit? <=> submit?
+		submit_with_ctrl <= submit_with_ctrl
+	View $rise_bench_textarea_view
+		text <= value
+		render_visible_only false
+		row_numb* <= row_numb*
+		sidebar_showed <= sidebar_showed
+		highlight <= highlight
+		syntax <= syntax

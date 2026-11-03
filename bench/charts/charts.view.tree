@@ -1,0 +1,7 @@
+$rise_bench_charts $mol_view
+	runs /$rise_bench_run
+	operations /string
+	sub <= charts /$mol_view
+	Chart* $rise_bench_charts_operation
+		operation <= operation* \
+		runs <= runs

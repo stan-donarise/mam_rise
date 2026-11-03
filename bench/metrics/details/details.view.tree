@@ -1,0 +1,14 @@
+$rise_bench_metrics_details $mol_pick
+	hint \Параметры компьютера и браузер
+	trigger_content / <= Icon $mol_icon_information_outline
+	bubble_content /
+		<= Text $mol_view
+			sub /
+				<= Computer_label $mol_labeler
+					title \Параметры компьютера
+					Content <= Computer $mol_view
+						sub / <= computer \
+				<= Browser_label $mol_labeler
+					title \Браузер
+					Content <= Browser $mol_view
+						sub / <= browser \

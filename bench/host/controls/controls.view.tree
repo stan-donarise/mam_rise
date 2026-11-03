@@ -1,0 +1,47 @@
+$rise_bench_host_controls $mol_page
+	title \Настройки
+	minimal_width 320
+	kind \goods
+	enabled true
+	body <= controls /$mol_view
+		<= Engine_label $mol_labeler
+			title \Хранилище
+			Content <= Engine $mol_switch
+				enabled <= enabled
+				value? <=> engine? \goods
+				options *
+					goods \Гипербаза
+					idb \IDB
+		<= Storage_label $mol_view
+			sub / <= storage_label \
+		<= Schema_label $mol_labeler
+			title \Состав записи
+			Content <= Schema $mol_switch
+				enabled <= enabled
+				value? <=> schema? \compact
+				options *
+					compact \4 свойства
+					full \10 свойств
+		<= Count_label $mol_labeler
+			title <= count_title \Количество записей
+			Content <= Count $mol_switch
+				enabled <= enabled
+				value? <=> count? \100
+				options <= counts *
+		<= Computer_label $mol_labeler
+			title \Параметры компьютера
+			Content <= Computer $rise_bench_textarea
+				length_max 8000
+				hint \Процессор, память, ОС
+				value? <=> computer? \
+				enabled <= enabled
+		<= Run $mol_button_major
+			title \Запустить бенчмарк
+			enabled <= enabled
+			click? <=> run? null
+		<= Status $mol_view
+			sub / <= status \
+		<= Retry $mol_button_minor
+			title \Повторить сохранение
+			click? <=> retry? null
+	retry_visible false

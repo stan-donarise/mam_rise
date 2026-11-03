@@ -16,6 +16,8 @@ namespace $ {
 				count: run.count, properties: run.properties, stamp: run.stamp, state: run.state(),
 				baza_version: run.baza_version, benchmark_version: run.benchmark_version,
 				id: run.id,
+				computer: run.computer, browser: run.browser,
+				bytes: run.bytes(),
 				metrics: Object.fromEntries( operations.map( operation => [ operation, run.metric( operation ) ] ) ),
 			}) )
 			sessionStorage.setItem( this.key, JSON.stringify({ rows, pending }) )

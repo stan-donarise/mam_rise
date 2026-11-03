@@ -1,16 +1,40 @@
-$rise_bench_host $mol_page
+$rise_bench_host $mol_book2
 	kind \goods
-	minimal_width 640
-	body /
-		<= Status $mol_view
-			sub / <= status? \
-		<= Retry $mol_button_minor
-			title \Повторить сохранение
-			click? <=> retry? null
-		<= Metrics $rise_bench_metrics
-			operations <= operations /string
-			runs <= runs /$rise_bench_run
-		<= Frame $mol_frame
-			uri <= fixture_uri \
-			clipboard_read false
-			clipboard_write false
+	pages /
+		<= Controls $rise_bench_host_controls
+			kind <= kind
+			enabled <= controls_enabled true
+			engine? <=> engine? \goods
+			count? <=> count? \100
+			schema? <=> schema? \compact
+			run? <=> run? null
+			status <= status? \
+			retry_visible <= retry_visible false
+			retry? <=> retry? null
+		<= Results $mol_page
+			title \Результаты
+			minimal_width 640
+			tools /
+				<= Mode $mol_switch
+					value? <=> mode? \table
+					options *
+						table \Таблица
+						charts \Графики
+			body <= results_body /$mol_view
+				<= History $mol_scroll
+					sub /
+						<= Metrics $rise_bench_metrics
+							operations <= operations /string
+							runs <= runs /$rise_bench_run
+							compare <= compare false
+							text_mode <= text_mode false
+				<= Frame $mol_frame
+					uri <= fixture_uri \
+					clipboard_read false
+					clipboard_write false
+					attr *
+						^
+						inert <= busy false
+	Charts $rise_bench_charts
+		runs <= runs
+		operations <= operations

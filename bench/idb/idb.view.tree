@@ -33,13 +33,10 @@ $rise_bench_idb $mol_book2
 					title \Запустить бенчмарк
 					click? <=> benchmark? null
 					enabled <= controls_enabled
-				<= Reset $mol_button_minor
-					title \Очистить
-					click? <=> reset? null
-					enabled <= controls_enabled
-		<= Page $mol_page
+		<= Page $rise_bench_surface
 			title \IndexedDB
 			minimal_width 640
+			body_scroll_top? => body_scroll_top?
 			body /
 				<= Metrics $rise_bench_metrics
 					operations /
@@ -48,5 +45,48 @@ $rise_bench_idb $mol_book2
 						\Добавить 1, с
 						\F5, с
 						\Поиск после F5, с
-				<= Table $mol_grid
-					records <= rows /any
+				<= Manual $mol_view
+					sub /
+						<= Search_label $mol_labeler
+							title \Поиск по названию
+							Content <= Search $mol_search
+								hint \Название товара
+								enabled <= filters_enabled true
+								query? => search_query? \
+						<= Color_label $mol_labeler
+							title \Color
+							Content <= Color_filter $mol_select
+								enabled <= filters_enabled
+								value? <=> color_filter? \all
+								dictionary *
+									all \All colors
+									red \red
+									green \green
+									blue \blue
+						<= Status_label $mol_labeler
+							title \Status
+							Content <= Status_filter $mol_select
+								enabled <= filters_enabled
+								value? <=> status_filter? \all
+								dictionary *
+									all \All statuses
+									minor \Store
+									major \Sale
+									critical \Support
+						<= Manual_actions $mol_view
+							sub /
+								<= Add $mol_button_minor
+									title \Добавить запись
+									enabled <= controls_enabled
+									click? <=> add_one? null
+								<= Reset $mol_button_minor
+									title \Очистить
+									click? <=> reset? null
+									enabled <= controls_enabled
+				<= Table $rise_bench_idb_table
+					records <= products /$rise_bench_idb_storage_product
+					compact <= compact false
+					query <= search_query?
+					color_filter <= color_filter?
+					status_filter <= status_filter?
+					change*? <=> change*? null

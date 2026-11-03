@@ -32,8 +32,7 @@ function targetUrl() {
 
 async function openBenchmark( page, url ) {
 	await page.goto( url, { waitUntil: 'domcontentloaded' } )
-	if( new URL( url ).pathname.endsWith( '/test.html' ) ) return
-	// Native $mol_offline reloads the first production page when its worker
+	// Native $mol_offline reloads the first page (including test.html) when its worker
 	// activates. Wait for that real navigation before starting a measured action.
 	await page.waitForFunction( ()=> globalThis.$ && (
 		!navigator.serviceWorker || navigator.serviceWorker.controller?.state === 'activated'

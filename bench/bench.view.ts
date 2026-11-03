@@ -1,5 +1,9 @@
 namespace $.$$ {
 	export class $rise_bench extends $.$rise_bench {
+		spread_ids(): readonly string[] {
+			const ids = super.spread_ids()
+			return new URL( location.href ).searchParams.get( 'rise_fixture' ) === 'tests' ? [ ...ids, '$rise_bench_idb' ] : ids
+		}
 		Spread( id: string ): $mol_view {
 			// Offline regression entry point exercises the same raw workload views.
 			if( new URL( location.href ).searchParams.get( 'rise_fixture' ) === 'tests' ) {

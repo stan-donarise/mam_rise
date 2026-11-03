@@ -1,0 +1,3 @@
+$rise_bench_idb_table $rise_bench_baza_goods_table
+	records /$rise_bench_idb_storage_product
+	change*? null

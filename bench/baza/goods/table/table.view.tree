@@ -5,6 +5,10 @@ $rise_bench_baza_goods_table $mol_list_demo_table
 	query \
 	color_filter \all
 	status_filter \all
+	Rows $rise_bench_baza_goods_rows
+		item_width_min* 200
+		item_height_min* 96
+		rows <= rows
 	Compact_id_labeler* $mol_labeler
 		title \ID
 		content /

@@ -1,6 +1,5 @@
 const assert = require( 'node:assert/strict' )
-const { chromium, headless, isolateUnitTests, resultScenario, resultStep, resultBenchmark, resultBenchmarkValue, screenshot } = require( '../../../../../shm/hitalama/playwright/harness' )
-const { closeTestContext } = require( '../../../../../shm/hitalama/playwright/unit-isolation' )
+const { chromium, headless, resultScenario, resultStep, resultBenchmark, resultBenchmarkValue, screenshot, closeTestContext } = require( '../../../playwright/harness' )
 const { observeOffline, targetUrl, openBenchmark } = require( '../../../playwright/offline' )
 
 resultScenario({ title: 'CRDT-текст: запись и метрики', group: 'entities' })
@@ -11,7 +10,6 @@ async function main() {
 	let context
 	try {
 		context = await browser.newContext({ viewport: { width: 1440, height: 900 } })
-		await isolateUnitTests( context )
 		const page = await context.newPage()
 		let navigations = 0
 		page.on( 'framenavigated', frame => { if( frame === page.mainFrame() ) ++navigations } )
@@ -75,7 +73,7 @@ async function main() {
 			assert.equal( metrics.length, index + 1 )
 			assert.equal( metrics[ 0 ][ 'Объём' ], lines )
 			assert.equal( metrics[ 0 ][ 'Версия Гипербазы' ], '2e6100b2' )
-			assert.equal( metrics[ 0 ][ 'Версия бенчмарка' ], '0.2.0' )
+			assert.equal( metrics[ 0 ][ 'Версия бенчмарка' ], '0.3.0' )
 			for( const column of [ 'Вставка, с', 'Добавить символ, с', 'F5, с' ] ) {
 				assert.match( metrics[ 0 ][ column ], /^\d+\.\d{3}$/ )
 				resultBenchmarkValue( `${lines} строк: ${column}`, Number( metrics[ 0 ][ column ] ), 's' )
@@ -106,7 +104,7 @@ async function main() {
 		assert.deepEqual( await page.evaluate( ()=> globalThis.$.$rise_app.Root( 0 ).Bench().Crdttext().Metrics().records() ), completed )
 		resultStep( 'Редактировать вручную и очистить новым Land', [ '$rise_bench_baza_crdttext.text', '$rise_bench_baza_crdttext.reset' ] )
 		await editor.fill( 'Ручная правка\nВторая строка' )
-		await page.waitForFunction( ()=> globalThis.$.$rise_app.Root( 0 ).Bench().Crdttext().document().text() === 'Ручная правка\nВторая строка' )
+		await page.waitForFunction( ()=> { try { return globalThis.$.$rise_app.Root( 0 ).Bench().Crdttext().document().text() === 'Ручная правка\nВторая строка' } catch(error) { if(error?.then)return false;throw error } } )
 		const oldLink = await page.evaluate( ()=> globalThis.$.$rise_app.Root( 0 ).Bench().Crdttext().text_link() )
 		await page.getByRole( 'button', { name: 'Очистить', exact: true } ).click()
 		await page.waitForFunction( ()=> document.querySelector( '[rise_bench_baza_crdttext_editor] textarea' )?.value === '' )

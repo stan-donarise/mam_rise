@@ -119,8 +119,9 @@ namespace $.$$ {
 		restore_runs() {
 			if( this.runs_restored ) return
 			this.Metrics().runs( this.reload_store().snapshot.rows.map( row => {
-				const run = new $rise_bench_run( row.count, row.properties, row.stamp, row.baza_version ?? '—', row.benchmark_version ?? '—', row.id )
+				const run = new $rise_bench_run( row.count, row.properties, row.stamp, row.baza_version ?? '—', row.benchmark_version ?? '—', row.id, row.computer ?? '', row.browser ?? '' )
 				run.state( row.state )
+				run.bytes( row.bytes ?? null )
 				for( const [ name, value ] of Object.entries( row.metrics ) ) if( value !== null ) run.metric( name, value )
 				return run
 			}) )
@@ -132,6 +133,7 @@ namespace $.$$ {
 
 		@ $mol_action
 		request_reload( run: $rise_bench_run ) {
+			run.bytes( $mol_charset_encode( this.text() ).byteLength )
 			run.state( 'Перезагрузка' )
 			this.reload_store().save( this.Metrics().runs(), this.Metrics().operations(), {
 				link: this.text_link(), count: run.count, started: performance.timeOrigin + performance.now(),

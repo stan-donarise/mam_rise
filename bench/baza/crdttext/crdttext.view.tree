@@ -20,20 +20,21 @@ $rise_bench_baza_crdttext $mol_book2
 					title \Запустить бенчмарк
 					click? <=> benchmark? null
 					enabled <= controls_enabled true
-				<= Reset $mol_button_minor
-					title \Очистить
-					click? <=> reset? null
-					enabled <= controls_enabled
-		<= Page $mol_page
+		<= Page $rise_bench_surface
 			title <= page_title \CRDT-текст
 			minimal_width 640
 			body /
 				<= Metrics $rise_bench_metrics
+					text_mode true
 					operations /
 						\Вставка, с
 						\Добавить символ, с
 						\F5, с
-				<= Editor $mol_textarea
+				<= Reset $mol_button_minor
+					title \Очистить
+					click? <=> reset? null
+					enabled <= controls_enabled
+				<= Editor $rise_bench_textarea
 					hint \Введите текст или запустите бенчмарк
 					value? <=> text? \
 					enabled <= controls_enabled

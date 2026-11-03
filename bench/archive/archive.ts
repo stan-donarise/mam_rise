@@ -7,6 +7,9 @@ namespace $ {
 		state: string
 		baza_version?: string
 		benchmark_version?: string
+		computer?: string
+		browser?: string
+		bytes?: number | null
 		metrics: Record< string, number | null >
 	}
 
@@ -29,6 +32,7 @@ namespace $ {
 		@ $mol_mem
 		static root() {
 			if( !this.link ) throw new Error( 'Не настроен общий Land результатов' )
+			$rise_bench_archive_seed.apply()
 			return $giper_baza_glob.Land( new $giper_baza_link( this.link ) ).Data( $giper_baza_dict )
 		}
 		static validate( value: unknown, operations: readonly string[] ): $rise_bench_archive_row | null {
@@ -40,6 +44,9 @@ namespace $ {
 			if( typeof row.stamp !== 'string' || !/^\d{2}\.\d{2}\.\d{4} \d{2}:\d{2}:\d{2}$/.test( row.stamp ) ) return null
 			if( typeof row.baza_version !== 'string' || !/^(?:[\da-f]{40}|—)$/.test( row.baza_version ) ) return null
 			if( typeof row.benchmark_version !== 'string' || !/^\d+\.\d+\.\d+$/.test( row.benchmark_version ) ) return null
+			if( row.computer !== undefined && ( typeof row.computer !== 'string' || row.computer.length > 8000 ) ) return null
+			if( row.browser !== undefined && ( typeof row.browser !== 'string' || row.browser.length > 4000 ) ) return null
+			if( row.bytes != null && ( !Number.isSafeInteger( row.bytes ) || row.bytes < 0 || row.bytes > 100_000_000 ) ) return null
 			if( !row.metrics || typeof row.metrics !== 'object' ) return null
 			const metrics: Record< string, number | null > = {}
 			for( const name of operations ) {
@@ -48,7 +55,7 @@ namespace $ {
 				metrics[ name ] = time
 			}
 			return { id: row.id, count: row.count, properties: row.properties, stamp: row.stamp, state: row.state,
-				baza_version: row.baza_version, benchmark_version: row.benchmark_version, metrics }
+				baza_version: row.baza_version, benchmark_version: row.benchmark_version, computer: row.computer ?? '', browser: row.browser ?? '', bytes: row.bytes ?? null, metrics }
 		}
 		@ $mol_action
 		static save( kind: string, row: $rise_bench_archive_row ) {
@@ -64,15 +71,21 @@ namespace $ {
 		static rows( kind: string ) {
 			const root = this.root()
 			return root.keys().filter( key => typeof key === 'string' && key.startsWith( kind + ':' ) ).flatMap( key => {
-				const text = root.dive( key, $giper_baza_atom_text )?.val()
-				const row = text && $mol_error_fence( ()=> this.validate( JSON.parse( text ), this.operations( kind ) ), ()=> null )
-				if( !row ) return []
-				if( key !== kind + ':' + row.id ) return []
-				const run = new $rise_bench_run( row.count, row.properties, row.stamp, row.baza_version ?? '—', row.benchmark_version ?? '—', row.id )
-				run.state( row.state )
-				for( const [ operation, value ] of Object.entries( row.metrics ) ) if( typeof value === 'number' ) run.metric( operation, value )
-				return [ run ]
+				const run = this.row( key as string )
+				return run ? [ run ] : []
 			})
+		}
+		@ $mol_mem_key
+		static row( key: string ) {
+			const kind = key.split( ':' )[ 0 ]
+			const text = this.root().dive( key, $giper_baza_atom_text )?.val()
+			const row = text && $mol_error_fence( ()=> this.validate( JSON.parse( text ), this.operations( kind ) ), ()=> null )
+			if( !row || key !== kind + ':' + row.id ) return null
+			const run = new ( $mol_wire_sync( $rise_bench_run ) )( row.count, row.properties, row.stamp, row.baza_version ?? '—', row.benchmark_version ?? '—', row.id, row.computer ?? '', row.browser ?? '' )
+			run.state( row.state )
+			run.bytes( row.bytes ?? null )
+			for( const [ operation, value ] of Object.entries( row.metrics ) ) if( typeof value === 'number' ) run.metric( operation, value )
+			return run
 		}
 	}
 }

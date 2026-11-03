@@ -114,6 +114,7 @@ namespace $.$$ {
 		product_links() { return this.dataset()?.Products()?.items() ?? [] }
 
 		controls_enabled() { return this.add_enabled() && !$mol_promise_like( this.Add().status()?.[0] ) }
+		filters_enabled() { return this.add_enabled() }
 		add_enabled() {
 			return this.Metrics().runs()[ 0 ]?.state() !== 'Перезагрузка'
 				&& !$mol_promise_like( this.Create().status()?.[0] )
@@ -208,8 +209,9 @@ namespace $.$$ {
 		restore_runs() {
 			if( this.runs_restored ) return
 			const rows = this.reload_store().snapshot.rows.map( row => {
-				const run = new $rise_bench_run( row.count, row.properties, row.stamp, row.baza_version ?? '—', row.benchmark_version ?? '—', row.id )
+				const run = new $rise_bench_run( row.count, row.properties, row.stamp, row.baza_version ?? '—', row.benchmark_version ?? '—', row.id, row.computer ?? '', row.browser ?? '' )
 				run.state( row.state )
+				run.bytes( row.bytes ?? null )
 				for( const [ name, value ] of Object.entries( row.metrics ) ) if( value !== null ) run.metric( name, value )
 				return run
 			})

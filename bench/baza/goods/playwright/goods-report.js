@@ -1,6 +1,6 @@
 const assert = require('node:assert/strict')
 const fs = require('node:fs')
-const { chromium, resultScenario, resultStep, resultBenchmark, screenshot } = require('../../../../../shm/hitalama/playwright/harness')
+const { chromium, resultScenario, resultStep, resultBenchmark, screenshot } = require('../../../playwright/harness')
 resultScenario({ title: 'HTML-отчёт бенчмарка', group: 'entities' })
 
 async function main() {

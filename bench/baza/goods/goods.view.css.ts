@@ -10,6 +10,9 @@ namespace $.$$ {
 			},
 		},
 		Actions: { flex: { wrap: 'wrap' } },
+		Storage_label: { padding: $mol_gap.text },
+		Manual: { flex: { wrap: 'wrap' }, alignItems: 'flex-end' },
+		Manual_actions: { flex: { wrap: 'wrap' } },
 	})
 
 }

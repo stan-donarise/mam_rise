@@ -1,0 +1,4 @@
+$rise_bench_surface $mol_page
+	attr *
+		^
+		embedded <= embedded false

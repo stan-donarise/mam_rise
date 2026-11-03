@@ -49,10 +49,13 @@ namespace $ {
 		}
 
 		async rows() {
-			const count = await this.count()
-			if( !count ) return []
-			const range = IDBKeyRange.bound( Math.max( 0, count - 24 ), count - 1 )
-			return ( await ( await this.db() ).read( 'Product' ).Product.select( range ) ).reverse()
+			return ( await ( await this.db() ).read( 'Product' ).Product.select() )
+		}
+		async change( index: number, field: keyof $rise_bench_idb_storage_product, value: string | number | boolean ) {
+			const db = await this.db(), product = await db.read( 'Product' ).Product.get( index )
+			if( !product ) throw new Error( 'Запись не найдена' )
+			const tx = db.change( 'Product' )
+			await Promise.all([ tx.stores.Product.put( { ...product, [ field ]: value }, index ), tx.commit() ])
 		}
 
 		destructor() { $mol_wire_async( this ).close() }

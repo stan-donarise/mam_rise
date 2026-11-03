@@ -1,0 +1,33 @@
+$rise_bench_charts_operation $mol_view
+	operation \
+	runs /$rise_bench_run
+	sub <= content /$mol_view
+	Title $mol_view
+		dom_name \h3
+		sub / <= operation
+	Empty $mol_view
+		sub / \Нет завершённых замеров
+	Legend $mol_view
+		sub <= legends /$mol_view
+	Legend_item* $mol_view
+		sub <= legend_content* /$mol_view_content
+	Legend_text* $mol_view
+		sub / <= series_title* \
+	Legend_sample* $mol_view
+		sub <= legend_sample* /$mol_view
+	Plot $rise_bench_charts_operation_plot
+		hue_base 210
+		graphs <= graphs /$mol_plot_graph
+	Series* $mol_plot_group
+		title <= series_title* \
+		series_x <= series_x* /number
+		series_y <= series_y* /number
+		graphs /
+			<= Line* $mol_plot_line
+			<= Dots* $mol_plot_dot
+	X $mol_plot_ruler_hor
+		title \Объём
+	Y $mol_plot_ruler_vert
+		title \с
+	Note $mol_view
+		sub / \Медиана прогонов; отдельные серии по хранилищу, полям, компьютеру и версии.

@@ -1,6 +1,5 @@
 const assert = require( 'node:assert/strict' )
-const { chromium, headless, isolateUnitTests, resultScenario, resultStep, resultBenchmark, resultBenchmarkValue, screenshot } = require( '../../../../../shm/hitalama/playwright/harness' )
-const { closeTestContext } = require( '../../../../../shm/hitalama/playwright/unit-isolation' )
+const { chromium, headless, resultScenario, resultStep, resultBenchmark, resultBenchmarkValue, screenshot, closeTestContext } = require( '../../../playwright/harness' )
 const { observeOffline, targetUrl, openBenchmark } = require( '../../../playwright/offline' )
 
 resultScenario({ title: 'Товары: Area на запись', group: 'entities' })
@@ -11,7 +10,6 @@ async function main() {
 	let context
 	try {
 		context = await browser.newContext({ viewport: { width: 1440, height: 900 } })
-		await isolateUnitTests( context )
 		const page = await context.newPage()
 		let navigations = 0
 		page.on( 'framenavigated', frame => { if( frame === page.mainFrame() ) ++navigations } )
@@ -94,7 +92,7 @@ async function main() {
 		assert.deepEqual( await fields(), changed )
 
 		resultStep( 'Создать 500 записей и проверить виртуализацию', [ '$rise_bench_baza_goods.create', '$rise_bench_baza_goods.initialize_product', '$rise_bench_baza_goods_table.rows' ] )
-		await page.getByRole( 'button', { name: 'Сбросить', exact: true } ).click()
+		await page.getByRole( 'button', { name: 'Очистить', exact: true } ).click()
 		await page.getByRole( 'checkbox', { name: '4 свойства', exact: true } ).click()
 		await page.getByRole( 'checkbox', { name: '500', exact: true } ).click()
 		const beforeRun = navigations
@@ -115,7 +113,7 @@ async function main() {
 			assert.match( metrics[ 0 ][ column ], /^\d+\.\d{3}$/ )
 		}
 		assert.equal( metrics[ 0 ][ 'Версия Гипербазы' ], '2e6100b2' )
-		assert.equal( metrics[ 0 ][ 'Версия бенчмарка' ], '0.2.0' )
+		assert.equal( metrics[ 0 ][ 'Версия бенчмарка' ], '0.3.0' )
 		assert.equal( await page.locator( '[rise_bench_baza_goods_metrics] [mol_grid_col_head]' ).count(), 12 )
 		assert.equal( await page.getByRole( 'button', { name: 'Перестроить индексы', exact: true } ).count(), 0 )
 		const keys = await page.evaluate( ()=> globalThis.$.$mol_wire_async( ()=> globalThis.$.$rise_app.Root( 0 ).Bench().Goods().dataset().keys() )() )
@@ -225,13 +223,13 @@ async function main() {
 			assert.ok( navigations > before, 'IDB benchmark must really reload' )
 			const result = await page.evaluate( ()=> globalThis.$.$mol_wire_async( ()=> {
 				const app = globalThis.$.$rise_app.Root( 0 ).Bench().Idb()
-				return { count: globalThis.$.$mol_wire_sync( app.storage() ).count(), name: app.dataset_name(), rows: app.rows(), metrics: app.Metrics().records() }
+				return { count: globalThis.$.$mol_wire_sync( app.storage() ).count(), name: app.dataset_name(), rows: app.Table().rows().length, last: app.products().at(-1).id, metrics: app.Metrics().records() }
 			} )() )
 			assert.equal( result.count, count + 1 )
 			assert.notEqual( result.name, previousDatabase )
 			previousDatabase = result.name
-			assert.equal( result.rows.length, 24 )
-			assert.equal( result.rows[ 0 ].ID, String( count ).padStart( 5, '0' ) )
+			assert.equal( result.rows, count + 1 )
+			assert.equal( result.last, String( count ).padStart( 5, '0' ) )
 			assert.equal( result.metrics[ 0 ][ 'Версия Гипербазы' ], '—' )
 			for( const column of [ 'Создание, с', 'Поиск, с', 'Добавить 1, с', 'F5, с', 'Поиск после F5, с' ] ) assert.match( result.metrics[ 0 ][ column ], /^\d+\.\d{3}$/ )
 			console.log( 'IndexedDB metrics', JSON.stringify( result.metrics[ 0 ] ) )
