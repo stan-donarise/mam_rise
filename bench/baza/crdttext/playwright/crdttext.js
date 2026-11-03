@@ -39,14 +39,14 @@ async function main() {
 			} )
 			await page.waitForFunction( count => {
 				const app = globalThis.$.$rise_app.Root( 0 ).Bench().Crdttext()
-				return app.Metrics().measurements().length === count && !globalThis.$.$mol_promise_like( app.Insert().status()?.[ 0 ] )
+				return app.Metrics().runs().length === count && app.Metrics().runs()[ 0 ].state() === 'Готово'
 			}, lines / 500 )
 			const metrics = await page.evaluate( ()=> globalThis.$.$rise_app.Root( 0 ).Bench().Crdttext().Metrics().records() )
 			assert.equal( metrics.length, lines / 500 )
-			assert.ok( metrics.every( row => Number( row[ 'Время, мс' ] ) >= 0 && row[ 'Скорость' ] !== '—' ) )
+			assert.ok( metrics.every( row => row[ 'Вставка, мс' ] !== '—' && Number( row[ 'Вставка, мс' ] ) >= 0 ) )
 		}
 		const expected = await editor.inputValue()
-		assert.equal( await page.locator( '[rise_bench_baza_crdttext_metrics] [mol_grid_col_head]' ).count(), 4 )
+		assert.equal( await page.locator( '[rise_bench_baza_crdttext_metrics] [mol_grid_col_head]' ).count(), 7 )
 		console.log( '[metrics screenshot]', await screenshot( page, 'crdttext-metrics.png' ) )
 		assert.ok( expected.startsWith( 'Строка 1:' ) )
 		assert.ok( expected.includes( 'Строка 1000:' ) )
@@ -62,7 +62,7 @@ async function main() {
 		await page.waitForFunction( ()=> globalThis.$.$rise_app.Root( 0 ).Bench().Crdttext().document().text() === 'Ручная правка\nВторая строка' )
 		await page.getByRole( 'button', { name: 'Сбросить', exact: true } ).click()
 		await page.waitForFunction( ()=> document.querySelector( '[rise_bench_baza_crdttext_editor] textarea' )?.value === '' )
-		assert.equal( await page.evaluate( ()=> globalThis.$.$rise_app.Root( 0 ).Bench().Crdttext().Metrics().measurements().length ), 0 )
+		assert.equal( await page.evaluate( ()=> globalThis.$.$rise_app.Root( 0 ).Bench().Crdttext().Metrics().runs().length ), 0 )
 		assert.deepEqual( errors, [] )
 		await assertOffline()
 		console.log( 'CRDT text: 500/1000 lines, metrics, native storage, F5, edit and reset passed' )

@@ -185,10 +185,8 @@ namespace $.$$ {
 		rebuild_indexes() {
 			const dataset = this.dataset()
 			if( !dataset ) return
-			const measure = new ( $mol_wire_sync( $rise_bench_measure ) )( 'Перестроение индексов', dataset.Products()!.items().length )
 			$mol_wire_sync( this ).build_index( dataset, 'Color' )
 			$mol_wire_sync( this ).build_index( dataset, 'Status' )
-			this.Metrics().measure_add( measure )
 		}
 
 		index_rebuild_enabled() { return !!this.dataset_link() && !$mol_promise_like( this.Add().status()?.[0] ) && !$mol_promise_like( this.Create().status()?.[0] ) }
@@ -201,12 +199,9 @@ namespace $.$$ {
 			index.Ready()!.val( true )
 		}
 
-		@ $mol_mem
-		creation_ms( next = 0 ) { return next }
-
 		controls_enabled() { return this.add_enabled() && !$mol_promise_like( this.Add().status()?.[0] ) }
 		add_enabled() { return !$mol_promise_like( this.Create().status()?.[0] ) && !$mol_promise_like( this.Rebuild_indexes().status()?.[0] ) }
-		create_enabled() { return !this.dataset_link() && !$mol_promise_like( this.Add().status()?.[0] ) && !$mol_promise_like( this.Rebuild_indexes().status()?.[0] ) }
+		create_enabled() { return this.controls_enabled() && !$mol_promise_like( this.Create().status()?.[0] ) }
 
 		prepare_append( dataset: $rise_bench_baza_goods_dataset ) {
 			return new $rise_bench_baza_goods_preparation( dataset, dataset.Products()!.items().length, this.compact_mode() )
@@ -214,7 +209,6 @@ namespace $.$$ {
 
 		@ $mol_action
 		add_one() {
-			const measure = new ( $mol_wire_sync( $rise_bench_measure ) )( 'Добавление товара', 1 )
 			const dataset = this.dataset() ?? $mol_wire_sync( this ).prepare_dataset( this.dataset_config() ).dataset
 			// Freeze the insertion index before any writes or suspension.
 			const state = $mol_wire_sync( this ).prepare_append( dataset )
@@ -228,7 +222,6 @@ namespace $.$$ {
 				$mol_wire_sync( this ).build_index( dataset, 'Status' )
 			}
 			this.dataset_link( dataset.link().str )
-			this.Metrics().measure_add( measure )
 			this.body_scroll_top( 0 )
 		}
 
@@ -236,8 +229,6 @@ namespace $.$$ {
 		reset() {
 			// Detach only this selected benchmark dataset, not the whole local database.
 			this.dataset_link( '' )
-			this.creation_ms( 0 )
-			this.Metrics().measurements( [] )
 			this.search_query( '' )
 			this.color_filter( 'all' )
 			this.status_filter( 'all' )
@@ -246,7 +237,6 @@ namespace $.$$ {
 
 		@ $mol_action
 		create() {
-			if( this.dataset_link() ) return
 			const total = new ( $mol_wire_sync( $rise_bench_measure ) )( 'Создание набора: всего', this.record_count() )
 			const state = $mol_wire_sync( this ).prepare_dataset( this.dataset_config() )
 			const records = new ( $mol_wire_sync( $rise_bench_measure ) )( 'Заполнение товаров', state.count )
@@ -260,10 +250,45 @@ namespace $.$$ {
 			$mol_wire_sync( this ).build_index( state.dataset, 'Color' )
 			$mol_wire_sync( this ).build_index( state.dataset, 'Status' )
 			indexes.finish()
-			this.creation_ms( performance.now() - state.started )
 			this.dataset_link( state.dataset.link().str )
 			total.finish()
-			for( const measure of [ records, links, indexes, total ] ) this.Metrics().measure_add( measure )
+			return { total: total.duration!, records: records.duration!, links: links.duration!, indexes: indexes.duration! }
+		}
+
+		@ $mol_action
+		start_run( run: $rise_bench_run ) {
+			if( this.Metrics().runs().includes( run ) ) return
+			this.reset()
+			this.Metrics().run_add( run )
+		}
+
+		@ $mol_action
+		benchmark_search() {
+			this.search_query( 'Notebook 00000' )
+			return this.Table().rows().length
+		}
+
+		@ $mol_action
+		benchmark() {
+			const run = new ( $mol_wire_sync( $rise_bench_run ) )( this.record_count(), this.compact_mode() ? 4 : 10 )
+			$mol_wire_sync( this ).start_run( run )
+			return $mol_error_fence( ()=> {
+				const created = $mol_wire_sync( this ).create()
+				run.metric( 'Создание, мс', created.total )
+				run.metric( 'Заполнение, мс', created.records )
+				run.metric( 'Список, мс', created.links )
+				run.metric( 'Индексы, мс', created.indexes )
+				const search = new ( $mol_wire_sync( $rise_bench_measure ) )( 'Поиск' )
+				if( $mol_wire_sync( this ).benchmark_search() !== 1 ) throw new Error( 'Поиск должен найти один товар' )
+				search.finish()
+				run.metric( 'Поиск, мс', search.duration! )
+				this.search_query( '' )
+				const add = new ( $mol_wire_sync( $rise_bench_measure ) )( 'Добавление' )
+				$mol_wire_sync( this ).add_one()
+				add.finish()
+				run.metric( 'Добавить 1, мс', add.duration! )
+				run.state( 'Готово' )
+			}, error => { run.state( 'Ошибка' ); return error } )
 		}
 
 		@ $mol_mem

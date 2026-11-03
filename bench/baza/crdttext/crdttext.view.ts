@@ -22,11 +22,8 @@ namespace $.$$ {
 		@ $mol_action
 		write_text( next: string ) {
 			const document = this.document() ?? $mol_wire_sync( this ).prepare_document()
-			const measure = new ( $mol_wire_sync( $rise_bench_measure ) )( 'Запись CRDT-текста', next.length, 'симв.' )
 			$mol_wire_sync( document ).text( next )
-			measure.finish()
 			this.text_link( document.link().str )
-			this.Metrics().measure_add( measure )
 		}
 
 		@ $mol_mem
@@ -47,13 +44,24 @@ namespace $.$$ {
 		}
 
 		@ $mol_action
-		insert() { this.write_text( $mol_wire_sync( this ).insertion_text() ) }
+		insert() {
+			const next = $mol_wire_sync( this ).insertion_text()
+			const run = new ( $mol_wire_sync( $rise_bench_run ) )( next.length )
+			this.Metrics().run_add( run )
+			return $mol_error_fence( ()=> {
+				const measure = new ( $mol_wire_sync( $rise_bench_measure ) )( 'Вставка' )
+				$mol_wire_sync( this ).write_text( next )
+				measure.finish()
+				run.metric( 'Вставка, мс', measure.duration! )
+				run.metric( 'Скорость, симв./с', measure.duration ? next.length * 1000 / measure.duration : 0 )
+				run.state( 'Готово' )
+			}, error => { run.state( 'Ошибка' ); return error } )
+		}
 
 		@ $mol_action
 		reset() {
 			const document = this.document()
 			if( document ) $mol_wire_sync( document ).text( '' )
-			this.Metrics().measurements( [] )
 		}
 
 		controls_enabled() {

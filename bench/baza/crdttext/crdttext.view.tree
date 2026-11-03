@@ -18,6 +18,9 @@ $rise_bench_baza_crdttext $mol_book2
 			minimal_width 640
 			body /
 				<= Metrics $rise_bench_metrics
+					operations /
+						\Вставка, мс
+						\Скорость, симв./с
 				<= Editor $mol_textarea
 					hint \Введите текст или вставьте 500 строк
 					value? <=> text? \
