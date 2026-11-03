@@ -54,7 +54,7 @@ async function main() {
 		const rootLand = await page.evaluate( ()=> globalThis.$.$rise_app.Root( 0 ).Bench().Goods().dataset().land().link().str )
 		assert.ok( before.every( row => row.land !== rootLand ) )
 
-		resultStep( 'Найти товар и изменить цвет', [ '$rise_bench_baza_goods_table.rows', '$rise_bench_baza_goods_table.change_field' ] )
+		resultStep( 'Найти товар и изменить цвет', [ '$rise_bench_baza_goods_table.rows', '$rise_bench_baza_goods_table.row_color' ] )
 		const search = page.locator( '[rise_bench_baza_goods_search]' ).locator( 'input' )
 		await search.fill( 'Notebook' )
 		await page.waitForFunction( ()=> globalThis.$.$rise_app.Root( 0 ).Bench().Goods().Table().rows().length === 1 )
@@ -63,6 +63,20 @@ async function main() {
 		await page.waitForFunction( ()=> globalThis.$.$rise_app.Root( 0 ).Bench().Goods().products()[ 0 ].Color().val() === 'blue' )
 		await page.locator( '[rise_bench_baza_goods_search] [mol_search_clear]' ).click()
 		await page.waitForFunction( ()=> globalThis.$.$rise_app.Root( 0 ).Bench().Goods().Table().rows().length === 2 )
+		resultStep( 'Фильтровать цвет и статус без индексов', [ '$rise_bench_baza_goods_table.rows' ] )
+		const selectFilter = async( name, label )=> {
+			await page.locator( `[rise_bench_baza_goods_${name}_filter]` ).getByRole( 'checkbox' ).first().click()
+			await page.getByRole( 'button', { name: label, exact: true } ).click()
+		}
+		const expectRows = count => page.waitForFunction( count => globalThis.$.$rise_app.Root( 0 ).Bench().Goods().Table().rows().length === count, count )
+		await selectFilter( 'color', 'blue' )
+		await expectRows( 1 )
+		await selectFilter( 'status', 'Sale' )
+		await expectRows( 0 )
+		await selectFilter( 'color', 'All colors' )
+		await expectRows( 1 )
+		await selectFilter( 'status', 'All statuses' )
+		await expectRows( 2 )
 		const changed = await fields()
 
 		resultStep( 'Восстановить записи после F5', [ '$rise_bench_baza_goods.dataset_link', '$rise_bench_baza_goods.dataset' ] )
@@ -87,12 +101,15 @@ async function main() {
 		const metrics = await page.evaluate( ()=> globalThis.$.$rise_app.Root( 0 ).Bench().Goods().Metrics().records() )
 		assert.equal( metrics.length, 1 )
 		assert.equal( metrics[ 0 ][ 'Состояние' ], 'Готово' )
-		for( const column of [ 'Создание, с', 'Заполнение, с', 'Список, с', 'Индексы, с', 'Поиск, с', 'Добавить 1, с' ] ) {
+		for( const column of [ 'Создание, с', 'Заполнение, с', 'Список, с', 'Поиск, с', 'Добавить 1, с' ] ) {
 			assert.notEqual( metrics[ 0 ][ column ], '—' )
 			assert.ok( Number( metrics[ 0 ][ column ] ) >= 0 )
 			assert.match( metrics[ 0 ][ column ], /^\d+\.\d{3}$/ )
 		}
-		assert.equal( await page.locator( '[rise_bench_baza_goods_metrics] [mol_grid_col_head]' ).count(), 11 )
+		assert.equal( await page.locator( '[rise_bench_baza_goods_metrics] [mol_grid_col_head]' ).count(), 10 )
+		assert.equal( await page.getByRole( 'button', { name: 'Перестроить индексы', exact: true } ).count(), 0 )
+		const keys = await page.evaluate( ()=> globalThis.$.$mol_wire_async( ()=> globalThis.$.$rise_app.Root( 0 ).Bench().Goods().dataset().keys() )() )
+		assert.ok( !keys.includes( 'Color_index' ) && !keys.includes( 'Status_index' ) )
 		resultStep( 'Ручное добавление не создаёт прогон', [ '$rise_bench_baza_goods.add_one' ] )
 		await page.getByRole( 'button', { name: 'Добавить запись', exact: true } ).click()
 		await page.waitForFunction( ()=> globalThis.$.$rise_app.Root( 0 ).Bench().Goods().product_links().length === 502 )

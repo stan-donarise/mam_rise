@@ -90,17 +90,6 @@ namespace $.$$ {
 			$mol_wire_sync( init ).run()
 		}
 
-		@ $mol_action
-		reconcile_bucket( bucket: $giper_baza_list_link, links: readonly $giper_baza_link[] ) {
-			const existing = bucket.items()
-			const members = new Set( existing.map( link => link.str ) )
-			// Index buckets represent membership, not ordering. Avoid rewriting a
-			// valid bucket merely because Add inserts its new member at the front.
-			if( existing.length === links.length && members.size === links.length && links.every( link => members.has( link.str ) ) ) return
-			if( !existing.length ) this.initialize_links( bucket, links )
-			else bucket.items( links )
-		}
-
 		@ $mol_mem
 		schema_mode( next?: string ) {
 			return $mol_state_arg.value( 'schema', next ) === 'compact' ? 'compact' : 'full'
@@ -142,65 +131,8 @@ namespace $.$$ {
 		@ $mol_mem
 		product_links() { return this.dataset()?.Products()?.items() ?? [] }
 
-		@ $mol_action
-		collect_index( dataset: $rise_bench_baza_goods_dataset, field: 'Color' | 'Status' ) {
-			const result: Record< string, $giper_baza_link[] > = field === 'Color'
-				? { red: [], green: [], blue: [] } : { minor: [], major: [], critical: [] }
-			for( const [ key, link ] of this.index_values( [ dataset, field, 0, dataset.Products()!.items().length ] ) ) {
-				;( result[ key ] ??= [] ).push( new $giper_baza_link( link.str ) )
-			}
-			return result
-		}
-
-		@ $mol_mem_key
-		index_values( key: readonly [ $rise_bench_baza_goods_dataset, 'Color' | 'Status', number, number ] ): readonly ( readonly [ string, $giper_baza_link ] )[] {
-			const [ dataset, field, from, to ] = key
-			if( to - from > 32 ) {
-				const middle = Math.floor( ( from + to ) / 2 )
-				return [ ...this.index_values( [ dataset, field, from, middle ] ), ...this.index_values( [ dataset, field, middle, to ] ) ]
-			}
-			const links = dataset.Products()!.items()
-			const result: ( readonly [ string, $giper_baza_link ] )[] = []
-			for( let index = from; index < to; ++index ) {
-				const product = $giper_baza_glob.Pawn( links[ index ], $rise_bench_baza_goods_product )
-				result.push( [ product[ field ]()?.val() ?? '', links[ index ] ] )
-			}
-			return result
-		}
-
-		@ $mol_action
-		build_index( dataset: $rise_bench_baza_goods_dataset, field: 'Color' | 'Status' ) {
-			const atom = field === 'Color' ? dataset.Color_index( null )! : dataset.Status_index( null )!
-			const index = $mol_wire_sync( atom ).ensure( dataset.land() )!
-			index.Ready( null )!.val( false )
-			const buckets = $mol_wire_sync( this ).collect_index( dataset, field )
-			for( const key of index.keys() ) {
-				if( typeof key === 'string' && key.startsWith( 'bucket:' ) ) buckets[ key.slice( 7 ) ] ??= []
-			}
-			for( const [ key, links ] of Object.entries( buckets ) ) $mol_wire_sync( this ).reconcile_bucket( index.bucket( key, null )!, links )
-			index.Ready( null )!.val( true )
-		}
-
-		@ $mol_action
-		rebuild_indexes() {
-			const dataset = this.dataset()
-			if( !dataset ) return
-			$mol_wire_sync( this ).build_index( dataset, 'Color' )
-			$mol_wire_sync( this ).build_index( dataset, 'Status' )
-		}
-
-		index_rebuild_enabled() { return !!this.dataset_link() && !$mol_promise_like( this.Add().status()?.[0] ) && !$mol_promise_like( this.Create().status()?.[0] ) }
-
-		@ $mol_action
-		extend_index( dataset: $rise_bench_baza_goods_dataset, product: $rise_bench_baza_goods_product, field: 'Color' | 'Status' ) {
-			const index = ( field === 'Color' ? dataset.Color_index() : dataset.Status_index() )!.remote()!
-			index.Ready()!.val( false )
-			$mol_wire_sync( index ).set_member( product.link(), product[ field ]()!.val()!, true )
-			index.Ready()!.val( true )
-		}
-
 		controls_enabled() { return this.add_enabled() && !$mol_promise_like( this.Add().status()?.[0] ) }
-		add_enabled() { return !$mol_promise_like( this.Create().status()?.[0] ) && !$mol_promise_like( this.Rebuild_indexes().status()?.[0] ) }
+		add_enabled() { return !$mol_promise_like( this.Create().status()?.[0] ) }
 		create_enabled() { return this.controls_enabled() && !$mol_promise_like( this.Create().status()?.[0] ) }
 
 		prepare_append( dataset: $rise_bench_baza_goods_dataset ) {
@@ -214,13 +146,6 @@ namespace $.$$ {
 			const state = $mol_wire_sync( this ).prepare_append( dataset )
 			const product = $mol_wire_sync( this ).prepare_product( state, state.count )
 			$mol_wire_sync( dataset.Products()! ).splice( state.links ??= [ product.link() ] )
-			if( state.indexes_ready ) {
-				$mol_wire_sync( this ).extend_index( dataset, product, 'Color' )
-				$mol_wire_sync( this ).extend_index( dataset, product, 'Status' )
-			} else {
-				$mol_wire_sync( this ).build_index( dataset, 'Color' )
-				$mol_wire_sync( this ).build_index( dataset, 'Status' )
-			}
 			this.dataset_link( dataset.link().str )
 			this.body_scroll_top( 0 )
 		}
@@ -246,13 +171,9 @@ namespace $.$$ {
 			// Publish only fully initialized records.
 			this.initialize_links( state.dataset.Products()!, state.links ??= state.products.map( product => product.link() ) )
 			links.finish()
-			const indexes = new ( $mol_wire_sync( $rise_bench_measure ) )( 'Построение индексов', state.count )
-			$mol_wire_sync( this ).build_index( state.dataset, 'Color' )
-			$mol_wire_sync( this ).build_index( state.dataset, 'Status' )
-			indexes.finish()
 			this.dataset_link( state.dataset.link().str )
 			total.finish()
-			return { total: total.duration!, records: records.duration!, links: links.duration!, indexes: indexes.duration! }
+			return { total: total.duration!, records: records.duration!, links: links.duration! }
 		}
 
 		@ $mol_action
@@ -277,7 +198,6 @@ namespace $.$$ {
 				run.metric( 'Создание, с', created.total / 1000 )
 				run.metric( 'Заполнение, с', created.records / 1000 )
 				run.metric( 'Список, с', created.links / 1000 )
-				run.metric( 'Индексы, с', created.indexes / 1000 )
 				const search = new ( $mol_wire_sync( $rise_bench_measure ) )( 'Поиск' )
 				if( $mol_wire_sync( this ).benchmark_search() !== 1 ) throw new Error( 'Поиск должен найти один товар' )
 				search.finish()

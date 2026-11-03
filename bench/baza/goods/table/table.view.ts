@@ -22,48 +22,14 @@ namespace $.$$ {
 			const status = this.status_filter()
 			const terms = this.query().trim().toLowerCase().split( /\s+/ ).filter( Boolean )
 			if( !terms.length && color === 'all' && status === 'all' ) return $mol_range2( index => this.Row( count - index - 1 ), ()=> count )
-			const color_index = this.index_matches( [ 'Color', color ] )
-			const status_index = this.index_matches( [ 'Status', status ] )
-			const links = this.links()
 			const matches: number[] = []
 			for( let index = count - 1; index >= 0; --index ) {
-				if( color_index ? !color_index.has( links[ index ].str ) : color !== 'all' && this.row_color( index ) !== color ) continue
-				if( status_index ? !status_index.has( links[ index ].str ) : status !== 'all' && this.row_status( index ) !== status ) continue
+				if( color !== 'all' && this.row_color( index ) !== color ) continue
+				if( status !== 'all' && this.row_status( index ) !== status ) continue
 				if( terms.length && !terms.every( term => this.row_title( index ).toLowerCase().includes( term ) ) ) continue
 				matches.push( index )
 			}
 			return $mol_range2( index => this.Row( matches[ index ] ), ()=> matches.length )
-		}
-
-		@ $mol_mem_key
-		index_matches( selection: readonly [ 'Color' | 'Status', string ] ): Set< string > | null {
-			const [ field, key ] = selection
-			if( key === 'all' ) return null
-			const dataset = this.dataset() as $rise_bench_baza_goods_dataset | null
-			const index = field === 'Color' ? dataset?.Color_index()?.remote() : dataset?.Status_index()?.remote()
-			if( !index?.Ready()?.val() ) return null
-			return new Set( index.bucket( key )?.items().map( link => link.str ) ?? [] )
-		}
-
-		@ $mol_action
-		index_keys( index: $rise_bench_baza_goods_index, next: string ) {
-			return [ ...new Set( [ ...index.keys().filter( key => typeof key === 'string' && key.startsWith( 'bucket:' ) ).map( key => String( key ).slice( 7 ) ), next ] ) ].sort()
-		}
-
-		@ $mol_action
-		change_field( id: number, field: 'Color' | 'Status', next: string ) {
-			const product = this.products()[ id ]
-			const dataset = this.dataset() as $rise_bench_baza_goods_dataset | null
-			const index = field === 'Color' ? dataset?.Color_index()?.remote() : dataset?.Status_index()?.remote()
-			// A suspended/interrupted update leaves the index unready: readers fall back to a scan.
-			if( index ) index.Ready( null )!.val( false )
-			product[ field ]( null )!.val( next )
-			if( index ) {
-				const keys = $mol_wire_sync( this ).index_keys( index, next )
-				for( const key of keys ) $mol_wire_sync( index ).set_member( product.link(), key, key === next )
-				index.Ready( null )!.val( true )
-			}
-			return next
 		}
 
 		row_id( id: number ) { return this.products()[ id ].Id()!.val()! }
@@ -76,11 +42,11 @@ namespace $.$$ {
 		}
 
 		row_color( id: number, next?: string ) {
-			return next === undefined ? this.products()[ id ].Color()!.val() ?? '' : this.change_field( id, 'Color', next )
+			return this.products()[ id ].Color()!.val( next ) ?? ''
 		}
 
 		row_status( id: number, next?: string ) {
-			return next === undefined ? this.products()[ id ].Status()!.val() ?? '' : this.change_field( id, 'Status', next )
+			return this.products()[ id ].Status()!.val( next ) ?? ''
 		}
 
 		row_quantity( id: number, next?: number ) {
