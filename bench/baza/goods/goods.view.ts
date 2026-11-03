@@ -113,7 +113,10 @@ namespace $.$$ {
 		product_links() { return this.dataset()?.Products()?.items() ?? [] }
 
 		controls_enabled() { return this.add_enabled() && !$mol_promise_like( this.Add().status()?.[0] ) }
-		add_enabled() { return !$mol_promise_like( this.Create().status()?.[0] ) }
+		add_enabled() {
+			return this.Metrics().runs()[ 0 ]?.state() !== 'Перезагрузка'
+				&& !$mol_promise_like( this.Create().status()?.[0] )
+		}
 		create_enabled() { return this.controls_enabled() && !$mol_promise_like( this.Create().status()?.[0] ) }
 
 		prepare_append( dataset: $rise_bench_baza_goods_dataset ) {
@@ -144,12 +147,10 @@ namespace $.$$ {
 		create() {
 			const total = new ( $mol_wire_sync( $rise_bench_measure ) )( 'Создание набора: всего', this.record_count() )
 			const state = $mol_wire_sync( this ).prepare_dataset( this.dataset_config() )
-			const records = new ( $mol_wire_sync( $rise_bench_measure ) )( 'Заполнение товаров', state.count )
 			for( let index = 0; index < state.count; ++index ) this.initialize_product( [ state, index ] )
-			records.finish()
 			this.dataset_link( state.dataset.link().str )
 			total.finish()
-			return { total: total.duration!, records: records.duration! }
+			return total.duration!
 		}
 
 		@ $mol_action
@@ -167,12 +168,12 @@ namespace $.$$ {
 
 		@ $mol_action
 		benchmark() {
+			this.restore_runs()
 			const run = new ( $mol_wire_sync( $rise_bench_run ) )( this.record_count(), this.compact_mode() ? 4 : 10 )
 			$mol_wire_sync( this ).start_run( run )
 			return $mol_error_fence( ()=> {
 				const created = $mol_wire_sync( this ).create()
-				run.metric( 'Создание, с', created.total / 1000 )
-				run.metric( 'Заполнение, с', created.records / 1000 )
+				run.metric( 'Создание, с', created / 1000 )
 				const search = new ( $mol_wire_sync( $rise_bench_measure ) )( 'Поиск' )
 				if( $mol_wire_sync( this ).benchmark_search() !== 1 ) throw new Error( 'Поиск должен найти один товар' )
 				search.finish()
@@ -182,8 +183,75 @@ namespace $.$$ {
 				$mol_wire_sync( this ).add_one()
 				add.finish()
 				run.metric( 'Добавить 1, с', add.duration! / 1000 )
-				run.state( 'Готово' )
+				$mol_wire_sync( this ).request_reload( run )
 			}, error => { run.state( 'Ошибка' ); return error } )
+		}
+
+		@ $mol_mem
+		reload_store() { return new $rise_bench_baza_goods_reload }
+
+		private runs_restored = false
+		@ $mol_action
+		restore_runs() {
+			if( this.runs_restored ) return
+			const rows = this.reload_store().snapshot.rows.map( row => {
+				const run = new $rise_bench_run( row.count, row.properties, row.stamp )
+				run.state( row.state )
+				for( const [ name, value ] of Object.entries( row.metrics ) ) if( value !== null ) run.metric( name, value )
+				return run
+			})
+			this.Metrics().runs( rows )
+			this.runs_restored = true
+		}
+
+		@ $mol_action
+		save_dataset() {
+			const lands = new Set( [ this.dataset()!.land(), ...this.products().map( product => product.land() ) ] )
+			// Native units_saving suspends until signing and IDB commits finish.
+			// This preparation is outside all reported operation/F5 timings.
+			for( const land of lands ) $mol_wire_sync( land ).units_saving()
+		}
+
+		@ $mol_action
+		request_reload( run: $rise_bench_run ) {
+			$mol_wire_sync( this ).save_dataset()
+			run.state( 'Перезагрузка' )
+			this.reload_store().save( this.Metrics().runs(), this.Metrics().operations(), {
+				link: this.dataset_link(), count: run.count,
+				started: performance.timeOrigin + performance.now(),
+			})
+			this.$.$mol_dom_context.location.reload()
+		}
+
+		private reload_done = false
+		@ $mol_mem
+		resume_reload() {
+			if( this.reload_done ) return
+			const ticket = this.reload_store().snapshot.pending
+			if( !ticket ) return
+			const run = this.Metrics().runs()[ 0 ]
+			return $mol_error_fence( ()=> {
+				if( this.dataset_link() !== ticket.link || this.product_links().length !== ticket.count + 1 ) {
+					throw new Error( 'После F5 открыт другой или неполный набор товаров' )
+				}
+				const ready = new ( $mol_wire_sync( $rise_bench_baza_goods_reload_ready ) )( this.Table().dom_node(), $rise_bench_baza_goods_product_name( ticket.count ) )
+				const finished = $mol_wire_sync( ready ).wait()
+				this.reload_done = true
+				run.metric( 'F5, с', ( finished - ticket.started ) / 1000 )
+				run.state( 'Готово' )
+				this.reload_store().save( this.Metrics().runs(), this.Metrics().operations(), null )
+			}, error => {
+				this.reload_done = true
+				run.state( 'Ошибка' )
+				this.reload_store().save( this.Metrics().runs(), this.Metrics().operations(), null )
+				return error
+			} )
+		}
+
+		override auto() {
+			this.restore_runs()
+			this.resume_reload()
+			return []
 		}
 
 		@ $mol_mem

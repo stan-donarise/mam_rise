@@ -13,6 +13,8 @@ async function main() {
 		context = await browser.newContext({ viewport: { width: 1440, height: 900 } })
 		await isolateUnitTests( context )
 		const page = await context.newPage()
+		let navigations = 0
+		page.on( 'framenavigated', frame => { if( frame === page.mainFrame() ) ++navigations } )
 		const url = targetUrl()
 		const assertOffline = observeOffline( page, url )
 		page.setDefaultTimeout( 60_000 )
@@ -91,17 +93,19 @@ async function main() {
 		await page.getByRole( 'button', { name: 'Сбросить', exact: true } ).click()
 		await page.getByRole( 'checkbox', { name: '4 свойства', exact: true } ).click()
 		await page.getByRole( 'checkbox', { name: '500', exact: true } ).click()
+		const beforeRun = navigations
 		await resultBenchmark( 'Создать 500 записей до отображения', async()=> {
 			await page.getByRole( 'button', { name: 'Запустить бенчмарк', exact: true } ).click()
 			await page.waitForFunction( ()=> globalThis.$.$rise_app.Root( 0 ).Bench().Goods().Metrics().runs()[ 0 ]?.state() === 'Готово' )
 		} )
 		const lands = await page.evaluate( ()=> globalThis.$.$rise_app.Root( 0 ).Bench().Goods().product_links().map( link => link.land().str ) )
+		assert.ok( navigations > beforeRun, 'The benchmark must really reload the whole page' )
 		assert.equal( lands.length, 501 )
 		assert.equal( new Set( lands ).size, 501 )
 		const metrics = await page.evaluate( ()=> globalThis.$.$rise_app.Root( 0 ).Bench().Goods().Metrics().records() )
 		assert.equal( metrics.length, 1 )
 		assert.equal( metrics[ 0 ][ 'Состояние' ], 'Готово' )
-		for( const column of [ 'Создание, с', 'Заполнение, с', 'Поиск, с', 'Добавить 1, с' ] ) {
+		for( const column of [ 'Создание, с', 'Поиск, с', 'Добавить 1, с', 'F5, с' ] ) {
 			assert.notEqual( metrics[ 0 ][ column ], '—' )
 			assert.ok( Number( metrics[ 0 ][ column ] ) >= 0 )
 			assert.match( metrics[ 0 ][ column ], /^\d+\.\d{3}$/ )
@@ -121,6 +125,11 @@ async function main() {
 			return app.Metrics().runs().length === 2 && app.Metrics().runs()[ 0 ].state() === 'Готово'
 		} )
 		assert.equal( await page.evaluate( ()=> globalThis.$.$rise_app.Root( 0 ).Bench().Goods().product_links().length ), 501 )
+		const completed = await page.evaluate( ()=> globalThis.$.$rise_app.Root( 0 ).Bench().Goods().Metrics().records() )
+		resultStep( 'Повторный F5 сохраняет историю и не повторяет прогон', [ '$rise_bench_baza_goods.restore_runs', '$rise_bench_baza_goods.resume_reload' ] )
+		await page.reload({ waitUntil: 'domcontentloaded' })
+		await page.getByText( 'Aurora Smart Notebook 00500', { exact: true } ).waitFor()
+		assert.deepEqual( await page.evaluate( ()=> globalThis.$.$rise_app.Root( 0 ).Bench().Goods().Metrics().records() ), completed )
 		console.log( '[metrics screenshot]', await screenshot( page, 'goods-metrics.png' ) )
 		const rows = await page.locator( '[rise_bench_baza_goods_table_row]' ).count()
 		assert.ok( rows > 0 && rows < 100, `Expected virtualized rows, got ${rows}` )

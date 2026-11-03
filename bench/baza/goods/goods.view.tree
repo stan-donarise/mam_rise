@@ -72,9 +72,9 @@ $rise_bench_baza_goods $mol_book2
 			<= Metrics $rise_bench_metrics
 				operations /
 					\Создание, с
-					\Заполнение, с
 					\Поиск, с
 					\Добавить 1, с
+					\F5, с
 			<= Table $rise_bench_baza_goods_table
 				products <= products /$rise_bench_baza_goods_product
 				compact <= compact_mode false
