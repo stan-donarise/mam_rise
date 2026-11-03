@@ -1,6 +1,15 @@
 namespace $.$$ {
 
 	export class $rise_bench_baza_crdttext extends $.$rise_bench_baza_crdttext {
+		private readonly preset: $giper_baza_rank_preset = [[ null, $giper_baza_rank_read ]]
+
+		@ $mol_mem
+		count_mode( next?: string ) {
+			const count = $mol_state_arg.value( 'lines', next )
+			return count && Object.hasOwn( this.Count().options(), count ) ? count : '500'
+		}
+		line_count() { return Number( this.count_mode() ) }
+		page_title() { return `CRDT-текст: ${ this.line_count() } строк` }
 
 		@ $mol_mem
 		text_link( next?: string ) {
@@ -16,7 +25,7 @@ namespace $.$$ {
 		@ $mol_action
 		prepare_document() {
 			this.$.$giper_baza_auth.current().pass()
-			return $mol_wire_sync( $giper_baza_glob ).land_grab( [[ null, $giper_baza_rank_read ]] ).Data( $giper_baza_text )
+			return $mol_wire_sync( $giper_baza_glob ).land_grab( this.preset ).Data( $giper_baza_text )
 		}
 
 		@ $mol_action
@@ -33,39 +42,127 @@ namespace $.$$ {
 			return this.document()?.text() ?? ''
 		}
 
-		@ $mol_action
-		insertion_text() {
-			const prev = this.text()
-			const lines = prev ? prev.split( '\n' ).length : 0
-			const block = Array.from( { length: 500 }, ( _, index ) =>
-				`Строка ${ lines + index + 1 }: проверяем запись и редактирование текста в Гипербазе.`
+		@ $mol_mem_key
+		sample_text( lines: number ) {
+			return Array.from( { length: lines }, ( _, index ) =>
+				`Строка ${ index + 1 }: проверяем запись и редактирование текста в Гипербазе.`
 			).join( '\n' )
-			return prev ? prev + '\n' + block : block
 		}
 
 		@ $mol_action
-		insert() {
-			const next = $mol_wire_sync( this ).insertion_text()
-			const run = new ( $mol_wire_sync( $rise_bench_run ) )( next.length )
+		insert( next: string ) {
+			const measure = new ( $mol_wire_sync( $rise_bench_measure ) )( 'Вставка' )
+			$mol_wire_sync( this ).write_text( next )
+			measure.finish()
+			return measure.duration!
+		}
+
+		@ $mol_action
+		appended_text() { return this.text() + '!' }
+
+		@ $mol_action
+		append_one() {
+			const measure = new ( $mol_wire_sync( $rise_bench_measure ) )( 'Добавление символа' )
+			const next = $mol_wire_sync( this ).appended_text()
+			$mol_wire_sync( this ).write_text( next )
+			measure.finish()
+			return measure.duration!
+		}
+
+		@ $mol_action
+		start_run( run: $rise_bench_run ) {
+			if( this.Metrics().runs().includes( run ) ) return
+			$mol_wire_sync( this ).reset()
 			this.Metrics().run_add( run )
+		}
+
+		@ $mol_action
+		benchmark() {
+			this.restore_runs()
+			const run = new ( $mol_wire_sync( $rise_bench_run ) )( this.line_count() )
+			const block = this.sample_text( run.count )
+			$mol_wire_sync( this ).start_run( run )
 			return $mol_error_fence( ()=> {
-				const measure = new ( $mol_wire_sync( $rise_bench_measure ) )( 'Вставка' )
-				$mol_wire_sync( this ).write_text( next )
-				measure.finish()
-				run.metric( 'Вставка, с', measure.duration! / 1000 )
-				run.metric( 'Скорость, симв./с', measure.duration ? next.length * 1000 / measure.duration : 0 )
-				run.state( 'Готово' )
+				const inserted = $mol_wire_sync( this ).insert( block )
+				run.metric( 'Вставка, с', inserted / 1000 )
+				run.metric( 'Скорость, симв./с', inserted ? block.length * 1000 / inserted : 0 )
+				$mol_wire_sync( this ).save_document()
+				const appended = $mol_wire_sync( this ).append_one()
+				run.metric( 'Добавить символ, с', appended / 1000 )
+				$mol_wire_sync( this ).save_document()
+				$mol_wire_sync( this ).request_reload( run )
 			}, error => { run.state( 'Ошибка' ); return error } )
 		}
 
 		@ $mol_action
 		reset() {
-			const document = this.document()
-			if( document ) $mol_wire_sync( document ).text( '' )
+			const document = $mol_wire_sync( this ).prepare_document()
+			this.text_link( document.link().str )
 		}
 
 		controls_enabled() {
-			return !$mol_promise_like( this.Insert().status()?.[ 0 ] ) && !$mol_promise_like( this.Reset().status()?.[ 0 ] )
+			return this.Metrics().runs()[ 0 ]?.state() !== 'Перезагрузка'
+				&& !$mol_promise_like( this.Run().status()?.[ 0 ] )
+				&& !$mol_promise_like( this.Reset().status()?.[ 0 ] )
+		}
+
+		@ $mol_mem
+		reload_store() { return new $rise_bench_baza_crdttext_reload }
+
+		private runs_restored = false
+		@ $mol_action
+		restore_runs() {
+			if( this.runs_restored ) return
+			this.Metrics().runs( this.reload_store().snapshot.rows.map( row => {
+				const run = new $rise_bench_run( row.count, row.properties, row.stamp )
+				run.state( row.state )
+				for( const [ name, value ] of Object.entries( row.metrics ) ) if( value !== null ) run.metric( name, value )
+				return run
+			}) )
+			this.runs_restored = true
+		}
+
+		@ $mol_action
+		save_document() { $mol_wire_sync( this.document()!.land() ).units_saving() }
+
+		@ $mol_action
+		request_reload( run: $rise_bench_run ) {
+			run.state( 'Перезагрузка' )
+			this.reload_store().save( this.Metrics().runs(), this.Metrics().operations(), {
+				link: this.text_link(), count: run.count, started: performance.timeOrigin + performance.now(),
+			})
+			this.$.$mol_dom_context.location.reload()
+		}
+
+		private reload_done = false
+		@ $mol_mem
+		resume_reload() {
+			if( this.reload_done ) return
+			const ticket = this.reload_store().snapshot.pending
+			if( !ticket ) return
+			const run = this.Metrics().runs()[ 0 ]
+			return $mol_error_fence( ()=> {
+				const expected = this.sample_text( ticket.count ) + '!'
+				if( this.text_link() !== ticket.link || this.text() !== expected ) throw new Error( 'После F5 открыт другой или неполный CRDT-текст' )
+				const ready = new ( $mol_wire_sync( $rise_bench_baza_crdttext_reload_ready ) )()
+				const finished = $mol_wire_sync( ready ).wait()
+				if( ( this.Editor().Edit().dom_node() as HTMLTextAreaElement ).value !== expected ) throw new Error( 'После F5 текст не появился в textarea' )
+				run.metric( 'F5, с', ( finished - ticket.started ) / 1000 )
+				this.reload_done = true
+				run.state( 'Готово' )
+				this.reload_store().save( this.Metrics().runs(), this.Metrics().operations(), null )
+			}, error => {
+				this.reload_done = true
+				run.state( 'Ошибка' )
+				this.reload_store().save( this.Metrics().runs(), this.Metrics().operations(), null )
+				return error
+			} )
+		}
+
+		override auto() {
+			this.restore_runs()
+			this.resume_reload()
+			return []
 		}
 	}
 
