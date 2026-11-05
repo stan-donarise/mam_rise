@@ -4,7 +4,6 @@ namespace $.$$ {
 		groups() {
 			const groups = new Map< string, { title: string, values: Map< number, number[] > } >()
 			for( const run of this.runs() ) {
-				if( run.benchmark_version !== $rise_bench_run_benchmark_version ) continue
 				const time = run.metric( this.operation() )
 				if( run.state() !== 'Готово' || time === null ) continue
 				const engine = $rise_bench_engine[ run.engine as $rise_bench_engine_kind ]?.title ?? run.engine

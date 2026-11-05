@@ -218,6 +218,11 @@ async function main(){
 			await page.getByRole('checkbox',{name:'Графики',exact:true}).click()
 			await page.locator('[rise_bench_charts_operation_plot]').first().waitFor()
 			assert.equal(await page.locator('[rise_bench_charts_operation_plot]').count(),3)
+			if(local){
+				const versions=await page.locator('[rise_bench_charts_operation_legend_text]').allTextContents()
+				assert.ok(versions.some(title=>title.includes('v0.3.0')),'Historical measurements must appear in charts')
+				assert.ok(versions.some(title=>title.includes('v0.5.0')),'Current measurements must remain a separate series')
+			}
 			if(attempt===0)await screenshot(page,'archive-charts.png')
 			await page.getByRole('checkbox',{name:'Таблица',exact:true}).click()
 			await page.locator('[rise_bench_metrics_table]').waitFor()
