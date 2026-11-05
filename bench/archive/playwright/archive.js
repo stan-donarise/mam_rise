@@ -31,8 +31,11 @@ async function main(){
 		page.on('console',message=>{if(/Different (host|args|task) on restart/.test(message.text()))errors.push(message.text())})
 		const packets=[]
 		page.on('websocket',socket=>socket.on('framesent',frame=>{if(Buffer.isBuffer(frame.payload))packets.push([...frame.payload])}))
-		const url=process.env.RISE_ARCHIVE_URL||'http://localhost:9080/rise/app/-/test.html'
-		const local=new URL(url).hostname==='localhost'
+		const target=new URL(process.env.RISE_ARCHIVE_URL||'http://localhost:9080/rise/app/-/test.html')
+		const isolated=process.env.RISE_ARCHIVE_OFFLINE==='1'
+		if(isolated)target.searchParams.set('rise_fixture','sqltests')
+		const url=target.toString()
+		const local=target.hostname==='localhost'||isolated
 		const sockets=[];page.on('websocket',socket=>sockets.push(socket.url()))
 		resultStep('Открыть каталог и публичную таблицу',['$rise_bench_host.fixture_uri','$rise_bench_archive.root'])
 		await openBenchmark(page,url)
