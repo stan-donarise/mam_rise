@@ -2622,103 +2622,6 @@ $rise_bench_baza_crdttext $mol_book2
 					enabled <= controls_enabled
 					spellcheck false
 
-$rise_bench_idb_table $rise_bench_baza_goods_table
-	records /$rise_bench_idb_storage_product
-	change*? null
-
-$rise_bench_idb $mol_book2
-	menu_title <= title \Сущности IDB
-	pages /
-		<= Settings $mol_page
-			title \Настройки IDB
-			minimal_width 320
-			body /
-				<= Storage_label $mol_view
-					sub / \Хранение: IndexedDB через $mol_db, без индексов
-				<= Schema_label $mol_labeler
-					title \Состав записи
-					Content <= Schema $mol_switch
-						value? <=> schema_mode? \compact
-						enabled <= controls_enabled true
-						options *
-							compact \4 свойства
-							full \10 свойств
-				<= Count_label $mol_labeler
-					title \Количество записей
-					Content <= Count $mol_switch
-						value? <=> count_mode? \100
-						enabled <= controls_enabled
-						options *
-							100 \100
-							500 \500
-							1000 \1000
-							2000 \2000
-							3000 \3000
-							4000 \4000
-							5000 \5000
-							10000 \10000
-				<= Run $mol_button_major
-					title \Запустить бенчмарк
-					click? <=> benchmark? null
-					enabled <= controls_enabled
-		<= Page $rise_bench_surface
-			title \IndexedDB
-			minimal_width 640
-			body_scroll_top? => body_scroll_top?
-			body /
-				<= Metrics $rise_bench_metrics
-					operations /
-						\Создание, с
-						\Поиск, с
-						\Добавить 1, с
-						\F5, с
-						\Поиск после F5, с
-				<= Manual $mol_view
-					sub /
-						<= Search_label $mol_labeler
-							title \Поиск по названию
-							Content <= Search $mol_search
-								hint \Название товара
-								enabled <= filters_enabled true
-								query? => search_query? \
-						<= Color_label $mol_labeler
-							title \Color
-							Content <= Color_filter $mol_select
-								enabled <= filters_enabled
-								value? <=> color_filter? \all
-								dictionary *
-									all \All colors
-									red \red
-									green \green
-									blue \blue
-						<= Status_label $mol_labeler
-							title \Status
-							Content <= Status_filter $mol_select
-								enabled <= filters_enabled
-								value? <=> status_filter? \all
-								dictionary *
-									all \All statuses
-									minor \Store
-									major \Sale
-									critical \Support
-						<= Manual_actions $mol_view
-							sub /
-								<= Add $mol_button_minor
-									title \Добавить запись
-									enabled <= controls_enabled
-									click? <=> add_one? null
-								<= Reset $mol_button_minor
-									title \Очистить
-									click? <=> reset? null
-									enabled <= controls_enabled
-				<= Table $rise_bench_idb_table
-					records <= products /$rise_bench_idb_storage_product
-					compact <= compact false
-					query <= search_query?
-					color_filter <= color_filter?
-					status_filter <= status_filter?
-					change*? <=> change*? null
-
 $rise_bench $mol_book2_catalog
 	placeholders /
 	param \bench
@@ -2745,8 +2648,12 @@ $rise_bench_host_controls $mol_page
 				enabled <= enabled
 				value? <=> engine? \goods
 				options *
+					all \Все
 					goods \Гипербаза
 					idb \IDB
+					sqlite \SQLite
+					pglite \PGlite
+					duckdb \DuckDB
 		<= Storage_label $mol_view
 			sub / <= storage_label \
 		<= Schema_label $mol_labeler
@@ -2892,6 +2799,113 @@ $rise_bench_host $mol_book2
 	Charts $rise_bench_charts
 		runs <= runs
 		operations <= operations
+
+$mol_status $mol_view
+	status <= title
+	minimal_height 24
+	minimal_width 0
+	sub /
+		<= message \
+
+$rise_bench_idb_table $rise_bench_baza_goods_table
+	records /$rise_bench_idb_storage_product
+	change*? null
+
+$rise_bench_idb $mol_book2
+	menu_title <= title \Сущности IDB
+	pages /
+		<= Settings $mol_page
+			title \Настройки
+			minimal_width 320
+			body /
+				<= Storage_label $mol_view
+					sub / <= storage_label \
+				<= Schema_label $mol_labeler
+					title \Состав записи
+					Content <= Schema $mol_switch
+						value? <=> schema_mode? \compact
+						enabled <= controls_enabled true
+						options *
+							compact \4 свойства
+							full \10 свойств
+				<= Count_label $mol_labeler
+					title \Количество записей
+					Content <= Count $mol_switch
+						value? <=> count_mode? \100
+						enabled <= controls_enabled
+						options *
+							100 \100
+							500 \500
+							1000 \1000
+							2000 \2000
+							3000 \3000
+							4000 \4000
+							5000 \5000
+							10000 \10000
+				<= Run $mol_button_major
+					title \Запустить бенчмарк
+					click? <=> benchmark? null
+					enabled <= controls_enabled
+		<= Page $rise_bench_surface
+			title <= storage_title \IDB
+			minimal_width 640
+			body_scroll_top? => body_scroll_top?
+			body /
+				<= Metrics $rise_bench_metrics
+					operations /
+						\Запуск БД, с
+						\Создание, с
+						\Поиск, с
+						\Добавить 1, с
+						\F5, с
+						\Поиск после F5, с
+				<= Manual $mol_view
+					sub <= manual_content /$mol_view
+						<= Search_label $mol_labeler
+							title \Поиск по названию
+							Content <= Search $mol_search
+								hint \Название товара
+								enabled <= filters_enabled true
+								query? => search_query? \
+						<= Color_label $mol_labeler
+							title \Color
+							Content <= Color_filter $mol_select
+								enabled <= filters_enabled
+								value? <=> color_filter? \all
+								dictionary *
+									all \All colors
+									red \red
+									green \green
+									blue \blue
+						<= Status_label $mol_labeler
+							title \Status
+							Content <= Status_filter $mol_select
+								enabled <= filters_enabled
+								value? <=> status_filter? \all
+								dictionary *
+									all \All statuses
+									minor \Store
+									major \Sale
+									critical \Support
+						<= Manual_actions $mol_view
+							sub /
+								<= Add $mol_button_minor
+									title \Добавить запись
+									enabled <= controls_enabled
+									click? <=> add_one? null
+								<= Reset $mol_button_minor
+									title \Очистить
+									click? <=> reset? null
+									enabled <= controls_enabled
+						<= Change_status $mol_status
+							status <= change_message \
+				<= Table $rise_bench_idb_table
+					records <= products /$rise_bench_idb_storage_product
+					compact <= compact false
+					query <= search_query?
+					color_filter <= color_filter?
+					status_filter <= status_filter?
+					change*? <=> change*? null
 
 $rise_drag $mol_plugin
 	x? 0
@@ -3652,13 +3666,6 @@ $mol_app_demo_readme $mol_page
 		uri_base <= uri_base? \
 	Not_found $mol_view sub /
 		<= Not_found_caption @ \Readme not found
-
-$mol_status $mol_view
-	status <= title
-	minimal_height 24
-	minimal_width 0
-	sub /
-		<= message \
 
 $mol_app_demo $mol_book2
 	editor_title <= detail_title \$mol

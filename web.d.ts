@@ -45514,7 +45514,7 @@ declare namespace $ {
 
 declare namespace $ {
     const $rise_bench_run_baza_version = "2e6100b225c8d4fb3a5b5d14e8568223e8a8c785";
-    const $rise_bench_run_benchmark_version = "0.3.0";
+    const $rise_bench_run_benchmark_version = "0.5.0";
     class $rise_bench_run extends $mol_object {
         readonly count: number;
         readonly properties: number;
@@ -45524,11 +45524,45 @@ declare namespace $ {
         readonly id: string;
         readonly computer: string;
         readonly browser: string;
-        constructor(count: number, properties?: number, stamp?: string, baza_version?: string, benchmark_version?: string, id?: string, computer?: string, browser?: string);
+        readonly engine: string;
+        readonly engine_version: string;
+        constructor(count: number, properties?: number, stamp?: string, baza_version?: string, benchmark_version?: string, id?: string, computer?: string, browser?: string, engine?: string, engine_version?: string);
         state(next?: string): string;
+        failure(next?: string): string;
         bytes(next?: number | null): number | null;
         metric(operation: string, next?: number): number | null;
     }
+}
+
+declare namespace $ {
+    const $rise_bench_engine: {
+        goods: {
+            title: string;
+            version: string;
+            storage: string;
+        };
+        idb: {
+            title: string;
+            version: string;
+            storage: string;
+        };
+        sqlite: {
+            title: string;
+            version: string;
+            storage: string;
+        };
+        pglite: {
+            title: string;
+            version: string;
+            storage: string;
+        };
+        duckdb: {
+            title: string;
+            version: string;
+            storage: string;
+        };
+    };
+    type $rise_bench_engine_kind = keyof typeof $rise_bench_engine;
 }
 
 declare namespace $ {
@@ -45582,7 +45616,7 @@ declare namespace $.$$ {
             '\u2116': number;
             '\u0414\u0430\u0442\u0430 \u0438 \u0432\u0440\u0435\u043C\u044F': string;
             Хранилище: string;
-            '\u0412\u0435\u0440\u0441\u0438\u044F \u0413\u0438\u043F\u0435\u0440\u0431\u0430\u0437\u044B': string;
+            '\u0412\u0435\u0440\u0441\u0438\u044F \u0434\u0432\u0438\u0436\u043A\u0430': string;
             '\u0412\u0435\u0440\u0441\u0438\u044F \u0431\u0435\u043D\u0447\u043C\u0430\u0440\u043A\u0430': string;
             Объём: number;
             Строк: number;
@@ -46191,6 +46225,58 @@ declare namespace $.$$ {
     /** Search replaces the set: preserve the viewport, not the previous row identity. */
     class $rise_bench_baza_goods_rows extends $.$rise_bench_baza_goods_rows {
         sub(): readonly $mol_view[];
+    }
+}
+
+declare namespace $ {
+    /** Signed public post/just grant for the result Land, not a private key or data. */
+    class $rise_bench_archive_seed extends $mol_object {
+        private static readonly bytes;
+        static apply(): boolean;
+    }
+}
+
+declare namespace $ {
+    type $rise_bench_archive_row = {
+        id?: string;
+        count: number;
+        properties: number;
+        stamp: string;
+        state: string;
+        error?: string;
+        baza_version?: string;
+        benchmark_version?: string;
+        engine?: string;
+        engine_version?: string;
+        computer?: string;
+        browser?: string;
+        bytes?: number | null;
+        metrics: Record<string, number | null>;
+    };
+    /** Small result metadata only. Never stores a workload Land or database name. */
+    class $rise_bench_archive extends $mol_object {
+        static link: string;
+        static operations(kind: string): string[];
+        private static readonly preset;
+        static provision(): string;
+        static root(): $giper_baza_dict;
+        static validate(value: unknown, operations: readonly string[]): $rise_bench_archive_row | null;
+        static save(kind: string, row: $rise_bench_archive_row): void;
+        static rows(kind: string): $rise_bench_run[];
+        static row(key: string): $rise_bench_run | null;
+    }
+}
+
+declare namespace $ {
+    /** A per-operation deadline, retained across wire replay and the measured F5. */
+    class $rise_bench_stage {
+        readonly run: $rise_bench_run;
+        readonly operation: string;
+        static readonly limit = 300000;
+        static current: $rise_bench_stage | null;
+        readonly started: number;
+        constructor(run: $rise_bench_run, operation: string);
+        check(): void;
     }
 }
 
@@ -48660,6 +48746,23 @@ declare namespace $ {
 
 declare namespace $ {
     function $rise_bench_product_name(index: number): string;
+}
+
+declare namespace $ {
+    type $rise_bench_product = {
+        id: string;
+        title: string;
+        color: string;
+        status: string;
+        checked?: boolean;
+        uri?: string;
+        quantity?: number;
+        supply?: string;
+        description?: string;
+        tags?: string[];
+    };
+    /** Identical input data for each non-CRDT storage adapter. */
+    function $rise_bench_product_make(index: number, compact: boolean): $rise_bench_product;
 }
 
 declare namespace $ {
@@ -60284,49 +60387,13 @@ declare namespace $ {
 }
 
 declare namespace $ {
-    /** Signed public post/just grant for the result Land, not a private key or data. */
-    class $rise_bench_archive_seed extends $mol_object {
-        private static readonly bytes;
-        static apply(): boolean;
-    }
-}
-
-declare namespace $ {
-    type $rise_bench_archive_row = {
-        id?: string;
-        count: number;
-        properties: number;
-        stamp: string;
-        state: string;
-        baza_version?: string;
-        benchmark_version?: string;
-        computer?: string;
-        browser?: string;
-        bytes?: number | null;
-        metrics: Record<string, number | null>;
-    };
-    /** Small result metadata only. Never stores a workload Land or database name. */
-    class $rise_bench_archive extends $mol_object {
-        static link: string;
-        static operations(kind: string): string[];
-        private static readonly preset;
-        static provision(): string;
-        static root(): $giper_baza_dict;
-        static validate(value: unknown, operations: readonly string[]): $rise_bench_archive_row | null;
-        static save(kind: string, row: $rise_bench_archive_row): void;
-        static rows(kind: string): $rise_bench_run[];
-        static row(key: string): $rise_bench_run | null;
-    }
-}
-
-declare namespace $ {
     /** Per-tab run history; the pending ticket belongs only to the next page. */
     class $rise_bench_reload<Ticket> {
-        readonly key: string;
         readonly snapshot: {
             rows: $rise_bench_archive_row[];
             pending: Ticket | null;
         };
+        readonly key: string;
         constructor(key: string);
         save(runs: readonly $rise_bench_run[], operations: readonly string[], pending: Ticket | null): void;
     }
@@ -61058,441 +61125,6 @@ declare namespace $.$$ {
 }
 
 declare namespace $ {
-    type $rise_bench_idb_storage_product = {
-        id: string;
-        title: string;
-        color: string;
-        status: string;
-        checked?: boolean;
-        uri?: string;
-        quantity?: number;
-        supply?: string;
-        description?: string;
-        tags?: string[];
-    };
-    type $rise_bench_idb_storage_schema = {
-        Product: {
-            Key: number;
-            Doc: $rise_bench_idb_storage_product;
-            Indexes: {};
-        };
-    };
-    /** Native IndexedDB through $mol_db. No indexes or CRDT fixture entities. */
-    class $rise_bench_idb_storage extends $mol_object {
-        readonly name: string;
-        constructor(name: string);
-        private readonly migration;
-        db(): Promise<$mol_db_database<$rise_bench_idb_storage_schema>>;
-        product(index: number, compact: boolean): $rise_bench_idb_storage_product;
-        create(count: number, compact: boolean): Promise<void>;
-        count(): Promise<number>;
-        search(): Promise<number>;
-        add(compact: boolean): Promise<void>;
-        rows(): Promise<$rise_bench_idb_storage_product[]>;
-        change(index: number, field: keyof $rise_bench_idb_storage_product, value: string | number | boolean): Promise<void>;
-        destructor(): void;
-        close(): Promise<void>;
-    }
-}
-
-declare namespace $ {
-
-	export class $rise_bench_idb_table extends $rise_bench_baza_goods_table {
-		records( ): readonly($rise_bench_idb_storage_product)[]
-		change( id: any, next?: any ): any
-	}
-	
-}
-
-//# sourceMappingURL=table.view.tree.d.ts.map
-declare namespace $.$$ {
-    /** Same cards and virtualization; only field access differs from CRDT storage. */
-    class $rise_bench_idb_table extends $.$rise_bench_idb_table {
-        count(): number;
-        row_id(id: number): string;
-        row_title(id: number): string;
-        row_uri(id: number): string;
-        row_description(id: number): string;
-        row_tags(id: number): string[];
-        row_color(id: number, next?: string): string;
-        row_status(id: number, next?: string): string;
-        row_checked(id: number, next?: boolean): boolean;
-        row_quantity(id: number, next?: number): number;
-        row_moment(id: number, next?: $mol_time_moment): $mol_time_moment;
-    }
-}
-
-declare namespace $ {
-    class $rise_bench_idb_ready extends $mol_object {
-        readonly table: Element;
-        readonly title: string;
-        constructor(table: Element, title: string);
-        private pending?;
-        private observer?;
-        private timer?;
-        private frame;
-        visible(): boolean;
-        wait(): Promise<number>;
-        destructor(): void;
-    }
-}
-
-declare namespace $ {
-
-	type $mol_view__sub_rise_bench_idb_1 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_view['sub'] >
-	>
-	type $mol_switch__value_rise_bench_idb_2 = $mol_type_enforce<
-		ReturnType< $rise_bench_idb['schema_mode'] >
-		,
-		ReturnType< $mol_switch['value'] >
-	>
-	type $mol_switch__enabled_rise_bench_idb_3 = $mol_type_enforce<
-		ReturnType< $rise_bench_idb['controls_enabled'] >
-		,
-		ReturnType< $mol_switch['enabled'] >
-	>
-	type $mol_switch__options_rise_bench_idb_4 = $mol_type_enforce<
-		({ 
-			'compact': string,
-			'full': string,
-		}) 
-		,
-		ReturnType< $mol_switch['options'] >
-	>
-	type $mol_labeler__title_rise_bench_idb_5 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $mol_labeler['title'] >
-	>
-	type $mol_labeler__Content_rise_bench_idb_6 = $mol_type_enforce<
-		ReturnType< $rise_bench_idb['Schema'] >
-		,
-		ReturnType< $mol_labeler['Content'] >
-	>
-	type $mol_switch__value_rise_bench_idb_7 = $mol_type_enforce<
-		ReturnType< $rise_bench_idb['count_mode'] >
-		,
-		ReturnType< $mol_switch['value'] >
-	>
-	type $mol_switch__enabled_rise_bench_idb_8 = $mol_type_enforce<
-		ReturnType< $rise_bench_idb['controls_enabled'] >
-		,
-		ReturnType< $mol_switch['enabled'] >
-	>
-	type $mol_switch__options_rise_bench_idb_9 = $mol_type_enforce<
-		({ 
-			'100': string,
-			'500': string,
-			'1000': string,
-			'2000': string,
-			'3000': string,
-			'4000': string,
-			'5000': string,
-			'10000': string,
-		}) 
-		,
-		ReturnType< $mol_switch['options'] >
-	>
-	type $mol_labeler__title_rise_bench_idb_10 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $mol_labeler['title'] >
-	>
-	type $mol_labeler__Content_rise_bench_idb_11 = $mol_type_enforce<
-		ReturnType< $rise_bench_idb['Count'] >
-		,
-		ReturnType< $mol_labeler['Content'] >
-	>
-	type $mol_button_major__title_rise_bench_idb_12 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $mol_button_major['title'] >
-	>
-	type $mol_button_major__click_rise_bench_idb_13 = $mol_type_enforce<
-		ReturnType< $rise_bench_idb['benchmark'] >
-		,
-		ReturnType< $mol_button_major['click'] >
-	>
-	type $mol_button_major__enabled_rise_bench_idb_14 = $mol_type_enforce<
-		ReturnType< $rise_bench_idb['controls_enabled'] >
-		,
-		ReturnType< $mol_button_major['enabled'] >
-	>
-	type $mol_page__title_rise_bench_idb_15 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $mol_page['title'] >
-	>
-	type $mol_page__minimal_width_rise_bench_idb_16 = $mol_type_enforce<
-		number
-		,
-		ReturnType< $mol_page['minimal_width'] >
-	>
-	type $mol_page__body_rise_bench_idb_17 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_page['body'] >
-	>
-	type __rise_bench_idb_18 = $mol_type_enforce<
-		Parameters< $rise_bench_idb['body_scroll_top'] >[0]
-		,
-		Parameters< ReturnType< $rise_bench_idb['Page'] >['body_scroll_top'] >[0]
-	>
-	type $rise_bench_metrics__operations_rise_bench_idb_19 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $rise_bench_metrics['operations'] >
-	>
-	type __rise_bench_idb_20 = $mol_type_enforce<
-		Parameters< $rise_bench_idb['search_query'] >[0]
-		,
-		Parameters< ReturnType< $rise_bench_idb['Search'] >['query'] >[0]
-	>
-	type $mol_search__hint_rise_bench_idb_21 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $mol_search['hint'] >
-	>
-	type $mol_search__enabled_rise_bench_idb_22 = $mol_type_enforce<
-		ReturnType< $rise_bench_idb['filters_enabled'] >
-		,
-		ReturnType< $mol_search['enabled'] >
-	>
-	type $mol_labeler__title_rise_bench_idb_23 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $mol_labeler['title'] >
-	>
-	type $mol_labeler__Content_rise_bench_idb_24 = $mol_type_enforce<
-		ReturnType< $rise_bench_idb['Search'] >
-		,
-		ReturnType< $mol_labeler['Content'] >
-	>
-	type $mol_select__enabled_rise_bench_idb_25 = $mol_type_enforce<
-		ReturnType< $rise_bench_idb['filters_enabled'] >
-		,
-		ReturnType< $mol_select['enabled'] >
-	>
-	type $mol_select__value_rise_bench_idb_26 = $mol_type_enforce<
-		ReturnType< $rise_bench_idb['color_filter'] >
-		,
-		ReturnType< $mol_select['value'] >
-	>
-	type $mol_select__dictionary_rise_bench_idb_27 = $mol_type_enforce<
-		({ 
-			'all': string,
-			'red': string,
-			'green': string,
-			'blue': string,
-		}) 
-		,
-		ReturnType< $mol_select['dictionary'] >
-	>
-	type $mol_labeler__title_rise_bench_idb_28 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $mol_labeler['title'] >
-	>
-	type $mol_labeler__Content_rise_bench_idb_29 = $mol_type_enforce<
-		ReturnType< $rise_bench_idb['Color_filter'] >
-		,
-		ReturnType< $mol_labeler['Content'] >
-	>
-	type $mol_select__enabled_rise_bench_idb_30 = $mol_type_enforce<
-		ReturnType< $rise_bench_idb['filters_enabled'] >
-		,
-		ReturnType< $mol_select['enabled'] >
-	>
-	type $mol_select__value_rise_bench_idb_31 = $mol_type_enforce<
-		ReturnType< $rise_bench_idb['status_filter'] >
-		,
-		ReturnType< $mol_select['value'] >
-	>
-	type $mol_select__dictionary_rise_bench_idb_32 = $mol_type_enforce<
-		({ 
-			'all': string,
-			'minor': string,
-			'major': string,
-			'critical': string,
-		}) 
-		,
-		ReturnType< $mol_select['dictionary'] >
-	>
-	type $mol_labeler__title_rise_bench_idb_33 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $mol_labeler['title'] >
-	>
-	type $mol_labeler__Content_rise_bench_idb_34 = $mol_type_enforce<
-		ReturnType< $rise_bench_idb['Status_filter'] >
-		,
-		ReturnType< $mol_labeler['Content'] >
-	>
-	type $mol_button_minor__title_rise_bench_idb_35 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $mol_button_minor['title'] >
-	>
-	type $mol_button_minor__enabled_rise_bench_idb_36 = $mol_type_enforce<
-		ReturnType< $rise_bench_idb['controls_enabled'] >
-		,
-		ReturnType< $mol_button_minor['enabled'] >
-	>
-	type $mol_button_minor__click_rise_bench_idb_37 = $mol_type_enforce<
-		ReturnType< $rise_bench_idb['add_one'] >
-		,
-		ReturnType< $mol_button_minor['click'] >
-	>
-	type $mol_button_minor__title_rise_bench_idb_38 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $mol_button_minor['title'] >
-	>
-	type $mol_button_minor__click_rise_bench_idb_39 = $mol_type_enforce<
-		ReturnType< $rise_bench_idb['reset'] >
-		,
-		ReturnType< $mol_button_minor['click'] >
-	>
-	type $mol_button_minor__enabled_rise_bench_idb_40 = $mol_type_enforce<
-		ReturnType< $rise_bench_idb['controls_enabled'] >
-		,
-		ReturnType< $mol_button_minor['enabled'] >
-	>
-	type $mol_view__sub_rise_bench_idb_41 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_view['sub'] >
-	>
-	type $mol_view__sub_rise_bench_idb_42 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_view['sub'] >
-	>
-	type $rise_bench_idb_table__records_rise_bench_idb_43 = $mol_type_enforce<
-		ReturnType< $rise_bench_idb['products'] >
-		,
-		ReturnType< $rise_bench_idb_table['records'] >
-	>
-	type $rise_bench_idb_table__compact_rise_bench_idb_44 = $mol_type_enforce<
-		ReturnType< $rise_bench_idb['compact'] >
-		,
-		ReturnType< $rise_bench_idb_table['compact'] >
-	>
-	type $rise_bench_idb_table__query_rise_bench_idb_45 = $mol_type_enforce<
-		ReturnType< $rise_bench_idb['search_query'] >
-		,
-		ReturnType< $rise_bench_idb_table['query'] >
-	>
-	type $rise_bench_idb_table__color_filter_rise_bench_idb_46 = $mol_type_enforce<
-		ReturnType< $rise_bench_idb['color_filter'] >
-		,
-		ReturnType< $rise_bench_idb_table['color_filter'] >
-	>
-	type $rise_bench_idb_table__status_filter_rise_bench_idb_47 = $mol_type_enforce<
-		ReturnType< $rise_bench_idb['status_filter'] >
-		,
-		ReturnType< $rise_bench_idb_table['status_filter'] >
-	>
-	type $rise_bench_idb_table__change_rise_bench_idb_48 = $mol_type_enforce<
-		ReturnType< $rise_bench_idb['change'] >
-		,
-		ReturnType< $rise_bench_idb_table['change'] >
-	>
-	type $rise_bench_surface__title_rise_bench_idb_49 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $rise_bench_surface['title'] >
-	>
-	type $rise_bench_surface__minimal_width_rise_bench_idb_50 = $mol_type_enforce<
-		number
-		,
-		ReturnType< $rise_bench_surface['minimal_width'] >
-	>
-	type $rise_bench_surface__body_rise_bench_idb_51 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $rise_bench_surface['body'] >
-	>
-	export class $rise_bench_idb extends $mol_book2 {
-		title( ): string
-		Storage_label( ): $mol_view
-		schema_mode( next?: string ): string
-		controls_enabled( ): boolean
-		Schema( ): $mol_switch
-		Schema_label( ): $mol_labeler
-		count_mode( next?: string ): string
-		Count( ): $mol_switch
-		Count_label( ): $mol_labeler
-		benchmark( next?: any ): any
-		Run( ): $mol_button_major
-		Settings( ): $mol_page
-		body_scroll_top( next?: ReturnType< ReturnType< $rise_bench_idb['Page'] >['body_scroll_top'] > ): ReturnType< ReturnType< $rise_bench_idb['Page'] >['body_scroll_top'] >
-		Metrics( ): $rise_bench_metrics
-		filters_enabled( ): boolean
-		search_query( next?: ReturnType< ReturnType< $rise_bench_idb['Search'] >['query'] > ): ReturnType< ReturnType< $rise_bench_idb['Search'] >['query'] >
-		Search( ): $mol_search
-		Search_label( ): $mol_labeler
-		color_filter( next?: string ): string
-		Color_filter( ): $mol_select
-		Color_label( ): $mol_labeler
-		status_filter( next?: string ): string
-		Status_filter( ): $mol_select
-		Status_label( ): $mol_labeler
-		add_one( next?: any ): any
-		Add( ): $mol_button_minor
-		reset( next?: any ): any
-		Reset( ): $mol_button_minor
-		Manual_actions( ): $mol_view
-		Manual( ): $mol_view
-		products( ): readonly($rise_bench_idb_storage_product)[]
-		compact( ): boolean
-		change( id: any, next?: any ): any
-		Table( ): $rise_bench_idb_table
-		Page( ): $rise_bench_surface
-		menu_title( ): ReturnType< $rise_bench_idb['title'] >
-		pages( ): readonly(any)[]
-	}
-	
-}
-
-//# sourceMappingURL=idb.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $rise_bench_idb extends $.$rise_bench_idb {
-        count_mode(next?: string): string;
-        schema_mode(next?: string): "full" | "compact";
-        compact(): boolean;
-        dataset_name(next?: string): string;
-        storage(): $rise_bench_idb_storage;
-        revision(next?: number): number;
-        products(): $rise_bench_idb_storage_product[];
-        refresh(): void;
-        change(key: string, next?: string | number | boolean): string | number | boolean | null;
-        reset(): void;
-        add_one(): void;
-        controls_enabled(): boolean;
-        filters_enabled(): boolean;
-        reload_store(): $rise_bench_reload<{
-            name: string;
-            count: number;
-            started: number;
-        }>;
-        private restored;
-        restore_runs(): void;
-        start_run(run: $rise_bench_run): void;
-        benchmark(): void;
-        private resumed;
-        resume_reload(): void;
-        auto(): never[];
-    }
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
 
 	type $rise_bench_host__title_rise_bench_1 = $mol_type_enforce<
 		string
@@ -61552,8 +61184,12 @@ declare namespace $ {
 	>
 	type $mol_switch__options_rise_bench_host_controls_3 = $mol_type_enforce<
 		({ 
+			'all': string,
 			'goods': string,
 			'idb': string,
+			'sqlite': string,
+			'pglite': string,
+			'duckdb': string,
 		}) 
 		,
 		ReturnType< $mol_switch['options'] >
@@ -61727,9 +61363,9 @@ declare namespace $.$$ {
         computer(next?: string): string;
         count_title(): "Количество строк" | "Количество записей";
         counts(): {
-            [k: string]: string;
+            all: string;
         };
-        storage_label(): "CRDT-текст" | "IndexedDB через $mol_db, без индексов" | "Хранение: одна Area на запись";
+        storage_label(): string;
         controls(): $mol_view[];
     }
 }
@@ -62022,10 +61658,541 @@ declare namespace $.$$ {
 declare namespace $ { }
 
 declare namespace $ {
+    type $rise_bench_batch_case = {
+        engine: string;
+        count: string;
+        schema: string;
+    };
+    /** A fixed, sequential matrix. Selection changes never alter a running batch. */
+    function $rise_bench_batch(engine: string, count: string, schema: string, text?: boolean): $rise_bench_batch_case[];
+}
+
+declare namespace $ {
     /** Retain every seed Land until peer URLs have live reactive consumers. */
     class $rise_bench_seed extends $mol_object {
         static lands(): $giper_baza_land[];
     }
+}
+
+declare namespace $ {
+
+	export class $mol_status extends $mol_view {
+		message( ): string
+		status( ): ReturnType< $mol_status['title'] >
+		minimal_height( ): number
+		minimal_width( ): number
+		sub( ): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=status.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $mol_status extends $.$mol_status {
+        message(): any;
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+    type $rise_bench_idb_storage_product = $rise_bench_product;
+    type $rise_bench_idb_storage_schema = {
+        Product: {
+            Key: number;
+            Doc: $rise_bench_idb_storage_product;
+            Indexes: {};
+        };
+    };
+    /** Native IndexedDB through $mol_db. No indexes or CRDT fixture entities. */
+    class $rise_bench_idb_storage extends $mol_object {
+        readonly name: string;
+        constructor(name: string);
+        private readonly migration;
+        db(): Promise<$mol_db_database<$rise_bench_idb_storage_schema>>;
+        prepare(): Promise<void>;
+        product(index: number, compact: boolean): $rise_bench_idb_storage_product;
+        create(count: number, compact: boolean): Promise<void>;
+        count(): Promise<number>;
+        search(): Promise<number>;
+        add(compact: boolean): Promise<void>;
+        rows(): Promise<$rise_bench_product[]>;
+        change(index: number, field: keyof $rise_bench_idb_storage_product, value: string | number | boolean): Promise<void>;
+        destructor(): void;
+        close(): Promise<void>;
+    }
+}
+
+declare namespace $ {
+
+	export class $rise_bench_idb_table extends $rise_bench_baza_goods_table {
+		records( ): readonly($rise_bench_idb_storage_product)[]
+		change( id: any, next?: any ): any
+	}
+	
+}
+
+//# sourceMappingURL=table.view.tree.d.ts.map
+declare namespace $.$$ {
+    /** Same cards and virtualization; only field access differs from CRDT storage. */
+    class $rise_bench_idb_table extends $.$rise_bench_idb_table {
+        count(): number;
+        row_id(id: number): string;
+        row_title(id: number): string;
+        row_uri(id: number): string;
+        row_description(id: number): string;
+        row_tags(id: number): string[];
+        row_color(id: number, next?: string): string;
+        row_status(id: number, next?: string): string;
+        row_checked(id: number, next?: boolean): boolean;
+        row_quantity(id: number, next?: number): number;
+        row_moment(id: number, next?: $mol_time_moment): $mol_time_moment;
+    }
+}
+
+declare namespace $ {
+    /** Minimal driver boundary; implementation lives entirely in a dedicated worker. */
+    type $rise_bench_sql_driver = {
+        query(sql: string): Promise<Record<string, any>[]>;
+        close(): Promise<void>;
+    };
+}
+
+declare namespace $ {
+    function $rise_bench_sql_sqlite(name: string): Promise<$rise_bench_sql_driver>;
+}
+
+declare namespace $ {
+    function $rise_bench_sql_pglite(name: string): Promise<$rise_bench_sql_driver>;
+}
+
+declare namespace $ {
+    function $rise_bench_sql_duckdb(name: string): Promise<$rise_bench_sql_driver>;
+}
+
+declare namespace $ {
+    /** Serial RPC: no interleaved transactions and no SQL work on the UI thread. */
+    function $rise_bench_sql_worker(): void;
+}
+
+declare namespace $ {
+    /** Same product generation and operations as IDB, with relational SQL columns. */
+    class $rise_bench_sql_storage extends $mol_object {
+        readonly name: string;
+        readonly engine: $rise_bench_engine_kind;
+        readonly compact: boolean;
+        constructor(name: string, engine: $rise_bench_engine_kind, compact: boolean);
+        product(index: number, compact: boolean): $rise_bench_product;
+        private worker?;
+        private serial;
+        private pending;
+        private disposed;
+        open(): Promise<void>;
+        private request;
+        private fail;
+        query(sql: string): Promise<Record<string, any>[]>;
+        prepare(): Promise<void>;
+        literal(value: unknown): string;
+        private tuple;
+        private write;
+        create(count: number, compact: boolean): Promise<void>;
+        count(): Promise<number>;
+        search(): Promise<number>;
+        add(compact: boolean): Promise<void>;
+        rows(): Promise<$rise_bench_product[]>;
+        change(index: number, field: keyof $rise_bench_product, value: string | number | boolean): Promise<void>;
+        destructor(): void;
+        close(): Promise<void>;
+    }
+}
+
+declare namespace $ {
+    class $rise_bench_idb_ready extends $mol_object {
+        readonly table: Element;
+        readonly title: string;
+        constructor(table: Element, title: string);
+        private pending?;
+        private observer?;
+        private timer?;
+        private frame;
+        visible(): boolean;
+        wait(): Promise<number>;
+        destructor(): void;
+    }
+}
+
+declare namespace $ {
+
+	type $mol_view__sub_rise_bench_idb_1 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_switch__value_rise_bench_idb_2 = $mol_type_enforce<
+		ReturnType< $rise_bench_idb['schema_mode'] >
+		,
+		ReturnType< $mol_switch['value'] >
+	>
+	type $mol_switch__enabled_rise_bench_idb_3 = $mol_type_enforce<
+		ReturnType< $rise_bench_idb['controls_enabled'] >
+		,
+		ReturnType< $mol_switch['enabled'] >
+	>
+	type $mol_switch__options_rise_bench_idb_4 = $mol_type_enforce<
+		({ 
+			'compact': string,
+			'full': string,
+		}) 
+		,
+		ReturnType< $mol_switch['options'] >
+	>
+	type $mol_labeler__title_rise_bench_idb_5 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_labeler['title'] >
+	>
+	type $mol_labeler__Content_rise_bench_idb_6 = $mol_type_enforce<
+		ReturnType< $rise_bench_idb['Schema'] >
+		,
+		ReturnType< $mol_labeler['Content'] >
+	>
+	type $mol_switch__value_rise_bench_idb_7 = $mol_type_enforce<
+		ReturnType< $rise_bench_idb['count_mode'] >
+		,
+		ReturnType< $mol_switch['value'] >
+	>
+	type $mol_switch__enabled_rise_bench_idb_8 = $mol_type_enforce<
+		ReturnType< $rise_bench_idb['controls_enabled'] >
+		,
+		ReturnType< $mol_switch['enabled'] >
+	>
+	type $mol_switch__options_rise_bench_idb_9 = $mol_type_enforce<
+		({ 
+			'100': string,
+			'500': string,
+			'1000': string,
+			'2000': string,
+			'3000': string,
+			'4000': string,
+			'5000': string,
+			'10000': string,
+		}) 
+		,
+		ReturnType< $mol_switch['options'] >
+	>
+	type $mol_labeler__title_rise_bench_idb_10 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_labeler['title'] >
+	>
+	type $mol_labeler__Content_rise_bench_idb_11 = $mol_type_enforce<
+		ReturnType< $rise_bench_idb['Count'] >
+		,
+		ReturnType< $mol_labeler['Content'] >
+	>
+	type $mol_button_major__title_rise_bench_idb_12 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_button_major['title'] >
+	>
+	type $mol_button_major__click_rise_bench_idb_13 = $mol_type_enforce<
+		ReturnType< $rise_bench_idb['benchmark'] >
+		,
+		ReturnType< $mol_button_major['click'] >
+	>
+	type $mol_button_major__enabled_rise_bench_idb_14 = $mol_type_enforce<
+		ReturnType< $rise_bench_idb['controls_enabled'] >
+		,
+		ReturnType< $mol_button_major['enabled'] >
+	>
+	type $mol_page__title_rise_bench_idb_15 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_page['title'] >
+	>
+	type $mol_page__minimal_width_rise_bench_idb_16 = $mol_type_enforce<
+		number
+		,
+		ReturnType< $mol_page['minimal_width'] >
+	>
+	type $mol_page__body_rise_bench_idb_17 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_page['body'] >
+	>
+	type __rise_bench_idb_18 = $mol_type_enforce<
+		Parameters< $rise_bench_idb['body_scroll_top'] >[0]
+		,
+		Parameters< ReturnType< $rise_bench_idb['Page'] >['body_scroll_top'] >[0]
+	>
+	type $rise_bench_metrics__operations_rise_bench_idb_19 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $rise_bench_metrics['operations'] >
+	>
+	type __rise_bench_idb_20 = $mol_type_enforce<
+		Parameters< $rise_bench_idb['search_query'] >[0]
+		,
+		Parameters< ReturnType< $rise_bench_idb['Search'] >['query'] >[0]
+	>
+	type $mol_search__hint_rise_bench_idb_21 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_search['hint'] >
+	>
+	type $mol_search__enabled_rise_bench_idb_22 = $mol_type_enforce<
+		ReturnType< $rise_bench_idb['filters_enabled'] >
+		,
+		ReturnType< $mol_search['enabled'] >
+	>
+	type $mol_labeler__title_rise_bench_idb_23 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_labeler['title'] >
+	>
+	type $mol_labeler__Content_rise_bench_idb_24 = $mol_type_enforce<
+		ReturnType< $rise_bench_idb['Search'] >
+		,
+		ReturnType< $mol_labeler['Content'] >
+	>
+	type $mol_select__enabled_rise_bench_idb_25 = $mol_type_enforce<
+		ReturnType< $rise_bench_idb['filters_enabled'] >
+		,
+		ReturnType< $mol_select['enabled'] >
+	>
+	type $mol_select__value_rise_bench_idb_26 = $mol_type_enforce<
+		ReturnType< $rise_bench_idb['color_filter'] >
+		,
+		ReturnType< $mol_select['value'] >
+	>
+	type $mol_select__dictionary_rise_bench_idb_27 = $mol_type_enforce<
+		({ 
+			'all': string,
+			'red': string,
+			'green': string,
+			'blue': string,
+		}) 
+		,
+		ReturnType< $mol_select['dictionary'] >
+	>
+	type $mol_labeler__title_rise_bench_idb_28 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_labeler['title'] >
+	>
+	type $mol_labeler__Content_rise_bench_idb_29 = $mol_type_enforce<
+		ReturnType< $rise_bench_idb['Color_filter'] >
+		,
+		ReturnType< $mol_labeler['Content'] >
+	>
+	type $mol_select__enabled_rise_bench_idb_30 = $mol_type_enforce<
+		ReturnType< $rise_bench_idb['filters_enabled'] >
+		,
+		ReturnType< $mol_select['enabled'] >
+	>
+	type $mol_select__value_rise_bench_idb_31 = $mol_type_enforce<
+		ReturnType< $rise_bench_idb['status_filter'] >
+		,
+		ReturnType< $mol_select['value'] >
+	>
+	type $mol_select__dictionary_rise_bench_idb_32 = $mol_type_enforce<
+		({ 
+			'all': string,
+			'minor': string,
+			'major': string,
+			'critical': string,
+		}) 
+		,
+		ReturnType< $mol_select['dictionary'] >
+	>
+	type $mol_labeler__title_rise_bench_idb_33 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_labeler['title'] >
+	>
+	type $mol_labeler__Content_rise_bench_idb_34 = $mol_type_enforce<
+		ReturnType< $rise_bench_idb['Status_filter'] >
+		,
+		ReturnType< $mol_labeler['Content'] >
+	>
+	type $mol_button_minor__title_rise_bench_idb_35 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_button_minor['title'] >
+	>
+	type $mol_button_minor__enabled_rise_bench_idb_36 = $mol_type_enforce<
+		ReturnType< $rise_bench_idb['controls_enabled'] >
+		,
+		ReturnType< $mol_button_minor['enabled'] >
+	>
+	type $mol_button_minor__click_rise_bench_idb_37 = $mol_type_enforce<
+		ReturnType< $rise_bench_idb['add_one'] >
+		,
+		ReturnType< $mol_button_minor['click'] >
+	>
+	type $mol_button_minor__title_rise_bench_idb_38 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_button_minor['title'] >
+	>
+	type $mol_button_minor__click_rise_bench_idb_39 = $mol_type_enforce<
+		ReturnType< $rise_bench_idb['reset'] >
+		,
+		ReturnType< $mol_button_minor['click'] >
+	>
+	type $mol_button_minor__enabled_rise_bench_idb_40 = $mol_type_enforce<
+		ReturnType< $rise_bench_idb['controls_enabled'] >
+		,
+		ReturnType< $mol_button_minor['enabled'] >
+	>
+	type $mol_view__sub_rise_bench_idb_41 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_status__status_rise_bench_idb_42 = $mol_type_enforce<
+		ReturnType< $rise_bench_idb['change_message'] >
+		,
+		ReturnType< $mol_status['status'] >
+	>
+	type $mol_view__sub_rise_bench_idb_43 = $mol_type_enforce<
+		ReturnType< $rise_bench_idb['manual_content'] >
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $rise_bench_idb_table__records_rise_bench_idb_44 = $mol_type_enforce<
+		ReturnType< $rise_bench_idb['products'] >
+		,
+		ReturnType< $rise_bench_idb_table['records'] >
+	>
+	type $rise_bench_idb_table__compact_rise_bench_idb_45 = $mol_type_enforce<
+		ReturnType< $rise_bench_idb['compact'] >
+		,
+		ReturnType< $rise_bench_idb_table['compact'] >
+	>
+	type $rise_bench_idb_table__query_rise_bench_idb_46 = $mol_type_enforce<
+		ReturnType< $rise_bench_idb['search_query'] >
+		,
+		ReturnType< $rise_bench_idb_table['query'] >
+	>
+	type $rise_bench_idb_table__color_filter_rise_bench_idb_47 = $mol_type_enforce<
+		ReturnType< $rise_bench_idb['color_filter'] >
+		,
+		ReturnType< $rise_bench_idb_table['color_filter'] >
+	>
+	type $rise_bench_idb_table__status_filter_rise_bench_idb_48 = $mol_type_enforce<
+		ReturnType< $rise_bench_idb['status_filter'] >
+		,
+		ReturnType< $rise_bench_idb_table['status_filter'] >
+	>
+	type $rise_bench_idb_table__change_rise_bench_idb_49 = $mol_type_enforce<
+		ReturnType< $rise_bench_idb['change'] >
+		,
+		ReturnType< $rise_bench_idb_table['change'] >
+	>
+	type $rise_bench_surface__title_rise_bench_idb_50 = $mol_type_enforce<
+		ReturnType< $rise_bench_idb['storage_title'] >
+		,
+		ReturnType< $rise_bench_surface['title'] >
+	>
+	type $rise_bench_surface__minimal_width_rise_bench_idb_51 = $mol_type_enforce<
+		number
+		,
+		ReturnType< $rise_bench_surface['minimal_width'] >
+	>
+	type $rise_bench_surface__body_rise_bench_idb_52 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $rise_bench_surface['body'] >
+	>
+	export class $rise_bench_idb extends $mol_book2 {
+		title( ): string
+		storage_label( ): string
+		Storage_label( ): $mol_view
+		schema_mode( next?: string ): string
+		controls_enabled( ): boolean
+		Schema( ): $mol_switch
+		Schema_label( ): $mol_labeler
+		count_mode( next?: string ): string
+		Count( ): $mol_switch
+		Count_label( ): $mol_labeler
+		benchmark( next?: any ): any
+		Run( ): $mol_button_major
+		Settings( ): $mol_page
+		storage_title( ): string
+		body_scroll_top( next?: ReturnType< ReturnType< $rise_bench_idb['Page'] >['body_scroll_top'] > ): ReturnType< ReturnType< $rise_bench_idb['Page'] >['body_scroll_top'] >
+		Metrics( ): $rise_bench_metrics
+		filters_enabled( ): boolean
+		search_query( next?: ReturnType< ReturnType< $rise_bench_idb['Search'] >['query'] > ): ReturnType< ReturnType< $rise_bench_idb['Search'] >['query'] >
+		Search( ): $mol_search
+		Search_label( ): $mol_labeler
+		color_filter( next?: string ): string
+		Color_filter( ): $mol_select
+		Color_label( ): $mol_labeler
+		status_filter( next?: string ): string
+		Status_filter( ): $mol_select
+		Status_label( ): $mol_labeler
+		add_one( next?: any ): any
+		Add( ): $mol_button_minor
+		reset( next?: any ): any
+		Reset( ): $mol_button_minor
+		Manual_actions( ): $mol_view
+		change_message( ): string
+		Change_status( ): $mol_status
+		manual_content( ): readonly($mol_view)[]
+		Manual( ): $mol_view
+		products( ): readonly($rise_bench_idb_storage_product)[]
+		compact( ): boolean
+		change( id: any, next?: any ): any
+		Table( ): $rise_bench_idb_table
+		Page( ): $rise_bench_surface
+		menu_title( ): ReturnType< $rise_bench_idb['title'] >
+		pages( ): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=idb.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $rise_bench_idb extends $.$rise_bench_idb {
+        engine_kind(): $rise_bench_engine_kind;
+        storage_title(): string;
+        storage_label(): string;
+        dataset_prefix(): string;
+        count_mode(next?: string): string;
+        schema_mode(next?: string): "full" | "compact";
+        compact(): boolean;
+        dataset_name(next?: string): string;
+        storage(): $rise_bench_idb_storage | $rise_bench_sql_storage;
+        revision(next?: number): number;
+        products(): $rise_bench_product[];
+        refresh(): void;
+        change(key: string, next?: string | number | boolean): string | number | boolean | null;
+        change_error(next?: Error | null): Error | null;
+        change_message(): string;
+        manual_content(): ($mol_view | $.$mol_status)[];
+        save_change(key: string, next: string | number | boolean): void;
+        reset(): void;
+        add_one(): void;
+        controls_enabled(): boolean;
+        filters_enabled(): boolean;
+        reload_store(): $rise_bench_reload<{
+            name: string;
+            count: number;
+            started: number;
+        }>;
+        private restored;
+        restore_runs(): void;
+        start_run(run: $rise_bench_run): void;
+        benchmark(): void;
+        private resumed;
+        resume_reload(): void;
+        auto(): never[];
+    }
+}
+
+declare namespace $ {
 }
 
 declare namespace $ {
@@ -62206,11 +62373,30 @@ declare namespace $.$$ {
         text_mode(): boolean;
         mode(next?: string): "charts" | "table";
         fixture_kind(): string;
-        engine(next?: string): "idb" | "goods";
+        engine(next?: string): string;
         count(next?: string): string;
         schema(next?: string): "full" | "compact";
         ready(next?: boolean): boolean;
         busy(next?: boolean): boolean;
+        active_case(next?: ($rise_bench_batch_case & {
+            token: string;
+        }) | null): ($rise_bench_batch_case & {
+            token: string;
+        }) | null;
+        display_case(next?: ($rise_bench_batch_case & {
+            token: string;
+        }) | null): ($rise_bench_batch_case & {
+            token: string;
+        }) | null;
+        frame_generation(next?: number): number;
+        private queue;
+        private total;
+        private finished;
+        private failed;
+        private command_sent;
+        private timer?;
+        private progress;
+        private readonly settled;
         controls_enabled(): boolean;
         config(): {
             count: string;
@@ -62218,6 +62404,9 @@ declare namespace $.$$ {
         };
         send(command: string, data: object): void;
         run(): void;
+        next_case(): void;
+        expire(error?: string): void;
+        finish_case(row: $rise_bench_archive_row, kind: string): void;
         operations(): string[];
         fixture_uri(): string;
         runs(): $rise_bench_run[];
@@ -62232,6 +62421,7 @@ declare namespace $.$$ {
         listener(): {
             destructor: () => void;
         };
+        destructor(): void;
         auto(): never[];
     }
     export {};
@@ -64887,28 +65077,6 @@ declare namespace $.$$ {
         readme(): string;
         body(): $mol_view[];
     }
-}
-
-declare namespace $ {
-
-	export class $mol_status extends $mol_view {
-		message( ): string
-		status( ): ReturnType< $mol_status['title'] >
-		minimal_height( ): number
-		minimal_width( ): number
-		sub( ): readonly(any)[]
-	}
-	
-}
-
-//# sourceMappingURL=status.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $mol_status extends $.$mol_status {
-        message(): any;
-    }
-}
-
-declare namespace $ {
 }
 
 declare namespace $ {

@@ -31391,7 +31391,7 @@ var $;
 var $;
 (function ($) {
     $.$rise_bench_run_baza_version = '2e6100b225c8d4fb3a5b5d14e8568223e8a8c785';
-    $.$rise_bench_run_benchmark_version = '0.3.0';
+    $.$rise_bench_run_benchmark_version = '0.5.0';
     class $rise_bench_run extends $mol_object {
         count;
         properties;
@@ -31401,7 +31401,9 @@ var $;
         id;
         computer;
         browser;
-        constructor(count, properties = 0, stamp = new $mol_time_moment().toString('DD.MM.YYYY hh:mm:ss'), baza_version = $.$rise_bench_run_baza_version, benchmark_version = $.$rise_bench_run_benchmark_version, id = crypto.randomUUID(), computer = $mol_state_local.value('$rise_bench_computer') ?? '', browser = typeof navigator === 'undefined' ? '' : navigator.userAgent) {
+        engine;
+        engine_version;
+        constructor(count, properties = 0, stamp = new $mol_time_moment().toString('DD.MM.YYYY hh:mm:ss'), baza_version = $.$rise_bench_run_baza_version, benchmark_version = $.$rise_bench_run_benchmark_version, id = crypto.randomUUID(), computer = $mol_state_local.value('$rise_bench_computer') ?? '', browser = typeof navigator === 'undefined' ? '' : navigator.userAgent, engine = baza_version === '—' ? 'idb' : 'goods', engine_version = baza_version === '—' ? 'browser' : baza_version) {
             super();
             this.count = count;
             this.properties = properties;
@@ -31411,8 +31413,11 @@ var $;
             this.id = id;
             this.computer = computer;
             this.browser = browser;
+            this.engine = engine;
+            this.engine_version = engine_version;
         }
         state(next = 'Выполняется') { return next; }
+        failure(next = '') { return next; }
         bytes(next = null) { return next; }
         metric(operation, next) { return next ?? null; }
     }
@@ -31421,11 +31426,27 @@ var $;
     ], $rise_bench_run.prototype, "state", null);
     __decorate([
         $mol_mem
+    ], $rise_bench_run.prototype, "failure", null);
+    __decorate([
+        $mol_mem
     ], $rise_bench_run.prototype, "bytes", null);
     __decorate([
         $mol_mem_key
     ], $rise_bench_run.prototype, "metric", null);
     $.$rise_bench_run = $rise_bench_run;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $.$rise_bench_engine = {
+        goods: { title: 'Гипербаза', version: $rise_bench_run_baza_version, storage: 'Хранение: одна Area на запись' },
+        idb: { title: 'IDB', version: 'browser', storage: 'IndexedDB через $mol_db, без индексов' },
+        sqlite: { title: 'SQLite', version: '3.54.1-build1', storage: 'SQLite WASM · OPFS SAH Pool · без индексов' },
+        pglite: { title: 'PGlite', version: '0.5.15', storage: 'PGlite · IndexedDB · без индексов' },
+        duckdb: { title: 'DuckDB', version: '1.32.0', storage: 'DuckDB WASM · OPFS · без индексов' },
+    };
 })($ || ($ = {}));
 
 ;
@@ -31449,19 +31470,19 @@ var $;
                     return;
                 this.runs([run, ...rows]);
             }
-            col_ids() { return ['№', 'Дата и время', ...this.compare() ? ['Хранилище'] : [], 'Версия Гипербазы', 'Версия бенчмарка', ...this.text_mode() ? ['Строк', 'Размер, КБ'] : ['Объём', 'Полей'], ...this.operations(), 'Компьютер']; }
+            col_ids() { return ['№', 'Дата и время', ...this.compare() ? ['Хранилище'] : [], 'Версия движка', 'Версия бенчмарка', ...this.text_mode() ? ['Строк', 'Размер, КБ'] : ['Объём', 'Полей'], ...this.operations(), 'Состояние', 'Компьютер']; }
             records() {
                 return this.runs().map((run, index, rows) => ({
                     '№': rows.length - index,
                     'Дата и время': run.stamp,
-                    'Хранилище': run.baza_version === '—' ? 'IDB' : 'Гипербаза',
-                    'Версия Гипербазы': run.baza_version.slice(0, 8),
+                    'Хранилище': $rise_bench_engine[run.engine]?.title ?? run.engine,
+                    'Версия движка': run.engine === 'goods' ? run.engine_version.slice(0, 8) : run.engine_version,
                     'Версия бенчмарка': run.benchmark_version,
                     'Объём': run.count,
                     'Строк': run.count,
                     'Размер, КБ': run.bytes() === null ? '—' : (run.bytes() / 1024).toFixed(3),
                     'Полей': run.properties || '—',
-                    'Состояние': run.state(),
+                    'Состояние': run.failure() || run.state(),
                     ...Object.fromEntries(this.operations().map(operation => {
                         const time = run.metric(operation);
                         return [operation, time === null ? '—' : time.toFixed(3)];
@@ -32727,6 +32748,181 @@ var $;
 "use strict";
 var $;
 (function ($) {
+    /** Signed public post/just grant for the result Land, not a private key or data. */
+    class $rise_bench_archive_seed extends $mol_object {
+        static bytes = new Uint8Array([76, 65, 78, 68, 9, 212, 44, 154, 255, 14, 96, 10, 136, 26, 73, 199, 0, 0, 0, 0, 0, 0, 0, 0, 253, 63, 1, 0, 139, 176, 233, 106, 9, 212, 44, 154, 255, 14, 96, 10, 136, 26, 73, 199, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 254, 131, 2, 0, 139, 176, 233, 106, 9, 212, 44, 154, 255, 14, 96, 10, 136, 26, 73, 199, 241, 85, 138, 73, 112, 199, 124, 123, 68, 6, 185, 190, 194, 27, 94, 118, 169, 2, 18, 121, 13, 234, 180, 83, 85, 126, 55, 125, 35, 163, 21, 179, 54, 235, 32, 73, 72, 149, 122, 140, 201, 105, 80, 32, 212, 129, 251, 221, 124, 12, 235, 250, 73, 187, 195, 219, 52, 188, 89, 205, 100, 162, 134, 51, 156, 68, 77, 124, 226, 101, 45, 141, 172, 219, 4, 14, 129, 216, 17, 54, 183, 120, 163, 108, 52, 49, 79, 46, 106, 255, 247, 176, 10, 29, 235, 20, 235, 4, 153, 6, 255, 246, 32, 121, 180, 60, 71, 12, 42, 227, 51, 55, 213, 14, 32, 110, 96, 84, 177, 50, 94, 193, 103, 39, 25, 230, 73, 78, 205, 43, 84, 108, 197, 247, 80, 23, 108, 108, 246, 3, 199, 219, 38, 228, 200, 148, 1, 218, 234, 169, 58, 10, 15, 148, 227, 220, 185, 66, 156, 110, 12, 241, 98, 123, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+        static apply() {
+            const pack = $mol_wire_sync($giper_baza_pack).from(this.bytes.buffer);
+            const parts = $mol_wire_sync(pack).parts();
+            $mol_wire_sync($giper_baza_glob).apply_parts(parts);
+            return true;
+        }
+    }
+    __decorate([
+        $mol_mem
+    ], $rise_bench_archive_seed, "apply", null);
+    $.$rise_bench_archive_seed = $rise_bench_archive_seed;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    /** Small result metadata only. Never stores a workload Land or database name. */
+    class $rise_bench_archive extends $mol_object {
+        static link = 'CdQsmv8O_YAqIGknH';
+        static operations(kind) {
+            return kind === 'text' ? ['Вставка, с', 'Добавить символ, с', 'F5, с']
+                : ['Запуск БД, с', 'Создание, с', 'Поиск, с', 'Добавить 1, с', 'F5, с', 'Поиск после F5, с'];
+        }
+        static preset = [[null, $giper_baza_rank_post('just')]];
+        static provision() {
+            this.$.$giper_baza_auth.current().pass();
+            const land = $mol_wire_sync($giper_baza_glob).land_grab(this.preset);
+            land.Data($giper_baza_dict).dive('title', $giper_baza_atom_text, null).val('Rise benchmark results');
+            $mol_wire_sync(land).units_saving();
+            return land.link().str;
+        }
+        static root() {
+            if (!this.link)
+                throw new Error('Не настроен общий Land результатов');
+            $rise_bench_archive_seed.apply();
+            return $giper_baza_glob.Land(new $giper_baza_link(this.link)).Data($giper_baza_dict);
+        }
+        static validate(value, operations) {
+            if (!value || typeof value !== 'object')
+                return null;
+            const row = value;
+            if (typeof row.id !== 'string' || !/^[\da-f-]{36}$/.test(row.id))
+                return null;
+            if (!Number.isSafeInteger(row.count) || row.count < 1 || row.count > 10000)
+                return null;
+            if (![0, 4, 10].includes(row.properties) || !['Готово', 'Ошибка'].includes(row.state))
+                return null;
+            if (typeof row.stamp !== 'string' || !/^\d{2}\.\d{2}\.\d{4} \d{2}:\d{2}:\d{2}$/.test(row.stamp))
+                return null;
+            if (row.error !== undefined && (typeof row.error !== 'string' || row.error.length > 2000))
+                return null;
+            if (typeof row.baza_version !== 'string' || !/^(?:[\da-f]{40}|—)$/.test(row.baza_version))
+                return null;
+            if (typeof row.benchmark_version !== 'string' || !/^\d+\.\d+\.\d+$/.test(row.benchmark_version))
+                return null;
+            if (row.engine !== undefined && !Object.hasOwn($rise_bench_engine, row.engine))
+                return null;
+            if (row.engine_version !== undefined && (typeof row.engine_version !== 'string' || !/^[\w.\-—]{1,80}$/.test(row.engine_version)))
+                return null;
+            if (row.computer !== undefined && (typeof row.computer !== 'string' || row.computer.length > 8000))
+                return null;
+            if (row.browser !== undefined && (typeof row.browser !== 'string' || row.browser.length > 4000))
+                return null;
+            if (row.bytes != null && (!Number.isSafeInteger(row.bytes) || row.bytes < 0 || row.bytes > 100_000_000))
+                return null;
+            if (!row.metrics || typeof row.metrics !== 'object')
+                return null;
+            const metrics = {};
+            for (const name of operations) {
+                // Older results and native Baza do not have a separate initialization phase.
+                const time = name === 'Запуск БД, с' ? row.metrics[name] ?? null : row.metrics[name];
+                if (time !== null && (typeof time !== 'number' || !Number.isFinite(time) || time < 0))
+                    return null;
+                metrics[name] = time;
+            }
+            return { id: row.id, count: row.count, properties: row.properties, stamp: row.stamp, state: row.state, error: row.error ?? '',
+                baza_version: row.baza_version, benchmark_version: row.benchmark_version, engine: row.engine, engine_version: row.engine_version, computer: row.computer ?? '', browser: row.browser ?? '', bytes: row.bytes ?? null, metrics };
+        }
+        static save(kind, row) {
+            if (kind !== 'text' && !Object.hasOwn($rise_bench_engine, kind))
+                throw new Error('Неизвестный бенчмарк');
+            const validated = this.validate(row, this.operations(kind));
+            if (!validated)
+                throw new Error('Некорректный результат бенчмарка');
+            if (validated.engine !== undefined && validated.engine !== (kind === 'text' ? 'goods' : kind))
+                throw new Error('Движок результата не соответствует нагрузке');
+            const atom = this.root().dive(kind + ':' + row.id, $giper_baza_atom_text, null);
+            if (!atom)
+                throw new Error('Нет доступа к результатам');
+            atom.val(JSON.stringify(validated));
+            $mol_wire_sync(this.root().land()).units_saving();
+        }
+        static rows(kind) {
+            const root = this.root();
+            return root.keys().filter(key => typeof key === 'string' && key.startsWith(kind + ':')).flatMap(key => {
+                const run = this.row(key);
+                return run ? [run] : [];
+            });
+        }
+        static row(key) {
+            const kind = key.split(':')[0];
+            const text = this.root().dive(key, $giper_baza_atom_text)?.val();
+            const row = text && $mol_error_fence(() => this.validate(JSON.parse(text), this.operations(kind)), () => null);
+            if (!row || key !== kind + ':' + row.id)
+                return null;
+            const run = new ($mol_wire_sync($rise_bench_run))(row.count, row.properties, row.stamp, row.baza_version ?? '—', row.benchmark_version ?? '—', row.id, row.computer ?? '', row.browser ?? '', row.engine, row.engine_version);
+            run.state(row.state);
+            run.failure(row.error ?? '');
+            run.bytes(row.bytes ?? null);
+            for (const [operation, value] of Object.entries(row.metrics))
+                if (typeof value === 'number')
+                    run.metric(operation, value);
+            return run;
+        }
+    }
+    __decorate([
+        $mol_action
+    ], $rise_bench_archive, "provision", null);
+    __decorate([
+        $mol_mem
+    ], $rise_bench_archive, "root", null);
+    __decorate([
+        $mol_action
+    ], $rise_bench_archive, "save", null);
+    __decorate([
+        $mol_mem_key
+    ], $rise_bench_archive, "rows", null);
+    __decorate([
+        $mol_mem_key
+    ], $rise_bench_archive, "row", null);
+    $.$rise_bench_archive = $rise_bench_archive;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    /** A per-operation deadline, retained across wire replay and the measured F5. */
+    class $rise_bench_stage {
+        run;
+        operation;
+        static limit = 300_000;
+        static current = null;
+        started = Date.now();
+        constructor(run, operation) {
+            this.run = run;
+            this.operation = operation;
+            $rise_bench_stage.current = this;
+            const token = new URL(location.href).searchParams.get('rise_run');
+            if (window.parent !== window)
+                window.parent.postMessage({
+                    type: 'rise-bench-progress', kind: new URL(location.href).searchParams.get('rise_fixture'), token,
+                    operation, started: this.started,
+                    row: { id: run.id, count: run.count, properties: run.properties, stamp: run.stamp,
+                        state: 'Ошибка', baza_version: run.baza_version, benchmark_version: run.benchmark_version,
+                        engine: run.engine, engine_version: run.engine_version, computer: run.computer, browser: run.browser,
+                        bytes: run.bytes(), metrics: Object.fromEntries($rise_bench_archive.operations(run.properties ? 'goods' : 'text').map(name => [name, run.metric(name)])) },
+                }, location.origin);
+        }
+        check() {
+            if (Date.now() - this.started >= $rise_bench_stage.limit)
+                throw new Error(`${this.operation}: превышен лимит 300 с`);
+        }
+    }
+    $.$rise_bench_stage = $rise_bench_stage;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
     class $rise_bench_baza_goods_tag extends $giper_baza_entity {
     }
     $.$rise_bench_baza_goods_tag = $rise_bench_baza_goods_tag;
@@ -32782,6 +32978,7 @@ var $;
                     return $mol_range2(index => this.Row(count - index - 1), () => count);
                 const matches = [];
                 for (let index = count - 1; index >= 0; --index) {
+                    $rise_bench_stage.current?.check();
                     if (color !== 'all' && this.row_color(index) !== color)
                         continue;
                     if (status !== 'all' && this.row_status(index) !== status)
@@ -33201,6 +33398,25 @@ var $;
         return `${brands[Math.floor(index / 10) % 10]} ${models[Math.floor(index / 100) % 10]} ${types[index % 10]} ${String(index).padStart(5, '0')}`;
     }
     $.$rise_bench_product_name = $rise_bench_product_name;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    /** Identical input data for each non-CRDT storage adapter. */
+    function $rise_bench_product_make(index, compact) {
+        const product = {
+            id: String(index).padStart(5, '0'), title: $rise_bench_product_name(index),
+            color: ['red', 'green', 'blue'][index % 3], status: ['minor', 'major', 'critical'][index % 3],
+        };
+        return compact ? product : {
+            ...product, checked: false, uri: `https://xkcd.com/${index + 1}/`, quantity: index % 100, supply: '2026-10-05',
+            description: `${product.title} — sample product for the local CRDT benchmark.`,
+            tags: Array.from({ length: 5 }, (_, offset) => ['Office', 'Home', 'Travel', 'Studio', 'Gaming', 'Portable', 'Wireless', 'Compact', 'Premium', 'Classic', 'New', 'Popular', 'Eco', 'Gift', 'Work', 'Creative', 'Audio', 'Video', 'Network', 'Accessories'][(index + offset * 3) % 20]),
+        };
+    }
+    $.$rise_bench_product_make = $rise_bench_product_make;
 })($ || ($ = {}));
 
 ;
@@ -33730,150 +33946,21 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    /** Signed public post/just grant for the result Land, not a private key or data. */
-    class $rise_bench_archive_seed extends $mol_object {
-        static bytes = new Uint8Array([76, 65, 78, 68, 9, 212, 44, 154, 255, 14, 96, 10, 136, 26, 73, 199, 0, 0, 0, 0, 0, 0, 0, 0, 253, 63, 1, 0, 139, 176, 233, 106, 9, 212, 44, 154, 255, 14, 96, 10, 136, 26, 73, 199, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 254, 131, 2, 0, 139, 176, 233, 106, 9, 212, 44, 154, 255, 14, 96, 10, 136, 26, 73, 199, 241, 85, 138, 73, 112, 199, 124, 123, 68, 6, 185, 190, 194, 27, 94, 118, 169, 2, 18, 121, 13, 234, 180, 83, 85, 126, 55, 125, 35, 163, 21, 179, 54, 235, 32, 73, 72, 149, 122, 140, 201, 105, 80, 32, 212, 129, 251, 221, 124, 12, 235, 250, 73, 187, 195, 219, 52, 188, 89, 205, 100, 162, 134, 51, 156, 68, 77, 124, 226, 101, 45, 141, 172, 219, 4, 14, 129, 216, 17, 54, 183, 120, 163, 108, 52, 49, 79, 46, 106, 255, 247, 176, 10, 29, 235, 20, 235, 4, 153, 6, 255, 246, 32, 121, 180, 60, 71, 12, 42, 227, 51, 55, 213, 14, 32, 110, 96, 84, 177, 50, 94, 193, 103, 39, 25, 230, 73, 78, 205, 43, 84, 108, 197, 247, 80, 23, 108, 108, 246, 3, 199, 219, 38, 228, 200, 148, 1, 218, 234, 169, 58, 10, 15, 148, 227, 220, 185, 66, 156, 110, 12, 241, 98, 123, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-        static apply() {
-            const pack = $mol_wire_sync($giper_baza_pack).from(this.bytes.buffer);
-            const parts = $mol_wire_sync(pack).parts();
-            $mol_wire_sync($giper_baza_glob).apply_parts(parts);
-            return true;
-        }
-    }
-    __decorate([
-        $mol_mem
-    ], $rise_bench_archive_seed, "apply", null);
-    $.$rise_bench_archive_seed = $rise_bench_archive_seed;
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    /** Small result metadata only. Never stores a workload Land or database name. */
-    class $rise_bench_archive extends $mol_object {
-        static link = 'CdQsmv8O_YAqIGknH';
-        static operations(kind) {
-            return kind === 'text' ? ['Вставка, с', 'Добавить символ, с', 'F5, с']
-                : ['Создание, с', 'Поиск, с', 'Добавить 1, с', 'F5, с', 'Поиск после F5, с'];
-        }
-        static preset = [[null, $giper_baza_rank_post('just')]];
-        static provision() {
-            this.$.$giper_baza_auth.current().pass();
-            const land = $mol_wire_sync($giper_baza_glob).land_grab(this.preset);
-            land.Data($giper_baza_dict).dive('title', $giper_baza_atom_text, null).val('Rise benchmark results');
-            $mol_wire_sync(land).units_saving();
-            return land.link().str;
-        }
-        static root() {
-            if (!this.link)
-                throw new Error('Не настроен общий Land результатов');
-            $rise_bench_archive_seed.apply();
-            return $giper_baza_glob.Land(new $giper_baza_link(this.link)).Data($giper_baza_dict);
-        }
-        static validate(value, operations) {
-            if (!value || typeof value !== 'object')
-                return null;
-            const row = value;
-            if (typeof row.id !== 'string' || !/^[\da-f-]{36}$/.test(row.id))
-                return null;
-            if (!Number.isSafeInteger(row.count) || row.count < 1 || row.count > 10000)
-                return null;
-            if (![0, 4, 10].includes(row.properties) || !['Готово', 'Ошибка'].includes(row.state))
-                return null;
-            if (typeof row.stamp !== 'string' || !/^\d{2}\.\d{2}\.\d{4} \d{2}:\d{2}:\d{2}$/.test(row.stamp))
-                return null;
-            if (typeof row.baza_version !== 'string' || !/^(?:[\da-f]{40}|—)$/.test(row.baza_version))
-                return null;
-            if (typeof row.benchmark_version !== 'string' || !/^\d+\.\d+\.\d+$/.test(row.benchmark_version))
-                return null;
-            if (row.computer !== undefined && (typeof row.computer !== 'string' || row.computer.length > 8000))
-                return null;
-            if (row.browser !== undefined && (typeof row.browser !== 'string' || row.browser.length > 4000))
-                return null;
-            if (row.bytes != null && (!Number.isSafeInteger(row.bytes) || row.bytes < 0 || row.bytes > 100_000_000))
-                return null;
-            if (!row.metrics || typeof row.metrics !== 'object')
-                return null;
-            const metrics = {};
-            for (const name of operations) {
-                const time = row.metrics[name];
-                if (time !== null && (typeof time !== 'number' || !Number.isFinite(time) || time < 0))
-                    return null;
-                metrics[name] = time;
-            }
-            return { id: row.id, count: row.count, properties: row.properties, stamp: row.stamp, state: row.state,
-                baza_version: row.baza_version, benchmark_version: row.benchmark_version, computer: row.computer ?? '', browser: row.browser ?? '', bytes: row.bytes ?? null, metrics };
-        }
-        static save(kind, row) {
-            if (!['goods', 'text', 'idb'].includes(kind))
-                throw new Error('Неизвестный бенчмарк');
-            const validated = this.validate(row, this.operations(kind));
-            if (!validated)
-                throw new Error('Некорректный результат бенчмарка');
-            const atom = this.root().dive(kind + ':' + row.id, $giper_baza_atom_text, null);
-            if (!atom)
-                throw new Error('Нет доступа к результатам');
-            atom.val(JSON.stringify(validated));
-            $mol_wire_sync(this.root().land()).units_saving();
-        }
-        static rows(kind) {
-            const root = this.root();
-            return root.keys().filter(key => typeof key === 'string' && key.startsWith(kind + ':')).flatMap(key => {
-                const run = this.row(key);
-                return run ? [run] : [];
-            });
-        }
-        static row(key) {
-            const kind = key.split(':')[0];
-            const text = this.root().dive(key, $giper_baza_atom_text)?.val();
-            const row = text && $mol_error_fence(() => this.validate(JSON.parse(text), this.operations(kind)), () => null);
-            if (!row || key !== kind + ':' + row.id)
-                return null;
-            const run = new ($mol_wire_sync($rise_bench_run))(row.count, row.properties, row.stamp, row.baza_version ?? '—', row.benchmark_version ?? '—', row.id, row.computer ?? '', row.browser ?? '');
-            run.state(row.state);
-            run.bytes(row.bytes ?? null);
-            for (const [operation, value] of Object.entries(row.metrics))
-                if (typeof value === 'number')
-                    run.metric(operation, value);
-            return run;
-        }
-    }
-    __decorate([
-        $mol_action
-    ], $rise_bench_archive, "provision", null);
-    __decorate([
-        $mol_mem
-    ], $rise_bench_archive, "root", null);
-    __decorate([
-        $mol_action
-    ], $rise_bench_archive, "save", null);
-    __decorate([
-        $mol_mem_key
-    ], $rise_bench_archive, "rows", null);
-    __decorate([
-        $mol_mem_key
-    ], $rise_bench_archive, "row", null);
-    $.$rise_bench_archive = $rise_bench_archive;
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
     /** Per-tab run history; the pending ticket belongs only to the next page. */
     class $rise_bench_reload {
-        key;
         snapshot;
+        key;
         constructor(key) {
-            this.key = key;
-            const saved = $mol_error_fence(() => JSON.parse(sessionStorage.getItem(key) || 'null'), () => null);
+            this.key = key + (new URL(location.href).searchParams.get('rise_run') || '');
+            const saved = $mol_error_fence(() => JSON.parse(sessionStorage.getItem(this.key) || 'null'), () => null);
             this.snapshot = Array.isArray(saved?.rows) ? saved : { rows: [], pending: null };
         }
         save(runs, operations, pending) {
             const rows = runs.map(run => ({
                 count: run.count, properties: run.properties, stamp: run.stamp, state: run.state(),
+                error: run.failure(),
                 baza_version: run.baza_version, benchmark_version: run.benchmark_version,
+                engine: run.engine, engine_version: run.engine_version,
                 id: run.id,
                 computer: run.computer, browser: run.browser,
                 bytes: run.bytes(),
@@ -33882,7 +33969,8 @@ var $;
             sessionStorage.setItem(this.key, JSON.stringify({ rows, pending }));
             const kind = new URL(location.href).searchParams.get('rise_fixture');
             if (window.parent !== window && !pending && ['Готово', 'Ошибка'].includes(rows[0]?.state)) {
-                window.parent.postMessage({ type: 'rise-bench-result', kind, row: rows[0] }, location.origin);
+                $rise_bench_stage.current = null;
+                window.parent.postMessage({ type: 'rise-bench-result', kind, token: new URL(location.href).searchParams.get('rise_run'), row: rows[0] }, location.origin);
             }
         }
     }
@@ -33947,8 +34035,8 @@ var $;
                 this.observer.observe(this.table, { childList: true, subtree: true, attributes: true, characterData: true });
                 this.timer = setTimeout(() => {
                     this.destructor();
-                    reject(new Error('После F5 товары не появились за 45 секунд'));
-                }, 45_000);
+                    reject(new Error('После F5 товары не появились за 300 секунд'));
+                }, 300_000);
                 check();
             });
         }
@@ -34023,6 +34111,7 @@ var $;
                 return product;
             }
             initialize_product(key) {
+                $rise_bench_stage.current?.check();
                 const [state, index] = key;
                 // This initializer is only invoked by Create. A completed record has no
                 // remaining write dependencies and is never recreated on async replay.
@@ -34044,7 +34133,7 @@ var $;
             dataset_link(next) {
                 // Keep existing Area datasets; retired single/shard datasets stay untouched.
                 const key = '$rise_bug_listbaza_dataset_names2_area' + (this.record_count() === 1000 ? '' : '_' + this.record_count()) + (this.compact_mode() ? '_compact' : '');
-                return $mol_state_local.value(key, next) ?? '';
+                return $mol_state_local.value(key + (new URL(location.href).searchParams.get('rise_run') || ''), next) ?? '';
             }
             dataset() {
                 const link = this.dataset_link();
@@ -34110,24 +34199,32 @@ var $;
             benchmark() {
                 this.restore_runs();
                 const run = new ($mol_wire_sync($rise_bench_run))(this.record_count(), this.compact_mode() ? 4 : 10);
+                new ($mol_wire_sync($rise_bench_stage))(run, 'Подготовка');
                 $mol_wire_sync(this).start_run(run);
                 return $mol_error_fence(() => {
+                    new ($mol_wire_sync($rise_bench_stage))(run, 'Создание, с');
                     const created = $mol_wire_sync(this).create();
                     run.metric('Создание, с', created / 1000);
                     // Drain the previous writes before measuring another operation.
+                    new ($mol_wire_sync($rise_bench_stage))(run, 'Сохранение после создания');
                     $mol_wire_sync(this).save_dataset();
+                    new ($mol_wire_sync($rise_bench_stage))(run, 'Поиск, с');
                     const search = new ($mol_wire_sync($rise_bench_measure))('Поиск');
                     if ($mol_wire_sync(this).benchmark_search() !== 1)
                         throw new Error('Поиск должен найти один товар');
                     search.finish();
                     run.metric('Поиск, с', search.duration / 1000);
                     this.search_query('');
+                    new ($mol_wire_sync($rise_bench_stage))(run, 'Добавить 1, с');
                     const added = $mol_wire_sync(this).add_one();
                     run.metric('Добавить 1, с', added / 1000);
+                    new ($mol_wire_sync($rise_bench_stage))(run, 'Сохранение после добавления');
                     $mol_wire_sync(this).save_dataset();
+                    new ($mol_wire_sync($rise_bench_stage))(run, 'F5, с');
                     $mol_wire_sync(this).request_reload(run);
                 }, error => {
                     run.state('Ошибка');
+                    run.failure(String(error));
                     this.reload_store().save(this.Metrics().runs(), this.Metrics().operations(), null);
                     return error;
                 });
@@ -34178,6 +34275,7 @@ var $;
                     const ready = new ($mol_wire_sync($rise_bench_baza_goods_reload_ready))(this.Table().dom_node(), $rise_bench_baza_goods_product_name(ticket.count));
                     const finished = $mol_wire_sync(ready).wait();
                     run.metric('F5, с', (finished - ticket.started) / 1000);
+                    new ($mol_wire_sync($rise_bench_stage))(run, 'Поиск после F5, с');
                     const search = new ($mol_wire_sync($rise_bench_measure))('Поиск после F5');
                     if ($mol_wire_sync(this).benchmark_search() !== 1)
                         throw new Error('Поиск после F5 должен найти один товар');
@@ -34190,6 +34288,7 @@ var $;
                 }, error => {
                     this.reload_done = true;
                     run.state('Ошибка');
+                    run.failure(String(error));
                     this.reload_store().save(this.Metrics().runs(), this.Metrics().operations(), null);
                     return error;
                 });
@@ -34587,8 +34686,8 @@ var $;
                 this.observer.observe(this.editor.dom_node(), { childList: true, subtree: true, characterData: true });
                 this.timer = setTimeout(() => {
                     this.destructor();
-                    reject(new Error('Текст не появился в редакторе за 45 секунд'));
-                }, 45_000);
+                    reject(new Error('Текст не появился в редакторе за 300 секунд'));
+                }, 300_000);
                 check();
             });
         }
@@ -34633,7 +34732,7 @@ var $;
             line_count() { return Number(this.count_mode()); }
             page_title() { return `CRDT-текст: ${this.line_count()} строк`; }
             text_link(next) {
-                return $mol_state_local.value('$rise_bench_baza_crdttext', next) ?? '';
+                return $mol_state_local.value('$rise_bench_baza_crdttext' + (new URL(location.href).searchParams.get('rise_run') || ''), next) ?? '';
             }
             document() {
                 const link = this.text_link();
@@ -34682,18 +34781,25 @@ var $;
             benchmark() {
                 this.restore_runs();
                 const run = new ($mol_wire_sync($rise_bench_run))(this.line_count());
+                new ($mol_wire_sync($rise_bench_stage))(run, 'Подготовка');
                 const block = this.sample_text(run.count);
                 $mol_wire_sync(this).start_run(run);
                 return $mol_error_fence(() => {
+                    new ($mol_wire_sync($rise_bench_stage))(run, 'Вставка, с');
                     const inserted = $mol_wire_sync(this).insert(block);
                     run.metric('Вставка, с', inserted / 1000);
+                    new ($mol_wire_sync($rise_bench_stage))(run, 'Сохранение после вставки');
                     $mol_wire_sync(this).save_document();
+                    new ($mol_wire_sync($rise_bench_stage))(run, 'Добавить символ, с');
                     const appended = $mol_wire_sync(this).append_one();
                     run.metric('Добавить символ, с', appended / 1000);
+                    new ($mol_wire_sync($rise_bench_stage))(run, 'Сохранение после добавления');
                     $mol_wire_sync(this).save_document();
+                    new ($mol_wire_sync($rise_bench_stage))(run, 'F5, с');
                     $mol_wire_sync(this).request_reload(run);
                 }, error => {
                     run.state('Ошибка');
+                    run.failure(String(error));
                     this.reload_store().save(this.Metrics().runs(), this.Metrics().operations(), null);
                     return error;
                 });
@@ -34755,6 +34861,7 @@ var $;
                 }, error => {
                     this.reload_done = true;
                     run.state('Ошибка');
+                    run.failure(String(error));
                     this.reload_store().save(this.Metrics().runs(), this.Metrics().operations(), null);
                     return error;
                 });
@@ -34834,644 +34941,6 @@ var $;
             Page: { flex: { grow: 1 } },
         });
     })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-	($.$rise_bench_idb_table) = class $rise_bench_idb_table extends ($.$rise_bench_baza_goods_table) {
-		records(){
-			return [];
-		}
-		change(id, next){
-			if(next !== undefined) return next;
-			return null;
-		}
-	};
-	($mol_mem_key(($.$rise_bench_idb_table.prototype), "change"));
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    /** Native IndexedDB through $mol_db. No indexes or CRDT fixture entities. */
-    class $rise_bench_idb_storage extends $mol_object {
-        name;
-        constructor(name) {
-            super();
-            this.name = name;
-        }
-        migration = (tx) => { tx.store_make('Product'); };
-        async db() { return this.$.$mol_db(this.name, this.migration); }
-        product(index, compact) {
-            const product = {
-                id: String(index).padStart(5, '0'), title: $rise_bench_product_name(index),
-                color: ['red', 'green', 'blue'][index % 3], status: ['minor', 'major', 'critical'][index % 3],
-            };
-            return compact ? product : {
-                ...product, checked: false, uri: `https://xkcd.com/${index + 1}/`, quantity: index % 100, supply: '2026-10-05',
-                description: `${product.title} — sample product for the local CRDT benchmark.`,
-                tags: Array.from({ length: 5 }, (_, offset) => ['Office', 'Home', 'Travel', 'Studio', 'Gaming', 'Portable', 'Wireless', 'Compact', 'Premium', 'Classic', 'New', 'Popular', 'Eco', 'Gift', 'Work', 'Creative', 'Audio', 'Video', 'Network', 'Accessories'][(index + offset * 3) % 20]),
-            };
-        }
-        async create(count, compact) {
-            const db = await this.db();
-            const tx = db.change('Product');
-            const products = tx.stores.Product;
-            const requests = Array.from({ length: count }, (_, index) => products.put(this.product(index, compact), index));
-            await Promise.all([...requests, tx.commit()]);
-        }
-        async count() { return (await this.db()).read('Product').Product.count(); }
-        async search() {
-            const products = await (await this.db()).read('Product').Product.select();
-            return products.filter(product => product.title.toLowerCase().includes('notebook 00000')).length;
-        }
-        async add(compact) {
-            const index = await this.count();
-            const tx = (await this.db()).change('Product');
-            await Promise.all([tx.stores.Product.put(this.product(index, compact), index), tx.commit()]);
-        }
-        async rows() {
-            return (await (await this.db()).read('Product').Product.select());
-        }
-        async change(index, field, value) {
-            const db = await this.db(), product = await db.read('Product').Product.get(index);
-            if (!product)
-                throw new Error('Запись не найдена');
-            const tx = db.change('Product');
-            await Promise.all([tx.stores.Product.put({ ...product, [field]: value }, index), tx.commit()]);
-        }
-        destructor() { $mol_wire_async(this).close(); }
-        async close() { (await this.db()).destructor(); }
-    }
-    __decorate([
-        $mol_memo.method
-    ], $rise_bench_idb_storage.prototype, "db", null);
-    $.$rise_bench_idb_storage = $rise_bench_idb_storage;
-})($ || ($ = {}));
-
-;
-"use strict";
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        /** Same cards and virtualization; only field access differs from CRDT storage. */
-        class $rise_bench_idb_table extends $.$rise_bench_idb_table {
-            count() { return this.records().length; }
-            row_id(id) { return this.records()[id].id; }
-            row_title(id) { return this.records()[id].title; }
-            row_uri(id) { return this.records()[id].uri ?? `https://xkcd.com/${Number(this.row_id(id)) + 1}/`; }
-            row_description(id) { return this.records()[id].description ?? ''; }
-            row_tags(id) { return [this.records()[id].tags?.join(', ') ?? '']; }
-            row_color(id, next) {
-                if (next !== undefined)
-                    this.change(`${id}:color`, next);
-                return this.records()[id].color;
-            }
-            row_status(id, next) {
-                if (next !== undefined)
-                    this.change(`${id}:status`, next);
-                return this.records()[id].status;
-            }
-            row_checked(id, next) {
-                if (next !== undefined)
-                    this.change(`${id}:checked`, next);
-                return this.records()[id].checked ?? false;
-            }
-            row_quantity(id, next) {
-                if (next !== undefined)
-                    this.change(`${id}:quantity`, next);
-                return this.records()[id].quantity ?? 0;
-            }
-            row_moment(id, next) {
-                if (next !== undefined)
-                    this.change(`${id}:supply`, next.toString('YYYY-MM-DD'));
-                return new $mol_time_moment(this.records()[id].supply ?? '2026-10-05');
-            }
-        }
-        __decorate([
-            $mol_mem_key
-        ], $rise_bench_idb_table.prototype, "row_moment", null);
-        $$.$rise_bench_idb_table = $rise_bench_idb_table;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-	($.$rise_bench_idb) = class $rise_bench_idb extends ($.$mol_book2) {
-		title(){
-			return "Сущности IDB";
-		}
-		Storage_label(){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => (["Хранение: IndexedDB через $mol_db, без индексов"]);
-			return obj;
-		}
-		schema_mode(next){
-			if(next !== undefined) return next;
-			return "compact";
-		}
-		controls_enabled(){
-			return true;
-		}
-		Schema(){
-			const obj = new this.$.$mol_switch();
-			(obj.value) = (next) => ((this.schema_mode(next)));
-			(obj.enabled) = () => ((this.controls_enabled()));
-			(obj.options) = () => ({"compact": "4 свойства", "full": "10 свойств"});
-			return obj;
-		}
-		Schema_label(){
-			const obj = new this.$.$mol_labeler();
-			(obj.title) = () => ("Состав записи");
-			(obj.Content) = () => ((this.Schema()));
-			return obj;
-		}
-		count_mode(next){
-			if(next !== undefined) return next;
-			return "100";
-		}
-		Count(){
-			const obj = new this.$.$mol_switch();
-			(obj.value) = (next) => ((this.count_mode(next)));
-			(obj.enabled) = () => ((this.controls_enabled()));
-			(obj.options) = () => ({
-				"100": "100", 
-				"500": "500", 
-				"1000": "1000", 
-				"2000": "2000", 
-				"3000": "3000", 
-				"4000": "4000", 
-				"5000": "5000", 
-				"10000": "10000"
-			});
-			return obj;
-		}
-		Count_label(){
-			const obj = new this.$.$mol_labeler();
-			(obj.title) = () => ("Количество записей");
-			(obj.Content) = () => ((this.Count()));
-			return obj;
-		}
-		benchmark(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		Run(){
-			const obj = new this.$.$mol_button_major();
-			(obj.title) = () => ("Запустить бенчмарк");
-			(obj.click) = (next) => ((this.benchmark(next)));
-			(obj.enabled) = () => ((this.controls_enabled()));
-			return obj;
-		}
-		Settings(){
-			const obj = new this.$.$mol_page();
-			(obj.title) = () => ("Настройки IDB");
-			(obj.minimal_width) = () => (320);
-			(obj.body) = () => ([
-				(this.Storage_label()), 
-				(this.Schema_label()), 
-				(this.Count_label()), 
-				(this.Run())
-			]);
-			return obj;
-		}
-		body_scroll_top(next){
-			return (this.Page().body_scroll_top(next));
-		}
-		Metrics(){
-			const obj = new this.$.$rise_bench_metrics();
-			(obj.operations) = () => ([
-				"Создание, с", 
-				"Поиск, с", 
-				"Добавить 1, с", 
-				"F5, с", 
-				"Поиск после F5, с"
-			]);
-			return obj;
-		}
-		filters_enabled(){
-			return true;
-		}
-		search_query(next){
-			return (this.Search().query(next));
-		}
-		Search(){
-			const obj = new this.$.$mol_search();
-			(obj.hint) = () => ("Название товара");
-			(obj.enabled) = () => ((this.filters_enabled()));
-			return obj;
-		}
-		Search_label(){
-			const obj = new this.$.$mol_labeler();
-			(obj.title) = () => ("Поиск по названию");
-			(obj.Content) = () => ((this.Search()));
-			return obj;
-		}
-		color_filter(next){
-			if(next !== undefined) return next;
-			return "all";
-		}
-		Color_filter(){
-			const obj = new this.$.$mol_select();
-			(obj.enabled) = () => ((this.filters_enabled()));
-			(obj.value) = (next) => ((this.color_filter(next)));
-			(obj.dictionary) = () => ({
-				"all": "All colors", 
-				"red": "red", 
-				"green": "green", 
-				"blue": "blue"
-			});
-			return obj;
-		}
-		Color_label(){
-			const obj = new this.$.$mol_labeler();
-			(obj.title) = () => ("Color");
-			(obj.Content) = () => ((this.Color_filter()));
-			return obj;
-		}
-		status_filter(next){
-			if(next !== undefined) return next;
-			return "all";
-		}
-		Status_filter(){
-			const obj = new this.$.$mol_select();
-			(obj.enabled) = () => ((this.filters_enabled()));
-			(obj.value) = (next) => ((this.status_filter(next)));
-			(obj.dictionary) = () => ({
-				"all": "All statuses", 
-				"minor": "Store", 
-				"major": "Sale", 
-				"critical": "Support"
-			});
-			return obj;
-		}
-		Status_label(){
-			const obj = new this.$.$mol_labeler();
-			(obj.title) = () => ("Status");
-			(obj.Content) = () => ((this.Status_filter()));
-			return obj;
-		}
-		add_one(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		Add(){
-			const obj = new this.$.$mol_button_minor();
-			(obj.title) = () => ("Добавить запись");
-			(obj.enabled) = () => ((this.controls_enabled()));
-			(obj.click) = (next) => ((this.add_one(next)));
-			return obj;
-		}
-		reset(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		Reset(){
-			const obj = new this.$.$mol_button_minor();
-			(obj.title) = () => ("Очистить");
-			(obj.click) = (next) => ((this.reset(next)));
-			(obj.enabled) = () => ((this.controls_enabled()));
-			return obj;
-		}
-		Manual_actions(){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([(this.Add()), (this.Reset())]);
-			return obj;
-		}
-		Manual(){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([
-				(this.Search_label()), 
-				(this.Color_label()), 
-				(this.Status_label()), 
-				(this.Manual_actions())
-			]);
-			return obj;
-		}
-		products(){
-			return [];
-		}
-		compact(){
-			return false;
-		}
-		change(id, next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		Table(){
-			const obj = new this.$.$rise_bench_idb_table();
-			(obj.records) = () => ((this.products()));
-			(obj.compact) = () => ((this.compact()));
-			(obj.query) = () => ((this.search_query()));
-			(obj.color_filter) = () => ((this.color_filter()));
-			(obj.status_filter) = () => ((this.status_filter()));
-			(obj.change) = (id, next) => ((this.change(id, next)));
-			return obj;
-		}
-		Page(){
-			const obj = new this.$.$rise_bench_surface();
-			(obj.title) = () => ("IndexedDB");
-			(obj.minimal_width) = () => (640);
-			(obj.body) = () => ([
-				(this.Metrics()), 
-				(this.Manual()), 
-				(this.Table())
-			]);
-			return obj;
-		}
-		menu_title(){
-			return (this.title());
-		}
-		pages(){
-			return [(this.Settings()), (this.Page())];
-		}
-	};
-	($mol_mem(($.$rise_bench_idb.prototype), "Storage_label"));
-	($mol_mem(($.$rise_bench_idb.prototype), "schema_mode"));
-	($mol_mem(($.$rise_bench_idb.prototype), "Schema"));
-	($mol_mem(($.$rise_bench_idb.prototype), "Schema_label"));
-	($mol_mem(($.$rise_bench_idb.prototype), "count_mode"));
-	($mol_mem(($.$rise_bench_idb.prototype), "Count"));
-	($mol_mem(($.$rise_bench_idb.prototype), "Count_label"));
-	($mol_mem(($.$rise_bench_idb.prototype), "benchmark"));
-	($mol_mem(($.$rise_bench_idb.prototype), "Run"));
-	($mol_mem(($.$rise_bench_idb.prototype), "Settings"));
-	($mol_mem(($.$rise_bench_idb.prototype), "Metrics"));
-	($mol_mem(($.$rise_bench_idb.prototype), "Search"));
-	($mol_mem(($.$rise_bench_idb.prototype), "Search_label"));
-	($mol_mem(($.$rise_bench_idb.prototype), "color_filter"));
-	($mol_mem(($.$rise_bench_idb.prototype), "Color_filter"));
-	($mol_mem(($.$rise_bench_idb.prototype), "Color_label"));
-	($mol_mem(($.$rise_bench_idb.prototype), "status_filter"));
-	($mol_mem(($.$rise_bench_idb.prototype), "Status_filter"));
-	($mol_mem(($.$rise_bench_idb.prototype), "Status_label"));
-	($mol_mem(($.$rise_bench_idb.prototype), "add_one"));
-	($mol_mem(($.$rise_bench_idb.prototype), "Add"));
-	($mol_mem(($.$rise_bench_idb.prototype), "reset"));
-	($mol_mem(($.$rise_bench_idb.prototype), "Reset"));
-	($mol_mem(($.$rise_bench_idb.prototype), "Manual_actions"));
-	($mol_mem(($.$rise_bench_idb.prototype), "Manual"));
-	($mol_mem_key(($.$rise_bench_idb.prototype), "change"));
-	($mol_mem(($.$rise_bench_idb.prototype), "Table"));
-	($mol_mem(($.$rise_bench_idb.prototype), "Page"));
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    class $rise_bench_idb_ready extends $mol_object {
-        table;
-        title;
-        constructor(table, title) {
-            super();
-            this.table = table;
-            this.title = title;
-        }
-        pending;
-        observer;
-        timer;
-        frame = 0;
-        visible() { return this.table.isConnected && this.table.textContent.includes(this.title) && !this.table.querySelector('[mol_view_error]'); }
-        wait() {
-            return this.pending ??= new Promise((resolve, reject) => {
-                const check = () => {
-                    if (this.frame || !this.visible())
-                        return;
-                    this.frame = requestAnimationFrame(() => {
-                        this.frame = requestAnimationFrame(() => {
-                            this.frame = 0;
-                            if (!this.visible())
-                                return;
-                            this.destructor();
-                            resolve(performance.timeOrigin + performance.now());
-                        });
-                    });
-                };
-                this.observer = new MutationObserver(check);
-                this.observer.observe(this.table, { childList: true, subtree: true, characterData: true, attributes: true });
-                this.timer = setTimeout(() => { this.destructor(); reject(new Error('После F5 записи IDB не появились за 45 секунд')); }, 45_000);
-                check();
-            });
-        }
-        destructor() {
-            this.observer?.disconnect();
-            if (this.timer)
-                clearTimeout(this.timer);
-            if (this.frame)
-                cancelAnimationFrame(this.frame);
-            super.destructor();
-        }
-    }
-    $.$rise_bench_idb_ready = $rise_bench_idb_ready;
-})($ || ($ = {}));
-
-;
-"use strict";
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $rise_bench_idb extends $.$rise_bench_idb {
-            count_mode(next) {
-                const count = $mol_state_arg.value('count', next);
-                return count && Object.hasOwn(this.Count().options(), count) ? count : '100';
-            }
-            schema_mode(next) { return $mol_state_arg.value('schema', next) === 'full' ? 'full' : 'compact'; }
-            compact() { return this.schema_mode() === 'compact'; }
-            dataset_name(next) {
-                const name = $mol_state_local.value('$rise_bench_idb_dataset_' + this.count_mode() + '_' + this.schema_mode(), next);
-                if (name !== null && name !== undefined)
-                    return name;
-                // Reuse the former single dataset only when its saved run matches the selection.
-                const row = this.reload_store().snapshot.rows[0];
-                return row?.count === Number(this.count_mode()) && row.properties === (this.compact() ? 4 : 10)
-                    ? $mol_state_local.value('$rise_bench_idb_dataset') ?? '' : '';
-            }
-            storage() { return new $rise_bench_idb_storage(this.dataset_name()); }
-            revision(next = 0) { return next; }
-            products() {
-                this.revision();
-                if (!this.dataset_name())
-                    return [];
-                return $mol_wire_sync(this.storage()).rows();
-            }
-            refresh() { this.revision(this.revision() + 1); }
-            change(key, next) {
-                if (next === undefined)
-                    return null;
-                const [index, field] = key.split(':');
-                if (!['color', 'status', 'checked', 'quantity', 'supply'].includes(field))
-                    throw new Error('Неизвестное поле');
-                $mol_wire_sync(this.storage()).change(Number(index), field, next);
-                this.refresh();
-                return next;
-            }
-            reset() {
-                this.dataset_name('$rise_bench_idb_' + $mol_wire_sync(crypto).randomUUID());
-                this.search_query('');
-                this.color_filter('all');
-                this.status_filter('all');
-                this.refresh();
-                this.body_scroll_top(0);
-            }
-            add_one() {
-                if (!this.dataset_name())
-                    this.reset();
-                $mol_wire_sync(this.storage()).add(this.compact());
-                this.refresh();
-                this.body_scroll_top(0);
-            }
-            controls_enabled() {
-                return this.filters_enabled()
-                    && !$mol_promise_like(this.Add().status()?.[0]) && !$mol_promise_like(this.Reset().status()?.[0]);
-            }
-            filters_enabled() { return this.Metrics().runs()[0]?.state() !== 'Перезагрузка' && !$mol_promise_like(this.Run().status()?.[0]); }
-            reload_store() { return new $rise_bench_reload('$rise_bench_idb_runs'); }
-            restored = false;
-            restore_runs() {
-                if (this.restored)
-                    return;
-                this.Metrics().runs(this.reload_store().snapshot.rows.map(row => {
-                    const run = new $rise_bench_run(row.count, row.properties, row.stamp, row.baza_version ?? '—', row.benchmark_version ?? '—', row.id, row.computer ?? '', row.browser ?? '');
-                    run.state(row.state);
-                    run.bytes(row.bytes ?? null);
-                    for (const [name, value] of Object.entries(row.metrics))
-                        if (value !== null)
-                            run.metric(name, value);
-                    return run;
-                }));
-                this.restored = true;
-            }
-            start_run(run) {
-                if (this.Metrics().runs().includes(run))
-                    return;
-                this.reset();
-                this.Metrics().run_add(run);
-            }
-            benchmark() {
-                this.restore_runs();
-                const run = new ($mol_wire_sync($rise_bench_run))(Number(this.count_mode()), this.compact() ? 4 : 10, undefined, '—');
-                $mol_wire_sync(this).start_run(run);
-                return $mol_error_fence(() => {
-                    const create = new ($mol_wire_sync($rise_bench_measure))('Создание IDB');
-                    $mol_wire_sync(this.storage()).create(run.count, this.compact());
-                    create.finish();
-                    run.metric('Создание, с', create.duration / 1000);
-                    const search = new ($mol_wire_sync($rise_bench_measure))('Поиск IDB');
-                    if ($mol_wire_sync(this.storage()).search() !== 1)
-                        throw new Error('Поиск IDB должен найти один товар');
-                    search.finish();
-                    run.metric('Поиск, с', search.duration / 1000);
-                    const add = new ($mol_wire_sync($rise_bench_measure))('Добавление IDB');
-                    $mol_wire_sync(this.storage()).add(this.compact());
-                    add.finish();
-                    run.metric('Добавить 1, с', add.duration / 1000);
-                    $mol_wire_sync(this).refresh();
-                    run.state('Перезагрузка');
-                    this.reload_store().save(this.Metrics().runs(), this.Metrics().operations(), { name: this.dataset_name(), count: run.count, started: performance.timeOrigin + performance.now() });
-                    this.$.$mol_dom_context.location.reload();
-                }, error => {
-                    run.state('Ошибка');
-                    this.reload_store().save(this.Metrics().runs(), this.Metrics().operations(), null);
-                    return error;
-                });
-            }
-            resumed = false;
-            resume_reload() {
-                if (this.resumed)
-                    return;
-                const ticket = this.reload_store().snapshot.pending;
-                if (!ticket)
-                    return;
-                const run = this.Metrics().runs()[0];
-                return $mol_error_fence(() => {
-                    if (this.dataset_name() !== ticket.name || $mol_wire_sync(this.storage()).count() !== ticket.count + 1)
-                        throw new Error('После F5 открыт неполный набор IDB');
-                    const ready = new ($mol_wire_sync($rise_bench_idb_ready))(this.Table().dom_node(), $rise_bench_product_name(ticket.count));
-                    run.metric('F5, с', ($mol_wire_sync(ready).wait() - ticket.started) / 1000);
-                    const search = new ($mol_wire_sync($rise_bench_measure))('Поиск IDB после F5');
-                    if ($mol_wire_sync(this.storage()).search() !== 1)
-                        throw new Error('Поиск IDB после F5 должен найти один товар');
-                    search.finish();
-                    run.metric('Поиск после F5, с', search.duration / 1000);
-                    this.resumed = true;
-                    run.state('Готово');
-                    this.reload_store().save(this.Metrics().runs(), this.Metrics().operations(), null);
-                }, error => {
-                    this.resumed = true;
-                    run.state('Ошибка');
-                    this.reload_store().save(this.Metrics().runs(), this.Metrics().operations(), null);
-                    return error;
-                });
-            }
-            auto() { this.restore_runs(); this.resume_reload(); return []; }
-        }
-        __decorate([
-            $mol_mem
-        ], $rise_bench_idb.prototype, "count_mode", null);
-        __decorate([
-            $mol_mem
-        ], $rise_bench_idb.prototype, "schema_mode", null);
-        __decorate([
-            $mol_mem
-        ], $rise_bench_idb.prototype, "dataset_name", null);
-        __decorate([
-            $mol_mem
-        ], $rise_bench_idb.prototype, "storage", null);
-        __decorate([
-            $mol_mem
-        ], $rise_bench_idb.prototype, "revision", null);
-        __decorate([
-            $mol_mem
-        ], $rise_bench_idb.prototype, "products", null);
-        __decorate([
-            $mol_action
-        ], $rise_bench_idb.prototype, "refresh", null);
-        __decorate([
-            $mol_action
-        ], $rise_bench_idb.prototype, "change", null);
-        __decorate([
-            $mol_action
-        ], $rise_bench_idb.prototype, "reset", null);
-        __decorate([
-            $mol_action
-        ], $rise_bench_idb.prototype, "add_one", null);
-        __decorate([
-            $mol_mem
-        ], $rise_bench_idb.prototype, "reload_store", null);
-        __decorate([
-            $mol_action
-        ], $rise_bench_idb.prototype, "restore_runs", null);
-        __decorate([
-            $mol_action
-        ], $rise_bench_idb.prototype, "start_run", null);
-        __decorate([
-            $mol_action
-        ], $rise_bench_idb.prototype, "benchmark", null);
-        __decorate([
-            $mol_mem
-        ], $rise_bench_idb.prototype, "resume_reload", null);
-        $$.$rise_bench_idb = $rise_bench_idb;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_define($rise_bench_idb, {
-        Manual: { flex: { wrap: 'wrap' }, alignItems: 'flex-end' },
-        Manual_actions: { flex: { wrap: 'wrap' } },
-    });
 })($ || ($ = {}));
 
 ;
@@ -35559,7 +35028,14 @@ var $;
 			const obj = new this.$.$mol_switch();
 			(obj.enabled) = () => ((this.enabled()));
 			(obj.value) = (next) => ((this.engine(next)));
-			(obj.options) = () => ({"goods": "Гипербаза", "idb": "IDB"});
+			(obj.options) = () => ({
+				"all": "Все", 
+				"goods": "Гипербаза", 
+				"idb": "IDB", 
+				"sqlite": "SQLite", 
+				"pglite": "PGlite", 
+				"duckdb": "DuckDB"
+			});
 			return obj;
 		}
 		Engine_label(){
@@ -35729,9 +35205,9 @@ var $;
             computer(next) { return $mol_state_local.value('$rise_bench_computer', next) ?? ''; }
             count_title() { return this.kind() === 'text' ? 'Количество строк' : 'Количество записей'; }
             counts() {
-                return Object.fromEntries((this.kind() === 'text' ? [100, 500, 1000, 2000, 5000] : [100, 500, 1000, 2000, 3000, 4000, 5000, 10000]).map(count => [count, String(count)]));
+                return { all: 'Все', ...Object.fromEntries((this.kind() === 'text' ? [100, 500, 1000, 2000, 5000] : [100, 500, 1000, 2000, 3000, 4000, 5000, 10000]).map(count => [count, String(count)])) };
             }
-            storage_label() { return this.kind() === 'text' ? 'CRDT-текст' : this.engine() === 'idb' ? 'IndexedDB через $mol_db, без индексов' : 'Хранение: одна Area на запись'; }
+            storage_label() { return this.kind() === 'text' ? 'CRDT-текст' : this.engine() === 'all' ? 'Все хранилища последовательно' : $rise_bench_engine[this.engine()].storage; }
             controls() {
                 return [
                     ...this.kind() === 'text' ? [] : [this.Engine_label()],
@@ -36251,11 +35727,11 @@ var $;
                     const time = run.metric(this.operation());
                     if (run.state() !== 'Готово' || time === null)
                         continue;
-                    const engine = run.baza_version === '—' ? 'IDB' : 'Гипербаза';
-                    const key = JSON.stringify([engine, run.properties, run.computer, run.browser, run.benchmark_version, run.baza_version]);
+                    const engine = $rise_bench_engine[run.engine]?.title ?? run.engine;
+                    const key = JSON.stringify([engine, run.properties, run.computer, run.browser, run.benchmark_version, run.engine_version]);
                     if (!groups.has(key))
                         groups.set(key, {
-                            title: `${engine} · ${run.properties || 'текст'} · ${run.computer.split(/\r?\n/)[0] || 'ПК не указан'} · v${run.benchmark_version}`, values: new Map,
+                            title: `${engine} ${run.engine_version.slice(0, run.engine === 'goods' ? 8 : 80)} · ${run.properties || 'текст'} · ${run.computer.split(/\r?\n/)[0] || 'ПК не указан'} · v${run.benchmark_version}`, values: new Map,
                         });
                     const values = groups.get(key).values;
                     if (!values.has(run.count))
@@ -36486,6 +35962,19 @@ var $;
 "use strict";
 var $;
 (function ($) {
+    /** A fixed, sequential matrix. Selection changes never alter a running batch. */
+    function $rise_bench_batch(engine, count, schema, text = false) {
+        const engines = text ? ['text'] : engine === 'all' ? Object.keys($rise_bench_engine) : [engine];
+        const counts = count === 'all' ? text ? [100, 500, 1000, 2000, 5000] : [100, 500, 1000, 2000, 3000, 4000, 5000, 10000] : [Number(count)];
+        return engines.flatMap(engine => counts.map(count => ({ engine, count: String(count), schema })));
+    }
+    $.$rise_bench_batch = $rise_bench_batch;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
     /** Retain every seed Land until peer URLs have live reactive consumers. */
     class $rise_bench_seed extends $mol_object {
         static lands() {
@@ -36503,6 +35992,992 @@ var $;
 })($ || ($ = {}));
 
 ;
+	($.$mol_status) = class $mol_status extends ($.$mol_view) {
+		message(){
+			return "";
+		}
+		status(){
+			return (this.title());
+		}
+		minimal_height(){
+			return 24;
+		}
+		minimal_width(){
+			return 0;
+		}
+		sub(){
+			return [(this.message())];
+		}
+	};
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $mol_status extends $.$mol_status {
+            message() {
+                try {
+                    return this.status() ?? null;
+                }
+                catch (error) {
+                    if (error instanceof Promise)
+                        $mol_fail_hidden(error);
+                    $mol_fail_log(error);
+                    return error.message;
+                }
+            }
+        }
+        $$.$mol_status = $mol_status;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/status/status.view.css", "[mol_status] {\n\tpadding: var(--mol_gap_text);\n\tborder-radius: var(--mol_gap_round);\n\tdisplay: block;\n\tflex-shrink: 1;\n\tword-wrap: break-word;\n}\n\n[mol_status]:not([mol_view_error=\"Promise\"]) {\n\tcolor: var(--mol_theme_focus);\n}\n\n[mol_status]:not([mol_view_error=\"Promise\"]):empty {\n\tdisplay: none;\n}\n");
+})($ || ($ = {}));
+
+;
+	($.$rise_bench_idb_table) = class $rise_bench_idb_table extends ($.$rise_bench_baza_goods_table) {
+		records(){
+			return [];
+		}
+		change(id, next){
+			if(next !== undefined) return next;
+			return null;
+		}
+	};
+	($mol_mem_key(($.$rise_bench_idb_table.prototype), "change"));
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    /** Native IndexedDB through $mol_db. No indexes or CRDT fixture entities. */
+    class $rise_bench_idb_storage extends $mol_object {
+        name;
+        constructor(name) {
+            super();
+            this.name = name;
+        }
+        migration = (tx) => { tx.store_make('Product'); };
+        async db() { return this.$.$mol_db(this.name, this.migration); }
+        async prepare() { await this.db(); }
+        product(index, compact) {
+            return $rise_bench_product_make(index, compact);
+        }
+        async create(count, compact) {
+            const db = await this.db();
+            const tx = db.change('Product');
+            const products = tx.stores.Product;
+            const requests = Array.from({ length: count }, (_, index) => products.put(this.product(index, compact), index));
+            await Promise.all([...requests, tx.commit()]);
+        }
+        async count() { return (await this.db()).read('Product').Product.count(); }
+        async search() {
+            const products = await (await this.db()).read('Product').Product.select();
+            return products.filter(product => product.title.toLowerCase().includes('notebook 00000')).length;
+        }
+        async add(compact) {
+            const index = await this.count();
+            const tx = (await this.db()).change('Product');
+            await Promise.all([tx.stores.Product.put(this.product(index, compact), index), tx.commit()]);
+        }
+        async rows() {
+            return (await (await this.db()).read('Product').Product.select());
+        }
+        async change(index, field, value) {
+            const db = await this.db(), product = await db.read('Product').Product.get(index);
+            if (!product)
+                throw new Error('Запись не найдена');
+            const tx = db.change('Product');
+            await Promise.all([tx.stores.Product.put({ ...product, [field]: value }, index), tx.commit()]);
+        }
+        destructor() { $mol_wire_async(this).close(); }
+        async close() { (await this.db()).destructor(); }
+    }
+    __decorate([
+        $mol_memo.method
+    ], $rise_bench_idb_storage.prototype, "db", null);
+    $.$rise_bench_idb_storage = $rise_bench_idb_storage;
+})($ || ($ = {}));
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        /** Same cards and virtualization; only field access differs from CRDT storage. */
+        class $rise_bench_idb_table extends $.$rise_bench_idb_table {
+            count() { return this.records().length; }
+            row_id(id) { return this.records()[id].id; }
+            row_title(id) { return this.records()[id].title; }
+            row_uri(id) { return this.records()[id].uri ?? `https://xkcd.com/${Number(this.row_id(id)) + 1}/`; }
+            row_description(id) { return this.records()[id].description ?? ''; }
+            row_tags(id) { return [this.records()[id].tags?.join(', ') ?? '']; }
+            row_color(id, next) {
+                if (next !== undefined) {
+                    this.change(`${id}:color`, next);
+                    return next;
+                }
+                return this.records()[id].color;
+            }
+            row_status(id, next) {
+                if (next !== undefined) {
+                    this.change(`${id}:status`, next);
+                    return next;
+                }
+                return this.records()[id].status;
+            }
+            row_checked(id, next) {
+                if (next !== undefined) {
+                    this.change(`${id}:checked`, next);
+                    return next;
+                }
+                return this.records()[id].checked ?? false;
+            }
+            row_quantity(id, next) {
+                if (next !== undefined) {
+                    this.change(`${id}:quantity`, next);
+                    return next;
+                }
+                return this.records()[id].quantity ?? 0;
+            }
+            row_moment(id, next) {
+                if (next !== undefined) {
+                    this.change(`${id}:supply`, next.toString('YYYY-MM-DD'));
+                    return next;
+                }
+                return new $mol_time_moment(this.records()[id].supply ?? '2026-10-05');
+            }
+        }
+        __decorate([
+            $mol_mem_key
+        ], $rise_bench_idb_table.prototype, "row_moment", null);
+        $$.$rise_bench_idb_table = $rise_bench_idb_table;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+	($.$rise_bench_idb) = class $rise_bench_idb extends ($.$mol_book2) {
+		title(){
+			return "Сущности IDB";
+		}
+		storage_label(){
+			return "";
+		}
+		Storage_label(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.storage_label())]);
+			return obj;
+		}
+		schema_mode(next){
+			if(next !== undefined) return next;
+			return "compact";
+		}
+		controls_enabled(){
+			return true;
+		}
+		Schema(){
+			const obj = new this.$.$mol_switch();
+			(obj.value) = (next) => ((this.schema_mode(next)));
+			(obj.enabled) = () => ((this.controls_enabled()));
+			(obj.options) = () => ({"compact": "4 свойства", "full": "10 свойств"});
+			return obj;
+		}
+		Schema_label(){
+			const obj = new this.$.$mol_labeler();
+			(obj.title) = () => ("Состав записи");
+			(obj.Content) = () => ((this.Schema()));
+			return obj;
+		}
+		count_mode(next){
+			if(next !== undefined) return next;
+			return "100";
+		}
+		Count(){
+			const obj = new this.$.$mol_switch();
+			(obj.value) = (next) => ((this.count_mode(next)));
+			(obj.enabled) = () => ((this.controls_enabled()));
+			(obj.options) = () => ({
+				"100": "100", 
+				"500": "500", 
+				"1000": "1000", 
+				"2000": "2000", 
+				"3000": "3000", 
+				"4000": "4000", 
+				"5000": "5000", 
+				"10000": "10000"
+			});
+			return obj;
+		}
+		Count_label(){
+			const obj = new this.$.$mol_labeler();
+			(obj.title) = () => ("Количество записей");
+			(obj.Content) = () => ((this.Count()));
+			return obj;
+		}
+		benchmark(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Run(){
+			const obj = new this.$.$mol_button_major();
+			(obj.title) = () => ("Запустить бенчмарк");
+			(obj.click) = (next) => ((this.benchmark(next)));
+			(obj.enabled) = () => ((this.controls_enabled()));
+			return obj;
+		}
+		Settings(){
+			const obj = new this.$.$mol_page();
+			(obj.title) = () => ("Настройки");
+			(obj.minimal_width) = () => (320);
+			(obj.body) = () => ([
+				(this.Storage_label()), 
+				(this.Schema_label()), 
+				(this.Count_label()), 
+				(this.Run())
+			]);
+			return obj;
+		}
+		storage_title(){
+			return "IDB";
+		}
+		body_scroll_top(next){
+			return (this.Page().body_scroll_top(next));
+		}
+		Metrics(){
+			const obj = new this.$.$rise_bench_metrics();
+			(obj.operations) = () => ([
+				"Запуск БД, с", 
+				"Создание, с", 
+				"Поиск, с", 
+				"Добавить 1, с", 
+				"F5, с", 
+				"Поиск после F5, с"
+			]);
+			return obj;
+		}
+		filters_enabled(){
+			return true;
+		}
+		search_query(next){
+			return (this.Search().query(next));
+		}
+		Search(){
+			const obj = new this.$.$mol_search();
+			(obj.hint) = () => ("Название товара");
+			(obj.enabled) = () => ((this.filters_enabled()));
+			return obj;
+		}
+		Search_label(){
+			const obj = new this.$.$mol_labeler();
+			(obj.title) = () => ("Поиск по названию");
+			(obj.Content) = () => ((this.Search()));
+			return obj;
+		}
+		color_filter(next){
+			if(next !== undefined) return next;
+			return "all";
+		}
+		Color_filter(){
+			const obj = new this.$.$mol_select();
+			(obj.enabled) = () => ((this.filters_enabled()));
+			(obj.value) = (next) => ((this.color_filter(next)));
+			(obj.dictionary) = () => ({
+				"all": "All colors", 
+				"red": "red", 
+				"green": "green", 
+				"blue": "blue"
+			});
+			return obj;
+		}
+		Color_label(){
+			const obj = new this.$.$mol_labeler();
+			(obj.title) = () => ("Color");
+			(obj.Content) = () => ((this.Color_filter()));
+			return obj;
+		}
+		status_filter(next){
+			if(next !== undefined) return next;
+			return "all";
+		}
+		Status_filter(){
+			const obj = new this.$.$mol_select();
+			(obj.enabled) = () => ((this.filters_enabled()));
+			(obj.value) = (next) => ((this.status_filter(next)));
+			(obj.dictionary) = () => ({
+				"all": "All statuses", 
+				"minor": "Store", 
+				"major": "Sale", 
+				"critical": "Support"
+			});
+			return obj;
+		}
+		Status_label(){
+			const obj = new this.$.$mol_labeler();
+			(obj.title) = () => ("Status");
+			(obj.Content) = () => ((this.Status_filter()));
+			return obj;
+		}
+		add_one(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Add(){
+			const obj = new this.$.$mol_button_minor();
+			(obj.title) = () => ("Добавить запись");
+			(obj.enabled) = () => ((this.controls_enabled()));
+			(obj.click) = (next) => ((this.add_one(next)));
+			return obj;
+		}
+		reset(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Reset(){
+			const obj = new this.$.$mol_button_minor();
+			(obj.title) = () => ("Очистить");
+			(obj.click) = (next) => ((this.reset(next)));
+			(obj.enabled) = () => ((this.controls_enabled()));
+			return obj;
+		}
+		Manual_actions(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.Add()), (this.Reset())]);
+			return obj;
+		}
+		change_message(){
+			return "";
+		}
+		Change_status(){
+			const obj = new this.$.$mol_status();
+			(obj.status) = () => ((this.change_message()));
+			return obj;
+		}
+		manual_content(){
+			return [
+				(this.Search_label()), 
+				(this.Color_label()), 
+				(this.Status_label()), 
+				(this.Manual_actions()), 
+				(this.Change_status())
+			];
+		}
+		Manual(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ((this.manual_content()));
+			return obj;
+		}
+		products(){
+			return [];
+		}
+		compact(){
+			return false;
+		}
+		change(id, next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Table(){
+			const obj = new this.$.$rise_bench_idb_table();
+			(obj.records) = () => ((this.products()));
+			(obj.compact) = () => ((this.compact()));
+			(obj.query) = () => ((this.search_query()));
+			(obj.color_filter) = () => ((this.color_filter()));
+			(obj.status_filter) = () => ((this.status_filter()));
+			(obj.change) = (id, next) => ((this.change(id, next)));
+			return obj;
+		}
+		Page(){
+			const obj = new this.$.$rise_bench_surface();
+			(obj.title) = () => ((this.storage_title()));
+			(obj.minimal_width) = () => (640);
+			(obj.body) = () => ([
+				(this.Metrics()), 
+				(this.Manual()), 
+				(this.Table())
+			]);
+			return obj;
+		}
+		menu_title(){
+			return (this.title());
+		}
+		pages(){
+			return [(this.Settings()), (this.Page())];
+		}
+	};
+	($mol_mem(($.$rise_bench_idb.prototype), "Storage_label"));
+	($mol_mem(($.$rise_bench_idb.prototype), "schema_mode"));
+	($mol_mem(($.$rise_bench_idb.prototype), "Schema"));
+	($mol_mem(($.$rise_bench_idb.prototype), "Schema_label"));
+	($mol_mem(($.$rise_bench_idb.prototype), "count_mode"));
+	($mol_mem(($.$rise_bench_idb.prototype), "Count"));
+	($mol_mem(($.$rise_bench_idb.prototype), "Count_label"));
+	($mol_mem(($.$rise_bench_idb.prototype), "benchmark"));
+	($mol_mem(($.$rise_bench_idb.prototype), "Run"));
+	($mol_mem(($.$rise_bench_idb.prototype), "Settings"));
+	($mol_mem(($.$rise_bench_idb.prototype), "Metrics"));
+	($mol_mem(($.$rise_bench_idb.prototype), "Search"));
+	($mol_mem(($.$rise_bench_idb.prototype), "Search_label"));
+	($mol_mem(($.$rise_bench_idb.prototype), "color_filter"));
+	($mol_mem(($.$rise_bench_idb.prototype), "Color_filter"));
+	($mol_mem(($.$rise_bench_idb.prototype), "Color_label"));
+	($mol_mem(($.$rise_bench_idb.prototype), "status_filter"));
+	($mol_mem(($.$rise_bench_idb.prototype), "Status_filter"));
+	($mol_mem(($.$rise_bench_idb.prototype), "Status_label"));
+	($mol_mem(($.$rise_bench_idb.prototype), "add_one"));
+	($mol_mem(($.$rise_bench_idb.prototype), "Add"));
+	($mol_mem(($.$rise_bench_idb.prototype), "reset"));
+	($mol_mem(($.$rise_bench_idb.prototype), "Reset"));
+	($mol_mem(($.$rise_bench_idb.prototype), "Manual_actions"));
+	($mol_mem(($.$rise_bench_idb.prototype), "Change_status"));
+	($mol_mem(($.$rise_bench_idb.prototype), "Manual"));
+	($mol_mem_key(($.$rise_bench_idb.prototype), "change"));
+	($mol_mem(($.$rise_bench_idb.prototype), "Table"));
+	($mol_mem(($.$rise_bench_idb.prototype), "Page"));
+
+
+;
+"use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    async function $rise_bench_sql_sqlite(name) {
+        const { default: initialize } = await new Function('url', 'return import(url)')('https://cdn.jsdelivr.net/npm/@sqlite.org/sqlite-wasm@3.54.1-build1/dist/index.mjs');
+        const sqlite = await initialize();
+        // The previous document may still be releasing its worker during F5.
+        // Own this database for the driver's lifetime, not only during initialization.
+        return new Promise((resolve, reject) => {
+            navigator.locks.request('rise-bench-sqlite:' + name, async () => {
+                let release;
+                const held = new Promise(done => { release = done; });
+                try {
+                    const pool = await sqlite.installOpfsSAHPoolVfs({ directory: '/rise-bench/' + name, preserveOnInitFailure: true });
+                    const db = new pool.OpfsSAHPoolDb('/products.sqlite');
+                    resolve({
+                        async query(sql) { return db.exec({ sql, rowMode: 'object', returnValue: 'resultRows' }); },
+                        async close() { try {
+                            db.close();
+                            await pool.pauseVfs();
+                        }
+                        finally {
+                            release();
+                        } },
+                    });
+                    await held;
+                }
+                catch (error) {
+                    reject(error);
+                }
+            }).catch(reject);
+        });
+    }
+    $.$rise_bench_sql_sqlite = $rise_bench_sql_sqlite;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    async function $rise_bench_sql_pglite(name) {
+        const { PGlite } = await new Function('url', 'return import(url)')('https://cdn.jsdelivr.net/npm/@electric-sql/pglite@0.5.15/dist/index.js');
+        const db = await PGlite.create('idb://' + name, { relaxedDurability: false });
+        return {
+            async query(sql) { const results = await db.exec(sql); return results.at(-1)?.rows ?? []; },
+            async close() { await db.close(); },
+        };
+    }
+    $.$rise_bench_sql_pglite = $rise_bench_sql_pglite;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    async function $rise_bench_sql_duckdb(name) {
+        // 1.33.1-dev57 (npm latest) does not persist OPFS correctly. Pin the working release.
+        const duck = await new Function('url', 'return import(url)')('https://cdn.jsdelivr.net/npm/@duckdb/duckdb-wasm@1.32.0/+esm');
+        const base = 'https://cdn.jsdelivr.net/npm/@duckdb/duckdb-wasm@1.32.0/dist/';
+        const blob = new Blob([`importScripts(${JSON.stringify(base + 'duckdb-browser-eh.worker.js')})`], { type: 'text/javascript' });
+        const url = URL.createObjectURL(blob);
+        const worker = new Worker(url);
+        const db = new duck.AsyncDuckDB(new duck.VoidLogger(), worker);
+        try {
+            await db.instantiate(base + 'duckdb-eh.wasm');
+            await db.open({ path: 'opfs://' + name + '.duckdb', accessMode: duck.DuckDBAccessMode.READ_WRITE });
+        }
+        catch (error) {
+            worker.terminate();
+            throw error;
+        }
+        finally {
+            URL.revokeObjectURL(url);
+        }
+        const connection = await db.connect();
+        return {
+            async query(sql) { return (await connection.query(sql)).toArray().map((row) => row.toJSON()); },
+            async close() { await connection.close(); await db.terminate(); worker.terminate(); },
+        };
+    }
+    $.$rise_bench_sql_duckdb = $rise_bench_sql_duckdb;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    /** Serial RPC: no interleaved transactions and no SQL work on the UI thread. */
+    function $rise_bench_sql_worker() {
+        let driver;
+        let tail = Promise.resolve();
+        globalThis.onmessage = event => {
+            const { id, method, args } = event.data;
+            tail = tail.then(async () => {
+                try {
+                    let result;
+                    if (method === 'open') {
+                        const [engine, name] = args;
+                        const factories = {
+                            sqlite: $rise_bench_sql_sqlite, pglite: $rise_bench_sql_pglite, duckdb: $rise_bench_sql_duckdb,
+                        };
+                        driver = await factories[engine](name);
+                    }
+                    else if (method === 'close')
+                        await driver.close();
+                    else
+                        result = await driver.query(args[0]);
+                    globalThis.postMessage({ id, result });
+                }
+                catch (error) {
+                    globalThis.postMessage({ id, error: error instanceof Error ? error.message : String(error) });
+                }
+            });
+        };
+    }
+    $.$rise_bench_sql_worker = $rise_bench_sql_worker;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    /** Same product generation and operations as IDB, with relational SQL columns. */
+    class $rise_bench_sql_storage extends $mol_object {
+        name;
+        engine;
+        compact;
+        constructor(name, engine, compact) {
+            super();
+            this.name = name;
+            this.engine = engine;
+            this.compact = compact;
+        }
+        product(index, compact) { return $rise_bench_product_make(index, compact); }
+        worker;
+        serial = 0;
+        pending = new Map();
+        disposed = false;
+        async open() {
+            if (this.disposed)
+                throw new Error('Хранилище закрыто');
+            const source = [$rise_bench_sql_sqlite, $rise_bench_sql_pglite, $rise_bench_sql_duckdb, $rise_bench_sql_worker]
+                .map(factory => factory.toString()).join('\n')
+                + '\nconst $ = { $rise_bench_sql_sqlite, $rise_bench_sql_pglite, $rise_bench_sql_duckdb }; $rise_bench_sql_worker()';
+            const url = URL.createObjectURL(new Blob([source], { type: 'text/javascript' }));
+            this.worker = new Worker(url);
+            URL.revokeObjectURL(url);
+            this.worker.onmessage = ({ data }) => {
+                const task = this.pending.get(data.id);
+                if (!task)
+                    return;
+                this.pending.delete(data.id);
+                data.error ? task.reject(new Error(data.error)) : task.resolve(data.result);
+            };
+            this.worker.onerror = error => { this.fail(new Error(error.message)); this.destructor(); };
+            await this.request('open', [this.engine, this.name]);
+            await this.request('query', ['CREATE TABLE IF NOT EXISTS products (id TEXT, title TEXT, color TEXT, status TEXT'
+                    + (this.compact ? '' : ', checked INTEGER, uri TEXT, quantity INTEGER, supply TEXT, description TEXT, tags TEXT') + ')']);
+        }
+        request(method, args) {
+            if (this.disposed || !this.worker)
+                return Promise.reject(new Error('Хранилище закрыто'));
+            const id = ++this.serial;
+            return new Promise((resolve, reject) => {
+                const timer = setTimeout(() => { this.fail(new Error('Движок не ответил за 300 секунд')); this.destructor(); }, 300000);
+                this.pending.set(id, {
+                    resolve: value => { clearTimeout(timer); resolve(value); },
+                    reject: error => { clearTimeout(timer); reject(error); },
+                });
+                this.worker.postMessage({ id, method, args });
+            });
+        }
+        fail(error) { for (const task of this.pending.values())
+            task.reject(error); this.pending.clear(); }
+        async query(sql) { await this.open(); return this.request('query', [sql]); }
+        async prepare() { await this.open(); }
+        literal(value) {
+            if (value === undefined || value === null)
+                return 'NULL';
+            if (typeof value === 'boolean')
+                return value ? '1' : '0';
+            if (typeof value === 'number') {
+                if (!Number.isFinite(value))
+                    throw new Error('Некорректное число');
+                return String(value);
+            }
+            return "'" + String(Array.isArray(value) ? JSON.stringify(value) : value).replace(/'/g, "''") + "'";
+        }
+        tuple(index, compact) { return '(' + Object.values(this.product(index, compact)).map(value => this.literal(value)).join(',') + ')'; }
+        async write(sql) {
+            await this.query(sql);
+            if (this.engine === 'duckdb')
+                await this.query('CHECKPOINT');
+        }
+        async create(count, compact) {
+            await this.write('INSERT INTO products VALUES ' + Array.from({ length: count }, (_, index) => this.tuple(index, compact)).join(','));
+        }
+        async count() { return Number((await this.query('SELECT COUNT(*) AS n FROM products'))[0].n); }
+        async search() { return Number((await this.query("SELECT COUNT(*) AS n FROM products WHERE LOWER(title) LIKE '%notebook 00000%'"))[0].n); }
+        async add(compact) { await this.write('INSERT INTO products VALUES ' + this.tuple(await this.count(), compact)); }
+        async rows() {
+            return (await this.query('SELECT * FROM products ORDER BY id')).map(row => ({ ...row,
+                ...(row.checked === undefined ? {} : { checked: Boolean(row.checked), tags: JSON.parse(row.tags) }),
+            }));
+        }
+        async change(index, field, value) {
+            if (!['color', 'status', 'checked', 'quantity', 'supply'].includes(field))
+                throw new Error('Неизвестное поле');
+            await this.write('UPDATE products SET ' + field + '=' + this.literal(value) + ' WHERE id=' + this.literal(String(index).padStart(5, '0')));
+        }
+        destructor() {
+            this.disposed = true;
+            this.fail(new Error('Хранилище закрыто'));
+            this.worker?.terminate();
+        }
+        async close() { try {
+            if (this.worker && !this.disposed)
+                await this.request('close', []);
+        }
+        finally {
+            this.destructor();
+        } }
+    }
+    __decorate([
+        $mol_memo.method
+    ], $rise_bench_sql_storage.prototype, "open", null);
+    $.$rise_bench_sql_storage = $rise_bench_sql_storage;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    class $rise_bench_idb_ready extends $mol_object {
+        table;
+        title;
+        constructor(table, title) {
+            super();
+            this.table = table;
+            this.title = title;
+        }
+        pending;
+        observer;
+        timer;
+        frame = 0;
+        visible() { return this.table.isConnected && this.table.textContent.includes(this.title) && !this.table.querySelector('[mol_view_error]'); }
+        wait() {
+            return this.pending ??= new Promise((resolve, reject) => {
+                const check = () => {
+                    if (this.frame || !this.visible())
+                        return;
+                    this.frame = requestAnimationFrame(() => {
+                        this.frame = requestAnimationFrame(() => {
+                            this.frame = 0;
+                            if (!this.visible())
+                                return;
+                            this.destructor();
+                            resolve(performance.timeOrigin + performance.now());
+                        });
+                    });
+                };
+                this.observer = new MutationObserver(check);
+                this.observer.observe(this.table, { childList: true, subtree: true, characterData: true, attributes: true });
+                this.timer = setTimeout(() => { this.destructor(); reject(new Error('После F5 записи IDB не появились за 300 секунд')); }, 300_000);
+                check();
+            });
+        }
+        destructor() {
+            this.observer?.disconnect();
+            if (this.timer)
+                clearTimeout(this.timer);
+            if (this.frame)
+                cancelAnimationFrame(this.frame);
+            super.destructor();
+        }
+    }
+    $.$rise_bench_idb_ready = $rise_bench_idb_ready;
+})($ || ($ = {}));
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $rise_bench_idb extends $.$rise_bench_idb {
+            engine_kind() {
+                const kind = new URL(location.href).searchParams.get('rise_fixture');
+                return ['sqlite', 'pglite', 'duckdb'].includes(kind ?? '') ? kind : 'idb';
+            }
+            storage_title() { return $rise_bench_engine[this.engine_kind()].title; }
+            storage_label() { return $rise_bench_engine[this.engine_kind()].storage; }
+            dataset_prefix() { return '$rise_bench_' + this.engine_kind(); }
+            count_mode(next) {
+                const count = $mol_state_arg.value('count', next);
+                return count && Object.hasOwn(this.Count().options(), count) ? count : '100';
+            }
+            schema_mode(next) { return $mol_state_arg.value('schema', next) === 'full' ? 'full' : 'compact'; }
+            compact() { return this.schema_mode() === 'compact'; }
+            dataset_name(next) {
+                const name = $mol_state_local.value(this.dataset_prefix() + '_dataset_' + this.count_mode() + '_' + this.schema_mode() + (new URL(location.href).searchParams.get('rise_run') || ''), next);
+                if (name !== null && name !== undefined)
+                    return name;
+                // Reuse the former single dataset only when its saved run matches the selection.
+                const row = this.reload_store().snapshot.rows[0];
+                return row?.count === Number(this.count_mode()) && row.properties === (this.compact() ? 4 : 10)
+                    ? $mol_state_local.value(this.dataset_prefix() + '_dataset') ?? '' : '';
+            }
+            storage() {
+                return this.engine_kind() === 'idb' ? new $rise_bench_idb_storage(this.dataset_name())
+                    : new $rise_bench_sql_storage(this.dataset_name(), this.engine_kind(), this.compact());
+            }
+            revision(next = 0) { return next; }
+            products() {
+                this.revision();
+                if (!this.dataset_name())
+                    return [];
+                return $mol_wire_sync(this.storage()).rows();
+            }
+            refresh() { this.revision(this.revision() + 1); }
+            change(key, next) {
+                if (next === undefined)
+                    return null;
+                $mol_wire_async(this).save_change(key, next).catch(error => this.change_error(error));
+                return next;
+            }
+            change_error(next = null) { return next; }
+            change_message() { return this.change_error()?.message ?? ''; }
+            manual_content() {
+                return [this.Search_label(), this.Color_label(), this.Status_label(), this.Manual_actions(), ...this.change_error() ? [this.Change_status()] : []];
+            }
+            save_change(key, next) {
+                this.change_error(null);
+                const [index, field] = key.split(':');
+                if (!['color', 'status', 'checked', 'quantity', 'supply'].includes(field))
+                    throw new Error('Неизвестное поле');
+                $mol_wire_sync(this.storage()).change(Number(index), field, next);
+                this.refresh();
+            }
+            reset() {
+                this.dataset_name(this.dataset_prefix() + '_' + $mol_wire_sync(crypto).randomUUID());
+                this.search_query('');
+                this.color_filter('all');
+                this.status_filter('all');
+                this.refresh();
+                this.body_scroll_top(0);
+            }
+            add_one() {
+                if (!this.dataset_name())
+                    this.reset();
+                $mol_wire_sync(this.storage()).add(this.compact());
+                this.refresh();
+                this.body_scroll_top(0);
+            }
+            controls_enabled() {
+                return this.filters_enabled()
+                    && !$mol_promise_like(this.Add().status()?.[0]) && !$mol_promise_like(this.Reset().status()?.[0]);
+            }
+            filters_enabled() { return this.Metrics().runs()[0]?.state() !== 'Перезагрузка' && !$mol_promise_like(this.Run().status()?.[0]); }
+            reload_store() { return new $rise_bench_reload(this.dataset_prefix() + '_runs'); }
+            restored = false;
+            restore_runs() {
+                if (this.restored)
+                    return;
+                this.Metrics().runs(this.reload_store().snapshot.rows.map(row => {
+                    const run = new $rise_bench_run(row.count, row.properties, row.stamp, row.baza_version ?? '—', row.benchmark_version ?? '—', row.id, row.computer ?? '', row.browser ?? '', row.engine, row.engine_version);
+                    run.state(row.state);
+                    run.bytes(row.bytes ?? null);
+                    for (const [name, value] of Object.entries(row.metrics))
+                        if (value !== null)
+                            run.metric(name, value);
+                    return run;
+                }));
+                this.restored = true;
+            }
+            start_run(run) {
+                if (this.Metrics().runs().includes(run))
+                    return;
+                this.reset();
+                this.Metrics().run_add(run);
+            }
+            benchmark() {
+                this.restore_runs();
+                const run = new ($mol_wire_sync($rise_bench_run))(Number(this.count_mode()), this.compact() ? 4 : 10, undefined, '—', undefined, undefined, undefined, undefined, this.engine_kind(), $rise_bench_engine[this.engine_kind()].version);
+                new ($mol_wire_sync($rise_bench_stage))(run, 'Подготовка');
+                $mol_wire_sync(this).start_run(run);
+                return $mol_error_fence(() => {
+                    new ($mol_wire_sync($rise_bench_stage))(run, 'Запуск БД, с');
+                    const prepare = new ($mol_wire_sync($rise_bench_measure))('Запуск БД');
+                    $mol_wire_sync(this.storage()).prepare();
+                    prepare.finish();
+                    run.metric('Запуск БД, с', prepare.duration / 1000);
+                    new ($mol_wire_sync($rise_bench_stage))(run, 'Создание, с');
+                    const create = new ($mol_wire_sync($rise_bench_measure))('Создание IDB');
+                    $mol_wire_sync(this.storage()).create(run.count, this.compact());
+                    create.finish();
+                    run.metric('Создание, с', create.duration / 1000);
+                    new ($mol_wire_sync($rise_bench_stage))(run, 'Поиск, с');
+                    const search = new ($mol_wire_sync($rise_bench_measure))('Поиск IDB');
+                    if ($mol_wire_sync(this.storage()).search() !== 1)
+                        throw new Error('Поиск должен найти один товар');
+                    search.finish();
+                    run.metric('Поиск, с', search.duration / 1000);
+                    new ($mol_wire_sync($rise_bench_stage))(run, 'Добавить 1, с');
+                    const add = new ($mol_wire_sync($rise_bench_measure))('Добавление IDB');
+                    $mol_wire_sync(this.storage()).add(this.compact());
+                    add.finish();
+                    run.metric('Добавить 1, с', add.duration / 1000);
+                    $mol_wire_sync(this).refresh();
+                    run.state('Перезагрузка');
+                    new ($mol_wire_sync($rise_bench_stage))(run, 'F5, с');
+                    this.reload_store().save(this.Metrics().runs(), this.Metrics().operations(), { name: this.dataset_name(), count: run.count, started: performance.timeOrigin + performance.now() });
+                    this.$.$mol_dom_context.location.reload();
+                }, error => {
+                    run.state('Ошибка');
+                    run.failure(String(error));
+                    this.reload_store().save(this.Metrics().runs(), this.Metrics().operations(), null);
+                    return $mol_fail(error);
+                });
+            }
+            resumed = false;
+            resume_reload() {
+                if (this.resumed)
+                    return;
+                const ticket = this.reload_store().snapshot.pending;
+                if (!ticket)
+                    return;
+                const run = this.Metrics().runs()[0];
+                return $mol_error_fence(() => {
+                    if (this.dataset_name() !== ticket.name || $mol_wire_sync(this.storage()).count() !== ticket.count + 1)
+                        throw new Error('После F5 открыт неполный набор IDB');
+                    const ready = new ($mol_wire_sync($rise_bench_idb_ready))(this.Table().dom_node(), $rise_bench_product_name(ticket.count));
+                    run.metric('F5, с', ($mol_wire_sync(ready).wait() - ticket.started) / 1000);
+                    new ($mol_wire_sync($rise_bench_stage))(run, 'Поиск после F5, с');
+                    const search = new ($mol_wire_sync($rise_bench_measure))('Поиск IDB после F5');
+                    if ($mol_wire_sync(this.storage()).search() !== 1)
+                        throw new Error('Поиск IDB после F5 должен найти один товар');
+                    search.finish();
+                    run.metric('Поиск после F5, с', search.duration / 1000);
+                    this.resumed = true;
+                    run.state('Готово');
+                    this.reload_store().save(this.Metrics().runs(), this.Metrics().operations(), null);
+                }, error => {
+                    this.resumed = true;
+                    run.state('Ошибка');
+                    run.failure(String(error));
+                    this.reload_store().save(this.Metrics().runs(), this.Metrics().operations(), null);
+                    return error;
+                });
+            }
+            auto() { this.restore_runs(); this.resume_reload(); return []; }
+        }
+        __decorate([
+            $mol_mem
+        ], $rise_bench_idb.prototype, "count_mode", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bench_idb.prototype, "schema_mode", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bench_idb.prototype, "dataset_name", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bench_idb.prototype, "storage", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bench_idb.prototype, "revision", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bench_idb.prototype, "products", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_idb.prototype, "refresh", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_idb.prototype, "change", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bench_idb.prototype, "change_error", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_idb.prototype, "save_change", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_idb.prototype, "reset", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_idb.prototype, "add_one", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bench_idb.prototype, "reload_store", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_idb.prototype, "restore_runs", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_idb.prototype, "start_run", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_idb.prototype, "benchmark", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bench_idb.prototype, "resume_reload", null);
+        $$.$rise_bench_idb = $rise_bench_idb;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_define($rise_bench_idb, {
+        Manual: { flex: { wrap: 'wrap' }, alignItems: 'flex-end' },
+        Manual_actions: { flex: { wrap: 'wrap' } },
+    });
+})($ || ($ = {}));
+
+;
 "use strict";
 
 
@@ -36517,32 +36992,108 @@ var $;
             compare() { return this.kind() === 'goods'; }
             text_mode() { return this.kind() === 'text'; }
             mode(next) { return $mol_state_arg.value('results', next) === 'charts' ? 'charts' : 'table'; }
-            fixture_kind() { return this.compare() ? this.engine() : this.kind(); }
+            fixture_kind() { return (this.active_case() ?? this.display_case())?.engine ?? (this.compare() ? this.engine() === 'all' ? 'goods' : this.engine() : this.kind()); }
             engine(next) {
-                const current = $mol_state_arg.value('engine') === 'idb' ? 'idb' : 'goods';
-                if (next !== undefined && (next === 'idb' ? 'idb' : 'goods') !== current)
+                if (next !== undefined)
+                    this.display_case(null);
+                const normalize = (value) => value === 'all' || Object.hasOwn($rise_bench_engine, value ?? '') ? value : 'goods';
+                const current = normalize($mol_state_arg.value('engine'));
+                if (next !== undefined && normalize(next) !== current)
                     this.ready(false);
-                return $mol_state_arg.value('engine', next) === 'idb' ? 'idb' : 'goods';
+                return normalize($mol_state_arg.value('engine', next));
             }
             count(next) {
+                if (next !== undefined)
+                    this.display_case(null);
                 const key = this.kind() === 'text' ? 'lines' : 'count';
+                if (next !== undefined && next !== ($mol_state_arg.value(key) ?? '100'))
+                    this.ready(false);
                 const value = $mol_state_arg.value(key, next) ?? '100';
                 return Object.hasOwn(this.Controls().counts(), value) ? value : '100';
             }
             schema(next) {
+                if (next !== undefined)
+                    this.display_case(null);
+                if (next !== undefined && next !== ($mol_state_arg.value('schema') === 'full' ? 'full' : 'compact'))
+                    this.ready(false);
                 return $mol_state_arg.value('schema', next) === 'full' ? 'full' : 'compact';
             }
             ready(next = false) { return next; }
             busy(next = false) { return next; }
+            active_case(next = null) { return next; }
+            display_case(next = null) { return next; }
+            frame_generation(next = 0) { return next; }
+            queue = [];
+            total = 0;
+            finished = 0;
+            failed = 0;
+            command_sent = false;
+            timer;
+            progress = null;
+            settled = new Set();
             controls_enabled() { return this.ready() && !this.busy(); }
-            config() { return { count: this.count(), schema: this.schema() }; }
+            config() { const current = this.active_case() ?? this.display_case(); return { count: current?.count ?? (this.count() === 'all' ? '100' : this.count()), schema: current?.schema ?? this.schema() }; }
             send(command, data) {
                 const target = this.Frame().dom_node().contentWindow;
                 if (!target || !this.ready())
                     throw new Error('Дождитесь загрузки бенчмарка');
                 target.postMessage({ type: 'rise-bench-command', kind: this.fixture_kind(), id: crypto.randomUUID(), command, data }, location.origin);
             }
-            run() { this.send('run', this.config()); this.busy(true); this.status('Выполняется'); }
+            run() {
+                if (this.active_case())
+                    return;
+                this.queue = $rise_bench_batch(this.engine(), this.count(), this.schema(), this.text_mode());
+                this.total = this.queue.length;
+                this.finished = 0;
+                this.failed = 0;
+                this.next_case();
+            }
+            next_case() {
+                if (this.timer)
+                    clearTimeout(this.timer);
+                this.progress = null;
+                this.command_sent = false;
+                const next = this.queue.shift();
+                if (next || !this.display_case())
+                    this.ready(false);
+                this.active_case(next ? { ...next, token: crypto.randomUUID() } : null);
+                if (next || !this.display_case())
+                    this.frame_generation(this.frame_generation() + 1);
+                this.busy(Boolean(next));
+                if (!next) {
+                    this.status(`Завершено ${this.finished} из ${this.total}; ошибки: ${this.failed}`);
+                    return;
+                }
+                this.status(`${this.finished + 1}/${this.total}: ${next.engine}, ${next.count} — загрузка`);
+                this.timer = setTimeout(() => this.expire(), $rise_bench_stage.limit);
+            }
+            expire(error) {
+                const active = this.active_case();
+                if (!active)
+                    return;
+                const row = this.progress?.row ?? {
+                    id: crypto.randomUUID(), count: Number(active.count), properties: this.text_mode() ? 0 : active.schema === 'full' ? 10 : 4,
+                    stamp: new $mol_time_moment().toString('DD.MM.YYYY hh:mm:ss'), state: 'Ошибка',
+                    baza_version: active.engine === 'goods' || active.engine === 'text' ? $rise_bench_run_baza_version : '—',
+                    benchmark_version: $rise_bench_run_benchmark_version, engine: active.engine === 'text' ? 'goods' : active.engine,
+                    engine_version: active.engine === 'text' ? $rise_bench_run_baza_version : $rise_bench_engine[active.engine].version,
+                    computer: this.Controls().computer(), browser: navigator.userAgent,
+                    metrics: Object.fromEntries(this.operations().map(name => [name, null])),
+                };
+                this.finish_case({ ...row, state: 'Ошибка', error: error ?? `${this.progress?.operation ?? 'Загрузка'}: превышен лимит 300 с` }, active.engine);
+            }
+            finish_case(row, kind) {
+                const active = this.active_case();
+                if (!active || this.settled.has(active.token))
+                    return;
+                this.settled.add(active.token);
+                ++this.finished;
+                if (row.state === 'Ошибка')
+                    ++this.failed;
+                this.display_case(row.state === 'Готово' && !this.queue.length ? active : null);
+                $mol_wire_async(this).accept(row, kind).catch(error => $mol_fail_log(error));
+                this.next_case();
+            }
             operations() {
                 return $rise_bench_archive.operations(this.kind());
             }
@@ -36551,11 +37102,19 @@ var $;
                 // The measured document runs the workload, not the parent unit-test suite.
                 url.pathname = url.pathname.replace(/\/test\.html$/, '/index.html');
                 url.searchParams.set('rise_fixture', this.fixture_kind());
-                url.hash = '!count=' + this.count() + '/lines=' + this.count() + '/schema=' + this.schema();
+                url.searchParams.set('rise_generation', String(this.frame_generation()));
+                url.searchParams.set('rise_selection', [this.engine(), this.count(), this.schema()].join(':'));
+                const active = this.active_case() ?? this.display_case();
+                if (active)
+                    url.searchParams.set('rise_run', active.token);
+                else
+                    url.searchParams.delete('rise_run');
+                const config = this.config();
+                url.hash = '!count=' + config.count + '/lines=' + config.count + '/schema=' + config.schema;
                 return url.href;
             }
             runs() {
-                const rows = this.compare() ? [...$rise_bench_archive.rows('goods'), ...$rise_bench_archive.rows('idb')] : $rise_bench_archive.rows(this.kind());
+                const rows = this.compare() ? Object.keys($rise_bench_engine).flatMap(kind => $rise_bench_archive.rows(kind)) : $rise_bench_archive.rows(this.kind());
                 const date = (value) => value.replace(/^(\d{2})\.(\d{2})\.(\d{4})/, '$3-$2-$1');
                 return [...rows].sort((a, b) => date(b.stamp).localeCompare(date(a.stamp)));
             }
@@ -36568,7 +37127,10 @@ var $;
             accept(row, kind) {
                 if (!this.outbox().some(item => item.id === row.id))
                     this.outbox([...this.outbox(), { ...row, kind }]);
-                return this.retry();
+                const result = this.retry();
+                if (!this.total && row.state === 'Ошибка' && !this.outbox().some(item => item.id === row.id))
+                    this.status('Бенчмарк завершился с ошибкой. Доступные измерения сохранены.');
+                return result;
             }
             retry() {
                 return $mol_error_fence(() => {
@@ -36576,7 +37138,8 @@ var $;
                         $mol_wire_sync($rise_bench_archive).save(row.kind ?? this.kind(), row);
                         this.outbox(this.outbox().filter(item => item.id !== row.id));
                     }
-                    this.status('Результаты сохранены');
+                    if (!this.total)
+                        this.status('Результаты сохранены');
                 }, error => { this.status('Не удалось сохранить результат. Нажмите «Повторить сохранение».'); return error; });
             }
             restored = false;
@@ -36593,11 +37156,40 @@ var $;
                         return;
                     if (event.data?.kind !== this.fixture_kind())
                         return;
+                    const active = this.active_case();
+                    if (event.data?.token !== (active?.token ?? this.display_case()?.token ?? null))
+                        return;
+                    if (event.data.type === 'rise-bench-progress') {
+                        if (!active || !this.command_sent || typeof event.data.operation !== 'string' || !Number.isFinite(event.data.started))
+                            return;
+                        const row = $rise_bench_archive.validate(event.data.row, this.operations());
+                        if (!row || row.count !== Number(active.count) || row.engine !== (active.engine === 'text' ? 'goods' : active.engine))
+                            return;
+                        if (this.progress?.operation === event.data.operation && this.progress?.started === event.data.started)
+                            return;
+                        this.progress = { operation: event.data.operation, started: event.data.started, row };
+                        if (this.timer)
+                            clearTimeout(this.timer);
+                        this.timer = setTimeout(() => this.expire(), Math.max(0, $rise_bench_stage.limit - (Date.now() - event.data.started)));
+                        this.status(`${this.finished + 1}/${this.total}: ${active.engine}, ${active.count} — ${event.data.operation}`);
+                        return;
+                    }
                     if (event.data.type === 'rise-bench-state') {
+                        const config = this.config();
+                        if (event.data.count !== config.count || this.kind() !== 'text' && event.data.schema !== config.schema)
+                            return;
                         this.ready(true);
-                        this.busy(event.data.busy === true);
-                        if (typeof event.data.error === 'string')
-                            this.status(event.data.error);
+                        this.busy(Boolean(active) || event.data.busy === true);
+                        if (active && !this.command_sent && !event.data.busy) {
+                            this.command_sent = true;
+                            this.send('run', config);
+                        }
+                        if (typeof event.data.error === 'string') {
+                            if (active)
+                                this.expire(event.data.error);
+                            else
+                                this.status(event.data.error);
+                        }
                         return;
                     }
                     if (event.data.type !== 'rise-bench-result')
@@ -36605,11 +37197,17 @@ var $;
                     const row = $rise_bench_archive.validate(event.data.row, this.operations());
                     if (!row)
                         return;
-                    this.busy(false);
-                    $mol_wire_async(this).accept(row, event.data.kind).catch(error => $mol_fail_log(error));
+                    if (active)
+                        this.finish_case(row, event.data.kind);
                 };
                 window.addEventListener('message', receive);
                 return { destructor: () => window.removeEventListener('message', receive) };
+            }
+            destructor() {
+                if (this.timer)
+                    clearTimeout(this.timer);
+                this.queue = [];
+                super.destructor();
             }
             auto() {
                 if (this.kind() === 'demo')
@@ -36640,11 +37238,29 @@ var $;
             $mol_mem
         ], $rise_bench_host.prototype, "busy", null);
         __decorate([
+            $mol_mem
+        ], $rise_bench_host.prototype, "active_case", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bench_host.prototype, "display_case", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bench_host.prototype, "frame_generation", null);
+        __decorate([
             $mol_action
         ], $rise_bench_host.prototype, "send", null);
         __decorate([
             $mol_action
         ], $rise_bench_host.prototype, "run", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_host.prototype, "next_case", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_host.prototype, "expire", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_host.prototype, "finish_case", null);
         __decorate([
             $mol_mem
         ], $rise_bench_host.prototype, "fixture_uri", null);
@@ -41039,60 +41655,6 @@ var $;
 })($ || ($ = {}));
 
 ;
-	($.$mol_status) = class $mol_status extends ($.$mol_view) {
-		message(){
-			return "";
-		}
-		status(){
-			return (this.title());
-		}
-		minimal_height(){
-			return 24;
-		}
-		minimal_width(){
-			return 0;
-		}
-		sub(){
-			return [(this.message())];
-		}
-	};
-
-
-;
-"use strict";
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $mol_status extends $.$mol_status {
-            message() {
-                try {
-                    return this.status() ?? null;
-                }
-                catch (error) {
-                    if (error instanceof Promise)
-                        $mol_fail_hidden(error);
-                    $mol_fail_log(error);
-                    return error.message;
-                }
-            }
-        }
-        $$.$mol_status = $mol_status;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_attach("mol/status/status.view.css", "[mol_status] {\n\tpadding: var(--mol_gap_text);\n\tborder-radius: var(--mol_gap_round);\n\tdisplay: block;\n\tflex-shrink: 1;\n\tword-wrap: break-word;\n}\n\n[mol_status]:not([mol_view_error=\"Promise\"]) {\n\tcolor: var(--mol_theme_focus);\n}\n\n[mol_status]:not([mol_view_error=\"Promise\"]):empty {\n\tdisplay: none;\n}\n");
-})($ || ($ = {}));
-
-;
 	($.$mol_app_demo) = class $mol_app_demo extends ($.$mol_book2) {
 		detail_title(){
 			return "$mol";
@@ -41579,14 +42141,17 @@ var $;
                     this.completed.add(request.id);
                     this.active(null);
                     this.report();
-                    window.parent.postMessage({ type: 'rise-bench-state', kind: this.kind, busy: false, error: String(error) }, location.origin);
+                    window.parent.postMessage({ type: 'rise-bench-state', kind: this.kind, token: new URL(location.href).searchParams.get('rise_run'), count: this.bench.count_mode(),
+                        schema: this.kind === 'text' ? 'compact' : this.bench.schema_mode(), busy: false, error: String(error) }, location.origin);
                     return error;
                 });
             }
             last_state = '';
             report() {
                 this.listener();
-                const state = JSON.stringify({ type: 'rise-bench-state', kind: this.kind, busy: Boolean(this.active()) || !this.bench.controls_enabled() });
+                const state = JSON.stringify({ type: 'rise-bench-state', kind: this.kind, token: new URL(location.href).searchParams.get('rise_run'),
+                    count: this.bench.count_mode(), schema: this.kind === 'text' ? 'compact' : this.bench.schema_mode(),
+                    busy: Boolean(this.active()) || !this.bench.controls_enabled() });
                 if (state === this.last_state)
                     return;
                 this.last_state = state;
@@ -41646,13 +42211,16 @@ var $;
                     case 'goods': return this.Bench().Goods();
                     case 'text': return this.Bench().Crdttext();
                     case 'idb': return this.Bench().Idb();
+                    case 'sqlite':
+                    case 'pglite':
+                    case 'duckdb': return this.Bench().Idb();
                     case 'demo': return this.Demo();
                 }
                 return null;
             }
             bridge() {
                 const kind = this.fixture_kind();
-                if (!kind || !['goods', 'text', 'idb'].includes(kind))
+                if (!kind || !['goods', 'text', 'idb', 'sqlite', 'pglite', 'duckdb'].includes(kind))
                     return null;
                 return new $rise_bench_fixture(kind, this.fixture());
             }
@@ -41664,6 +42232,8 @@ var $;
                     if (this.fixture_kind() === 'text')
                         return [this.Bench().Crdttext().Page()];
                     if (this.fixture_kind() === 'idb')
+                        return [this.Bench().Idb().Page()];
+                    if (['sqlite', 'pglite', 'duckdb'].includes(this.fixture_kind() ?? ''))
                         return [this.Bench().Idb().Page()];
                 }
                 return this.fixture()?.pages_deep() ?? super.pages();
