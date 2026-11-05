@@ -167,7 +167,7 @@ async function main(){
 		const touched=await page.evaluate(()=>[...$.$giper_baza_glob.lands_touched])
 		if(!local)assert.ok(sent.length>0)
 		assert.ok(sent.every(id=>touched.includes(id)))
-		assert.equal(await page.evaluate(()=>$.$mol_wire_async(()=>$.$mol_wire_sync($.$rise_storage).db().name)()),'$rise_results')
+		assert.equal(await page.evaluate(()=>$.$mol_wire_async(()=>$.$mol_wire_sync($.$rise_storage).db().name)()),isolated?'$rise_workload_sqltests':'$rise_results')
 		if(!local){
 		resultStep('Прочитать результаты новым профилем и подтвердить публичную запись',['$rise_bench_archive.rows','$rise_bench_archive.save'])
 		const reader=await browser.newContext();contexts.push(reader)
