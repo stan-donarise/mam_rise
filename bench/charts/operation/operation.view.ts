@@ -7,10 +7,10 @@ namespace $.$$ {
 				if( run.benchmark_version !== $rise_bench_run_benchmark_version ) continue
 				const time = run.metric( this.operation() )
 				if( run.state() !== 'Готово' || time === null ) continue
-				const engine = run.baza_version === '—' ? 'IDB' : 'Гипербаза'
-				const key = JSON.stringify([ engine, run.properties, run.computer, run.browser, run.benchmark_version, run.baza_version ])
+				const engine = $rise_bench_engine[ run.engine as $rise_bench_engine_kind ]?.title ?? run.engine
+				const key = JSON.stringify([ engine, run.properties, run.computer, run.browser, run.benchmark_version, run.engine_version ])
 				if( !groups.has( key ) ) groups.set( key, {
-					title: `${ engine } · ${ run.properties || 'текст' } · ${ run.computer.split( /\r?\n/ )[ 0 ] || 'ПК не указан' } · v${ run.benchmark_version }`, values: new Map,
+					title: `${ engine } ${ run.engine_version.slice( 0, run.engine === 'goods' ? 8 : 80 ) } · ${ run.properties || 'текст' } · ${ run.computer.split( /\r?\n/ )[ 0 ] || 'ПК не указан' } · v${ run.benchmark_version }`, values: new Map,
 				} )
 				const values = groups.get( key )!.values
 				if( !values.has( run.count ) ) values.set( run.count, [] )

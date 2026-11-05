@@ -64,6 +64,7 @@ namespace $.$$ {
 
 		@ $mol_mem_key
 		initialize_product( key: readonly [ $rise_bench_baza_goods_preparation, number ] ) {
+			$rise_bench_stage.current?.check()
 			const [ state, index ] = key
 			// This initializer is only invoked by Create. A completed record has no
 			// remaining write dependencies and is never recreated on async replay.
@@ -92,7 +93,7 @@ namespace $.$$ {
 		dataset_link( next?: string ) {
 			// Keep existing Area datasets; retired single/shard datasets stay untouched.
 			const key = '$rise_bug_listbaza_dataset_names2_area' + ( this.record_count() === 1000 ? '' : '_' + this.record_count() ) + ( this.compact_mode() ? '_compact' : '' )
-			return $mol_state_local.value< string >( key, next ) ?? ''
+			return $mol_state_local.value< string >( key + ( new URL( location.href ).searchParams.get( 'rise_run' ) || '' ), next ) ?? ''
 		}
 
 		@ $mol_mem
@@ -179,23 +180,31 @@ namespace $.$$ {
 		benchmark() {
 			this.restore_runs()
 			const run = new ( $mol_wire_sync( $rise_bench_run ) )( this.record_count(), this.compact_mode() ? 4 : 10 )
+			new ( $mol_wire_sync( $rise_bench_stage ) )( run, 'Подготовка' )
 			$mol_wire_sync( this ).start_run( run )
 			return $mol_error_fence( ()=> {
+				new ( $mol_wire_sync( $rise_bench_stage ) )( run, 'Создание, с' )
 				const created = $mol_wire_sync( this ).create()
 				run.metric( 'Создание, с', created / 1000 )
 				// Drain the previous writes before measuring another operation.
+				new ( $mol_wire_sync( $rise_bench_stage ) )( run, 'Сохранение после создания' )
 				$mol_wire_sync( this ).save_dataset()
+				new ( $mol_wire_sync( $rise_bench_stage ) )( run, 'Поиск, с' )
 				const search = new ( $mol_wire_sync( $rise_bench_measure ) )( 'Поиск' )
 				if( $mol_wire_sync( this ).benchmark_search() !== 1 ) throw new Error( 'Поиск должен найти один товар' )
 				search.finish()
 				run.metric( 'Поиск, с', search.duration! / 1000 )
 				this.search_query( '' )
+				new ( $mol_wire_sync( $rise_bench_stage ) )( run, 'Добавить 1, с' )
 				const added = $mol_wire_sync( this ).add_one()
 				run.metric( 'Добавить 1, с', added / 1000 )
+				new ( $mol_wire_sync( $rise_bench_stage ) )( run, 'Сохранение после добавления' )
 				$mol_wire_sync( this ).save_dataset()
+				new ( $mol_wire_sync( $rise_bench_stage ) )( run, 'F5, с' )
 				$mol_wire_sync( this ).request_reload( run )
 			}, error => {
 				run.state( 'Ошибка' )
+				run.failure( String( error ) )
 				this.reload_store().save( this.Metrics().runs(), this.Metrics().operations(), null )
 				return error
 			} )
@@ -250,6 +259,7 @@ namespace $.$$ {
 				const ready = new ( $mol_wire_sync( $rise_bench_baza_goods_reload_ready ) )( this.Table().dom_node(), $rise_bench_baza_goods_product_name( ticket.count ) )
 				const finished = $mol_wire_sync( ready ).wait()
 				run.metric( 'F5, с', ( finished - ticket.started ) / 1000 )
+				new ( $mol_wire_sync( $rise_bench_stage ) )( run, 'Поиск после F5, с' )
 				const search = new ( $mol_wire_sync( $rise_bench_measure ) )( 'Поиск после F5' )
 				if( $mol_wire_sync( this ).benchmark_search() !== 1 ) throw new Error( 'Поиск после F5 должен найти один товар' )
 				search.finish()
@@ -261,6 +271,7 @@ namespace $.$$ {
 			}, error => {
 				this.reload_done = true
 				run.state( 'Ошибка' )
+				run.failure( String( error ) )
 				this.reload_store().save( this.Metrics().runs(), this.Metrics().operations(), null )
 				return error
 			} )

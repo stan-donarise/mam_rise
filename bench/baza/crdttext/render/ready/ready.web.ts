@@ -37,8 +37,8 @@ namespace $ {
 				this.observer.observe( this.editor.dom_node(), { childList: true, subtree: true, characterData: true } )
 				this.timer = setTimeout( ()=> {
 					this.destructor()
-					reject( new Error( 'Текст не появился в редакторе за 45 секунд' ) )
-				}, 45_000 )
+					reject( new Error( 'Текст не появился в редакторе за 300 секунд' ) )
+				}, 300_000 )
 				check()
 			})
 		}

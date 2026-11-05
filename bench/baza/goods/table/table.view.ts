@@ -24,6 +24,7 @@ namespace $.$$ {
 			if( !terms.length && color === 'all' && status === 'all' ) return $mol_range2( index => this.Row( count - index - 1 ), ()=> count )
 			const matches: number[] = []
 			for( let index = count - 1; index >= 0; --index ) {
+				$rise_bench_stage.current?.check()
 				if( color !== 'all' && this.row_color( index ) !== color ) continue
 				if( status !== 'all' && this.row_status( index ) !== status ) continue
 				if( terms.length && !terms.every( term => this.row_title( index ).toLowerCase().includes( term ) ) ) continue

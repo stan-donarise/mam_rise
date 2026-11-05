@@ -13,21 +13,21 @@ namespace $.$$ {
 			this.runs( [ run, ...rows ] )
 		}
 
-		col_ids() { return [ '№', 'Дата и время', ...this.compare() ? [ 'Хранилище' ] : [], 'Версия Гипербазы', 'Версия бенчмарка', ...this.text_mode() ? [ 'Строк', 'Размер, КБ' ] : [ 'Объём', 'Полей' ], ...this.operations(), 'Компьютер' ] }
+		col_ids() { return [ '№', 'Дата и время', ...this.compare() ? [ 'Хранилище' ] : [], 'Версия движка', 'Версия бенчмарка', ...this.text_mode() ? [ 'Строк', 'Размер, КБ' ] : [ 'Объём', 'Полей' ], ...this.operations(), 'Состояние', 'Компьютер' ] }
 
 		@ $mol_mem
 		records() {
 			return this.runs().map( ( run, index, rows ) => ({
 				'№': rows.length - index,
 				'Дата и время': run.stamp,
-				'Хранилище': run.baza_version === '—' ? 'IDB' : 'Гипербаза',
-				'Версия Гипербазы': run.baza_version.slice( 0, 8 ),
+				'Хранилище': $rise_bench_engine[ run.engine as $rise_bench_engine_kind ]?.title ?? run.engine,
+				'Версия движка': run.engine === 'goods' ? run.engine_version.slice( 0, 8 ) : run.engine_version,
 				'Версия бенчмарка': run.benchmark_version,
 				'Объём': run.count,
 				'Строк': run.count,
 				'Размер, КБ': run.bytes() === null ? '—' : ( run.bytes()! / 1024 ).toFixed( 3 ),
 				'Полей': run.properties || '—',
-				'Состояние': run.state(),
+				'Состояние': run.failure() || run.state(),
 				...Object.fromEntries( this.operations().map( operation => {
 					const time = run.metric( operation )
 					return [ operation, time === null ? '—' : time.toFixed( 3 ) ]

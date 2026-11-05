@@ -112,9 +112,9 @@ async function main() {
 			assert.ok( Number( metrics[ 0 ][ column ] ) >= 0 )
 			assert.match( metrics[ 0 ][ column ], /^\d+\.\d{3}$/ )
 		}
-		assert.equal( metrics[ 0 ][ 'Версия Гипербазы' ], '2e6100b2' )
-		assert.equal( metrics[ 0 ][ 'Версия бенчмарка' ], '0.3.0' )
-		assert.equal( await page.locator( '[rise_bench_baza_goods_metrics] [mol_grid_col_head]' ).count(), 12 )
+		assert.equal( metrics[ 0 ][ 'Версия движка' ], '2e6100b2' )
+		assert.equal( metrics[ 0 ][ 'Версия бенчмарка' ], '0.5.0' )
+		assert.equal( await page.locator( '[rise_bench_baza_goods_metrics] [mol_grid_col_head]' ).count(), 13 )
 		assert.equal( await page.getByRole( 'button', { name: 'Перестроить индексы', exact: true } ).count(), 0 )
 		const keys = await page.evaluate( ()=> globalThis.$.$mol_wire_async( ()=> globalThis.$.$rise_app.Root( 0 ).Bench().Goods().dataset().keys() )() )
 		assert.ok( !keys.includes( 'Color_index' ) && !keys.includes( 'Status_index' ) )
@@ -230,7 +230,7 @@ async function main() {
 			previousDatabase = result.name
 			assert.equal( result.rows, count + 1 )
 			assert.equal( result.last, String( count ).padStart( 5, '0' ) )
-			assert.equal( result.metrics[ 0 ][ 'Версия Гипербазы' ], '—' )
+			assert.equal( result.metrics[ 0 ][ 'Версия движка' ], 'browser' )
 			for( const column of [ 'Создание, с', 'Поиск, с', 'Добавить 1, с', 'F5, с', 'Поиск после F5, с' ] ) assert.match( result.metrics[ 0 ][ column ], /^\d+\.\d{3}$/ )
 			console.log( 'IndexedDB metrics', JSON.stringify( result.metrics[ 0 ] ) )
 		}

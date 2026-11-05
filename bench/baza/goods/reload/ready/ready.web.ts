@@ -37,8 +37,8 @@ namespace $ {
 				this.observer.observe( this.table, { childList: true, subtree: true, attributes: true, characterData: true } )
 				this.timer = setTimeout( ()=> {
 					this.destructor()
-					reject( new Error( 'После F5 товары не появились за 45 секунд' ) )
-				}, 45_000 )
+					reject( new Error( 'После F5 товары не появились за 300 секунд' ) )
+				}, 300_000 )
 				check()
 			})
 		}

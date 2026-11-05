@@ -21,7 +21,7 @@ namespace $ {
 				}
 				this.observer = new MutationObserver( check )
 				this.observer.observe( this.table, { childList: true, subtree: true, characterData: true, attributes: true } )
-				this.timer = setTimeout( ()=> { this.destructor(); reject( new Error( 'После F5 записи IDB не появились за 45 секунд' ) ) }, 45_000 )
+				this.timer = setTimeout( ()=> { this.destructor(); reject( new Error( 'После F5 записи IDB не появились за 300 секунд' ) ) }, 300_000 )
 				check()
 			})
 		}

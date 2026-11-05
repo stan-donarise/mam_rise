@@ -2,11 +2,11 @@ $rise_bench_idb $mol_book2
 	menu_title <= title \Сущности IDB
 	pages /
 		<= Settings $mol_page
-			title \Настройки IDB
+			title \Настройки
 			minimal_width 320
 			body /
 				<= Storage_label $mol_view
-					sub / \Хранение: IndexedDB через $mol_db, без индексов
+					sub / <= storage_label \
 				<= Schema_label $mol_labeler
 					title \Состав записи
 					Content <= Schema $mol_switch
@@ -34,19 +34,20 @@ $rise_bench_idb $mol_book2
 					click? <=> benchmark? null
 					enabled <= controls_enabled
 		<= Page $rise_bench_surface
-			title \IndexedDB
+			title <= storage_title \IDB
 			minimal_width 640
 			body_scroll_top? => body_scroll_top?
 			body /
 				<= Metrics $rise_bench_metrics
 					operations /
+						\Запуск БД, с
 						\Создание, с
 						\Поиск, с
 						\Добавить 1, с
 						\F5, с
 						\Поиск после F5, с
 				<= Manual $mol_view
-					sub /
+					sub <= manual_content /$mol_view
 						<= Search_label $mol_labeler
 							title \Поиск по названию
 							Content <= Search $mol_search
@@ -83,6 +84,8 @@ $rise_bench_idb $mol_book2
 									title \Очистить
 									click? <=> reset? null
 									enabled <= controls_enabled
+						<= Change_status $mol_status
+							status <= change_message \
 				<= Table $rise_bench_idb_table
 					records <= products /$rise_bench_idb_storage_product
 					compact <= compact false

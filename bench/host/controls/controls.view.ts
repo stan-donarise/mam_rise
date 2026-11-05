@@ -5,9 +5,9 @@ namespace $.$$ {
 		computer( next?: string ) { return $mol_state_local.value<string>( '$rise_bench_computer', next ) ?? '' }
 		count_title() { return this.kind() === 'text' ? 'Количество строк' : 'Количество записей' }
 		counts() {
-			return Object.fromEntries( ( this.kind() === 'text' ? [ 100, 500, 1000, 2000, 5000 ] : [ 100, 500, 1000, 2000, 3000, 4000, 5000, 10000 ] ).map( count => [ count, String( count ) ] ) )
+			return { all: 'Все', ...Object.fromEntries( ( this.kind() === 'text' ? [ 100, 500, 1000, 2000, 5000 ] : [ 100, 500, 1000, 2000, 3000, 4000, 5000, 10000 ] ).map( count => [ count, String( count ) ] ) ) }
 		}
-		storage_label() { return this.kind() === 'text' ? 'CRDT-текст' : this.engine() === 'idb' ? 'IndexedDB через $mol_db, без индексов' : 'Хранение: одна Area на запись' }
+		storage_label() { return this.kind() === 'text' ? 'CRDT-текст' : this.engine() === 'all' ? 'Все хранилища последовательно' : $rise_bench_engine[ this.engine() as $rise_bench_engine_kind ].storage }
 		controls() {
 			return [
 				...this.kind() === 'text' ? [] : [ this.Engine_label() ],

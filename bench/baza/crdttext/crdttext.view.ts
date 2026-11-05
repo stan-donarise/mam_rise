@@ -13,7 +13,7 @@ namespace $.$$ {
 
 		@ $mol_mem
 		text_link( next?: string ) {
-			return $mol_state_local.value< string >( '$rise_bench_baza_crdttext', next ) ?? ''
+			return $mol_state_local.value< string >( '$rise_bench_baza_crdttext' + ( new URL( location.href ).searchParams.get( 'rise_run' ) || '' ), next ) ?? ''
 		}
 
 		@ $mol_mem
@@ -82,18 +82,25 @@ namespace $.$$ {
 		benchmark() {
 			this.restore_runs()
 			const run = new ( $mol_wire_sync( $rise_bench_run ) )( this.line_count() )
+			new ( $mol_wire_sync( $rise_bench_stage ) )( run, 'Подготовка' )
 			const block = this.sample_text( run.count )
 			$mol_wire_sync( this ).start_run( run )
 			return $mol_error_fence( ()=> {
+				new ( $mol_wire_sync( $rise_bench_stage ) )( run, 'Вставка, с' )
 				const inserted = $mol_wire_sync( this ).insert( block )
 				run.metric( 'Вставка, с', inserted / 1000 )
+				new ( $mol_wire_sync( $rise_bench_stage ) )( run, 'Сохранение после вставки' )
 				$mol_wire_sync( this ).save_document()
+				new ( $mol_wire_sync( $rise_bench_stage ) )( run, 'Добавить символ, с' )
 				const appended = $mol_wire_sync( this ).append_one()
 				run.metric( 'Добавить символ, с', appended / 1000 )
+				new ( $mol_wire_sync( $rise_bench_stage ) )( run, 'Сохранение после добавления' )
 				$mol_wire_sync( this ).save_document()
+				new ( $mol_wire_sync( $rise_bench_stage ) )( run, 'F5, с' )
 				$mol_wire_sync( this ).request_reload( run )
 			}, error => {
 				run.state( 'Ошибка' )
+				run.failure( String( error ) )
 				this.reload_store().save( this.Metrics().runs(), this.Metrics().operations(), null )
 				return error
 			} )
@@ -161,6 +168,7 @@ namespace $.$$ {
 			}, error => {
 				this.reload_done = true
 				run.state( 'Ошибка' )
+				run.failure( String( error ) )
 				this.reload_store().save( this.Metrics().runs(), this.Metrics().operations(), null )
 				return error
 			} )

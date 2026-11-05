@@ -34,14 +34,17 @@ namespace $.$$ {
 			}, error => {
 				this.completed.add( request.id ); this.active( null )
 				this.report()
-				window.parent.postMessage({ type: 'rise-bench-state', kind: this.kind, busy: false, error: String( error ) }, location.origin )
+			window.parent.postMessage({ type: 'rise-bench-state', kind: this.kind, token: new URL( location.href ).searchParams.get( 'rise_run' ), count: this.bench.count_mode(),
+					schema: this.kind === 'text' ? 'compact' : ( this.bench as $rise_bench_idb ).schema_mode(), busy: false, error: String( error ) }, location.origin )
 				return error
 			} )
 		}
 		private last_state = ''
 		report() {
 			this.listener()
-			const state = JSON.stringify({ type: 'rise-bench-state', kind: this.kind, busy: Boolean( this.active() ) || !this.bench.controls_enabled() })
+			const state = JSON.stringify({ type: 'rise-bench-state', kind: this.kind, token: new URL( location.href ).searchParams.get( 'rise_run' ),
+				count: this.bench.count_mode(), schema: this.kind === 'text' ? 'compact' : ( this.bench as $rise_bench_idb ).schema_mode(),
+				busy: Boolean( this.active() ) || !this.bench.controls_enabled() })
 			if( state === this.last_state ) return
 			this.last_state = state
 			window.parent.postMessage( JSON.parse( state ), location.origin )

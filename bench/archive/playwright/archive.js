@@ -67,7 +67,7 @@ async function main(){
 				const r=$.$rise_bench_archive.rows(kind).find(r=>r.id===id)
 				return {kind,id:r.id,count:r.count,baza:r.baza_version,version:r.benchmark_version,state:r.state(),computer:r.computer,browser:r.browser,bytes:r.bytes()}
 			},{kind,id})
-			assert.equal(run.count,100);assert.equal(run.version,'0.3.0');assert.equal(run.state,'Готово')
+			assert.equal(run.count,100);assert.equal(run.version,'0.5.0');assert.equal(run.state,'Готово')
 			assert.equal(run.computer,'Rise test computer\nCPU / RAM / OS');assert.ok(run.browser.includes('Chrome'))
 			assert.equal(run.baza,kind==='idb'?'—':'2e6100b225c8d4fb3a5b5d14e8568223e8a8c785');completed.push(run)
 			const boundary=await child.evaluate(({method,kind})=>$.$mol_wire_async(()=>{
@@ -82,7 +82,7 @@ async function main(){
 				const bytes=await child.evaluate(()=>new TextEncoder().encode($.$rise_app.Root(0).Bench().Crdttext().text()).byteLength)
 				assert.equal(run.bytes,bytes)
 				const columns=await page.evaluate(()=>$.$rise_app.Root(0).Bench().Text_host().Metrics().col_ids())
-				assert.ok(columns.includes('Строк')&&columns.includes('Размер, КБ')&&!columns.includes('Полей')&&!columns.includes('Состояние'))
+				assert.ok(columns.includes('Строк')&&columns.includes('Размер, КБ')&&!columns.includes('Полей')&&columns.includes('Состояние'))
 			}
 			const parentLands=await page.evaluate(()=>[...$.$giper_baza_glob.lands_touched])
 			assert.ok(boundary.lands.every(id=>!parentLands.includes(id)),'No workload Land in online parent')
@@ -108,7 +108,7 @@ async function main(){
 				assert.equal(await page.evaluate(()=>$.$rise_bench_archive.rows('goods').length),before)
 				for(const count of ['500','100']){
 					await page.getByRole('checkbox',{name:count,exact:true}).click()
-					await child.waitForFunction(count=>new URL(location.href).hash.includes('count='+count)&&$.$rise_app.Root(0).Bench().Goods().count_mode()===count,count)
+					await child.waitForFunction(count=>new URL(location.href).hash.includes('count='+count)&&globalThis.$?.$rise_app?.Root(0).Bench().Goods().count_mode()===count,count)
 					await page.waitForFunction(()=>!document.querySelector('[rise_bench_host_controls_run]').hasAttribute('disabled'))
 				}
 			}
@@ -136,7 +136,7 @@ async function main(){
 					for(let index=0;index<10;index++){
 						const previous=await child.evaluate(()=>$.$rise_app.Root(0).Bench().Idb().Metrics().runs()[0].id)
 						await runButton.click()
-						const next=await child.waitForFunction(previous=>{const id=$.$rise_app.Root(0).Bench().Idb().Metrics().runs()[0]?.id;return id&&id!==previous?id:false},previous)
+						const next=await child.waitForFunction(previous=>{const id=globalThis.$?.$rise_app?.Root(0).Bench().Idb().Metrics().runs()[0]?.id;return id&&id!==previous?id:false},previous)
 						const id=await next.jsonValue();await next.dispose()
 						await page.waitForFunction(id=>{try{return $.$rise_bench_archive.rows('idb').some(row=>row.id===id&&row.state()==='Готово')}catch(error){if(error?.then)return false;throw error}},id)
 					}

@@ -10,8 +10,12 @@ $rise_bench_host_controls $mol_page
 				enabled <= enabled
 				value? <=> engine? \goods
 				options *
+					all \Все
 					goods \Гипербаза
 					idb \IDB
+					sqlite \SQLite
+					pglite \PGlite
+					duckdb \DuckDB
 		<= Storage_label $mol_view
 			sub / <= storage_label \
 		<= Schema_label $mol_labeler
