@@ -31,4 +31,6 @@ test('Operation deadline is 300 seconds, not 45; checks do not reset its start',
 	now++;assert.throws(()=>stage.check(),/300 с/)
 	assert.equal(messages.length,1);assert.equal(messages[0].token,'token');assert.equal(messages[0].started,1000)
 	const next=new c.$.$rise_bench_stage(run,'Поиск, с');assert.doesNotThrow(()=>next.check())
+	assert.equal(c.$.$rise_bench_stage.failure(new Error('database secret-dataset-name')), 'Поиск, с: ошибка выполнения')
+	assert.equal(c.$.$rise_bench_stage.failure(new Error('превышен лимит 300 с')), 'Поиск, с: превышен лимит 300 с')
 })

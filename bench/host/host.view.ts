@@ -88,7 +88,7 @@ namespace $.$$ {
 				computer: this.Controls().computer(), browser: navigator.userAgent,
 				metrics: Object.fromEntries( this.operations().map( name => [ name, null ] ) ),
 			}
-			this.finish_case( { ...row, state: 'Ошибка', error: error ?? `${ this.progress?.operation ?? 'Загрузка' }: превышен лимит 300 с` }, active.engine )
+			this.finish_case( { ...row, state: 'Ошибка', error: `${ this.progress?.operation ?? 'Загрузка' }: ${ error ? 'ошибка выполнения' : 'превышен лимит 300 с' }` }, active.engine )
 		}
 		@ $mol_action
 		finish_case( row: $rise_bench_archive_row, kind: string ) {

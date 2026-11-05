@@ -100,7 +100,7 @@ namespace $.$$ {
 				$mol_wire_sync( this ).request_reload( run )
 			}, error => {
 				run.state( 'Ошибка' )
-				run.failure( String( error ) )
+				run.failure( $rise_bench_stage.failure( error ) )
 				this.reload_store().save( this.Metrics().runs(), this.Metrics().operations(), null )
 				return error
 			} )
@@ -168,7 +168,7 @@ namespace $.$$ {
 			}, error => {
 				this.reload_done = true
 				run.state( 'Ошибка' )
-				run.failure( String( error ) )
+				run.failure( $rise_bench_stage.failure( error ) )
 				this.reload_store().save( this.Metrics().runs(), this.Metrics().operations(), null )
 				return error
 			} )

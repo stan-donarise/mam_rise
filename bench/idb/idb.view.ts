@@ -127,7 +127,7 @@ namespace $.$$ {
 				this.$.$mol_dom_context.location.reload()
 			}, error => {
 				run.state( 'Ошибка' )
-				run.failure( String( error ) )
+				run.failure( $rise_bench_stage.failure( error ) )
 				this.reload_store().save( this.Metrics().runs(), this.Metrics().operations(), null )
 				return $mol_fail( error )
 			} )
@@ -151,7 +151,7 @@ namespace $.$$ {
 				this.reload_store().save( this.Metrics().runs(), this.Metrics().operations(), null )
 			}, error => {
 				this.resumed = true; run.state( 'Ошибка' )
-				run.failure( String( error ) )
+				run.failure( $rise_bench_stage.failure( error ) )
 				this.reload_store().save( this.Metrics().runs(), this.Metrics().operations(), null )
 				return error
 			} )

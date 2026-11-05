@@ -25,9 +25,9 @@ namespace $ {
 				metrics: Object.fromEntries( operations.map( operation => [ operation, run.metric( operation ) ] ) ),
 			}) )
 			sessionStorage.setItem( this.key, JSON.stringify({ rows, pending }) )
+			if( !pending && [ 'Готово', 'Ошибка' ].includes( rows[ 0 ]?.state ) ) $rise_bench_stage.current = null
 			const kind = new URL( location.href ).searchParams.get( 'rise_fixture' )
 			if( window.parent !== window && !pending && [ 'Готово', 'Ошибка' ].includes( rows[ 0 ]?.state ) ) {
-				$rise_bench_stage.current = null
 				window.parent.postMessage({ type: 'rise-bench-result', kind, token: new URL( location.href ).searchParams.get( 'rise_run' ), row: rows[ 0 ] }, location.origin )
 			}
 		}

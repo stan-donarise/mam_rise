@@ -3,6 +3,11 @@ namespace $ {
 	export class $rise_bench_stage {
 		static readonly limit = 300_000
 		static current: $rise_bench_stage | null = null
+		static failure( error: unknown ) {
+			// Native failures may contain a workload database name or Land ID.
+			// Archive only the stage and a bounded diagnostic, never raw payloads.
+			return `${ this.current?.operation ?? 'Операция' }: ${ error instanceof Error && /300 с/.test( error.message ) ? 'превышен лимит 300 с' : 'ошибка выполнения' }`
+		}
 		readonly started = Date.now()
 		constructor( readonly run: $rise_bench_run, readonly operation: string ) {
 			$rise_bench_stage.current = this
