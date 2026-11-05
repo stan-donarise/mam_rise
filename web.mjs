@@ -32895,6 +32895,11 @@ var $;
         operation;
         static limit = 300_000;
         static current = null;
+        static failure(error) {
+            // Native failures may contain a workload database name or Land ID.
+            // Archive only the stage and a bounded diagnostic, never raw payloads.
+            return `${this.current?.operation ?? 'Операция'}: ${error instanceof Error && /300 с/.test(error.message) ? 'превышен лимит 300 с' : 'ошибка выполнения'}`;
+        }
         started = Date.now();
         constructor(run, operation) {
             this.run = run;
@@ -33967,9 +33972,10 @@ var $;
                 metrics: Object.fromEntries(operations.map(operation => [operation, run.metric(operation)])),
             }));
             sessionStorage.setItem(this.key, JSON.stringify({ rows, pending }));
+            if (!pending && ['Готово', 'Ошибка'].includes(rows[0]?.state))
+                $rise_bench_stage.current = null;
             const kind = new URL(location.href).searchParams.get('rise_fixture');
             if (window.parent !== window && !pending && ['Готово', 'Ошибка'].includes(rows[0]?.state)) {
-                $rise_bench_stage.current = null;
                 window.parent.postMessage({ type: 'rise-bench-result', kind, token: new URL(location.href).searchParams.get('rise_run'), row: rows[0] }, location.origin);
             }
         }
@@ -34224,7 +34230,7 @@ var $;
                     $mol_wire_sync(this).request_reload(run);
                 }, error => {
                     run.state('Ошибка');
-                    run.failure(String(error));
+                    run.failure($rise_bench_stage.failure(error));
                     this.reload_store().save(this.Metrics().runs(), this.Metrics().operations(), null);
                     return error;
                 });
@@ -34288,7 +34294,7 @@ var $;
                 }, error => {
                     this.reload_done = true;
                     run.state('Ошибка');
-                    run.failure(String(error));
+                    run.failure($rise_bench_stage.failure(error));
                     this.reload_store().save(this.Metrics().runs(), this.Metrics().operations(), null);
                     return error;
                 });
@@ -34799,7 +34805,7 @@ var $;
                     $mol_wire_sync(this).request_reload(run);
                 }, error => {
                     run.state('Ошибка');
-                    run.failure(String(error));
+                    run.failure($rise_bench_stage.failure(error));
                     this.reload_store().save(this.Metrics().runs(), this.Metrics().operations(), null);
                     return error;
                 });
@@ -34861,7 +34867,7 @@ var $;
                 }, error => {
                     this.reload_done = true;
                     run.state('Ошибка');
-                    run.failure(String(error));
+                    run.failure($rise_bench_stage.failure(error));
                     this.reload_store().save(this.Metrics().runs(), this.Metrics().operations(), null);
                     return error;
                 });
@@ -36875,7 +36881,7 @@ var $;
                     this.$.$mol_dom_context.location.reload();
                 }, error => {
                     run.state('Ошибка');
-                    run.failure(String(error));
+                    run.failure($rise_bench_stage.failure(error));
                     this.reload_store().save(this.Metrics().runs(), this.Metrics().operations(), null);
                     return $mol_fail(error);
                 });
@@ -36905,7 +36911,7 @@ var $;
                 }, error => {
                     this.resumed = true;
                     run.state('Ошибка');
-                    run.failure(String(error));
+                    run.failure($rise_bench_stage.failure(error));
                     this.reload_store().save(this.Metrics().runs(), this.Metrics().operations(), null);
                     return error;
                 });
@@ -37080,7 +37086,7 @@ var $;
                     computer: this.Controls().computer(), browser: navigator.userAgent,
                     metrics: Object.fromEntries(this.operations().map(name => [name, null])),
                 };
-                this.finish_case({ ...row, state: 'Ошибка', error: error ?? `${this.progress?.operation ?? 'Загрузка'}: превышен лимит 300 с` }, active.engine);
+                this.finish_case({ ...row, state: 'Ошибка', error: `${this.progress?.operation ?? 'Загрузка'}: ${error ? 'ошибка выполнения' : 'превышен лимит 300 с'}` }, active.engine);
             }
             finish_case(row, kind) {
                 const active = this.active_case();

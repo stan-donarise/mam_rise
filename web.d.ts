@@ -46274,6 +46274,7 @@ declare namespace $ {
         readonly operation: string;
         static readonly limit = 300000;
         static current: $rise_bench_stage | null;
+        static failure(error: unknown): string;
         readonly started: number;
         constructor(run: $rise_bench_run, operation: string);
         check(): void;
