@@ -45527,6 +45527,10 @@ declare namespace $ {
         readonly engine: string;
         readonly engine_version: string;
         constructor(count: number, properties?: number, stamp?: string, baza_version?: string, benchmark_version?: string, id?: string, computer?: string, browser?: string, engine?: string, engine_version?: string);
+        private state_value;
+        private failure_value;
+        private bytes_value;
+        private readonly metric_values;
         state(next?: string): string;
         failure(next?: string): string;
         bytes(next?: number | null): number | null;

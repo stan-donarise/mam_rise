@@ -31416,10 +31416,32 @@ var $;
             this.engine = engine;
             this.engine_version = engine_version;
         }
-        state(next = 'Выполняется') { return next; }
-        failure(next = '') { return next; }
-        bytes(next = null) { return next; }
-        metric(operation, next) { return next ?? null; }
+        // Memoized channels can be reaped when neither table nor chart observes them.
+        // A run owns its data independently of those temporary subscriptions.
+        state_value = 'Выполняется';
+        failure_value = '';
+        bytes_value = null;
+        metric_values = new Map();
+        state(next) {
+            if (next !== undefined)
+                this.state_value = next;
+            return this.state_value;
+        }
+        failure(next) {
+            if (next !== undefined)
+                this.failure_value = next;
+            return this.failure_value;
+        }
+        bytes(next) {
+            if (next !== undefined)
+                this.bytes_value = next;
+            return this.bytes_value;
+        }
+        metric(operation, next) {
+            if (next !== undefined)
+                this.metric_values.set(operation, next);
+            return this.metric_values.get(operation) ?? null;
+        }
     }
     __decorate([
         $mol_mem
@@ -35728,8 +35750,6 @@ var $;
             groups() {
                 const groups = new Map();
                 for (const run of this.runs()) {
-                    if (run.benchmark_version !== $rise_bench_run_benchmark_version)
-                        continue;
                     const time = run.metric(this.operation());
                     if (run.state() !== 'Готово' || time === null)
                         continue;
