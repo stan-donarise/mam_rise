@@ -2,6 +2,12 @@ const assert = require('node:assert/strict')
 const {chromium,resultScenario,resultStep,resultBenchmark,screenshot,closeTestContext}=require('../../playwright/harness')
 const {openBenchmark}=require('../../playwright/offline')
 resultScenario({title:'Общие результаты Rise и изолированные нагрузки',group:'entities'})
+async function measurements(page,completed){
+	return page.evaluate(completed=>completed.map(({kind,id})=>{
+		const run=$.$rise_bench_archive.rows(kind).find(row=>row.id===id)
+		return {kind,id,state:run.state(),failure:run.failure(),bytes:run.bytes(),metrics:Object.fromEntries($.$rise_bench_archive.operations(kind).map(name=>[name,run.metric(name)]))}
+	}),completed)
+}
 async function watchFilters(child,method){
 	await child.evaluate(method=>{
 		const bench=$.$rise_app.Root(0).Bench()[method]();const nodes=[bench.Search_label().dom_node(),bench.Color_label().dom_node(),bench.Status_label().dom_node()]
@@ -192,11 +198,31 @@ async function main(){
 		await screenshot(page,'archive-computer.png')
 		await page.keyboard.press('Escape')
 		await page.locator('[rise_bench_metrics_details_computer]').waitFor({state:'detached'})
-		await page.getByRole('checkbox',{name:'Графики',exact:true}).click()
-		await page.locator('[rise_bench_charts_operation_plot]').first().waitFor()
-		assert.equal(await page.locator('[rise_bench_charts_operation_plot]').count(),3)
-		await screenshot(page,'archive-charts.png')
-		await page.getByRole('checkbox',{name:'Таблица',exact:true}).click()
+		// Isolated local archive: exercise the older rows excluded from current-version charts too.
+		if(local){
+			const legacy=await page.evaluate(()=>$.$mol_wire_async(()=>{
+				const root=$.$rise_bench_archive.root()
+				const source=root.keys().find(key=>String(key).startsWith('text:'))
+				return JSON.parse(root.dive(source,$.$giper_baza_atom_text).val())
+			})())
+			legacy.id=require('node:crypto').randomUUID();legacy.benchmark_version='0.3.0'
+			await page.evaluate(row=>$.$mol_wire_async(()=>$.$rise_bench_archive.save('text',row))(),legacy)
+			completed.push({kind:'text',id:legacy.id})
+			const failed={...legacy,id:require('node:crypto').randomUUID(),state:'Ошибка',error:'Вставка, с: превышен лимит 300 с',metrics:{'Вставка, с':0,'Добавить символ, с':null,'F5, с':null}}
+			await page.evaluate(row=>$.$mol_wire_async(()=>$.$rise_bench_archive.save('text',row))(),failed)
+			completed.push({kind:'text',id:failed.id})
+		}
+		const measured=await measurements(page,completed)
+		assert.ok(measured.every(row=>Object.values(row.metrics).some(value=>typeof value==='number')),'Native runs must have measurements before switching')
+		for(let attempt=0;attempt<3;attempt++){
+			await page.getByRole('checkbox',{name:'Графики',exact:true}).click()
+			await page.locator('[rise_bench_charts_operation_plot]').first().waitFor()
+			assert.equal(await page.locator('[rise_bench_charts_operation_plot]').count(),3)
+			if(attempt===0)await screenshot(page,'archive-charts.png')
+			await page.getByRole('checkbox',{name:'Таблица',exact:true}).click()
+			await page.locator('[rise_bench_metrics_table]').waitFor()
+			assert.deepEqual(await measurements(page,completed),measured,'Charts must not discard archived measurements or status')
+		}
 		resultStep('Проверить узкое окно и светлую тему',['$rise_bench_host.Frame'])
 		await page.emulateMedia({colorScheme:'light'})
 		for(const frame of page.frames())await frame.evaluate(()=>document.documentElement.setAttribute('mol_theme','$mol_theme_light'))
@@ -209,6 +235,7 @@ async function main(){
 		}
 		await page.reload({waitUntil:'domcontentloaded'})
 		await page.waitForFunction(completed=>{try{return completed.every(r=>$.$rise_bench_archive.rows(r.kind).filter(row=>row.id===r.id).length===1)}catch(e){if(e?.then)return false;throw e}},completed)
+		assert.deepEqual(await measurements(page,completed),measured,'F5 must preserve the same values, not repair them')
 		assert.deepEqual(errors,[])
 		console.log('ARCHIVE_PASS',JSON.stringify({completed,packets:packets.length,independent_sync_checked:!local}))
 	}finally{clearTimeout(deadline);for(const context of contexts)await closeTestContext(context);await browser.close()}

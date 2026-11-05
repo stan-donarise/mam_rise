@@ -15,14 +15,32 @@ namespace $ {
 			readonly engine: string = baza_version === '—' ? 'idb' : 'goods',
 			readonly engine_version = baza_version === '—' ? 'browser' : baza_version,
 		) { super() }
+		// Memoized channels can be reaped when neither table nor chart observes them.
+		// A run owns its data independently of those temporary subscriptions.
+		private state_value = 'Выполняется'
+		private failure_value = ''
+		private bytes_value: number | null = null
+		private readonly metric_values = new Map< string, number >()
 		@ $mol_mem
-		state( next = 'Выполняется' ) { return next }
+		state( next?: string ) {
+			if( next !== undefined ) this.state_value = next
+			return this.state_value
+		}
 		@ $mol_mem
-		failure( next = '' ) { return next }
+		failure( next?: string ) {
+			if( next !== undefined ) this.failure_value = next
+			return this.failure_value
+		}
 		@ $mol_mem
-		bytes( next: number | null = null ) { return next }
+		bytes( next?: number | null ) {
+			if( next !== undefined ) this.bytes_value = next
+			return this.bytes_value
+		}
 		@ $mol_mem_key
-		metric( operation: string, next?: number ): number | null { return next ?? null }
+		metric( operation: string, next?: number ): number | null {
+			if( next !== undefined ) this.metric_values.set( operation, next )
+			return this.metric_values.get( operation ) ?? null
+		}
 	}
 
 }
