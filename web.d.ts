@@ -65322,6 +65322,7 @@ declare namespace $.$$ {
         private readonly completed;
         active(next?: string | null): string | null;
         listener(): $mol_dom_listener;
+        request(event: MessageEvent): any;
         configure(data: {
             count?: string;
             schema?: string;
