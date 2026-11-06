@@ -61257,72 +61257,77 @@ declare namespace $ {
 		,
 		ReturnType< $mol_switch['options'] >
 	>
-	type $mol_labeler__title_rise_bench_host_controls_15 = $mol_type_enforce<
+	type $mol_switch__keys_rise_bench_host_controls_15 = $mol_type_enforce<
+		ReturnType< $rise_bench_host_controls['count_keys'] >
+		,
+		ReturnType< $mol_switch['keys'] >
+	>
+	type $mol_labeler__title_rise_bench_host_controls_16 = $mol_type_enforce<
 		ReturnType< $rise_bench_host_controls['count_title'] >
 		,
 		ReturnType< $mol_labeler['title'] >
 	>
-	type $mol_labeler__Content_rise_bench_host_controls_16 = $mol_type_enforce<
+	type $mol_labeler__Content_rise_bench_host_controls_17 = $mol_type_enforce<
 		ReturnType< $rise_bench_host_controls['Count'] >
 		,
 		ReturnType< $mol_labeler['Content'] >
 	>
-	type $rise_bench_textarea__length_max_rise_bench_host_controls_17 = $mol_type_enforce<
+	type $rise_bench_textarea__length_max_rise_bench_host_controls_18 = $mol_type_enforce<
 		number
 		,
 		ReturnType< $rise_bench_textarea['length_max'] >
 	>
-	type $rise_bench_textarea__hint_rise_bench_host_controls_18 = $mol_type_enforce<
+	type $rise_bench_textarea__hint_rise_bench_host_controls_19 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $rise_bench_textarea['hint'] >
 	>
-	type $rise_bench_textarea__value_rise_bench_host_controls_19 = $mol_type_enforce<
+	type $rise_bench_textarea__value_rise_bench_host_controls_20 = $mol_type_enforce<
 		ReturnType< $rise_bench_host_controls['computer'] >
 		,
 		ReturnType< $rise_bench_textarea['value'] >
 	>
-	type $rise_bench_textarea__enabled_rise_bench_host_controls_20 = $mol_type_enforce<
+	type $rise_bench_textarea__enabled_rise_bench_host_controls_21 = $mol_type_enforce<
 		ReturnType< $rise_bench_host_controls['enabled'] >
 		,
 		ReturnType< $rise_bench_textarea['enabled'] >
 	>
-	type $mol_labeler__title_rise_bench_host_controls_21 = $mol_type_enforce<
+	type $mol_labeler__title_rise_bench_host_controls_22 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_labeler['title'] >
 	>
-	type $mol_labeler__Content_rise_bench_host_controls_22 = $mol_type_enforce<
+	type $mol_labeler__Content_rise_bench_host_controls_23 = $mol_type_enforce<
 		ReturnType< $rise_bench_host_controls['Computer'] >
 		,
 		ReturnType< $mol_labeler['Content'] >
 	>
-	type $mol_button_major__title_rise_bench_host_controls_23 = $mol_type_enforce<
+	type $mol_button_major__title_rise_bench_host_controls_24 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_button_major['title'] >
 	>
-	type $mol_button_major__enabled_rise_bench_host_controls_24 = $mol_type_enforce<
+	type $mol_button_major__enabled_rise_bench_host_controls_25 = $mol_type_enforce<
 		ReturnType< $rise_bench_host_controls['enabled'] >
 		,
 		ReturnType< $mol_button_major['enabled'] >
 	>
-	type $mol_button_major__click_rise_bench_host_controls_25 = $mol_type_enforce<
+	type $mol_button_major__click_rise_bench_host_controls_26 = $mol_type_enforce<
 		ReturnType< $rise_bench_host_controls['run'] >
 		,
 		ReturnType< $mol_button_major['click'] >
 	>
-	type $mol_view__sub_rise_bench_host_controls_26 = $mol_type_enforce<
+	type $mol_view__sub_rise_bench_host_controls_27 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $mol_button_minor__title_rise_bench_host_controls_27 = $mol_type_enforce<
+	type $mol_button_minor__title_rise_bench_host_controls_28 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_button_minor['title'] >
 	>
-	type $mol_button_minor__click_rise_bench_host_controls_28 = $mol_type_enforce<
+	type $mol_button_minor__click_rise_bench_host_controls_29 = $mol_type_enforce<
 		ReturnType< $rise_bench_host_controls['retry'] >
 		,
 		ReturnType< $mol_button_minor['click'] >
@@ -61339,6 +61344,7 @@ declare namespace $ {
 		count_title( ): string
 		count( next?: string ): string
 		counts( ): Record<string, any>
+		count_keys( ): readonly(string)[]
 		Count( ): $mol_switch
 		Count_label( ): $mol_labeler
 		computer( next?: string ): string
@@ -61370,6 +61376,7 @@ declare namespace $.$$ {
         counts(): {
             all: string;
         };
+        count_keys(): string[];
         storage_label(): string;
         controls(): $mol_view[];
     }

@@ -35107,11 +35107,15 @@ var $;
 		counts(){
 			return {};
 		}
+		count_keys(){
+			return [];
+		}
 		Count(){
 			const obj = new this.$.$mol_switch();
 			(obj.enabled) = () => ((this.enabled()));
 			(obj.value) = (next) => ((this.count(next)));
 			(obj.options) = () => ((this.counts()));
+			(obj.keys) = () => ((this.count_keys()));
 			return obj;
 		}
 		Count_label(){
@@ -35235,6 +35239,7 @@ var $;
             counts() {
                 return { all: 'Все', ...Object.fromEntries((this.kind() === 'text' ? [100, 500, 1000, 2000, 5000] : [100, 500, 1000, 2000, 3000, 4000, 5000, 10000]).map(count => [count, String(count)])) };
             }
+            count_keys() { return ['all', ...Object.keys(this.counts()).filter(key => key !== 'all')]; }
             storage_label() { return this.kind() === 'text' ? 'CRDT-текст' : this.engine() === 'all' ? 'Все хранилища последовательно' : $rise_bench_engine[this.engine()].storage; }
             controls() {
                 return [
