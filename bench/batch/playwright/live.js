@@ -3,13 +3,13 @@ const fs=require('node:fs')
 const path=require('node:path')
 const WebSocket=require('ws')
 const readline=require('node:readline')
-console.log('OWNER',JSON.stringify({pid:process.pid,deadline_ms:360000}))
+console.log('OWNER',JSON.stringify({pid:process.pid,deadline_ms:1800000}))
 const lines=fs.readFileSync(path.join(process.env.LOCALAPPDATA,'Google/Chrome/User Data/DevToolsActivePort'),'utf8').trim().split(/\r?\n/)
 const socket=new WebSocket(`ws://127.0.0.1:${lines[0]}${lines[1]}`)
 const pending=new Map(),contexts=new Map();let serial=0,session
 const input=readline.createInterface({input:process.stdin})
 function finish(){input.close();socket.close();setTimeout(()=>socket.terminate(),1000).unref()}
-const deadline=setTimeout(finish,360000)
+const deadline=setTimeout(finish,1800000)
 function call(method,params={},sessionId){
 	return new Promise((resolve,reject)=>{
 		const id=++serial,timer=setTimeout(()=>{pending.delete(id);reject(new Error(`${method}: deadline`))},20000)
