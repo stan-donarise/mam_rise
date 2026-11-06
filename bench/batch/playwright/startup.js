@@ -57,6 +57,7 @@ async function main(){
 		const result=await page.evaluate(()=>startupResult)
 		assert.equal(result.row?.state,'Готово',JSON.stringify(result))
 		assert.equal(result.row?.count,100)
+		assert.match(await page.evaluate(()=>$.$rise_app.Root(0).Bench().Goods_host().status()),/^1\/40: Гипербаза, 100 — /)
 		assert.equal(await page.evaluate(()=>startupProgress.filter(row=>row.operation==='Подготовка').length),1,'Duplicate delivery must not restart the benchmark')
 		console.log('FIRST_CASE_PASS')
 		await context.close()
