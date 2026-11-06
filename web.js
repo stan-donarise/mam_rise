@@ -37062,6 +37062,7 @@ var $;
             timer;
             progress = null;
             settled = new Set();
+            engine_title(engine) { return engine === 'text' ? 'CRDT-текст' : $rise_bench_engine[engine].title; }
             controls_enabled() { return this.ready() && !this.busy(); }
             config() { const current = this.active_case() ?? this.display_case(); return { count: current?.count ?? (this.count() === 'all' ? '100' : this.count()), schema: current?.schema ?? this.schema() }; }
             send(command, data) {
@@ -37095,7 +37096,7 @@ var $;
                     this.status(`Завершено ${this.finished} из ${this.total}; ошибки: ${this.failed}`);
                     return;
                 }
-                this.status(`${this.finished + 1}/${this.total}: ${next.engine}, ${next.count} — загрузка`);
+                this.status(`${this.finished + 1}/${this.total}: ${this.engine_title(next.engine)}, ${next.count} — загрузка`);
                 this.timer = setTimeout(() => this.expire(), $rise_bench_stage.limit);
             }
             expire(error) {
@@ -37202,7 +37203,7 @@ var $;
                         if (this.timer)
                             clearTimeout(this.timer);
                         this.timer = setTimeout(() => this.expire(), Math.max(0, $rise_bench_stage.limit - (Date.now() - event.data.started)));
-                        this.status(`${this.finished + 1}/${this.total}: ${active.engine}, ${active.count} — ${event.data.operation}`);
+                        this.status(`${this.finished + 1}/${this.total}: ${this.engine_title(active.engine)}, ${active.count} — ${event.data.operation}`);
                         return;
                     }
                     if (event.data.type === 'rise-bench-state') {

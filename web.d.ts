@@ -62409,6 +62409,7 @@ declare namespace $.$$ {
         private timer?;
         private progress;
         private readonly settled;
+        engine_title(engine: string): string;
         controls_enabled(): boolean;
         config(): {
             count: string;
