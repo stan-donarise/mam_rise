@@ -10,7 +10,23 @@ namespace $.$$ {
 		@ $mol_mem
 		active( next: string | null = null ) { return next }
 		@ $mol_mem
-		listener() { return new $mol_dom_listener( window, 'message', $mol_wire_async( this ).receive ) }
+		listener() {
+			const receive = $mol_wire_async( this ).receive
+			return new $mol_dom_listener( window, 'message', event => {
+				// wire_async cancels its previous call BEFORE entering receive(). Reject
+				// unrelated and duplicate messages before they can cancel a running case.
+				const request = this.request( event )
+				if( !request || this.active() || this.completed.has( request.id ) ) return
+				receive( event ).catch( error => $mol_fail_log( error ) )
+			} )
+		}
+		request( event: MessageEvent ) {
+			if( event.origin !== location.origin || event.source !== window.parent ) return null
+			const request = event.data
+			if( request?.type !== 'rise-bench-command' || request.kind !== this.kind || typeof request.id !== 'string' ) return null
+			if( request.command !== 'run' || !request.data || typeof request.data !== 'object' ) return null
+			return request
+		}
 		@ $mol_action
 		configure( data: { count?: string, schema?: string } ) {
 			if( typeof data.count === 'string' && Object.hasOwn( this.bench.Count().options(), data.count ) ) this.bench.count_mode( data.count )
@@ -18,10 +34,8 @@ namespace $.$$ {
 		}
 		@ $mol_action
 		receive( event: MessageEvent ) {
-			if( event.origin !== location.origin || event.source !== window.parent ) return
-			const request = event.data
-			if( request?.type !== 'rise-bench-command' || request.kind !== this.kind || typeof request.id !== 'string' ) return
-			if( request.command !== 'run' || !request.data || typeof request.data !== 'object' ) return
+			const request = this.request( event )
+			if( !request ) return
 			if( this.completed.has( request.id ) || this.active() && this.active() !== request.id ) return
 			this.active( request.id )
 			this.report()
