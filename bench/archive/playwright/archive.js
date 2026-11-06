@@ -49,6 +49,10 @@ async function main(){
 			selected=label
 			const runButton=page.getByRole('button',{name:'Запустить бенчмарк',exact:true})
 			await runButton.waitFor();await page.waitForFunction(()=>!document.querySelector('[rise_bench_host_controls_run]')?.hasAttribute('disabled'))
+			const countOptions=page.locator('[rise_bench_host_controls_count]').getByRole('checkbox')
+			assert.equal(await countOptions.first().innerText(),'Все','All is first, not the default selection')
+			assert.equal(await page.locator('[rise_bench_host_controls_count]').getByRole('checkbox',{name:'100',exact:true}).getAttribute('aria-checked'),'true')
+			if(!completed.length)assert.equal(await page.getByRole('checkbox',{name:'Гипербаза',exact:true}).getAttribute('aria-checked'),'true')
 			if(kind==='idb')await page.getByRole('checkbox',{name:'IDB',exact:true}).click()
 			if(kind==='goods')await page.getByRole('checkbox',{name:'Гипербаза',exact:true}).click()
 			await page.waitForFunction(()=>!document.querySelector('[rise_bench_host_controls_run]')?.hasAttribute('disabled'))

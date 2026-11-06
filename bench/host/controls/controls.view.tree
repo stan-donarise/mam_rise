@@ -32,6 +32,7 @@ $rise_bench_host_controls $mol_page
 				enabled <= enabled
 				value? <=> count? \100
 				options <= counts *
+				keys <= count_keys /string
 		<= Computer_label $mol_labeler
 			title \Параметры компьютера
 			Content <= Computer $rise_bench_textarea

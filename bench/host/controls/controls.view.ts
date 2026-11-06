@@ -7,6 +7,7 @@ namespace $.$$ {
 		counts() {
 			return { all: 'Все', ...Object.fromEntries( ( this.kind() === 'text' ? [ 100, 500, 1000, 2000, 5000 ] : [ 100, 500, 1000, 2000, 3000, 4000, 5000, 10000 ] ).map( count => [ count, String( count ) ] ) ) }
 		}
+		count_keys() { return [ 'all', ...Object.keys( this.counts() ).filter( key => key !== 'all' ) ] }
 		storage_label() { return this.kind() === 'text' ? 'CRDT-текст' : this.engine() === 'all' ? 'Все хранилища последовательно' : $rise_bench_engine[ this.engine() as $rise_bench_engine_kind ].storage }
 		controls() {
 			return [
