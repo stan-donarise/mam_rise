@@ -6,22 +6,26 @@ async function main(){
 	console.log('OWNER',JSON.stringify({pid:process.pid,deadline:360000}))
 	const browser=await chromium.launch({headless:true,channel:'chrome'})
 	const deadline=setTimeout(()=>browser.close().catch(()=>{}),360000)
+	let built
 	try{
+		if(process.env.RISE_TEST_BUILT==='1')built=await require('../../playwright/built').serveBuilt()
 		const context=await browser.newContext({viewport:{width:1600,height:1000}})
 		const page=await context.newPage();page.setDefaultTimeout(90000)
 		const errors=[];page.on('pageerror',error=>errors.push(error.message))
 		await page.addInitScript(()=>window.addEventListener('message',event=>{if(event.data?.type==='rise-bench-state'&&event.data.error)console.error('FIXTURE_ERROR',event.data.error)}))
 		page.on('console',message=>{if(/Different (host|args|task) on restart|Audit fail/.test(message.text()))errors.push(message.text())})
-		const url=new URL(process.env.RISE_TEST_URL||'http://localhost:9080/rise/app/-/test.html')
+		const url=new URL(built?.url||process.env.RISE_TEST_URL||'http://localhost:9080/rise/app/-/test.html')
 		const count=Number(process.env.RISE_SQL_COUNT||100)
 		url.searchParams.set('rise_fixture','sqltests') // Fully offline parent and real archive, not raw fixture catalogue.
 		url.hash='!=bench/bench=%24rise_bench_baza_goods/count='+count
 		await openBenchmark(page,url.href)
 		const engines=[['sqlite','SQLite'],['pglite','PGlite'],['duckdb','DuckDB'],['idb','IDB'],['goods','Гипербаза']].filter(([kind])=>!process.env.RISE_SQL_ENGINE||process.env.RISE_SQL_ENGINE.split(',').includes(kind))
 		assert.ok(engines.length,'Unknown RISE_SQL_ENGINE')
+		let selected='Гипербаза'
 		for(const [engine,label] of engines){
 			resultStep(`Выбрать ${label} и прогнать ${count} записей`,['$rise_bench_host.engine','$rise_bench_sql_storage.create','$rise_bench_idb.resume_reload'])
-			await page.getByRole('checkbox',{name:label,exact:true}).click()
+			if(selected!==label){await page.getByRole('checkbox',{name:selected,exact:true}).click();await page.getByRole('checkbox',{name:label,exact:true}).click()}
+			selected=label
 			const frame=await page.locator('iframe').elementHandle().then(element=>element.contentFrame())
 			await frame.waitForFunction(engine=>globalThis.$?.$rise_app.Root(0).fixture_kind()===engine,engine)
 			const run=page.getByRole('button',{name:'Запустить бенчмарк',exact:true})
@@ -51,6 +55,7 @@ async function main(){
 			await frame.waitForFunction(()=>{try{return $.$rise_app.Root(0).fixture().products().length===0}catch(e){if(e?.then)return false;throw e}})
 			if(['sqlite','pglite','duckdb','idb'].includes(engine)){
 				resultStep(`${label}: десять полей, редактирование и повторный F5`,['$rise_bench_sql_storage.change','$rise_bench_sql_storage.rows'])
+				await page.getByRole('checkbox',{name:'4 свойства',exact:true}).click()
 				await page.getByRole('checkbox',{name:'10 свойств',exact:true}).click()
 				await page.waitForFunction(()=>!document.querySelector('[rise_bench_host_controls_run]')?.hasAttribute('disabled'))
 				const before=await page.evaluate(engine=>$.$rise_bench_archive.rows(engine).map(row=>row.id),engine)
@@ -67,6 +72,7 @@ async function main(){
 				await child.goto(child.url(),{waitUntil:'domcontentloaded'})
 				await child.waitForFunction(count=>{try{return globalThis.$?.$rise_app.Root(0).fixture().products()[count]?.quantity===42}catch(e){if(e?.then)return false;throw e}},count)
 				await screenshot(page,`sql-${engine}-full.png`)
+				await page.getByRole('checkbox',{name:'10 свойств',exact:true}).click()
 				await page.getByRole('checkbox',{name:'4 свойства',exact:true}).click()
 			}
 		}
@@ -77,6 +83,6 @@ async function main(){
 		await page.getByRole('checkbox',{name:'Графики',exact:true}).click()
 		await screenshot(page,'sql-charts.png')
 		await context.close()
-	}finally{clearTimeout(deadline);await browser.close()}
+	}finally{clearTimeout(deadline);await browser.close();await built?.close()}
 }
 main().catch(error=>{console.error(error);process.exitCode=1})

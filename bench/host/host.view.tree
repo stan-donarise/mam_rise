@@ -4,17 +4,26 @@ $rise_bench_host $mol_book2
 		<= Controls $rise_bench_host_controls
 			kind <= kind
 			enabled <= controls_enabled true
-			engine? <=> engine? \goods
-			count? <=> count? \100
-			schema? <=> schema? \compact
+			run_enabled <= run_enabled true
+			running <= busy false
+			engines? <=> selected_engines? /string
+			sizes? <=> selected_counts? /string
+			schemas? <=> selected_schemas? /string
 			run? <=> run? null
+			stop? <=> stop? null
 			status <= status? \
+			elapsed <= elapsed_text \
 			retry_visible <= retry_visible false
 			retry? <=> retry? null
 		<= Results $mol_page
 			title \Результаты
 			minimal_width 640
 			tools /
+				<= Download $mol_button_download
+					title <= csv_title \Скачать CSV
+					hint \Скачать CSV
+					blob <= csv_blob null
+					file_name <= csv_filename \rise-benchmark.csv
 				<= Mode $mol_switch
 					value? <=> mode? \table
 					options *

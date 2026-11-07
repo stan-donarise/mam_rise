@@ -6,6 +6,12 @@ $rise_bench_metrics_details $mol_pick
 			sub /
 				<= Computer_label $mol_labeler
 					title \Параметры компьютера
+					label /
+						\Параметры компьютера
+						<= Copy $mol_button_copy
+							hint \Копировать параметры компьютера
+							text <= computer
+							sub / <= Copy_icon $mol_icon_content_copy
 					Content <= Computer $mol_view
 						sub / <= computer \
 				<= Browser_label $mol_labeler

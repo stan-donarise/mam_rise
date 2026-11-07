@@ -17,6 +17,7 @@ async function main(){
 		await page.waitForFunction(()=>/ошибк/i.test(document.querySelector('[rise_bench_host_controls_status]').textContent))
 		assert.equal(await page.evaluate(()=>$.$rise_app.Root(0).Bench().Goods_host().busy()),false)
 		resultStep('Переключиться на IDB и выполнить здоровый прогон',['$rise_bench_host.engine','$rise_bench_idb.benchmark'])
+		await page.getByRole('checkbox',{name:'SQLite',exact:true}).click()
 		await page.getByRole('checkbox',{name:'IDB',exact:true}).click()
 		await run.click()
 		await page.waitForFunction(()=>{try{return $.$rise_bench_archive.rows('idb').some(row=>row.state()==='Готово')}catch(e){if(e?.then)return false;throw e}})

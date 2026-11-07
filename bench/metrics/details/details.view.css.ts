@@ -5,6 +5,7 @@ namespace $ {
 		Bubble: { maxHeight: $mol_style_unit.vh( 80 ), overflow: 'auto' },
 		Text: { padding: $mol_gap.block, flex: { direction: 'column' }, maxWidth: $mol_style_unit.vw( 80 ), width: $mol_style_unit.rem( 28 ) },
 		Computer: { whiteSpace: 'pre-wrap', overflowWrap: 'anywhere' },
+		Computer_label: { Label: { align: { items: 'center' } } },
 		Browser: { whiteSpace: 'pre-wrap', overflowWrap: 'anywhere' },
 	} )
 }

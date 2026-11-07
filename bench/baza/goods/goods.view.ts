@@ -64,7 +64,6 @@ namespace $.$$ {
 
 		@ $mol_mem_key
 		initialize_product( key: readonly [ $rise_bench_baza_goods_preparation, number ] ) {
-			$rise_bench_stage.current?.check()
 			const [ state, index ] = key
 			// This initializer is only invoked by Create. A completed record has no
 			// remaining write dependencies and is never recreated on async replay.

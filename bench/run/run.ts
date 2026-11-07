@@ -1,6 +1,6 @@
 namespace $ {
 	export const $rise_bench_run_baza_version = '2e6100b225c8d4fb3a5b5d14e8568223e8a8c785'
-	export const $rise_bench_run_benchmark_version = '0.5.0'
+	export const $rise_bench_run_benchmark_version = '0.6.0'
 
 	export class $rise_bench_run extends $mol_object {
 		constructor(
@@ -10,7 +10,7 @@ namespace $ {
 			readonly baza_version = $rise_bench_run_baza_version,
 			readonly benchmark_version = $rise_bench_run_benchmark_version,
 			readonly id: string = crypto.randomUUID(),
-			readonly computer = $mol_state_local.value<string>( '$rise_bench_computer' ) ?? '',
+			readonly computer = $rise_bench_computer.clean( $mol_state_local.value<string>( '$rise_bench_computer' ) ?? '' ),
 			readonly browser = typeof navigator === 'undefined' ? '' : navigator.userAgent,
 			readonly engine: string = baza_version === '—' ? 'idb' : 'goods',
 			readonly engine_version = baza_version === '—' ? 'browser' : baza_version,

@@ -3,38 +3,43 @@ $rise_bench_host_controls $mol_page
 	minimal_width 320
 	kind \goods
 	enabled true
+	running false
+	run_enabled true
 	body <= controls /$mol_view
+		<= Intro $mol_text
+			text <= intro \
 		<= Engine_label $mol_labeler
 			title \Хранилище
-			Content <= Engine $mol_switch
+			Content <= Engine $rise_check_list
 				enabled <= enabled
-				value? <=> engine? \goods
-				options *
-					all \Все
-					goods \Гипербаза
-					idb \IDB
-					sqlite \SQLite
-					pglite \PGlite
-					duckdb \DuckDB
+				value? <=> engines? /string
+				options <= engine_keys /string
+				titles <= engine_titles *
 		<= Storage_label $mol_view
 			sub / <= storage_label \
 		<= Schema_label $mol_labeler
 			title \Состав записи
-			Content <= Schema $mol_switch
+			Content <= Schema $rise_check_list
 				enabled <= enabled
-				value? <=> schema? \compact
-				options *
+				value? <=> schemas? /string
+				options /string
+					\compact
+					\full
+				titles *
 					compact \4 свойства
 					full \10 свойств
 		<= Count_label $mol_labeler
 			title <= count_title \Количество записей
-			Content <= Count $mol_switch
+			Content <= Count $rise_check_list
 				enabled <= enabled
-				value? <=> count? \100
-				options <= counts *
-				keys <= count_keys /string
+				value? <=> sizes? /string
+				options <= count_keys /string
+				titles <= counts *
 		<= Computer_label $mol_labeler
 			title \Параметры компьютера
+			label /
+				\Параметры компьютера
+				<= Computer_help $rise_bench_host_controls_computerhelp
 			Content <= Computer $rise_bench_textarea
 				length_max 8000
 				hint \Процессор, память, ОС
@@ -42,10 +47,15 @@ $rise_bench_host_controls $mol_page
 				enabled <= enabled
 		<= Run $mol_button_major
 			title \Запустить бенчмарк
-			enabled <= enabled
+			enabled <= run_enabled
 			click? <=> run? null
+		<= Stop $mol_button_minor
+			title \Остановить
+			click? <=> stop? null
 		<= Status $mol_view
 			sub / <= status \
+		<= Elapsed $mol_view
+			sub / <= elapsed \
 		<= Retry $mol_button_minor
 			title \Повторить сохранение
 			click? <=> retry? null

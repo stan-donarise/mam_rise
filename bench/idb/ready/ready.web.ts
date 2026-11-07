@@ -3,7 +3,6 @@ namespace $ {
 		constructor( readonly table: Element, readonly title: string ) { super() }
 		private pending?: Promise< number >
 		private observer?: MutationObserver
-		private timer?: ReturnType< typeof setTimeout >
 		private frame = 0
 		visible() { return this.table.isConnected && this.table.textContent!.includes( this.title ) && !this.table.querySelector( '[mol_view_error]' ) }
 		wait() {
@@ -21,13 +20,11 @@ namespace $ {
 				}
 				this.observer = new MutationObserver( check )
 				this.observer.observe( this.table, { childList: true, subtree: true, characterData: true, attributes: true } )
-				this.timer = setTimeout( ()=> { this.destructor(); reject( new Error( 'После F5 записи IDB не появились за 300 секунд' ) ) }, 300_000 )
 				check()
 			})
 		}
 		destructor() {
 			this.observer?.disconnect()
-			if( this.timer ) clearTimeout( this.timer )
 			if( this.frame ) cancelAnimationFrame( this.frame )
 			super.destructor()
 		}

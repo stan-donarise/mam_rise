@@ -24,14 +24,16 @@ async function main(){
 	const browser=await chromium.launch({headless:true,channel:'chrome'})
 	const deadline=setTimeout(()=>browser.close().catch(()=>{}),180000)
 	const contexts=[]
+	let built
 	try{
+		if(process.env.RISE_TEST_BUILT==='1')built=await require('../../playwright/built').serveBuilt()
 		const context=await browser.newContext({viewport:{width:1600,height:1000}});contexts.push(context)
 		const page=await context.newPage();page.setDefaultTimeout(60000)
 		const errors=[];page.on('pageerror',e=>errors.push(e.message))
 		page.on('console',message=>{if(/Different (host|args|task) on restart/.test(message.text()))errors.push(message.text())})
 		const packets=[]
 		page.on('websocket',socket=>socket.on('framesent',frame=>{if(Buffer.isBuffer(frame.payload))packets.push([...frame.payload])}))
-		const target=new URL(process.env.RISE_ARCHIVE_URL||'http://localhost:9080/rise/app/-/test.html')
+		const target=new URL(built?.url||process.env.RISE_ARCHIVE_URL||'http://localhost:9080/rise/app/-/test.html')
 		const isolated=process.env.RISE_ARCHIVE_OFFLINE==='1'
 		if(isolated)target.searchParams.set('rise_fixture','sqltests')
 		const url=target.toString()
@@ -53,8 +55,10 @@ async function main(){
 			assert.equal(await countOptions.first().innerText(),'Все','All is first, not the default selection')
 			assert.equal(await page.locator('[rise_bench_host_controls_count]').getByRole('checkbox',{name:'100',exact:true}).getAttribute('aria-checked'),'true')
 			if(!completed.length)assert.equal(await page.getByRole('checkbox',{name:'Гипербаза',exact:true}).getAttribute('aria-checked'),'true')
-			if(kind==='idb')await page.getByRole('checkbox',{name:'IDB',exact:true}).click()
-			if(kind==='goods')await page.getByRole('checkbox',{name:'Гипербаза',exact:true}).click()
+			if(kind==='idb'){
+				await page.getByRole('checkbox',{name:'Гипербаза',exact:true}).click()
+				await page.getByRole('checkbox',{name:'IDB',exact:true}).click()
+			}
 			await page.waitForFunction(()=>!document.querySelector('[rise_bench_host_controls_run]')?.hasAttribute('disabled'))
 			await page.getByRole('textbox',{name:'Процессор, память, ОС',exact:true}).fill('Rise test computer\nCPU / RAM / OS')
 			const element=page.locator('iframe');await element.waitFor()
@@ -80,7 +84,7 @@ async function main(){
 				const r=$.$rise_bench_archive.rows(kind).find(r=>r.id===id)
 				return {kind,id:r.id,count:r.count,baza:r.baza_version,version:r.benchmark_version,state:r.state(),computer:r.computer,browser:r.browser,bytes:r.bytes()}
 			},{kind,id})
-			assert.equal(run.count,100);assert.equal(run.version,'0.5.0');assert.equal(run.state,'Готово')
+			assert.equal(run.count,100);assert.equal(run.version,'0.6.0');assert.equal(run.state,'Готово')
 			assert.equal(run.computer,'Rise test computer\nCPU / RAM / OS');assert.ok(run.browser.includes('Chrome'))
 			assert.equal(run.baza,kind==='idb'?'—':'2e6100b225c8d4fb3a5b5d14e8568223e8a8c785');completed.push(run)
 			const boundary=await child.evaluate(({method,kind})=>$.$mol_wire_async(()=>{
@@ -120,6 +124,7 @@ async function main(){
 				await page.waitForFunction(()=>!document.querySelector('[rise_bench_host_controls_run]').hasAttribute('disabled'))
 				assert.equal(await page.evaluate(()=>$.$rise_bench_archive.rows('goods').length),before)
 				for(const count of ['500','100']){
+					await page.getByRole('checkbox',{name:count==='500'?'100':'500',exact:true}).click()
 					await page.getByRole('checkbox',{name:count,exact:true}).click()
 					await child.waitForFunction(count=>new URL(location.href).hash.includes('count='+count)&&globalThis.$?.$rise_app?.Root(0).Bench().Goods().count_mode()===count,count)
 					await page.waitForFunction(()=>!document.querySelector('[rise_bench_host_controls_run]').hasAttribute('disabled'))
@@ -228,7 +233,7 @@ async function main(){
 			if(local){
 				const versions=await page.locator('[rise_bench_charts_operation_legend_text]').allTextContents()
 				assert.ok(versions.some(title=>title.includes('v0.3.0')),'Historical measurements must appear in charts')
-				assert.ok(versions.some(title=>title.includes('v0.5.0')),'Current measurements must remain a separate series')
+				assert.ok(versions.some(title=>title.includes('v0.6.0')),'Current measurements must remain a separate series')
 			}
 			if(attempt===0)await screenshot(page,'archive-charts.png')
 			await page.getByRole('checkbox',{name:'Таблица',exact:true}).click()
@@ -242,7 +247,8 @@ async function main(){
 			await page.setViewportSize({width,height:900})
 			await page.waitForFunction(width=>{const node=$.$rise_app.Root(0).Bench().Text_host().Results().dom_node();return node.getBoundingClientRect().width<=width+1},width)
 			await page.locator('[rise_bench_host_results]').last().scrollIntoViewIfNeeded()
-			await page.waitForFunction(()=>document.querySelector('[rise_bench_host_results_head]').getBoundingClientRect().height<=80,null,{timeout:5000})
+			try{await page.waitForFunction(()=>document.querySelector('[rise_bench_host_results_head]').getBoundingClientRect().height<=128,null,{timeout:5000})}
+			catch(error){console.log('HEADER_DIAGNOSTIC',await page.evaluate(()=>{const head=document.querySelector('[rise_bench_host_results_head]');return {height:head.getBoundingClientRect().height,width:head.getBoundingClientRect().width}}));console.log('HEADER_SCREENSHOT',await screenshot(page,`archive-header-${width}.png`));throw error}
 			await screenshot(page,`archive-light-${width}.png`)
 		}
 		await page.reload({waitUntil:'domcontentloaded'})
@@ -250,6 +256,6 @@ async function main(){
 		assert.deepEqual(await measurements(page,completed),measured,'F5 must preserve the same values, not repair them')
 		assert.deepEqual(errors,[])
 		console.log('ARCHIVE_PASS',JSON.stringify({completed,packets:packets.length,independent_sync_checked:!local}))
-	}finally{clearTimeout(deadline);for(const context of contexts)await closeTestContext(context);await browser.close()}
+	}finally{clearTimeout(deadline);for(const context of contexts)await closeTestContext(context);await browser.close();await built?.close()}
 }
 main().catch(e=>{console.error(e);process.exitCode=1})

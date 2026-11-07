@@ -1,0 +1,17 @@
+$rise_check_list $mol_view
+	options /string
+	titles *
+	value? /string
+	enabled true
+	sub /
+		<= All $rise_check_all
+			title \Все
+			checks <= checks
+			enabled <= enabled
+			checked? <=> all_checked? false
+		<= Checks $mol_view
+			sub <= checks /$mol_check
+	Check* $mol_check_box
+		title <= check_title* \
+		enabled <= enabled
+		checked? <=> checked*? false

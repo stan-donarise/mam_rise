@@ -43,7 +43,7 @@ namespace $ {
 			const row = value as $rise_bench_archive_row
 			if( typeof row.id !== 'string' || !/^[\da-f-]{36}$/.test( row.id ) ) return null
 			if( !Number.isSafeInteger( row.count ) || row.count < 1 || row.count > 10000 ) return null
-			if( ![ 0, 4, 10 ].includes( row.properties ) || ![ 'Готово', 'Ошибка' ].includes( row.state ) ) return null
+			if( ![ 0, 4, 10 ].includes( row.properties ) || ![ 'Готово', 'Ошибка', 'Остановлено' ].includes( row.state ) ) return null
 			if( typeof row.stamp !== 'string' || !/^\d{2}\.\d{2}\.\d{4} \d{2}:\d{2}:\d{2}$/.test( row.stamp ) ) return null
 			if( row.error !== undefined && ( typeof row.error !== 'string' || row.error.length > 2000 ) ) return null
 			if( typeof row.baza_version !== 'string' || !/^(?:[\da-f]{40}|—)$/.test( row.baza_version ) ) return null

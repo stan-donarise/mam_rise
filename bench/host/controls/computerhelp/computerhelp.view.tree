@@ -1,0 +1,6 @@
+$rise_bench_host_controls_computerhelp $mol_pick
+	hint \Где найти параметры компьютера
+	trigger_content / <= Icon $mol_icon_help_circle_outline
+	bubble_content /
+		<= Text $mol_text
+			text \В Windows нажмите **Win + I**, откройте **Система → О системе** (в некоторых версиях — «О программе»). В разделе **Характеристики устройства** нажмите **Копировать** и вставьте текст в это поле. Коды устройства и продукта удалятся автоматически. Имя компьютера, процессор, память и тип системы сохранятся. Версию Windows можно дописать ниже. [Инструкция Microsoft](https://support.microsoft.com/ru-ru/windows/experience/find-information-about-your-windows-device).

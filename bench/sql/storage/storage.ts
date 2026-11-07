@@ -30,11 +30,7 @@ namespace $ {
 			if( this.disposed || !this.worker ) return Promise.reject( new Error( 'Хранилище закрыто' ) )
 			const id = ++this.serial
 			return new Promise( ( resolve, reject )=> {
-				const timer = setTimeout( ()=> { this.fail( new Error( 'Движок не ответил за 300 секунд' ) ); this.destructor() }, 300000 )
-				this.pending.set( id, {
-					resolve: value => { clearTimeout( timer ); resolve( value ) },
-					reject: error => { clearTimeout( timer ); reject( error ) },
-				})
+				this.pending.set( id, { resolve, reject } )
 				this.worker!.postMessage({ id, method, args })
 			})
 		}

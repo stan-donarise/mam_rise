@@ -5,7 +5,6 @@ namespace $ {
 		private pending?: Promise< number >
 		private observer?: MutationObserver
 		private frame = 0
-		private timer?: ReturnType< typeof setTimeout >
 
 		visible() {
 			const input = this.editor.Edit().dom_node() as HTMLTextAreaElement
@@ -35,10 +34,6 @@ namespace $ {
 				}
 				this.observer = new MutationObserver( check )
 				this.observer.observe( this.editor.dom_node(), { childList: true, subtree: true, characterData: true } )
-				this.timer = setTimeout( ()=> {
-					this.destructor()
-					reject( new Error( 'Текст не появился в редакторе за 300 секунд' ) )
-				}, 300_000 )
 				check()
 			})
 		}
@@ -46,7 +41,6 @@ namespace $ {
 		destructor() {
 			this.observer?.disconnect()
 			if( this.frame ) cancelAnimationFrame( this.frame )
-			if( this.timer ) clearTimeout( this.timer )
 			super.destructor()
 		}
 	}

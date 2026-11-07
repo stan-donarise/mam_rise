@@ -6,29 +6,29 @@ namespace $.$$ {
 		text_mode() { return this.kind() === 'text' }
 		@ $mol_mem
 		mode( next?: string ) { return $mol_state_arg.value( 'results', next ) === 'charts' ? 'charts' : 'table' }
-		fixture_kind() { return ( this.active_case() ?? this.display_case() )?.engine ?? ( this.compare() ? this.engine() === 'all' ? 'goods' : this.engine() : this.kind() ) }
+		fixture_kind() { return ( this.active_case() ?? this.display_case() )?.engine ?? ( this.compare() ? this.selected_engines()[ 0 ] ?? 'goods' : this.kind() ) }
 		@ $mol_mem
 		engine( next?: string ) {
 			if( next !== undefined ) this.display_case( null )
-			const normalize = ( value: string | null )=> value === 'all' || Object.hasOwn( $rise_bench_engine, value ?? '' ) ? value! : 'goods'
-			const current = normalize( $mol_state_arg.value( 'engine' ) )
-			if( next !== undefined && normalize( next ) !== current ) this.ready( false )
-			return normalize( $mol_state_arg.value( 'engine', next ) )
+			if( next !== undefined && next !== ( $mol_state_arg.value( 'engine' ) ?? 'goods' ) ) this.ready( false )
+			return $mol_state_arg.value( 'engine', next ) ?? 'goods'
 		}
 		@ $mol_mem
 		count( next?: string ) {
 			if( next !== undefined ) this.display_case( null )
 			const key = this.kind() === 'text' ? 'lines' : 'count'
 			if( next !== undefined && next !== ( $mol_state_arg.value( key ) ?? '100' ) ) this.ready( false )
-			const value = $mol_state_arg.value( key, next ) ?? '100'
-			return Object.hasOwn( this.Controls().counts(), value ) ? value : '100'
+			return $mol_state_arg.value( key, next ) ?? '100'
 		}
 		@ $mol_mem
 		schema( next?: string ) {
 			if( next !== undefined ) this.display_case( null )
-			if( next !== undefined && next !== ( $mol_state_arg.value( 'schema' ) === 'full' ? 'full' : 'compact' ) ) this.ready( false )
-			return $mol_state_arg.value( 'schema', next ) === 'full' ? 'full' : 'compact'
+			if( next !== undefined && next !== ( $mol_state_arg.value( 'schema' ) ?? 'compact' ) ) this.ready( false )
+			return $mol_state_arg.value( 'schema', next ) ?? 'compact'
 		}
+		selected_engines( next?: readonly string[] ) { return $rise_bench_selection( this.engine( next?.join( ',' ) ), Object.keys( $rise_bench_engine ) ) }
+		selected_counts( next?: readonly string[] ) { return $rise_bench_selection( this.count( next?.join( ',' ) ), Object.keys( this.Controls().counts() ) ) }
+		selected_schemas( next?: readonly string[] ) { return $rise_bench_selection( this.schema( next?.join( ',' ) ), [ 'compact', 'full' ] ) }
 		@ $mol_mem
 		ready( next = false ) { return next }
 		@ $mol_mem
@@ -44,12 +44,28 @@ namespace $.$$ {
 		private finished = 0
 		private failed = 0
 		private command_sent = false
-		private timer?: ReturnType<typeof setTimeout>
 		private progress: { operation: string, started: number, row: $rise_bench_archive_row } | null = null
+		private timing_value = { batch: 0, step: 0, ended: 0 }
+		@ $mol_mem
+		timing( next?: { batch: number, step: number, ended: number } ) {
+			if( next !== undefined ) this.timing_value = next
+			return this.timing_value
+		}
+		elapsed_text() {
+			const timing = this.timing()
+			if( !timing.batch ) return ''
+			const now = timing.ended || $mol_state_time.now( 1000 )
+			return `Текущий этап: ${ this.duration( now - timing.step ) } · Всего: ${ this.duration( now - timing.batch ) }`
+		}
+		duration( milliseconds: number ) {
+			const seconds = Math.max( 0, Math.floor( milliseconds / 1000 ) )
+			return [ Math.floor( seconds / 3600 ), Math.floor( seconds / 60 ) % 60, seconds % 60 ].map( value => String( value ).padStart( 2, '0' ) ).join( ':' )
+		}
 		private readonly settled = new Set<string>()
 		engine_title( engine: string ) { return engine === 'text' ? 'CRDT-текст' : $rise_bench_engine[ engine as $rise_bench_engine_kind ].title }
-		controls_enabled() { return this.ready() && !this.busy() }
-		config() { const current = this.active_case() ?? this.display_case(); return { count: current?.count ?? ( this.count() === 'all' ? '100' : this.count() ), schema: current?.schema ?? this.schema() } }
+		controls_enabled() { return !this.busy() }
+		run_enabled() { return this.ready() && this.controls_enabled() && this.selected_counts().length > 0 && ( this.text_mode() || this.selected_engines().length > 0 && this.selected_schemas().length > 0 ) }
+		config() { const current = this.active_case() ?? this.display_case(); return { count: current?.count ?? this.selected_counts()[ 0 ] ?? '100', schema: current?.schema ?? this.selected_schemas()[ 0 ] ?? 'compact' } }
 		@ $mol_action
 		send( command: string, data: object ) {
 			const target = ( this.Frame().dom_node() as HTMLIFrameElement ).contentWindow
@@ -58,29 +74,37 @@ namespace $.$$ {
 		}
 		@ $mol_action
 		run() {
-			if( this.active_case() ) return
+			if( this.active_case() || !this.run_enabled() ) return
 			this.queue = $rise_bench_batch( this.engine(), this.count(), this.schema(), this.text_mode() )
 			this.total = this.queue.length; this.finished = 0; this.failed = 0
+			this.settled.clear()
+			this.timing( { batch: Date.now(), step: Date.now(), ended: 0 } )
 			this.next_case()
 		}
 		@ $mol_action
 		next_case() {
-			if( this.timer ) clearTimeout( this.timer )
 			this.progress = null; this.command_sent = false
 			const next = this.queue.shift()
 			if( next || !this.display_case() ) this.ready( false )
 			this.active_case( next ? { ...next, token: crypto.randomUUID() } : null )
 			if( next || !this.display_case() ) this.frame_generation( this.frame_generation() + 1 )
 			this.busy( Boolean( next ) )
-			if( !next ) { this.status( `Завершено ${ this.finished } из ${ this.total }; ошибки: ${ this.failed }` ); return }
+			if( !next ) {
+				this.timing( { ...this.timing(), ended: Date.now() } )
+				this.status( `Завершено ${ this.finished } из ${ this.total }; ошибки: ${ this.failed }` ); return
+			}
+			this.timing( { ...this.timing(), step: Date.now() } )
 			this.status( `${ this.finished + 1 }/${ this.total }: ${ this.engine_title( next.engine ) }, ${ next.count } — загрузка` )
-			this.timer = setTimeout( ()=> this.expire(), $rise_bench_stage.limit )
 		}
 		@ $mol_action
-		expire( error?: string ) {
+		fail_case() {
 			const active = this.active_case()
 			if( !active ) return
-			const row: $rise_bench_archive_row = this.progress?.row ?? {
+			this.finish_case( { ...this.partial_row(), state: 'Ошибка', error: `${ this.progress?.operation ?? 'Загрузка' }: ошибка выполнения` }, active.engine )
+		}
+		partial_row(): $rise_bench_archive_row {
+			const active = this.active_case()!
+			return this.progress?.row ?? {
 				id: crypto.randomUUID(), count: Number( active.count ), properties: this.text_mode() ? 0 : active.schema === 'full' ? 10 : 4,
 				stamp: new $mol_time_moment().toString( 'DD.MM.YYYY hh:mm:ss' ), state: 'Ошибка',
 				baza_version: active.engine === 'goods' || active.engine === 'text' ? $rise_bench_run_baza_version : '—',
@@ -89,7 +113,21 @@ namespace $.$$ {
 				computer: this.Controls().computer(), browser: navigator.userAgent,
 				metrics: Object.fromEntries( this.operations().map( name => [ name, null ] ) ),
 			}
-			this.finish_case( { ...row, state: 'Ошибка', error: `${ this.progress?.operation ?? 'Загрузка' }: ${ error ? 'ошибка выполнения' : 'превышен лимит 300 с' }` }, active.engine )
+		}
+		@ $mol_action
+		stop() {
+			const active = this.active_case()
+			if( !active ) return
+			const row = { ...this.partial_row(), state: 'Остановлено', error: `Остановлено пользователем · ${ this.progress?.operation ?? 'Загрузка' }` }
+			this.settled.add( active.token )
+			this.queue = []
+			this.display_case( null ); this.active_case( null ); this.busy( false ); this.ready( false )
+			this.command_sent = false; this.progress = null
+			this.timing( { ...this.timing(), ended: Date.now() } )
+			// A new document tears down the old workload, its listeners and SQL workers.
+			this.frame_generation( this.frame_generation() + 1 )
+			this.status( `Остановлено. Завершено ${ this.finished } из ${ this.total }` )
+			$mol_wire_async( this ).accept( row, active.engine ).catch( error => $mol_fail_log( error ) )
 		}
 		@ $mol_action
 		finish_case( row: $rise_bench_archive_row, kind: string ) {
@@ -127,6 +165,18 @@ namespace $.$$ {
 			return [ ...rows ].sort( ( a, b )=> date( b.stamp ).localeCompare( date( a.stamp ) ) )
 		}
 		pages() { return this.kind() === 'demo' ? [ this.Results() ] : super.pages() }
+		csv_filename() { return `rise-${ this.text_mode() ? 'text' : 'entities' }-v${ $rise_bench_run_benchmark_version }.csv` }
+		csv_title() { return $mol_window.size().width < 640 ? 'CSV' : 'Скачать CSV' }
+		@ $mol_mem
+		csv_blob() {
+			const columns = [ ...this.Metrics().col_ids(), 'Браузер' ]
+			const runs = this.runs()
+			const rows = this.Metrics().records().map( ( record, index )=> ({
+				...record, 'Компьютер': runs[ index ].computer, 'Браузер': runs[ index ].browser,
+				...Object.fromEntries( this.operations().map( operation => [ operation, runs[ index ].metric( operation ) ] ) ),
+			}) )
+			return new $mol_blob( [ $rise_bench_csv( rows, columns ) ], { type: 'text/csv;charset=utf-8' } )
+		}
 		results_body() { return this.kind() === 'demo' ? [ this.Frame() ] : [ this.mode() === 'charts' ? this.Charts() : this.History(), this.Frame() ] }
 		retry_visible() { return this.outbox().length > 0 }
 		@ $mol_mem
@@ -170,8 +220,7 @@ namespace $.$$ {
 					if( !row || row.count !== Number( active.count ) || row.engine !== ( active.engine === 'text' ? 'goods' : active.engine ) ) return
 					if( this.progress?.operation === event.data.operation && this.progress?.started === event.data.started ) return
 					this.progress = { operation: event.data.operation, started: event.data.started, row }
-					if( this.timer ) clearTimeout( this.timer )
-					this.timer = setTimeout( ()=> this.expire(), Math.max( 0, $rise_bench_stage.limit - ( Date.now() - event.data.started ) ) )
+					this.timing( { ...this.timing(), step: event.data.started } )
 					this.status( `${ this.finished + 1 }/${ this.total }: ${ this.engine_title( active.engine ) }, ${ active.count } — ${ event.data.operation }` )
 					return
 				}
@@ -180,7 +229,7 @@ namespace $.$$ {
 					if( event.data.count !== config.count || this.kind() !== 'text' && event.data.schema !== config.schema ) return
 					this.ready( true ); this.busy( Boolean( active ) || event.data.busy === true )
 					if( active && !this.command_sent && !event.data.busy ) { this.command_sent = true; this.send( 'run', config ) }
-					if( typeof event.data.error === 'string' ) { if( active ) this.expire( event.data.error ); else this.status( event.data.error ) }
+					if( typeof event.data.error === 'string' ) { if( active ) this.fail_case(); else this.status( event.data.error ) }
 					return
 				}
 				if( event.data.type !== 'rise-bench-result' ) return
@@ -192,7 +241,6 @@ namespace $.$$ {
 			return { destructor: ()=> window.removeEventListener( 'message', receive ) }
 		}
 		override destructor() {
-			if( this.timer ) clearTimeout( this.timer )
 			this.queue = []
 			super.destructor()
 		}

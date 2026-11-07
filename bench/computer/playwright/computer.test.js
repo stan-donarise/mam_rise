@@ -1,0 +1,20 @@
+const {test}=require('node:test')
+const assert=require('node:assert/strict')
+const fs=require('node:fs')
+const path=require('node:path')
+const vm=require('node:vm')
+const ts=require('typescript')
+const context=vm.createContext({$: {}})
+const source=fs.readFileSync(path.resolve(__dirname,'../computer.ts'),'utf8')
+vm.runInContext(ts.transpileModule(source,{compilerOptions:{target:ts.ScriptTarget.ES2022}}).outputText,context)
+const clean=text=>context.$.$rise_bench_computer.clean(text)
+test('Windows device and product IDs are removed, system type and useful specifications remain',()=>{
+	const input='Имя устройства\tTEST-PC\r\nПроцессор\tAMD CPU\r\nОперативная память\t32 ГБ\r\nКод устройства\t12345678-1234-1234-1234-123456789abc\r\nКод продукта\t00331-20020-00000-AA700\r\nТип системы\t64-разрядная ОС, процессор x64\r\nПеро и сенсорный ввод\tНет'
+	assert.equal(clean(input),'Имя устройства\tTEST-PC\nПроцессор\tAMD CPU\nОперативная память\t32 ГБ\nТип системы\t64-разрядная ОС, процессор x64\nПеро и сенсорный ввод\tНет')
+	assert.equal(clean(clean(input)),clean(input))
+})
+test('English and multiline Windows copies; ordinary descriptions are preserved',()=>{
+	assert.equal(clean('CPU\nDevice ID\n12345678-1234-1234-1234-123456789abc\nProduct ID\n00331-20020-00000-AA700\nSystem type\nx64'),'CPU\nSystem type\nx64')
+	assert.equal(clean('CPU / RAM / OS'),'CPU / RAM / OS')
+	assert.equal(clean('Код продукта\t00331-20020-00000-AA700\nWindows 11'),'Windows 11')
+})
