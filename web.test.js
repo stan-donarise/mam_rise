@@ -7333,6 +7333,111 @@ var $;
 "use strict";
 var $;
 (function ($) {
+    const { separated, repeat_greedy, char_except, from: regexp, line_end, end } = $mol_regexp;
+    function $mol_csv_syntax_make(delimiter) {
+        const cell = regexp({
+            quote: ['"', separated(repeat_greedy(char_except('"'), 1), '""'), '"'],
+            inline: repeat_greedy(char_except('"\n' + delimiter), 1),
+        });
+        const row = regexp([
+            { row: separated(cell, delimiter) },
+            { line_end, end },
+        ]);
+        const table = repeat_greedy(row, 1);
+        return { cell, row, table };
+    }
+    $.$mol_csv_syntax_make = $mol_csv_syntax_make;
+    const cache = {};
+    function $mol_csv_syntax(delimiter) {
+        if (cache[delimiter])
+            return cache[delimiter];
+        return cache[delimiter] = $mol_csv_syntax_make(delimiter);
+    }
+    $.$mol_csv_syntax = $mol_csv_syntax;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    /**
+     * Parse csv text with delimiter
+     * @see https://mol.hyoo.ru/#!section=demos/demo=mol_csv_parse
+     */
+    function $mol_csv_parse(text, delimiter = ',') {
+        const lines = $mol_csv_parse_table(text, delimiter);
+        const header = lines.shift();
+        const res = [];
+        for (const line of lines) {
+            const row = {};
+            res.push(row);
+            for (let i = 0; i < header?.length; ++i) {
+                row[header[i]] = line[i];
+            }
+        }
+        return res;
+    }
+    $.$mol_csv_parse = $mol_csv_parse;
+    function $mol_csv_parse_table(text, delimiter = ',') {
+        const syntax = $mol_csv_syntax(delimiter);
+        const rows = [];
+        for (const line of text.matchAll(syntax.row)) {
+            if (!line.groups)
+                continue;
+            const cells = [];
+            rows.push(cells);
+            for (const item of line.groups.row.matchAll(syntax.cell)) {
+                if (!item.groups)
+                    continue;
+                const text = item.groups.inline
+                    || item.groups.quote.slice(1, -1).replace(/""/g, '"');
+                cells.push(text);
+            }
+        }
+        return rows;
+    }
+    $.$mol_csv_parse_table = $mol_csv_parse_table;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_test({
+        'serial & parse'() {
+            const data = [
+                { foo: '123', bar: '456' },
+                { foo: 'x"xx', bar: 'y,y\ny' },
+            ];
+            $mol_assert_equal($mol_csv_parse($mol_csv_serial(data)), data);
+        },
+        'parse & serial'() {
+            const csv = '"foo","bar"\n"123","456"\n"x""xx","y,y\ny"';
+            $mol_assert_equal($mol_csv_serial($mol_csv_parse(csv)), csv);
+        },
+        'one row'() {
+            const csv = '"foo","y,y\ny"';
+            $mol_assert_equal($mol_csv_serial_table($mol_csv_parse_table(csv)), csv);
+        },
+        'one col'() {
+            const csv = '"foo"\n"y,y\ny"';
+            $mol_assert_equal($mol_csv_serial($mol_csv_parse(csv)), csv);
+        },
+        'one cell'() {
+            const csv = '"y,y\ny"';
+            $mol_assert_equal($mol_csv_serial_table($mol_csv_parse_table(csv)), csv);
+        },
+        'tab separated'() {
+            const tsv = '"foo"\t"bar"\n"123"\t"456"\n"x""xx"\t"y,y\ny"';
+            $mol_assert_equal($mol_csv_serial($mol_csv_parse(tsv, '\t'), '\t'), tsv);
+        },
+    });
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
     /** MAM's UI entry loads dependency tests too. Never run them beside timed workloads. */
     $.$rise_app_test_suite = $mol_test_all.slice();
     if (!new URL(location.href).searchParams.has('rise_unit_suite')) {

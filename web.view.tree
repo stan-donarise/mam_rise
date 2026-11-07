@@ -2220,6 +2220,8 @@ $mol_icon_information $mol_icon path \M13,9H11V7H13M13,17H11V11H13M12,2A10,10 0 
 
 $mol_icon_information_outline $mol_icon path \M11,9H13V7H11M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M11,17H13V11H11V17Z
 
+$mol_icon_content_copy $mol_icon path \M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z
+
 $rise_bench_metrics_details $mol_pick
 	hint \Параметры компьютера и браузер
 	trigger_content / <= Icon $mol_icon_information_outline
@@ -2228,6 +2230,12 @@ $rise_bench_metrics_details $mol_pick
 			sub /
 				<= Computer_label $mol_labeler
 					title \Параметры компьютера
+					label /
+						\Параметры компьютера
+						<= Copy $mol_button_copy
+							hint \Копировать параметры компьютера
+							text <= computer
+							sub / <= Copy_icon $mol_icon_content_copy
 					Content <= Computer $mol_view
 						sub / <= computer \
 				<= Browser_label $mol_labeler
@@ -2636,43 +2644,253 @@ $rise_bench $mol_book2_catalog
 	Crdttext $rise_bench_baza_crdttext
 	Idb $rise_bench_idb
 
+$mol_icon_youtube $mol_icon path \M10,15L15.19,12L10,9V15M21.56,7.17C21.69,7.64 21.78,8.27 21.84,9.07C21.91,9.87 21.94,10.56 21.94,11.16L22,12C22,14.19 21.84,15.8 21.56,16.83C21.31,17.73 20.73,18.31 19.83,18.56C19.36,18.69 18.5,18.78 17.18,18.84C15.88,18.91 14.69,18.94 13.59,18.94L12,19C7.81,19 5.2,18.84 4.17,18.56C3.27,18.31 2.69,17.73 2.44,16.83C2.31,16.36 2.22,15.73 2.16,14.93C2.09,14.13 2.06,13.44 2.06,12.84L2,12C2,9.81 2.16,8.2 2.44,7.17C2.69,6.27 3.27,5.69 4.17,5.44C4.64,5.31 5.5,5.22 6.82,5.16C8.12,5.09 9.31,5.06 10.41,5.06L12,5C16.19,5 18.8,5.16 19.83,5.44C20.73,5.69 21.31,6.27 21.56,7.17Z
+
+$mol_embed_service $mol_check
+	uri \
+	video_preview \
+	video_id \
+	checked? <=> active? false
+	sub /
+		<= Image $mol_image
+			title <= title \
+			uri <= video_preview \
+		<= Hint $mol_icon_youtube
+		<= Frame $mol_frame
+			title <= title \
+			uri <= video_embed \
+
+
+$mol_embed_youtube $mol_embed_service
+
+$mol_embed_rutube $mol_embed_service
+
+$mol_embed_vklive $mol_embed_service
+
+$mol_embed_any $mol_view
+	Image $mol_image
+		title <= title \
+		uri <= uri \
+	Object $mol_embed_native
+		title <= title \
+		uri <= uri \
+	Youtube $mol_embed_youtube
+		title <= title \
+		uri <= uri \
+	Rutube $mol_embed_rutube
+		title <= title \
+		uri <= uri \
+	Vklive $mol_embed_vklive
+		title <= title \
+		uri <= uri \
+
+$mol_text $mol_list
+	uri_base \
+	text \
+	param \
+	flow_tokens /
+	block_text* \
+	auto /
+		<= auto_scroll null
+	- \Blocks
+	Paragraph* $mol_paragraph
+		sub <= block_content* /
+	Quote* $mol_text
+		text <= quote_text* \
+		auto_scroll null
+		highlight <= highlight \
+		uri_resolve* <= uri_resolve* \
+		code_sidebar_showed <= code_sidebar_showed true
+	List* $mol_text_list
+		type <= list_type* \-
+		text <= list_text* \
+		highlight <= highlight \
+		uri_resolve* <= uri_resolve* \
+		code_sidebar_showed <= code_sidebar_showed true
+	item_index* 0
+	Header* $mol_text_header
+		minimal_height 40
+		level <= header_level* 1
+		content <= block_content* /
+		arg <= header_arg* *
+	Pre* $mol_text_code
+		text <= pre_text* \
+		row_themes <= pre_themes* /string
+		highlight <= highlight \
+		uri_resolve* <= uri_resolve* \
+		sidebar_showed <= code_sidebar_showed true
+	Cut* $mol_view dom_name \hr
+	- \Table
+	Table* $mol_grid
+		head_cells <= table_head_cells* /
+		rows <= table_rows* /
+	Table_row* $mol_grid_row
+		cells <= table_cells* /
+	Table_cell* $mol_text
+		auto_scroll null
+		text <= table_cell_text* \
+		highlight <= highlight \
+		uri_resolve* <= uri_resolve* \
+		code_sidebar_showed <= code_sidebar_showed true
+	- \Grid
+	Grid* $mol_grid
+		rows <= grid_rows* /
+	Grid_row* $mol_grid_row
+		cells <= grid_cells* /
+	Grid_cell* $mol_text
+		auto_scroll null
+		text <= grid_cell_text* \
+		highlight <= highlight \
+		uri_resolve* <= uri_resolve* \
+		code_sidebar_showed <= code_sidebar_showed true
+	- \Lines
+	String* $mol_dimmer
+		dom_name \span
+		needle <= highlight \
+		haystack <= line_text* \
+	Span* $mol_text_span
+		dom_name \span
+		type <= line_type* \
+		sub <= line_content* /
+	Code_line* $mol_text_code_line
+		numb_showed false
+		highlight <= highlight \
+		text <= line_text* \
+		uri_resolve* <= uri_resolve* \
+		syntax <= code_syntax null
+	Link* $mol_link_iconed
+		uri <= link_uri* \
+		content <= line_content* /
+	Link_http* $mol_link_iconed
+		uri <= link_uri* \
+		content / <= link_host* \
+	Embed* $mol_embed_any
+		uri <= link_uri* \
+		title <= line_text* \
+	- \Spoilers
+	Spoiler* $mol_expander
+		label /
+			<= Spoiler_label* $mol_text
+				text <= spoiler_label* \
+				highlight <= highlight \
+				uri_resolve* <= uri_resolve* \
+				code_sidebar_showed <= code_sidebar_showed true
+		content /
+			<= Spoiler_content* $mol_text
+				text <= spoiler_content* \
+				highlight <= highlight \
+				uri_resolve* <= uri_resolve* \
+				code_sidebar_showed <= code_sidebar_showed true
+
+$mol_text_header $mol_paragraph
+	level 1
+	sub /
+		<= Link $mol_link
+			arg <= arg *
+			hint @ \Permalink to this section
+			sub <= content /
+
+$mol_text_span $mol_paragraph
+	dom_name \span
+	attr *
+		^
+		mol_text_type <= type \
+
+$mol_icon_check $mol_icon path \M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z
+
+$mol_icon_check_all $mol_icon path \M0.41,13.41L6,19L7.41,17.58L1.83,12M22.24,5.58L11.66,16.17L7.5,12L6.07,13.41L11.66,19L23.66,7M18,7L16.59,5.58L10.24,11.93L11.66,13.34L18,7Z
+
+$rise_check_all $mol_check_box
+	checks /$mol_check
+	Icon $mol_icon_check_all
+
+$rise_check_list $mol_view
+	options /string
+	titles *
+	value? /string
+	enabled true
+	sub /
+		<= All $rise_check_all
+			title \Все
+			checks <= checks
+			enabled <= enabled
+			checked? <=> all_checked? false
+		<= Checks $mol_view
+			sub <= checks /$mol_check
+	Check* $mol_check_box
+		title <= check_title* \
+		enabled <= enabled
+		checked? <=> checked*? false
+
+$mol_icon_help $mol_icon path \M10,19H13V22H10V19M12,2C17.35,2.22 19.68,7.62 16.5,11.67C15.67,12.67 14.33,13.33 13.67,14.17C13,15 13,16 13,17H10C10,15.33 10,13.92 10.67,12.92C11.33,11.92 12.67,11.33 13.5,10.67C15.92,8.43 15.32,5.26 12,5A3,3 0 0,0 9,8H6A6,6 0 0,1 12,2Z
+
+$mol_icon_help_circle $mol_icon path \M15.07,11.25L14.17,12.17C13.45,12.89 13,13.5 13,15H11V14.5C11,13.39 11.45,12.39 12.17,11.67L13.41,10.41C13.78,10.05 14,9.55 14,9C14,7.89 13.1,7 12,7A2,2 0 0,0 10,9H8A4,4 0 0,1 12,5A4,4 0 0,1 16,9C16,9.88 15.64,10.67 15.07,11.25M13,19H11V17H13M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12C22,6.47 17.5,2 12,2Z
+
+$mol_icon_help_circle_outline $mol_icon path \M11,18H13V16H11V18M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,6A4,4 0 0,0 8,10H10A2,2 0 0,1 12,8A2,2 0 0,1 14,10C14,12 11,11.75 11,15H13C13,12.75 16,12.5 16,10A4,4 0 0,0 12,6Z
+
+$rise_bench_host_controls_computerhelp $mol_pick
+	hint \Где найти параметры компьютера
+	trigger_content / <= Icon $mol_icon_help_circle_outline
+	bubble_content /
+		<= Text $mol_text
+			text \В Windows нажмите **Win + I**, откройте **Система → О системе** (в некоторых версиях — «О программе»). В разделе **Характеристики устройства** нажмите **Копировать** и вставьте текст в это поле. Коды устройства и продукта удалятся автоматически. Имя компьютера, процессор, память и тип системы сохранятся. Версию Windows можно дописать ниже. [Инструкция Microsoft](https://support.microsoft.com/ru-ru/windows/experience/find-information-about-your-windows-device).
+
+$mol_text_list $mol_text
+	auto_scroll null
+	attr *
+		^
+		mol_text_list_type <= type \
+	Paragraph* $mol_text_list_item
+		index <= item_index*
+		sub <= block_content*
+
+$mol_text_list_item $mol_paragraph
+	attr *
+		^
+		mol_text_list_item_index <= index 0
+
 $rise_bench_host_controls $mol_page
 	title \Настройки
 	minimal_width 320
 	kind \goods
 	enabled true
+	running false
+	run_enabled true
 	body <= controls /$mol_view
+		<= Intro $mol_text
+			text <= intro \
 		<= Engine_label $mol_labeler
 			title \Хранилище
-			Content <= Engine $mol_switch
+			Content <= Engine $rise_check_list
 				enabled <= enabled
-				value? <=> engine? \goods
-				options *
-					all \Все
-					goods \Гипербаза
-					idb \IDB
-					sqlite \SQLite
-					pglite \PGlite
-					duckdb \DuckDB
+				value? <=> engines? /string
+				options <= engine_keys /string
+				titles <= engine_titles *
 		<= Storage_label $mol_view
 			sub / <= storage_label \
 		<= Schema_label $mol_labeler
 			title \Состав записи
-			Content <= Schema $mol_switch
+			Content <= Schema $rise_check_list
 				enabled <= enabled
-				value? <=> schema? \compact
-				options *
+				value? <=> schemas? /string
+				options /string
+					\compact
+					\full
+				titles *
 					compact \4 свойства
 					full \10 свойств
 		<= Count_label $mol_labeler
 			title <= count_title \Количество записей
-			Content <= Count $mol_switch
+			Content <= Count $rise_check_list
 				enabled <= enabled
-				value? <=> count? \100
-				options <= counts *
-				keys <= count_keys /string
+				value? <=> sizes? /string
+				options <= count_keys /string
+				titles <= counts *
 		<= Computer_label $mol_labeler
 			title \Параметры компьютера
+			label /
+				\Параметры компьютера
+				<= Computer_help $rise_bench_host_controls_computerhelp
 			Content <= Computer $rise_bench_textarea
 				length_max 8000
 				hint \Процессор, память, ОС
@@ -2680,10 +2898,15 @@ $rise_bench_host_controls $mol_page
 				enabled <= enabled
 		<= Run $mol_button_major
 			title \Запустить бенчмарк
-			enabled <= enabled
+			enabled <= run_enabled
 			click? <=> run? null
+		<= Stop $mol_button_minor
+			title \Остановить
+			click? <=> stop? null
 		<= Status $mol_view
 			sub / <= status \
+		<= Elapsed $mol_view
+			sub / <= elapsed \
 		<= Retry $mol_button_minor
 			title \Повторить сохранение
 			click? <=> retry? null
@@ -2766,17 +2989,26 @@ $rise_bench_host $mol_book2
 		<= Controls $rise_bench_host_controls
 			kind <= kind
 			enabled <= controls_enabled true
-			engine? <=> engine? \goods
-			count? <=> count? \100
-			schema? <=> schema? \compact
+			run_enabled <= run_enabled true
+			running <= busy false
+			engines? <=> selected_engines? /string
+			sizes? <=> selected_counts? /string
+			schemas? <=> selected_schemas? /string
 			run? <=> run? null
+			stop? <=> stop? null
 			status <= status? \
+			elapsed <= elapsed_text \
 			retry_visible <= retry_visible false
 			retry? <=> retry? null
 		<= Results $mol_page
 			title \Результаты
 			minimal_width 640
 			tools /
+				<= Download $mol_button_download
+					title <= csv_title \Скачать CSV
+					hint \Скачать CSV
+					blob <= csv_blob null
+					file_name <= csv_filename \rise-benchmark.csv
 				<= Mode $mol_switch
 					value? <=> mode? \table
 					options *
@@ -3109,172 +3341,6 @@ $rise_resize $mol_view
 		width <= width_px \20px
 
 $rise_resize_edge $rise_drag_view
-
-$mol_icon_youtube $mol_icon path \M10,15L15.19,12L10,9V15M21.56,7.17C21.69,7.64 21.78,8.27 21.84,9.07C21.91,9.87 21.94,10.56 21.94,11.16L22,12C22,14.19 21.84,15.8 21.56,16.83C21.31,17.73 20.73,18.31 19.83,18.56C19.36,18.69 18.5,18.78 17.18,18.84C15.88,18.91 14.69,18.94 13.59,18.94L12,19C7.81,19 5.2,18.84 4.17,18.56C3.27,18.31 2.69,17.73 2.44,16.83C2.31,16.36 2.22,15.73 2.16,14.93C2.09,14.13 2.06,13.44 2.06,12.84L2,12C2,9.81 2.16,8.2 2.44,7.17C2.69,6.27 3.27,5.69 4.17,5.44C4.64,5.31 5.5,5.22 6.82,5.16C8.12,5.09 9.31,5.06 10.41,5.06L12,5C16.19,5 18.8,5.16 19.83,5.44C20.73,5.69 21.31,6.27 21.56,7.17Z
-
-$mol_embed_service $mol_check
-	uri \
-	video_preview \
-	video_id \
-	checked? <=> active? false
-	sub /
-		<= Image $mol_image
-			title <= title \
-			uri <= video_preview \
-		<= Hint $mol_icon_youtube
-		<= Frame $mol_frame
-			title <= title \
-			uri <= video_embed \
-
-
-$mol_embed_youtube $mol_embed_service
-
-$mol_embed_rutube $mol_embed_service
-
-$mol_embed_vklive $mol_embed_service
-
-$mol_embed_any $mol_view
-	Image $mol_image
-		title <= title \
-		uri <= uri \
-	Object $mol_embed_native
-		title <= title \
-		uri <= uri \
-	Youtube $mol_embed_youtube
-		title <= title \
-		uri <= uri \
-	Rutube $mol_embed_rutube
-		title <= title \
-		uri <= uri \
-	Vklive $mol_embed_vklive
-		title <= title \
-		uri <= uri \
-
-$mol_text $mol_list
-	uri_base \
-	text \
-	param \
-	flow_tokens /
-	block_text* \
-	auto /
-		<= auto_scroll null
-	- \Blocks
-	Paragraph* $mol_paragraph
-		sub <= block_content* /
-	Quote* $mol_text
-		text <= quote_text* \
-		auto_scroll null
-		highlight <= highlight \
-		uri_resolve* <= uri_resolve* \
-		code_sidebar_showed <= code_sidebar_showed true
-	List* $mol_text_list
-		type <= list_type* \-
-		text <= list_text* \
-		highlight <= highlight \
-		uri_resolve* <= uri_resolve* \
-		code_sidebar_showed <= code_sidebar_showed true
-	item_index* 0
-	Header* $mol_text_header
-		minimal_height 40
-		level <= header_level* 1
-		content <= block_content* /
-		arg <= header_arg* *
-	Pre* $mol_text_code
-		text <= pre_text* \
-		row_themes <= pre_themes* /string
-		highlight <= highlight \
-		uri_resolve* <= uri_resolve* \
-		sidebar_showed <= code_sidebar_showed true
-	Cut* $mol_view dom_name \hr
-	- \Table
-	Table* $mol_grid
-		head_cells <= table_head_cells* /
-		rows <= table_rows* /
-	Table_row* $mol_grid_row
-		cells <= table_cells* /
-	Table_cell* $mol_text
-		auto_scroll null
-		text <= table_cell_text* \
-		highlight <= highlight \
-		uri_resolve* <= uri_resolve* \
-		code_sidebar_showed <= code_sidebar_showed true
-	- \Grid
-	Grid* $mol_grid
-		rows <= grid_rows* /
-	Grid_row* $mol_grid_row
-		cells <= grid_cells* /
-	Grid_cell* $mol_text
-		auto_scroll null
-		text <= grid_cell_text* \
-		highlight <= highlight \
-		uri_resolve* <= uri_resolve* \
-		code_sidebar_showed <= code_sidebar_showed true
-	- \Lines
-	String* $mol_dimmer
-		dom_name \span
-		needle <= highlight \
-		haystack <= line_text* \
-	Span* $mol_text_span
-		dom_name \span
-		type <= line_type* \
-		sub <= line_content* /
-	Code_line* $mol_text_code_line
-		numb_showed false
-		highlight <= highlight \
-		text <= line_text* \
-		uri_resolve* <= uri_resolve* \
-		syntax <= code_syntax null
-	Link* $mol_link_iconed
-		uri <= link_uri* \
-		content <= line_content* /
-	Link_http* $mol_link_iconed
-		uri <= link_uri* \
-		content / <= link_host* \
-	Embed* $mol_embed_any
-		uri <= link_uri* \
-		title <= line_text* \
-	- \Spoilers
-	Spoiler* $mol_expander
-		label /
-			<= Spoiler_label* $mol_text
-				text <= spoiler_label* \
-				highlight <= highlight \
-				uri_resolve* <= uri_resolve* \
-				code_sidebar_showed <= code_sidebar_showed true
-		content /
-			<= Spoiler_content* $mol_text
-				text <= spoiler_content* \
-				highlight <= highlight \
-				uri_resolve* <= uri_resolve* \
-				code_sidebar_showed <= code_sidebar_showed true
-
-$mol_text_header $mol_paragraph
-	level 1
-	sub /
-		<= Link $mol_link
-			arg <= arg *
-			hint @ \Permalink to this section
-			sub <= content /
-
-$mol_text_span $mol_paragraph
-	dom_name \span
-	attr *
-		^
-		mol_text_type <= type \
-
-$mol_text_list $mol_text
-	auto_scroll null
-	attr *
-		^
-		mol_text_list_type <= type \
-	Paragraph* $mol_text_list_item
-		index <= item_index*
-		sub <= block_content*
-
-$mol_text_list_item $mol_paragraph
-	attr *
-		^
-		mol_text_list_item_index <= index 0
 
 $rise_resize_demo $mol_example_small
 	sub /

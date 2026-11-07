@@ -31269,9 +31269,32 @@ var $;
 
 
 ;
+	($.$mol_icon_content_copy) = class $mol_icon_content_copy extends ($.$mol_icon) {
+		path(){
+			return "M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z";
+		}
+	};
+
+
+;
+"use strict";
+
+
+;
 	($.$rise_bench_metrics_details) = class $rise_bench_metrics_details extends ($.$mol_pick) {
 		Icon(){
 			const obj = new this.$.$mol_icon_information_outline();
+			return obj;
+		}
+		Copy_icon(){
+			const obj = new this.$.$mol_icon_content_copy();
+			return obj;
+		}
+		Copy(){
+			const obj = new this.$.$mol_button_copy();
+			(obj.hint) = () => ("Копировать параметры компьютера");
+			(obj.text) = () => ((this.computer()));
+			(obj.sub) = () => ([(this.Copy_icon())]);
 			return obj;
 		}
 		computer(){
@@ -31285,6 +31308,7 @@ var $;
 		Computer_label(){
 			const obj = new this.$.$mol_labeler();
 			(obj.title) = () => ("Параметры компьютера");
+			(obj.label) = () => (["Параметры компьютера", (this.Copy())]);
 			(obj.Content) = () => ((this.Computer()));
 			return obj;
 		}
@@ -31318,6 +31342,8 @@ var $;
 		}
 	};
 	($mol_mem(($.$rise_bench_metrics_details.prototype), "Icon"));
+	($mol_mem(($.$rise_bench_metrics_details.prototype), "Copy_icon"));
+	($mol_mem(($.$rise_bench_metrics_details.prototype), "Copy"));
 	($mol_mem(($.$rise_bench_metrics_details.prototype), "Computer"));
 	($mol_mem(($.$rise_bench_metrics_details.prototype), "Computer_label"));
 	($mol_mem(($.$rise_bench_metrics_details.prototype), "Browser"));
@@ -31339,6 +31365,7 @@ var $;
         Bubble: { maxHeight: $mol_style_unit.vh(80), overflow: 'auto' },
         Text: { padding: $mol_gap.block, flex: { direction: 'column' }, maxWidth: $mol_style_unit.vw(80), width: $mol_style_unit.rem(28) },
         Computer: { whiteSpace: 'pre-wrap', overflowWrap: 'anywhere' },
+        Computer_label: { Label: { align: { items: 'center' } } },
         Browser: { whiteSpace: 'pre-wrap', overflowWrap: 'anywhere' },
     });
 })($ || ($ = {}));
@@ -31390,8 +31417,22 @@ var $;
 "use strict";
 var $;
 (function ($) {
+    class $rise_bench_computer {
+        static clean(text) {
+            return text.replace(/\r\n?/g, '\n')
+                .replace(/^[\t ]*(?:Код устройства|Идентификатор устройства|Device ID)[^\n]*\n[\s\S]*?(?=^[\t ]*(?:Тип системы|System type)(?=[\t :]|$))/gim, '')
+                .replace(/^[\t ]*(?:Код устройства|Идентификатор устройства|Код продукта|Идентификатор продукта|Device ID|Product ID)[^\n]*(?:\n[\t ]*(?:[\da-f]{8}(?:-[\da-f]{4}){3}-[\da-f]{12}|[\dA-Z]{5}(?:-[\dA-Z]{5}){4}|\d{5}-\d{5}-\d{5}-[\dA-Z]{5})[\t ]*)?\n?/gim, '');
+        }
+    }
+    $.$rise_bench_computer = $rise_bench_computer;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
     $.$rise_bench_run_baza_version = '2e6100b225c8d4fb3a5b5d14e8568223e8a8c785';
-    $.$rise_bench_run_benchmark_version = '0.5.0';
+    $.$rise_bench_run_benchmark_version = '0.6.0';
     class $rise_bench_run extends $mol_object {
         count;
         properties;
@@ -31403,7 +31444,7 @@ var $;
         browser;
         engine;
         engine_version;
-        constructor(count, properties = 0, stamp = new $mol_time_moment().toString('DD.MM.YYYY hh:mm:ss'), baza_version = $.$rise_bench_run_baza_version, benchmark_version = $.$rise_bench_run_benchmark_version, id = crypto.randomUUID(), computer = $mol_state_local.value('$rise_bench_computer') ?? '', browser = typeof navigator === 'undefined' ? '' : navigator.userAgent, engine = baza_version === '—' ? 'idb' : 'goods', engine_version = baza_version === '—' ? 'browser' : baza_version) {
+        constructor(count, properties = 0, stamp = new $mol_time_moment().toString('DD.MM.YYYY hh:mm:ss'), baza_version = $.$rise_bench_run_baza_version, benchmark_version = $.$rise_bench_run_benchmark_version, id = crypto.randomUUID(), computer = $rise_bench_computer.clean($mol_state_local.value('$rise_bench_computer') ?? ''), browser = typeof navigator === 'undefined' ? '' : navigator.userAgent, engine = baza_version === '—' ? 'idb' : 'goods', engine_version = baza_version === '—' ? 'browser' : baza_version) {
             super();
             this.count = count;
             this.properties = properties;
@@ -32770,186 +32811,6 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    /** Signed public post/just grant for the result Land, not a private key or data. */
-    class $rise_bench_archive_seed extends $mol_object {
-        static bytes = new Uint8Array([76, 65, 78, 68, 9, 212, 44, 154, 255, 14, 96, 10, 136, 26, 73, 199, 0, 0, 0, 0, 0, 0, 0, 0, 253, 63, 1, 0, 139, 176, 233, 106, 9, 212, 44, 154, 255, 14, 96, 10, 136, 26, 73, 199, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 254, 131, 2, 0, 139, 176, 233, 106, 9, 212, 44, 154, 255, 14, 96, 10, 136, 26, 73, 199, 241, 85, 138, 73, 112, 199, 124, 123, 68, 6, 185, 190, 194, 27, 94, 118, 169, 2, 18, 121, 13, 234, 180, 83, 85, 126, 55, 125, 35, 163, 21, 179, 54, 235, 32, 73, 72, 149, 122, 140, 201, 105, 80, 32, 212, 129, 251, 221, 124, 12, 235, 250, 73, 187, 195, 219, 52, 188, 89, 205, 100, 162, 134, 51, 156, 68, 77, 124, 226, 101, 45, 141, 172, 219, 4, 14, 129, 216, 17, 54, 183, 120, 163, 108, 52, 49, 79, 46, 106, 255, 247, 176, 10, 29, 235, 20, 235, 4, 153, 6, 255, 246, 32, 121, 180, 60, 71, 12, 42, 227, 51, 55, 213, 14, 32, 110, 96, 84, 177, 50, 94, 193, 103, 39, 25, 230, 73, 78, 205, 43, 84, 108, 197, 247, 80, 23, 108, 108, 246, 3, 199, 219, 38, 228, 200, 148, 1, 218, 234, 169, 58, 10, 15, 148, 227, 220, 185, 66, 156, 110, 12, 241, 98, 123, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-        static apply() {
-            const pack = $mol_wire_sync($giper_baza_pack).from(this.bytes.buffer);
-            const parts = $mol_wire_sync(pack).parts();
-            $mol_wire_sync($giper_baza_glob).apply_parts(parts);
-            return true;
-        }
-    }
-    __decorate([
-        $mol_mem
-    ], $rise_bench_archive_seed, "apply", null);
-    $.$rise_bench_archive_seed = $rise_bench_archive_seed;
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    /** Small result metadata only. Never stores a workload Land or database name. */
-    class $rise_bench_archive extends $mol_object {
-        static link = 'CdQsmv8O_YAqIGknH';
-        static operations(kind) {
-            return kind === 'text' ? ['Вставка, с', 'Добавить символ, с', 'F5, с']
-                : ['Запуск БД, с', 'Создание, с', 'Поиск, с', 'Добавить 1, с', 'F5, с', 'Поиск после F5, с'];
-        }
-        static preset = [[null, $giper_baza_rank_post('just')]];
-        static provision() {
-            this.$.$giper_baza_auth.current().pass();
-            const land = $mol_wire_sync($giper_baza_glob).land_grab(this.preset);
-            land.Data($giper_baza_dict).dive('title', $giper_baza_atom_text, null).val('Rise benchmark results');
-            $mol_wire_sync(land).units_saving();
-            return land.link().str;
-        }
-        static root() {
-            if (!this.link)
-                throw new Error('Не настроен общий Land результатов');
-            $rise_bench_archive_seed.apply();
-            return $giper_baza_glob.Land(new $giper_baza_link(this.link)).Data($giper_baza_dict);
-        }
-        static validate(value, operations) {
-            if (!value || typeof value !== 'object')
-                return null;
-            const row = value;
-            if (typeof row.id !== 'string' || !/^[\da-f-]{36}$/.test(row.id))
-                return null;
-            if (!Number.isSafeInteger(row.count) || row.count < 1 || row.count > 10000)
-                return null;
-            if (![0, 4, 10].includes(row.properties) || !['Готово', 'Ошибка'].includes(row.state))
-                return null;
-            if (typeof row.stamp !== 'string' || !/^\d{2}\.\d{2}\.\d{4} \d{2}:\d{2}:\d{2}$/.test(row.stamp))
-                return null;
-            if (row.error !== undefined && (typeof row.error !== 'string' || row.error.length > 2000))
-                return null;
-            if (typeof row.baza_version !== 'string' || !/^(?:[\da-f]{40}|—)$/.test(row.baza_version))
-                return null;
-            if (typeof row.benchmark_version !== 'string' || !/^\d+\.\d+\.\d+$/.test(row.benchmark_version))
-                return null;
-            if (row.engine !== undefined && !Object.hasOwn($rise_bench_engine, row.engine))
-                return null;
-            if (row.engine_version !== undefined && (typeof row.engine_version !== 'string' || !/^[\w.\-—]{1,80}$/.test(row.engine_version)))
-                return null;
-            if (row.computer !== undefined && (typeof row.computer !== 'string' || row.computer.length > 8000))
-                return null;
-            if (row.browser !== undefined && (typeof row.browser !== 'string' || row.browser.length > 4000))
-                return null;
-            if (row.bytes != null && (!Number.isSafeInteger(row.bytes) || row.bytes < 0 || row.bytes > 100_000_000))
-                return null;
-            if (!row.metrics || typeof row.metrics !== 'object')
-                return null;
-            const metrics = {};
-            for (const name of operations) {
-                // Older results and native Baza do not have a separate initialization phase.
-                const time = name === 'Запуск БД, с' ? row.metrics[name] ?? null : row.metrics[name];
-                if (time !== null && (typeof time !== 'number' || !Number.isFinite(time) || time < 0))
-                    return null;
-                metrics[name] = time;
-            }
-            return { id: row.id, count: row.count, properties: row.properties, stamp: row.stamp, state: row.state, error: row.error ?? '',
-                baza_version: row.baza_version, benchmark_version: row.benchmark_version, engine: row.engine, engine_version: row.engine_version, computer: row.computer ?? '', browser: row.browser ?? '', bytes: row.bytes ?? null, metrics };
-        }
-        static save(kind, row) {
-            if (kind !== 'text' && !Object.hasOwn($rise_bench_engine, kind))
-                throw new Error('Неизвестный бенчмарк');
-            const validated = this.validate(row, this.operations(kind));
-            if (!validated)
-                throw new Error('Некорректный результат бенчмарка');
-            if (validated.engine !== undefined && validated.engine !== (kind === 'text' ? 'goods' : kind))
-                throw new Error('Движок результата не соответствует нагрузке');
-            const atom = this.root().dive(kind + ':' + row.id, $giper_baza_atom_text, null);
-            if (!atom)
-                throw new Error('Нет доступа к результатам');
-            atom.val(JSON.stringify(validated));
-            $mol_wire_sync(this.root().land()).units_saving();
-        }
-        static rows(kind) {
-            const root = this.root();
-            return root.keys().filter(key => typeof key === 'string' && key.startsWith(kind + ':')).flatMap(key => {
-                const run = this.row(key);
-                return run ? [run] : [];
-            });
-        }
-        static row(key) {
-            const kind = key.split(':')[0];
-            const text = this.root().dive(key, $giper_baza_atom_text)?.val();
-            const row = text && $mol_error_fence(() => this.validate(JSON.parse(text), this.operations(kind)), () => null);
-            if (!row || key !== kind + ':' + row.id)
-                return null;
-            const run = new ($mol_wire_sync($rise_bench_run))(row.count, row.properties, row.stamp, row.baza_version ?? '—', row.benchmark_version ?? '—', row.id, row.computer ?? '', row.browser ?? '', row.engine, row.engine_version);
-            run.state(row.state);
-            run.failure(row.error ?? '');
-            run.bytes(row.bytes ?? null);
-            for (const [operation, value] of Object.entries(row.metrics))
-                if (typeof value === 'number')
-                    run.metric(operation, value);
-            return run;
-        }
-    }
-    __decorate([
-        $mol_action
-    ], $rise_bench_archive, "provision", null);
-    __decorate([
-        $mol_mem
-    ], $rise_bench_archive, "root", null);
-    __decorate([
-        $mol_action
-    ], $rise_bench_archive, "save", null);
-    __decorate([
-        $mol_mem_key
-    ], $rise_bench_archive, "rows", null);
-    __decorate([
-        $mol_mem_key
-    ], $rise_bench_archive, "row", null);
-    $.$rise_bench_archive = $rise_bench_archive;
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    /** A per-operation deadline, retained across wire replay and the measured F5. */
-    class $rise_bench_stage {
-        run;
-        operation;
-        static limit = 300_000;
-        static current = null;
-        static failure(error) {
-            // Native failures may contain a workload database name or Land ID.
-            // Archive only the stage and a bounded diagnostic, never raw payloads.
-            return `${this.current?.operation ?? 'Операция'}: ${error instanceof Error && /300 с/.test(error.message) ? 'превышен лимит 300 с' : 'ошибка выполнения'}`;
-        }
-        started = Date.now();
-        constructor(run, operation) {
-            this.run = run;
-            this.operation = operation;
-            $rise_bench_stage.current = this;
-            const token = new URL(location.href).searchParams.get('rise_run');
-            if (window.parent !== window)
-                window.parent.postMessage({
-                    type: 'rise-bench-progress', kind: new URL(location.href).searchParams.get('rise_fixture'), token,
-                    operation, started: this.started,
-                    row: { id: run.id, count: run.count, properties: run.properties, stamp: run.stamp,
-                        state: 'Ошибка', baza_version: run.baza_version, benchmark_version: run.benchmark_version,
-                        engine: run.engine, engine_version: run.engine_version, computer: run.computer, browser: run.browser,
-                        bytes: run.bytes(), metrics: Object.fromEntries($rise_bench_archive.operations(run.properties ? 'goods' : 'text').map(name => [name, run.metric(name)])) },
-                }, location.origin);
-        }
-        check() {
-            if (Date.now() - this.started >= $rise_bench_stage.limit)
-                throw new Error(`${this.operation}: превышен лимит 300 с`);
-        }
-    }
-    $.$rise_bench_stage = $rise_bench_stage;
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
     class $rise_bench_baza_goods_tag extends $giper_baza_entity {
     }
     $.$rise_bench_baza_goods_tag = $rise_bench_baza_goods_tag;
@@ -33005,7 +32866,6 @@ var $;
                     return $mol_range2(index => this.Row(count - index - 1), () => count);
                 const matches = [];
                 for (let index = count - 1; index >= 0; --index) {
-                    $rise_bench_stage.current?.check();
                     if (color !== 'all' && this.row_color(index) !== color)
                         continue;
                     if (status !== 'all' && this.row_status(index) !== status)
@@ -33973,6 +33833,181 @@ var $;
 "use strict";
 var $;
 (function ($) {
+    /** Signed public post/just grant for the result Land, not a private key or data. */
+    class $rise_bench_archive_seed extends $mol_object {
+        static bytes = new Uint8Array([76, 65, 78, 68, 9, 212, 44, 154, 255, 14, 96, 10, 136, 26, 73, 199, 0, 0, 0, 0, 0, 0, 0, 0, 253, 63, 1, 0, 139, 176, 233, 106, 9, 212, 44, 154, 255, 14, 96, 10, 136, 26, 73, 199, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 254, 131, 2, 0, 139, 176, 233, 106, 9, 212, 44, 154, 255, 14, 96, 10, 136, 26, 73, 199, 241, 85, 138, 73, 112, 199, 124, 123, 68, 6, 185, 190, 194, 27, 94, 118, 169, 2, 18, 121, 13, 234, 180, 83, 85, 126, 55, 125, 35, 163, 21, 179, 54, 235, 32, 73, 72, 149, 122, 140, 201, 105, 80, 32, 212, 129, 251, 221, 124, 12, 235, 250, 73, 187, 195, 219, 52, 188, 89, 205, 100, 162, 134, 51, 156, 68, 77, 124, 226, 101, 45, 141, 172, 219, 4, 14, 129, 216, 17, 54, 183, 120, 163, 108, 52, 49, 79, 46, 106, 255, 247, 176, 10, 29, 235, 20, 235, 4, 153, 6, 255, 246, 32, 121, 180, 60, 71, 12, 42, 227, 51, 55, 213, 14, 32, 110, 96, 84, 177, 50, 94, 193, 103, 39, 25, 230, 73, 78, 205, 43, 84, 108, 197, 247, 80, 23, 108, 108, 246, 3, 199, 219, 38, 228, 200, 148, 1, 218, 234, 169, 58, 10, 15, 148, 227, 220, 185, 66, 156, 110, 12, 241, 98, 123, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+        static apply() {
+            const pack = $mol_wire_sync($giper_baza_pack).from(this.bytes.buffer);
+            const parts = $mol_wire_sync(pack).parts();
+            $mol_wire_sync($giper_baza_glob).apply_parts(parts);
+            return true;
+        }
+    }
+    __decorate([
+        $mol_mem
+    ], $rise_bench_archive_seed, "apply", null);
+    $.$rise_bench_archive_seed = $rise_bench_archive_seed;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    /** Small result metadata only. Never stores a workload Land or database name. */
+    class $rise_bench_archive extends $mol_object {
+        static link = 'CdQsmv8O_YAqIGknH';
+        static operations(kind) {
+            return kind === 'text' ? ['Вставка, с', 'Добавить символ, с', 'F5, с']
+                : ['Запуск БД, с', 'Создание, с', 'Поиск, с', 'Добавить 1, с', 'F5, с', 'Поиск после F5, с'];
+        }
+        static preset = [[null, $giper_baza_rank_post('just')]];
+        static provision() {
+            this.$.$giper_baza_auth.current().pass();
+            const land = $mol_wire_sync($giper_baza_glob).land_grab(this.preset);
+            land.Data($giper_baza_dict).dive('title', $giper_baza_atom_text, null).val('Rise benchmark results');
+            $mol_wire_sync(land).units_saving();
+            return land.link().str;
+        }
+        static root() {
+            if (!this.link)
+                throw new Error('Не настроен общий Land результатов');
+            $rise_bench_archive_seed.apply();
+            return $giper_baza_glob.Land(new $giper_baza_link(this.link)).Data($giper_baza_dict);
+        }
+        static validate(value, operations) {
+            if (!value || typeof value !== 'object')
+                return null;
+            const row = value;
+            if (typeof row.id !== 'string' || !/^[\da-f-]{36}$/.test(row.id))
+                return null;
+            if (!Number.isSafeInteger(row.count) || row.count < 1 || row.count > 10000)
+                return null;
+            if (![0, 4, 10].includes(row.properties) || !['Готово', 'Ошибка', 'Остановлено'].includes(row.state))
+                return null;
+            if (typeof row.stamp !== 'string' || !/^\d{2}\.\d{2}\.\d{4} \d{2}:\d{2}:\d{2}$/.test(row.stamp))
+                return null;
+            if (row.error !== undefined && (typeof row.error !== 'string' || row.error.length > 2000))
+                return null;
+            if (typeof row.baza_version !== 'string' || !/^(?:[\da-f]{40}|—)$/.test(row.baza_version))
+                return null;
+            if (typeof row.benchmark_version !== 'string' || !/^\d+\.\d+\.\d+$/.test(row.benchmark_version))
+                return null;
+            if (row.engine !== undefined && !Object.hasOwn($rise_bench_engine, row.engine))
+                return null;
+            if (row.engine_version !== undefined && (typeof row.engine_version !== 'string' || !/^[\w.\-—]{1,80}$/.test(row.engine_version)))
+                return null;
+            if (row.computer !== undefined && (typeof row.computer !== 'string' || row.computer.length > 8000))
+                return null;
+            if (row.browser !== undefined && (typeof row.browser !== 'string' || row.browser.length > 4000))
+                return null;
+            if (row.bytes != null && (!Number.isSafeInteger(row.bytes) || row.bytes < 0 || row.bytes > 100_000_000))
+                return null;
+            if (!row.metrics || typeof row.metrics !== 'object')
+                return null;
+            const metrics = {};
+            for (const name of operations) {
+                // Older results and native Baza do not have a separate initialization phase.
+                const time = name === 'Запуск БД, с' ? row.metrics[name] ?? null : row.metrics[name];
+                if (time !== null && (typeof time !== 'number' || !Number.isFinite(time) || time < 0))
+                    return null;
+                metrics[name] = time;
+            }
+            return { id: row.id, count: row.count, properties: row.properties, stamp: row.stamp, state: row.state, error: row.error ?? '',
+                baza_version: row.baza_version, benchmark_version: row.benchmark_version, engine: row.engine, engine_version: row.engine_version, computer: row.computer ?? '', browser: row.browser ?? '', bytes: row.bytes ?? null, metrics };
+        }
+        static save(kind, row) {
+            if (kind !== 'text' && !Object.hasOwn($rise_bench_engine, kind))
+                throw new Error('Неизвестный бенчмарк');
+            const validated = this.validate(row, this.operations(kind));
+            if (!validated)
+                throw new Error('Некорректный результат бенчмарка');
+            if (validated.engine !== undefined && validated.engine !== (kind === 'text' ? 'goods' : kind))
+                throw new Error('Движок результата не соответствует нагрузке');
+            const atom = this.root().dive(kind + ':' + row.id, $giper_baza_atom_text, null);
+            if (!atom)
+                throw new Error('Нет доступа к результатам');
+            atom.val(JSON.stringify(validated));
+            $mol_wire_sync(this.root().land()).units_saving();
+        }
+        static rows(kind) {
+            const root = this.root();
+            return root.keys().filter(key => typeof key === 'string' && key.startsWith(kind + ':')).flatMap(key => {
+                const run = this.row(key);
+                return run ? [run] : [];
+            });
+        }
+        static row(key) {
+            const kind = key.split(':')[0];
+            const text = this.root().dive(key, $giper_baza_atom_text)?.val();
+            const row = text && $mol_error_fence(() => this.validate(JSON.parse(text), this.operations(kind)), () => null);
+            if (!row || key !== kind + ':' + row.id)
+                return null;
+            const run = new ($mol_wire_sync($rise_bench_run))(row.count, row.properties, row.stamp, row.baza_version ?? '—', row.benchmark_version ?? '—', row.id, row.computer ?? '', row.browser ?? '', row.engine, row.engine_version);
+            run.state(row.state);
+            run.failure(row.error ?? '');
+            run.bytes(row.bytes ?? null);
+            for (const [operation, value] of Object.entries(row.metrics))
+                if (typeof value === 'number')
+                    run.metric(operation, value);
+            return run;
+        }
+    }
+    __decorate([
+        $mol_action
+    ], $rise_bench_archive, "provision", null);
+    __decorate([
+        $mol_mem
+    ], $rise_bench_archive, "root", null);
+    __decorate([
+        $mol_action
+    ], $rise_bench_archive, "save", null);
+    __decorate([
+        $mol_mem_key
+    ], $rise_bench_archive, "rows", null);
+    __decorate([
+        $mol_mem_key
+    ], $rise_bench_archive, "row", null);
+    $.$rise_bench_archive = $rise_bench_archive;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    /** Reports phase boundaries; only the user decides when to stop a workload. */
+    class $rise_bench_stage {
+        run;
+        operation;
+        static current = null;
+        static failure(error) {
+            // Native failures may contain a workload database name or Land ID.
+            // Archive only the stage and a bounded diagnostic, never raw payloads.
+            return `${this.current?.operation ?? 'Операция'}: ошибка выполнения`;
+        }
+        started = Date.now();
+        constructor(run, operation) {
+            this.run = run;
+            this.operation = operation;
+            $rise_bench_stage.current = this;
+            const token = new URL(location.href).searchParams.get('rise_run');
+            if (window.parent !== window)
+                window.parent.postMessage({
+                    type: 'rise-bench-progress', kind: new URL(location.href).searchParams.get('rise_fixture'), token,
+                    operation, started: this.started,
+                    row: { id: run.id, count: run.count, properties: run.properties, stamp: run.stamp,
+                        state: 'Ошибка', baza_version: run.baza_version, benchmark_version: run.benchmark_version,
+                        engine: run.engine, engine_version: run.engine_version, computer: run.computer, browser: run.browser,
+                        bytes: run.bytes(), metrics: Object.fromEntries($rise_bench_archive.operations(run.properties ? 'goods' : 'text').map(name => [name, run.metric(name)])) },
+                }, location.origin);
+        }
+    }
+    $.$rise_bench_stage = $rise_bench_stage;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
     /** Per-tab run history; the pending ticket belongs only to the next page. */
     class $rise_bench_reload {
         snapshot;
@@ -34029,7 +34064,6 @@ var $;
             this.title = title;
         }
         observer;
-        timer;
         frame = 0;
         pending;
         visible() {
@@ -34061,17 +34095,11 @@ var $;
                 };
                 this.observer = new MutationObserver(check);
                 this.observer.observe(this.table, { childList: true, subtree: true, attributes: true, characterData: true });
-                this.timer = setTimeout(() => {
-                    this.destructor();
-                    reject(new Error('После F5 товары не появились за 300 секунд'));
-                }, 300_000);
                 check();
             });
         }
         destructor() {
             this.observer?.disconnect();
-            if (this.timer)
-                clearTimeout(this.timer);
             if (this.frame)
                 cancelAnimationFrame(this.frame);
             super.destructor();
@@ -34139,7 +34167,6 @@ var $;
                 return product;
             }
             initialize_product(key) {
-                $rise_bench_stage.current?.check();
                 const [state, index] = key;
                 // This initializer is only invoked by Create. A completed record has no
                 // remaining write dependencies and is never recreated on async replay.
@@ -34682,7 +34709,6 @@ var $;
         pending;
         observer;
         frame = 0;
-        timer;
         visible() {
             const input = this.editor.Edit().dom_node();
             const row = this.editor.View().Row(1).dom_node();
@@ -34712,10 +34738,6 @@ var $;
                 };
                 this.observer = new MutationObserver(check);
                 this.observer.observe(this.editor.dom_node(), { childList: true, subtree: true, characterData: true });
-                this.timer = setTimeout(() => {
-                    this.destructor();
-                    reject(new Error('Текст не появился в редакторе за 300 секунд'));
-                }, 300_000);
                 check();
             });
         }
@@ -34723,8 +34745,6 @@ var $;
             this.observer?.disconnect();
             if (this.frame)
                 cancelAnimationFrame(this.frame);
-            if (this.timer)
-                clearTimeout(this.timer);
             super.destructor();
         }
     }
@@ -35047,23 +35067,1293 @@ var $;
 })($ || ($ = {}));
 
 ;
-	($.$rise_bench_host_controls) = class $rise_bench_host_controls extends ($.$mol_page) {
-		engine(next){
+	($.$mol_icon_youtube) = class $mol_icon_youtube extends ($.$mol_icon) {
+		path(){
+			return "M10,15L15.19,12L10,9V15M21.56,7.17C21.69,7.64 21.78,8.27 21.84,9.07C21.91,9.87 21.94,10.56 21.94,11.16L22,12C22,14.19 21.84,15.8 21.56,16.83C21.31,17.73 20.73,18.31 19.83,18.56C19.36,18.69 18.5,18.78 17.18,18.84C15.88,18.91 14.69,18.94 13.59,18.94L12,19C7.81,19 5.2,18.84 4.17,18.56C3.27,18.31 2.69,17.73 2.44,16.83C2.31,16.36 2.22,15.73 2.16,14.93C2.09,14.13 2.06,13.44 2.06,12.84L2,12C2,9.81 2.16,8.2 2.44,7.17C2.69,6.27 3.27,5.69 4.17,5.44C4.64,5.31 5.5,5.22 6.82,5.16C8.12,5.09 9.31,5.06 10.41,5.06L12,5C16.19,5 18.8,5.16 19.83,5.44C20.73,5.69 21.31,6.27 21.56,7.17Z";
+		}
+	};
+
+
+;
+"use strict";
+
+
+;
+	($.$mol_embed_service) = class $mol_embed_service extends ($.$mol_check) {
+		active(next){
 			if(next !== undefined) return next;
-			return "goods";
+			return false;
+		}
+		title(){
+			return "";
+		}
+		video_preview(){
+			return "";
+		}
+		Image(){
+			const obj = new this.$.$mol_image();
+			(obj.title) = () => ((this.title()));
+			(obj.uri) = () => ((this.video_preview()));
+			return obj;
+		}
+		Hint(){
+			const obj = new this.$.$mol_icon_youtube();
+			return obj;
+		}
+		video_embed(){
+			return "";
+		}
+		Frame(){
+			const obj = new this.$.$mol_frame();
+			(obj.title) = () => ((this.title()));
+			(obj.uri) = () => ((this.video_embed()));
+			return obj;
+		}
+		uri(){
+			return "";
+		}
+		video_id(){
+			return "";
+		}
+		checked(next){
+			return (this.active(next));
+		}
+		sub(){
+			return [
+				(this.Image()), 
+				(this.Hint()), 
+				(this.Frame())
+			];
+		}
+	};
+	($mol_mem(($.$mol_embed_service.prototype), "active"));
+	($mol_mem(($.$mol_embed_service.prototype), "Image"));
+	($mol_mem(($.$mol_embed_service.prototype), "Hint"));
+	($mol_mem(($.$mol_embed_service.prototype), "Frame"));
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $mol_embed_service extends $.$mol_embed_service {
+            sub() {
+                return this.active()
+                    ? [this.Frame()]
+                    : [this.Image(), this.Hint()];
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $mol_embed_service.prototype, "sub", null);
+        $$.$mol_embed_service = $mol_embed_service;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/embed/service/service.view.css", "[mol_embed_service] {\n\tpadding: 0;\n\tmax-width: 100%;\n}\n\n[mol_embed_service_image] {\n\tflex: auto 1 1;\n\twidth: 100vw;\n}\n\n[mol_embed_service_frame] {\n\twidth: 100vw;\n}\n\n[mol_embed_service_hint] {\n\tposition: absolute;\n    left: 50%;\n    top: 50%;\n    width: 50%;\n    height: 50%;\n    opacity: 0.3;\n    transform: translate(-50%, -50%);\n}\n\n[mol_embed_service]:hover [mol_embed_service_hint] {\n\topacity: .6;\n}\n");
+})($ || ($ = {}));
+
+;
+	($.$mol_embed_youtube) = class $mol_embed_youtube extends ($.$mol_embed_service) {};
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $mol_embed_youtube extends $.$mol_embed_youtube {
+            video_embed() {
+                return `https://www.youtube.com/embed/${encodeURIComponent(this.video_id())}?autoplay=1&loop=1`;
+            }
+            video_id() {
+                return this.uri().match(/^https\:\/\/www\.youtube\.com\/(?:embed\/|shorts\/|watch\?v=)([^\/&?#]+)/)?.[1]
+                    ?? this.uri().match(/^https\:\/\/youtu\.be\/([^\/&?#]+)/)?.[1]
+                    ?? 'about:blank';
+            }
+            video_preview() {
+                return `https://i.ytimg.com/vi/${this.video_id()}/sddefault.jpg`;
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $mol_embed_youtube.prototype, "video_embed", null);
+        __decorate([
+            $mol_mem
+        ], $mol_embed_youtube.prototype, "video_id", null);
+        __decorate([
+            $mol_mem
+        ], $mol_embed_youtube.prototype, "video_preview", null);
+        $$.$mol_embed_youtube = $mol_embed_youtube;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+	($.$mol_embed_rutube) = class $mol_embed_rutube extends ($.$mol_embed_service) {};
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $mol_embed_rutube extends $.$mol_embed_rutube {
+            video_embed() {
+                return `https://rutube.ru/play/embed/${encodeURIComponent(this.video_id())}`;
+            }
+            video_id() {
+                return this.uri().match(/^https:\/\/rutube.ru\/video\/([^\/&?#]+)/)?.[1] ?? 'about:blank';
+            }
+            video_preview() {
+                return `https://rutube.ru/api/video/${this.video_id()}/thumbnail/?redirect=1`;
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $mol_embed_rutube.prototype, "video_embed", null);
+        __decorate([
+            $mol_mem
+        ], $mol_embed_rutube.prototype, "video_id", null);
+        __decorate([
+            $mol_mem
+        ], $mol_embed_rutube.prototype, "video_preview", null);
+        $$.$mol_embed_rutube = $mol_embed_rutube;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+	($.$mol_embed_vklive) = class $mol_embed_vklive extends ($.$mol_embed_service) {};
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $mol_embed_vklive extends $.$mol_embed_vklive {
+            video_embed() {
+                return `https://live.vkvideo.ru/app/embed/${this.channel_id()}/${this.video_id()}`;
+            }
+            channel_id() {
+                return this.uri().match(/^https:\/\/live\.vkvideo\.ru\/([^\/&?#]+)/)?.[1] ?? '';
+            }
+            video_id() {
+                return this.uri().match(/^https:\/\/live\.vkvideo\.ru\/[^\/&?#]+\/record\/([^\/&?#]+)/)?.[1] ?? '';
+            }
+            video_preview() {
+                return `https://images.live.vkvideo.ru/public_video_stream/record/${this.video_id()}/preview`;
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $mol_embed_vklive.prototype, "video_embed", null);
+        __decorate([
+            $mol_mem
+        ], $mol_embed_vklive.prototype, "channel_id", null);
+        __decorate([
+            $mol_mem
+        ], $mol_embed_vklive.prototype, "video_id", null);
+        __decorate([
+            $mol_mem
+        ], $mol_embed_vklive.prototype, "video_preview", null);
+        $$.$mol_embed_vklive = $mol_embed_vklive;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+	($.$mol_embed_any) = class $mol_embed_any extends ($.$mol_view) {
+		title(){
+			return "";
+		}
+		uri(){
+			return "";
+		}
+		Image(){
+			const obj = new this.$.$mol_image();
+			(obj.title) = () => ((this.title()));
+			(obj.uri) = () => ((this.uri()));
+			return obj;
+		}
+		Object(){
+			const obj = new this.$.$mol_embed_native();
+			(obj.title) = () => ((this.title()));
+			(obj.uri) = () => ((this.uri()));
+			return obj;
+		}
+		Youtube(){
+			const obj = new this.$.$mol_embed_youtube();
+			(obj.title) = () => ((this.title()));
+			(obj.uri) = () => ((this.uri()));
+			return obj;
+		}
+		Rutube(){
+			const obj = new this.$.$mol_embed_rutube();
+			(obj.title) = () => ((this.title()));
+			(obj.uri) = () => ((this.uri()));
+			return obj;
+		}
+		Vklive(){
+			const obj = new this.$.$mol_embed_vklive();
+			(obj.title) = () => ((this.title()));
+			(obj.uri) = () => ((this.uri()));
+			return obj;
+		}
+	};
+	($mol_mem(($.$mol_embed_any.prototype), "Image"));
+	($mol_mem(($.$mol_embed_any.prototype), "Object"));
+	($mol_mem(($.$mol_embed_any.prototype), "Youtube"));
+	($mol_mem(($.$mol_embed_any.prototype), "Rutube"));
+	($mol_mem(($.$mol_embed_any.prototype), "Vklive"));
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $mol_embed_any extends $.$mol_embed_any {
+            type() {
+                try {
+                    const uri = this.uri();
+                    if (/\b(png|gif|jpg|jpeg|jfif|webp|svg)\b/.test(uri))
+                        return 'image';
+                    if (/^https:\/\/www\.youtube\.com\//.test(uri))
+                        return 'youtube';
+                    if (/^https:\/\/youtu\.be\//.test(uri))
+                        return 'youtube';
+                    if (/^https:\/\/rutube\.ru\//.test(uri))
+                        return 'rutube';
+                    if (/^https:\/\/live\.vkvideo\.ru\//.test(uri))
+                        return 'vklive';
+                }
+                catch (error) {
+                    $mol_fail_log(error);
+                    return 'image';
+                }
+                return 'object';
+            }
+            sub() {
+                switch (this.type()) {
+                    case 'image': return [this.Image()];
+                    case 'youtube': return [this.Youtube()];
+                    case 'rutube': return [this.Rutube()];
+                    case 'vklive': return [this.Vklive()];
+                    default: return [this.Object()];
+                }
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $mol_embed_any.prototype, "type", null);
+        __decorate([
+            $mol_mem
+        ], $mol_embed_any.prototype, "sub", null);
+        $$.$mol_embed_any = $mol_embed_any;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+	($.$mol_text) = class $mol_text extends ($.$mol_list) {
+		auto_scroll(){
+			return null;
+		}
+		block_content(id){
+			return [];
+		}
+		quote_text(id){
+			return "";
+		}
+		highlight(){
+			return "";
+		}
+		uri_resolve(id){
+			return "";
+		}
+		code_sidebar_showed(){
+			return true;
+		}
+		list_type(id){
+			return "-";
+		}
+		list_text(id){
+			return "";
+		}
+		header_level(id){
+			return 1;
+		}
+		header_arg(id){
+			return {};
+		}
+		pre_text(id){
+			return "";
+		}
+		pre_themes(id){
+			return [];
+		}
+		table_head_cells(id){
+			return [];
+		}
+		table_rows(id){
+			return [];
+		}
+		table_cells(id){
+			return [];
+		}
+		table_cell_text(id){
+			return "";
+		}
+		grid_rows(id){
+			return [];
+		}
+		grid_cells(id){
+			return [];
+		}
+		grid_cell_text(id){
+			return "";
+		}
+		line_text(id){
+			return "";
+		}
+		line_type(id){
+			return "";
+		}
+		line_content(id){
+			return [];
+		}
+		code_syntax(){
+			return null;
+		}
+		link_uri(id){
+			return "";
+		}
+		link_host(id){
+			return "";
+		}
+		spoiler_label(id){
+			return "";
+		}
+		Spoiler_label(id){
+			const obj = new this.$.$mol_text();
+			(obj.text) = () => ((this.spoiler_label(id)));
+			(obj.highlight) = () => ((this.highlight()));
+			(obj.uri_resolve) = (id) => ((this.uri_resolve(id)));
+			(obj.code_sidebar_showed) = () => ((this.code_sidebar_showed()));
+			return obj;
+		}
+		spoiler_content(id){
+			return "";
+		}
+		Spoiler_content(id){
+			const obj = new this.$.$mol_text();
+			(obj.text) = () => ((this.spoiler_content(id)));
+			(obj.highlight) = () => ((this.highlight()));
+			(obj.uri_resolve) = (id) => ((this.uri_resolve(id)));
+			(obj.code_sidebar_showed) = () => ((this.code_sidebar_showed()));
+			return obj;
+		}
+		uri_base(){
+			return "";
+		}
+		text(){
+			return "";
+		}
+		param(){
+			return "";
+		}
+		flow_tokens(){
+			return [];
+		}
+		block_text(id){
+			return "";
+		}
+		auto(){
+			return [(this.auto_scroll())];
+		}
+		Paragraph(id){
+			const obj = new this.$.$mol_paragraph();
+			(obj.sub) = () => ((this.block_content(id)));
+			return obj;
+		}
+		Quote(id){
+			const obj = new this.$.$mol_text();
+			(obj.text) = () => ((this.quote_text(id)));
+			(obj.auto_scroll) = () => (null);
+			(obj.highlight) = () => ((this.highlight()));
+			(obj.uri_resolve) = (id) => ((this.uri_resolve(id)));
+			(obj.code_sidebar_showed) = () => ((this.code_sidebar_showed()));
+			return obj;
+		}
+		List(id){
+			const obj = new this.$.$mol_text_list();
+			(obj.type) = () => ((this.list_type(id)));
+			(obj.text) = () => ((this.list_text(id)));
+			(obj.highlight) = () => ((this.highlight()));
+			(obj.uri_resolve) = (id) => ((this.uri_resolve(id)));
+			(obj.code_sidebar_showed) = () => ((this.code_sidebar_showed()));
+			return obj;
+		}
+		item_index(id){
+			return 0;
+		}
+		Header(id){
+			const obj = new this.$.$mol_text_header();
+			(obj.minimal_height) = () => (40);
+			(obj.level) = () => ((this.header_level(id)));
+			(obj.content) = () => ((this.block_content(id)));
+			(obj.arg) = () => ((this.header_arg(id)));
+			return obj;
+		}
+		Pre(id){
+			const obj = new this.$.$mol_text_code();
+			(obj.text) = () => ((this.pre_text(id)));
+			(obj.row_themes) = () => ((this.pre_themes(id)));
+			(obj.highlight) = () => ((this.highlight()));
+			(obj.uri_resolve) = (id) => ((this.uri_resolve(id)));
+			(obj.sidebar_showed) = () => ((this.code_sidebar_showed()));
+			return obj;
+		}
+		Cut(id){
+			const obj = new this.$.$mol_view();
+			(obj.dom_name) = () => ("hr");
+			return obj;
+		}
+		Table(id){
+			const obj = new this.$.$mol_grid();
+			(obj.head_cells) = () => ((this.table_head_cells(id)));
+			(obj.rows) = () => ((this.table_rows(id)));
+			return obj;
+		}
+		Table_row(id){
+			const obj = new this.$.$mol_grid_row();
+			(obj.cells) = () => ((this.table_cells(id)));
+			return obj;
+		}
+		Table_cell(id){
+			const obj = new this.$.$mol_text();
+			(obj.auto_scroll) = () => (null);
+			(obj.text) = () => ((this.table_cell_text(id)));
+			(obj.highlight) = () => ((this.highlight()));
+			(obj.uri_resolve) = (id) => ((this.uri_resolve(id)));
+			(obj.code_sidebar_showed) = () => ((this.code_sidebar_showed()));
+			return obj;
+		}
+		Grid(id){
+			const obj = new this.$.$mol_grid();
+			(obj.rows) = () => ((this.grid_rows(id)));
+			return obj;
+		}
+		Grid_row(id){
+			const obj = new this.$.$mol_grid_row();
+			(obj.cells) = () => ((this.grid_cells(id)));
+			return obj;
+		}
+		Grid_cell(id){
+			const obj = new this.$.$mol_text();
+			(obj.auto_scroll) = () => (null);
+			(obj.text) = () => ((this.grid_cell_text(id)));
+			(obj.highlight) = () => ((this.highlight()));
+			(obj.uri_resolve) = (id) => ((this.uri_resolve(id)));
+			(obj.code_sidebar_showed) = () => ((this.code_sidebar_showed()));
+			return obj;
+		}
+		String(id){
+			const obj = new this.$.$mol_dimmer();
+			(obj.dom_name) = () => ("span");
+			(obj.needle) = () => ((this.highlight()));
+			(obj.haystack) = () => ((this.line_text(id)));
+			return obj;
+		}
+		Span(id){
+			const obj = new this.$.$mol_text_span();
+			(obj.dom_name) = () => ("span");
+			(obj.type) = () => ((this.line_type(id)));
+			(obj.sub) = () => ((this.line_content(id)));
+			return obj;
+		}
+		Code_line(id){
+			const obj = new this.$.$mol_text_code_line();
+			(obj.numb_showed) = () => (false);
+			(obj.highlight) = () => ((this.highlight()));
+			(obj.text) = () => ((this.line_text(id)));
+			(obj.uri_resolve) = (id) => ((this.uri_resolve(id)));
+			(obj.syntax) = () => ((this.code_syntax()));
+			return obj;
+		}
+		Link(id){
+			const obj = new this.$.$mol_link_iconed();
+			(obj.uri) = () => ((this.link_uri(id)));
+			(obj.content) = () => ((this.line_content(id)));
+			return obj;
+		}
+		Link_http(id){
+			const obj = new this.$.$mol_link_iconed();
+			(obj.uri) = () => ((this.link_uri(id)));
+			(obj.content) = () => ([(this.link_host(id))]);
+			return obj;
+		}
+		Embed(id){
+			const obj = new this.$.$mol_embed_any();
+			(obj.uri) = () => ((this.link_uri(id)));
+			(obj.title) = () => ((this.line_text(id)));
+			return obj;
+		}
+		Spoiler(id){
+			const obj = new this.$.$mol_expander();
+			(obj.label) = () => ([(this.Spoiler_label(id))]);
+			(obj.content) = () => ([(this.Spoiler_content(id))]);
+			return obj;
+		}
+	};
+	($mol_mem_key(($.$mol_text.prototype), "Spoiler_label"));
+	($mol_mem_key(($.$mol_text.prototype), "Spoiler_content"));
+	($mol_mem_key(($.$mol_text.prototype), "Paragraph"));
+	($mol_mem_key(($.$mol_text.prototype), "Quote"));
+	($mol_mem_key(($.$mol_text.prototype), "List"));
+	($mol_mem_key(($.$mol_text.prototype), "Header"));
+	($mol_mem_key(($.$mol_text.prototype), "Pre"));
+	($mol_mem_key(($.$mol_text.prototype), "Cut"));
+	($mol_mem_key(($.$mol_text.prototype), "Table"));
+	($mol_mem_key(($.$mol_text.prototype), "Table_row"));
+	($mol_mem_key(($.$mol_text.prototype), "Table_cell"));
+	($mol_mem_key(($.$mol_text.prototype), "Grid"));
+	($mol_mem_key(($.$mol_text.prototype), "Grid_row"));
+	($mol_mem_key(($.$mol_text.prototype), "Grid_cell"));
+	($mol_mem_key(($.$mol_text.prototype), "String"));
+	($mol_mem_key(($.$mol_text.prototype), "Span"));
+	($mol_mem_key(($.$mol_text.prototype), "Code_line"));
+	($mol_mem_key(($.$mol_text.prototype), "Link"));
+	($mol_mem_key(($.$mol_text.prototype), "Link_http"));
+	($mol_mem_key(($.$mol_text.prototype), "Embed"));
+	($mol_mem_key(($.$mol_text.prototype), "Spoiler"));
+	($.$mol_text_header) = class $mol_text_header extends ($.$mol_paragraph) {
+		arg(){
+			return {};
+		}
+		content(){
+			return [];
+		}
+		Link(){
+			const obj = new this.$.$mol_link();
+			(obj.arg) = () => ((this.arg()));
+			(obj.hint) = () => ((this.$.$mol_locale.text("$mol_text_header_Link_hint")));
+			(obj.sub) = () => ((this.content()));
+			return obj;
+		}
+		level(){
+			return 1;
+		}
+		sub(){
+			return [(this.Link())];
+		}
+	};
+	($mol_mem(($.$mol_text_header.prototype), "Link"));
+	($.$mol_text_span) = class $mol_text_span extends ($.$mol_paragraph) {
+		type(){
+			return "";
+		}
+		dom_name(){
+			return "span";
+		}
+		attr(){
+			return {...(super.attr()), "mol_text_type": (this.type())};
+		}
+	};
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        /**
+         * Markdown visualizer.
+         * @see https://mol.hyoo.ru/#!section=demos/demo=mol_text_demo
+         */
+        class $mol_text extends $.$mol_text {
+            flow_tokens() {
+                const tokens = [];
+                this.$.$mol_syntax2_md_flow.tokenize(this.text(), (name, found, chunks) => tokens.push({ name, found, chunks }));
+                return tokens;
+            }
+            block_type(index) {
+                return this.flow_tokens()[index].name;
+            }
+            rows() {
+                return this.flow_tokens().map(({ name }, index) => {
+                    switch (name) {
+                        case 'quote': return this.Quote(index);
+                        case 'spoiler': return this.Spoiler(index);
+                        case 'header': return this.Header(index);
+                        case 'list': return this.List(index);
+                        case 'code': return this.Pre(index);
+                        case 'code-indent': return this.Pre(index);
+                        case 'table': return this.Table(index);
+                        case 'grid': return this.Grid(index);
+                        case 'cut': return this.Cut(index);
+                        default: return this.Paragraph(index);
+                    }
+                });
+            }
+            param() {
+                return this.toString().replace(/^.*?[\)>]\./, '').replace(/[(<>)]/g, '');
+            }
+            header_level(index) {
+                return this.flow_tokens()[index].chunks[0].length;
+            }
+            header_arg(index) {
+                return {
+                    [this.param()]: this.block_text(index)
+                };
+            }
+            list_type(index) {
+                return this.flow_tokens()[index].chunks[1] ?? '';
+            }
+            item_index(index) {
+                return this.flow_tokens().slice(0, index).filter(token => token.name === 'block').length + 1;
+            }
+            pre_text(index) {
+                const token = this.flow_tokens()[index];
+                return (token.chunks[2] ?? token.chunks[0].replace(/^(\t| (?:\+\+|--|\*\*|  ) )/gm, '')).replace(/[\n\r]*$/, '');
+            }
+            pre_themes(index) {
+                const token = this.flow_tokens()[index];
+                const names = {
+                    ' ** ': '$mol_theme_accent',
+                    ' ++ ': '$mol_theme_current',
+                    ' -- ': '$mol_theme_special',
+                };
+                return token.chunks[0].split('\n')
+                    .map(line => names[line.match(/^ (?:\+\+|--|\*\*|  ) /gm)?.[0] ?? ''] ?? null);
+            }
+            quote_text(index) {
+                return this.flow_tokens()[index].chunks[0].replace(/^[>"] /mg, '');
+            }
+            list_text(index) {
+                return this.flow_tokens()[index].chunks[0].replace(/^([-*+]|(?:\d+[\.\)])+) ?/mg, '').replace(/^  ?/mg, '');
+            }
+            cell_content(indexBlock) {
+                return this.flow_tokens()[indexBlock].chunks[0]
+                    .split(/\r?\n/g)
+                    .filter(row => row && !/\|--/.test(row))
+                    .map((row, rowId) => {
+                    return row.split(/\|/g)
+                        .filter(cell => cell)
+                        .map((cell, cellId) => cell.trim());
+                });
+            }
+            table_rows(blockId) {
+                return this.cell_content(blockId)
+                    .slice(1)
+                    .map((row, rowId) => this.Table_row({ block: blockId, row: rowId + 1 }));
+            }
+            table_head_cells(blockId) {
+                return this.cell_content(blockId)[0]
+                    .map((cell, cellId) => this.Table_cell({ block: blockId, row: 0, cell: cellId }));
+            }
+            table_cells(id) {
+                return this.cell_content(id.block)[id.row]
+                    .map((cell, cellId) => this.Table_cell({ block: id.block, row: id.row, cell: cellId }));
+            }
+            table_cell_text(id) {
+                return this.cell_content(id.block)[id.row][id.cell];
+            }
+            grid_content(indexBlock) {
+                return [...this.flow_tokens()[indexBlock].chunks[0].match(/(?:^! .*?$\r?\n?)+(?:^ +! .*?$\r?\n?)*/gm)]
+                    .map((row, rowId) => {
+                    const cells = [];
+                    for (const line of row.trim().split(/\r?\n/)) {
+                        const [_, indent, content] = /^( *)! (.*)/.exec(line) ?? ['', '', ''];
+                        const col = Math.ceil(indent.length / 2);
+                        cells[col] = (cells[col] ? cells[col] + '\n' : '') + content;
+                    }
+                    return cells;
+                });
+            }
+            grid_rows(blockId) {
+                return this.grid_content(blockId)
+                    .map((row, rowId) => this.Grid_row({ block: blockId, row: rowId }));
+            }
+            grid_cells(id) {
+                return this.grid_content(id.block)[id.row]
+                    .map((cell, cellId) => this.Grid_cell({ block: id.block, row: id.row, cell: cellId }));
+            }
+            grid_cell_text(id) {
+                return this.grid_content(id.block)[id.row][id.cell];
+            }
+            uri_base() {
+                return $mol_dom_context.document.location.href;
+            }
+            uri_base_abs() {
+                return new URL(this.uri_base(), $mol_dom_context.document.location.href);
+            }
+            uri_resolve(uri) {
+                if (/^(\w+script+:)+/.test(uri))
+                    return null;
+                if (/^#\!/.test(uri)) {
+                    const params = {};
+                    for (const chunk of uri.slice(2).split(this.$.$mol_state_arg.separator)) {
+                        if (!chunk)
+                            continue;
+                        const vals = chunk.split('=').map(decodeURIComponent);
+                        params[vals.shift()] = vals.join('=');
+                    }
+                    return this.$.$mol_state_arg.link(params);
+                }
+                try {
+                    const url = new URL(uri, this.uri_base_abs());
+                    return url.toString();
+                }
+                catch (error) {
+                    $mol_fail_log(error);
+                    return null;
+                }
+            }
+            code_syntax() {
+                return this.$.$mol_syntax2_md_code;
+            }
+            block_text(index) {
+                const token = this.flow_tokens()[index];
+                switch (token.name) {
+                    case 'header': return token.chunks[2];
+                    default: return token.chunks[0];
+                }
+            }
+            block_content(index) {
+                return this.line_content([index]);
+            }
+            line_tokens(path) {
+                const tokens = [];
+                this.$.$mol_syntax2_md_line.tokenize(this.line_text(path), (name, found, chunks) => tokens.push({ name, found, chunks }));
+                return tokens;
+            }
+            line_token(path) {
+                const tokens = this.line_tokens(path.slice(0, path.length - 1));
+                return tokens[path[path.length - 1]];
+            }
+            line_type(path) {
+                return this.line_token(path).name;
+            }
+            line_text(path) {
+                if (path.length === 1)
+                    return this.block_text(path[0]);
+                const { name, found, chunks } = this.line_token(path);
+                switch (name) {
+                    case 'link': return chunks[0] || chunks[1].replace(/^.*?\/\/|\/.*$/g, '');
+                    case 'text-link': return chunks[0] || chunks[1].replace(/^.*?\/\/|\/.*$/g, '');
+                    default: return (chunks[0] || chunks[1] || chunks[2]) ?? found;
+                }
+            }
+            line_content(path) {
+                return this.line_tokens(path).map(({ name, chunks }, index) => {
+                    const path2 = [...path, index];
+                    switch (name) {
+                        case 'embed': return this.Embed(path2);
+                        case 'link': return this.Link(path2);
+                        case 'text-link-http': return this.Link_http(path2);
+                        case 'text-link': return this.Link(path2);
+                        case 'image-link': return this.Embed(path2);
+                        case 'code': return this.Code_line(path2);
+                        case '': return this.String(path2);
+                        default: return this.Span(path2);
+                    }
+                });
+            }
+            link_uri(path) {
+                const token = this.line_token(path);
+                const uri = this.uri_resolve(token.chunks[1] ?? token.found);
+                if (!uri)
+                    throw new Error('Bad link');
+                return uri;
+            }
+            link_host(path) {
+                return this.link_uri(path).replace(/^.*?\/\/|\/.*$/g, '');
+            }
+            auto_scroll() {
+                for (const [index, token] of this.flow_tokens().entries()) {
+                    if (token.name !== 'header')
+                        continue;
+                    const header = this.Header(index);
+                    if (!header.Link().current())
+                        continue;
+                    new $mol_after_tick(() => this.ensure_visible(header));
+                }
+            }
+            spoiler_rows(index) {
+                return this.flow_tokens()[index].chunks[0].replace(/^[\?] /mg, '').split('\n');
+            }
+            spoiler_label(index) {
+                return this.spoiler_rows(index)[0];
+            }
+            spoiler_content(index) {
+                return this.spoiler_rows(index).slice(1).join('\n');
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $mol_text.prototype, "flow_tokens", null);
+        __decorate([
+            $mol_mem_key
+        ], $mol_text.prototype, "block_type", null);
+        __decorate([
+            $mol_mem
+        ], $mol_text.prototype, "rows", null);
+        __decorate([
+            $mol_mem
+        ], $mol_text.prototype, "param", null);
+        __decorate([
+            $mol_mem_key
+        ], $mol_text.prototype, "header_level", null);
+        __decorate([
+            $mol_mem_key
+        ], $mol_text.prototype, "header_arg", null);
+        __decorate([
+            $mol_mem_key
+        ], $mol_text.prototype, "pre_text", null);
+        __decorate([
+            $mol_mem_key
+        ], $mol_text.prototype, "pre_themes", null);
+        __decorate([
+            $mol_mem_key
+        ], $mol_text.prototype, "quote_text", null);
+        __decorate([
+            $mol_mem_key
+        ], $mol_text.prototype, "list_text", null);
+        __decorate([
+            $mol_mem_key
+        ], $mol_text.prototype, "cell_content", null);
+        __decorate([
+            $mol_mem_key
+        ], $mol_text.prototype, "table_rows", null);
+        __decorate([
+            $mol_mem_key
+        ], $mol_text.prototype, "table_head_cells", null);
+        __decorate([
+            $mol_mem_key
+        ], $mol_text.prototype, "table_cells", null);
+        __decorate([
+            $mol_mem_key
+        ], $mol_text.prototype, "table_cell_text", null);
+        __decorate([
+            $mol_mem_key
+        ], $mol_text.prototype, "grid_content", null);
+        __decorate([
+            $mol_mem_key
+        ], $mol_text.prototype, "grid_rows", null);
+        __decorate([
+            $mol_mem_key
+        ], $mol_text.prototype, "grid_cells", null);
+        __decorate([
+            $mol_mem_key
+        ], $mol_text.prototype, "grid_cell_text", null);
+        __decorate([
+            $mol_mem
+        ], $mol_text.prototype, "uri_base_abs", null);
+        __decorate([
+            $mol_mem_key
+        ], $mol_text.prototype, "uri_resolve", null);
+        __decorate([
+            $mol_mem_key
+        ], $mol_text.prototype, "block_text", null);
+        __decorate([
+            $mol_mem_key
+        ], $mol_text.prototype, "line_tokens", null);
+        __decorate([
+            $mol_mem_key
+        ], $mol_text.prototype, "line_token", null);
+        __decorate([
+            $mol_mem_key
+        ], $mol_text.prototype, "line_type", null);
+        __decorate([
+            $mol_mem_key
+        ], $mol_text.prototype, "line_text", null);
+        __decorate([
+            $mol_mem_key
+        ], $mol_text.prototype, "line_content", null);
+        __decorate([
+            $mol_mem_key
+        ], $mol_text.prototype, "link_uri", null);
+        __decorate([
+            $mol_mem_key
+        ], $mol_text.prototype, "link_host", null);
+        __decorate([
+            $mol_mem
+        ], $mol_text.prototype, "auto_scroll", null);
+        __decorate([
+            $mol_mem_key
+        ], $mol_text.prototype, "spoiler_rows", null);
+        __decorate([
+            $mol_mem_key
+        ], $mol_text.prototype, "spoiler_label", null);
+        __decorate([
+            $mol_mem_key
+        ], $mol_text.prototype, "spoiler_content", null);
+        $$.$mol_text = $mol_text;
+        class $mol_text_header extends $.$mol_text_header {
+            dom_name() {
+                return 'h' + this.level();
+            }
+        }
+        $$.$mol_text_header = $mol_text_header;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/text/text/text.view.css", "[mol_text] {\n\tline-height: 1.5em;\n\tbox-sizing: border-box;\n\tborder-radius: var(--mol_gap_round);\n\twhite-space: pre-line;\n\tdisplay: flex;\n\tflex-direction: column;\n\tflex: 0 0 auto;\n\ttab-size: 4;\n}\n\n[mol_text_paragraph] {\n\tpadding: var(--mol_gap_text);\n\toverflow: auto;\n\toverflow-x: overlay;\n\tmax-width: 100%;\n\tdisplay: block;\n\tmax-width: 60rem;\n\tbreak-inside: avoid;\n}\n\n[mol_text_spoiler_label_paragraph] {\n\tpadding: 0;\n}\n\n[mol_text_span] {\n\tdisplay: inline;\n}\n\n[mol_text_string] {\n\tdisplay: inline;\n\tflex: 0 1 auto;\n\twhite-space: normal;\n}\n\n[mol_text_quote] {\n\tmargin: var(--mol_gap_block);\n\tpadding: var(--mol_gap_block);\n\tbackground: var(--mol_theme_card);\n\tbox-shadow: 0 0 0 1px var(--mol_theme_back);\n\tbreak-inside: avoid;\n}\n\n[mol_text_header] {\n\tdisplay: block;\n\ttext-shadow: 0 0;\n\tfont-weight: normal;\n\tbreak-after: avoid;\n\tletter-spacing: 2px;\n}\n\n* + [mol_text_header] {\n\tmargin-top: 0.75rem;\n}\n\nh1[mol_text_header] {\n\tfont-size: 1.5rem;\n}\n\nh2[mol_text_header] {\n\tfont-size: 1.5rem;\n\tfont-style: italic;\n}\n\nh3[mol_text_header] {\n\tfont-size: 1.25rem;\n}\n\nh4[mol_text_header] {\n\tfont-size: 1.25em;\n\tfont-style: italic;\n}\n\nh5[mol_text_header] {\n\tfont-size: 1rem;\n}\n\nh6[mol_text_header] {\n\tfont-size: 1rem;\n\tfont-style: italic;\n}\n\n[mol_text_header_link] {\n\tcolor: inherit;\n}\n\n[mol_text_table] {\n\tbreak-inside: avoid;\n}\n\n[mol_text_table_cell] {\n\twidth: auto;\n\tdisplay: table-cell;\n\tvertical-align: baseline;\n\tpadding: 0;\n\tborder-radius: 0;\n}\n\n[mol_text_grid] {\n\tbreak-inside: avoid;\n}\n\n[mol_text_grid_cell] {\n\twidth: auto;\n\tdisplay: table-cell;\n\tvertical-align: top;\n\tpadding: 0;\n\tborder-radius: 0;\n}\n\n[mol_text_cut] {\n\tborder: none;\n\twidth: 100%;\n\tbox-shadow: 0 0 0 1px var(--mol_theme_line);\n}\n\n[mol_text_link_http],\n[mol_text_link] {\n\tpadding: 0;\n\tdisplay: inline;\n\twhite-space: nowrap;\n}\n\n[mol_text_link_icon] + [mol_text_embed] {\n\tmargin-inline-start: -1.5rem;\n}\n\n[mol_text_embed_youtube] {\n\tdisplay: inline;\n}\n\n[mol_text_embed_youtube_image],\n[mol_text_embed_youtube_frame],\n[mol_text_embed_object] {\n\tobject-fit: contain;\n\tobject-position: center;\n\twidth: 100vw;\n\tmax-height: calc( 100vh - 6rem );\n}\n[mol_text_embed_object_fallback] {\n\tpadding: 0;\n}\n[mol_text_embed_image] {\n\tobject-fit: contain;\n\tobject-position: center;\n\tdisplay: inline;\n\t/* max-height: calc( 100vh - 6rem ); */\n\tvertical-align: top;\n}\n\n[mol_text_pre] {\n\twhite-space: pre;\n\toverflow-x: auto;\n\toverflow-x: overlay;\n\ttab-size: 2;\n\tbreak-inside: avoid;\n}\n\n[mol_text_code_line] {\n\tdisplay: inline-block;\n}\n\n[mol_text_type=\"strong\"] {\n\ttext-shadow: 0 0;\n\tfilter: contrast(1.5);\n}\n\n[mol_text_type=\"emphasis\"] {\n\tfont-style: italic;\n}\n\n[mol_text_type=\"insert\"] {\n\tcolor: var(--mol_theme_special);\n}\n\n[mol_text_type=\"delete\"] {\n\tcolor: var(--mol_theme_shade);\n}\n\n[mol_text_type=\"remark\"] {\n\tcolor: var(--mol_theme_shade);\n}\n\n[mol_text_type=\"quote\"] {\n\tfont-style: italic;\n}\n");
+})($ || ($ = {}));
+
+;
+	($.$mol_icon_check) = class $mol_icon_check extends ($.$mol_icon) {
+		path(){
+			return "M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z";
+		}
+	};
+
+
+;
+"use strict";
+
+
+;
+	($.$mol_icon_check_all) = class $mol_icon_check_all extends ($.$mol_icon) {
+		path(){
+			return "M0.41,13.41L6,19L7.41,17.58L1.83,12M22.24,5.58L11.66,16.17L7.5,12L6.07,13.41L11.66,19L23.66,7M18,7L16.59,5.58L10.24,11.93L11.66,13.34L18,7Z";
+		}
+	};
+
+
+;
+"use strict";
+
+
+;
+	($.$rise_check_all) = class $rise_check_all extends ($.$mol_check_box) {
+		checks(){
+			return [];
+		}
+		Icon(){
+			const obj = new this.$.$mol_icon_check_all();
+			return obj;
+		}
+	};
+	($mol_mem(($.$rise_check_all.prototype), "Icon"));
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        /** Owned port of shm/check/all. No runtime dependency on shm. */
+        class $rise_check_all extends $.$rise_check_all {
+            checked(next) {
+                const checks = this.checks();
+                if (next !== undefined) {
+                    for (const check of checks)
+                        check.checked(next);
+                    return next;
+                }
+                return checks.length > 0 && checks.every(check => check.checked());
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $rise_check_all.prototype, "checked", null);
+        $$.$rise_check_all = $rise_check_all;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+	($.$rise_check_list) = class $rise_check_list extends ($.$mol_view) {
+		all_checked(next){
+			if(next !== undefined) return next;
+			return false;
+		}
+		All(){
+			const obj = new this.$.$rise_check_all();
+			(obj.title) = () => ("Все");
+			(obj.checks) = () => ((this.checks()));
+			(obj.enabled) = () => ((this.enabled()));
+			(obj.checked) = (next) => ((this.all_checked(next)));
+			return obj;
+		}
+		checks(){
+			return [];
+		}
+		Checks(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ((this.checks()));
+			return obj;
+		}
+		check_title(id){
+			return "";
+		}
+		checked(id, next){
+			if(next !== undefined) return next;
+			return false;
+		}
+		options(){
+			return [];
+		}
+		titles(){
+			return {};
+		}
+		value(next){
+			if(next !== undefined) return next;
+			return [];
+		}
+		enabled(){
+			return true;
+		}
+		sub(){
+			return [(this.All()), (this.Checks())];
+		}
+		Check(id){
+			const obj = new this.$.$mol_check_box();
+			(obj.title) = () => ((this.check_title(id)));
+			(obj.enabled) = () => ((this.enabled()));
+			(obj.checked) = (next) => ((this.checked(id, next)));
+			return obj;
+		}
+	};
+	($mol_mem(($.$rise_check_list.prototype), "all_checked"));
+	($mol_mem(($.$rise_check_list.prototype), "All"));
+	($mol_mem(($.$rise_check_list.prototype), "Checks"));
+	($mol_mem_key(($.$rise_check_list.prototype), "checked"));
+	($mol_mem(($.$rise_check_list.prototype), "value"));
+	($mol_mem_key(($.$rise_check_list.prototype), "Check"));
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        /** Owned port of shm/check/list, with labels and a shared disabled state. */
+        class $rise_check_list extends $.$rise_check_list {
+            checks() { return this.options().map(id => this.Check(id)); }
+            check_title(id) { return this.titles()[id] ?? id; }
+            all_checked(next) {
+                const options = this.options();
+                if (next !== undefined) {
+                    this.value(next ? [...options] : []);
+                    return next;
+                }
+                return options.length > 0 && options.every(id => this.checked(id));
+            }
+            checked(id, next) {
+                const value = this.value();
+                if (next === undefined)
+                    return value.includes(id);
+                this.value(next ? value.includes(id) ? value : [...value, id] : value.filter(key => key !== id));
+                return next;
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $rise_check_list.prototype, "all_checked", null);
+        $$.$rise_check_list = $rise_check_list;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_define($rise_check_list, {
+        flex: { direction: 'column' },
+        Checks: { flex: { wrap: 'wrap' } },
+        All: { box: { shadow: [{ inset: false, x: 0, y: '1px', blur: 0, spread: 0, color: $mol_theme.line }] } },
+    });
+})($ || ($ = {}));
+
+;
+	($.$mol_icon_help) = class $mol_icon_help extends ($.$mol_icon) {
+		path(){
+			return "M10,19H13V22H10V19M12,2C17.35,2.22 19.68,7.62 16.5,11.67C15.67,12.67 14.33,13.33 13.67,14.17C13,15 13,16 13,17H10C10,15.33 10,13.92 10.67,12.92C11.33,11.92 12.67,11.33 13.5,10.67C15.92,8.43 15.32,5.26 12,5A3,3 0 0,0 9,8H6A6,6 0 0,1 12,2Z";
+		}
+	};
+
+
+;
+"use strict";
+
+
+;
+	($.$mol_icon_help_circle) = class $mol_icon_help_circle extends ($.$mol_icon) {
+		path(){
+			return "M15.07,11.25L14.17,12.17C13.45,12.89 13,13.5 13,15H11V14.5C11,13.39 11.45,12.39 12.17,11.67L13.41,10.41C13.78,10.05 14,9.55 14,9C14,7.89 13.1,7 12,7A2,2 0 0,0 10,9H8A4,4 0 0,1 12,5A4,4 0 0,1 16,9C16,9.88 15.64,10.67 15.07,11.25M13,19H11V17H13M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12C22,6.47 17.5,2 12,2Z";
+		}
+	};
+
+
+;
+"use strict";
+
+
+;
+	($.$mol_icon_help_circle_outline) = class $mol_icon_help_circle_outline extends ($.$mol_icon) {
+		path(){
+			return "M11,18H13V16H11V18M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,6A4,4 0 0,0 8,10H10A2,2 0 0,1 12,8A2,2 0 0,1 14,10C14,12 11,11.75 11,15H13C13,12.75 16,12.5 16,10A4,4 0 0,0 12,6Z";
+		}
+	};
+
+
+;
+"use strict";
+
+
+;
+	($.$rise_bench_host_controls_computerhelp) = class $rise_bench_host_controls_computerhelp extends ($.$mol_pick) {
+		Icon(){
+			const obj = new this.$.$mol_icon_help_circle_outline();
+			return obj;
+		}
+		Text(){
+			const obj = new this.$.$mol_text();
+			(obj.text) = () => ("В Windows нажмите **Win + I**, откройте **Система → О системе** (в некоторых версиях — «О программе»). В разделе **Характеристики устройства** нажмите **Копировать** и вставьте текст в это поле. Коды устройства и продукта удалятся автоматически. Имя компьютера, процессор, память и тип системы сохранятся. Версию Windows можно дописать ниже. [Инструкция Microsoft](https://support.microsoft.com/ru-ru/windows/experience/find-information-about-your-windows-device).");
+			return obj;
+		}
+		hint(){
+			return "Где найти параметры компьютера";
+		}
+		trigger_content(){
+			return [(this.Icon())];
+		}
+		bubble_content(){
+			return [(this.Text())];
+		}
+	};
+	($mol_mem(($.$rise_bench_host_controls_computerhelp.prototype), "Icon"));
+	($mol_mem(($.$rise_bench_host_controls_computerhelp.prototype), "Text"));
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_define($rise_bench_host_controls_computerhelp, {
+        Text: { width: $mol_style_unit.rem(28), maxWidth: $mol_style_unit.vw(85) },
+    });
+})($ || ($ = {}));
+
+;
+	($.$mol_text_list) = class $mol_text_list extends ($.$mol_text) {
+		type(){
+			return "";
+		}
+		auto_scroll(){
+			return null;
+		}
+		attr(){
+			return {...(super.attr()), "mol_text_list_type": (this.type())};
+		}
+		Paragraph(id){
+			const obj = new this.$.$mol_text_list_item();
+			(obj.index) = () => ((this.item_index(id)));
+			(obj.sub) = () => ((this.block_content(id)));
+			return obj;
+		}
+	};
+	($mol_mem_key(($.$mol_text_list.prototype), "Paragraph"));
+	($.$mol_text_list_item) = class $mol_text_list_item extends ($.$mol_paragraph) {
+		index(){
+			return 0;
+		}
+		attr(){
+			return {...(super.attr()), "mol_text_list_item_index": (this.index())};
+		}
+	};
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/text/list/list.view.css", "[mol_text_list] {\n\tpadding-inline-start: 1.75rem;\n}\n\n[mol_text_list_item] {\n\tcontain: none;\n\tdisplay: list-item;\n}\n\n[mol_text_list_item]::before {\n\tcontent: attr( mol_text_list_item_index ) \".\";\n\twidth: 1.25rem;\n\tdisplay: inline-block;\n\tposition: absolute;\n\tmargin-inline-start: -1.75rem;\n\ttext-align: end;\n}\n\n[mol_text_list_type=\"-\"] > [mol_text_list_item]::before,\n[mol_text_list_type=\"*\"] > [mol_text_list_item]::before {\n\tcontent: \"•\";\n}\n");
+})($ || ($ = {}));
+
+;
+"use strict";
+
+
+;
+	($.$rise_bench_host_controls) = class $rise_bench_host_controls extends ($.$mol_page) {
+		intro(){
+			return "";
+		}
+		Intro(){
+			const obj = new this.$.$mol_text();
+			(obj.text) = () => ((this.intro()));
+			return obj;
+		}
+		engines(next){
+			if(next !== undefined) return next;
+			return [];
+		}
+		engine_keys(){
+			return [];
+		}
+		engine_titles(){
+			return {};
 		}
 		Engine(){
-			const obj = new this.$.$mol_switch();
+			const obj = new this.$.$rise_check_list();
 			(obj.enabled) = () => ((this.enabled()));
-			(obj.value) = (next) => ((this.engine(next)));
-			(obj.options) = () => ({
-				"all": "Все", 
-				"goods": "Гипербаза", 
-				"idb": "IDB", 
-				"sqlite": "SQLite", 
-				"pglite": "PGlite", 
-				"duckdb": "DuckDB"
-			});
+			(obj.value) = (next) => ((this.engines(next)));
+			(obj.options) = () => ((this.engine_keys()));
+			(obj.titles) = () => ((this.engine_titles()));
 			return obj;
 		}
 		Engine_label(){
@@ -35080,15 +36370,16 @@ var $;
 			(obj.sub) = () => ([(this.storage_label())]);
 			return obj;
 		}
-		schema(next){
+		schemas(next){
 			if(next !== undefined) return next;
-			return "compact";
+			return [];
 		}
 		Schema(){
-			const obj = new this.$.$mol_switch();
+			const obj = new this.$.$rise_check_list();
 			(obj.enabled) = () => ((this.enabled()));
-			(obj.value) = (next) => ((this.schema(next)));
-			(obj.options) = () => ({"compact": "4 свойства", "full": "10 свойств"});
+			(obj.value) = (next) => ((this.schemas(next)));
+			(obj.options) = () => (["compact", "full"]);
+			(obj.titles) = () => ({"compact": "4 свойства", "full": "10 свойств"});
 			return obj;
 		}
 		Schema_label(){
@@ -35100,28 +36391,32 @@ var $;
 		count_title(){
 			return "Количество записей";
 		}
-		count(next){
+		sizes(next){
 			if(next !== undefined) return next;
-			return "100";
-		}
-		counts(){
-			return {};
+			return [];
 		}
 		count_keys(){
 			return [];
 		}
+		counts(){
+			return {};
+		}
 		Count(){
-			const obj = new this.$.$mol_switch();
+			const obj = new this.$.$rise_check_list();
 			(obj.enabled) = () => ((this.enabled()));
-			(obj.value) = (next) => ((this.count(next)));
-			(obj.options) = () => ((this.counts()));
-			(obj.keys) = () => ((this.count_keys()));
+			(obj.value) = (next) => ((this.sizes(next)));
+			(obj.options) = () => ((this.count_keys()));
+			(obj.titles) = () => ((this.counts()));
 			return obj;
 		}
 		Count_label(){
 			const obj = new this.$.$mol_labeler();
 			(obj.title) = () => ((this.count_title()));
 			(obj.Content) = () => ((this.Count()));
+			return obj;
+		}
+		Computer_help(){
+			const obj = new this.$.$rise_bench_host_controls_computerhelp();
 			return obj;
 		}
 		computer(next){
@@ -35139,6 +36434,7 @@ var $;
 		Computer_label(){
 			const obj = new this.$.$mol_labeler();
 			(obj.title) = () => ("Параметры компьютера");
+			(obj.label) = () => (["Параметры компьютера", (this.Computer_help())]);
 			(obj.Content) = () => ((this.Computer()));
 			return obj;
 		}
@@ -35149,8 +36445,18 @@ var $;
 		Run(){
 			const obj = new this.$.$mol_button_major();
 			(obj.title) = () => ("Запустить бенчмарк");
-			(obj.enabled) = () => ((this.enabled()));
+			(obj.enabled) = () => ((this.run_enabled()));
 			(obj.click) = (next) => ((this.run(next)));
+			return obj;
+		}
+		stop(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Stop(){
+			const obj = new this.$.$mol_button_minor();
+			(obj.title) = () => ("Остановить");
+			(obj.click) = (next) => ((this.stop(next)));
 			return obj;
 		}
 		status(){
@@ -35159,6 +36465,14 @@ var $;
 		Status(){
 			const obj = new this.$.$mol_view();
 			(obj.sub) = () => ([(this.status())]);
+			return obj;
+		}
+		elapsed(){
+			return "";
+		}
+		Elapsed(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.elapsed())]);
 			return obj;
 		}
 		retry(next){
@@ -35173,13 +36487,16 @@ var $;
 		}
 		controls(){
 			return [
+				(this.Intro()), 
 				(this.Engine_label()), 
 				(this.Storage_label()), 
 				(this.Schema_label()), 
 				(this.Count_label()), 
 				(this.Computer_label()), 
 				(this.Run()), 
+				(this.Stop()), 
 				(this.Status()), 
+				(this.Elapsed()), 
 				(this.Retry())
 			];
 		}
@@ -35195,6 +36512,12 @@ var $;
 		enabled(){
 			return true;
 		}
+		running(){
+			return false;
+		}
+		run_enabled(){
+			return true;
+		}
 		body(){
 			return (this.controls());
 		}
@@ -35202,22 +36525,27 @@ var $;
 			return false;
 		}
 	};
-	($mol_mem(($.$rise_bench_host_controls.prototype), "engine"));
+	($mol_mem(($.$rise_bench_host_controls.prototype), "Intro"));
+	($mol_mem(($.$rise_bench_host_controls.prototype), "engines"));
 	($mol_mem(($.$rise_bench_host_controls.prototype), "Engine"));
 	($mol_mem(($.$rise_bench_host_controls.prototype), "Engine_label"));
 	($mol_mem(($.$rise_bench_host_controls.prototype), "Storage_label"));
-	($mol_mem(($.$rise_bench_host_controls.prototype), "schema"));
+	($mol_mem(($.$rise_bench_host_controls.prototype), "schemas"));
 	($mol_mem(($.$rise_bench_host_controls.prototype), "Schema"));
 	($mol_mem(($.$rise_bench_host_controls.prototype), "Schema_label"));
-	($mol_mem(($.$rise_bench_host_controls.prototype), "count"));
+	($mol_mem(($.$rise_bench_host_controls.prototype), "sizes"));
 	($mol_mem(($.$rise_bench_host_controls.prototype), "Count"));
 	($mol_mem(($.$rise_bench_host_controls.prototype), "Count_label"));
+	($mol_mem(($.$rise_bench_host_controls.prototype), "Computer_help"));
 	($mol_mem(($.$rise_bench_host_controls.prototype), "computer"));
 	($mol_mem(($.$rise_bench_host_controls.prototype), "Computer"));
 	($mol_mem(($.$rise_bench_host_controls.prototype), "Computer_label"));
 	($mol_mem(($.$rise_bench_host_controls.prototype), "run"));
 	($mol_mem(($.$rise_bench_host_controls.prototype), "Run"));
+	($mol_mem(($.$rise_bench_host_controls.prototype), "stop"));
+	($mol_mem(($.$rise_bench_host_controls.prototype), "Stop"));
 	($mol_mem(($.$rise_bench_host_controls.prototype), "Status"));
+	($mol_mem(($.$rise_bench_host_controls.prototype), "Elapsed"));
 	($mol_mem(($.$rise_bench_host_controls.prototype), "retry"));
 	($mol_mem(($.$rise_bench_host_controls.prototype), "Retry"));
 
@@ -35234,19 +36562,25 @@ var $;
     (function ($$) {
         class $rise_bench_host_controls extends $.$rise_bench_host_controls {
             /** Persist the draft locally; each run takes its own immutable snapshot. */
-            computer(next) { return $mol_state_local.value('$rise_bench_computer', next) ?? ''; }
+            computer(next) { return $mol_state_local.value('$rise_bench_computer', next === undefined ? undefined : $rise_bench_computer.clean(next)) ?? ''; }
+            intro() {
+                return `Выберите хранилища, состав и объёмы данных. «Все» отмечает всю группу; каждое выбранное сочетание выполняется по очереди.\n\nНебольшой набор — обычно несколько секунд, крупные наборы — минуты. Полный перебор может занять десятки минут и дольше: время зависит от компьютера и хранилища. Таймаута нет — при необходимости нажмите «Остановить».\n\nВерсия бенчмарка: ${$rise_bench_run_benchmark_version}.`;
+            }
+            engine_keys() { return Object.keys($rise_bench_engine); }
+            engine_titles() { return Object.fromEntries(Object.entries($rise_bench_engine).map(([key, engine]) => [key, engine.title])); }
             count_title() { return this.kind() === 'text' ? 'Количество строк' : 'Количество записей'; }
             counts() {
-                return { all: 'Все', ...Object.fromEntries((this.kind() === 'text' ? [100, 500, 1000, 2000, 5000] : [100, 500, 1000, 2000, 3000, 4000, 5000, 10000]).map(count => [count, String(count)])) };
+                return Object.fromEntries((this.kind() === 'text' ? [100, 500, 1000, 2000, 5000] : [100, 500, 1000, 2000, 3000, 4000, 5000, 10000]).map(count => [count, String(count)]));
             }
-            count_keys() { return ['all', ...Object.keys(this.counts()).filter(key => key !== 'all')]; }
-            storage_label() { return this.kind() === 'text' ? 'CRDT-текст' : this.engine() === 'all' ? 'Все хранилища последовательно' : $rise_bench_engine[this.engine()].storage; }
+            count_keys() { return Object.keys(this.counts()); }
+            storage_label() { return this.kind() === 'text' ? 'CRDT-текст' : this.engines().length === 1 ? $rise_bench_engine[this.engines()[0]].storage : 'Выбранные хранилища выполняются последовательно'; }
             controls() {
                 return [
+                    this.Intro(),
                     ...this.kind() === 'text' ? [] : [this.Engine_label()],
                     this.Storage_label(),
                     ...this.kind() === 'text' ? [] : [this.Schema_label()],
-                    this.Count_label(), this.Computer_label(), this.Run(), this.Status(),
+                    this.Count_label(), this.Computer_label(), this.Run(), ...this.running() ? [this.Stop()] : [], this.Status(), this.Elapsed(),
                     ...this.retry_visible() ? [this.Retry()] : [],
                 ];
             }
@@ -35266,6 +36600,8 @@ var $;
         flex: { grow: 0, basis: $mol_style_unit.rem(20) },
         Storage_label: { padding: $mol_gap.text },
         Status: { padding: $mol_gap.text },
+        Elapsed: { padding: $mol_gap.text },
+        Computer_label: { Label: { align: { items: 'center' } } },
     });
 })($ || ($ = {}));
 
@@ -35860,24 +37196,37 @@ var $;
 		controls_enabled(){
 			return true;
 		}
-		engine(next){
-			if(next !== undefined) return next;
-			return "goods";
+		run_enabled(){
+			return true;
 		}
-		count(next){
-			if(next !== undefined) return next;
-			return "100";
+		busy(){
+			return false;
 		}
-		schema(next){
+		selected_engines(next){
 			if(next !== undefined) return next;
-			return "compact";
+			return [];
+		}
+		selected_counts(next){
+			if(next !== undefined) return next;
+			return [];
+		}
+		selected_schemas(next){
+			if(next !== undefined) return next;
+			return [];
 		}
 		run(next){
 			if(next !== undefined) return next;
 			return null;
 		}
+		stop(next){
+			if(next !== undefined) return next;
+			return null;
+		}
 		status(next){
 			if(next !== undefined) return next;
+			return "";
+		}
+		elapsed_text(){
 			return "";
 		}
 		retry_visible(){
@@ -35891,13 +37240,34 @@ var $;
 			const obj = new this.$.$rise_bench_host_controls();
 			(obj.kind) = () => ((this.kind()));
 			(obj.enabled) = () => ((this.controls_enabled()));
-			(obj.engine) = (next) => ((this.engine(next)));
-			(obj.count) = (next) => ((this.count(next)));
-			(obj.schema) = (next) => ((this.schema(next)));
+			(obj.run_enabled) = () => ((this.run_enabled()));
+			(obj.running) = () => ((this.busy()));
+			(obj.engines) = (next) => ((this.selected_engines(next)));
+			(obj.sizes) = (next) => ((this.selected_counts(next)));
+			(obj.schemas) = (next) => ((this.selected_schemas(next)));
 			(obj.run) = (next) => ((this.run(next)));
+			(obj.stop) = (next) => ((this.stop(next)));
 			(obj.status) = () => ((this.status()));
+			(obj.elapsed) = () => ((this.elapsed_text()));
 			(obj.retry_visible) = () => ((this.retry_visible()));
 			(obj.retry) = (next) => ((this.retry(next)));
+			return obj;
+		}
+		csv_title(){
+			return "Скачать CSV";
+		}
+		csv_blob(){
+			return null;
+		}
+		csv_filename(){
+			return "rise-benchmark.csv";
+		}
+		Download(){
+			const obj = new this.$.$mol_button_download();
+			(obj.title) = () => ((this.csv_title()));
+			(obj.hint) = () => ("Скачать CSV");
+			(obj.blob) = () => ((this.csv_blob()));
+			(obj.file_name) = () => ((this.csv_filename()));
 			return obj;
 		}
 		mode(next){
@@ -35938,9 +37308,6 @@ var $;
 		fixture_uri(){
 			return "";
 		}
-		busy(){
-			return false;
-		}
 		Frame(){
 			const obj = new this.$.$mol_frame();
 			(obj.uri) = () => ((this.fixture_uri()));
@@ -35956,7 +37323,7 @@ var $;
 			const obj = new this.$.$mol_page();
 			(obj.title) = () => ("Результаты");
 			(obj.minimal_width) = () => (640);
-			(obj.tools) = () => ([(this.Mode())]);
+			(obj.tools) = () => ([(this.Download()), (this.Mode())]);
 			(obj.body) = () => ((this.results_body()));
 			return obj;
 		}
@@ -35973,13 +37340,15 @@ var $;
 			return obj;
 		}
 	};
-	($mol_mem(($.$rise_bench_host.prototype), "engine"));
-	($mol_mem(($.$rise_bench_host.prototype), "count"));
-	($mol_mem(($.$rise_bench_host.prototype), "schema"));
+	($mol_mem(($.$rise_bench_host.prototype), "selected_engines"));
+	($mol_mem(($.$rise_bench_host.prototype), "selected_counts"));
+	($mol_mem(($.$rise_bench_host.prototype), "selected_schemas"));
 	($mol_mem(($.$rise_bench_host.prototype), "run"));
+	($mol_mem(($.$rise_bench_host.prototype), "stop"));
 	($mol_mem(($.$rise_bench_host.prototype), "status"));
 	($mol_mem(($.$rise_bench_host.prototype), "retry"));
 	($mol_mem(($.$rise_bench_host.prototype), "Controls"));
+	($mol_mem(($.$rise_bench_host.prototype), "Download"));
 	($mol_mem(($.$rise_bench_host.prototype), "mode"));
 	($mol_mem(($.$rise_bench_host.prototype), "Mode"));
 	($mol_mem(($.$rise_bench_host.prototype), "Metrics"));
@@ -35993,13 +37362,76 @@ var $;
 "use strict";
 var $;
 (function ($) {
+    /** Stable URL order and backwards compatibility with the old `all` links. */
+    function $rise_bench_selection(value, options) {
+        if (value === 'all')
+            return [...options];
+        const selected = new Set(value.split(','));
+        return options.filter(key => selected.has(key));
+    }
+    $.$rise_bench_selection = $rise_bench_selection;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
     /** A fixed, sequential matrix. Selection changes never alter a running batch. */
     function $rise_bench_batch(engine, count, schema, text = false) {
-        const engines = text ? ['text'] : engine === 'all' ? Object.keys($rise_bench_engine) : [engine];
-        const counts = count === 'all' ? text ? [100, 500, 1000, 2000, 5000] : [100, 500, 1000, 2000, 3000, 4000, 5000, 10000] : [Number(count)];
-        return engines.flatMap(engine => counts.map(count => ({ engine, count: String(count), schema })));
+        const engines = text ? ['text'] : $rise_bench_selection(engine, Object.keys($rise_bench_engine));
+        const counts = $rise_bench_selection(count, (text ? [100, 500, 1000, 2000, 5000] : [100, 500, 1000, 2000, 3000, 4000, 5000, 10000]).map(String));
+        const schemas = text ? ['compact'] : $rise_bench_selection(schema, ['compact', 'full']);
+        return engines.flatMap(engine => schemas.flatMap(schema => counts.map(count => ({ engine, count, schema }))));
     }
     $.$rise_bench_batch = $rise_bench_batch;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    /**
+     * Serialize csv data with delimiter
+     * @see https://mol.hyoo.ru/#!section=demos/demo=mol_csv_serial
+     */
+    function $mol_csv_serial(data, delimiter = ',') {
+        const fields = new Set();
+        for (const item of data) {
+            for (const field of Object.keys(item)) {
+                fields.add(field);
+            }
+        }
+        const rows = [[...fields]];
+        for (const item of data) {
+            const row = [];
+            rows.push(row);
+            for (const field of fields) {
+                row.push(String(item[field] ?? ''));
+            }
+        }
+        return $mol_csv_serial_table(rows, delimiter);
+    }
+    $.$mol_csv_serial = $mol_csv_serial;
+    function $mol_csv_serial_table(rows, delimiter = ',') {
+        return rows.map(row => row.map(cell => '"' + String(cell).replace(/"/g, '""') + '"').join(delimiter)).join('\n');
+    }
+    $.$mol_csv_serial_table = $mol_csv_serial_table;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    /** UTF-8 with BOM and semicolons opens correctly in Russian Windows Excel. */
+    function $rise_bench_csv(rows, columns) {
+        const cell = (value) => {
+            const text = String(value ?? '');
+            // Quoting alone does not protect spreadsheet applications from formulas.
+            return typeof value === 'string' && /^[=+@\-\t\r]/.test(text) ? "'" + text : text;
+        };
+        return '\uFEFF' + $mol_csv_serial_table([[...columns], ...rows.map(row => columns.map(key => cell(row[key])))], ';');
+    }
+    $.$rise_bench_csv = $rise_bench_csv;
 })($ || ($ = {}));
 
 ;
@@ -36651,11 +38083,7 @@ var $;
                 return Promise.reject(new Error('Хранилище закрыто'));
             const id = ++this.serial;
             return new Promise((resolve, reject) => {
-                const timer = setTimeout(() => { this.fail(new Error('Движок не ответил за 300 секунд')); this.destructor(); }, 300000);
-                this.pending.set(id, {
-                    resolve: value => { clearTimeout(timer); resolve(value); },
-                    reject: error => { clearTimeout(timer); reject(error); },
-                });
+                this.pending.set(id, { resolve, reject });
                 this.worker.postMessage({ id, method, args });
             });
         }
@@ -36730,7 +38158,6 @@ var $;
         }
         pending;
         observer;
-        timer;
         frame = 0;
         visible() { return this.table.isConnected && this.table.textContent.includes(this.title) && !this.table.querySelector('[mol_view_error]'); }
         wait() {
@@ -36750,14 +38177,11 @@ var $;
                 };
                 this.observer = new MutationObserver(check);
                 this.observer.observe(this.table, { childList: true, subtree: true, characterData: true, attributes: true });
-                this.timer = setTimeout(() => { this.destructor(); reject(new Error('После F5 записи IDB не появились за 300 секунд')); }, 300_000);
                 check();
             });
         }
         destructor() {
             this.observer?.disconnect();
-            if (this.timer)
-                clearTimeout(this.timer);
             if (this.frame)
                 cancelAnimationFrame(this.frame);
             super.destructor();
@@ -37023,15 +38447,13 @@ var $;
             compare() { return this.kind() === 'goods'; }
             text_mode() { return this.kind() === 'text'; }
             mode(next) { return $mol_state_arg.value('results', next) === 'charts' ? 'charts' : 'table'; }
-            fixture_kind() { return (this.active_case() ?? this.display_case())?.engine ?? (this.compare() ? this.engine() === 'all' ? 'goods' : this.engine() : this.kind()); }
+            fixture_kind() { return (this.active_case() ?? this.display_case())?.engine ?? (this.compare() ? this.selected_engines()[0] ?? 'goods' : this.kind()); }
             engine(next) {
                 if (next !== undefined)
                     this.display_case(null);
-                const normalize = (value) => value === 'all' || Object.hasOwn($rise_bench_engine, value ?? '') ? value : 'goods';
-                const current = normalize($mol_state_arg.value('engine'));
-                if (next !== undefined && normalize(next) !== current)
+                if (next !== undefined && next !== ($mol_state_arg.value('engine') ?? 'goods'))
                     this.ready(false);
-                return normalize($mol_state_arg.value('engine', next));
+                return $mol_state_arg.value('engine', next) ?? 'goods';
             }
             count(next) {
                 if (next !== undefined)
@@ -37039,16 +38461,18 @@ var $;
                 const key = this.kind() === 'text' ? 'lines' : 'count';
                 if (next !== undefined && next !== ($mol_state_arg.value(key) ?? '100'))
                     this.ready(false);
-                const value = $mol_state_arg.value(key, next) ?? '100';
-                return Object.hasOwn(this.Controls().counts(), value) ? value : '100';
+                return $mol_state_arg.value(key, next) ?? '100';
             }
             schema(next) {
                 if (next !== undefined)
                     this.display_case(null);
-                if (next !== undefined && next !== ($mol_state_arg.value('schema') === 'full' ? 'full' : 'compact'))
+                if (next !== undefined && next !== ($mol_state_arg.value('schema') ?? 'compact'))
                     this.ready(false);
-                return $mol_state_arg.value('schema', next) === 'full' ? 'full' : 'compact';
+                return $mol_state_arg.value('schema', next) ?? 'compact';
             }
+            selected_engines(next) { return $rise_bench_selection(this.engine(next?.join(',')), Object.keys($rise_bench_engine)); }
+            selected_counts(next) { return $rise_bench_selection(this.count(next?.join(',')), Object.keys(this.Controls().counts())); }
+            selected_schemas(next) { return $rise_bench_selection(this.schema(next?.join(',')), ['compact', 'full']); }
             ready(next = false) { return next; }
             busy(next = false) { return next; }
             active_case(next = null) { return next; }
@@ -37059,12 +38483,29 @@ var $;
             finished = 0;
             failed = 0;
             command_sent = false;
-            timer;
             progress = null;
+            timing_value = { batch: 0, step: 0, ended: 0 };
+            timing(next) {
+                if (next !== undefined)
+                    this.timing_value = next;
+                return this.timing_value;
+            }
+            elapsed_text() {
+                const timing = this.timing();
+                if (!timing.batch)
+                    return '';
+                const now = timing.ended || $mol_state_time.now(1000);
+                return `Текущий этап: ${this.duration(now - timing.step)} · Всего: ${this.duration(now - timing.batch)}`;
+            }
+            duration(milliseconds) {
+                const seconds = Math.max(0, Math.floor(milliseconds / 1000));
+                return [Math.floor(seconds / 3600), Math.floor(seconds / 60) % 60, seconds % 60].map(value => String(value).padStart(2, '0')).join(':');
+            }
             settled = new Set();
             engine_title(engine) { return engine === 'text' ? 'CRDT-текст' : $rise_bench_engine[engine].title; }
-            controls_enabled() { return this.ready() && !this.busy(); }
-            config() { const current = this.active_case() ?? this.display_case(); return { count: current?.count ?? (this.count() === 'all' ? '100' : this.count()), schema: current?.schema ?? this.schema() }; }
+            controls_enabled() { return !this.busy(); }
+            run_enabled() { return this.ready() && this.controls_enabled() && this.selected_counts().length > 0 && (this.text_mode() || this.selected_engines().length > 0 && this.selected_schemas().length > 0); }
+            config() { const current = this.active_case() ?? this.display_case(); return { count: current?.count ?? this.selected_counts()[0] ?? '100', schema: current?.schema ?? this.selected_schemas()[0] ?? 'compact' }; }
             send(command, data) {
                 const target = this.Frame().dom_node().contentWindow;
                 if (!target || !this.ready())
@@ -37072,17 +38513,17 @@ var $;
                 target.postMessage({ type: 'rise-bench-command', kind: this.fixture_kind(), id: crypto.randomUUID(), command, data }, location.origin);
             }
             run() {
-                if (this.active_case())
+                if (this.active_case() || !this.run_enabled())
                     return;
                 this.queue = $rise_bench_batch(this.engine(), this.count(), this.schema(), this.text_mode());
                 this.total = this.queue.length;
                 this.finished = 0;
                 this.failed = 0;
+                this.settled.clear();
+                this.timing({ batch: Date.now(), step: Date.now(), ended: 0 });
                 this.next_case();
             }
             next_case() {
-                if (this.timer)
-                    clearTimeout(this.timer);
                 this.progress = null;
                 this.command_sent = false;
                 const next = this.queue.shift();
@@ -37093,17 +38534,22 @@ var $;
                     this.frame_generation(this.frame_generation() + 1);
                 this.busy(Boolean(next));
                 if (!next) {
+                    this.timing({ ...this.timing(), ended: Date.now() });
                     this.status(`Завершено ${this.finished} из ${this.total}; ошибки: ${this.failed}`);
                     return;
                 }
+                this.timing({ ...this.timing(), step: Date.now() });
                 this.status(`${this.finished + 1}/${this.total}: ${this.engine_title(next.engine)}, ${next.count} — загрузка`);
-                this.timer = setTimeout(() => this.expire(), $rise_bench_stage.limit);
             }
-            expire(error) {
+            fail_case() {
                 const active = this.active_case();
                 if (!active)
                     return;
-                const row = this.progress?.row ?? {
+                this.finish_case({ ...this.partial_row(), state: 'Ошибка', error: `${this.progress?.operation ?? 'Загрузка'}: ошибка выполнения` }, active.engine);
+            }
+            partial_row() {
+                const active = this.active_case();
+                return this.progress?.row ?? {
                     id: crypto.randomUUID(), count: Number(active.count), properties: this.text_mode() ? 0 : active.schema === 'full' ? 10 : 4,
                     stamp: new $mol_time_moment().toString('DD.MM.YYYY hh:mm:ss'), state: 'Ошибка',
                     baza_version: active.engine === 'goods' || active.engine === 'text' ? $rise_bench_run_baza_version : '—',
@@ -37112,7 +38558,25 @@ var $;
                     computer: this.Controls().computer(), browser: navigator.userAgent,
                     metrics: Object.fromEntries(this.operations().map(name => [name, null])),
                 };
-                this.finish_case({ ...row, state: 'Ошибка', error: `${this.progress?.operation ?? 'Загрузка'}: ${error ? 'ошибка выполнения' : 'превышен лимит 300 с'}` }, active.engine);
+            }
+            stop() {
+                const active = this.active_case();
+                if (!active)
+                    return;
+                const row = { ...this.partial_row(), state: 'Остановлено', error: `Остановлено пользователем · ${this.progress?.operation ?? 'Загрузка'}` };
+                this.settled.add(active.token);
+                this.queue = [];
+                this.display_case(null);
+                this.active_case(null);
+                this.busy(false);
+                this.ready(false);
+                this.command_sent = false;
+                this.progress = null;
+                this.timing({ ...this.timing(), ended: Date.now() });
+                // A new document tears down the old workload, its listeners and SQL workers.
+                this.frame_generation(this.frame_generation() + 1);
+                this.status(`Остановлено. Завершено ${this.finished} из ${this.total}`);
+                $mol_wire_async(this).accept(row, active.engine).catch(error => $mol_fail_log(error));
             }
             finish_case(row, kind) {
                 const active = this.active_case();
@@ -37151,6 +38615,17 @@ var $;
                 return [...rows].sort((a, b) => date(b.stamp).localeCompare(date(a.stamp)));
             }
             pages() { return this.kind() === 'demo' ? [this.Results()] : super.pages(); }
+            csv_filename() { return `rise-${this.text_mode() ? 'text' : 'entities'}-v${$rise_bench_run_benchmark_version}.csv`; }
+            csv_title() { return $mol_window.size().width < 640 ? 'CSV' : 'Скачать CSV'; }
+            csv_blob() {
+                const columns = [...this.Metrics().col_ids(), 'Браузер'];
+                const runs = this.runs();
+                const rows = this.Metrics().records().map((record, index) => ({
+                    ...record, 'Компьютер': runs[index].computer, 'Браузер': runs[index].browser,
+                    ...Object.fromEntries(this.operations().map(operation => [operation, runs[index].metric(operation)])),
+                }));
+                return new $mol_blob([$rise_bench_csv(rows, columns)], { type: 'text/csv;charset=utf-8' });
+            }
             results_body() { return this.kind() === 'demo' ? [this.Frame()] : [this.mode() === 'charts' ? this.Charts() : this.History(), this.Frame()]; }
             retry_visible() { return this.outbox().length > 0; }
             outbox(next) {
@@ -37200,9 +38675,7 @@ var $;
                         if (this.progress?.operation === event.data.operation && this.progress?.started === event.data.started)
                             return;
                         this.progress = { operation: event.data.operation, started: event.data.started, row };
-                        if (this.timer)
-                            clearTimeout(this.timer);
-                        this.timer = setTimeout(() => this.expire(), Math.max(0, $rise_bench_stage.limit - (Date.now() - event.data.started)));
+                        this.timing({ ...this.timing(), step: event.data.started });
                         this.status(`${this.finished + 1}/${this.total}: ${this.engine_title(active.engine)}, ${active.count} — ${event.data.operation}`);
                         return;
                     }
@@ -37218,7 +38691,7 @@ var $;
                         }
                         if (typeof event.data.error === 'string') {
                             if (active)
-                                this.expire(event.data.error);
+                                this.fail_case();
                             else
                                 this.status(event.data.error);
                         }
@@ -37236,8 +38709,6 @@ var $;
                 return { destructor: () => window.removeEventListener('message', receive) };
             }
             destructor() {
-                if (this.timer)
-                    clearTimeout(this.timer);
                 this.queue = [];
                 super.destructor();
             }
@@ -37279,6 +38750,9 @@ var $;
             $mol_mem
         ], $rise_bench_host.prototype, "frame_generation", null);
         __decorate([
+            $mol_mem
+        ], $rise_bench_host.prototype, "timing", null);
+        __decorate([
             $mol_action
         ], $rise_bench_host.prototype, "send", null);
         __decorate([
@@ -37289,7 +38763,10 @@ var $;
         ], $rise_bench_host.prototype, "next_case", null);
         __decorate([
             $mol_action
-        ], $rise_bench_host.prototype, "expire", null);
+        ], $rise_bench_host.prototype, "fail_case", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_host.prototype, "stop", null);
         __decorate([
             $mol_action
         ], $rise_bench_host.prototype, "finish_case", null);
@@ -37299,6 +38776,9 @@ var $;
         __decorate([
             $mol_mem
         ], $rise_bench_host.prototype, "runs", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bench_host.prototype, "csv_blob", null);
         __decorate([
             $mol_mem
         ], $rise_bench_host.prototype, "outbox", null);
@@ -38372,1019 +39852,6 @@ var $;
         });
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
-
-;
-	($.$mol_icon_youtube) = class $mol_icon_youtube extends ($.$mol_icon) {
-		path(){
-			return "M10,15L15.19,12L10,9V15M21.56,7.17C21.69,7.64 21.78,8.27 21.84,9.07C21.91,9.87 21.94,10.56 21.94,11.16L22,12C22,14.19 21.84,15.8 21.56,16.83C21.31,17.73 20.73,18.31 19.83,18.56C19.36,18.69 18.5,18.78 17.18,18.84C15.88,18.91 14.69,18.94 13.59,18.94L12,19C7.81,19 5.2,18.84 4.17,18.56C3.27,18.31 2.69,17.73 2.44,16.83C2.31,16.36 2.22,15.73 2.16,14.93C2.09,14.13 2.06,13.44 2.06,12.84L2,12C2,9.81 2.16,8.2 2.44,7.17C2.69,6.27 3.27,5.69 4.17,5.44C4.64,5.31 5.5,5.22 6.82,5.16C8.12,5.09 9.31,5.06 10.41,5.06L12,5C16.19,5 18.8,5.16 19.83,5.44C20.73,5.69 21.31,6.27 21.56,7.17Z";
-		}
-	};
-
-
-;
-"use strict";
-
-
-;
-	($.$mol_embed_service) = class $mol_embed_service extends ($.$mol_check) {
-		active(next){
-			if(next !== undefined) return next;
-			return false;
-		}
-		title(){
-			return "";
-		}
-		video_preview(){
-			return "";
-		}
-		Image(){
-			const obj = new this.$.$mol_image();
-			(obj.title) = () => ((this.title()));
-			(obj.uri) = () => ((this.video_preview()));
-			return obj;
-		}
-		Hint(){
-			const obj = new this.$.$mol_icon_youtube();
-			return obj;
-		}
-		video_embed(){
-			return "";
-		}
-		Frame(){
-			const obj = new this.$.$mol_frame();
-			(obj.title) = () => ((this.title()));
-			(obj.uri) = () => ((this.video_embed()));
-			return obj;
-		}
-		uri(){
-			return "";
-		}
-		video_id(){
-			return "";
-		}
-		checked(next){
-			return (this.active(next));
-		}
-		sub(){
-			return [
-				(this.Image()), 
-				(this.Hint()), 
-				(this.Frame())
-			];
-		}
-	};
-	($mol_mem(($.$mol_embed_service.prototype), "active"));
-	($mol_mem(($.$mol_embed_service.prototype), "Image"));
-	($mol_mem(($.$mol_embed_service.prototype), "Hint"));
-	($mol_mem(($.$mol_embed_service.prototype), "Frame"));
-
-
-;
-"use strict";
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $mol_embed_service extends $.$mol_embed_service {
-            sub() {
-                return this.active()
-                    ? [this.Frame()]
-                    : [this.Image(), this.Hint()];
-            }
-        }
-        __decorate([
-            $mol_mem
-        ], $mol_embed_service.prototype, "sub", null);
-        $$.$mol_embed_service = $mol_embed_service;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_attach("mol/embed/service/service.view.css", "[mol_embed_service] {\n\tpadding: 0;\n\tmax-width: 100%;\n}\n\n[mol_embed_service_image] {\n\tflex: auto 1 1;\n\twidth: 100vw;\n}\n\n[mol_embed_service_frame] {\n\twidth: 100vw;\n}\n\n[mol_embed_service_hint] {\n\tposition: absolute;\n    left: 50%;\n    top: 50%;\n    width: 50%;\n    height: 50%;\n    opacity: 0.3;\n    transform: translate(-50%, -50%);\n}\n\n[mol_embed_service]:hover [mol_embed_service_hint] {\n\topacity: .6;\n}\n");
-})($ || ($ = {}));
-
-;
-	($.$mol_embed_youtube) = class $mol_embed_youtube extends ($.$mol_embed_service) {};
-
-
-;
-"use strict";
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $mol_embed_youtube extends $.$mol_embed_youtube {
-            video_embed() {
-                return `https://www.youtube.com/embed/${encodeURIComponent(this.video_id())}?autoplay=1&loop=1`;
-            }
-            video_id() {
-                return this.uri().match(/^https\:\/\/www\.youtube\.com\/(?:embed\/|shorts\/|watch\?v=)([^\/&?#]+)/)?.[1]
-                    ?? this.uri().match(/^https\:\/\/youtu\.be\/([^\/&?#]+)/)?.[1]
-                    ?? 'about:blank';
-            }
-            video_preview() {
-                return `https://i.ytimg.com/vi/${this.video_id()}/sddefault.jpg`;
-            }
-        }
-        __decorate([
-            $mol_mem
-        ], $mol_embed_youtube.prototype, "video_embed", null);
-        __decorate([
-            $mol_mem
-        ], $mol_embed_youtube.prototype, "video_id", null);
-        __decorate([
-            $mol_mem
-        ], $mol_embed_youtube.prototype, "video_preview", null);
-        $$.$mol_embed_youtube = $mol_embed_youtube;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-	($.$mol_embed_rutube) = class $mol_embed_rutube extends ($.$mol_embed_service) {};
-
-
-;
-"use strict";
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $mol_embed_rutube extends $.$mol_embed_rutube {
-            video_embed() {
-                return `https://rutube.ru/play/embed/${encodeURIComponent(this.video_id())}`;
-            }
-            video_id() {
-                return this.uri().match(/^https:\/\/rutube.ru\/video\/([^\/&?#]+)/)?.[1] ?? 'about:blank';
-            }
-            video_preview() {
-                return `https://rutube.ru/api/video/${this.video_id()}/thumbnail/?redirect=1`;
-            }
-        }
-        __decorate([
-            $mol_mem
-        ], $mol_embed_rutube.prototype, "video_embed", null);
-        __decorate([
-            $mol_mem
-        ], $mol_embed_rutube.prototype, "video_id", null);
-        __decorate([
-            $mol_mem
-        ], $mol_embed_rutube.prototype, "video_preview", null);
-        $$.$mol_embed_rutube = $mol_embed_rutube;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-	($.$mol_embed_vklive) = class $mol_embed_vklive extends ($.$mol_embed_service) {};
-
-
-;
-"use strict";
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $mol_embed_vklive extends $.$mol_embed_vklive {
-            video_embed() {
-                return `https://live.vkvideo.ru/app/embed/${this.channel_id()}/${this.video_id()}`;
-            }
-            channel_id() {
-                return this.uri().match(/^https:\/\/live\.vkvideo\.ru\/([^\/&?#]+)/)?.[1] ?? '';
-            }
-            video_id() {
-                return this.uri().match(/^https:\/\/live\.vkvideo\.ru\/[^\/&?#]+\/record\/([^\/&?#]+)/)?.[1] ?? '';
-            }
-            video_preview() {
-                return `https://images.live.vkvideo.ru/public_video_stream/record/${this.video_id()}/preview`;
-            }
-        }
-        __decorate([
-            $mol_mem
-        ], $mol_embed_vklive.prototype, "video_embed", null);
-        __decorate([
-            $mol_mem
-        ], $mol_embed_vklive.prototype, "channel_id", null);
-        __decorate([
-            $mol_mem
-        ], $mol_embed_vklive.prototype, "video_id", null);
-        __decorate([
-            $mol_mem
-        ], $mol_embed_vklive.prototype, "video_preview", null);
-        $$.$mol_embed_vklive = $mol_embed_vklive;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-	($.$mol_embed_any) = class $mol_embed_any extends ($.$mol_view) {
-		title(){
-			return "";
-		}
-		uri(){
-			return "";
-		}
-		Image(){
-			const obj = new this.$.$mol_image();
-			(obj.title) = () => ((this.title()));
-			(obj.uri) = () => ((this.uri()));
-			return obj;
-		}
-		Object(){
-			const obj = new this.$.$mol_embed_native();
-			(obj.title) = () => ((this.title()));
-			(obj.uri) = () => ((this.uri()));
-			return obj;
-		}
-		Youtube(){
-			const obj = new this.$.$mol_embed_youtube();
-			(obj.title) = () => ((this.title()));
-			(obj.uri) = () => ((this.uri()));
-			return obj;
-		}
-		Rutube(){
-			const obj = new this.$.$mol_embed_rutube();
-			(obj.title) = () => ((this.title()));
-			(obj.uri) = () => ((this.uri()));
-			return obj;
-		}
-		Vklive(){
-			const obj = new this.$.$mol_embed_vklive();
-			(obj.title) = () => ((this.title()));
-			(obj.uri) = () => ((this.uri()));
-			return obj;
-		}
-	};
-	($mol_mem(($.$mol_embed_any.prototype), "Image"));
-	($mol_mem(($.$mol_embed_any.prototype), "Object"));
-	($mol_mem(($.$mol_embed_any.prototype), "Youtube"));
-	($mol_mem(($.$mol_embed_any.prototype), "Rutube"));
-	($mol_mem(($.$mol_embed_any.prototype), "Vklive"));
-
-
-;
-"use strict";
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $mol_embed_any extends $.$mol_embed_any {
-            type() {
-                try {
-                    const uri = this.uri();
-                    if (/\b(png|gif|jpg|jpeg|jfif|webp|svg)\b/.test(uri))
-                        return 'image';
-                    if (/^https:\/\/www\.youtube\.com\//.test(uri))
-                        return 'youtube';
-                    if (/^https:\/\/youtu\.be\//.test(uri))
-                        return 'youtube';
-                    if (/^https:\/\/rutube\.ru\//.test(uri))
-                        return 'rutube';
-                    if (/^https:\/\/live\.vkvideo\.ru\//.test(uri))
-                        return 'vklive';
-                }
-                catch (error) {
-                    $mol_fail_log(error);
-                    return 'image';
-                }
-                return 'object';
-            }
-            sub() {
-                switch (this.type()) {
-                    case 'image': return [this.Image()];
-                    case 'youtube': return [this.Youtube()];
-                    case 'rutube': return [this.Rutube()];
-                    case 'vklive': return [this.Vklive()];
-                    default: return [this.Object()];
-                }
-            }
-        }
-        __decorate([
-            $mol_mem
-        ], $mol_embed_any.prototype, "type", null);
-        __decorate([
-            $mol_mem
-        ], $mol_embed_any.prototype, "sub", null);
-        $$.$mol_embed_any = $mol_embed_any;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-	($.$mol_text) = class $mol_text extends ($.$mol_list) {
-		auto_scroll(){
-			return null;
-		}
-		block_content(id){
-			return [];
-		}
-		quote_text(id){
-			return "";
-		}
-		highlight(){
-			return "";
-		}
-		uri_resolve(id){
-			return "";
-		}
-		code_sidebar_showed(){
-			return true;
-		}
-		list_type(id){
-			return "-";
-		}
-		list_text(id){
-			return "";
-		}
-		header_level(id){
-			return 1;
-		}
-		header_arg(id){
-			return {};
-		}
-		pre_text(id){
-			return "";
-		}
-		pre_themes(id){
-			return [];
-		}
-		table_head_cells(id){
-			return [];
-		}
-		table_rows(id){
-			return [];
-		}
-		table_cells(id){
-			return [];
-		}
-		table_cell_text(id){
-			return "";
-		}
-		grid_rows(id){
-			return [];
-		}
-		grid_cells(id){
-			return [];
-		}
-		grid_cell_text(id){
-			return "";
-		}
-		line_text(id){
-			return "";
-		}
-		line_type(id){
-			return "";
-		}
-		line_content(id){
-			return [];
-		}
-		code_syntax(){
-			return null;
-		}
-		link_uri(id){
-			return "";
-		}
-		link_host(id){
-			return "";
-		}
-		spoiler_label(id){
-			return "";
-		}
-		Spoiler_label(id){
-			const obj = new this.$.$mol_text();
-			(obj.text) = () => ((this.spoiler_label(id)));
-			(obj.highlight) = () => ((this.highlight()));
-			(obj.uri_resolve) = (id) => ((this.uri_resolve(id)));
-			(obj.code_sidebar_showed) = () => ((this.code_sidebar_showed()));
-			return obj;
-		}
-		spoiler_content(id){
-			return "";
-		}
-		Spoiler_content(id){
-			const obj = new this.$.$mol_text();
-			(obj.text) = () => ((this.spoiler_content(id)));
-			(obj.highlight) = () => ((this.highlight()));
-			(obj.uri_resolve) = (id) => ((this.uri_resolve(id)));
-			(obj.code_sidebar_showed) = () => ((this.code_sidebar_showed()));
-			return obj;
-		}
-		uri_base(){
-			return "";
-		}
-		text(){
-			return "";
-		}
-		param(){
-			return "";
-		}
-		flow_tokens(){
-			return [];
-		}
-		block_text(id){
-			return "";
-		}
-		auto(){
-			return [(this.auto_scroll())];
-		}
-		Paragraph(id){
-			const obj = new this.$.$mol_paragraph();
-			(obj.sub) = () => ((this.block_content(id)));
-			return obj;
-		}
-		Quote(id){
-			const obj = new this.$.$mol_text();
-			(obj.text) = () => ((this.quote_text(id)));
-			(obj.auto_scroll) = () => (null);
-			(obj.highlight) = () => ((this.highlight()));
-			(obj.uri_resolve) = (id) => ((this.uri_resolve(id)));
-			(obj.code_sidebar_showed) = () => ((this.code_sidebar_showed()));
-			return obj;
-		}
-		List(id){
-			const obj = new this.$.$mol_text_list();
-			(obj.type) = () => ((this.list_type(id)));
-			(obj.text) = () => ((this.list_text(id)));
-			(obj.highlight) = () => ((this.highlight()));
-			(obj.uri_resolve) = (id) => ((this.uri_resolve(id)));
-			(obj.code_sidebar_showed) = () => ((this.code_sidebar_showed()));
-			return obj;
-		}
-		item_index(id){
-			return 0;
-		}
-		Header(id){
-			const obj = new this.$.$mol_text_header();
-			(obj.minimal_height) = () => (40);
-			(obj.level) = () => ((this.header_level(id)));
-			(obj.content) = () => ((this.block_content(id)));
-			(obj.arg) = () => ((this.header_arg(id)));
-			return obj;
-		}
-		Pre(id){
-			const obj = new this.$.$mol_text_code();
-			(obj.text) = () => ((this.pre_text(id)));
-			(obj.row_themes) = () => ((this.pre_themes(id)));
-			(obj.highlight) = () => ((this.highlight()));
-			(obj.uri_resolve) = (id) => ((this.uri_resolve(id)));
-			(obj.sidebar_showed) = () => ((this.code_sidebar_showed()));
-			return obj;
-		}
-		Cut(id){
-			const obj = new this.$.$mol_view();
-			(obj.dom_name) = () => ("hr");
-			return obj;
-		}
-		Table(id){
-			const obj = new this.$.$mol_grid();
-			(obj.head_cells) = () => ((this.table_head_cells(id)));
-			(obj.rows) = () => ((this.table_rows(id)));
-			return obj;
-		}
-		Table_row(id){
-			const obj = new this.$.$mol_grid_row();
-			(obj.cells) = () => ((this.table_cells(id)));
-			return obj;
-		}
-		Table_cell(id){
-			const obj = new this.$.$mol_text();
-			(obj.auto_scroll) = () => (null);
-			(obj.text) = () => ((this.table_cell_text(id)));
-			(obj.highlight) = () => ((this.highlight()));
-			(obj.uri_resolve) = (id) => ((this.uri_resolve(id)));
-			(obj.code_sidebar_showed) = () => ((this.code_sidebar_showed()));
-			return obj;
-		}
-		Grid(id){
-			const obj = new this.$.$mol_grid();
-			(obj.rows) = () => ((this.grid_rows(id)));
-			return obj;
-		}
-		Grid_row(id){
-			const obj = new this.$.$mol_grid_row();
-			(obj.cells) = () => ((this.grid_cells(id)));
-			return obj;
-		}
-		Grid_cell(id){
-			const obj = new this.$.$mol_text();
-			(obj.auto_scroll) = () => (null);
-			(obj.text) = () => ((this.grid_cell_text(id)));
-			(obj.highlight) = () => ((this.highlight()));
-			(obj.uri_resolve) = (id) => ((this.uri_resolve(id)));
-			(obj.code_sidebar_showed) = () => ((this.code_sidebar_showed()));
-			return obj;
-		}
-		String(id){
-			const obj = new this.$.$mol_dimmer();
-			(obj.dom_name) = () => ("span");
-			(obj.needle) = () => ((this.highlight()));
-			(obj.haystack) = () => ((this.line_text(id)));
-			return obj;
-		}
-		Span(id){
-			const obj = new this.$.$mol_text_span();
-			(obj.dom_name) = () => ("span");
-			(obj.type) = () => ((this.line_type(id)));
-			(obj.sub) = () => ((this.line_content(id)));
-			return obj;
-		}
-		Code_line(id){
-			const obj = new this.$.$mol_text_code_line();
-			(obj.numb_showed) = () => (false);
-			(obj.highlight) = () => ((this.highlight()));
-			(obj.text) = () => ((this.line_text(id)));
-			(obj.uri_resolve) = (id) => ((this.uri_resolve(id)));
-			(obj.syntax) = () => ((this.code_syntax()));
-			return obj;
-		}
-		Link(id){
-			const obj = new this.$.$mol_link_iconed();
-			(obj.uri) = () => ((this.link_uri(id)));
-			(obj.content) = () => ((this.line_content(id)));
-			return obj;
-		}
-		Link_http(id){
-			const obj = new this.$.$mol_link_iconed();
-			(obj.uri) = () => ((this.link_uri(id)));
-			(obj.content) = () => ([(this.link_host(id))]);
-			return obj;
-		}
-		Embed(id){
-			const obj = new this.$.$mol_embed_any();
-			(obj.uri) = () => ((this.link_uri(id)));
-			(obj.title) = () => ((this.line_text(id)));
-			return obj;
-		}
-		Spoiler(id){
-			const obj = new this.$.$mol_expander();
-			(obj.label) = () => ([(this.Spoiler_label(id))]);
-			(obj.content) = () => ([(this.Spoiler_content(id))]);
-			return obj;
-		}
-	};
-	($mol_mem_key(($.$mol_text.prototype), "Spoiler_label"));
-	($mol_mem_key(($.$mol_text.prototype), "Spoiler_content"));
-	($mol_mem_key(($.$mol_text.prototype), "Paragraph"));
-	($mol_mem_key(($.$mol_text.prototype), "Quote"));
-	($mol_mem_key(($.$mol_text.prototype), "List"));
-	($mol_mem_key(($.$mol_text.prototype), "Header"));
-	($mol_mem_key(($.$mol_text.prototype), "Pre"));
-	($mol_mem_key(($.$mol_text.prototype), "Cut"));
-	($mol_mem_key(($.$mol_text.prototype), "Table"));
-	($mol_mem_key(($.$mol_text.prototype), "Table_row"));
-	($mol_mem_key(($.$mol_text.prototype), "Table_cell"));
-	($mol_mem_key(($.$mol_text.prototype), "Grid"));
-	($mol_mem_key(($.$mol_text.prototype), "Grid_row"));
-	($mol_mem_key(($.$mol_text.prototype), "Grid_cell"));
-	($mol_mem_key(($.$mol_text.prototype), "String"));
-	($mol_mem_key(($.$mol_text.prototype), "Span"));
-	($mol_mem_key(($.$mol_text.prototype), "Code_line"));
-	($mol_mem_key(($.$mol_text.prototype), "Link"));
-	($mol_mem_key(($.$mol_text.prototype), "Link_http"));
-	($mol_mem_key(($.$mol_text.prototype), "Embed"));
-	($mol_mem_key(($.$mol_text.prototype), "Spoiler"));
-	($.$mol_text_header) = class $mol_text_header extends ($.$mol_paragraph) {
-		arg(){
-			return {};
-		}
-		content(){
-			return [];
-		}
-		Link(){
-			const obj = new this.$.$mol_link();
-			(obj.arg) = () => ((this.arg()));
-			(obj.hint) = () => ((this.$.$mol_locale.text("$mol_text_header_Link_hint")));
-			(obj.sub) = () => ((this.content()));
-			return obj;
-		}
-		level(){
-			return 1;
-		}
-		sub(){
-			return [(this.Link())];
-		}
-	};
-	($mol_mem(($.$mol_text_header.prototype), "Link"));
-	($.$mol_text_span) = class $mol_text_span extends ($.$mol_paragraph) {
-		type(){
-			return "";
-		}
-		dom_name(){
-			return "span";
-		}
-		attr(){
-			return {...(super.attr()), "mol_text_type": (this.type())};
-		}
-	};
-
-
-;
-"use strict";
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        /**
-         * Markdown visualizer.
-         * @see https://mol.hyoo.ru/#!section=demos/demo=mol_text_demo
-         */
-        class $mol_text extends $.$mol_text {
-            flow_tokens() {
-                const tokens = [];
-                this.$.$mol_syntax2_md_flow.tokenize(this.text(), (name, found, chunks) => tokens.push({ name, found, chunks }));
-                return tokens;
-            }
-            block_type(index) {
-                return this.flow_tokens()[index].name;
-            }
-            rows() {
-                return this.flow_tokens().map(({ name }, index) => {
-                    switch (name) {
-                        case 'quote': return this.Quote(index);
-                        case 'spoiler': return this.Spoiler(index);
-                        case 'header': return this.Header(index);
-                        case 'list': return this.List(index);
-                        case 'code': return this.Pre(index);
-                        case 'code-indent': return this.Pre(index);
-                        case 'table': return this.Table(index);
-                        case 'grid': return this.Grid(index);
-                        case 'cut': return this.Cut(index);
-                        default: return this.Paragraph(index);
-                    }
-                });
-            }
-            param() {
-                return this.toString().replace(/^.*?[\)>]\./, '').replace(/[(<>)]/g, '');
-            }
-            header_level(index) {
-                return this.flow_tokens()[index].chunks[0].length;
-            }
-            header_arg(index) {
-                return {
-                    [this.param()]: this.block_text(index)
-                };
-            }
-            list_type(index) {
-                return this.flow_tokens()[index].chunks[1] ?? '';
-            }
-            item_index(index) {
-                return this.flow_tokens().slice(0, index).filter(token => token.name === 'block').length + 1;
-            }
-            pre_text(index) {
-                const token = this.flow_tokens()[index];
-                return (token.chunks[2] ?? token.chunks[0].replace(/^(\t| (?:\+\+|--|\*\*|  ) )/gm, '')).replace(/[\n\r]*$/, '');
-            }
-            pre_themes(index) {
-                const token = this.flow_tokens()[index];
-                const names = {
-                    ' ** ': '$mol_theme_accent',
-                    ' ++ ': '$mol_theme_current',
-                    ' -- ': '$mol_theme_special',
-                };
-                return token.chunks[0].split('\n')
-                    .map(line => names[line.match(/^ (?:\+\+|--|\*\*|  ) /gm)?.[0] ?? ''] ?? null);
-            }
-            quote_text(index) {
-                return this.flow_tokens()[index].chunks[0].replace(/^[>"] /mg, '');
-            }
-            list_text(index) {
-                return this.flow_tokens()[index].chunks[0].replace(/^([-*+]|(?:\d+[\.\)])+) ?/mg, '').replace(/^  ?/mg, '');
-            }
-            cell_content(indexBlock) {
-                return this.flow_tokens()[indexBlock].chunks[0]
-                    .split(/\r?\n/g)
-                    .filter(row => row && !/\|--/.test(row))
-                    .map((row, rowId) => {
-                    return row.split(/\|/g)
-                        .filter(cell => cell)
-                        .map((cell, cellId) => cell.trim());
-                });
-            }
-            table_rows(blockId) {
-                return this.cell_content(blockId)
-                    .slice(1)
-                    .map((row, rowId) => this.Table_row({ block: blockId, row: rowId + 1 }));
-            }
-            table_head_cells(blockId) {
-                return this.cell_content(blockId)[0]
-                    .map((cell, cellId) => this.Table_cell({ block: blockId, row: 0, cell: cellId }));
-            }
-            table_cells(id) {
-                return this.cell_content(id.block)[id.row]
-                    .map((cell, cellId) => this.Table_cell({ block: id.block, row: id.row, cell: cellId }));
-            }
-            table_cell_text(id) {
-                return this.cell_content(id.block)[id.row][id.cell];
-            }
-            grid_content(indexBlock) {
-                return [...this.flow_tokens()[indexBlock].chunks[0].match(/(?:^! .*?$\r?\n?)+(?:^ +! .*?$\r?\n?)*/gm)]
-                    .map((row, rowId) => {
-                    const cells = [];
-                    for (const line of row.trim().split(/\r?\n/)) {
-                        const [_, indent, content] = /^( *)! (.*)/.exec(line) ?? ['', '', ''];
-                        const col = Math.ceil(indent.length / 2);
-                        cells[col] = (cells[col] ? cells[col] + '\n' : '') + content;
-                    }
-                    return cells;
-                });
-            }
-            grid_rows(blockId) {
-                return this.grid_content(blockId)
-                    .map((row, rowId) => this.Grid_row({ block: blockId, row: rowId }));
-            }
-            grid_cells(id) {
-                return this.grid_content(id.block)[id.row]
-                    .map((cell, cellId) => this.Grid_cell({ block: id.block, row: id.row, cell: cellId }));
-            }
-            grid_cell_text(id) {
-                return this.grid_content(id.block)[id.row][id.cell];
-            }
-            uri_base() {
-                return $mol_dom_context.document.location.href;
-            }
-            uri_base_abs() {
-                return new URL(this.uri_base(), $mol_dom_context.document.location.href);
-            }
-            uri_resolve(uri) {
-                if (/^(\w+script+:)+/.test(uri))
-                    return null;
-                if (/^#\!/.test(uri)) {
-                    const params = {};
-                    for (const chunk of uri.slice(2).split(this.$.$mol_state_arg.separator)) {
-                        if (!chunk)
-                            continue;
-                        const vals = chunk.split('=').map(decodeURIComponent);
-                        params[vals.shift()] = vals.join('=');
-                    }
-                    return this.$.$mol_state_arg.link(params);
-                }
-                try {
-                    const url = new URL(uri, this.uri_base_abs());
-                    return url.toString();
-                }
-                catch (error) {
-                    $mol_fail_log(error);
-                    return null;
-                }
-            }
-            code_syntax() {
-                return this.$.$mol_syntax2_md_code;
-            }
-            block_text(index) {
-                const token = this.flow_tokens()[index];
-                switch (token.name) {
-                    case 'header': return token.chunks[2];
-                    default: return token.chunks[0];
-                }
-            }
-            block_content(index) {
-                return this.line_content([index]);
-            }
-            line_tokens(path) {
-                const tokens = [];
-                this.$.$mol_syntax2_md_line.tokenize(this.line_text(path), (name, found, chunks) => tokens.push({ name, found, chunks }));
-                return tokens;
-            }
-            line_token(path) {
-                const tokens = this.line_tokens(path.slice(0, path.length - 1));
-                return tokens[path[path.length - 1]];
-            }
-            line_type(path) {
-                return this.line_token(path).name;
-            }
-            line_text(path) {
-                if (path.length === 1)
-                    return this.block_text(path[0]);
-                const { name, found, chunks } = this.line_token(path);
-                switch (name) {
-                    case 'link': return chunks[0] || chunks[1].replace(/^.*?\/\/|\/.*$/g, '');
-                    case 'text-link': return chunks[0] || chunks[1].replace(/^.*?\/\/|\/.*$/g, '');
-                    default: return (chunks[0] || chunks[1] || chunks[2]) ?? found;
-                }
-            }
-            line_content(path) {
-                return this.line_tokens(path).map(({ name, chunks }, index) => {
-                    const path2 = [...path, index];
-                    switch (name) {
-                        case 'embed': return this.Embed(path2);
-                        case 'link': return this.Link(path2);
-                        case 'text-link-http': return this.Link_http(path2);
-                        case 'text-link': return this.Link(path2);
-                        case 'image-link': return this.Embed(path2);
-                        case 'code': return this.Code_line(path2);
-                        case '': return this.String(path2);
-                        default: return this.Span(path2);
-                    }
-                });
-            }
-            link_uri(path) {
-                const token = this.line_token(path);
-                const uri = this.uri_resolve(token.chunks[1] ?? token.found);
-                if (!uri)
-                    throw new Error('Bad link');
-                return uri;
-            }
-            link_host(path) {
-                return this.link_uri(path).replace(/^.*?\/\/|\/.*$/g, '');
-            }
-            auto_scroll() {
-                for (const [index, token] of this.flow_tokens().entries()) {
-                    if (token.name !== 'header')
-                        continue;
-                    const header = this.Header(index);
-                    if (!header.Link().current())
-                        continue;
-                    new $mol_after_tick(() => this.ensure_visible(header));
-                }
-            }
-            spoiler_rows(index) {
-                return this.flow_tokens()[index].chunks[0].replace(/^[\?] /mg, '').split('\n');
-            }
-            spoiler_label(index) {
-                return this.spoiler_rows(index)[0];
-            }
-            spoiler_content(index) {
-                return this.spoiler_rows(index).slice(1).join('\n');
-            }
-        }
-        __decorate([
-            $mol_mem
-        ], $mol_text.prototype, "flow_tokens", null);
-        __decorate([
-            $mol_mem_key
-        ], $mol_text.prototype, "block_type", null);
-        __decorate([
-            $mol_mem
-        ], $mol_text.prototype, "rows", null);
-        __decorate([
-            $mol_mem
-        ], $mol_text.prototype, "param", null);
-        __decorate([
-            $mol_mem_key
-        ], $mol_text.prototype, "header_level", null);
-        __decorate([
-            $mol_mem_key
-        ], $mol_text.prototype, "header_arg", null);
-        __decorate([
-            $mol_mem_key
-        ], $mol_text.prototype, "pre_text", null);
-        __decorate([
-            $mol_mem_key
-        ], $mol_text.prototype, "pre_themes", null);
-        __decorate([
-            $mol_mem_key
-        ], $mol_text.prototype, "quote_text", null);
-        __decorate([
-            $mol_mem_key
-        ], $mol_text.prototype, "list_text", null);
-        __decorate([
-            $mol_mem_key
-        ], $mol_text.prototype, "cell_content", null);
-        __decorate([
-            $mol_mem_key
-        ], $mol_text.prototype, "table_rows", null);
-        __decorate([
-            $mol_mem_key
-        ], $mol_text.prototype, "table_head_cells", null);
-        __decorate([
-            $mol_mem_key
-        ], $mol_text.prototype, "table_cells", null);
-        __decorate([
-            $mol_mem_key
-        ], $mol_text.prototype, "table_cell_text", null);
-        __decorate([
-            $mol_mem_key
-        ], $mol_text.prototype, "grid_content", null);
-        __decorate([
-            $mol_mem_key
-        ], $mol_text.prototype, "grid_rows", null);
-        __decorate([
-            $mol_mem_key
-        ], $mol_text.prototype, "grid_cells", null);
-        __decorate([
-            $mol_mem_key
-        ], $mol_text.prototype, "grid_cell_text", null);
-        __decorate([
-            $mol_mem
-        ], $mol_text.prototype, "uri_base_abs", null);
-        __decorate([
-            $mol_mem_key
-        ], $mol_text.prototype, "uri_resolve", null);
-        __decorate([
-            $mol_mem_key
-        ], $mol_text.prototype, "block_text", null);
-        __decorate([
-            $mol_mem_key
-        ], $mol_text.prototype, "line_tokens", null);
-        __decorate([
-            $mol_mem_key
-        ], $mol_text.prototype, "line_token", null);
-        __decorate([
-            $mol_mem_key
-        ], $mol_text.prototype, "line_type", null);
-        __decorate([
-            $mol_mem_key
-        ], $mol_text.prototype, "line_text", null);
-        __decorate([
-            $mol_mem_key
-        ], $mol_text.prototype, "line_content", null);
-        __decorate([
-            $mol_mem_key
-        ], $mol_text.prototype, "link_uri", null);
-        __decorate([
-            $mol_mem_key
-        ], $mol_text.prototype, "link_host", null);
-        __decorate([
-            $mol_mem
-        ], $mol_text.prototype, "auto_scroll", null);
-        __decorate([
-            $mol_mem_key
-        ], $mol_text.prototype, "spoiler_rows", null);
-        __decorate([
-            $mol_mem_key
-        ], $mol_text.prototype, "spoiler_label", null);
-        __decorate([
-            $mol_mem_key
-        ], $mol_text.prototype, "spoiler_content", null);
-        $$.$mol_text = $mol_text;
-        class $mol_text_header extends $.$mol_text_header {
-            dom_name() {
-                return 'h' + this.level();
-            }
-        }
-        $$.$mol_text_header = $mol_text_header;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_attach("mol/text/text/text.view.css", "[mol_text] {\n\tline-height: 1.5em;\n\tbox-sizing: border-box;\n\tborder-radius: var(--mol_gap_round);\n\twhite-space: pre-line;\n\tdisplay: flex;\n\tflex-direction: column;\n\tflex: 0 0 auto;\n\ttab-size: 4;\n}\n\n[mol_text_paragraph] {\n\tpadding: var(--mol_gap_text);\n\toverflow: auto;\n\toverflow-x: overlay;\n\tmax-width: 100%;\n\tdisplay: block;\n\tmax-width: 60rem;\n\tbreak-inside: avoid;\n}\n\n[mol_text_spoiler_label_paragraph] {\n\tpadding: 0;\n}\n\n[mol_text_span] {\n\tdisplay: inline;\n}\n\n[mol_text_string] {\n\tdisplay: inline;\n\tflex: 0 1 auto;\n\twhite-space: normal;\n}\n\n[mol_text_quote] {\n\tmargin: var(--mol_gap_block);\n\tpadding: var(--mol_gap_block);\n\tbackground: var(--mol_theme_card);\n\tbox-shadow: 0 0 0 1px var(--mol_theme_back);\n\tbreak-inside: avoid;\n}\n\n[mol_text_header] {\n\tdisplay: block;\n\ttext-shadow: 0 0;\n\tfont-weight: normal;\n\tbreak-after: avoid;\n\tletter-spacing: 2px;\n}\n\n* + [mol_text_header] {\n\tmargin-top: 0.75rem;\n}\n\nh1[mol_text_header] {\n\tfont-size: 1.5rem;\n}\n\nh2[mol_text_header] {\n\tfont-size: 1.5rem;\n\tfont-style: italic;\n}\n\nh3[mol_text_header] {\n\tfont-size: 1.25rem;\n}\n\nh4[mol_text_header] {\n\tfont-size: 1.25em;\n\tfont-style: italic;\n}\n\nh5[mol_text_header] {\n\tfont-size: 1rem;\n}\n\nh6[mol_text_header] {\n\tfont-size: 1rem;\n\tfont-style: italic;\n}\n\n[mol_text_header_link] {\n\tcolor: inherit;\n}\n\n[mol_text_table] {\n\tbreak-inside: avoid;\n}\n\n[mol_text_table_cell] {\n\twidth: auto;\n\tdisplay: table-cell;\n\tvertical-align: baseline;\n\tpadding: 0;\n\tborder-radius: 0;\n}\n\n[mol_text_grid] {\n\tbreak-inside: avoid;\n}\n\n[mol_text_grid_cell] {\n\twidth: auto;\n\tdisplay: table-cell;\n\tvertical-align: top;\n\tpadding: 0;\n\tborder-radius: 0;\n}\n\n[mol_text_cut] {\n\tborder: none;\n\twidth: 100%;\n\tbox-shadow: 0 0 0 1px var(--mol_theme_line);\n}\n\n[mol_text_link_http],\n[mol_text_link] {\n\tpadding: 0;\n\tdisplay: inline;\n\twhite-space: nowrap;\n}\n\n[mol_text_link_icon] + [mol_text_embed] {\n\tmargin-inline-start: -1.5rem;\n}\n\n[mol_text_embed_youtube] {\n\tdisplay: inline;\n}\n\n[mol_text_embed_youtube_image],\n[mol_text_embed_youtube_frame],\n[mol_text_embed_object] {\n\tobject-fit: contain;\n\tobject-position: center;\n\twidth: 100vw;\n\tmax-height: calc( 100vh - 6rem );\n}\n[mol_text_embed_object_fallback] {\n\tpadding: 0;\n}\n[mol_text_embed_image] {\n\tobject-fit: contain;\n\tobject-position: center;\n\tdisplay: inline;\n\t/* max-height: calc( 100vh - 6rem ); */\n\tvertical-align: top;\n}\n\n[mol_text_pre] {\n\twhite-space: pre;\n\toverflow-x: auto;\n\toverflow-x: overlay;\n\ttab-size: 2;\n\tbreak-inside: avoid;\n}\n\n[mol_text_code_line] {\n\tdisplay: inline-block;\n}\n\n[mol_text_type=\"strong\"] {\n\ttext-shadow: 0 0;\n\tfilter: contrast(1.5);\n}\n\n[mol_text_type=\"emphasis\"] {\n\tfont-style: italic;\n}\n\n[mol_text_type=\"insert\"] {\n\tcolor: var(--mol_theme_special);\n}\n\n[mol_text_type=\"delete\"] {\n\tcolor: var(--mol_theme_shade);\n}\n\n[mol_text_type=\"remark\"] {\n\tcolor: var(--mol_theme_shade);\n}\n\n[mol_text_type=\"quote\"] {\n\tfont-style: italic;\n}\n");
-})($ || ($ = {}));
-
-;
-	($.$mol_text_list) = class $mol_text_list extends ($.$mol_text) {
-		type(){
-			return "";
-		}
-		auto_scroll(){
-			return null;
-		}
-		attr(){
-			return {...(super.attr()), "mol_text_list_type": (this.type())};
-		}
-		Paragraph(id){
-			const obj = new this.$.$mol_text_list_item();
-			(obj.index) = () => ((this.item_index(id)));
-			(obj.sub) = () => ((this.block_content(id)));
-			return obj;
-		}
-	};
-	($mol_mem_key(($.$mol_text_list.prototype), "Paragraph"));
-	($.$mol_text_list_item) = class $mol_text_list_item extends ($.$mol_paragraph) {
-		index(){
-			return 0;
-		}
-		attr(){
-			return {...(super.attr()), "mol_text_list_item_index": (this.index())};
-		}
-	};
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_attach("mol/text/list/list.view.css", "[mol_text_list] {\n\tpadding-inline-start: 1.75rem;\n}\n\n[mol_text_list_item] {\n\tcontain: none;\n\tdisplay: list-item;\n}\n\n[mol_text_list_item]::before {\n\tcontent: attr( mol_text_list_item_index ) \".\";\n\twidth: 1.25rem;\n\tdisplay: inline-block;\n\tposition: absolute;\n\tmargin-inline-start: -1.75rem;\n\ttext-align: end;\n}\n\n[mol_text_list_type=\"-\"] > [mol_text_list_item]::before,\n[mol_text_list_type=\"*\"] > [mol_text_list_item]::before {\n\tcontent: \"•\";\n}\n");
-})($ || ($ = {}));
-
-;
-"use strict";
-
 
 ;
 	($.$rise_resize_demo) = class $rise_resize_demo extends ($.$mol_example_small) {
