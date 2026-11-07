@@ -171,7 +171,7 @@ namespace $.$$ {
 		csv_blob() {
 			const columns = [ ...this.Metrics().col_ids(), 'Браузер' ]
 			const runs = this.runs()
-			const rows = this.Metrics().records().map( ( record, index )=> ({
+			const rows = this.Metrics().records().map( ( record, index: number )=> ({
 				...record, 'Компьютер': runs[ index ].computer, 'Браузер': runs[ index ].browser,
 				...Object.fromEntries( this.operations().map( operation => [ operation, runs[ index ].metric( operation ) ] ) ),
 			}) )
