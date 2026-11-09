@@ -1,0 +1,15 @@
+$rise_bench_charts_selection $mol_pick
+	runs /$rise_bench_run
+	value? /string
+	title <= selection_title \
+	bubble_content /
+		<= List $mol_scroll
+			sub /
+				<= Items $mol_list
+					rows <= choices /$mol_view
+	Reset $mol_button_minor
+		title \Сбросить
+		click? <=> reset? null
+	Check* $mol_check_box
+		title <= run_title* \
+		checked? <=> checked*? false

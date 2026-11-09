@@ -1,7 +1,11 @@
 $rise_bench_charts $mol_view
 	runs /$rise_bench_run
 	operations /string
+	selected? /string
 	sub <= charts /$mol_view
+	Selection $rise_bench_charts_selection
+		runs <= runs
+		value? <=> selected?
 	Chart* $rise_bench_charts_operation
 		operation <= operation* \
-		runs <= runs
+		runs <= selected_runs /$rise_bench_run

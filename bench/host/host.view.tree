@@ -47,3 +47,4 @@ $rise_bench_host $mol_book2
 	Charts $rise_bench_charts
 		runs <= runs
 		operations <= operations
+		selected? <=> chart_selection? /string
