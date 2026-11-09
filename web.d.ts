@@ -62348,6 +62348,70 @@ declare namespace $ {
 }
 
 declare namespace $ {
+
+	type $mol_list__rows_rise_bench_charts_selection_1 = $mol_type_enforce<
+		ReturnType< $rise_bench_charts_selection['choices'] >
+		,
+		ReturnType< $mol_list['rows'] >
+	>
+	type $mol_scroll__sub_rise_bench_charts_selection_2 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_scroll['sub'] >
+	>
+	type $mol_button_minor__title_rise_bench_charts_selection_3 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_button_minor['title'] >
+	>
+	type $mol_button_minor__click_rise_bench_charts_selection_4 = $mol_type_enforce<
+		ReturnType< $rise_bench_charts_selection['reset'] >
+		,
+		ReturnType< $mol_button_minor['click'] >
+	>
+	type $mol_check_box__title_rise_bench_charts_selection_5 = $mol_type_enforce<
+		ReturnType< $rise_bench_charts_selection['run_title'] >
+		,
+		ReturnType< $mol_check_box['title'] >
+	>
+	type $mol_check_box__checked_rise_bench_charts_selection_6 = $mol_type_enforce<
+		ReturnType< $rise_bench_charts_selection['checked'] >
+		,
+		ReturnType< $mol_check_box['checked'] >
+	>
+	export class $rise_bench_charts_selection extends $mol_pick {
+		selection_title( ): string
+		choices( ): readonly($mol_view)[]
+		Items( ): $mol_list
+		List( ): $mol_scroll
+		reset( next?: any ): any
+		run_title( id: any): string
+		checked( id: any, next?: boolean ): boolean
+		runs( ): readonly($rise_bench_run)[]
+		value( next?: readonly(string)[] ): readonly(string)[]
+		title( ): ReturnType< $rise_bench_charts_selection['selection_title'] >
+		bubble_content( ): readonly(any)[]
+		Reset( ): $mol_button_minor
+		Check( id: any): $mol_check_box
+	}
+	
+}
+
+//# sourceMappingURL=selection.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $rise_bench_charts_selection extends $.$rise_bench_charts_selection {
+        selection_title(): string;
+        choices(): $mol_button_minor[];
+        reset(): void;
+        checked(id: string, next?: boolean): boolean;
+        run_title(id: string): string;
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
     function $mol_coord_pack(high: number, low: number): number;
     function $mol_coord_high(pack: number): number;
     function $mol_coord_low(pack: number): number;
@@ -62600,22 +62664,35 @@ declare namespace $ {
 
 declare namespace $ {
 
-	type $rise_bench_charts_operation__operation_rise_bench_charts_1 = $mol_type_enforce<
+	type $rise_bench_charts_selection__runs_rise_bench_charts_1 = $mol_type_enforce<
+		ReturnType< $rise_bench_charts['runs'] >
+		,
+		ReturnType< $rise_bench_charts_selection['runs'] >
+	>
+	type $rise_bench_charts_selection__value_rise_bench_charts_2 = $mol_type_enforce<
+		ReturnType< $rise_bench_charts['selected'] >
+		,
+		ReturnType< $rise_bench_charts_selection['value'] >
+	>
+	type $rise_bench_charts_operation__operation_rise_bench_charts_3 = $mol_type_enforce<
 		ReturnType< $rise_bench_charts['operation'] >
 		,
 		ReturnType< $rise_bench_charts_operation['operation'] >
 	>
-	type $rise_bench_charts_operation__runs_rise_bench_charts_2 = $mol_type_enforce<
-		ReturnType< $rise_bench_charts['runs'] >
+	type $rise_bench_charts_operation__runs_rise_bench_charts_4 = $mol_type_enforce<
+		ReturnType< $rise_bench_charts['selected_runs'] >
 		,
 		ReturnType< $rise_bench_charts_operation['runs'] >
 	>
 	export class $rise_bench_charts extends $mol_view {
 		charts( ): readonly($mol_view)[]
 		operation( id: any): string
+		selected_runs( ): readonly($rise_bench_run)[]
 		runs( ): readonly($rise_bench_run)[]
 		operations( ): readonly(string)[]
+		selected( next?: readonly(string)[] ): readonly(string)[]
 		sub( ): ReturnType< $rise_bench_charts['charts'] >
+		Selection( ): $rise_bench_charts_selection
 		Chart( id: any): $rise_bench_charts_operation
 	}
 	
@@ -62624,7 +62701,8 @@ declare namespace $ {
 //# sourceMappingURL=charts.view.tree.d.ts.map
 declare namespace $.$$ {
     class $rise_bench_charts extends $.$rise_bench_charts {
-        charts(): $.$rise_bench_charts_operation[];
+        charts(): ($.$rise_bench_charts_selection | $.$rise_bench_charts_operation)[];
+        selected_runs(): $rise_bench_run[];
         operation(index: number): string;
     }
 }
@@ -63364,6 +63442,11 @@ declare namespace $ {
 		,
 		ReturnType< $rise_bench_charts['operations'] >
 	>
+	type $rise_bench_charts__selected_rise_bench_host_35 = $mol_type_enforce<
+		ReturnType< $rise_bench_host['chart_selection'] >
+		,
+		ReturnType< $rise_bench_charts['selected'] >
+	>
 	export class $rise_bench_host extends $mol_book2 {
 		controls_enabled( ): boolean
 		run_enabled( ): boolean
@@ -63394,6 +63477,7 @@ declare namespace $ {
 		Frame( ): $mol_frame
 		results_body( ): readonly($mol_view)[]
 		Results( ): $mol_page
+		chart_selection( next?: readonly(string)[] ): readonly(string)[]
 		kind( ): string
 		pages( ): readonly(any)[]
 		Charts( ): $rise_bench_charts
@@ -63418,6 +63502,8 @@ declare namespace $.$$ {
         selected_engines(next?: readonly string[]): string[];
         selected_counts(next?: readonly string[]): string[];
         selected_schemas(next?: readonly string[]): string[];
+        private chart_selection_value?;
+        chart_selection(next?: readonly string[]): readonly string[];
         ready(next?: boolean): boolean;
         busy(next?: boolean): boolean;
         active_case(next?: ($rise_bench_batch_case & {

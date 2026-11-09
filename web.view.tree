@@ -2912,6 +2912,22 @@ $rise_bench_host_controls $mol_page
 			click? <=> retry? null
 	retry_visible false
 
+$rise_bench_charts_selection $mol_pick
+	runs /$rise_bench_run
+	value? /string
+	title <= selection_title \
+	bubble_content /
+		<= List $mol_scroll
+			sub /
+				<= Items $mol_list
+					rows <= choices /$mol_view
+	Reset $mol_button_minor
+		title \Сбросить
+		click? <=> reset? null
+	Check* $mol_check_box
+		title <= run_title* \
+		checked? <=> checked*? false
+
 $mol_plot_dot $mol_plot_graph
 	points_max +Infinity
 	aspect 1
@@ -2978,10 +2994,14 @@ $rise_bench_charts_operation $mol_view
 $rise_bench_charts $mol_view
 	runs /$rise_bench_run
 	operations /string
+	selected? /string
 	sub <= charts /$mol_view
+	Selection $rise_bench_charts_selection
+		runs <= runs
+		value? <=> selected?
 	Chart* $rise_bench_charts_operation
 		operation <= operation* \
-		runs <= runs
+		runs <= selected_runs /$rise_bench_run
 
 $rise_bench_host $mol_book2
 	kind \goods
@@ -3032,6 +3052,7 @@ $rise_bench_host $mol_book2
 	Charts $rise_bench_charts
 		runs <= runs
 		operations <= operations
+		selected? <=> chart_selection? /string
 
 $mol_status $mol_view
 	status <= title
