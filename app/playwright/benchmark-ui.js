@@ -9,7 +9,7 @@ async function main(){
 		const url=new URL(process.env.RISE_TEST_URL||'http://localhost:9080/rise/app/-/test.html');url.searchParams.set('rise_fixture','sqltests');url.hash='!=demo'
 		await page.goto(url.href,{waitUntil:'domcontentloaded'})
 		resultStep('Открыть Demo без обёртки результатов',['$rise_app.Demo'])
-		await page.locator('[rise_demo]').waitFor();assert.equal(await page.getByText('Результаты',{exact:true}).count(),0);assert.equal(await page.locator('iframe').count(),0)
+		await page.locator('[mol_app_demo_menu]').waitFor();assert.equal(await page.getByText('Результаты',{exact:true}).count(),0);assert.equal(await page.locator('iframe').count(),0)
 		console.log('DEMO',await screenshot(page,'demo-direct.png'))
 		await page.getByRole('link',{name:'Bench',exact:true}).click();await page.getByRole('link',{name:'Сущности',exact:true}).click()
 		const engines=page.locator('[rise_bench_host_controls_engine]'),counts=page.locator('[rise_bench_host_controls_count]')
