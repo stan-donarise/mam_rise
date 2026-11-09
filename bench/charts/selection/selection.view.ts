@@ -2,11 +2,13 @@ namespace $.$$ {
 	export class $rise_bench_charts_selection extends $.$rise_bench_charts_selection {
 		selection_title() {
 			const selected = new Set( this.value() )
-			return `Выбранные (${ this.runs().filter( run => selected.has( run.id ) ).length })`
+			return `Прогоны (${ this.runs().filter( run => selected.has( run.id ) ).length })`
 		}
-		choices() { return [ this.Reset(), ...this.runs().map( run => this.Check( run.id ) ) ] }
+		choices() { return [ this.Presets(), ...this.runs().map( run => this.Check( run.id ) ) ] }
+		presets() { return [ 0, 10, 20, 30, 50 ].map( count => this.Preset( count ) ) }
+		preset_title( count: number ) { return String( count ) }
 		@ $mol_action
-		reset() { this.value( this.runs().slice( 0, 10 ).map( run => run.id ) ) }
+		select_latest( count: number ) { this.value( this.runs().slice( 0, count ).map( run => run.id ) ) }
 		checked( id: string, next?: boolean ): boolean {
 			const value = this.value()
 			if( next === undefined ) return value.includes( id )

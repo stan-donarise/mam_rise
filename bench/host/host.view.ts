@@ -33,7 +33,7 @@ namespace $.$$ {
 		@ $mol_mem
 		chart_selection( next?: readonly string[] ): readonly string[] {
 			if( next !== undefined ) this.chart_selection_value = next
-			return this.chart_selection_value ?? this.runs().slice( 0, 10 ).map( run => run.id )
+			return this.chart_selection_value ?? this.runs().slice( 0, 20 ).map( run => run.id )
 		}
 		@ $mol_mem
 		ready( next = false ) { return next }
