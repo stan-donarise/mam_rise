@@ -11,9 +11,15 @@ namespace $.$$ {
 		line_count() { return Number( this.count_mode() ) }
 		page_title() { return `CRDT-текст: ${ this.line_count() } строк` }
 
+		private text_link_value?: string
 		@ $mol_mem
 		text_link( next?: string ) {
-			return $mol_state_local.value< string >( '$rise_bench_baza_crdttext' + ( new URL( location.href ).searchParams.get( 'rise_run' ) || '' ), next ) ?? ''
+			if( next !== undefined ) this.text_link_value = next
+			return this.text_link_value ??= this.reload_ticket()?.link ?? ''
+		}
+		reload_ticket() {
+			const navigation = performance.getEntriesByType( 'navigation' )[ 0 ] as PerformanceNavigationTiming | undefined
+			return navigation?.type === 'reload' ? this.reload_store().snapshot.pending : null
 		}
 
 		@ $mol_mem
@@ -152,7 +158,7 @@ namespace $.$$ {
 		@ $mol_mem
 		resume_reload() {
 			if( this.reload_done ) return
-			const ticket = this.reload_store().snapshot.pending
+			const ticket = this.reload_ticket()
 			if( !ticket ) return
 			const run = this.Metrics().runs()[ 0 ]
 			return $mol_error_fence( ()=> {

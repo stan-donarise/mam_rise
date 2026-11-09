@@ -4,6 +4,7 @@ namespace $ {
 		Storage_label: { padding: $mol_gap.text },
 		Status: { padding: $mol_gap.text },
 		Elapsed: { padding: $mol_gap.text },
+		Foot: { padding: $mol_style_unit.rem(1) },
 		Computer_label: { Label: { align: { items: 'center' } } },
 	} )
 }
