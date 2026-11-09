@@ -36370,6 +36370,7 @@ var $;
     $mol_style_define($rise_bench_host_controls_support, {
         flex: { direction: 'column', grow: 1 },
         align: { items: 'center' },
+        gap: $mol_style_unit.rem(.5),
         Logo: { width: '11rem', maxWidth: '100%' },
     });
 })($ || ($ = {}));
@@ -37141,6 +37142,7 @@ var $;
         Storage_label: { padding: $mol_gap.text },
         Status: { padding: $mol_gap.text },
         Elapsed: { padding: $mol_gap.text },
+        Foot: { padding: $mol_style_unit.rem(1) },
         Computer_label: { Label: { align: { items: 'center' } } },
     });
 })($ || ($ = {}));
@@ -41614,8 +41616,15 @@ var $;
             }
             line_count() { return Number(this.count_mode()); }
             page_title() { return `CRDT-текст: ${this.line_count()} строк`; }
+            text_link_value;
             text_link(next) {
-                return $mol_state_local.value('$rise_bench_baza_crdttext' + (new URL(location.href).searchParams.get('rise_run') || ''), next) ?? '';
+                if (next !== undefined)
+                    this.text_link_value = next;
+                return this.text_link_value ??= this.reload_ticket()?.link ?? '';
+            }
+            reload_ticket() {
+                const navigation = performance.getEntriesByType('navigation')[0];
+                return navigation?.type === 'reload' ? this.reload_store().snapshot.pending : null;
             }
             document() {
                 const link = this.text_link();
@@ -41725,7 +41734,7 @@ var $;
             resume_reload() {
                 if (this.reload_done)
                     return;
-                const ticket = this.reload_store().snapshot.pending;
+                const ticket = this.reload_ticket();
                 if (!ticket)
                     return;
                 const run = this.Metrics().runs()[0];

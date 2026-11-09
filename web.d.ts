@@ -65233,7 +65233,9 @@ declare namespace $.$$ {
         count_mode(next?: string): string;
         line_count(): number;
         page_title(): string;
+        private text_link_value?;
         text_link(next?: string): string;
+        reload_ticket(): $rise_bench_baza_crdttext_reload_ticket | null;
         document(): $giper_baza_text | null;
         prepare_document(): $giper_baza_text;
         write_text(next: string): void;
