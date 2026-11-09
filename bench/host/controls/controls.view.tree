@@ -5,6 +5,8 @@ $rise_bench_host_controls $mol_page
 	enabled true
 	running false
 	run_enabled true
+	foot /
+		<= Support $rise_bench_host_controls_support
 	body <= controls /$mol_view
 		<= Intro $mol_text
 			text <= intro \

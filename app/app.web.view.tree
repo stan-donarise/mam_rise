@@ -1,9 +1,10 @@
 $rise_app $mol_book2_catalog
 	menu_title \$rise
+	plugins /
+		<= Theme $mol_theme_auto
+	menu_tools /
+		<= Lights $mol_lights_toggle
 	spreads *
-		demo <= Demo_host $rise_bench_host
-			title \Demo
-			kind \demo
+		demo <= Demo $rise_demo
 		bench <= Bench $rise_bench
 			menu_title \Bench
-	Demo $rise_demo

@@ -49,7 +49,7 @@ async function main(){
 			await page.waitForFunction(()=>!globalThis.$.$rise_app.Root(0).Bench().Goods_host().active_case())
 			for(const route of held)await route.abort().catch(()=>{})
 		}
-		const expected=stopCheck?3:matrix?40:mixed?8:5,start=Date.now(),seen=new Set()
+		const expected=stopCheck?3:matrix?50:mixed?8:5,start=Date.now(),seen=new Set()
 		let lastStatus=''
 		while(true){
 			if(os.freemem()<1536*1024*1024)throw Error('Stopped own benchmark: less than 1.5 GiB available RAM; progress preserved')

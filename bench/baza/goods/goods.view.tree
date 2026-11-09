@@ -21,6 +21,8 @@ $rise_bench_baza_goods $mol_book2
 					enabled <= controls_enabled
 					value? <=> count_mode? \100
 					options *
+						1 \1
+						10 \10
 						100 \100
 						500 \500
 						1000 \1000

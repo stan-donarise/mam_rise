@@ -31,7 +31,7 @@ async function main(){
 		await option(engine,'IDB').click();await option(count,'500').click();await option(schema,'10 свойств').click()
 		assert.equal(await page.evaluate(()=>{const h=$.$rise_app.Root(0).Bench().Goods_host();return $.$rise_bench_batch(h.engine(),h.count(),h.schema()).length}),8)
 		await option(engine,'Все').click();await option(count,'Все').click()
-		assert.equal(await page.evaluate(()=>{const h=$.$rise_app.Root(0).Bench().Goods_host();return $.$rise_bench_batch(h.engine(),h.count(),h.schema()).length}),80)
+		assert.equal(await page.evaluate(()=>{const h=$.$rise_app.Root(0).Bench().Goods_host();return $.$rise_bench_batch(h.engine(),h.count(),h.schema()).length}),100)
 		await option(engine,'Все').click();await page.waitForFunction(()=>!$.$rise_app.Root(0).Bench().Goods_host().run_enabled());assert.notEqual(await run.getAttribute('disabled'),null)
 		await option(engine,'IDB').click()
 		await option(count,'Все').click();await option(count,'100').click()

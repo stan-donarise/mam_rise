@@ -21,6 +21,8 @@ $rise_bench_idb $mol_book2
 						value? <=> count_mode? \100
 						enabled <= controls_enabled
 						options *
+							1 \1
+							10 \10
 							100 \100
 							500 \500
 							1000 \1000

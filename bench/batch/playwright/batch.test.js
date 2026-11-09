@@ -10,13 +10,13 @@ function load(files,extra={}){
 	for(const file of files){vm.runInContext(ts.transpileModule(fs.readFileSync(path.join(root,file),'utf8'),{compilerOptions:{target:ts.ScriptTarget.ES2022}}).outputText,context);Object.assign(context,context.$)}
 	return context
 }
-test('All All is exactly forty distinct cases, in stable engine and ascending size order',()=>{
+test('All All is exactly fifty distinct cases, in stable engine and ascending size order',()=>{
 	const c=load(['selection/selection.ts','batch/batch.ts']);c.$rise_bench_engine={goods:{},idb:{},sqlite:{},pglite:{},duckdb:{}}
 	const rows=c.$.$rise_bench_batch('all','all','compact')
-	assert.equal(rows.length,40);assert.equal(new Set(rows.map(row=>JSON.stringify(row))).size,40)
+	assert.equal(rows.length,50);assert.equal(new Set(rows.map(row=>JSON.stringify(row))).size,50)
 	assert.ok(rows.every(row=>row.schema==='compact'))
-	assert.deepEqual(Array.from(rows.slice(0,8),r=>Number(r.count)),[100,500,1000,2000,3000,4000,5000,10000])
-	assert.equal(c.$.$rise_bench_batch('idb','all','full').length,8)
+	assert.deepEqual(Array.from(rows.slice(0,10),r=>Number(r.count)),[1,10,100,500,1000,2000,3000,4000,5000,10000])
+	assert.equal(c.$.$rise_bench_batch('idb','all','full').length,10)
 	assert.equal(c.$.$rise_bench_batch('all','100','compact').length,5)
 	assert.equal(c.$.$rise_bench_batch('all','all','compact',true).length,5)
 })
@@ -40,7 +40,7 @@ test('Multiple schemas and partial selections produce exactly their Cartesian pr
 	const rows=c.$.$rise_bench_batch('idb,goods,idb','500,100','full,compact')
 	assert.equal(rows.length,8);assert.equal(new Set(rows.map(row=>JSON.stringify(row))).size,8)
 	assert.equal(rows[0].engine,'goods');assert.equal(rows[0].count,'100');assert.equal(rows[0].schema,'compact')
-	assert.equal(c.$.$rise_bench_batch('all','all','all').length,80)
+	assert.equal(c.$.$rise_bench_batch('all','all','all').length,100)
 	assert.equal(c.$.$rise_bench_batch('','100','compact').length,0)
 	assert.equal(c.$.$rise_bench_batch('goods','','compact').length,0)
 	assert.equal(c.$.$rise_bench_batch('goods','100','').length,0)

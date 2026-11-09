@@ -1,5 +1,6 @@
 namespace $.$$ {
 	export class $rise_app extends $.$rise_app {
+		spread_title( id: string ) { return id === 'demo' ? 'Demo' : super.spread_title( id ) }
 		fixture_kind() { return new URL( location.href ).searchParams.get( 'rise_fixture' ) }
 		fixture() {
 			switch( this.fixture_kind() ) {

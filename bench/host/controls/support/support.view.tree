@@ -1,0 +1,7 @@
+$rise_bench_host_controls_support $mol_view
+	sub /
+		<= Label $mol_paragraph
+			sub / \при поддержке
+		<= Logo $mol_image
+			uri <= logo_uri \
+			title \Шмаков Медиа
