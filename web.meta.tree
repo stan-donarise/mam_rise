@@ -134,3 +134,6 @@
 	include \/rise/toggle/demo
 	include \/rise/range/demo
 	include \/rise/radio/demo
+\/rise/bench/host/controls/support
+	deploy \/rise/bench/host/controls/support/foot_logo_light.png
+	deploy \/rise/bench/host/controls/support/foot_logo_dark.png

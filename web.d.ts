@@ -38139,6 +38139,78 @@ declare namespace $ {
 
 //# sourceMappingURL=marker.view.tree.d.ts.map
 declare namespace $ {
+
+	export class $mol_icon_upload extends $mol_icon {
+		path( ): string
+	}
+	
+}
+
+//# sourceMappingURL=upload.view.tree.d.ts.map
+declare namespace $ {
+
+	type $mol_button_open_native__files_mol_button_open_1 = $mol_type_enforce<
+		ReturnType< $mol_button_open['files_handled'] >
+		,
+		ReturnType< $mol_button_open_native['files'] >
+	>
+	type $mol_button_open_native__accept_mol_button_open_2 = $mol_type_enforce<
+		ReturnType< $mol_button_open['accept'] >
+		,
+		ReturnType< $mol_button_open_native['accept'] >
+	>
+	type $mol_button_open_native__multiple_mol_button_open_3 = $mol_type_enforce<
+		ReturnType< $mol_button_open['multiple'] >
+		,
+		ReturnType< $mol_button_open_native['multiple'] >
+	>
+	export class $mol_button_open extends $mol_button_minor {
+		Icon( ): $mol_icon_upload
+		files( next?: readonly(File)[] ): readonly(File)[]
+		files_handled( next?: ReturnType< $mol_button_open['files'] > ): ReturnType< $mol_button_open['files'] >
+		accept( ): string
+		multiple( ): boolean
+		Native( ): $mol_button_open_native
+		sub( ): readonly(any)[]
+	}
+	
+	export class $mol_button_open_native extends $mol_view {
+		accept( ): string
+		multiple( ): boolean
+		picked( next?: any ): any
+		dom_name( ): string
+		files( next?: readonly(File)[] ): readonly(File)[]
+		attr( ): ({ 
+			'type': string,
+			'accept': ReturnType< $mol_button_open_native['accept'] >,
+			'multiple': ReturnType< $mol_button_open_native['multiple'] >,
+		}) 
+		event( ): ({ 
+			change( next?: ReturnType< $mol_button_open_native['picked'] > ): ReturnType< $mol_button_open_native['picked'] >,
+		}) 
+	}
+	
+}
+
+//# sourceMappingURL=open.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $mol_button_open extends $.$mol_button_open {
+        files_handled(next?: readonly File[]): readonly File[];
+    }
+    /**
+     * File open button
+     * @see https://mol.hyoo.ru/#!section=demos/demo=mol_button_demo
+     */
+    class $mol_button_open_native extends $.$mol_button_open_native {
+        dom_node(): HTMLInputElement;
+        picked(): void;
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
 }
 
 declare namespace $ {
@@ -41727,39 +41799,54 @@ declare namespace $ {
 		,
 		ReturnType< $mol_pick['bubble_content'] >
 	>
-	type $mol_bar__sub_giper_baza_rich_edit_50 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_bar['sub'] >
-	>
-	type $mol_string__hint_giper_baza_rich_edit_51 = $mol_type_enforce<
+	type $mol_button_open__hint_giper_baza_rich_edit_50 = $mol_type_enforce<
 		string
 		,
-		ReturnType< $mol_string['hint'] >
+		ReturnType< $mol_button_open['hint'] >
 	>
-	type $mol_string__hint_giper_baza_rich_edit_52 = $mol_type_enforce<
-		string
+	type $mol_button_open__enabled_giper_baza_rich_edit_51 = $mol_type_enforce<
+		ReturnType< $giper_baza_rich_edit['selected'] >
 		,
-		ReturnType< $mol_string['hint'] >
+		ReturnType< $mol_button_open['enabled'] >
+	>
+	type $mol_button_open__files_giper_baza_rich_edit_52 = $mol_type_enforce<
+		ReturnType< $giper_baza_rich_edit['attach_files'] >
+		,
+		ReturnType< $mol_button_open['files'] >
 	>
 	type $mol_bar__sub_giper_baza_rich_edit_53 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_bar['sub'] >
 	>
-	type $mol_float__sub_giper_baza_rich_edit_54 = $mol_type_enforce<
+	type $mol_string__hint_giper_baza_rich_edit_54 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_string['hint'] >
+	>
+	type $mol_string__hint_giper_baza_rich_edit_55 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_string['hint'] >
+	>
+	type $mol_bar__sub_giper_baza_rich_edit_56 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_bar['sub'] >
+	>
+	type $mol_float__sub_giper_baza_rich_edit_57 = $mol_type_enforce<
 		ReturnType< $giper_baza_rich_edit['tools'] >
 		,
 		ReturnType< $mol_float['sub'] >
 	>
-	type $mol_view__attr_giper_baza_rich_edit_55 = $mol_type_enforce<
+	type $mol_view__attr_giper_baza_rich_edit_58 = $mol_type_enforce<
 		({ 
 			'contenteditable': ReturnType< $giper_baza_rich_edit['editable'] >,
 		}) 
 		,
 		ReturnType< $mol_view['attr'] >
 	>
-	type $mol_view__event_giper_baza_rich_edit_56 = $mol_type_enforce<
+	type $mol_view__event_giper_baza_rich_edit_59 = $mol_type_enforce<
 		({ 
 			input( next?: ReturnType< $giper_baza_rich_edit['save'] > ): ReturnType< $giper_baza_rich_edit['save'] >,
 			paste( next?: ReturnType< $giper_baza_rich_edit['paste'] > ): ReturnType< $giper_baza_rich_edit['paste'] >,
@@ -41768,7 +41855,7 @@ declare namespace $ {
 		,
 		ReturnType< $mol_view['event'] >
 	>
-	type $mol_view__sub_giper_baza_rich_edit_57 = $mol_type_enforce<
+	type $mol_view__sub_giper_baza_rich_edit_60 = $mol_type_enforce<
 		ReturnType< $giper_baza_rich_edit['content'] >
 		,
 		ReturnType< $mol_view['sub'] >
@@ -41804,6 +41891,8 @@ declare namespace $ {
 		Del_button( ): $mol_button_minor
 		Code_button( ): $mol_button_minor
 		Inline_format_menu( ): $mol_pick
+		attach_files( next?: readonly(any)[] ): readonly(any)[]
+		Attach( ): $mol_button_open
 		Main( ): $mol_bar
 		Search_query( ): $mol_string
 		Search_replace( ): $mol_string
@@ -41849,6 +41938,7 @@ declare namespace $.$$ {
         block_unwrap(event: KeyboardEvent): void;
         /** Wraps selecion to given element type. */
         inline_toggle(Type: string, event: KeyboardEvent): void;
+        attach_files(files: readonly File[]): never[];
         paste(event: ClipboardEvent): void;
         hover(event: PointerEvent): void;
     }
@@ -42901,78 +42991,6 @@ declare namespace $.$$ {
     class $giper_baza_land_grab extends $.$giper_baza_land_grab {
         value(rights?: string): string;
     }
-}
-
-declare namespace $ {
-
-	export class $mol_icon_upload extends $mol_icon {
-		path( ): string
-	}
-	
-}
-
-//# sourceMappingURL=upload.view.tree.d.ts.map
-declare namespace $ {
-
-	type $mol_button_open_native__files_mol_button_open_1 = $mol_type_enforce<
-		ReturnType< $mol_button_open['files_handled'] >
-		,
-		ReturnType< $mol_button_open_native['files'] >
-	>
-	type $mol_button_open_native__accept_mol_button_open_2 = $mol_type_enforce<
-		ReturnType< $mol_button_open['accept'] >
-		,
-		ReturnType< $mol_button_open_native['accept'] >
-	>
-	type $mol_button_open_native__multiple_mol_button_open_3 = $mol_type_enforce<
-		ReturnType< $mol_button_open['multiple'] >
-		,
-		ReturnType< $mol_button_open_native['multiple'] >
-	>
-	export class $mol_button_open extends $mol_button_minor {
-		Icon( ): $mol_icon_upload
-		files( next?: readonly(File)[] ): readonly(File)[]
-		files_handled( next?: ReturnType< $mol_button_open['files'] > ): ReturnType< $mol_button_open['files'] >
-		accept( ): string
-		multiple( ): boolean
-		Native( ): $mol_button_open_native
-		sub( ): readonly(any)[]
-	}
-	
-	export class $mol_button_open_native extends $mol_view {
-		accept( ): string
-		multiple( ): boolean
-		picked( next?: any ): any
-		dom_name( ): string
-		files( next?: readonly(File)[] ): readonly(File)[]
-		attr( ): ({ 
-			'type': string,
-			'accept': ReturnType< $mol_button_open_native['accept'] >,
-			'multiple': ReturnType< $mol_button_open_native['multiple'] >,
-		}) 
-		event( ): ({ 
-			change( next?: ReturnType< $mol_button_open_native['picked'] > ): ReturnType< $mol_button_open_native['picked'] >,
-		}) 
-	}
-	
-}
-
-//# sourceMappingURL=open.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $mol_button_open extends $.$mol_button_open {
-        files_handled(next?: readonly File[]): readonly File[];
-    }
-    /**
-     * File open button
-     * @see https://mol.hyoo.ru/#!section=demos/demo=mol_button_demo
-     */
-    class $mol_button_open_native extends $.$mol_button_open_native {
-        dom_node(): HTMLInputElement;
-        picked(): void;
-    }
-}
-
-declare namespace $ {
 }
 
 declare namespace $ {
@@ -45166,64 +45184,190 @@ declare namespace $ {
 }
 
 declare namespace $ {
+    class $mol_media extends $mol_object2 {
+        static match(query: string, next?: boolean): boolean;
+    }
+}
 
-	type $mol_check__checked_mol_check_list_1 = $mol_type_enforce<
-		ReturnType< $mol_check_list['option_checked'] >
+declare namespace $ {
+    /**
+     * Switcher between light/dark themes (usually for `mol_theme_auto` plugin).
+     * @see https://mol.hyoo.ru/#!section=demos/demo=mol_lights_demo
+     */
+    function $mol_lights(this: $, next?: boolean): boolean;
+}
+
+declare namespace $ {
+
+	export class $mol_theme_auto extends $mol_plugin {
+		dark( ): string
+		theme( ): ReturnType< $mol_theme_auto['dark'] >
+		light( ): string
+		attr( ): ({ 
+			'mol_theme': ReturnType< $mol_theme_auto['theme'] >,
+		}) 
+	}
+	
+}
+
+//# sourceMappingURL=auto.view.tree.d.ts.map
+declare namespace $.$$ {
+    /**
+     * The [plugin](../../plugin/readme.md) which defines theme based on [mol_lights](../../lights/readme.md).
+     * @see https://mol.hyoo.ru/#!section=demos/demo=mol_lights_demo
+     */
+    class $mol_theme_auto extends $.$mol_theme_auto {
+        theme(): string;
+    }
+}
+
+declare namespace $ {
+
+	export class $mol_icon_brightness_4 extends $mol_icon {
+		path( ): string
+	}
+	
+}
+
+//# sourceMappingURL=4.view.tree.d.ts.map
+declare namespace $ {
+
+	export class $mol_lights_toggle extends $mol_check_icon {
+		Lights_icon( ): $mol_icon_brightness_4
+		lights( next?: boolean ): boolean
+		Icon( ): ReturnType< $mol_lights_toggle['Lights_icon'] >
+		hint( ): string
+		checked( next?: ReturnType< $mol_lights_toggle['lights'] > ): ReturnType< $mol_lights_toggle['lights'] >
+	}
+	
+}
+
+//# sourceMappingURL=toggle.view.tree.d.ts.map
+declare namespace $.$$ {
+    /**
+     * Toggle for Switcher between light/dark themes (usually for `mol_theme_auto` plugin).
+     * @see https://mol.hyoo.ru/#!section=demos/demo=mol_lights_demo
+     */
+    class $mol_lights_toggle extends $.$mol_lights_toggle {
+        lights(next?: boolean): boolean;
+    }
+}
+
+declare namespace $ {
+
+	export class $rise_drag extends $mol_plugin {
+		pointerdown( next?: any ): any
+		dragged( next?: boolean ): boolean
+		pointermove_listener( ): $mol_dom_listener | null
+		pointerup_listener( ): $mol_dom_listener | null
+		x( next?: number ): number
+		y( next?: number ): number
+		repos_x( id: any): number
+		repos_y( id: any): number
+		on_drag( next?: any ): any
+		on_drag_start( next?: any ): any
+		on_drag_end( next?: any ): any
+		drag( next?: any ): any
+		drag_start( next?: any ): any
+		drag_end( next?: any ): any
+		use_buttons( ): readonly(any)[]
+		event( ): ({ 
+			pointerdown( next?: ReturnType< $rise_drag['pointerdown'] > ): ReturnType< $rise_drag['pointerdown'] >,
+		})  & ReturnType< $mol_plugin['event'] >
+		attr( ): ({ 
+			'rise_dragged': ReturnType< $rise_drag['dragged'] >,
+		})  & ReturnType< $mol_plugin['attr'] >
+		auto( ): readonly(any)[]
+		drags_synced( ): readonly($rise_drag)[]
+	}
+	
+}
+
+//# sourceMappingURL=drag.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $rise_drag extends $.$rise_drag {
+        repos_x(val: number): number;
+        repos_y(val: number): number;
+        start_event?: PointerEvent;
+        start_pos?: {
+            x: number;
+            y: number;
+        };
+        drags_synced_frozen: readonly $.$rise_drag[];
+        drag_start(event: PointerEvent): void;
+        drag(event: PointerEvent): void;
+        drag_end(event: PointerEvent): void;
+        pointerdown(event: PointerEvent): void;
+        pointermove_listener(): $mol_dom_listener | null;
+        handle_pointermove_async: ((event: PointerEvent) => Promise<void>) & {};
+        pointerup_listener(): $mol_dom_listener | null;
+        handle_pointerup_async: ((event: PointerEvent) => Promise<void>) & {};
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	export class $mol_example extends $mol_view {
+		tags( ): readonly(string)[]
+		aspects( ): readonly(string)[]
+	}
+	
+}
+
+//# sourceMappingURL=example.view.tree.d.ts.map
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	export class $mol_example_small extends $mol_example {
+	}
+	
+}
+
+//# sourceMappingURL=small.view.tree.d.ts.map
+declare namespace $ {
+
+	type $mol_view__sub_mol_card_1 = $mol_type_enforce<
+		ReturnType< $mol_card['content'] >
 		,
-		ReturnType< $mol_check['checked'] >
+		ReturnType< $mol_view['sub'] >
 	>
-	type $mol_check__label_mol_check_list_2 = $mol_type_enforce<
-		ReturnType< $mol_check_list['option_label'] >
-		,
-		ReturnType< $mol_check['label'] >
-	>
-	type $mol_check__enabled_mol_check_list_3 = $mol_type_enforce<
-		ReturnType< $mol_check_list['option_enabled'] >
-		,
-		ReturnType< $mol_check['enabled'] >
-	>
-	type $mol_check__hint_mol_check_list_4 = $mol_type_enforce<
-		ReturnType< $mol_check_list['option_hint'] >
-		,
-		ReturnType< $mol_check['hint'] >
-	>
-	type $mol_check__minimal_height_mol_check_list_5 = $mol_type_enforce<
+	type $mol_view__minimal_height_mol_card_2 = $mol_type_enforce<
 		number
 		,
-		ReturnType< $mol_check['minimal_height'] >
+		ReturnType< $mol_view['minimal_height'] >
 	>
-	export class $mol_check_list extends $mol_view {
-		option_checked( id: any, next?: boolean ): boolean
-		option_title( id: any): string
-		option_label( id: any): readonly(any)[]
-		enabled( ): boolean
-		option_enabled( id: any): ReturnType< $mol_check_list['enabled'] >
-		option_hint( id: any): string
-		items( ): readonly($mol_check)[]
-		dictionary( ): Record<string, any>
-		Option( id: any): $mol_check
-		options( ): Record<string, any>
-		keys( ): readonly(string)[]
-		sub( ): ReturnType< $mol_check_list['items'] >
+	type $mol_view__sub_mol_card_3 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	export class $mol_card extends $mol_list {
+		status( ): string
+		content( ): readonly($mol_view_content)[]
+		Content( ): $mol_view
+		status_text( ): ReturnType< $mol_card['status'] >
+		Status( ): $mol_view
+		attr( ): ({ 
+			'mol_card_status_type': ReturnType< $mol_card['status'] >,
+		})  & ReturnType< $mol_list['attr'] >
+		rows( ): readonly($mol_view)[]
 	}
 	
 }
 
-//# sourceMappingURL=list.view.tree.d.ts.map
+//# sourceMappingURL=card.view.tree.d.ts.map
 declare namespace $.$$ {
     /**
-     * List of checkboxes
-     * @see https://mol.hyoo.ru/#!section=demos/demo=mol_check_list_demo
+     * Represents a common card. It can has several statuses at bottom line.
+     * @see https://mol.hyoo.ru/#!section=demos/demo=mol_card_demo/readme
      */
-    class $mol_check_list extends $.$mol_check_list {
-        options(): {
-            [key: string]: string;
-        };
-        dictionary(next?: Record<string, boolean>): Record<string, boolean>;
-        option_checked(id: string, next?: boolean | null): boolean;
-        keys(): readonly string[];
-        items(): $.$mol_check[];
-        option_title(key: string): string;
+    class $mol_card extends $.$mol_card {
+        rows(): readonly $mol_view[];
     }
 }
 
@@ -45232,36 +45376,533 @@ declare namespace $ {
 
 declare namespace $ {
 
-	export class $mol_switch extends $mol_check_list {
-		value( next?: string ): string
+	type __rise_drag_view_1 = $mol_type_enforce<
+		Parameters< $rise_drag_view['pointerdown'] >[0]
+		,
+		Parameters< ReturnType< $rise_drag_view['Drag'] >['pointerdown'] >[0]
+	>
+	type $rise_drag__on_drag_start_rise_drag_view_2 = $mol_type_enforce<
+		ReturnType< $rise_drag_view['on_drag_start'] >
+		,
+		ReturnType< $rise_drag['on_drag_start'] >
+	>
+	type $rise_drag__on_drag_end_rise_drag_view_3 = $mol_type_enforce<
+		ReturnType< $rise_drag_view['on_drag_end'] >
+		,
+		ReturnType< $rise_drag['on_drag_end'] >
+	>
+	type $rise_drag__on_drag_rise_drag_view_4 = $mol_type_enforce<
+		ReturnType< $rise_drag_view['on_drag'] >
+		,
+		ReturnType< $rise_drag['on_drag'] >
+	>
+	type $rise_drag__y_rise_drag_view_5 = $mol_type_enforce<
+		ReturnType< $rise_drag_view['y'] >
+		,
+		ReturnType< $rise_drag['y'] >
+	>
+	type $rise_drag__x_rise_drag_view_6 = $mol_type_enforce<
+		ReturnType< $rise_drag_view['x'] >
+		,
+		ReturnType< $rise_drag['x'] >
+	>
+	type $rise_drag__drags_synced_rise_drag_view_7 = $mol_type_enforce<
+		ReturnType< $rise_drag_view['drags_synced'] >
+		,
+		ReturnType< $rise_drag['drags_synced'] >
+	>
+	type $rise_drag__repos_x_rise_drag_view_8 = $mol_type_enforce<
+		ReturnType< $rise_drag_view['repos_x'] >
+		,
+		ReturnType< $rise_drag['repos_x'] >
+	>
+	type $rise_drag__repos_y_rise_drag_view_9 = $mol_type_enforce<
+		ReturnType< $rise_drag_view['repos_y'] >
+		,
+		ReturnType< $rise_drag['repos_y'] >
+	>
+	export class $rise_drag_view extends $mol_view {
+		on_drag_start( next?: any ): any
+		on_drag_end( next?: any ): any
+		on_drag( next?: any ): any
+		dragged( ): ReturnType< ReturnType< $rise_drag_view['Drag'] >['dragged'] >
+		y( next?: number ): number
+		x( next?: number ): number
+		drags_synced( ): readonly($rise_drag)[]
+		repos_x( id: any): number
+		repos_y( id: any): number
+		pointerdown( next?: ReturnType< ReturnType< $rise_drag_view['Drag'] >['pointerdown'] > ): ReturnType< ReturnType< $rise_drag_view['Drag'] >['pointerdown'] >
+		Drag( ): $rise_drag
+		plugins( ): readonly(any)[]
+		style( ): ({ 
+			'userSelect': string,
+		})  & ReturnType< $mol_view['style'] >
 	}
 	
 }
 
-//# sourceMappingURL=switch.view.tree.d.ts.map
+//# sourceMappingURL=view.view.tree.d.ts.map
 declare namespace $.$$ {
-    /**
-     * Buttons which switching the state
-     * @see https://mol.hyoo.ru/#!section=demos/demo=mol_switch_demo
-     */
-    class $mol_switch extends $.$mol_switch {
-        value(next?: string): string;
-        option_checked(key: string, next?: boolean): boolean;
+    class $rise_drag_view extends $.$rise_drag_view {
+        repos_x(val: number): number;
+        repos_y(val: number): number;
     }
 }
 
 declare namespace $ {
-}
 
-declare namespace $ {
-
-	export class $mol_button_major extends $mol_button_minor {
-		theme( ): string
+	export class $rise_drag_absolute extends $rise_drag_view {
+		top( next?: number ): number
+		left( next?: number ): number
+		top_px( ): string
+		left_px( ): string
+		y( next?: ReturnType< $rise_drag_absolute['top'] > ): ReturnType< $rise_drag_absolute['top'] >
+		x( next?: ReturnType< $rise_drag_absolute['left'] > ): ReturnType< $rise_drag_absolute['left'] >
+		style( ): ({ 
+			'position': string,
+			'top': ReturnType< $rise_drag_absolute['top_px'] >,
+			'left': ReturnType< $rise_drag_absolute['left_px'] >,
+		})  & ReturnType< $rise_drag_view['style'] >
 	}
 	
 }
 
-//# sourceMappingURL=major.view.tree.d.ts.map
+//# sourceMappingURL=absolute.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $rise_drag_absolute extends $.$rise_drag_absolute {
+        top_px(): string;
+        left_px(): string;
+    }
+}
+
+declare namespace $ {
+
+	type $mol_card__title_rise_drag_demo_1 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_card['title'] >
+	>
+	type $rise_drag_absolute__sub_rise_drag_demo_2 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $rise_drag_absolute['sub'] >
+	>
+	type $rise_drag_absolute__drags_synced_rise_drag_demo_3 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $rise_drag_absolute['drags_synced'] >
+	>
+	type $mol_card__title_rise_drag_demo_4 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_card['title'] >
+	>
+	type $rise_drag_absolute__top_rise_drag_demo_5 = $mol_type_enforce<
+		ReturnType< $rise_drag_demo['top'] >
+		,
+		ReturnType< $rise_drag_absolute['top'] >
+	>
+	type $rise_drag_absolute__left_rise_drag_demo_6 = $mol_type_enforce<
+		ReturnType< $rise_drag_demo['left'] >
+		,
+		ReturnType< $rise_drag_absolute['left'] >
+	>
+	type $rise_drag_absolute__sub_rise_drag_demo_7 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $rise_drag_absolute['sub'] >
+	>
+	export class $rise_drag_demo extends $mol_example_small {
+		Card( ): $mol_card
+		Draggable( ): $rise_drag_absolute
+		top( next?: number ): number
+		left( next?: number ): number
+		Synced_drag( ): ReturnType< ReturnType< $rise_drag_demo['Synced'] >['Drag'] >
+		Synced_card( ): $mol_card
+		Synced( ): $rise_drag_absolute
+		sub( ): readonly(any)[]
+		tags( ): readonly(any)[]
+		aspects( ): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=demo.view.tree.d.ts.map
+declare namespace $ {
+
+	type __rise_resize_1 = $mol_type_enforce<
+		Parameters< $rise_resize['drag_pointerdown'] >[0]
+		,
+		Parameters< ReturnType< $rise_resize['Drag_view'] >['pointerdown'] >[0]
+	>
+	type $rise_drag_view__minimal_height_rise_resize_2 = $mol_type_enforce<
+		number
+		,
+		ReturnType< $rise_drag_view['minimal_height'] >
+	>
+	type $rise_drag_view__sub_rise_resize_3 = $mol_type_enforce<
+		ReturnType< $rise_resize['drag_body'] >
+		,
+		ReturnType< $rise_drag_view['sub'] >
+	>
+	type $rise_drag_view__x_rise_resize_4 = $mol_type_enforce<
+		ReturnType< $rise_resize['x'] >
+		,
+		ReturnType< $rise_drag_view['x'] >
+	>
+	type $rise_drag_view__y_rise_resize_5 = $mol_type_enforce<
+		ReturnType< $rise_resize['y'] >
+		,
+		ReturnType< $rise_drag_view['y'] >
+	>
+	type $rise_drag_view__on_drag_start_rise_resize_6 = $mol_type_enforce<
+		ReturnType< $rise_resize['on_drag_start'] >
+		,
+		ReturnType< $rise_drag_view['on_drag_start'] >
+	>
+	type $rise_drag_view__on_drag_rise_resize_7 = $mol_type_enforce<
+		ReturnType< $rise_resize['on_drag'] >
+		,
+		ReturnType< $rise_drag_view['on_drag'] >
+	>
+	type $rise_drag_view__on_drag_end_rise_resize_8 = $mol_type_enforce<
+		ReturnType< $rise_resize['on_drag_end'] >
+		,
+		ReturnType< $rise_drag_view['on_drag_end'] >
+	>
+	type $rise_drag_view__drags_synced_rise_resize_9 = $mol_type_enforce<
+		ReturnType< $rise_resize['drags_synced'] >
+		,
+		ReturnType< $rise_drag_view['drags_synced'] >
+	>
+	type $rise_drag_view__repos_x_rise_resize_10 = $mol_type_enforce<
+		ReturnType< $rise_resize['repos_x'] >
+		,
+		ReturnType< $rise_drag_view['repos_x'] >
+	>
+	type $rise_drag_view__repos_y_rise_resize_11 = $mol_type_enforce<
+		ReturnType< $rise_resize['repos_y'] >
+		,
+		ReturnType< $rise_drag_view['repos_y'] >
+	>
+	type $rise_resize_edge__repos_x_rise_resize_12 = $mol_type_enforce<
+		ReturnType< $rise_resize['repos_x'] >
+		,
+		ReturnType< $rise_resize_edge['repos_x'] >
+	>
+	type $rise_resize_edge__repos_y_rise_resize_13 = $mol_type_enforce<
+		ReturnType< $rise_resize['repos_y'] >
+		,
+		ReturnType< $rise_resize_edge['repos_y'] >
+	>
+	type $rise_resize_edge__on_drag_start_rise_resize_14 = $mol_type_enforce<
+		ReturnType< $rise_resize['resize_start'] >
+		,
+		ReturnType< $rise_resize_edge['on_drag_start'] >
+	>
+	type $rise_resize_edge__on_drag_end_rise_resize_15 = $mol_type_enforce<
+		ReturnType< $rise_resize['resize_end'] >
+		,
+		ReturnType< $rise_resize_edge['on_drag_end'] >
+	>
+	type $rise_resize_edge__y_rise_resize_16 = $mol_type_enforce<
+		ReturnType< $rise_resize['top_edge_y'] >
+		,
+		ReturnType< $rise_resize_edge['y'] >
+	>
+	type $rise_resize_edge__repos_x_rise_resize_17 = $mol_type_enforce<
+		ReturnType< $rise_resize['repos_x'] >
+		,
+		ReturnType< $rise_resize_edge['repos_x'] >
+	>
+	type $rise_resize_edge__repos_y_rise_resize_18 = $mol_type_enforce<
+		ReturnType< $rise_resize['repos_y'] >
+		,
+		ReturnType< $rise_resize_edge['repos_y'] >
+	>
+	type $rise_resize_edge__on_drag_start_rise_resize_19 = $mol_type_enforce<
+		ReturnType< $rise_resize['resize_start'] >
+		,
+		ReturnType< $rise_resize_edge['on_drag_start'] >
+	>
+	type $rise_resize_edge__on_drag_end_rise_resize_20 = $mol_type_enforce<
+		ReturnType< $rise_resize['resize_end'] >
+		,
+		ReturnType< $rise_resize_edge['on_drag_end'] >
+	>
+	type $rise_resize_edge__x_rise_resize_21 = $mol_type_enforce<
+		ReturnType< $rise_resize['left_edge_x'] >
+		,
+		ReturnType< $rise_resize_edge['x'] >
+	>
+	type $rise_resize_edge__repos_x_rise_resize_22 = $mol_type_enforce<
+		ReturnType< $rise_resize['repos_x'] >
+		,
+		ReturnType< $rise_resize_edge['repos_x'] >
+	>
+	type $rise_resize_edge__repos_y_rise_resize_23 = $mol_type_enforce<
+		ReturnType< $rise_resize['repos_y'] >
+		,
+		ReturnType< $rise_resize_edge['repos_y'] >
+	>
+	type $rise_resize_edge__on_drag_start_rise_resize_24 = $mol_type_enforce<
+		ReturnType< $rise_resize['resize_start'] >
+		,
+		ReturnType< $rise_resize_edge['on_drag_start'] >
+	>
+	type $rise_resize_edge__on_drag_end_rise_resize_25 = $mol_type_enforce<
+		ReturnType< $rise_resize['resize_end'] >
+		,
+		ReturnType< $rise_resize_edge['on_drag_end'] >
+	>
+	type $rise_resize_edge__y_rise_resize_26 = $mol_type_enforce<
+		ReturnType< $rise_resize['bottom_edge_y'] >
+		,
+		ReturnType< $rise_resize_edge['y'] >
+	>
+	type $rise_resize_edge__repos_x_rise_resize_27 = $mol_type_enforce<
+		ReturnType< $rise_resize['repos_x'] >
+		,
+		ReturnType< $rise_resize_edge['repos_x'] >
+	>
+	type $rise_resize_edge__repos_y_rise_resize_28 = $mol_type_enforce<
+		ReturnType< $rise_resize['repos_y'] >
+		,
+		ReturnType< $rise_resize_edge['repos_y'] >
+	>
+	type $rise_resize_edge__on_drag_start_rise_resize_29 = $mol_type_enforce<
+		ReturnType< $rise_resize['resize_start'] >
+		,
+		ReturnType< $rise_resize_edge['on_drag_start'] >
+	>
+	type $rise_resize_edge__on_drag_end_rise_resize_30 = $mol_type_enforce<
+		ReturnType< $rise_resize['resize_end'] >
+		,
+		ReturnType< $rise_resize_edge['on_drag_end'] >
+	>
+	type $rise_resize_edge__x_rise_resize_31 = $mol_type_enforce<
+		ReturnType< $rise_resize['right_edge_x'] >
+		,
+		ReturnType< $rise_resize_edge['x'] >
+	>
+	type $rise_resize_edge__repos_x_rise_resize_32 = $mol_type_enforce<
+		ReturnType< $rise_resize['repos_x'] >
+		,
+		ReturnType< $rise_resize_edge['repos_x'] >
+	>
+	type $rise_resize_edge__repos_y_rise_resize_33 = $mol_type_enforce<
+		ReturnType< $rise_resize['repos_y'] >
+		,
+		ReturnType< $rise_resize_edge['repos_y'] >
+	>
+	type $rise_resize_edge__on_drag_start_rise_resize_34 = $mol_type_enforce<
+		ReturnType< $rise_resize['resize_start'] >
+		,
+		ReturnType< $rise_resize_edge['on_drag_start'] >
+	>
+	type $rise_resize_edge__on_drag_end_rise_resize_35 = $mol_type_enforce<
+		ReturnType< $rise_resize['resize_end'] >
+		,
+		ReturnType< $rise_resize_edge['on_drag_end'] >
+	>
+	type $rise_resize_edge__y_rise_resize_36 = $mol_type_enforce<
+		ReturnType< $rise_resize['top_edge_y'] >
+		,
+		ReturnType< $rise_resize_edge['y'] >
+	>
+	type $rise_resize_edge__x_rise_resize_37 = $mol_type_enforce<
+		ReturnType< $rise_resize['left_edge_x'] >
+		,
+		ReturnType< $rise_resize_edge['x'] >
+	>
+	type $rise_resize_edge__repos_x_rise_resize_38 = $mol_type_enforce<
+		ReturnType< $rise_resize['repos_x'] >
+		,
+		ReturnType< $rise_resize_edge['repos_x'] >
+	>
+	type $rise_resize_edge__repos_y_rise_resize_39 = $mol_type_enforce<
+		ReturnType< $rise_resize['repos_y'] >
+		,
+		ReturnType< $rise_resize_edge['repos_y'] >
+	>
+	type $rise_resize_edge__on_drag_start_rise_resize_40 = $mol_type_enforce<
+		ReturnType< $rise_resize['resize_start'] >
+		,
+		ReturnType< $rise_resize_edge['on_drag_start'] >
+	>
+	type $rise_resize_edge__on_drag_end_rise_resize_41 = $mol_type_enforce<
+		ReturnType< $rise_resize['resize_end'] >
+		,
+		ReturnType< $rise_resize_edge['on_drag_end'] >
+	>
+	type $rise_resize_edge__y_rise_resize_42 = $mol_type_enforce<
+		ReturnType< $rise_resize['top_edge_y'] >
+		,
+		ReturnType< $rise_resize_edge['y'] >
+	>
+	type $rise_resize_edge__x_rise_resize_43 = $mol_type_enforce<
+		ReturnType< $rise_resize['right_edge_x'] >
+		,
+		ReturnType< $rise_resize_edge['x'] >
+	>
+	type $rise_resize_edge__repos_x_rise_resize_44 = $mol_type_enforce<
+		ReturnType< $rise_resize['repos_x'] >
+		,
+		ReturnType< $rise_resize_edge['repos_x'] >
+	>
+	type $rise_resize_edge__repos_y_rise_resize_45 = $mol_type_enforce<
+		ReturnType< $rise_resize['repos_y'] >
+		,
+		ReturnType< $rise_resize_edge['repos_y'] >
+	>
+	type $rise_resize_edge__on_drag_start_rise_resize_46 = $mol_type_enforce<
+		ReturnType< $rise_resize['resize_start'] >
+		,
+		ReturnType< $rise_resize_edge['on_drag_start'] >
+	>
+	type $rise_resize_edge__on_drag_end_rise_resize_47 = $mol_type_enforce<
+		ReturnType< $rise_resize['resize_end'] >
+		,
+		ReturnType< $rise_resize_edge['on_drag_end'] >
+	>
+	type $rise_resize_edge__y_rise_resize_48 = $mol_type_enforce<
+		ReturnType< $rise_resize['bottom_edge_y'] >
+		,
+		ReturnType< $rise_resize_edge['y'] >
+	>
+	type $rise_resize_edge__x_rise_resize_49 = $mol_type_enforce<
+		ReturnType< $rise_resize['left_edge_x'] >
+		,
+		ReturnType< $rise_resize_edge['x'] >
+	>
+	type $rise_resize_edge__repos_x_rise_resize_50 = $mol_type_enforce<
+		ReturnType< $rise_resize['repos_x'] >
+		,
+		ReturnType< $rise_resize_edge['repos_x'] >
+	>
+	type $rise_resize_edge__repos_y_rise_resize_51 = $mol_type_enforce<
+		ReturnType< $rise_resize['repos_y'] >
+		,
+		ReturnType< $rise_resize_edge['repos_y'] >
+	>
+	type $rise_resize_edge__on_drag_start_rise_resize_52 = $mol_type_enforce<
+		ReturnType< $rise_resize['resize_start'] >
+		,
+		ReturnType< $rise_resize_edge['on_drag_start'] >
+	>
+	type $rise_resize_edge__on_drag_end_rise_resize_53 = $mol_type_enforce<
+		ReturnType< $rise_resize['resize_end'] >
+		,
+		ReturnType< $rise_resize_edge['on_drag_end'] >
+	>
+	type $rise_resize_edge__y_rise_resize_54 = $mol_type_enforce<
+		ReturnType< $rise_resize['bottom_edge_y'] >
+		,
+		ReturnType< $rise_resize_edge['y'] >
+	>
+	type $rise_resize_edge__x_rise_resize_55 = $mol_type_enforce<
+		ReturnType< $rise_resize['right_edge_x'] >
+		,
+		ReturnType< $rise_resize_edge['x'] >
+	>
+	export class $rise_resize extends $mol_view {
+		drag_body( ): readonly(any)[]
+		x( next?: number ): number
+		y( next?: number ): number
+		on_drag_start( next?: any ): any
+		on_drag( next?: any ): any
+		on_drag_end( next?: any ): any
+		dragged( ): ReturnType< ReturnType< $rise_resize['Drag_view'] >['dragged'] >
+		drags_synced( ): readonly($rise_drag)[]
+		Drag( ): ReturnType< ReturnType< $rise_resize['Drag_view'] >['Drag'] >
+		repos_x( id: any): number
+		repos_y( id: any): number
+		drag_pointerdown( next?: ReturnType< ReturnType< $rise_resize['Drag_view'] >['pointerdown'] > ): ReturnType< ReturnType< $rise_resize['Drag_view'] >['pointerdown'] >
+		Drag_view( ): $rise_drag_view
+		controls( ): readonly(any)[]
+		resize_start( next?: any ): any
+		resize_end( next?: any ): any
+		top_edge_y( next?: number ): number
+		Top_edge( ): $rise_resize_edge
+		left_edge_x( next?: number ): number
+		Left_edge( ): $rise_resize_edge
+		bottom_edge_y( next?: number ): number
+		Bottom_edge( ): $rise_resize_edge
+		right_edge_x( next?: number ): number
+		Right_edge( ): $rise_resize_edge
+		Top_left_edge( ): $rise_resize_edge
+		Top_right_edge( ): $rise_resize_edge
+		Bottom_left_edge( ): $rise_resize_edge
+		Bottom_right_edge( ): $rise_resize_edge
+		edges( ): readonly(any)[]
+		top_px( ): string
+		left_px( ): string
+		height_px( ): string
+		width_px( ): string
+		sub( ): readonly(any)[]
+		resizing( next?: boolean ): boolean
+		transforming( ): boolean
+		height_min( ): number
+		width_min( ): number
+		height( next?: number ): number
+		width( next?: number ): number
+		top( next?: number ): number
+		left( next?: number ): number
+		stick_threshold( ): number
+		x_stick( next?: number ): number
+		y_stick( next?: number ): number
+		bottom_edge_y_stick( next?: ReturnType< $rise_resize['height_min'] > ): ReturnType< $rise_resize['height_min'] >
+		right_edge_x_stick( next?: ReturnType< $rise_resize['width_min'] > ): ReturnType< $rise_resize['width_min'] >
+		top_edge_y_stick( next?: number ): number
+		left_edge_x_stick( next?: number ): number
+		stickable( next?: boolean ): boolean
+		sticks_y( ): readonly(number)[]
+		sticks_x( ): readonly(number)[]
+		auto( ): readonly(any)[]
+		style( ): ({ 
+			'top': ReturnType< $rise_resize['top_px'] >,
+			'left': ReturnType< $rise_resize['left_px'] >,
+			'height': ReturnType< $rise_resize['height_px'] >,
+			'width': ReturnType< $rise_resize['width_px'] >,
+		})  & ReturnType< $mol_view['style'] >
+	}
+	
+	export class $rise_resize_edge extends $rise_drag_view {
+	}
+	
+}
+
+//# sourceMappingURL=resize.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $rise_resize extends $.$rise_resize {
+        repos_x(val: number): number;
+        repos_y(val: number): number;
+        to_stick(sticks: readonly number[], val: number, shift: number): number;
+        to_stick_x(val: number, shift: number): number;
+        to_stick_y(val: number, shift: number): number;
+        y(next?: number): number;
+        x(next?: number): number;
+        top_edge_y(next?: number): number;
+        bottom_edge_y(next?: number): number;
+        left_edge_x(next?: number): number;
+        right_edge_x(next?: number): number;
+        top(next?: number): number;
+        left(next?: number): number;
+        width(next?: number): number;
+        height(next?: number): number;
+        height_px(): string;
+        width_px(): string;
+        top_px(): string;
+        left_px(): string;
+        transforming(): boolean;
+        resize_start(next?: any): void;
+        resize_end(): void;
+    }
+}
+
+declare namespace $.$$ {
+}
+
 declare namespace $ {
 
 	type $mol_grid_table__sub_mol_grid_1 = $mol_type_enforce<
@@ -45439,6 +46080,1816 @@ declare namespace $ {
 
 declare namespace $ {
 
+	export class $mol_image extends $mol_view {
+		uri( ): string
+		title( ): string
+		loading( ): string
+		decoding( ): string
+		cors( ): any
+		natural_width( ): number
+		natural_height( ): number
+		load( next?: any ): any
+		dom_name( ): string
+		attr( ): Record<string, any> & ReturnType< $mol_view['attr'] >
+		event( ): Record<string, any>
+		minimal_width( ): number
+		minimal_height( ): number
+	}
+	
+}
+
+//# sourceMappingURL=image.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $mol_image extends $.$mol_image {
+        natural_width(next?: null): number;
+        natural_height(next?: null): number;
+        load(): void;
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	type $mol_image__uri_mol_link_iconed_1 = $mol_type_enforce<
+		ReturnType< $mol_link_iconed['icon'] >
+		,
+		ReturnType< $mol_image['uri'] >
+	>
+	type $mol_image__title_mol_link_iconed_2 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_image['title'] >
+	>
+	export class $mol_link_iconed extends $mol_link {
+		icon( ): string
+		Icon( ): $mol_image
+		title( ): ReturnType< $mol_link_iconed['uri'] >
+		sub( ): readonly(any)[]
+		content( ): readonly(any)[]
+		host( ): string
+	}
+	
+}
+
+//# sourceMappingURL=iconed.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $mol_link_iconed extends $.$mol_link_iconed {
+        icon(): string;
+        host(): string;
+        title(): string;
+        sub(): readonly any[];
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	export class $mol_icon_youtube extends $mol_icon {
+		path( ): string
+	}
+	
+}
+
+//# sourceMappingURL=youtube.view.tree.d.ts.map
+declare namespace $ {
+
+	type $mol_image__title_mol_embed_service_1 = $mol_type_enforce<
+		ReturnType< $mol_embed_service['title'] >
+		,
+		ReturnType< $mol_image['title'] >
+	>
+	type $mol_image__uri_mol_embed_service_2 = $mol_type_enforce<
+		ReturnType< $mol_embed_service['video_preview'] >
+		,
+		ReturnType< $mol_image['uri'] >
+	>
+	type $mol_frame__title_mol_embed_service_3 = $mol_type_enforce<
+		ReturnType< $mol_embed_service['title'] >
+		,
+		ReturnType< $mol_frame['title'] >
+	>
+	type $mol_frame__uri_mol_embed_service_4 = $mol_type_enforce<
+		ReturnType< $mol_embed_service['video_embed'] >
+		,
+		ReturnType< $mol_frame['uri'] >
+	>
+	export class $mol_embed_service extends $mol_check {
+		active( next?: boolean ): boolean
+		title( ): string
+		video_preview( ): string
+		Image( ): $mol_image
+		Hint( ): $mol_icon_youtube
+		video_embed( ): string
+		Frame( ): $mol_frame
+		uri( ): string
+		video_id( ): string
+		checked( next?: ReturnType< $mol_embed_service['active'] > ): ReturnType< $mol_embed_service['active'] >
+		sub( ): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=service.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $mol_embed_service extends $.$mol_embed_service {
+        sub(): $.$mol_frame[] | ($.$mol_image | $mol_icon_youtube)[];
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	export class $mol_embed_youtube extends $mol_embed_service {
+	}
+	
+}
+
+//# sourceMappingURL=youtube.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $mol_embed_youtube extends $.$mol_embed_youtube {
+        video_embed(): string;
+        video_id(): string;
+        video_preview(): string;
+    }
+}
+
+declare namespace $ {
+
+	export class $mol_embed_rutube extends $mol_embed_service {
+	}
+	
+}
+
+//# sourceMappingURL=rutube.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $mol_embed_rutube extends $.$mol_embed_rutube {
+        video_embed(): string;
+        video_id(): string;
+        video_preview(): string;
+    }
+}
+
+declare namespace $ {
+
+	export class $mol_embed_vklive extends $mol_embed_service {
+	}
+	
+}
+
+//# sourceMappingURL=vklive.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $mol_embed_vklive extends $.$mol_embed_vklive {
+        video_embed(): string;
+        channel_id(): string;
+        video_id(): string;
+        video_preview(): string;
+    }
+}
+
+declare namespace $ {
+
+	type $mol_image__title_mol_embed_any_1 = $mol_type_enforce<
+		ReturnType< $mol_embed_any['title'] >
+		,
+		ReturnType< $mol_image['title'] >
+	>
+	type $mol_image__uri_mol_embed_any_2 = $mol_type_enforce<
+		ReturnType< $mol_embed_any['uri'] >
+		,
+		ReturnType< $mol_image['uri'] >
+	>
+	type $mol_embed_native__title_mol_embed_any_3 = $mol_type_enforce<
+		ReturnType< $mol_embed_any['title'] >
+		,
+		ReturnType< $mol_embed_native['title'] >
+	>
+	type $mol_embed_native__uri_mol_embed_any_4 = $mol_type_enforce<
+		ReturnType< $mol_embed_any['uri'] >
+		,
+		ReturnType< $mol_embed_native['uri'] >
+	>
+	type $mol_embed_youtube__title_mol_embed_any_5 = $mol_type_enforce<
+		ReturnType< $mol_embed_any['title'] >
+		,
+		ReturnType< $mol_embed_youtube['title'] >
+	>
+	type $mol_embed_youtube__uri_mol_embed_any_6 = $mol_type_enforce<
+		ReturnType< $mol_embed_any['uri'] >
+		,
+		ReturnType< $mol_embed_youtube['uri'] >
+	>
+	type $mol_embed_rutube__title_mol_embed_any_7 = $mol_type_enforce<
+		ReturnType< $mol_embed_any['title'] >
+		,
+		ReturnType< $mol_embed_rutube['title'] >
+	>
+	type $mol_embed_rutube__uri_mol_embed_any_8 = $mol_type_enforce<
+		ReturnType< $mol_embed_any['uri'] >
+		,
+		ReturnType< $mol_embed_rutube['uri'] >
+	>
+	type $mol_embed_vklive__title_mol_embed_any_9 = $mol_type_enforce<
+		ReturnType< $mol_embed_any['title'] >
+		,
+		ReturnType< $mol_embed_vklive['title'] >
+	>
+	type $mol_embed_vklive__uri_mol_embed_any_10 = $mol_type_enforce<
+		ReturnType< $mol_embed_any['uri'] >
+		,
+		ReturnType< $mol_embed_vklive['uri'] >
+	>
+	export class $mol_embed_any extends $mol_view {
+		title( ): string
+		uri( ): string
+		Image( ): $mol_image
+		Object( ): $mol_embed_native
+		Youtube( ): $mol_embed_youtube
+		Rutube( ): $mol_embed_rutube
+		Vklive( ): $mol_embed_vklive
+	}
+	
+}
+
+//# sourceMappingURL=any.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $mol_embed_any extends $.$mol_embed_any {
+        type(): "object" | "image" | "youtube" | "rutube" | "vklive";
+        sub(): $.$mol_image[] | $.$mol_embed_youtube[] | $.$mol_embed_native[];
+    }
+}
+
+declare namespace $ {
+
+	type $mol_text__text_mol_text_1 = $mol_type_enforce<
+		ReturnType< $mol_text['spoiler_label'] >
+		,
+		ReturnType< $mol_text['text'] >
+	>
+	type $mol_text__highlight_mol_text_2 = $mol_type_enforce<
+		ReturnType< $mol_text['highlight'] >
+		,
+		ReturnType< $mol_text['highlight'] >
+	>
+	type $mol_text__uri_resolve_mol_text_3 = $mol_type_enforce<
+		ReturnType< $mol_text['uri_resolve'] >
+		,
+		ReturnType< $mol_text['uri_resolve'] >
+	>
+	type $mol_text__code_sidebar_showed_mol_text_4 = $mol_type_enforce<
+		ReturnType< $mol_text['code_sidebar_showed'] >
+		,
+		ReturnType< $mol_text['code_sidebar_showed'] >
+	>
+	type $mol_text__text_mol_text_5 = $mol_type_enforce<
+		ReturnType< $mol_text['spoiler_content'] >
+		,
+		ReturnType< $mol_text['text'] >
+	>
+	type $mol_text__highlight_mol_text_6 = $mol_type_enforce<
+		ReturnType< $mol_text['highlight'] >
+		,
+		ReturnType< $mol_text['highlight'] >
+	>
+	type $mol_text__uri_resolve_mol_text_7 = $mol_type_enforce<
+		ReturnType< $mol_text['uri_resolve'] >
+		,
+		ReturnType< $mol_text['uri_resolve'] >
+	>
+	type $mol_text__code_sidebar_showed_mol_text_8 = $mol_type_enforce<
+		ReturnType< $mol_text['code_sidebar_showed'] >
+		,
+		ReturnType< $mol_text['code_sidebar_showed'] >
+	>
+	type $mol_paragraph__sub_mol_text_9 = $mol_type_enforce<
+		ReturnType< $mol_text['block_content'] >
+		,
+		ReturnType< $mol_paragraph['sub'] >
+	>
+	type $mol_text__text_mol_text_10 = $mol_type_enforce<
+		ReturnType< $mol_text['quote_text'] >
+		,
+		ReturnType< $mol_text['text'] >
+	>
+	type $mol_text__auto_scroll_mol_text_11 = $mol_type_enforce<
+		any
+		,
+		ReturnType< $mol_text['auto_scroll'] >
+	>
+	type $mol_text__highlight_mol_text_12 = $mol_type_enforce<
+		ReturnType< $mol_text['highlight'] >
+		,
+		ReturnType< $mol_text['highlight'] >
+	>
+	type $mol_text__uri_resolve_mol_text_13 = $mol_type_enforce<
+		ReturnType< $mol_text['uri_resolve'] >
+		,
+		ReturnType< $mol_text['uri_resolve'] >
+	>
+	type $mol_text__code_sidebar_showed_mol_text_14 = $mol_type_enforce<
+		ReturnType< $mol_text['code_sidebar_showed'] >
+		,
+		ReturnType< $mol_text['code_sidebar_showed'] >
+	>
+	type $mol_text_list__type_mol_text_15 = $mol_type_enforce<
+		ReturnType< $mol_text['list_type'] >
+		,
+		ReturnType< $mol_text_list['type'] >
+	>
+	type $mol_text_list__text_mol_text_16 = $mol_type_enforce<
+		ReturnType< $mol_text['list_text'] >
+		,
+		ReturnType< $mol_text_list['text'] >
+	>
+	type $mol_text_list__highlight_mol_text_17 = $mol_type_enforce<
+		ReturnType< $mol_text['highlight'] >
+		,
+		ReturnType< $mol_text_list['highlight'] >
+	>
+	type $mol_text_list__uri_resolve_mol_text_18 = $mol_type_enforce<
+		ReturnType< $mol_text['uri_resolve'] >
+		,
+		ReturnType< $mol_text_list['uri_resolve'] >
+	>
+	type $mol_text_list__code_sidebar_showed_mol_text_19 = $mol_type_enforce<
+		ReturnType< $mol_text['code_sidebar_showed'] >
+		,
+		ReturnType< $mol_text_list['code_sidebar_showed'] >
+	>
+	type $mol_text_header__minimal_height_mol_text_20 = $mol_type_enforce<
+		number
+		,
+		ReturnType< $mol_text_header['minimal_height'] >
+	>
+	type $mol_text_header__level_mol_text_21 = $mol_type_enforce<
+		ReturnType< $mol_text['header_level'] >
+		,
+		ReturnType< $mol_text_header['level'] >
+	>
+	type $mol_text_header__content_mol_text_22 = $mol_type_enforce<
+		ReturnType< $mol_text['block_content'] >
+		,
+		ReturnType< $mol_text_header['content'] >
+	>
+	type $mol_text_header__arg_mol_text_23 = $mol_type_enforce<
+		ReturnType< $mol_text['header_arg'] >
+		,
+		ReturnType< $mol_text_header['arg'] >
+	>
+	type $mol_text_code__text_mol_text_24 = $mol_type_enforce<
+		ReturnType< $mol_text['pre_text'] >
+		,
+		ReturnType< $mol_text_code['text'] >
+	>
+	type $mol_text_code__row_themes_mol_text_25 = $mol_type_enforce<
+		ReturnType< $mol_text['pre_themes'] >
+		,
+		ReturnType< $mol_text_code['row_themes'] >
+	>
+	type $mol_text_code__highlight_mol_text_26 = $mol_type_enforce<
+		ReturnType< $mol_text['highlight'] >
+		,
+		ReturnType< $mol_text_code['highlight'] >
+	>
+	type $mol_text_code__uri_resolve_mol_text_27 = $mol_type_enforce<
+		ReturnType< $mol_text['uri_resolve'] >
+		,
+		ReturnType< $mol_text_code['uri_resolve'] >
+	>
+	type $mol_text_code__sidebar_showed_mol_text_28 = $mol_type_enforce<
+		ReturnType< $mol_text['code_sidebar_showed'] >
+		,
+		ReturnType< $mol_text_code['sidebar_showed'] >
+	>
+	type $mol_view__dom_name_mol_text_29 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_view['dom_name'] >
+	>
+	type $mol_grid__head_cells_mol_text_30 = $mol_type_enforce<
+		ReturnType< $mol_text['table_head_cells'] >
+		,
+		ReturnType< $mol_grid['head_cells'] >
+	>
+	type $mol_grid__rows_mol_text_31 = $mol_type_enforce<
+		ReturnType< $mol_text['table_rows'] >
+		,
+		ReturnType< $mol_grid['rows'] >
+	>
+	type $mol_grid_row__cells_mol_text_32 = $mol_type_enforce<
+		ReturnType< $mol_text['table_cells'] >
+		,
+		ReturnType< $mol_grid_row['cells'] >
+	>
+	type $mol_text__auto_scroll_mol_text_33 = $mol_type_enforce<
+		any
+		,
+		ReturnType< $mol_text['auto_scroll'] >
+	>
+	type $mol_text__text_mol_text_34 = $mol_type_enforce<
+		ReturnType< $mol_text['table_cell_text'] >
+		,
+		ReturnType< $mol_text['text'] >
+	>
+	type $mol_text__highlight_mol_text_35 = $mol_type_enforce<
+		ReturnType< $mol_text['highlight'] >
+		,
+		ReturnType< $mol_text['highlight'] >
+	>
+	type $mol_text__uri_resolve_mol_text_36 = $mol_type_enforce<
+		ReturnType< $mol_text['uri_resolve'] >
+		,
+		ReturnType< $mol_text['uri_resolve'] >
+	>
+	type $mol_text__code_sidebar_showed_mol_text_37 = $mol_type_enforce<
+		ReturnType< $mol_text['code_sidebar_showed'] >
+		,
+		ReturnType< $mol_text['code_sidebar_showed'] >
+	>
+	type $mol_grid__rows_mol_text_38 = $mol_type_enforce<
+		ReturnType< $mol_text['grid_rows'] >
+		,
+		ReturnType< $mol_grid['rows'] >
+	>
+	type $mol_grid_row__cells_mol_text_39 = $mol_type_enforce<
+		ReturnType< $mol_text['grid_cells'] >
+		,
+		ReturnType< $mol_grid_row['cells'] >
+	>
+	type $mol_text__auto_scroll_mol_text_40 = $mol_type_enforce<
+		any
+		,
+		ReturnType< $mol_text['auto_scroll'] >
+	>
+	type $mol_text__text_mol_text_41 = $mol_type_enforce<
+		ReturnType< $mol_text['grid_cell_text'] >
+		,
+		ReturnType< $mol_text['text'] >
+	>
+	type $mol_text__highlight_mol_text_42 = $mol_type_enforce<
+		ReturnType< $mol_text['highlight'] >
+		,
+		ReturnType< $mol_text['highlight'] >
+	>
+	type $mol_text__uri_resolve_mol_text_43 = $mol_type_enforce<
+		ReturnType< $mol_text['uri_resolve'] >
+		,
+		ReturnType< $mol_text['uri_resolve'] >
+	>
+	type $mol_text__code_sidebar_showed_mol_text_44 = $mol_type_enforce<
+		ReturnType< $mol_text['code_sidebar_showed'] >
+		,
+		ReturnType< $mol_text['code_sidebar_showed'] >
+	>
+	type $mol_dimmer__dom_name_mol_text_45 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_dimmer['dom_name'] >
+	>
+	type $mol_dimmer__needle_mol_text_46 = $mol_type_enforce<
+		ReturnType< $mol_text['highlight'] >
+		,
+		ReturnType< $mol_dimmer['needle'] >
+	>
+	type $mol_dimmer__haystack_mol_text_47 = $mol_type_enforce<
+		ReturnType< $mol_text['line_text'] >
+		,
+		ReturnType< $mol_dimmer['haystack'] >
+	>
+	type $mol_text_span__dom_name_mol_text_48 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_text_span['dom_name'] >
+	>
+	type $mol_text_span__type_mol_text_49 = $mol_type_enforce<
+		ReturnType< $mol_text['line_type'] >
+		,
+		ReturnType< $mol_text_span['type'] >
+	>
+	type $mol_text_span__sub_mol_text_50 = $mol_type_enforce<
+		ReturnType< $mol_text['line_content'] >
+		,
+		ReturnType< $mol_text_span['sub'] >
+	>
+	type $mol_text_code_line__numb_showed_mol_text_51 = $mol_type_enforce<
+		boolean
+		,
+		ReturnType< $mol_text_code_line['numb_showed'] >
+	>
+	type $mol_text_code_line__highlight_mol_text_52 = $mol_type_enforce<
+		ReturnType< $mol_text['highlight'] >
+		,
+		ReturnType< $mol_text_code_line['highlight'] >
+	>
+	type $mol_text_code_line__text_mol_text_53 = $mol_type_enforce<
+		ReturnType< $mol_text['line_text'] >
+		,
+		ReturnType< $mol_text_code_line['text'] >
+	>
+	type $mol_text_code_line__uri_resolve_mol_text_54 = $mol_type_enforce<
+		ReturnType< $mol_text['uri_resolve'] >
+		,
+		ReturnType< $mol_text_code_line['uri_resolve'] >
+	>
+	type $mol_text_code_line__syntax_mol_text_55 = $mol_type_enforce<
+		ReturnType< $mol_text['code_syntax'] >
+		,
+		ReturnType< $mol_text_code_line['syntax'] >
+	>
+	type $mol_link_iconed__uri_mol_text_56 = $mol_type_enforce<
+		ReturnType< $mol_text['link_uri'] >
+		,
+		ReturnType< $mol_link_iconed['uri'] >
+	>
+	type $mol_link_iconed__content_mol_text_57 = $mol_type_enforce<
+		ReturnType< $mol_text['line_content'] >
+		,
+		ReturnType< $mol_link_iconed['content'] >
+	>
+	type $mol_link_iconed__uri_mol_text_58 = $mol_type_enforce<
+		ReturnType< $mol_text['link_uri'] >
+		,
+		ReturnType< $mol_link_iconed['uri'] >
+	>
+	type $mol_link_iconed__content_mol_text_59 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_link_iconed['content'] >
+	>
+	type $mol_embed_any__uri_mol_text_60 = $mol_type_enforce<
+		ReturnType< $mol_text['link_uri'] >
+		,
+		ReturnType< $mol_embed_any['uri'] >
+	>
+	type $mol_embed_any__title_mol_text_61 = $mol_type_enforce<
+		ReturnType< $mol_text['line_text'] >
+		,
+		ReturnType< $mol_embed_any['title'] >
+	>
+	type $mol_expander__label_mol_text_62 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_expander['label'] >
+	>
+	type $mol_expander__content_mol_text_63 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_expander['content'] >
+	>
+	export class $mol_text extends $mol_list {
+		auto_scroll( ): any
+		block_content( id: any): readonly(any)[]
+		quote_text( id: any): string
+		highlight( ): string
+		uri_resolve( id: any): string
+		code_sidebar_showed( ): boolean
+		list_type( id: any): string
+		list_text( id: any): string
+		header_level( id: any): number
+		header_arg( id: any): Record<string, any>
+		pre_text( id: any): string
+		pre_themes( id: any): readonly(string)[]
+		table_head_cells( id: any): readonly(any)[]
+		table_rows( id: any): readonly(any)[]
+		table_cells( id: any): readonly(any)[]
+		table_cell_text( id: any): string
+		grid_rows( id: any): readonly(any)[]
+		grid_cells( id: any): readonly(any)[]
+		grid_cell_text( id: any): string
+		line_text( id: any): string
+		line_type( id: any): string
+		line_content( id: any): readonly(any)[]
+		code_syntax( ): any
+		link_uri( id: any): string
+		link_host( id: any): string
+		spoiler_label( id: any): string
+		Spoiler_label( id: any): $mol_text
+		spoiler_content( id: any): string
+		Spoiler_content( id: any): $mol_text
+		uri_base( ): string
+		text( ): string
+		param( ): string
+		flow_tokens( ): readonly(any)[]
+		block_text( id: any): string
+		auto( ): readonly(any)[]
+		Paragraph( id: any): $mol_paragraph
+		Quote( id: any): $mol_text
+		List( id: any): $mol_text_list
+		item_index( id: any): number
+		Header( id: any): $mol_text_header
+		Pre( id: any): $mol_text_code
+		Cut( id: any): $mol_view
+		Table( id: any): $mol_grid
+		Table_row( id: any): $mol_grid_row
+		Table_cell( id: any): $mol_text
+		Grid( id: any): $mol_grid
+		Grid_row( id: any): $mol_grid_row
+		Grid_cell( id: any): $mol_text
+		String( id: any): $mol_dimmer
+		Span( id: any): $mol_text_span
+		Code_line( id: any): $mol_text_code_line
+		Link( id: any): $mol_link_iconed
+		Link_http( id: any): $mol_link_iconed
+		Embed( id: any): $mol_embed_any
+		Spoiler( id: any): $mol_expander
+	}
+	
+	type $mol_link__arg_mol_text_header_1 = $mol_type_enforce<
+		ReturnType< $mol_text_header['arg'] >
+		,
+		ReturnType< $mol_link['arg'] >
+	>
+	type $mol_link__hint_mol_text_header_2 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_link['hint'] >
+	>
+	type $mol_link__sub_mol_text_header_3 = $mol_type_enforce<
+		ReturnType< $mol_text_header['content'] >
+		,
+		ReturnType< $mol_link['sub'] >
+	>
+	export class $mol_text_header extends $mol_paragraph {
+		arg( ): Record<string, any>
+		content( ): readonly(any)[]
+		Link( ): $mol_link
+		level( ): number
+		sub( ): readonly(any)[]
+	}
+	
+	export class $mol_text_span extends $mol_paragraph {
+		type( ): string
+		dom_name( ): string
+		attr( ): ({ 
+			'mol_text_type': ReturnType< $mol_text_span['type'] >,
+		})  & ReturnType< $mol_paragraph['attr'] >
+	}
+	
+}
+
+//# sourceMappingURL=text.view.tree.d.ts.map
+declare namespace $.$$ {
+    /**
+     * Markdown visualizer.
+     * @see https://mol.hyoo.ru/#!section=demos/demo=mol_text_demo
+     */
+    class $mol_text extends $.$mol_text {
+        flow_tokens(): Readonly<{
+            name: string;
+            found: string;
+            chunks: string[];
+        }[]>;
+        block_type(index: number): string;
+        rows(): ($mol_view | $.$mol_paragraph | $.$mol_text_code | $.$mol_grid)[];
+        param(): string;
+        header_level(index: number): number;
+        header_arg(index: number): {
+            [x: string]: string;
+        };
+        list_type(index: number): string;
+        item_index(index: number): number;
+        pre_text(index: number): string;
+        pre_themes(index: number): string[];
+        quote_text(index: number): string;
+        list_text(index: number): string;
+        cell_content(indexBlock: number): string[][];
+        table_rows(blockId: number): $mol_grid_row[];
+        table_head_cells(blockId: number): $.$mol_text[];
+        table_cells(id: {
+            block: number;
+            row: number;
+        }): $.$mol_text[];
+        table_cell_text(id: {
+            block: number;
+            row: number;
+            cell: number;
+        }): string;
+        grid_content(indexBlock: number): string[][];
+        grid_rows(blockId: number): $mol_grid_row[];
+        grid_cells(id: {
+            block: number;
+            row: number;
+        }): $.$mol_text[];
+        grid_cell_text(id: {
+            block: number;
+            row: number;
+            cell: number;
+        }): string;
+        uri_base(): string;
+        uri_base_abs(): URL;
+        uri_resolve(uri: string): string;
+        code_syntax(): $mol_syntax2<{
+            'code-indent': RegExp;
+            'code-docs': RegExp;
+            'code-comment-block': RegExp;
+            'code-link': RegExp;
+            'code-comment-inline': RegExp;
+            'code-string': RegExp;
+            'code-number': RegExp;
+            'code-call': RegExp;
+            'code-sexpr': RegExp;
+            'code-field': RegExp;
+            'code-keyword': RegExp;
+            'code-global': RegExp;
+            'code-word': RegExp;
+            'code-decorator': RegExp;
+            'code-tag': RegExp;
+            'code-punctuation': RegExp;
+        }>;
+        block_text(index: number): string;
+        block_content(index: number): ($.$mol_dimmer | $.$mol_text_code_line | $.$mol_link_iconed | $.$mol_embed_any | $mol_text_span)[];
+        line_tokens(path: readonly number[]): Readonly<{
+            name: string;
+            found: string;
+            chunks: string[];
+        }[]>;
+        line_token(path: readonly number[]): {
+            name: string;
+            found: string;
+            chunks: string[];
+        };
+        line_type(path: readonly number[]): string;
+        line_text(path: readonly number[]): string;
+        line_content(path: readonly number[]): ($.$mol_dimmer | $.$mol_text_code_line | $.$mol_link_iconed | $.$mol_embed_any | $mol_text_span)[];
+        link_uri(path: readonly number[]): string;
+        link_host(path: readonly number[]): string;
+        auto_scroll(): void;
+        spoiler_rows(index: number): string[];
+        spoiler_label(index: number): string;
+        spoiler_content(index: number): string;
+    }
+    class $mol_text_header extends $.$mol_text_header {
+        dom_name(): string;
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	type $mol_text_list_item__index_mol_text_list_1 = $mol_type_enforce<
+		ReturnType< $mol_text_list['item_index'] >
+		,
+		ReturnType< $mol_text_list_item['index'] >
+	>
+	type $mol_text_list_item__sub_mol_text_list_2 = $mol_type_enforce<
+		ReturnType< $mol_text_list['block_content'] >
+		,
+		ReturnType< $mol_text_list_item['sub'] >
+	>
+	export class $mol_text_list extends $mol_text {
+		type( ): string
+		auto_scroll( ): any
+		attr( ): ({ 
+			'mol_text_list_type': ReturnType< $mol_text_list['type'] >,
+		})  & ReturnType< $mol_text['attr'] >
+		Paragraph( id: any): $mol_text_list_item
+	}
+	
+	export class $mol_text_list_item extends $mol_paragraph {
+		index( ): number
+		attr( ): ({ 
+			'mol_text_list_item_index': ReturnType< $mol_text_list_item['index'] >,
+		})  & ReturnType< $mol_paragraph['attr'] >
+	}
+	
+}
+
+//# sourceMappingURL=list.view.tree.d.ts.map
+declare namespace $ {
+
+	type __rise_resize_demo_1 = $mol_type_enforce<
+		Parameters< $rise_resize_demo['stickable'] >[0]
+		,
+		Parameters< ReturnType< $rise_resize_demo['Resize'] >['stickable'] >[0]
+	>
+	type $mol_check_box__title_rise_resize_demo_2 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_check_box['title'] >
+	>
+	type $mol_check_box__checked_rise_resize_demo_3 = $mol_type_enforce<
+		ReturnType< $rise_resize_demo['stickable'] >
+		,
+		ReturnType< $mol_check_box['checked'] >
+	>
+	type $mol_text__text_rise_resize_demo_4 = $mol_type_enforce<
+		ReturnType< $rise_resize_demo['content'] >
+		,
+		ReturnType< $mol_text['text'] >
+	>
+	type $rise_resize__height_min_rise_resize_demo_5 = $mol_type_enforce<
+		number
+		,
+		ReturnType< $rise_resize['height_min'] >
+	>
+	type $rise_resize__width_min_rise_resize_demo_6 = $mol_type_enforce<
+		number
+		,
+		ReturnType< $rise_resize['width_min'] >
+	>
+	type $rise_resize__drag_body_rise_resize_demo_7 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $rise_resize['drag_body'] >
+	>
+	type $rise_resize__sticks_y_rise_resize_demo_8 = $mol_type_enforce<
+		ReturnType< $rise_resize_demo['sticks_y'] >
+		,
+		ReturnType< $rise_resize['sticks_y'] >
+	>
+	type $rise_resize__sticks_x_rise_resize_demo_9 = $mol_type_enforce<
+		ReturnType< $rise_resize_demo['sticks_x'] >
+		,
+		ReturnType< $rise_resize['sticks_x'] >
+	>
+	type $mol_view__style_rise_resize_demo_10 = $mol_type_enforce<
+		({ 
+			'left': ReturnType< $rise_resize_demo['stick_left'] >,
+		}) 
+		,
+		ReturnType< $mol_view['style'] >
+	>
+	type $mol_view__style_rise_resize_demo_11 = $mol_type_enforce<
+		({ 
+			'top': ReturnType< $rise_resize_demo['stick_top'] >,
+		}) 
+		,
+		ReturnType< $mol_view['style'] >
+	>
+	export class $rise_resize_demo extends $mol_example_small {
+		height( ): ReturnType< ReturnType< $rise_resize_demo['Resize'] >['height'] >
+		width( ): ReturnType< ReturnType< $rise_resize_demo['Resize'] >['width'] >
+		top( ): ReturnType< ReturnType< $rise_resize_demo['Resize'] >['top'] >
+		left( ): ReturnType< ReturnType< $rise_resize_demo['Resize'] >['left'] >
+		x( ): ReturnType< ReturnType< $rise_resize_demo['Resize'] >['x'] >
+		y( ): ReturnType< ReturnType< $rise_resize_demo['Resize'] >['y'] >
+		bottom_edge_y( ): ReturnType< ReturnType< $rise_resize_demo['Resize'] >['bottom_edge_y'] >
+		right_edge_x( ): ReturnType< ReturnType< $rise_resize_demo['Resize'] >['right_edge_x'] >
+		top_edge_y( ): ReturnType< ReturnType< $rise_resize_demo['Resize'] >['top_edge_y'] >
+		left_edge_x( ): ReturnType< ReturnType< $rise_resize_demo['Resize'] >['left_edge_x'] >
+		x_stick( ): ReturnType< ReturnType< $rise_resize_demo['Resize'] >['x_stick'] >
+		y_stick( ): ReturnType< ReturnType< $rise_resize_demo['Resize'] >['y_stick'] >
+		bottom_edge_y_stick( ): ReturnType< ReturnType< $rise_resize_demo['Resize'] >['bottom_edge_y_stick'] >
+		right_edge_x_stick( ): ReturnType< ReturnType< $rise_resize_demo['Resize'] >['right_edge_x_stick'] >
+		top_edge_y_stick( ): ReturnType< ReturnType< $rise_resize_demo['Resize'] >['top_edge_y_stick'] >
+		left_edge_x_stick( ): ReturnType< ReturnType< $rise_resize_demo['Resize'] >['left_edge_x_stick'] >
+		stickable( next?: ReturnType< ReturnType< $rise_resize_demo['Resize'] >['stickable'] > ): ReturnType< ReturnType< $rise_resize_demo['Resize'] >['stickable'] >
+		Stickable( ): $mol_check_box
+		content( ): string
+		Content( ): $mol_text
+		sticks_y( ): readonly(any)[]
+		sticks_x( ): readonly(any)[]
+		Resize( ): $rise_resize
+		sticks( ): readonly(any)[]
+		stick_left( id: any): string
+		stick_top( id: any): string
+		sub( ): readonly(any)[]
+		Stick_x( id: any): $mol_view
+		Stick_y( id: any): $mol_view
+		tags( ): readonly(any)[]
+		aspects( ): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=demo.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $rise_resize_demo extends $.$rise_resize_demo {
+        content(): string;
+        sticks(): $mol_view[];
+        stick_left(x: number): string;
+        stick_top(y: number): string;
+    }
+}
+
+declare namespace $.$$ {
+}
+
+declare namespace $ {
+
+	type $rise_resize_edge__repos_x_rise_resize_ratio_1 = $mol_type_enforce<
+		ReturnType< $rise_resize_ratio['repos_x'] >
+		,
+		ReturnType< $rise_resize_edge['repos_x'] >
+	>
+	type $rise_resize_edge__repos_y_rise_resize_ratio_2 = $mol_type_enforce<
+		ReturnType< $rise_resize_ratio['repos_y'] >
+		,
+		ReturnType< $rise_resize_edge['repos_y'] >
+	>
+	type $rise_resize_edge__on_drag_start_rise_resize_ratio_3 = $mol_type_enforce<
+		ReturnType< $rise_resize_ratio['resize_start'] >
+		,
+		ReturnType< $rise_resize_edge['on_drag_start'] >
+	>
+	type $rise_resize_edge__on_drag_end_rise_resize_ratio_4 = $mol_type_enforce<
+		ReturnType< $rise_resize_ratio['resize_end'] >
+		,
+		ReturnType< $rise_resize_edge['on_drag_end'] >
+	>
+	type $rise_resize_edge__x_rise_resize_ratio_5 = $mol_type_enforce<
+		ReturnType< $rise_resize_ratio['left_top_edge_ratio_x'] >
+		,
+		ReturnType< $rise_resize_edge['x'] >
+	>
+	type $rise_resize_edge__repos_x_rise_resize_ratio_6 = $mol_type_enforce<
+		ReturnType< $rise_resize_ratio['repos_x'] >
+		,
+		ReturnType< $rise_resize_edge['repos_x'] >
+	>
+	type $rise_resize_edge__repos_y_rise_resize_ratio_7 = $mol_type_enforce<
+		ReturnType< $rise_resize_ratio['repos_y'] >
+		,
+		ReturnType< $rise_resize_edge['repos_y'] >
+	>
+	type $rise_resize_edge__on_drag_start_rise_resize_ratio_8 = $mol_type_enforce<
+		ReturnType< $rise_resize_ratio['resize_start'] >
+		,
+		ReturnType< $rise_resize_edge['on_drag_start'] >
+	>
+	type $rise_resize_edge__on_drag_end_rise_resize_ratio_9 = $mol_type_enforce<
+		ReturnType< $rise_resize_ratio['resize_end'] >
+		,
+		ReturnType< $rise_resize_edge['on_drag_end'] >
+	>
+	type $rise_resize_edge__x_rise_resize_ratio_10 = $mol_type_enforce<
+		ReturnType< $rise_resize_ratio['left_bottom_edge_ratio_x'] >
+		,
+		ReturnType< $rise_resize_edge['x'] >
+	>
+	type $rise_resize_edge__repos_x_rise_resize_ratio_11 = $mol_type_enforce<
+		ReturnType< $rise_resize_ratio['repos_x'] >
+		,
+		ReturnType< $rise_resize_edge['repos_x'] >
+	>
+	type $rise_resize_edge__repos_y_rise_resize_ratio_12 = $mol_type_enforce<
+		ReturnType< $rise_resize_ratio['repos_y'] >
+		,
+		ReturnType< $rise_resize_edge['repos_y'] >
+	>
+	type $rise_resize_edge__on_drag_start_rise_resize_ratio_13 = $mol_type_enforce<
+		ReturnType< $rise_resize_ratio['resize_start'] >
+		,
+		ReturnType< $rise_resize_edge['on_drag_start'] >
+	>
+	type $rise_resize_edge__on_drag_end_rise_resize_ratio_14 = $mol_type_enforce<
+		ReturnType< $rise_resize_ratio['resize_end'] >
+		,
+		ReturnType< $rise_resize_edge['on_drag_end'] >
+	>
+	type $rise_resize_edge__x_rise_resize_ratio_15 = $mol_type_enforce<
+		ReturnType< $rise_resize_ratio['right_bottom_edge_ratio_x'] >
+		,
+		ReturnType< $rise_resize_edge['x'] >
+	>
+	type $rise_resize_edge__repos_x_rise_resize_ratio_16 = $mol_type_enforce<
+		ReturnType< $rise_resize_ratio['repos_x'] >
+		,
+		ReturnType< $rise_resize_edge['repos_x'] >
+	>
+	type $rise_resize_edge__repos_y_rise_resize_ratio_17 = $mol_type_enforce<
+		ReturnType< $rise_resize_ratio['repos_y'] >
+		,
+		ReturnType< $rise_resize_edge['repos_y'] >
+	>
+	type $rise_resize_edge__on_drag_start_rise_resize_ratio_18 = $mol_type_enforce<
+		ReturnType< $rise_resize_ratio['resize_start'] >
+		,
+		ReturnType< $rise_resize_edge['on_drag_start'] >
+	>
+	type $rise_resize_edge__on_drag_end_rise_resize_ratio_19 = $mol_type_enforce<
+		ReturnType< $rise_resize_ratio['resize_end'] >
+		,
+		ReturnType< $rise_resize_edge['on_drag_end'] >
+	>
+	type $rise_resize_edge__x_rise_resize_ratio_20 = $mol_type_enforce<
+		ReturnType< $rise_resize_ratio['right_top_edge_ratio_x'] >
+		,
+		ReturnType< $rise_resize_edge['x'] >
+	>
+	type $rise_resize_edge__repos_x_rise_resize_ratio_21 = $mol_type_enforce<
+		ReturnType< $rise_resize_ratio['repos_x'] >
+		,
+		ReturnType< $rise_resize_edge['repos_x'] >
+	>
+	type $rise_resize_edge__repos_y_rise_resize_ratio_22 = $mol_type_enforce<
+		ReturnType< $rise_resize_ratio['repos_y'] >
+		,
+		ReturnType< $rise_resize_edge['repos_y'] >
+	>
+	type $rise_resize_edge__on_drag_start_rise_resize_ratio_23 = $mol_type_enforce<
+		ReturnType< $rise_resize_ratio['resize_start'] >
+		,
+		ReturnType< $rise_resize_edge['on_drag_start'] >
+	>
+	type $rise_resize_edge__on_drag_end_rise_resize_ratio_24 = $mol_type_enforce<
+		ReturnType< $rise_resize_ratio['resize_end'] >
+		,
+		ReturnType< $rise_resize_edge['on_drag_end'] >
+	>
+	type $rise_resize_edge__y_rise_resize_ratio_25 = $mol_type_enforce<
+		ReturnType< $rise_resize_ratio['top_left_edge_ratio_y'] >
+		,
+		ReturnType< $rise_resize_edge['y'] >
+	>
+	type $rise_resize_edge__repos_x_rise_resize_ratio_26 = $mol_type_enforce<
+		ReturnType< $rise_resize_ratio['repos_x'] >
+		,
+		ReturnType< $rise_resize_edge['repos_x'] >
+	>
+	type $rise_resize_edge__repos_y_rise_resize_ratio_27 = $mol_type_enforce<
+		ReturnType< $rise_resize_ratio['repos_y'] >
+		,
+		ReturnType< $rise_resize_edge['repos_y'] >
+	>
+	type $rise_resize_edge__on_drag_start_rise_resize_ratio_28 = $mol_type_enforce<
+		ReturnType< $rise_resize_ratio['resize_start'] >
+		,
+		ReturnType< $rise_resize_edge['on_drag_start'] >
+	>
+	type $rise_resize_edge__on_drag_end_rise_resize_ratio_29 = $mol_type_enforce<
+		ReturnType< $rise_resize_ratio['resize_end'] >
+		,
+		ReturnType< $rise_resize_edge['on_drag_end'] >
+	>
+	type $rise_resize_edge__y_rise_resize_ratio_30 = $mol_type_enforce<
+		ReturnType< $rise_resize_ratio['top_right_edge_ratio_y'] >
+		,
+		ReturnType< $rise_resize_edge['y'] >
+	>
+	type $rise_resize_edge__repos_x_rise_resize_ratio_31 = $mol_type_enforce<
+		ReturnType< $rise_resize_ratio['repos_x'] >
+		,
+		ReturnType< $rise_resize_edge['repos_x'] >
+	>
+	type $rise_resize_edge__repos_y_rise_resize_ratio_32 = $mol_type_enforce<
+		ReturnType< $rise_resize_ratio['repos_y'] >
+		,
+		ReturnType< $rise_resize_edge['repos_y'] >
+	>
+	type $rise_resize_edge__on_drag_start_rise_resize_ratio_33 = $mol_type_enforce<
+		ReturnType< $rise_resize_ratio['resize_start'] >
+		,
+		ReturnType< $rise_resize_edge['on_drag_start'] >
+	>
+	type $rise_resize_edge__on_drag_end_rise_resize_ratio_34 = $mol_type_enforce<
+		ReturnType< $rise_resize_ratio['resize_end'] >
+		,
+		ReturnType< $rise_resize_edge['on_drag_end'] >
+	>
+	type $rise_resize_edge__y_rise_resize_ratio_35 = $mol_type_enforce<
+		ReturnType< $rise_resize_ratio['bottom_left_edge_ratio_y'] >
+		,
+		ReturnType< $rise_resize_edge['y'] >
+	>
+	type $rise_resize_edge__repos_x_rise_resize_ratio_36 = $mol_type_enforce<
+		ReturnType< $rise_resize_ratio['repos_x'] >
+		,
+		ReturnType< $rise_resize_edge['repos_x'] >
+	>
+	type $rise_resize_edge__repos_y_rise_resize_ratio_37 = $mol_type_enforce<
+		ReturnType< $rise_resize_ratio['repos_y'] >
+		,
+		ReturnType< $rise_resize_edge['repos_y'] >
+	>
+	type $rise_resize_edge__on_drag_start_rise_resize_ratio_38 = $mol_type_enforce<
+		ReturnType< $rise_resize_ratio['resize_start'] >
+		,
+		ReturnType< $rise_resize_edge['on_drag_start'] >
+	>
+	type $rise_resize_edge__on_drag_end_rise_resize_ratio_39 = $mol_type_enforce<
+		ReturnType< $rise_resize_ratio['resize_end'] >
+		,
+		ReturnType< $rise_resize_edge['on_drag_end'] >
+	>
+	type $rise_resize_edge__y_rise_resize_ratio_40 = $mol_type_enforce<
+		ReturnType< $rise_resize_ratio['bottom_right_edge_ratio_y'] >
+		,
+		ReturnType< $rise_resize_edge['y'] >
+	>
+	export class $rise_resize_ratio extends $rise_resize {
+		left_top_edge_ratio_x( next?: number ): number
+		Left_top_edge_ratio( ): $rise_resize_edge
+		left_bottom_edge_ratio_x( next?: number ): number
+		Left_bottom_edge_ratio( ): $rise_resize_edge
+		right_bottom_edge_ratio_x( next?: number ): number
+		Right_bottom_edge_ratio( ): $rise_resize_edge
+		right_top_edge_ratio_x( next?: number ): number
+		Right_top_edge_ratio( ): $rise_resize_edge
+		top_left_edge_ratio_y( next?: number ): number
+		Top_left_edge_ratio( ): $rise_resize_edge
+		top_right_edge_ratio_y( next?: number ): number
+		Top_right_edge_ratio( ): $rise_resize_edge
+		bottom_left_edge_ratio_y( next?: number ): number
+		Bottom_left_edge_ratio( ): $rise_resize_edge
+		bottom_right_edge_ratio_y( next?: number ): number
+		Bottom_right_edge_ratio( ): $rise_resize_edge
+		ratio( ): number
+		edges_ratio( ): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=ratio.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $rise_resize_ratio extends $.$rise_resize_ratio {
+        top_edge_y_by_ratio(): void;
+        bottom_edge_y_by_ratio(): void;
+        left_edge_x_by_ratio(): void;
+        right_edge_x_by_ratio(): void;
+        left_top_edge_ratio_x(next?: number): number;
+        left_bottom_edge_ratio_x(next?: number): number;
+        right_bottom_edge_ratio_x(next?: number): number;
+        top_left_edge_ratio_y(next?: number): number;
+        right_top_edge_ratio_x(next?: number): number;
+        top_right_edge_ratio_y(next?: number): number;
+        bottom_left_edge_ratio_y(next?: number): number;
+        bottom_right_edge_ratio_y(next?: number): number;
+        edges(): readonly (any)[];
+    }
+}
+
+declare namespace $.$$ {
+}
+
+declare namespace $ {
+
+	type $mol_text__text_rise_resize_ratio_demo_1 = $mol_type_enforce<
+		ReturnType< $rise_resize_ratio_demo['content'] >
+		,
+		ReturnType< $mol_text['text'] >
+	>
+	type $rise_resize_ratio__height_min_rise_resize_ratio_demo_2 = $mol_type_enforce<
+		number
+		,
+		ReturnType< $rise_resize_ratio['height_min'] >
+	>
+	type $rise_resize_ratio__width_min_rise_resize_ratio_demo_3 = $mol_type_enforce<
+		number
+		,
+		ReturnType< $rise_resize_ratio['width_min'] >
+	>
+	type $rise_resize_ratio__ratio_rise_resize_ratio_demo_4 = $mol_type_enforce<
+		number
+		,
+		ReturnType< $rise_resize_ratio['ratio'] >
+	>
+	type $rise_resize_ratio__drag_body_rise_resize_ratio_demo_5 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $rise_resize_ratio['drag_body'] >
+	>
+	type $rise_resize_ratio__sticks_y_rise_resize_ratio_demo_6 = $mol_type_enforce<
+		ReturnType< $rise_resize_ratio_demo['sticks_y'] >
+		,
+		ReturnType< $rise_resize_ratio['sticks_y'] >
+	>
+	type $rise_resize_ratio__sticks_x_rise_resize_ratio_demo_7 = $mol_type_enforce<
+		ReturnType< $rise_resize_ratio_demo['sticks_x'] >
+		,
+		ReturnType< $rise_resize_ratio['sticks_x'] >
+	>
+	type $mol_view__style_rise_resize_ratio_demo_8 = $mol_type_enforce<
+		({ 
+			'left': ReturnType< $rise_resize_ratio_demo['stick_left'] >,
+		}) 
+		,
+		ReturnType< $mol_view['style'] >
+	>
+	type $mol_view__style_rise_resize_ratio_demo_9 = $mol_type_enforce<
+		({ 
+			'top': ReturnType< $rise_resize_ratio_demo['stick_top'] >,
+		}) 
+		,
+		ReturnType< $mol_view['style'] >
+	>
+	export class $rise_resize_ratio_demo extends $mol_example_small {
+		height( ): ReturnType< ReturnType< $rise_resize_ratio_demo['Resize'] >['height'] >
+		width( ): ReturnType< ReturnType< $rise_resize_ratio_demo['Resize'] >['width'] >
+		top( ): ReturnType< ReturnType< $rise_resize_ratio_demo['Resize'] >['top'] >
+		left( ): ReturnType< ReturnType< $rise_resize_ratio_demo['Resize'] >['left'] >
+		x( ): ReturnType< ReturnType< $rise_resize_ratio_demo['Resize'] >['x'] >
+		y( ): ReturnType< ReturnType< $rise_resize_ratio_demo['Resize'] >['y'] >
+		bottom_edge_y( ): ReturnType< ReturnType< $rise_resize_ratio_demo['Resize'] >['bottom_edge_y'] >
+		right_edge_x( ): ReturnType< ReturnType< $rise_resize_ratio_demo['Resize'] >['right_edge_x'] >
+		top_edge_y( ): ReturnType< ReturnType< $rise_resize_ratio_demo['Resize'] >['top_edge_y'] >
+		left_edge_x( ): ReturnType< ReturnType< $rise_resize_ratio_demo['Resize'] >['left_edge_x'] >
+		x_stick( ): ReturnType< ReturnType< $rise_resize_ratio_demo['Resize'] >['x_stick'] >
+		y_stick( ): ReturnType< ReturnType< $rise_resize_ratio_demo['Resize'] >['y_stick'] >
+		bottom_edge_y_stick( ): ReturnType< ReturnType< $rise_resize_ratio_demo['Resize'] >['bottom_edge_y_stick'] >
+		right_edge_x_stick( ): ReturnType< ReturnType< $rise_resize_ratio_demo['Resize'] >['right_edge_x_stick'] >
+		top_edge_y_stick( ): ReturnType< ReturnType< $rise_resize_ratio_demo['Resize'] >['top_edge_y_stick'] >
+		left_edge_x_stick( ): ReturnType< ReturnType< $rise_resize_ratio_demo['Resize'] >['left_edge_x_stick'] >
+		content( ): string
+		Content( ): $mol_text
+		sticks_y( ): readonly(any)[]
+		sticks_x( ): readonly(any)[]
+		Resize( ): $rise_resize_ratio
+		sticks( ): readonly(any)[]
+		stick_left( id: any): string
+		stick_top( id: any): string
+		sub( ): readonly(any)[]
+		Stick_x( id: any): $mol_view
+		Stick_y( id: any): $mol_view
+		tags( ): readonly(any)[]
+		aspects( ): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=demo.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $rise_resize_ratio_demo extends $.$rise_resize_ratio_demo {
+        content(): string;
+        sticks(): $mol_view[];
+        stick_left(x: number): string;
+        stick_top(y: number): string;
+    }
+}
+
+declare namespace $.$$ {
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	export class $rise_toggle extends $mol_check {
+		minimal_height( ): number
+		minimal_width( ): number
+		sub( ): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=toggle.view.tree.d.ts.map
+declare namespace $ {
+
+	export class $rise_toggle_demo extends $mol_example_small {
+		Toggle( ): $rise_toggle
+		sub( ): readonly(any)[]
+		tags( ): readonly(any)[]
+		aspects( ): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=demo.view.tree.d.ts.map
+declare namespace $ {
+
+	type $mol_view__sub_rise_range_1 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_view__sub_rise_range_2 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_view__sub_rise_range_3 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_view__sub_rise_range_4 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $rise_range_input__disabled_rise_range_5 = $mol_type_enforce<
+		ReturnType< $rise_range['disabled'] >
+		,
+		ReturnType< $rise_range_input['disabled'] >
+	>
+	type $rise_range_input__min_rise_range_6 = $mol_type_enforce<
+		ReturnType< $rise_range['min'] >
+		,
+		ReturnType< $rise_range_input['min'] >
+	>
+	type $rise_range_input__max_rise_range_7 = $mol_type_enforce<
+		ReturnType< $rise_range['max'] >
+		,
+		ReturnType< $rise_range_input['max'] >
+	>
+	type $rise_range_input__step_rise_range_8 = $mol_type_enforce<
+		ReturnType< $rise_range['step'] >
+		,
+		ReturnType< $rise_range_input['step'] >
+	>
+	type $rise_range_input__value_rise_range_9 = $mol_type_enforce<
+		ReturnType< $rise_range['value'] >
+		,
+		ReturnType< $rise_range_input['value'] >
+	>
+	type $rise_range_input__event_input_rise_range_10 = $mol_type_enforce<
+		ReturnType< $rise_range['event_input'] >
+		,
+		ReturnType< $rise_range_input['event_input'] >
+	>
+	type $rise_range_value__sub_rise_range_11 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $rise_range_value['sub'] >
+	>
+	type $rise_range_value__disabled_rise_range_12 = $mol_type_enforce<
+		ReturnType< $rise_range['disabled'] >
+		,
+		ReturnType< $rise_range_value['disabled'] >
+	>
+	type $mol_view__sub_rise_range_13 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	export class $rise_range extends $mol_view {
+		label_min( ): string
+		Min( ): $mol_view
+		label_medium( ): string
+		Medium( ): $mol_view
+		label_max( ): string
+		Max( ): $mol_view
+		Labels( ): $mol_view
+		disabled( ): boolean
+		min( next?: number ): number
+		max( next?: number ): number
+		step( next?: number ): number
+		value( next?: number ): number
+		event_input( next?: any ): any
+		Input( ): $rise_range_input
+		Value( ): $rise_range_value
+		Current( ): $mol_view
+		percent( ): string
+		minimal_height( ): number
+		unit( ): string
+		medium( next?: number ): number
+		enabled( ): boolean
+		sub( ): readonly(any)[]
+		attr( ): ({ 
+			'disabled': ReturnType< $rise_range['disabled'] >,
+		})  & ReturnType< $mol_view['attr'] >
+		style( ): ({ 
+			'--rise_range_percent': ReturnType< $rise_range['percent'] >,
+		})  & ReturnType< $mol_view['style'] >
+	}
+	
+	export class $rise_range_input extends $mol_view {
+		disabled( ): boolean
+		min( next?: number ): number
+		max( next?: number ): number
+		step( next?: number ): number
+		value( next?: number ): number
+		event_input( next?: any ): any
+		dom_name( ): string
+		attr( ): ({ 
+			'type': string,
+			'disabled': ReturnType< $rise_range_input['disabled'] >,
+		})  & ReturnType< $mol_view['attr'] >
+		field( ): ({ 
+			'min': ReturnType< $rise_range_input['min'] >,
+			'max': ReturnType< $rise_range_input['max'] >,
+			'step': ReturnType< $rise_range_input['step'] >,
+			'value': ReturnType< $rise_range_input['value'] >,
+		})  & ReturnType< $mol_view['field'] >
+		event( ): ({ 
+			input( next?: ReturnType< $rise_range_input['event_input'] > ): ReturnType< $rise_range_input['event_input'] >,
+		})  & ReturnType< $mol_view['event'] >
+	}
+	
+	export class $rise_range_value extends $mol_view {
+		disabled( ): boolean
+		attr( ): ({ 
+			'disabled': ReturnType< $rise_range_value['disabled'] >,
+		})  & ReturnType< $mol_view['attr'] >
+	}
+	
+}
+
+//# sourceMappingURL=range.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $rise_range extends $.$rise_range {
+        event_input(event: Event): void;
+        medium(): number;
+        label_min(): string;
+        label_max(): string;
+        label_medium(): string;
+        percent(): string;
+        disabled(): boolean;
+    }
+}
+
+declare namespace $.$$ {
+}
+
+declare namespace $ {
+
+	type $mol_number__value_rise_range_demo_1 = $mol_type_enforce<
+		ReturnType< $rise_range_demo['value'] >
+		,
+		ReturnType< $mol_number['value'] >
+	>
+	type $mol_number__value_min_rise_range_demo_2 = $mol_type_enforce<
+		ReturnType< $rise_range_demo['min'] >
+		,
+		ReturnType< $mol_number['value_min'] >
+	>
+	type $mol_number__value_max_rise_range_demo_3 = $mol_type_enforce<
+		ReturnType< $rise_range_demo['max'] >
+		,
+		ReturnType< $mol_number['value_max'] >
+	>
+	type $rise_range__value_rise_range_demo_4 = $mol_type_enforce<
+		ReturnType< $rise_range_demo['value'] >
+		,
+		ReturnType< $rise_range['value'] >
+	>
+	type $rise_range__min_rise_range_demo_5 = $mol_type_enforce<
+		ReturnType< $rise_range_demo['min'] >
+		,
+		ReturnType< $rise_range['min'] >
+	>
+	type $rise_range__max_rise_range_demo_6 = $mol_type_enforce<
+		ReturnType< $rise_range_demo['max'] >
+		,
+		ReturnType< $rise_range['max'] >
+	>
+	type $rise_range__value_rise_range_demo_7 = $mol_type_enforce<
+		ReturnType< $rise_range_demo['value'] >
+		,
+		ReturnType< $rise_range['value'] >
+	>
+	type $rise_range__disabled_rise_range_demo_8 = $mol_type_enforce<
+		boolean
+		,
+		ReturnType< $rise_range['disabled'] >
+	>
+	type $rise_range__min_rise_range_demo_9 = $mol_type_enforce<
+		ReturnType< $rise_range_demo['min'] >
+		,
+		ReturnType< $rise_range['min'] >
+	>
+	type $rise_range__max_rise_range_demo_10 = $mol_type_enforce<
+		ReturnType< $rise_range_demo['max'] >
+		,
+		ReturnType< $rise_range['max'] >
+	>
+	type $mol_list__sub_rise_range_demo_11 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_list['sub'] >
+	>
+	export class $rise_range_demo extends $mol_example_small {
+		Number( ): $mol_number
+		value( next?: number ): number
+		min( ): number
+		max( ): number
+		Range( ): $rise_range
+		Range_disabled( ): $rise_range
+		List( ): $mol_list
+		sub( ): readonly(any)[]
+		tags( ): readonly(any)[]
+		aspects( ): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=demo.view.tree.d.ts.map
+declare namespace $ {
+
+	type $mol_check__checked_mol_check_list_1 = $mol_type_enforce<
+		ReturnType< $mol_check_list['option_checked'] >
+		,
+		ReturnType< $mol_check['checked'] >
+	>
+	type $mol_check__label_mol_check_list_2 = $mol_type_enforce<
+		ReturnType< $mol_check_list['option_label'] >
+		,
+		ReturnType< $mol_check['label'] >
+	>
+	type $mol_check__enabled_mol_check_list_3 = $mol_type_enforce<
+		ReturnType< $mol_check_list['option_enabled'] >
+		,
+		ReturnType< $mol_check['enabled'] >
+	>
+	type $mol_check__hint_mol_check_list_4 = $mol_type_enforce<
+		ReturnType< $mol_check_list['option_hint'] >
+		,
+		ReturnType< $mol_check['hint'] >
+	>
+	type $mol_check__minimal_height_mol_check_list_5 = $mol_type_enforce<
+		number
+		,
+		ReturnType< $mol_check['minimal_height'] >
+	>
+	export class $mol_check_list extends $mol_view {
+		option_checked( id: any, next?: boolean ): boolean
+		option_title( id: any): string
+		option_label( id: any): readonly(any)[]
+		enabled( ): boolean
+		option_enabled( id: any): ReturnType< $mol_check_list['enabled'] >
+		option_hint( id: any): string
+		items( ): readonly($mol_check)[]
+		dictionary( ): Record<string, any>
+		Option( id: any): $mol_check
+		options( ): Record<string, any>
+		keys( ): readonly(string)[]
+		sub( ): ReturnType< $mol_check_list['items'] >
+	}
+	
+}
+
+//# sourceMappingURL=list.view.tree.d.ts.map
+declare namespace $.$$ {
+    /**
+     * List of checkboxes
+     * @see https://mol.hyoo.ru/#!section=demos/demo=mol_check_list_demo
+     */
+    class $mol_check_list extends $.$mol_check_list {
+        options(): {
+            [key: string]: string;
+        };
+        dictionary(next?: Record<string, boolean>): Record<string, boolean>;
+        option_checked(id: string, next?: boolean | null): boolean;
+        keys(): readonly string[];
+        items(): $.$mol_check[];
+        option_title(key: string): string;
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	export class $mol_switch extends $mol_check_list {
+		value( next?: string ): string
+	}
+	
+}
+
+//# sourceMappingURL=switch.view.tree.d.ts.map
+declare namespace $.$$ {
+    /**
+     * Buttons which switching the state
+     * @see https://mol.hyoo.ru/#!section=demos/demo=mol_switch_demo
+     */
+    class $mol_switch extends $.$mol_switch {
+        value(next?: string): string;
+        option_checked(key: string, next?: boolean): boolean;
+    }
+}
+
+declare namespace $ {
+
+	type $mol_view__sub_rise_radio_1 = $mol_type_enforce<
+		ReturnType< $rise_radio['circle_inner'] >
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	export class $rise_radio extends $mol_switch {
+		Circle_inner( id: any): $mol_view
+		circle_inner( id: any): readonly(any)[]
+		Circle( id: any): $mol_view
+		option_label( id: any): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=radio.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $rise_radio extends $.$rise_radio {
+        circle_inner(id: any): readonly any[];
+    }
+}
+
+declare namespace $.$$ {
+}
+
+declare namespace $ {
+
+	type $rise_radio__options_rise_radio_demo_1 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $rise_radio['options'] >
+	>
+	export class $rise_radio_demo extends $mol_example_small {
+		Radio( ): $rise_radio
+		sub( ): readonly(any)[]
+		tags( ): readonly(any)[]
+		aspects( ): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=demo.view.tree.d.ts.map
+declare namespace $ {
+
+	type $mol_tag_tree__ids_tags_mol_tag_tree_1 = $mol_type_enforce<
+		ReturnType< $mol_tag_tree['ids_tags'] >
+		,
+		ReturnType< $mol_tag_tree['ids_tags'] >
+	>
+	type $mol_tag_tree__path_mol_tag_tree_2 = $mol_type_enforce<
+		ReturnType< $mol_tag_tree['tag_path'] >
+		,
+		ReturnType< $mol_tag_tree['path'] >
+	>
+	type $mol_tag_tree__Item_mol_tag_tree_3 = $mol_type_enforce<
+		ReturnType< $mol_tag_tree['Item'] >
+		,
+		ReturnType< $mol_tag_tree['Item'] >
+	>
+	type $mol_tag_tree__item_title_mol_tag_tree_4 = $mol_type_enforce<
+		ReturnType< $mol_tag_tree['item_title'] >
+		,
+		ReturnType< $mol_tag_tree['item_title'] >
+	>
+	type $mol_tag_tree__tag_expanded_mol_tag_tree_5 = $mol_type_enforce<
+		ReturnType< $mol_tag_tree['tag_expanded'] >
+		,
+		ReturnType< $mol_tag_tree['tag_expanded'] >
+	>
+	type $mol_tag_tree__tag_name_mol_tag_tree_6 = $mol_type_enforce<
+		ReturnType< $mol_tag_tree['tag_name'] >
+		,
+		ReturnType< $mol_tag_tree['tag_name'] >
+	>
+	type $mol_tag_tree_sub__7 = $mol_type_enforce<
+		ReturnType< $mol_tag_tree['tag_list'] >[number]
+		,
+		$mol_view
+	>
+	type $mol_tag_tree_sub__8 = $mol_type_enforce<
+		ReturnType< $mol_tag_tree['item_list'] >[number]
+		,
+		$mol_view
+	>
+	type $mol_view__sub_mol_tag_tree_9 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_expander__expandable_mol_tag_tree_10 = $mol_type_enforce<
+		boolean
+		,
+		ReturnType< $mol_expander['expandable'] >
+	>
+	type $mol_expander__expanded_mol_tag_tree_11 = $mol_type_enforce<
+		ReturnType< $mol_tag_tree['tag_expanded'] >
+		,
+		ReturnType< $mol_expander['expanded'] >
+	>
+	type $mol_expander__title_mol_tag_tree_12 = $mol_type_enforce<
+		ReturnType< $mol_tag_tree['tag_name'] >
+		,
+		ReturnType< $mol_expander['title'] >
+	>
+	type $mol_expander__content_mol_tag_tree_13 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_expander['content'] >
+	>
+	export class $mol_tag_tree extends $mol_list {
+		tag_list( ): readonly($mol_view)[]
+		item_list( ): readonly($mol_view)[]
+		item_title( id: any): string
+		tag_expanded( id: any, next?: boolean ): boolean
+		tag_name( id: any): string
+		tag_path( id: any): readonly(string)[]
+		Tag_tree( id: any): $mol_tag_tree
+		path( ): readonly(string)[]
+		ids_tags( ): Record<string, any>
+		ids( ): readonly(any)[]
+		tags( ): readonly(string)[]
+		levels_expanded( ): number
+		sub( ): readonly($mol_view)[]
+		Item( id: any): $mol_view
+		Tag( id: any): $mol_expander
+	}
+	
+}
+
+//# sourceMappingURL=tree.view.tree.d.ts.map
+declare namespace $.$$ {
+    /**
+     * @see https://mol.hyoo.ru/#!section=demos/demo=mol_tag_tree_demo
+     */
+    class $mol_tag_tree extends $.$mol_tag_tree {
+        ids(): string[];
+        item_list(): $mol_view[];
+        tags(): string[];
+        tag_list(): $.$mol_expander[];
+        tag_path(id: string): string[];
+        tag_expanded(id: readonly string[], next?: boolean): boolean;
+        tag_expanded_default(id: readonly string[]): boolean;
+        tag_name(id: string): string;
+        item_title(id: readonly string[]): string;
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	type $mol_search__query_mol_app_demo_menu_1 = $mol_type_enforce<
+		ReturnType< $mol_app_demo_menu['filter'] >
+		,
+		ReturnType< $mol_search['query'] >
+	>
+	type $mol_tag_tree__Item_mol_app_demo_menu_2 = $mol_type_enforce<
+		ReturnType< $mol_app_demo_menu['Option'] >
+		,
+		ReturnType< $mol_tag_tree['Item'] >
+	>
+	type $mol_tag_tree__ids_tags_mol_app_demo_menu_3 = $mol_type_enforce<
+		ReturnType< $mol_app_demo_menu['ids_tags'] >
+		,
+		ReturnType< $mol_tag_tree['ids_tags'] >
+	>
+	type $mol_tag_tree__levels_expanded_mol_app_demo_menu_4 = $mol_type_enforce<
+		ReturnType< $mol_app_demo_menu['levels_expanded'] >
+		,
+		ReturnType< $mol_tag_tree['levels_expanded'] >
+	>
+	type $mol_dimmer__haystack_mol_app_demo_menu_5 = $mol_type_enforce<
+		ReturnType< $mol_app_demo_menu['option_title'] >
+		,
+		ReturnType< $mol_dimmer['haystack'] >
+	>
+	type $mol_dimmer__needle_mol_app_demo_menu_6 = $mol_type_enforce<
+		ReturnType< $mol_app_demo_menu['filter'] >
+		,
+		ReturnType< $mol_dimmer['needle'] >
+	>
+	type $mol_link__arg_mol_app_demo_menu_7 = $mol_type_enforce<
+		ReturnType< $mol_app_demo_menu['option_arg'] >
+		,
+		ReturnType< $mol_link['arg'] >
+	>
+	type $mol_link__sub_mol_app_demo_menu_8 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_link['sub'] >
+	>
+	export class $mol_app_demo_menu extends $mol_page {
+		filter( next?: string ): string
+		Filter( ): $mol_search
+		ids_tags( ): Record<string, any>
+		levels_expanded_default( ): number
+		levels_expanded( ): ReturnType< $mol_app_demo_menu['levels_expanded_default'] >
+		Tree( ): $mol_tag_tree
+		option_arg( id: any): Record<string, any>
+		option_title( id: any): string
+		Option_title( id: any): $mol_dimmer
+		names( ): readonly(string)[]
+		widget_tags( id: any): readonly(string)[]
+		widget_aspects( id: any): readonly(string)[]
+		widget_title( id: any): string
+		search_start( next?: any ): any
+		body( ): readonly(any)[]
+		Option( id: any): $mol_link
+	}
+	
+}
+
+//# sourceMappingURL=menu.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $mol_app_demo_menu extends $.$mol_app_demo_menu {
+        filter(next?: string): string;
+        option_arg(id: readonly string[]): {
+            demo: string | undefined;
+        };
+        option_title(path_id: readonly string[]): string;
+        search_start(event?: Event): void;
+        /** Filter string not empty and ends with space */
+        filter_last_word_completed(): boolean;
+        /** Filter string uniq words */
+        filter_words(): string[];
+        ids_tags(): Record<string, string[]>;
+        tags_filtered(): string[];
+        filter_suggests(): string[];
+        levels_expanded(): number;
+        names_filtered(): string[];
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+
 	export class $mol_icon_information extends $mol_icon {
 		path( ): string
 	}
@@ -45455,6 +47906,1201 @@ declare namespace $ {
 }
 
 //# sourceMappingURL=outline.view.tree.d.ts.map
+declare namespace $ {
+
+	export class $mol_icon_forum extends $mol_icon {
+		path( ): string
+	}
+	
+}
+
+//# sourceMappingURL=forum.view.tree.d.ts.map
+declare namespace $ {
+
+	export class $mol_icon_forum_outline extends $mol_icon {
+		path( ): string
+	}
+	
+}
+
+//# sourceMappingURL=outline.view.tree.d.ts.map
+declare namespace $ {
+
+	export class $mol_icon_open_in_new extends $mol_icon {
+		path( ): string
+	}
+	
+}
+
+//# sourceMappingURL=new.view.tree.d.ts.map
+declare namespace $ {
+
+	type $mol_link__uri_mol_chat_1 = $mol_type_enforce<
+		ReturnType< $mol_chat['standalone'] >
+		,
+		ReturnType< $mol_link['uri'] >
+	>
+	type $mol_link__sub_mol_chat_2 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_link['sub'] >
+	>
+	type $mol_link__arg_mol_chat_3 = $mol_type_enforce<
+		({ 
+			'mol_chat': any,
+		}) 
+		,
+		ReturnType< $mol_link['arg'] >
+	>
+	type $mol_link__sub_mol_chat_4 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_link['sub'] >
+	>
+	type $mol_frame__uri_mol_chat_5 = $mol_type_enforce<
+		ReturnType< $mol_chat['embed'] >
+		,
+		ReturnType< $mol_frame['uri'] >
+	>
+	type $mol_page__title_mol_chat_6 = $mol_type_enforce<
+		ReturnType< $mol_chat['title'] >
+		,
+		ReturnType< $mol_page['title'] >
+	>
+	type $mol_page__tools_mol_chat_7 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_page['tools'] >
+	>
+	type $mol_page__Body_mol_chat_8 = $mol_type_enforce<
+		ReturnType< $mol_chat['Embed'] >
+		,
+		ReturnType< $mol_page['Body'] >
+	>
+	export class $mol_chat extends $mol_link {
+		Icon( ): $mol_icon_forum_outline
+		title( ): string
+		standalone( ): string
+		Standalone_icon( ): $mol_icon_open_in_new
+		Esternal( ): $mol_link
+		Close_icon( ): $mol_icon_close
+		Close( ): $mol_link
+		embed( ): string
+		Embed( ): $mol_frame
+		Page( ): $mol_page
+		seed( ): string
+		opened( ): boolean
+		arg( ): ({ 
+			'mol_chat': string,
+		}) 
+		hint( ): ReturnType< $mol_chat['title'] >
+		sub( ): readonly(any)[]
+		pages( ): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=chat.view.tree.d.ts.map
+declare namespace $.$$ {
+    /**
+     * Button to open embedded chat.
+     * @see https://mol.hyoo.ru/#!section=demos/demo=mol_chat_demo
+     */
+    class $mol_chat extends $.$mol_chat {
+        opened(): boolean;
+        pages(): $mol_page[];
+        standalone(): string;
+        embed(): string;
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	export class $mol_icon_settings extends $mol_icon {
+		path( ): string
+	}
+	
+}
+
+//# sourceMappingURL=settings.view.tree.d.ts.map
+declare namespace $ {
+
+	type $mol_check_icon__checked_mol_app_demo_detail_1 = $mol_type_enforce<
+		ReturnType< $mol_app_demo_detail['readme'] >
+		,
+		ReturnType< $mol_check_icon['checked'] >
+	>
+	type $mol_check_icon__hint_mol_app_demo_detail_2 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_check_icon['hint'] >
+	>
+	type $mol_check_icon__Icon_mol_app_demo_detail_3 = $mol_type_enforce<
+		ReturnType< $mol_app_demo_detail['readme_icon'] >
+		,
+		ReturnType< $mol_check_icon['Icon'] >
+	>
+	type $mol_chat__seed_mol_app_demo_detail_4 = $mol_type_enforce<
+		ReturnType< $mol_app_demo_detail['chat_seed'] >
+		,
+		ReturnType< $mol_chat['seed'] >
+	>
+	type $mol_speck__value_mol_app_demo_detail_5 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_speck['value'] >
+	>
+	type $mol_link__hint_mol_app_demo_detail_6 = $mol_type_enforce<
+		ReturnType< $mol_app_demo_detail['edit_hint'] >
+		,
+		ReturnType< $mol_link['hint'] >
+	>
+	type $mol_link__sub_mol_app_demo_detail_7 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_link['sub'] >
+	>
+	type $mol_link__uri_mol_app_demo_detail_8 = $mol_type_enforce<
+		ReturnType< $mol_app_demo_detail['edit_uri'] >
+		,
+		ReturnType< $mol_link['uri'] >
+	>
+	type $mol_link__hint_mol_app_demo_detail_9 = $mol_type_enforce<
+		ReturnType< $mol_app_demo_detail['close_hint'] >
+		,
+		ReturnType< $mol_link['hint'] >
+	>
+	type $mol_link__sub_mol_app_demo_detail_10 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_link['sub'] >
+	>
+	type $mol_link__arg_mol_app_demo_detail_11 = $mol_type_enforce<
+		ReturnType< $mol_app_demo_detail['close_arg'] >
+		,
+		ReturnType< $mol_link['arg'] >
+	>
+	export class $mol_app_demo_detail extends $mol_page {
+		readme( next?: boolean ): boolean
+		readme_icon( ): $mol_icon_information_outline
+		Readme( ): $mol_check_icon
+		chat_pages( ): ReturnType< ReturnType< $mol_app_demo_detail['Chat'] >['pages'] >
+		chat_seed( ): string
+		Chat( ): $mol_chat
+		edit_hint( ): string
+		Edit_speck( ): $mol_speck
+		Edit_icon( ): $mol_icon_settings
+		edit_uri( ): string
+		Edit( ): $mol_link
+		close_hint( ): string
+		Close_icon( ): $mol_icon_close
+		close_arg( ): ({ 
+			'demo': any,
+		}) 
+		Close( ): $mol_link
+		Demo( ): $mol_view
+		description( ): string
+		tools( ): readonly(any)[]
+		body( ): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=detail.view.tree.d.ts.map
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	export class $mol_example_large extends $mol_example {
+	}
+	
+}
+
+//# sourceMappingURL=large.view.tree.d.ts.map
+declare namespace $ {
+
+	type $mol_link_source__uri_mol_app_demo_readme_1 = $mol_type_enforce<
+		ReturnType< $mol_app_demo_readme['source_link'] >
+		,
+		ReturnType< $mol_link_source['uri'] >
+	>
+	type $mol_link_source__hint_mol_app_demo_readme_2 = $mol_type_enforce<
+		ReturnType< $mol_app_demo_readme['source_hint'] >
+		,
+		ReturnType< $mol_link_source['hint'] >
+	>
+	type $mol_button_minor__hint_mol_app_demo_readme_3 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_button_minor['hint'] >
+	>
+	type $mol_button_minor__sub_mol_app_demo_readme_4 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_button_minor['sub'] >
+	>
+	type $mol_button_minor__click_mol_app_demo_readme_5 = $mol_type_enforce<
+		ReturnType< $mol_app_demo_readme['close'] >
+		,
+		ReturnType< $mol_button_minor['click'] >
+	>
+	type $mol_text__text_mol_app_demo_readme_6 = $mol_type_enforce<
+		ReturnType< $mol_app_demo_readme['readme'] >
+		,
+		ReturnType< $mol_text['text'] >
+	>
+	type $mol_text__uri_base_mol_app_demo_readme_7 = $mol_type_enforce<
+		ReturnType< $mol_app_demo_readme['uri_base'] >
+		,
+		ReturnType< $mol_text['uri_base'] >
+	>
+	type $mol_view__sub_mol_app_demo_readme_8 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	export class $mol_app_demo_readme extends $mol_page {
+		source_link( ): string
+		source_hint( ): string
+		Source_link( ): $mol_link_source
+		Close_icon( ): $mol_icon_close
+		close( next?: any ): any
+		Close( ): $mol_button_minor
+		readme( ): string
+		uri_base( next?: string ): string
+		Not_found_caption( ): string
+		readme_link_template( ): string
+		source_link_template( ): string
+		repo( ): string
+		module( ): readonly(string)[]
+		title( ): string
+		opened( next?: boolean ): boolean
+		tools( ): readonly(any)[]
+		Readme( ): $mol_text
+		Not_found( ): $mol_view
+	}
+	
+}
+
+//# sourceMappingURL=readme.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $mol_app_demo_readme_not_found_error extends Error {
+        module: readonly string[];
+        constructor(module: readonly string[]);
+    }
+    class $mol_app_demo_readme extends $.$mol_app_demo_readme {
+        close(): void;
+        link(template: string, repo: string, module: readonly string[]): string;
+        uri_base(next?: string): string;
+        source_link(): string;
+        readme(): string;
+        body(): $mol_view[];
+    }
+}
+
+declare namespace $ {
+
+	export class $mol_status extends $mol_view {
+		message( ): string
+		status( ): ReturnType< $mol_status['title'] >
+		minimal_height( ): number
+		minimal_width( ): number
+		sub( ): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=status.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $mol_status extends $.$mol_status {
+        message(): any;
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	type $mol_link_source__uri_mol_app_demo_main_1 = $mol_type_enforce<
+		ReturnType< $mol_app_demo_main['project_uri'] >
+		,
+		ReturnType< $mol_link_source['uri'] >
+	>
+	type $mol_text__text_mol_app_demo_main_2 = $mol_type_enforce<
+		ReturnType< $mol_app_demo_main['description'] >
+		,
+		ReturnType< $mol_text['text'] >
+	>
+	type $mol_text__uri_base_mol_app_demo_main_3 = $mol_type_enforce<
+		ReturnType< $mol_app_demo_main['project_uri'] >
+		,
+		ReturnType< $mol_text['uri_base'] >
+	>
+	export class $mol_app_demo_main extends $mol_page {
+		Lights( ): $mol_lights_toggle
+		project_uri( ): string
+		Project( ): $mol_link_source
+		description( ): string
+		Description( ): $mol_text
+		minimal_width( ): number
+		title( ): string
+		tools( ): readonly(any)[]
+		body( ): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=main.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $mol_app_demo_main extends $.$mol_app_demo_main {
+        description(): string;
+    }
+}
+
+declare namespace $ {
+
+	type $mol_hotkey__key_mol_app_demo_1 = $mol_type_enforce<
+		({ 
+			F( next?: ReturnType< $mol_app_demo['search_start'] > ): ReturnType< $mol_app_demo['search_start'] >,
+		}) 
+		,
+		ReturnType< $mol_hotkey['key'] >
+	>
+	type $mol_hotkey__mod_ctrl_mol_app_demo_2 = $mol_type_enforce<
+		boolean
+		,
+		ReturnType< $mol_hotkey['mod_ctrl'] >
+	>
+	type __mol_app_demo_3 = $mol_type_enforce<
+		Parameters< $mol_app_demo['search_start'] >[0]
+		,
+		Parameters< ReturnType< $mol_app_demo['Menu'] >['search_start'] >[0]
+	>
+	type $mol_link_source__uri_mol_app_demo_4 = $mol_type_enforce<
+		ReturnType< $mol_app_demo['sources_uri'] >
+		,
+		ReturnType< $mol_link_source['uri'] >
+	>
+	type __mol_app_demo_5 = $mol_type_enforce<
+		Parameters< $mol_app_demo['chat_pages'] >[0]
+		,
+		Parameters< $mol_app_demo['Detail'] >[0]
+	>
+	type $mol_app_demo_menu__title_mol_app_demo_6 = $mol_type_enforce<
+		ReturnType< $mol_app_demo['menu_title'] >
+		,
+		ReturnType< $mol_app_demo_menu['title'] >
+	>
+	type $mol_app_demo_menu__names_mol_app_demo_7 = $mol_type_enforce<
+		ReturnType< $mol_app_demo['names'] >
+		,
+		ReturnType< $mol_app_demo_menu['names'] >
+	>
+	type $mol_app_demo_menu__widget_tags_mol_app_demo_8 = $mol_type_enforce<
+		ReturnType< $mol_app_demo['widget_tags'] >
+		,
+		ReturnType< $mol_app_demo_menu['widget_tags'] >
+	>
+	type $mol_app_demo_menu__widget_aspects_mol_app_demo_9 = $mol_type_enforce<
+		ReturnType< $mol_app_demo['widget_aspects'] >
+		,
+		ReturnType< $mol_app_demo_menu['widget_aspects'] >
+	>
+	type $mol_app_demo_menu__widget_title_mol_app_demo_10 = $mol_type_enforce<
+		ReturnType< $mol_app_demo['widget_title'] >
+		,
+		ReturnType< $mol_app_demo_menu['widget_title'] >
+	>
+	type $mol_app_demo_menu__tools_mol_app_demo_11 = $mol_type_enforce<
+		ReturnType< $mol_app_demo['tools'] >
+		,
+		ReturnType< $mol_app_demo_menu['tools'] >
+	>
+	type $mol_app_demo_detail__chat_seed_mol_app_demo_12 = $mol_type_enforce<
+		ReturnType< $mol_app_demo['chat_seed'] >
+		,
+		ReturnType< $mol_app_demo_detail['chat_seed'] >
+	>
+	type $mol_app_demo_detail__title_mol_app_demo_13 = $mol_type_enforce<
+		ReturnType< $mol_app_demo['detail_title'] >
+		,
+		ReturnType< $mol_app_demo_detail['title'] >
+	>
+	type $mol_app_demo_detail__description_mol_app_demo_14 = $mol_type_enforce<
+		ReturnType< $mol_app_demo['detail_description'] >
+		,
+		ReturnType< $mol_app_demo_detail['description'] >
+	>
+	type $mol_app_demo_detail__edit_uri_mol_app_demo_15 = $mol_type_enforce<
+		ReturnType< $mol_app_demo['edit_uri'] >
+		,
+		ReturnType< $mol_app_demo_detail['edit_uri'] >
+	>
+	type $mol_app_demo_detail__readme_mol_app_demo_16 = $mol_type_enforce<
+		ReturnType< $mol_app_demo['readme_page'] >
+		,
+		ReturnType< $mol_app_demo_detail['readme'] >
+	>
+	type $mol_app_demo_detail__Demo_mol_app_demo_17 = $mol_type_enforce<
+		ReturnType< $mol_app_demo['Demo'] >
+		,
+		ReturnType< $mol_app_demo_detail['Demo'] >
+	>
+	type $mol_app_demo_readme__repo_mol_app_demo_18 = $mol_type_enforce<
+		ReturnType< $mol_app_demo['repo'] >
+		,
+		ReturnType< $mol_app_demo_readme['repo'] >
+	>
+	type $mol_app_demo_readme__opened_mol_app_demo_19 = $mol_type_enforce<
+		ReturnType< $mol_app_demo['readme_page'] >
+		,
+		ReturnType< $mol_app_demo_readme['opened'] >
+	>
+	type $mol_app_demo_readme__module_mol_app_demo_20 = $mol_type_enforce<
+		ReturnType< $mol_app_demo['module'] >
+		,
+		ReturnType< $mol_app_demo_readme['module'] >
+	>
+	type $mol_status__sub_mol_app_demo_21 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_status['sub'] >
+	>
+	export class $mol_app_demo extends $mol_book2 {
+		detail_title( ): string
+		Theme( ): $mol_theme_auto
+		Search_start( ): $mol_hotkey
+		menu_title( ): string
+		names( ): readonly(string)[]
+		widget_tags( id: any): readonly(string)[]
+		widget_aspects( id: any): readonly(string)[]
+		widget_title( id: any): string
+		search_start( next?: ReturnType< ReturnType< $mol_app_demo['Menu'] >['search_start'] > ): ReturnType< ReturnType< $mol_app_demo['Menu'] >['search_start'] >
+		sources_uri( ): string
+		Sources( ): $mol_link_source
+		Lights( ): $mol_lights_toggle
+		tools( ): readonly(any)[]
+		chat_seed( id: any): string
+		chat_pages( id: any): ReturnType< ReturnType< $mol_app_demo['Detail'] >['chat_pages'] >
+		detail_description( ): string
+		edit_uri( ): string
+		readme_page( next?: boolean ): boolean
+		Demo( ): $mol_view
+		repo( ): string
+		module( ): readonly(string)[]
+		detail_empty_prefix( ): string
+		selected( ): string
+		detail_empty_postfix( ): string
+		editor_title( ): ReturnType< $mol_app_demo['detail_title'] >
+		meta_bundle_base( ): string
+		repo_dict( ): Record<string, any>
+		plugins( ): readonly(any)[]
+		demo_block_list( ): readonly(any)[]
+		Menu( ): $mol_app_demo_menu
+		Detail( id: any): $mol_app_demo_detail
+		Readme_page( ): $mol_app_demo_readme
+		Detail_empty_message( ): $mol_status
+	}
+	
+}
+
+//# sourceMappingURL=demo.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $mol_app_demo extends $.$mol_app_demo {
+        component_name(name: string): string;
+        detail_title(): string;
+        detail_description(): string;
+        names(): string[];
+        widget_tags(name: string): string[];
+        widget_title(name: string): string;
+        widget_aspects(name: string): readonly string[];
+        selected(): string;
+        readme_page(next?: boolean): boolean;
+        selected_class_name(): string;
+        Widget(name: string): $mol_example;
+        names_demo(): string[];
+        pages(): $mol_view[];
+        Demo(): $mol_example;
+        logo_uri(): string;
+        meta_bundle_base(): string;
+        repo_dict(): Record<string, string>;
+        name_parse(name: string): {
+            repo: string;
+            module: string[];
+        };
+        repo(): string;
+        module(): string[];
+        chat_link(): string;
+        edit_uri(): string;
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	export class $rise_demo extends $mol_app_demo {
+		menu_title( ): string
+		sources_uri( ): string
+	}
+	
+}
+
+//# sourceMappingURL=demo.view.tree.d.ts.map
+declare namespace $ {
+
+	type $mol_paragraph__sub_rise_bench_host_controls_support_1 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_paragraph['sub'] >
+	>
+	type $mol_image__uri_rise_bench_host_controls_support_2 = $mol_type_enforce<
+		ReturnType< $rise_bench_host_controls_support['logo_uri'] >
+		,
+		ReturnType< $mol_image['uri'] >
+	>
+	type $mol_image__title_rise_bench_host_controls_support_3 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_image['title'] >
+	>
+	export class $rise_bench_host_controls_support extends $mol_view {
+		Label( ): $mol_paragraph
+		logo_uri( ): string
+		Logo( ): $mol_image
+		sub( ): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=support.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $rise_bench_host_controls_support extends $.$rise_bench_host_controls_support {
+        logo_uri(): string;
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	export class $mol_icon_check extends $mol_icon {
+		path( ): string
+	}
+	
+}
+
+//# sourceMappingURL=check.view.tree.d.ts.map
+declare namespace $ {
+
+	export class $mol_icon_check_all extends $mol_icon {
+		path( ): string
+	}
+	
+}
+
+//# sourceMappingURL=all.view.tree.d.ts.map
+declare namespace $ {
+
+	export class $rise_check_all extends $mol_check_box {
+		checks( ): readonly($mol_check)[]
+		Icon( ): $mol_icon_check_all
+	}
+	
+}
+
+//# sourceMappingURL=all.view.tree.d.ts.map
+declare namespace $.$$ {
+    /** Owned port of shm/check/all. No runtime dependency on shm. */
+    class $rise_check_all extends $.$rise_check_all {
+        checked(next?: boolean): boolean;
+    }
+}
+
+declare namespace $ {
+
+	type $rise_check_all__title_rise_check_list_1 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $rise_check_all['title'] >
+	>
+	type $rise_check_all__checks_rise_check_list_2 = $mol_type_enforce<
+		ReturnType< $rise_check_list['checks'] >
+		,
+		ReturnType< $rise_check_all['checks'] >
+	>
+	type $rise_check_all__enabled_rise_check_list_3 = $mol_type_enforce<
+		ReturnType< $rise_check_list['enabled'] >
+		,
+		ReturnType< $rise_check_all['enabled'] >
+	>
+	type $rise_check_all__checked_rise_check_list_4 = $mol_type_enforce<
+		ReturnType< $rise_check_list['all_checked'] >
+		,
+		ReturnType< $rise_check_all['checked'] >
+	>
+	type $mol_view__sub_rise_check_list_5 = $mol_type_enforce<
+		ReturnType< $rise_check_list['checks'] >
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_check_box__title_rise_check_list_6 = $mol_type_enforce<
+		ReturnType< $rise_check_list['check_title'] >
+		,
+		ReturnType< $mol_check_box['title'] >
+	>
+	type $mol_check_box__enabled_rise_check_list_7 = $mol_type_enforce<
+		ReturnType< $rise_check_list['enabled'] >
+		,
+		ReturnType< $mol_check_box['enabled'] >
+	>
+	type $mol_check_box__checked_rise_check_list_8 = $mol_type_enforce<
+		ReturnType< $rise_check_list['checked'] >
+		,
+		ReturnType< $mol_check_box['checked'] >
+	>
+	export class $rise_check_list extends $mol_view {
+		all_checked( next?: boolean ): boolean
+		All( ): $rise_check_all
+		checks( ): readonly($mol_check)[]
+		Checks( ): $mol_view
+		check_title( id: any): string
+		checked( id: any, next?: boolean ): boolean
+		options( ): readonly(string)[]
+		titles( ): Record<string, any>
+		value( next?: readonly(string)[] ): readonly(string)[]
+		enabled( ): boolean
+		sub( ): readonly(any)[]
+		Check( id: any): $mol_check_box
+	}
+	
+}
+
+//# sourceMappingURL=list.view.tree.d.ts.map
+declare namespace $.$$ {
+    /** Owned port of shm/check/list, with labels and a shared disabled state. */
+    class $rise_check_list extends $.$rise_check_list {
+        checks(): $mol_check_box[];
+        check_title(id: string): any;
+        all_checked(next?: boolean): boolean;
+        checked(id: string, next?: boolean): boolean;
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	export class $mol_icon_help extends $mol_icon {
+		path( ): string
+	}
+	
+}
+
+//# sourceMappingURL=help.view.tree.d.ts.map
+declare namespace $ {
+
+	export class $mol_icon_help_circle extends $mol_icon {
+		path( ): string
+	}
+	
+}
+
+//# sourceMappingURL=circle.view.tree.d.ts.map
+declare namespace $ {
+
+	export class $mol_icon_help_circle_outline extends $mol_icon {
+		path( ): string
+	}
+	
+}
+
+//# sourceMappingURL=outline.view.tree.d.ts.map
+declare namespace $ {
+
+	type $mol_text__text_rise_bench_host_controls_computerhelp_1 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_text['text'] >
+	>
+	export class $rise_bench_host_controls_computerhelp extends $mol_pick {
+		Icon( ): $mol_icon_help_circle_outline
+		Text( ): $mol_text
+		hint( ): string
+		trigger_content( ): readonly(any)[]
+		bubble_content( ): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=computerhelp.view.tree.d.ts.map
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	export class $rise_bench_textarea_input extends $mol_textarea_edit {
+	}
+	
+}
+
+//# sourceMappingURL=input.view.tree.d.ts.map
+declare namespace $.$$ {
+    /** Native selection is applied as a command, never replayed by unrelated renders. */
+    class $rise_bench_textarea_input extends $.$rise_bench_textarea_input {
+        private applied?;
+        field(): ReturnType<$.$rise_bench_textarea_input['field']>;
+        render(): void;
+        /** CRDT writes may suspend; a Promise is not an invalid-input error. */
+        value_changed(next?: string): string;
+    }
+}
+
+declare namespace $ {
+
+	export class $rise_bench_textarea_view extends $mol_text_code {
+	}
+	
+}
+
+//# sourceMappingURL=view.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $rise_bench_textarea_view extends $.$rise_bench_textarea_view {
+        text_lines(): string[];
+    }
+}
+
+declare namespace $ {
+
+	type $rise_bench_textarea_input__value_rise_bench_textarea_1 = $mol_type_enforce<
+		ReturnType< $rise_bench_textarea['value'] >
+		,
+		ReturnType< $rise_bench_textarea_input['value'] >
+	>
+	type $rise_bench_textarea_input__hint_rise_bench_textarea_2 = $mol_type_enforce<
+		ReturnType< $rise_bench_textarea['hint'] >
+		,
+		ReturnType< $rise_bench_textarea_input['hint'] >
+	>
+	type $rise_bench_textarea_input__enabled_rise_bench_textarea_3 = $mol_type_enforce<
+		ReturnType< $rise_bench_textarea['enabled'] >
+		,
+		ReturnType< $rise_bench_textarea_input['enabled'] >
+	>
+	type $rise_bench_textarea_input__spellcheck_rise_bench_textarea_4 = $mol_type_enforce<
+		ReturnType< $rise_bench_textarea['spellcheck'] >
+		,
+		ReturnType< $rise_bench_textarea_input['spellcheck'] >
+	>
+	type $rise_bench_textarea_input__length_max_rise_bench_textarea_5 = $mol_type_enforce<
+		ReturnType< $rise_bench_textarea['length_max'] >
+		,
+		ReturnType< $rise_bench_textarea_input['length_max'] >
+	>
+	type $rise_bench_textarea_input__selection_rise_bench_textarea_6 = $mol_type_enforce<
+		ReturnType< $rise_bench_textarea['selection'] >
+		,
+		ReturnType< $rise_bench_textarea_input['selection'] >
+	>
+	type $rise_bench_textarea_input__submit_rise_bench_textarea_7 = $mol_type_enforce<
+		ReturnType< $rise_bench_textarea['submit'] >
+		,
+		ReturnType< $rise_bench_textarea_input['submit'] >
+	>
+	type $rise_bench_textarea_input__submit_with_ctrl_rise_bench_textarea_8 = $mol_type_enforce<
+		ReturnType< $rise_bench_textarea['submit_with_ctrl'] >
+		,
+		ReturnType< $rise_bench_textarea_input['submit_with_ctrl'] >
+	>
+	type $rise_bench_textarea_view__text_rise_bench_textarea_9 = $mol_type_enforce<
+		ReturnType< $rise_bench_textarea['value'] >
+		,
+		ReturnType< $rise_bench_textarea_view['text'] >
+	>
+	type $rise_bench_textarea_view__render_visible_only_rise_bench_textarea_10 = $mol_type_enforce<
+		boolean
+		,
+		ReturnType< $rise_bench_textarea_view['render_visible_only'] >
+	>
+	type $rise_bench_textarea_view__row_numb_rise_bench_textarea_11 = $mol_type_enforce<
+		ReturnType< $rise_bench_textarea['row_numb'] >
+		,
+		ReturnType< $rise_bench_textarea_view['row_numb'] >
+	>
+	type $rise_bench_textarea_view__sidebar_showed_rise_bench_textarea_12 = $mol_type_enforce<
+		ReturnType< $rise_bench_textarea['sidebar_showed'] >
+		,
+		ReturnType< $rise_bench_textarea_view['sidebar_showed'] >
+	>
+	type $rise_bench_textarea_view__highlight_rise_bench_textarea_13 = $mol_type_enforce<
+		ReturnType< $rise_bench_textarea['highlight'] >
+		,
+		ReturnType< $rise_bench_textarea_view['highlight'] >
+	>
+	type $rise_bench_textarea_view__syntax_rise_bench_textarea_14 = $mol_type_enforce<
+		ReturnType< $rise_bench_textarea['syntax'] >
+		,
+		ReturnType< $rise_bench_textarea_view['syntax'] >
+	>
+	export class $rise_bench_textarea extends $mol_textarea {
+		bring( ): ReturnType< ReturnType< $rise_bench_textarea['Edit'] >['bring'] >
+		Edit( ): $rise_bench_textarea_input
+		View( ): $rise_bench_textarea_view
+	}
+	
+}
+
+//# sourceMappingURL=textarea.view.tree.d.ts.map
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	export class $mol_button_major extends $mol_button_minor {
+		theme( ): string
+	}
+	
+}
+
+//# sourceMappingURL=major.view.tree.d.ts.map
+declare namespace $ {
+    class $rise_bench_computer {
+        static clean(text: string): string;
+    }
+}
+
+declare namespace $ {
+    const $rise_bench_run_baza_version = "2e6100b225c8d4fb3a5b5d14e8568223e8a8c785";
+    const $rise_bench_run_benchmark_version = "0.6.0";
+    class $rise_bench_run extends $mol_object {
+        readonly count: number;
+        readonly properties: number;
+        readonly stamp: string;
+        readonly baza_version: string;
+        readonly benchmark_version: string;
+        readonly id: string;
+        readonly computer: string;
+        readonly browser: string;
+        readonly engine: string;
+        readonly engine_version: string;
+        constructor(count: number, properties?: number, stamp?: string, baza_version?: string, benchmark_version?: string, id?: string, computer?: string, browser?: string, engine?: string, engine_version?: string);
+        private state_value;
+        private failure_value;
+        private bytes_value;
+        private readonly metric_values;
+        state(next?: string): string;
+        failure(next?: string): string;
+        bytes(next?: number | null): number | null;
+        metric(operation: string, next?: number): number | null;
+    }
+}
+
+declare namespace $ {
+    const $rise_bench_engine: {
+        goods: {
+            title: string;
+            version: string;
+            storage: string;
+        };
+        idb: {
+            title: string;
+            version: string;
+            storage: string;
+        };
+        sqlite: {
+            title: string;
+            version: string;
+            storage: string;
+        };
+        pglite: {
+            title: string;
+            version: string;
+            storage: string;
+        };
+        duckdb: {
+            title: string;
+            version: string;
+            storage: string;
+        };
+    };
+    type $rise_bench_engine_kind = keyof typeof $rise_bench_engine;
+}
+
+declare namespace $ {
+
+	type $mol_text__text_rise_bench_host_controls_1 = $mol_type_enforce<
+		ReturnType< $rise_bench_host_controls['intro'] >
+		,
+		ReturnType< $mol_text['text'] >
+	>
+	type $rise_check_list__enabled_rise_bench_host_controls_2 = $mol_type_enforce<
+		ReturnType< $rise_bench_host_controls['enabled'] >
+		,
+		ReturnType< $rise_check_list['enabled'] >
+	>
+	type $rise_check_list__value_rise_bench_host_controls_3 = $mol_type_enforce<
+		ReturnType< $rise_bench_host_controls['engines'] >
+		,
+		ReturnType< $rise_check_list['value'] >
+	>
+	type $rise_check_list__options_rise_bench_host_controls_4 = $mol_type_enforce<
+		ReturnType< $rise_bench_host_controls['engine_keys'] >
+		,
+		ReturnType< $rise_check_list['options'] >
+	>
+	type $rise_check_list__titles_rise_bench_host_controls_5 = $mol_type_enforce<
+		ReturnType< $rise_bench_host_controls['engine_titles'] >
+		,
+		ReturnType< $rise_check_list['titles'] >
+	>
+	type $mol_labeler__title_rise_bench_host_controls_6 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_labeler['title'] >
+	>
+	type $mol_labeler__Content_rise_bench_host_controls_7 = $mol_type_enforce<
+		ReturnType< $rise_bench_host_controls['Engine'] >
+		,
+		ReturnType< $mol_labeler['Content'] >
+	>
+	type $mol_view__sub_rise_bench_host_controls_8 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $rise_check_list__enabled_rise_bench_host_controls_9 = $mol_type_enforce<
+		ReturnType< $rise_bench_host_controls['enabled'] >
+		,
+		ReturnType< $rise_check_list['enabled'] >
+	>
+	type $rise_check_list__value_rise_bench_host_controls_10 = $mol_type_enforce<
+		ReturnType< $rise_bench_host_controls['schemas'] >
+		,
+		ReturnType< $rise_check_list['value'] >
+	>
+	type $rise_bench_host_controls_Schema__12 = $mol_type_enforce<
+		`compact`
+		,
+		string
+	>
+	type $rise_bench_host_controls_Schema__13 = $mol_type_enforce<
+		`full`
+		,
+		string
+	>
+	type $rise_check_list__options_rise_bench_host_controls_11 = $mol_type_enforce<
+		readonly(string)[]
+		,
+		ReturnType< $rise_check_list['options'] >
+	>
+	type $rise_check_list__titles_rise_bench_host_controls_14 = $mol_type_enforce<
+		({ 
+			'compact': string,
+			'full': string,
+		}) 
+		,
+		ReturnType< $rise_check_list['titles'] >
+	>
+	type $mol_labeler__title_rise_bench_host_controls_15 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_labeler['title'] >
+	>
+	type $mol_labeler__Content_rise_bench_host_controls_16 = $mol_type_enforce<
+		ReturnType< $rise_bench_host_controls['Schema'] >
+		,
+		ReturnType< $mol_labeler['Content'] >
+	>
+	type $rise_check_list__enabled_rise_bench_host_controls_17 = $mol_type_enforce<
+		ReturnType< $rise_bench_host_controls['enabled'] >
+		,
+		ReturnType< $rise_check_list['enabled'] >
+	>
+	type $rise_check_list__value_rise_bench_host_controls_18 = $mol_type_enforce<
+		ReturnType< $rise_bench_host_controls['sizes'] >
+		,
+		ReturnType< $rise_check_list['value'] >
+	>
+	type $rise_check_list__options_rise_bench_host_controls_19 = $mol_type_enforce<
+		ReturnType< $rise_bench_host_controls['count_keys'] >
+		,
+		ReturnType< $rise_check_list['options'] >
+	>
+	type $rise_check_list__titles_rise_bench_host_controls_20 = $mol_type_enforce<
+		ReturnType< $rise_bench_host_controls['counts'] >
+		,
+		ReturnType< $rise_check_list['titles'] >
+	>
+	type $mol_labeler__title_rise_bench_host_controls_21 = $mol_type_enforce<
+		ReturnType< $rise_bench_host_controls['count_title'] >
+		,
+		ReturnType< $mol_labeler['title'] >
+	>
+	type $mol_labeler__Content_rise_bench_host_controls_22 = $mol_type_enforce<
+		ReturnType< $rise_bench_host_controls['Count'] >
+		,
+		ReturnType< $mol_labeler['Content'] >
+	>
+	type $rise_bench_textarea__length_max_rise_bench_host_controls_23 = $mol_type_enforce<
+		number
+		,
+		ReturnType< $rise_bench_textarea['length_max'] >
+	>
+	type $rise_bench_textarea__hint_rise_bench_host_controls_24 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $rise_bench_textarea['hint'] >
+	>
+	type $rise_bench_textarea__value_rise_bench_host_controls_25 = $mol_type_enforce<
+		ReturnType< $rise_bench_host_controls['computer'] >
+		,
+		ReturnType< $rise_bench_textarea['value'] >
+	>
+	type $rise_bench_textarea__enabled_rise_bench_host_controls_26 = $mol_type_enforce<
+		ReturnType< $rise_bench_host_controls['enabled'] >
+		,
+		ReturnType< $rise_bench_textarea['enabled'] >
+	>
+	type $mol_labeler__title_rise_bench_host_controls_27 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_labeler['title'] >
+	>
+	type $mol_labeler__label_rise_bench_host_controls_28 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_labeler['label'] >
+	>
+	type $mol_labeler__Content_rise_bench_host_controls_29 = $mol_type_enforce<
+		ReturnType< $rise_bench_host_controls['Computer'] >
+		,
+		ReturnType< $mol_labeler['Content'] >
+	>
+	type $mol_button_major__title_rise_bench_host_controls_30 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_button_major['title'] >
+	>
+	type $mol_button_major__enabled_rise_bench_host_controls_31 = $mol_type_enforce<
+		ReturnType< $rise_bench_host_controls['run_enabled'] >
+		,
+		ReturnType< $mol_button_major['enabled'] >
+	>
+	type $mol_button_major__click_rise_bench_host_controls_32 = $mol_type_enforce<
+		ReturnType< $rise_bench_host_controls['run'] >
+		,
+		ReturnType< $mol_button_major['click'] >
+	>
+	type $mol_button_minor__title_rise_bench_host_controls_33 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_button_minor['title'] >
+	>
+	type $mol_button_minor__click_rise_bench_host_controls_34 = $mol_type_enforce<
+		ReturnType< $rise_bench_host_controls['stop'] >
+		,
+		ReturnType< $mol_button_minor['click'] >
+	>
+	type $mol_view__sub_rise_bench_host_controls_35 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_view__sub_rise_bench_host_controls_36 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_button_minor__title_rise_bench_host_controls_37 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_button_minor['title'] >
+	>
+	type $mol_button_minor__click_rise_bench_host_controls_38 = $mol_type_enforce<
+		ReturnType< $rise_bench_host_controls['retry'] >
+		,
+		ReturnType< $mol_button_minor['click'] >
+	>
+	export class $rise_bench_host_controls extends $mol_page {
+		Support( ): $rise_bench_host_controls_support
+		intro( ): string
+		Intro( ): $mol_text
+		engines( next?: readonly(string)[] ): readonly(string)[]
+		engine_keys( ): readonly(string)[]
+		engine_titles( ): Record<string, any>
+		Engine( ): $rise_check_list
+		Engine_label( ): $mol_labeler
+		storage_label( ): string
+		Storage_label( ): $mol_view
+		schemas( next?: readonly(string)[] ): readonly(string)[]
+		Schema( ): $rise_check_list
+		Schema_label( ): $mol_labeler
+		count_title( ): string
+		sizes( next?: readonly(string)[] ): readonly(string)[]
+		count_keys( ): readonly(string)[]
+		counts( ): Record<string, any>
+		Count( ): $rise_check_list
+		Count_label( ): $mol_labeler
+		Computer_help( ): $rise_bench_host_controls_computerhelp
+		computer( next?: string ): string
+		Computer( ): $rise_bench_textarea
+		Computer_label( ): $mol_labeler
+		run( next?: any ): any
+		Run( ): $mol_button_major
+		stop( next?: any ): any
+		Stop( ): $mol_button_minor
+		status( ): string
+		Status( ): $mol_view
+		elapsed( ): string
+		Elapsed( ): $mol_view
+		retry( next?: any ): any
+		Retry( ): $mol_button_minor
+		controls( ): readonly($mol_view)[]
+		title( ): string
+		minimal_width( ): number
+		kind( ): string
+		enabled( ): boolean
+		running( ): boolean
+		run_enabled( ): boolean
+		foot( ): readonly(any)[]
+		body( ): ReturnType< $rise_bench_host_controls['controls'] >
+		retry_visible( ): boolean
+	}
+	
+}
+
+//# sourceMappingURL=controls.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $rise_bench_host_controls extends $.$rise_bench_host_controls {
+        /** Persist the draft locally; each run takes its own immutable snapshot. */
+        computer(next?: string): string;
+        intro(): string;
+        source_uri(): string;
+        engine_keys(): string[];
+        engine_titles(): {
+            [k: string]: string;
+        };
+        count_title(): "Количество строк" | "Количество записей";
+        counts(): {
+            [k: string]: string;
+        };
+        count_keys(): string[];
+        storage_label(): string;
+        controls(): $mol_view[];
+    }
+}
+
+declare namespace $ {
+}
+
 declare namespace $ {
 
 	export class $mol_icon_content_copy extends $mol_icon {
@@ -45544,69 +49190,6 @@ declare namespace $ {
 }
 
 declare namespace $ {
-    class $rise_bench_computer {
-        static clean(text: string): string;
-    }
-}
-
-declare namespace $ {
-    const $rise_bench_run_baza_version = "2e6100b225c8d4fb3a5b5d14e8568223e8a8c785";
-    const $rise_bench_run_benchmark_version = "0.6.0";
-    class $rise_bench_run extends $mol_object {
-        readonly count: number;
-        readonly properties: number;
-        readonly stamp: string;
-        readonly baza_version: string;
-        readonly benchmark_version: string;
-        readonly id: string;
-        readonly computer: string;
-        readonly browser: string;
-        readonly engine: string;
-        readonly engine_version: string;
-        constructor(count: number, properties?: number, stamp?: string, baza_version?: string, benchmark_version?: string, id?: string, computer?: string, browser?: string, engine?: string, engine_version?: string);
-        private state_value;
-        private failure_value;
-        private bytes_value;
-        private readonly metric_values;
-        state(next?: string): string;
-        failure(next?: string): string;
-        bytes(next?: number | null): number | null;
-        metric(operation: string, next?: number): number | null;
-    }
-}
-
-declare namespace $ {
-    const $rise_bench_engine: {
-        goods: {
-            title: string;
-            version: string;
-            storage: string;
-        };
-        idb: {
-            title: string;
-            version: string;
-            storage: string;
-        };
-        sqlite: {
-            title: string;
-            version: string;
-            storage: string;
-        };
-        pglite: {
-            title: string;
-            version: string;
-            storage: string;
-        };
-        duckdb: {
-            title: string;
-            version: string;
-            storage: string;
-        };
-    };
-    type $rise_bench_engine_kind = keyof typeof $rise_bench_engine;
-}
-
-declare namespace $ {
 
 	type $rise_bench_metrics_details__computer_rise_bench_metrics_1 = $mol_type_enforce<
 		ReturnType< $rise_bench_metrics['details_computer'] >
@@ -45672,29 +49255,763 @@ declare namespace $ {
 }
 
 declare namespace $ {
-}
 
-declare namespace $ {
-
-	export class $mol_example extends $mol_view {
-		tags( ): readonly(string)[]
-		aspects( ): readonly(string)[]
+	type $mol_list__rows_rise_bench_charts_selection_1 = $mol_type_enforce<
+		ReturnType< $rise_bench_charts_selection['choices'] >
+		,
+		ReturnType< $mol_list['rows'] >
+	>
+	type $mol_scroll__sub_rise_bench_charts_selection_2 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_scroll['sub'] >
+	>
+	type $mol_view__sub_rise_bench_charts_selection_3 = $mol_type_enforce<
+		ReturnType< $rise_bench_charts_selection['presets'] >
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_button_minor__title_rise_bench_charts_selection_4 = $mol_type_enforce<
+		ReturnType< $rise_bench_charts_selection['preset_title'] >
+		,
+		ReturnType< $mol_button_minor['title'] >
+	>
+	type $mol_button_minor__click_rise_bench_charts_selection_5 = $mol_type_enforce<
+		ReturnType< $rise_bench_charts_selection['select_latest'] >
+		,
+		ReturnType< $mol_button_minor['click'] >
+	>
+	type $mol_check_box__title_rise_bench_charts_selection_6 = $mol_type_enforce<
+		ReturnType< $rise_bench_charts_selection['run_title'] >
+		,
+		ReturnType< $mol_check_box['title'] >
+	>
+	type $mol_check_box__checked_rise_bench_charts_selection_7 = $mol_type_enforce<
+		ReturnType< $rise_bench_charts_selection['checked'] >
+		,
+		ReturnType< $mol_check_box['checked'] >
+	>
+	export class $rise_bench_charts_selection extends $mol_pick {
+		selection_title( ): string
+		choices( ): readonly($mol_view)[]
+		Items( ): $mol_list
+		List( ): $mol_scroll
+		presets( ): readonly($mol_view)[]
+		preset_title( id: any): string
+		select_latest( id: any, next?: any ): any
+		run_title( id: any): string
+		checked( id: any, next?: boolean ): boolean
+		runs( ): readonly($rise_bench_run)[]
+		value( next?: readonly(string)[] ): readonly(string)[]
+		title( ): ReturnType< $rise_bench_charts_selection['selection_title'] >
+		bubble_content( ): readonly(any)[]
+		Presets( ): $mol_view
+		Preset( id: any): $mol_button_minor
+		Check( id: any): $mol_check_box
 	}
 	
 }
 
-//# sourceMappingURL=example.view.tree.d.ts.map
+//# sourceMappingURL=selection.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $rise_bench_charts_selection extends $.$rise_bench_charts_selection {
+        selection_title(): string;
+        choices(): $mol_view[];
+        presets(): $mol_button_minor[];
+        preset_title(count: number): string;
+        select_latest(count: number): void;
+        checked(id: string, next?: boolean): boolean;
+        run_title(id: string): string;
+    }
+}
+
 declare namespace $ {
 }
 
 declare namespace $ {
+    function $mol_coord_pack(high: number, low: number): number;
+    function $mol_coord_high(pack: number): number;
+    function $mol_coord_low(pack: number): number;
+}
 
-	export class $mol_example_small extends $mol_example {
+declare namespace $ {
+
+	type $mol_svg_path__geometry_mol_plot_dot_1 = $mol_type_enforce<
+		ReturnType< $mol_plot_dot['curve'] >
+		,
+		ReturnType< $mol_svg_path['geometry'] >
+	>
+	type $mol_plot_graph_sample__color_mol_plot_dot_2 = $mol_type_enforce<
+		ReturnType< $mol_plot_dot['color'] >
+		,
+		ReturnType< $mol_plot_graph_sample['color'] >
+	>
+	export class $mol_plot_dot extends $mol_plot_graph {
+		diameter( ): number
+		curve( ): string
+		Curve( ): $mol_svg_path
+		points_max( ): number
+		aspect( ): number
+		style( ): ({ 
+			'stroke-width': ReturnType< $mol_plot_dot['diameter'] >,
+		})  & ReturnType< $mol_plot_graph['style'] >
+		sub( ): readonly(any)[]
+		Sample( ): $mol_plot_graph_sample
 	}
 	
 }
 
-//# sourceMappingURL=small.view.tree.d.ts.map
+//# sourceMappingURL=dot.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $mol_plot_dot extends $.$mol_plot_dot {
+        filled(): Set<number>;
+        indexes(): number[];
+        curve(): string;
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	export class $rise_bench_charts_operation_plot extends $mol_plot_pane {
+	}
+	
+}
+
+//# sourceMappingURL=plot.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $rise_bench_charts_operation_plot extends $.$rise_bench_charts_operation_plot {
+        dimensions(): $mol_vector_2d<$mol_vector_range<number>>;
+    }
+}
+
+declare namespace $ {
+
+	type $mol_plot_graph_sample__sub_mol_plot_group_1 = $mol_type_enforce<
+		ReturnType< $mol_plot_group['graph_samples'] >
+		,
+		ReturnType< $mol_plot_graph_sample['sub'] >
+	>
+	export class $mol_plot_group extends $mol_plot_graph {
+		graphs( ): readonly($mol_plot_graph)[]
+		graphs_enriched( ): ReturnType< $mol_plot_group['graphs'] >
+		graph_samples( ): readonly($mol_view)[]
+		sub( ): ReturnType< $mol_plot_group['graphs_enriched'] >
+		Sample( ): $mol_plot_graph_sample
+	}
+	
+}
+
+//# sourceMappingURL=group.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $mol_plot_group extends $.$mol_plot_group {
+        graphs_enriched(): readonly $.$mol_plot_graph[];
+        dimensions(): $mol_vector_2d<$mol_vector_range<number>>;
+        graph_samples(): any[];
+        back(): $mol_plot_graph[];
+        front(): $mol_plot_graph[];
+    }
+}
+
+declare namespace $ {
+
+	export class $mol_plot_ruler_hor extends $mol_plot_ruler {
+		title_align( ): string
+		label_align( ): string
+		title_pos_x( ): string
+		title_pos_y( ): string
+		label_pos_y( id: any): ReturnType< $mol_plot_ruler_hor['title_pos_y'] >
+		background_width( ): string
+	}
+	
+}
+
+//# sourceMappingURL=hor.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $mol_plot_ruler_hor extends $.$mol_plot_ruler_hor {
+        dimensions_axis(): $mol_vector_range<number>;
+        viewport_axis(): $mol_vector_range<number>;
+        scale_axis(): number;
+        scale_step(): number;
+        shift_axis(): number;
+        curve(): string;
+        label_pos_x(index: number): string;
+        background_y(): string;
+        title_pos_y(): string;
+        background_height(): string;
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	type $mol_view__dom_name_rise_bench_charts_operation_1 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_view['dom_name'] >
+	>
+	type $mol_view__sub_rise_bench_charts_operation_2 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_view__sub_rise_bench_charts_operation_3 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_view__sub_rise_bench_charts_operation_4 = $mol_type_enforce<
+		ReturnType< $rise_bench_charts_operation['legends'] >
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_view__sub_rise_bench_charts_operation_5 = $mol_type_enforce<
+		ReturnType< $rise_bench_charts_operation['legend_content'] >
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_view__sub_rise_bench_charts_operation_6 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_view__sub_rise_bench_charts_operation_7 = $mol_type_enforce<
+		ReturnType< $rise_bench_charts_operation['legend_sample'] >
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $rise_bench_charts_operation_plot__hue_base_rise_bench_charts_operation_8 = $mol_type_enforce<
+		number
+		,
+		ReturnType< $rise_bench_charts_operation_plot['hue_base'] >
+	>
+	type $rise_bench_charts_operation_plot__graphs_rise_bench_charts_operation_9 = $mol_type_enforce<
+		ReturnType< $rise_bench_charts_operation['graphs'] >
+		,
+		ReturnType< $rise_bench_charts_operation_plot['graphs'] >
+	>
+	type $mol_plot_group__title_rise_bench_charts_operation_10 = $mol_type_enforce<
+		ReturnType< $rise_bench_charts_operation['series_title'] >
+		,
+		ReturnType< $mol_plot_group['title'] >
+	>
+	type $mol_plot_group__series_x_rise_bench_charts_operation_11 = $mol_type_enforce<
+		ReturnType< $rise_bench_charts_operation['series_x'] >
+		,
+		ReturnType< $mol_plot_group['series_x'] >
+	>
+	type $mol_plot_group__series_y_rise_bench_charts_operation_12 = $mol_type_enforce<
+		ReturnType< $rise_bench_charts_operation['series_y'] >
+		,
+		ReturnType< $mol_plot_group['series_y'] >
+	>
+	type $mol_plot_group__graphs_rise_bench_charts_operation_13 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_plot_group['graphs'] >
+	>
+	type $mol_plot_ruler_hor__title_rise_bench_charts_operation_14 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_plot_ruler_hor['title'] >
+	>
+	type $mol_plot_ruler_vert__title_rise_bench_charts_operation_15 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_plot_ruler_vert['title'] >
+	>
+	type $mol_view__sub_rise_bench_charts_operation_16 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	export class $rise_bench_charts_operation extends $mol_view {
+		content( ): readonly($mol_view)[]
+		legends( ): readonly($mol_view)[]
+		legend_content( id: any): readonly($mol_view_content)[]
+		series_title( id: any): string
+		legend_sample( id: any): readonly($mol_view)[]
+		graphs( ): readonly($mol_plot_graph)[]
+		series_x( id: any): readonly(number)[]
+		series_y( id: any): readonly(number)[]
+		Line( id: any): $mol_plot_line
+		Dots( id: any): $mol_plot_dot
+		operation( ): string
+		runs( ): readonly($rise_bench_run)[]
+		sub( ): ReturnType< $rise_bench_charts_operation['content'] >
+		Title( ): $mol_view
+		Empty( ): $mol_view
+		Legend( ): $mol_view
+		Legend_item( id: any): $mol_view
+		Legend_text( id: any): $mol_view
+		Legend_sample( id: any): $mol_view
+		Plot( ): $rise_bench_charts_operation_plot
+		Series( id: any): $mol_plot_group
+		X( ): $mol_plot_ruler_hor
+		Y( ): $mol_plot_ruler_vert
+		Note( ): $mol_view
+	}
+	
+}
+
+//# sourceMappingURL=operation.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $rise_bench_charts_operation extends $.$rise_bench_charts_operation {
+        groups(): {
+            title: string;
+            points: number[][];
+        }[];
+        content(): ($mol_view | $.$rise_bench_charts_operation_plot)[];
+        series_title(id: number): string;
+        series_x(id: number): number[];
+        series_y(id: number): number[];
+        graphs(): ($.$mol_plot_ruler_vert | $.$mol_plot_group | $.$mol_plot_ruler_hor)[];
+        legends(): $mol_view[];
+        legend_content(id: number): $mol_view[];
+        legend_sample(id: number): $mol_plot_graph_sample[];
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	type $rise_bench_charts_selection__runs_rise_bench_charts_1 = $mol_type_enforce<
+		ReturnType< $rise_bench_charts['runs'] >
+		,
+		ReturnType< $rise_bench_charts_selection['runs'] >
+	>
+	type $rise_bench_charts_selection__value_rise_bench_charts_2 = $mol_type_enforce<
+		ReturnType< $rise_bench_charts['selected'] >
+		,
+		ReturnType< $rise_bench_charts_selection['value'] >
+	>
+	type $rise_bench_charts_operation__operation_rise_bench_charts_3 = $mol_type_enforce<
+		ReturnType< $rise_bench_charts['operation'] >
+		,
+		ReturnType< $rise_bench_charts_operation['operation'] >
+	>
+	type $rise_bench_charts_operation__runs_rise_bench_charts_4 = $mol_type_enforce<
+		ReturnType< $rise_bench_charts['selected_runs'] >
+		,
+		ReturnType< $rise_bench_charts_operation['runs'] >
+	>
+	export class $rise_bench_charts extends $mol_view {
+		charts( ): readonly($mol_view)[]
+		operation( id: any): string
+		selected_runs( ): readonly($rise_bench_run)[]
+		runs( ): readonly($rise_bench_run)[]
+		operations( ): readonly(string)[]
+		selected( next?: readonly(string)[] ): readonly(string)[]
+		sub( ): ReturnType< $rise_bench_charts['charts'] >
+		Selection( ): $rise_bench_charts_selection
+		Chart( id: any): $rise_bench_charts_operation
+	}
+	
+}
+
+//# sourceMappingURL=charts.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $rise_bench_charts extends $.$rise_bench_charts {
+        charts(): ($.$rise_bench_charts_selection | $.$rise_bench_charts_operation)[];
+        selected_runs(): $rise_bench_run[];
+        operation(index: number): string;
+    }
+}
+
+declare namespace $ { }
+
+declare namespace $ {
+    /** Signed public post/just grant for the result Land, not a private key or data. */
+    class $rise_bench_archive_seed extends $mol_object {
+        private static readonly bytes;
+        static apply(): boolean;
+    }
+}
+
+declare namespace $ {
+    type $rise_bench_archive_row = {
+        id?: string;
+        count: number;
+        properties: number;
+        stamp: string;
+        state: string;
+        error?: string;
+        baza_version?: string;
+        benchmark_version?: string;
+        engine?: string;
+        engine_version?: string;
+        computer?: string;
+        browser?: string;
+        bytes?: number | null;
+        metrics: Record<string, number | null>;
+    };
+    /** Small result metadata only. Never stores a workload Land or database name. */
+    class $rise_bench_archive extends $mol_object {
+        static link: string;
+        static operations(kind: string): string[];
+        private static readonly preset;
+        static provision(): string;
+        static root(): $giper_baza_dict;
+        static validate(value: unknown, operations: readonly string[]): $rise_bench_archive_row | null;
+        static save(kind: string, row: $rise_bench_archive_row): void;
+        static rows(kind: string): $rise_bench_run[];
+        static row(key: string): $rise_bench_run | null;
+    }
+}
+
+declare namespace $ {
+    /** Stable URL order and backwards compatibility with the old `all` links. */
+    function $rise_bench_selection(value: string, options: readonly string[]): string[];
+}
+
+declare namespace $ {
+    type $rise_bench_batch_case = {
+        engine: string;
+        count: string;
+        schema: string;
+    };
+    /** A fixed, sequential matrix. Selection changes never alter a running batch. */
+    function $rise_bench_batch(engine: string, count: string, schema: string, text?: boolean): $rise_bench_batch_case[];
+}
+
+declare namespace $ {
+    /**
+     * Serialize csv data with delimiter
+     * @see https://mol.hyoo.ru/#!section=demos/demo=mol_csv_serial
+     */
+    function $mol_csv_serial(data: Record<string, any>[], delimiter?: string): string;
+    function $mol_csv_serial_table(rows: string[][], delimiter?: string): string;
+}
+
+declare namespace $ {
+    /** UTF-8 with BOM and semicolons opens correctly in Russian Windows Excel. */
+    function $rise_bench_csv(rows: readonly Record<string, unknown>[], columns: readonly string[]): string;
+}
+
+declare namespace $ {
+    /** Retain every seed Land until peer URLs have live reactive consumers. */
+    class $rise_bench_seed extends $mol_object {
+        static lands(): $giper_baza_land[];
+    }
+}
+
+declare namespace $ {
+
+	type $rise_bench_host_controls__kind_rise_bench_host_1 = $mol_type_enforce<
+		ReturnType< $rise_bench_host['kind'] >
+		,
+		ReturnType< $rise_bench_host_controls['kind'] >
+	>
+	type $rise_bench_host_controls__enabled_rise_bench_host_2 = $mol_type_enforce<
+		ReturnType< $rise_bench_host['controls_enabled'] >
+		,
+		ReturnType< $rise_bench_host_controls['enabled'] >
+	>
+	type $rise_bench_host_controls__run_enabled_rise_bench_host_3 = $mol_type_enforce<
+		ReturnType< $rise_bench_host['run_enabled'] >
+		,
+		ReturnType< $rise_bench_host_controls['run_enabled'] >
+	>
+	type $rise_bench_host_controls__running_rise_bench_host_4 = $mol_type_enforce<
+		ReturnType< $rise_bench_host['busy'] >
+		,
+		ReturnType< $rise_bench_host_controls['running'] >
+	>
+	type $rise_bench_host_controls__engines_rise_bench_host_5 = $mol_type_enforce<
+		ReturnType< $rise_bench_host['selected_engines'] >
+		,
+		ReturnType< $rise_bench_host_controls['engines'] >
+	>
+	type $rise_bench_host_controls__sizes_rise_bench_host_6 = $mol_type_enforce<
+		ReturnType< $rise_bench_host['selected_counts'] >
+		,
+		ReturnType< $rise_bench_host_controls['sizes'] >
+	>
+	type $rise_bench_host_controls__schemas_rise_bench_host_7 = $mol_type_enforce<
+		ReturnType< $rise_bench_host['selected_schemas'] >
+		,
+		ReturnType< $rise_bench_host_controls['schemas'] >
+	>
+	type $rise_bench_host_controls__run_rise_bench_host_8 = $mol_type_enforce<
+		ReturnType< $rise_bench_host['run'] >
+		,
+		ReturnType< $rise_bench_host_controls['run'] >
+	>
+	type $rise_bench_host_controls__stop_rise_bench_host_9 = $mol_type_enforce<
+		ReturnType< $rise_bench_host['stop'] >
+		,
+		ReturnType< $rise_bench_host_controls['stop'] >
+	>
+	type $rise_bench_host_controls__status_rise_bench_host_10 = $mol_type_enforce<
+		ReturnType< $rise_bench_host['status'] >
+		,
+		ReturnType< $rise_bench_host_controls['status'] >
+	>
+	type $rise_bench_host_controls__elapsed_rise_bench_host_11 = $mol_type_enforce<
+		ReturnType< $rise_bench_host['elapsed_text'] >
+		,
+		ReturnType< $rise_bench_host_controls['elapsed'] >
+	>
+	type $rise_bench_host_controls__retry_visible_rise_bench_host_12 = $mol_type_enforce<
+		ReturnType< $rise_bench_host['retry_visible'] >
+		,
+		ReturnType< $rise_bench_host_controls['retry_visible'] >
+	>
+	type $rise_bench_host_controls__retry_rise_bench_host_13 = $mol_type_enforce<
+		ReturnType< $rise_bench_host['retry'] >
+		,
+		ReturnType< $rise_bench_host_controls['retry'] >
+	>
+	type $mol_button_download__title_rise_bench_host_14 = $mol_type_enforce<
+		ReturnType< $rise_bench_host['csv_title'] >
+		,
+		ReturnType< $mol_button_download['title'] >
+	>
+	type $mol_button_download__hint_rise_bench_host_15 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_button_download['hint'] >
+	>
+	type $mol_button_download__blob_rise_bench_host_16 = $mol_type_enforce<
+		ReturnType< $rise_bench_host['csv_blob'] >
+		,
+		ReturnType< $mol_button_download['blob'] >
+	>
+	type $mol_button_download__file_name_rise_bench_host_17 = $mol_type_enforce<
+		ReturnType< $rise_bench_host['csv_filename'] >
+		,
+		ReturnType< $mol_button_download['file_name'] >
+	>
+	type $mol_switch__value_rise_bench_host_18 = $mol_type_enforce<
+		ReturnType< $rise_bench_host['mode'] >
+		,
+		ReturnType< $mol_switch['value'] >
+	>
+	type $mol_switch__options_rise_bench_host_19 = $mol_type_enforce<
+		({ 
+			'table': string,
+			'charts': string,
+		}) 
+		,
+		ReturnType< $mol_switch['options'] >
+	>
+	type $rise_bench_metrics__operations_rise_bench_host_20 = $mol_type_enforce<
+		ReturnType< $rise_bench_host['operations'] >
+		,
+		ReturnType< $rise_bench_metrics['operations'] >
+	>
+	type $rise_bench_metrics__runs_rise_bench_host_21 = $mol_type_enforce<
+		ReturnType< $rise_bench_host['runs'] >
+		,
+		ReturnType< $rise_bench_metrics['runs'] >
+	>
+	type $rise_bench_metrics__compare_rise_bench_host_22 = $mol_type_enforce<
+		ReturnType< $rise_bench_host['compare'] >
+		,
+		ReturnType< $rise_bench_metrics['compare'] >
+	>
+	type $rise_bench_metrics__text_mode_rise_bench_host_23 = $mol_type_enforce<
+		ReturnType< $rise_bench_host['text_mode'] >
+		,
+		ReturnType< $rise_bench_metrics['text_mode'] >
+	>
+	type $mol_scroll__sub_rise_bench_host_24 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_scroll['sub'] >
+	>
+	type $mol_frame__uri_rise_bench_host_25 = $mol_type_enforce<
+		ReturnType< $rise_bench_host['fixture_uri'] >
+		,
+		ReturnType< $mol_frame['uri'] >
+	>
+	type $mol_frame__clipboard_read_rise_bench_host_26 = $mol_type_enforce<
+		boolean
+		,
+		ReturnType< $mol_frame['clipboard_read'] >
+	>
+	type $mol_frame__clipboard_write_rise_bench_host_27 = $mol_type_enforce<
+		boolean
+		,
+		ReturnType< $mol_frame['clipboard_write'] >
+	>
+	type $mol_frame__attr_rise_bench_host_28 = $mol_type_enforce<
+		({ 
+			'inert': ReturnType< $rise_bench_host['busy'] >,
+		})  & ReturnType< $mol_frame['attr'] >
+		,
+		ReturnType< $mol_frame['attr'] >
+	>
+	type $mol_page__title_rise_bench_host_29 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_page['title'] >
+	>
+	type $mol_page__minimal_width_rise_bench_host_30 = $mol_type_enforce<
+		number
+		,
+		ReturnType< $mol_page['minimal_width'] >
+	>
+	type $mol_page__tools_rise_bench_host_31 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_page['tools'] >
+	>
+	type $mol_page__body_rise_bench_host_32 = $mol_type_enforce<
+		ReturnType< $rise_bench_host['results_body'] >
+		,
+		ReturnType< $mol_page['body'] >
+	>
+	type $rise_bench_charts__runs_rise_bench_host_33 = $mol_type_enforce<
+		ReturnType< $rise_bench_host['runs'] >
+		,
+		ReturnType< $rise_bench_charts['runs'] >
+	>
+	type $rise_bench_charts__operations_rise_bench_host_34 = $mol_type_enforce<
+		ReturnType< $rise_bench_host['operations'] >
+		,
+		ReturnType< $rise_bench_charts['operations'] >
+	>
+	type $rise_bench_charts__selected_rise_bench_host_35 = $mol_type_enforce<
+		ReturnType< $rise_bench_host['chart_selection'] >
+		,
+		ReturnType< $rise_bench_charts['selected'] >
+	>
+	export class $rise_bench_host extends $mol_book2 {
+		controls_enabled( ): boolean
+		run_enabled( ): boolean
+		busy( ): boolean
+		selected_engines( next?: readonly(string)[] ): readonly(string)[]
+		selected_counts( next?: readonly(string)[] ): readonly(string)[]
+		selected_schemas( next?: readonly(string)[] ): readonly(string)[]
+		run( next?: any ): any
+		stop( next?: any ): any
+		status( next?: string ): string
+		elapsed_text( ): string
+		retry_visible( ): boolean
+		retry( next?: any ): any
+		Controls( ): $rise_bench_host_controls
+		csv_title( ): string
+		csv_blob( ): any
+		csv_filename( ): string
+		Download( ): $mol_button_download
+		mode( next?: string ): string
+		Mode( ): $mol_switch
+		operations( ): readonly(string)[]
+		runs( ): readonly($rise_bench_run)[]
+		compare( ): boolean
+		text_mode( ): boolean
+		Metrics( ): $rise_bench_metrics
+		History( ): $mol_scroll
+		fixture_uri( ): string
+		Frame( ): $mol_frame
+		results_body( ): readonly($mol_view)[]
+		Results( ): $mol_page
+		chart_selection( next?: readonly(string)[] ): readonly(string)[]
+		kind( ): string
+		pages( ): readonly(any)[]
+		Charts( ): $rise_bench_charts
+	}
+	
+}
+
+//# sourceMappingURL=host.view.tree.d.ts.map
+declare namespace $.$$ {
+    type $rise_bench_host_pending = $rise_bench_archive_row & {
+        kind?: string;
+    };
+    export class $rise_bench_host extends $.$rise_bench_host {
+        menu_title(): string;
+        compare(): boolean;
+        text_mode(): boolean;
+        mode(next?: string): "charts" | "table";
+        fixture_kind(): string;
+        engine(next?: string): string;
+        count(next?: string): string;
+        schema(next?: string): string;
+        selected_engines(next?: readonly string[]): string[];
+        selected_counts(next?: readonly string[]): string[];
+        selected_schemas(next?: readonly string[]): string[];
+        private chart_selection_value?;
+        chart_selection(next?: readonly string[]): readonly string[];
+        ready(next?: boolean): boolean;
+        busy(next?: boolean): boolean;
+        active_case(next?: ($rise_bench_batch_case & {
+            token: string;
+        }) | null): ($rise_bench_batch_case & {
+            token: string;
+        }) | null;
+        display_case(next?: ($rise_bench_batch_case & {
+            token: string;
+        }) | null): ($rise_bench_batch_case & {
+            token: string;
+        }) | null;
+        frame_generation(next?: number): number;
+        private queue;
+        private total;
+        private finished;
+        private failed;
+        private command_sent;
+        private progress;
+        private timing_value;
+        timing(next?: {
+            batch: number;
+            step: number;
+            ended: number;
+        }): {
+            batch: number;
+            step: number;
+            ended: number;
+        };
+        elapsed_text(): string;
+        duration(milliseconds: number): string;
+        private readonly settled;
+        engine_title(engine: string): string;
+        controls_enabled(): boolean;
+        run_enabled(): boolean;
+        config(): {
+            count: string;
+            schema: string;
+        };
+        send(command: string, data: object): void;
+        run(): void;
+        next_case(): void;
+        fail_case(): void;
+        partial_row(): $rise_bench_archive_row;
+        stop(): void;
+        finish_case(row: $rise_bench_archive_row, kind: string): void;
+        operations(): string[];
+        fixture_uri(): string;
+        runs(): $rise_bench_run[];
+        pages(): readonly any[];
+        csv_filename(): string;
+        csv_title(): "CSV" | "Скачать CSV";
+        csv_blob(): Blob;
+        results_body(): ($.$mol_scroll | $.$mol_frame | $.$rise_bench_charts)[];
+        retry_visible(): boolean;
+        outbox(next?: readonly $rise_bench_host_pending[]): readonly $rise_bench_host_pending[];
+        accept(row: $rise_bench_archive_row, kind: string): void;
+        retry(): void;
+        private restored;
+        restore_outbox(): void;
+        listener(): {
+            destructor: () => void;
+        };
+        destructor(): void;
+        auto(): never[];
+    }
+    export {};
+}
+
+declare namespace $ {
+}
+
 declare namespace $ {
 
 	type $mol_number__value_mol_list_demo_1 = $mol_type_enforce<
@@ -45764,74 +50081,6 @@ declare namespace $.$$ {
         item_title(id: number): string;
         list_items(): $.$mol_link[];
     }
-}
-
-declare namespace $ {
-
-	export class $mol_image extends $mol_view {
-		uri( ): string
-		title( ): string
-		loading( ): string
-		decoding( ): string
-		cors( ): any
-		natural_width( ): number
-		natural_height( ): number
-		load( next?: any ): any
-		dom_name( ): string
-		attr( ): Record<string, any> & ReturnType< $mol_view['attr'] >
-		event( ): Record<string, any>
-		minimal_width( ): number
-		minimal_height( ): number
-	}
-	
-}
-
-//# sourceMappingURL=image.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $mol_image extends $.$mol_image {
-        natural_width(next?: null): number;
-        natural_height(next?: null): number;
-        load(): void;
-    }
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
-
-	type $mol_image__uri_mol_link_iconed_1 = $mol_type_enforce<
-		ReturnType< $mol_link_iconed['icon'] >
-		,
-		ReturnType< $mol_image['uri'] >
-	>
-	type $mol_image__title_mol_link_iconed_2 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $mol_image['title'] >
-	>
-	export class $mol_link_iconed extends $mol_link {
-		icon( ): string
-		Icon( ): $mol_image
-		title( ): ReturnType< $mol_link_iconed['uri'] >
-		sub( ): readonly(any)[]
-		content( ): readonly(any)[]
-		host( ): string
-	}
-	
-}
-
-//# sourceMappingURL=iconed.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $mol_link_iconed extends $.$mol_link_iconed {
-        icon(): string;
-        host(): string;
-        title(): string;
-        sub(): readonly any[];
-    }
-}
-
-declare namespace $ {
 }
 
 declare namespace $ {
@@ -60376,45 +64625,6 @@ declare namespace $ {
 }
 
 declare namespace $ {
-    /** Signed public post/just grant for the result Land, not a private key or data. */
-    class $rise_bench_archive_seed extends $mol_object {
-        private static readonly bytes;
-        static apply(): boolean;
-    }
-}
-
-declare namespace $ {
-    type $rise_bench_archive_row = {
-        id?: string;
-        count: number;
-        properties: number;
-        stamp: string;
-        state: string;
-        error?: string;
-        baza_version?: string;
-        benchmark_version?: string;
-        engine?: string;
-        engine_version?: string;
-        computer?: string;
-        browser?: string;
-        bytes?: number | null;
-        metrics: Record<string, number | null>;
-    };
-    /** Small result metadata only. Never stores a workload Land or database name. */
-    class $rise_bench_archive extends $mol_object {
-        static link: string;
-        static operations(kind: string): string[];
-        private static readonly preset;
-        static provision(): string;
-        static root(): $giper_baza_dict;
-        static validate(value: unknown, operations: readonly string[]): $rise_bench_archive_row | null;
-        static save(kind: string, row: $rise_bench_archive_row): void;
-        static rows(kind: string): $rise_bench_run[];
-        static row(key: string): $rise_bench_run | null;
-    }
-}
-
-declare namespace $ {
     /** Reports phase boundaries; only the user decides when to stop a workload. */
     class $rise_bench_stage {
         readonly run: $rise_bench_run;
@@ -60512,6 +64722,8 @@ declare namespace $ {
 	>
 	type $mol_switch__options_rise_bench_baza_goods_9 = $mol_type_enforce<
 		({ 
+			'1': string,
+			'10': string,
 			'100': string,
 			'500': string,
 			'1000': string,
@@ -60807,7 +65019,7 @@ declare namespace $.$$ {
         }): $rise_bench_baza_goods_preparation;
         fill_product(state: $rise_bench_baza_goods_preparation, index: number, product: $rise_bench_baza_goods_product): $rise_bench_baza_goods_product;
         initialize_product(key: readonly [$rise_bench_baza_goods_preparation, number]): $rise_bench_baza_goods_product;
-        schema_mode(next?: string): "full" | "compact";
+        schema_mode(next?: string): "compact" | "full";
         compact_mode(): boolean;
         count_mode(next?: string): string;
         record_count(): number;
@@ -60842,120 +65054,6 @@ declare namespace $.$$ {
 declare namespace $.$$ {
 }
 
-declare namespace $ {
-
-	export class $rise_bench_textarea_input extends $mol_textarea_edit {
-	}
-	
-}
-
-//# sourceMappingURL=input.view.tree.d.ts.map
-declare namespace $.$$ {
-    /** Native selection is applied as a command, never replayed by unrelated renders. */
-    class $rise_bench_textarea_input extends $.$rise_bench_textarea_input {
-        private applied?;
-        field(): ReturnType<$.$rise_bench_textarea_input['field']>;
-        render(): void;
-        /** CRDT writes may suspend; a Promise is not an invalid-input error. */
-        value_changed(next?: string): string;
-    }
-}
-
-declare namespace $ {
-
-	export class $rise_bench_textarea_view extends $mol_text_code {
-	}
-	
-}
-
-//# sourceMappingURL=view.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $rise_bench_textarea_view extends $.$rise_bench_textarea_view {
-        text_lines(): string[];
-    }
-}
-
-declare namespace $ {
-
-	type $rise_bench_textarea_input__value_rise_bench_textarea_1 = $mol_type_enforce<
-		ReturnType< $rise_bench_textarea['value'] >
-		,
-		ReturnType< $rise_bench_textarea_input['value'] >
-	>
-	type $rise_bench_textarea_input__hint_rise_bench_textarea_2 = $mol_type_enforce<
-		ReturnType< $rise_bench_textarea['hint'] >
-		,
-		ReturnType< $rise_bench_textarea_input['hint'] >
-	>
-	type $rise_bench_textarea_input__enabled_rise_bench_textarea_3 = $mol_type_enforce<
-		ReturnType< $rise_bench_textarea['enabled'] >
-		,
-		ReturnType< $rise_bench_textarea_input['enabled'] >
-	>
-	type $rise_bench_textarea_input__spellcheck_rise_bench_textarea_4 = $mol_type_enforce<
-		ReturnType< $rise_bench_textarea['spellcheck'] >
-		,
-		ReturnType< $rise_bench_textarea_input['spellcheck'] >
-	>
-	type $rise_bench_textarea_input__length_max_rise_bench_textarea_5 = $mol_type_enforce<
-		ReturnType< $rise_bench_textarea['length_max'] >
-		,
-		ReturnType< $rise_bench_textarea_input['length_max'] >
-	>
-	type $rise_bench_textarea_input__selection_rise_bench_textarea_6 = $mol_type_enforce<
-		ReturnType< $rise_bench_textarea['selection'] >
-		,
-		ReturnType< $rise_bench_textarea_input['selection'] >
-	>
-	type $rise_bench_textarea_input__submit_rise_bench_textarea_7 = $mol_type_enforce<
-		ReturnType< $rise_bench_textarea['submit'] >
-		,
-		ReturnType< $rise_bench_textarea_input['submit'] >
-	>
-	type $rise_bench_textarea_input__submit_with_ctrl_rise_bench_textarea_8 = $mol_type_enforce<
-		ReturnType< $rise_bench_textarea['submit_with_ctrl'] >
-		,
-		ReturnType< $rise_bench_textarea_input['submit_with_ctrl'] >
-	>
-	type $rise_bench_textarea_view__text_rise_bench_textarea_9 = $mol_type_enforce<
-		ReturnType< $rise_bench_textarea['value'] >
-		,
-		ReturnType< $rise_bench_textarea_view['text'] >
-	>
-	type $rise_bench_textarea_view__render_visible_only_rise_bench_textarea_10 = $mol_type_enforce<
-		boolean
-		,
-		ReturnType< $rise_bench_textarea_view['render_visible_only'] >
-	>
-	type $rise_bench_textarea_view__row_numb_rise_bench_textarea_11 = $mol_type_enforce<
-		ReturnType< $rise_bench_textarea['row_numb'] >
-		,
-		ReturnType< $rise_bench_textarea_view['row_numb'] >
-	>
-	type $rise_bench_textarea_view__sidebar_showed_rise_bench_textarea_12 = $mol_type_enforce<
-		ReturnType< $rise_bench_textarea['sidebar_showed'] >
-		,
-		ReturnType< $rise_bench_textarea_view['sidebar_showed'] >
-	>
-	type $rise_bench_textarea_view__highlight_rise_bench_textarea_13 = $mol_type_enforce<
-		ReturnType< $rise_bench_textarea['highlight'] >
-		,
-		ReturnType< $rise_bench_textarea_view['highlight'] >
-	>
-	type $rise_bench_textarea_view__syntax_rise_bench_textarea_14 = $mol_type_enforce<
-		ReturnType< $rise_bench_textarea['syntax'] >
-		,
-		ReturnType< $rise_bench_textarea_view['syntax'] >
-	>
-	export class $rise_bench_textarea extends $mol_textarea {
-		bring( ): ReturnType< ReturnType< $rise_bench_textarea['Edit'] >['bring'] >
-		Edit( ): $rise_bench_textarea_input
-		View( ): $rise_bench_textarea_view
-	}
-	
-}
-
-//# sourceMappingURL=textarea.view.tree.d.ts.map
 declare namespace $ {
     /** Native textarea plus its visible text layer, followed by a paint opportunity. */
     class $rise_bench_baza_crdttext_render_ready extends $mol_object {
@@ -61209,1575 +65307,6 @@ declare namespace $.$$ {
 }
 
 declare namespace $ {
-
-	export class $mol_icon_youtube extends $mol_icon {
-		path( ): string
-	}
-	
-}
-
-//# sourceMappingURL=youtube.view.tree.d.ts.map
-declare namespace $ {
-
-	type $mol_image__title_mol_embed_service_1 = $mol_type_enforce<
-		ReturnType< $mol_embed_service['title'] >
-		,
-		ReturnType< $mol_image['title'] >
-	>
-	type $mol_image__uri_mol_embed_service_2 = $mol_type_enforce<
-		ReturnType< $mol_embed_service['video_preview'] >
-		,
-		ReturnType< $mol_image['uri'] >
-	>
-	type $mol_frame__title_mol_embed_service_3 = $mol_type_enforce<
-		ReturnType< $mol_embed_service['title'] >
-		,
-		ReturnType< $mol_frame['title'] >
-	>
-	type $mol_frame__uri_mol_embed_service_4 = $mol_type_enforce<
-		ReturnType< $mol_embed_service['video_embed'] >
-		,
-		ReturnType< $mol_frame['uri'] >
-	>
-	export class $mol_embed_service extends $mol_check {
-		active( next?: boolean ): boolean
-		title( ): string
-		video_preview( ): string
-		Image( ): $mol_image
-		Hint( ): $mol_icon_youtube
-		video_embed( ): string
-		Frame( ): $mol_frame
-		uri( ): string
-		video_id( ): string
-		checked( next?: ReturnType< $mol_embed_service['active'] > ): ReturnType< $mol_embed_service['active'] >
-		sub( ): readonly(any)[]
-	}
-	
-}
-
-//# sourceMappingURL=service.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $mol_embed_service extends $.$mol_embed_service {
-        sub(): $.$mol_frame[] | ($.$mol_image | $mol_icon_youtube)[];
-    }
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
-
-	export class $mol_embed_youtube extends $mol_embed_service {
-	}
-	
-}
-
-//# sourceMappingURL=youtube.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $mol_embed_youtube extends $.$mol_embed_youtube {
-        video_embed(): string;
-        video_id(): string;
-        video_preview(): string;
-    }
-}
-
-declare namespace $ {
-
-	export class $mol_embed_rutube extends $mol_embed_service {
-	}
-	
-}
-
-//# sourceMappingURL=rutube.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $mol_embed_rutube extends $.$mol_embed_rutube {
-        video_embed(): string;
-        video_id(): string;
-        video_preview(): string;
-    }
-}
-
-declare namespace $ {
-
-	export class $mol_embed_vklive extends $mol_embed_service {
-	}
-	
-}
-
-//# sourceMappingURL=vklive.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $mol_embed_vklive extends $.$mol_embed_vklive {
-        video_embed(): string;
-        channel_id(): string;
-        video_id(): string;
-        video_preview(): string;
-    }
-}
-
-declare namespace $ {
-
-	type $mol_image__title_mol_embed_any_1 = $mol_type_enforce<
-		ReturnType< $mol_embed_any['title'] >
-		,
-		ReturnType< $mol_image['title'] >
-	>
-	type $mol_image__uri_mol_embed_any_2 = $mol_type_enforce<
-		ReturnType< $mol_embed_any['uri'] >
-		,
-		ReturnType< $mol_image['uri'] >
-	>
-	type $mol_embed_native__title_mol_embed_any_3 = $mol_type_enforce<
-		ReturnType< $mol_embed_any['title'] >
-		,
-		ReturnType< $mol_embed_native['title'] >
-	>
-	type $mol_embed_native__uri_mol_embed_any_4 = $mol_type_enforce<
-		ReturnType< $mol_embed_any['uri'] >
-		,
-		ReturnType< $mol_embed_native['uri'] >
-	>
-	type $mol_embed_youtube__title_mol_embed_any_5 = $mol_type_enforce<
-		ReturnType< $mol_embed_any['title'] >
-		,
-		ReturnType< $mol_embed_youtube['title'] >
-	>
-	type $mol_embed_youtube__uri_mol_embed_any_6 = $mol_type_enforce<
-		ReturnType< $mol_embed_any['uri'] >
-		,
-		ReturnType< $mol_embed_youtube['uri'] >
-	>
-	type $mol_embed_rutube__title_mol_embed_any_7 = $mol_type_enforce<
-		ReturnType< $mol_embed_any['title'] >
-		,
-		ReturnType< $mol_embed_rutube['title'] >
-	>
-	type $mol_embed_rutube__uri_mol_embed_any_8 = $mol_type_enforce<
-		ReturnType< $mol_embed_any['uri'] >
-		,
-		ReturnType< $mol_embed_rutube['uri'] >
-	>
-	type $mol_embed_vklive__title_mol_embed_any_9 = $mol_type_enforce<
-		ReturnType< $mol_embed_any['title'] >
-		,
-		ReturnType< $mol_embed_vklive['title'] >
-	>
-	type $mol_embed_vklive__uri_mol_embed_any_10 = $mol_type_enforce<
-		ReturnType< $mol_embed_any['uri'] >
-		,
-		ReturnType< $mol_embed_vklive['uri'] >
-	>
-	export class $mol_embed_any extends $mol_view {
-		title( ): string
-		uri( ): string
-		Image( ): $mol_image
-		Object( ): $mol_embed_native
-		Youtube( ): $mol_embed_youtube
-		Rutube( ): $mol_embed_rutube
-		Vklive( ): $mol_embed_vklive
-	}
-	
-}
-
-//# sourceMappingURL=any.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $mol_embed_any extends $.$mol_embed_any {
-        type(): "object" | "image" | "youtube" | "rutube" | "vklive";
-        sub(): $.$mol_image[] | $.$mol_embed_youtube[] | $.$mol_embed_native[];
-    }
-}
-
-declare namespace $ {
-
-	type $mol_text__text_mol_text_1 = $mol_type_enforce<
-		ReturnType< $mol_text['spoiler_label'] >
-		,
-		ReturnType< $mol_text['text'] >
-	>
-	type $mol_text__highlight_mol_text_2 = $mol_type_enforce<
-		ReturnType< $mol_text['highlight'] >
-		,
-		ReturnType< $mol_text['highlight'] >
-	>
-	type $mol_text__uri_resolve_mol_text_3 = $mol_type_enforce<
-		ReturnType< $mol_text['uri_resolve'] >
-		,
-		ReturnType< $mol_text['uri_resolve'] >
-	>
-	type $mol_text__code_sidebar_showed_mol_text_4 = $mol_type_enforce<
-		ReturnType< $mol_text['code_sidebar_showed'] >
-		,
-		ReturnType< $mol_text['code_sidebar_showed'] >
-	>
-	type $mol_text__text_mol_text_5 = $mol_type_enforce<
-		ReturnType< $mol_text['spoiler_content'] >
-		,
-		ReturnType< $mol_text['text'] >
-	>
-	type $mol_text__highlight_mol_text_6 = $mol_type_enforce<
-		ReturnType< $mol_text['highlight'] >
-		,
-		ReturnType< $mol_text['highlight'] >
-	>
-	type $mol_text__uri_resolve_mol_text_7 = $mol_type_enforce<
-		ReturnType< $mol_text['uri_resolve'] >
-		,
-		ReturnType< $mol_text['uri_resolve'] >
-	>
-	type $mol_text__code_sidebar_showed_mol_text_8 = $mol_type_enforce<
-		ReturnType< $mol_text['code_sidebar_showed'] >
-		,
-		ReturnType< $mol_text['code_sidebar_showed'] >
-	>
-	type $mol_paragraph__sub_mol_text_9 = $mol_type_enforce<
-		ReturnType< $mol_text['block_content'] >
-		,
-		ReturnType< $mol_paragraph['sub'] >
-	>
-	type $mol_text__text_mol_text_10 = $mol_type_enforce<
-		ReturnType< $mol_text['quote_text'] >
-		,
-		ReturnType< $mol_text['text'] >
-	>
-	type $mol_text__auto_scroll_mol_text_11 = $mol_type_enforce<
-		any
-		,
-		ReturnType< $mol_text['auto_scroll'] >
-	>
-	type $mol_text__highlight_mol_text_12 = $mol_type_enforce<
-		ReturnType< $mol_text['highlight'] >
-		,
-		ReturnType< $mol_text['highlight'] >
-	>
-	type $mol_text__uri_resolve_mol_text_13 = $mol_type_enforce<
-		ReturnType< $mol_text['uri_resolve'] >
-		,
-		ReturnType< $mol_text['uri_resolve'] >
-	>
-	type $mol_text__code_sidebar_showed_mol_text_14 = $mol_type_enforce<
-		ReturnType< $mol_text['code_sidebar_showed'] >
-		,
-		ReturnType< $mol_text['code_sidebar_showed'] >
-	>
-	type $mol_text_list__type_mol_text_15 = $mol_type_enforce<
-		ReturnType< $mol_text['list_type'] >
-		,
-		ReturnType< $mol_text_list['type'] >
-	>
-	type $mol_text_list__text_mol_text_16 = $mol_type_enforce<
-		ReturnType< $mol_text['list_text'] >
-		,
-		ReturnType< $mol_text_list['text'] >
-	>
-	type $mol_text_list__highlight_mol_text_17 = $mol_type_enforce<
-		ReturnType< $mol_text['highlight'] >
-		,
-		ReturnType< $mol_text_list['highlight'] >
-	>
-	type $mol_text_list__uri_resolve_mol_text_18 = $mol_type_enforce<
-		ReturnType< $mol_text['uri_resolve'] >
-		,
-		ReturnType< $mol_text_list['uri_resolve'] >
-	>
-	type $mol_text_list__code_sidebar_showed_mol_text_19 = $mol_type_enforce<
-		ReturnType< $mol_text['code_sidebar_showed'] >
-		,
-		ReturnType< $mol_text_list['code_sidebar_showed'] >
-	>
-	type $mol_text_header__minimal_height_mol_text_20 = $mol_type_enforce<
-		number
-		,
-		ReturnType< $mol_text_header['minimal_height'] >
-	>
-	type $mol_text_header__level_mol_text_21 = $mol_type_enforce<
-		ReturnType< $mol_text['header_level'] >
-		,
-		ReturnType< $mol_text_header['level'] >
-	>
-	type $mol_text_header__content_mol_text_22 = $mol_type_enforce<
-		ReturnType< $mol_text['block_content'] >
-		,
-		ReturnType< $mol_text_header['content'] >
-	>
-	type $mol_text_header__arg_mol_text_23 = $mol_type_enforce<
-		ReturnType< $mol_text['header_arg'] >
-		,
-		ReturnType< $mol_text_header['arg'] >
-	>
-	type $mol_text_code__text_mol_text_24 = $mol_type_enforce<
-		ReturnType< $mol_text['pre_text'] >
-		,
-		ReturnType< $mol_text_code['text'] >
-	>
-	type $mol_text_code__row_themes_mol_text_25 = $mol_type_enforce<
-		ReturnType< $mol_text['pre_themes'] >
-		,
-		ReturnType< $mol_text_code['row_themes'] >
-	>
-	type $mol_text_code__highlight_mol_text_26 = $mol_type_enforce<
-		ReturnType< $mol_text['highlight'] >
-		,
-		ReturnType< $mol_text_code['highlight'] >
-	>
-	type $mol_text_code__uri_resolve_mol_text_27 = $mol_type_enforce<
-		ReturnType< $mol_text['uri_resolve'] >
-		,
-		ReturnType< $mol_text_code['uri_resolve'] >
-	>
-	type $mol_text_code__sidebar_showed_mol_text_28 = $mol_type_enforce<
-		ReturnType< $mol_text['code_sidebar_showed'] >
-		,
-		ReturnType< $mol_text_code['sidebar_showed'] >
-	>
-	type $mol_view__dom_name_mol_text_29 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $mol_view['dom_name'] >
-	>
-	type $mol_grid__head_cells_mol_text_30 = $mol_type_enforce<
-		ReturnType< $mol_text['table_head_cells'] >
-		,
-		ReturnType< $mol_grid['head_cells'] >
-	>
-	type $mol_grid__rows_mol_text_31 = $mol_type_enforce<
-		ReturnType< $mol_text['table_rows'] >
-		,
-		ReturnType< $mol_grid['rows'] >
-	>
-	type $mol_grid_row__cells_mol_text_32 = $mol_type_enforce<
-		ReturnType< $mol_text['table_cells'] >
-		,
-		ReturnType< $mol_grid_row['cells'] >
-	>
-	type $mol_text__auto_scroll_mol_text_33 = $mol_type_enforce<
-		any
-		,
-		ReturnType< $mol_text['auto_scroll'] >
-	>
-	type $mol_text__text_mol_text_34 = $mol_type_enforce<
-		ReturnType< $mol_text['table_cell_text'] >
-		,
-		ReturnType< $mol_text['text'] >
-	>
-	type $mol_text__highlight_mol_text_35 = $mol_type_enforce<
-		ReturnType< $mol_text['highlight'] >
-		,
-		ReturnType< $mol_text['highlight'] >
-	>
-	type $mol_text__uri_resolve_mol_text_36 = $mol_type_enforce<
-		ReturnType< $mol_text['uri_resolve'] >
-		,
-		ReturnType< $mol_text['uri_resolve'] >
-	>
-	type $mol_text__code_sidebar_showed_mol_text_37 = $mol_type_enforce<
-		ReturnType< $mol_text['code_sidebar_showed'] >
-		,
-		ReturnType< $mol_text['code_sidebar_showed'] >
-	>
-	type $mol_grid__rows_mol_text_38 = $mol_type_enforce<
-		ReturnType< $mol_text['grid_rows'] >
-		,
-		ReturnType< $mol_grid['rows'] >
-	>
-	type $mol_grid_row__cells_mol_text_39 = $mol_type_enforce<
-		ReturnType< $mol_text['grid_cells'] >
-		,
-		ReturnType< $mol_grid_row['cells'] >
-	>
-	type $mol_text__auto_scroll_mol_text_40 = $mol_type_enforce<
-		any
-		,
-		ReturnType< $mol_text['auto_scroll'] >
-	>
-	type $mol_text__text_mol_text_41 = $mol_type_enforce<
-		ReturnType< $mol_text['grid_cell_text'] >
-		,
-		ReturnType< $mol_text['text'] >
-	>
-	type $mol_text__highlight_mol_text_42 = $mol_type_enforce<
-		ReturnType< $mol_text['highlight'] >
-		,
-		ReturnType< $mol_text['highlight'] >
-	>
-	type $mol_text__uri_resolve_mol_text_43 = $mol_type_enforce<
-		ReturnType< $mol_text['uri_resolve'] >
-		,
-		ReturnType< $mol_text['uri_resolve'] >
-	>
-	type $mol_text__code_sidebar_showed_mol_text_44 = $mol_type_enforce<
-		ReturnType< $mol_text['code_sidebar_showed'] >
-		,
-		ReturnType< $mol_text['code_sidebar_showed'] >
-	>
-	type $mol_dimmer__dom_name_mol_text_45 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $mol_dimmer['dom_name'] >
-	>
-	type $mol_dimmer__needle_mol_text_46 = $mol_type_enforce<
-		ReturnType< $mol_text['highlight'] >
-		,
-		ReturnType< $mol_dimmer['needle'] >
-	>
-	type $mol_dimmer__haystack_mol_text_47 = $mol_type_enforce<
-		ReturnType< $mol_text['line_text'] >
-		,
-		ReturnType< $mol_dimmer['haystack'] >
-	>
-	type $mol_text_span__dom_name_mol_text_48 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $mol_text_span['dom_name'] >
-	>
-	type $mol_text_span__type_mol_text_49 = $mol_type_enforce<
-		ReturnType< $mol_text['line_type'] >
-		,
-		ReturnType< $mol_text_span['type'] >
-	>
-	type $mol_text_span__sub_mol_text_50 = $mol_type_enforce<
-		ReturnType< $mol_text['line_content'] >
-		,
-		ReturnType< $mol_text_span['sub'] >
-	>
-	type $mol_text_code_line__numb_showed_mol_text_51 = $mol_type_enforce<
-		boolean
-		,
-		ReturnType< $mol_text_code_line['numb_showed'] >
-	>
-	type $mol_text_code_line__highlight_mol_text_52 = $mol_type_enforce<
-		ReturnType< $mol_text['highlight'] >
-		,
-		ReturnType< $mol_text_code_line['highlight'] >
-	>
-	type $mol_text_code_line__text_mol_text_53 = $mol_type_enforce<
-		ReturnType< $mol_text['line_text'] >
-		,
-		ReturnType< $mol_text_code_line['text'] >
-	>
-	type $mol_text_code_line__uri_resolve_mol_text_54 = $mol_type_enforce<
-		ReturnType< $mol_text['uri_resolve'] >
-		,
-		ReturnType< $mol_text_code_line['uri_resolve'] >
-	>
-	type $mol_text_code_line__syntax_mol_text_55 = $mol_type_enforce<
-		ReturnType< $mol_text['code_syntax'] >
-		,
-		ReturnType< $mol_text_code_line['syntax'] >
-	>
-	type $mol_link_iconed__uri_mol_text_56 = $mol_type_enforce<
-		ReturnType< $mol_text['link_uri'] >
-		,
-		ReturnType< $mol_link_iconed['uri'] >
-	>
-	type $mol_link_iconed__content_mol_text_57 = $mol_type_enforce<
-		ReturnType< $mol_text['line_content'] >
-		,
-		ReturnType< $mol_link_iconed['content'] >
-	>
-	type $mol_link_iconed__uri_mol_text_58 = $mol_type_enforce<
-		ReturnType< $mol_text['link_uri'] >
-		,
-		ReturnType< $mol_link_iconed['uri'] >
-	>
-	type $mol_link_iconed__content_mol_text_59 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_link_iconed['content'] >
-	>
-	type $mol_embed_any__uri_mol_text_60 = $mol_type_enforce<
-		ReturnType< $mol_text['link_uri'] >
-		,
-		ReturnType< $mol_embed_any['uri'] >
-	>
-	type $mol_embed_any__title_mol_text_61 = $mol_type_enforce<
-		ReturnType< $mol_text['line_text'] >
-		,
-		ReturnType< $mol_embed_any['title'] >
-	>
-	type $mol_expander__label_mol_text_62 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_expander['label'] >
-	>
-	type $mol_expander__content_mol_text_63 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_expander['content'] >
-	>
-	export class $mol_text extends $mol_list {
-		auto_scroll( ): any
-		block_content( id: any): readonly(any)[]
-		quote_text( id: any): string
-		highlight( ): string
-		uri_resolve( id: any): string
-		code_sidebar_showed( ): boolean
-		list_type( id: any): string
-		list_text( id: any): string
-		header_level( id: any): number
-		header_arg( id: any): Record<string, any>
-		pre_text( id: any): string
-		pre_themes( id: any): readonly(string)[]
-		table_head_cells( id: any): readonly(any)[]
-		table_rows( id: any): readonly(any)[]
-		table_cells( id: any): readonly(any)[]
-		table_cell_text( id: any): string
-		grid_rows( id: any): readonly(any)[]
-		grid_cells( id: any): readonly(any)[]
-		grid_cell_text( id: any): string
-		line_text( id: any): string
-		line_type( id: any): string
-		line_content( id: any): readonly(any)[]
-		code_syntax( ): any
-		link_uri( id: any): string
-		link_host( id: any): string
-		spoiler_label( id: any): string
-		Spoiler_label( id: any): $mol_text
-		spoiler_content( id: any): string
-		Spoiler_content( id: any): $mol_text
-		uri_base( ): string
-		text( ): string
-		param( ): string
-		flow_tokens( ): readonly(any)[]
-		block_text( id: any): string
-		auto( ): readonly(any)[]
-		Paragraph( id: any): $mol_paragraph
-		Quote( id: any): $mol_text
-		List( id: any): $mol_text_list
-		item_index( id: any): number
-		Header( id: any): $mol_text_header
-		Pre( id: any): $mol_text_code
-		Cut( id: any): $mol_view
-		Table( id: any): $mol_grid
-		Table_row( id: any): $mol_grid_row
-		Table_cell( id: any): $mol_text
-		Grid( id: any): $mol_grid
-		Grid_row( id: any): $mol_grid_row
-		Grid_cell( id: any): $mol_text
-		String( id: any): $mol_dimmer
-		Span( id: any): $mol_text_span
-		Code_line( id: any): $mol_text_code_line
-		Link( id: any): $mol_link_iconed
-		Link_http( id: any): $mol_link_iconed
-		Embed( id: any): $mol_embed_any
-		Spoiler( id: any): $mol_expander
-	}
-	
-	type $mol_link__arg_mol_text_header_1 = $mol_type_enforce<
-		ReturnType< $mol_text_header['arg'] >
-		,
-		ReturnType< $mol_link['arg'] >
-	>
-	type $mol_link__hint_mol_text_header_2 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $mol_link['hint'] >
-	>
-	type $mol_link__sub_mol_text_header_3 = $mol_type_enforce<
-		ReturnType< $mol_text_header['content'] >
-		,
-		ReturnType< $mol_link['sub'] >
-	>
-	export class $mol_text_header extends $mol_paragraph {
-		arg( ): Record<string, any>
-		content( ): readonly(any)[]
-		Link( ): $mol_link
-		level( ): number
-		sub( ): readonly(any)[]
-	}
-	
-	export class $mol_text_span extends $mol_paragraph {
-		type( ): string
-		dom_name( ): string
-		attr( ): ({ 
-			'mol_text_type': ReturnType< $mol_text_span['type'] >,
-		})  & ReturnType< $mol_paragraph['attr'] >
-	}
-	
-}
-
-//# sourceMappingURL=text.view.tree.d.ts.map
-declare namespace $.$$ {
-    /**
-     * Markdown visualizer.
-     * @see https://mol.hyoo.ru/#!section=demos/demo=mol_text_demo
-     */
-    class $mol_text extends $.$mol_text {
-        flow_tokens(): Readonly<{
-            name: string;
-            found: string;
-            chunks: string[];
-        }[]>;
-        block_type(index: number): string;
-        rows(): ($mol_view | $.$mol_paragraph | $.$mol_text_code | $.$mol_grid)[];
-        param(): string;
-        header_level(index: number): number;
-        header_arg(index: number): {
-            [x: string]: string;
-        };
-        list_type(index: number): string;
-        item_index(index: number): number;
-        pre_text(index: number): string;
-        pre_themes(index: number): string[];
-        quote_text(index: number): string;
-        list_text(index: number): string;
-        cell_content(indexBlock: number): string[][];
-        table_rows(blockId: number): $mol_grid_row[];
-        table_head_cells(blockId: number): $.$mol_text[];
-        table_cells(id: {
-            block: number;
-            row: number;
-        }): $.$mol_text[];
-        table_cell_text(id: {
-            block: number;
-            row: number;
-            cell: number;
-        }): string;
-        grid_content(indexBlock: number): string[][];
-        grid_rows(blockId: number): $mol_grid_row[];
-        grid_cells(id: {
-            block: number;
-            row: number;
-        }): $.$mol_text[];
-        grid_cell_text(id: {
-            block: number;
-            row: number;
-            cell: number;
-        }): string;
-        uri_base(): string;
-        uri_base_abs(): URL;
-        uri_resolve(uri: string): string;
-        code_syntax(): $mol_syntax2<{
-            'code-indent': RegExp;
-            'code-docs': RegExp;
-            'code-comment-block': RegExp;
-            'code-link': RegExp;
-            'code-comment-inline': RegExp;
-            'code-string': RegExp;
-            'code-number': RegExp;
-            'code-call': RegExp;
-            'code-sexpr': RegExp;
-            'code-field': RegExp;
-            'code-keyword': RegExp;
-            'code-global': RegExp;
-            'code-word': RegExp;
-            'code-decorator': RegExp;
-            'code-tag': RegExp;
-            'code-punctuation': RegExp;
-        }>;
-        block_text(index: number): string;
-        block_content(index: number): ($.$mol_dimmer | $.$mol_text_code_line | $.$mol_link_iconed | $.$mol_embed_any | $mol_text_span)[];
-        line_tokens(path: readonly number[]): Readonly<{
-            name: string;
-            found: string;
-            chunks: string[];
-        }[]>;
-        line_token(path: readonly number[]): {
-            name: string;
-            found: string;
-            chunks: string[];
-        };
-        line_type(path: readonly number[]): string;
-        line_text(path: readonly number[]): string;
-        line_content(path: readonly number[]): ($.$mol_dimmer | $.$mol_text_code_line | $.$mol_link_iconed | $.$mol_embed_any | $mol_text_span)[];
-        link_uri(path: readonly number[]): string;
-        link_host(path: readonly number[]): string;
-        auto_scroll(): void;
-        spoiler_rows(index: number): string[];
-        spoiler_label(index: number): string;
-        spoiler_content(index: number): string;
-    }
-    class $mol_text_header extends $.$mol_text_header {
-        dom_name(): string;
-    }
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
-
-	export class $mol_icon_check extends $mol_icon {
-		path( ): string
-	}
-	
-}
-
-//# sourceMappingURL=check.view.tree.d.ts.map
-declare namespace $ {
-
-	export class $mol_icon_check_all extends $mol_icon {
-		path( ): string
-	}
-	
-}
-
-//# sourceMappingURL=all.view.tree.d.ts.map
-declare namespace $ {
-
-	export class $rise_check_all extends $mol_check_box {
-		checks( ): readonly($mol_check)[]
-		Icon( ): $mol_icon_check_all
-	}
-	
-}
-
-//# sourceMappingURL=all.view.tree.d.ts.map
-declare namespace $.$$ {
-    /** Owned port of shm/check/all. No runtime dependency on shm. */
-    class $rise_check_all extends $.$rise_check_all {
-        checked(next?: boolean): boolean;
-    }
-}
-
-declare namespace $ {
-
-	type $rise_check_all__title_rise_check_list_1 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $rise_check_all['title'] >
-	>
-	type $rise_check_all__checks_rise_check_list_2 = $mol_type_enforce<
-		ReturnType< $rise_check_list['checks'] >
-		,
-		ReturnType< $rise_check_all['checks'] >
-	>
-	type $rise_check_all__enabled_rise_check_list_3 = $mol_type_enforce<
-		ReturnType< $rise_check_list['enabled'] >
-		,
-		ReturnType< $rise_check_all['enabled'] >
-	>
-	type $rise_check_all__checked_rise_check_list_4 = $mol_type_enforce<
-		ReturnType< $rise_check_list['all_checked'] >
-		,
-		ReturnType< $rise_check_all['checked'] >
-	>
-	type $mol_view__sub_rise_check_list_5 = $mol_type_enforce<
-		ReturnType< $rise_check_list['checks'] >
-		,
-		ReturnType< $mol_view['sub'] >
-	>
-	type $mol_check_box__title_rise_check_list_6 = $mol_type_enforce<
-		ReturnType< $rise_check_list['check_title'] >
-		,
-		ReturnType< $mol_check_box['title'] >
-	>
-	type $mol_check_box__enabled_rise_check_list_7 = $mol_type_enforce<
-		ReturnType< $rise_check_list['enabled'] >
-		,
-		ReturnType< $mol_check_box['enabled'] >
-	>
-	type $mol_check_box__checked_rise_check_list_8 = $mol_type_enforce<
-		ReturnType< $rise_check_list['checked'] >
-		,
-		ReturnType< $mol_check_box['checked'] >
-	>
-	export class $rise_check_list extends $mol_view {
-		all_checked( next?: boolean ): boolean
-		All( ): $rise_check_all
-		checks( ): readonly($mol_check)[]
-		Checks( ): $mol_view
-		check_title( id: any): string
-		checked( id: any, next?: boolean ): boolean
-		options( ): readonly(string)[]
-		titles( ): Record<string, any>
-		value( next?: readonly(string)[] ): readonly(string)[]
-		enabled( ): boolean
-		sub( ): readonly(any)[]
-		Check( id: any): $mol_check_box
-	}
-	
-}
-
-//# sourceMappingURL=list.view.tree.d.ts.map
-declare namespace $.$$ {
-    /** Owned port of shm/check/list, with labels and a shared disabled state. */
-    class $rise_check_list extends $.$rise_check_list {
-        checks(): $mol_check_box[];
-        check_title(id: string): any;
-        all_checked(next?: boolean): boolean;
-        checked(id: string, next?: boolean): boolean;
-    }
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
-
-	export class $mol_icon_help extends $mol_icon {
-		path( ): string
-	}
-	
-}
-
-//# sourceMappingURL=help.view.tree.d.ts.map
-declare namespace $ {
-
-	export class $mol_icon_help_circle extends $mol_icon {
-		path( ): string
-	}
-	
-}
-
-//# sourceMappingURL=circle.view.tree.d.ts.map
-declare namespace $ {
-
-	export class $mol_icon_help_circle_outline extends $mol_icon {
-		path( ): string
-	}
-	
-}
-
-//# sourceMappingURL=outline.view.tree.d.ts.map
-declare namespace $ {
-
-	type $mol_text__text_rise_bench_host_controls_computerhelp_1 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $mol_text['text'] >
-	>
-	export class $rise_bench_host_controls_computerhelp extends $mol_pick {
-		Icon( ): $mol_icon_help_circle_outline
-		Text( ): $mol_text
-		hint( ): string
-		trigger_content( ): readonly(any)[]
-		bubble_content( ): readonly(any)[]
-	}
-	
-}
-
-//# sourceMappingURL=computerhelp.view.tree.d.ts.map
-declare namespace $ {
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
-
-	type $mol_text_list_item__index_mol_text_list_1 = $mol_type_enforce<
-		ReturnType< $mol_text_list['item_index'] >
-		,
-		ReturnType< $mol_text_list_item['index'] >
-	>
-	type $mol_text_list_item__sub_mol_text_list_2 = $mol_type_enforce<
-		ReturnType< $mol_text_list['block_content'] >
-		,
-		ReturnType< $mol_text_list_item['sub'] >
-	>
-	export class $mol_text_list extends $mol_text {
-		type( ): string
-		auto_scroll( ): any
-		attr( ): ({ 
-			'mol_text_list_type': ReturnType< $mol_text_list['type'] >,
-		})  & ReturnType< $mol_text['attr'] >
-		Paragraph( id: any): $mol_text_list_item
-	}
-	
-	export class $mol_text_list_item extends $mol_paragraph {
-		index( ): number
-		attr( ): ({ 
-			'mol_text_list_item_index': ReturnType< $mol_text_list_item['index'] >,
-		})  & ReturnType< $mol_paragraph['attr'] >
-	}
-	
-}
-
-//# sourceMappingURL=list.view.tree.d.ts.map
-declare namespace $ {
-
-	type $mol_text__text_rise_bench_host_controls_1 = $mol_type_enforce<
-		ReturnType< $rise_bench_host_controls['intro'] >
-		,
-		ReturnType< $mol_text['text'] >
-	>
-	type $rise_check_list__enabled_rise_bench_host_controls_2 = $mol_type_enforce<
-		ReturnType< $rise_bench_host_controls['enabled'] >
-		,
-		ReturnType< $rise_check_list['enabled'] >
-	>
-	type $rise_check_list__value_rise_bench_host_controls_3 = $mol_type_enforce<
-		ReturnType< $rise_bench_host_controls['engines'] >
-		,
-		ReturnType< $rise_check_list['value'] >
-	>
-	type $rise_check_list__options_rise_bench_host_controls_4 = $mol_type_enforce<
-		ReturnType< $rise_bench_host_controls['engine_keys'] >
-		,
-		ReturnType< $rise_check_list['options'] >
-	>
-	type $rise_check_list__titles_rise_bench_host_controls_5 = $mol_type_enforce<
-		ReturnType< $rise_bench_host_controls['engine_titles'] >
-		,
-		ReturnType< $rise_check_list['titles'] >
-	>
-	type $mol_labeler__title_rise_bench_host_controls_6 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $mol_labeler['title'] >
-	>
-	type $mol_labeler__Content_rise_bench_host_controls_7 = $mol_type_enforce<
-		ReturnType< $rise_bench_host_controls['Engine'] >
-		,
-		ReturnType< $mol_labeler['Content'] >
-	>
-	type $mol_view__sub_rise_bench_host_controls_8 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_view['sub'] >
-	>
-	type $rise_check_list__enabled_rise_bench_host_controls_9 = $mol_type_enforce<
-		ReturnType< $rise_bench_host_controls['enabled'] >
-		,
-		ReturnType< $rise_check_list['enabled'] >
-	>
-	type $rise_check_list__value_rise_bench_host_controls_10 = $mol_type_enforce<
-		ReturnType< $rise_bench_host_controls['schemas'] >
-		,
-		ReturnType< $rise_check_list['value'] >
-	>
-	type $rise_bench_host_controls_Schema__12 = $mol_type_enforce<
-		`compact`
-		,
-		string
-	>
-	type $rise_bench_host_controls_Schema__13 = $mol_type_enforce<
-		`full`
-		,
-		string
-	>
-	type $rise_check_list__options_rise_bench_host_controls_11 = $mol_type_enforce<
-		readonly(string)[]
-		,
-		ReturnType< $rise_check_list['options'] >
-	>
-	type $rise_check_list__titles_rise_bench_host_controls_14 = $mol_type_enforce<
-		({ 
-			'compact': string,
-			'full': string,
-		}) 
-		,
-		ReturnType< $rise_check_list['titles'] >
-	>
-	type $mol_labeler__title_rise_bench_host_controls_15 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $mol_labeler['title'] >
-	>
-	type $mol_labeler__Content_rise_bench_host_controls_16 = $mol_type_enforce<
-		ReturnType< $rise_bench_host_controls['Schema'] >
-		,
-		ReturnType< $mol_labeler['Content'] >
-	>
-	type $rise_check_list__enabled_rise_bench_host_controls_17 = $mol_type_enforce<
-		ReturnType< $rise_bench_host_controls['enabled'] >
-		,
-		ReturnType< $rise_check_list['enabled'] >
-	>
-	type $rise_check_list__value_rise_bench_host_controls_18 = $mol_type_enforce<
-		ReturnType< $rise_bench_host_controls['sizes'] >
-		,
-		ReturnType< $rise_check_list['value'] >
-	>
-	type $rise_check_list__options_rise_bench_host_controls_19 = $mol_type_enforce<
-		ReturnType< $rise_bench_host_controls['count_keys'] >
-		,
-		ReturnType< $rise_check_list['options'] >
-	>
-	type $rise_check_list__titles_rise_bench_host_controls_20 = $mol_type_enforce<
-		ReturnType< $rise_bench_host_controls['counts'] >
-		,
-		ReturnType< $rise_check_list['titles'] >
-	>
-	type $mol_labeler__title_rise_bench_host_controls_21 = $mol_type_enforce<
-		ReturnType< $rise_bench_host_controls['count_title'] >
-		,
-		ReturnType< $mol_labeler['title'] >
-	>
-	type $mol_labeler__Content_rise_bench_host_controls_22 = $mol_type_enforce<
-		ReturnType< $rise_bench_host_controls['Count'] >
-		,
-		ReturnType< $mol_labeler['Content'] >
-	>
-	type $rise_bench_textarea__length_max_rise_bench_host_controls_23 = $mol_type_enforce<
-		number
-		,
-		ReturnType< $rise_bench_textarea['length_max'] >
-	>
-	type $rise_bench_textarea__hint_rise_bench_host_controls_24 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $rise_bench_textarea['hint'] >
-	>
-	type $rise_bench_textarea__value_rise_bench_host_controls_25 = $mol_type_enforce<
-		ReturnType< $rise_bench_host_controls['computer'] >
-		,
-		ReturnType< $rise_bench_textarea['value'] >
-	>
-	type $rise_bench_textarea__enabled_rise_bench_host_controls_26 = $mol_type_enforce<
-		ReturnType< $rise_bench_host_controls['enabled'] >
-		,
-		ReturnType< $rise_bench_textarea['enabled'] >
-	>
-	type $mol_labeler__title_rise_bench_host_controls_27 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $mol_labeler['title'] >
-	>
-	type $mol_labeler__label_rise_bench_host_controls_28 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_labeler['label'] >
-	>
-	type $mol_labeler__Content_rise_bench_host_controls_29 = $mol_type_enforce<
-		ReturnType< $rise_bench_host_controls['Computer'] >
-		,
-		ReturnType< $mol_labeler['Content'] >
-	>
-	type $mol_button_major__title_rise_bench_host_controls_30 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $mol_button_major['title'] >
-	>
-	type $mol_button_major__enabled_rise_bench_host_controls_31 = $mol_type_enforce<
-		ReturnType< $rise_bench_host_controls['run_enabled'] >
-		,
-		ReturnType< $mol_button_major['enabled'] >
-	>
-	type $mol_button_major__click_rise_bench_host_controls_32 = $mol_type_enforce<
-		ReturnType< $rise_bench_host_controls['run'] >
-		,
-		ReturnType< $mol_button_major['click'] >
-	>
-	type $mol_button_minor__title_rise_bench_host_controls_33 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $mol_button_minor['title'] >
-	>
-	type $mol_button_minor__click_rise_bench_host_controls_34 = $mol_type_enforce<
-		ReturnType< $rise_bench_host_controls['stop'] >
-		,
-		ReturnType< $mol_button_minor['click'] >
-	>
-	type $mol_view__sub_rise_bench_host_controls_35 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_view['sub'] >
-	>
-	type $mol_view__sub_rise_bench_host_controls_36 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_view['sub'] >
-	>
-	type $mol_button_minor__title_rise_bench_host_controls_37 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $mol_button_minor['title'] >
-	>
-	type $mol_button_minor__click_rise_bench_host_controls_38 = $mol_type_enforce<
-		ReturnType< $rise_bench_host_controls['retry'] >
-		,
-		ReturnType< $mol_button_minor['click'] >
-	>
-	export class $rise_bench_host_controls extends $mol_page {
-		intro( ): string
-		Intro( ): $mol_text
-		engines( next?: readonly(string)[] ): readonly(string)[]
-		engine_keys( ): readonly(string)[]
-		engine_titles( ): Record<string, any>
-		Engine( ): $rise_check_list
-		Engine_label( ): $mol_labeler
-		storage_label( ): string
-		Storage_label( ): $mol_view
-		schemas( next?: readonly(string)[] ): readonly(string)[]
-		Schema( ): $rise_check_list
-		Schema_label( ): $mol_labeler
-		count_title( ): string
-		sizes( next?: readonly(string)[] ): readonly(string)[]
-		count_keys( ): readonly(string)[]
-		counts( ): Record<string, any>
-		Count( ): $rise_check_list
-		Count_label( ): $mol_labeler
-		Computer_help( ): $rise_bench_host_controls_computerhelp
-		computer( next?: string ): string
-		Computer( ): $rise_bench_textarea
-		Computer_label( ): $mol_labeler
-		run( next?: any ): any
-		Run( ): $mol_button_major
-		stop( next?: any ): any
-		Stop( ): $mol_button_minor
-		status( ): string
-		Status( ): $mol_view
-		elapsed( ): string
-		Elapsed( ): $mol_view
-		retry( next?: any ): any
-		Retry( ): $mol_button_minor
-		controls( ): readonly($mol_view)[]
-		title( ): string
-		minimal_width( ): number
-		kind( ): string
-		enabled( ): boolean
-		running( ): boolean
-		run_enabled( ): boolean
-		body( ): ReturnType< $rise_bench_host_controls['controls'] >
-		retry_visible( ): boolean
-	}
-	
-}
-
-//# sourceMappingURL=controls.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $rise_bench_host_controls extends $.$rise_bench_host_controls {
-        /** Persist the draft locally; each run takes its own immutable snapshot. */
-        computer(next?: string): string;
-        intro(): string;
-        engine_keys(): string[];
-        engine_titles(): {
-            [k: string]: string;
-        };
-        count_title(): "Количество строк" | "Количество записей";
-        counts(): {
-            [k: string]: string;
-        };
-        count_keys(): string[];
-        storage_label(): string;
-        controls(): $mol_view[];
-    }
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
-
-	type $mol_list__rows_rise_bench_charts_selection_1 = $mol_type_enforce<
-		ReturnType< $rise_bench_charts_selection['choices'] >
-		,
-		ReturnType< $mol_list['rows'] >
-	>
-	type $mol_scroll__sub_rise_bench_charts_selection_2 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_scroll['sub'] >
-	>
-	type $mol_view__sub_rise_bench_charts_selection_3 = $mol_type_enforce<
-		ReturnType< $rise_bench_charts_selection['presets'] >
-		,
-		ReturnType< $mol_view['sub'] >
-	>
-	type $mol_button_minor__title_rise_bench_charts_selection_4 = $mol_type_enforce<
-		ReturnType< $rise_bench_charts_selection['preset_title'] >
-		,
-		ReturnType< $mol_button_minor['title'] >
-	>
-	type $mol_button_minor__click_rise_bench_charts_selection_5 = $mol_type_enforce<
-		ReturnType< $rise_bench_charts_selection['select_latest'] >
-		,
-		ReturnType< $mol_button_minor['click'] >
-	>
-	type $mol_check_box__title_rise_bench_charts_selection_6 = $mol_type_enforce<
-		ReturnType< $rise_bench_charts_selection['run_title'] >
-		,
-		ReturnType< $mol_check_box['title'] >
-	>
-	type $mol_check_box__checked_rise_bench_charts_selection_7 = $mol_type_enforce<
-		ReturnType< $rise_bench_charts_selection['checked'] >
-		,
-		ReturnType< $mol_check_box['checked'] >
-	>
-	export class $rise_bench_charts_selection extends $mol_pick {
-		selection_title( ): string
-		choices( ): readonly($mol_view)[]
-		Items( ): $mol_list
-		List( ): $mol_scroll
-		presets( ): readonly($mol_view)[]
-		preset_title( id: any): string
-		select_latest( id: any, next?: any ): any
-		run_title( id: any): string
-		checked( id: any, next?: boolean ): boolean
-		runs( ): readonly($rise_bench_run)[]
-		value( next?: readonly(string)[] ): readonly(string)[]
-		title( ): ReturnType< $rise_bench_charts_selection['selection_title'] >
-		bubble_content( ): readonly(any)[]
-		Presets( ): $mol_view
-		Preset( id: any): $mol_button_minor
-		Check( id: any): $mol_check_box
-	}
-	
-}
-
-//# sourceMappingURL=selection.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $rise_bench_charts_selection extends $.$rise_bench_charts_selection {
-        selection_title(): string;
-        choices(): $mol_view[];
-        presets(): $mol_button_minor[];
-        preset_title(count: number): string;
-        select_latest(count: number): void;
-        checked(id: string, next?: boolean): boolean;
-        run_title(id: string): string;
-    }
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
-    function $mol_coord_pack(high: number, low: number): number;
-    function $mol_coord_high(pack: number): number;
-    function $mol_coord_low(pack: number): number;
-}
-
-declare namespace $ {
-
-	type $mol_svg_path__geometry_mol_plot_dot_1 = $mol_type_enforce<
-		ReturnType< $mol_plot_dot['curve'] >
-		,
-		ReturnType< $mol_svg_path['geometry'] >
-	>
-	type $mol_plot_graph_sample__color_mol_plot_dot_2 = $mol_type_enforce<
-		ReturnType< $mol_plot_dot['color'] >
-		,
-		ReturnType< $mol_plot_graph_sample['color'] >
-	>
-	export class $mol_plot_dot extends $mol_plot_graph {
-		diameter( ): number
-		curve( ): string
-		Curve( ): $mol_svg_path
-		points_max( ): number
-		aspect( ): number
-		style( ): ({ 
-			'stroke-width': ReturnType< $mol_plot_dot['diameter'] >,
-		})  & ReturnType< $mol_plot_graph['style'] >
-		sub( ): readonly(any)[]
-		Sample( ): $mol_plot_graph_sample
-	}
-	
-}
-
-//# sourceMappingURL=dot.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $mol_plot_dot extends $.$mol_plot_dot {
-        filled(): Set<number>;
-        indexes(): number[];
-        curve(): string;
-    }
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
-
-	export class $rise_bench_charts_operation_plot extends $mol_plot_pane {
-	}
-	
-}
-
-//# sourceMappingURL=plot.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $rise_bench_charts_operation_plot extends $.$rise_bench_charts_operation_plot {
-        dimensions(): $mol_vector_2d<$mol_vector_range<number>>;
-    }
-}
-
-declare namespace $ {
-
-	type $mol_plot_graph_sample__sub_mol_plot_group_1 = $mol_type_enforce<
-		ReturnType< $mol_plot_group['graph_samples'] >
-		,
-		ReturnType< $mol_plot_graph_sample['sub'] >
-	>
-	export class $mol_plot_group extends $mol_plot_graph {
-		graphs( ): readonly($mol_plot_graph)[]
-		graphs_enriched( ): ReturnType< $mol_plot_group['graphs'] >
-		graph_samples( ): readonly($mol_view)[]
-		sub( ): ReturnType< $mol_plot_group['graphs_enriched'] >
-		Sample( ): $mol_plot_graph_sample
-	}
-	
-}
-
-//# sourceMappingURL=group.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $mol_plot_group extends $.$mol_plot_group {
-        graphs_enriched(): readonly $.$mol_plot_graph[];
-        dimensions(): $mol_vector_2d<$mol_vector_range<number>>;
-        graph_samples(): any[];
-        back(): $mol_plot_graph[];
-        front(): $mol_plot_graph[];
-    }
-}
-
-declare namespace $ {
-
-	export class $mol_plot_ruler_hor extends $mol_plot_ruler {
-		title_align( ): string
-		label_align( ): string
-		title_pos_x( ): string
-		title_pos_y( ): string
-		label_pos_y( id: any): ReturnType< $mol_plot_ruler_hor['title_pos_y'] >
-		background_width( ): string
-	}
-	
-}
-
-//# sourceMappingURL=hor.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $mol_plot_ruler_hor extends $.$mol_plot_ruler_hor {
-        dimensions_axis(): $mol_vector_range<number>;
-        viewport_axis(): $mol_vector_range<number>;
-        scale_axis(): number;
-        scale_step(): number;
-        shift_axis(): number;
-        curve(): string;
-        label_pos_x(index: number): string;
-        background_y(): string;
-        title_pos_y(): string;
-        background_height(): string;
-    }
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
-
-	type $mol_view__dom_name_rise_bench_charts_operation_1 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $mol_view['dom_name'] >
-	>
-	type $mol_view__sub_rise_bench_charts_operation_2 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_view['sub'] >
-	>
-	type $mol_view__sub_rise_bench_charts_operation_3 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_view['sub'] >
-	>
-	type $mol_view__sub_rise_bench_charts_operation_4 = $mol_type_enforce<
-		ReturnType< $rise_bench_charts_operation['legends'] >
-		,
-		ReturnType< $mol_view['sub'] >
-	>
-	type $mol_view__sub_rise_bench_charts_operation_5 = $mol_type_enforce<
-		ReturnType< $rise_bench_charts_operation['legend_content'] >
-		,
-		ReturnType< $mol_view['sub'] >
-	>
-	type $mol_view__sub_rise_bench_charts_operation_6 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_view['sub'] >
-	>
-	type $mol_view__sub_rise_bench_charts_operation_7 = $mol_type_enforce<
-		ReturnType< $rise_bench_charts_operation['legend_sample'] >
-		,
-		ReturnType< $mol_view['sub'] >
-	>
-	type $rise_bench_charts_operation_plot__hue_base_rise_bench_charts_operation_8 = $mol_type_enforce<
-		number
-		,
-		ReturnType< $rise_bench_charts_operation_plot['hue_base'] >
-	>
-	type $rise_bench_charts_operation_plot__graphs_rise_bench_charts_operation_9 = $mol_type_enforce<
-		ReturnType< $rise_bench_charts_operation['graphs'] >
-		,
-		ReturnType< $rise_bench_charts_operation_plot['graphs'] >
-	>
-	type $mol_plot_group__title_rise_bench_charts_operation_10 = $mol_type_enforce<
-		ReturnType< $rise_bench_charts_operation['series_title'] >
-		,
-		ReturnType< $mol_plot_group['title'] >
-	>
-	type $mol_plot_group__series_x_rise_bench_charts_operation_11 = $mol_type_enforce<
-		ReturnType< $rise_bench_charts_operation['series_x'] >
-		,
-		ReturnType< $mol_plot_group['series_x'] >
-	>
-	type $mol_plot_group__series_y_rise_bench_charts_operation_12 = $mol_type_enforce<
-		ReturnType< $rise_bench_charts_operation['series_y'] >
-		,
-		ReturnType< $mol_plot_group['series_y'] >
-	>
-	type $mol_plot_group__graphs_rise_bench_charts_operation_13 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_plot_group['graphs'] >
-	>
-	type $mol_plot_ruler_hor__title_rise_bench_charts_operation_14 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $mol_plot_ruler_hor['title'] >
-	>
-	type $mol_plot_ruler_vert__title_rise_bench_charts_operation_15 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $mol_plot_ruler_vert['title'] >
-	>
-	type $mol_view__sub_rise_bench_charts_operation_16 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_view['sub'] >
-	>
-	export class $rise_bench_charts_operation extends $mol_view {
-		content( ): readonly($mol_view)[]
-		legends( ): readonly($mol_view)[]
-		legend_content( id: any): readonly($mol_view_content)[]
-		series_title( id: any): string
-		legend_sample( id: any): readonly($mol_view)[]
-		graphs( ): readonly($mol_plot_graph)[]
-		series_x( id: any): readonly(number)[]
-		series_y( id: any): readonly(number)[]
-		Line( id: any): $mol_plot_line
-		Dots( id: any): $mol_plot_dot
-		operation( ): string
-		runs( ): readonly($rise_bench_run)[]
-		sub( ): ReturnType< $rise_bench_charts_operation['content'] >
-		Title( ): $mol_view
-		Empty( ): $mol_view
-		Legend( ): $mol_view
-		Legend_item( id: any): $mol_view
-		Legend_text( id: any): $mol_view
-		Legend_sample( id: any): $mol_view
-		Plot( ): $rise_bench_charts_operation_plot
-		Series( id: any): $mol_plot_group
-		X( ): $mol_plot_ruler_hor
-		Y( ): $mol_plot_ruler_vert
-		Note( ): $mol_view
-	}
-	
-}
-
-//# sourceMappingURL=operation.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $rise_bench_charts_operation extends $.$rise_bench_charts_operation {
-        groups(): {
-            title: string;
-            points: number[][];
-        }[];
-        content(): ($mol_view | $.$rise_bench_charts_operation_plot)[];
-        series_title(id: number): string;
-        series_x(id: number): number[];
-        series_y(id: number): number[];
-        graphs(): ($.$mol_plot_ruler_vert | $.$mol_plot_group | $.$mol_plot_ruler_hor)[];
-        legends(): $mol_view[];
-        legend_content(id: number): $mol_view[];
-        legend_sample(id: number): $mol_plot_graph_sample[];
-    }
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
-
-	type $rise_bench_charts_selection__runs_rise_bench_charts_1 = $mol_type_enforce<
-		ReturnType< $rise_bench_charts['runs'] >
-		,
-		ReturnType< $rise_bench_charts_selection['runs'] >
-	>
-	type $rise_bench_charts_selection__value_rise_bench_charts_2 = $mol_type_enforce<
-		ReturnType< $rise_bench_charts['selected'] >
-		,
-		ReturnType< $rise_bench_charts_selection['value'] >
-	>
-	type $rise_bench_charts_operation__operation_rise_bench_charts_3 = $mol_type_enforce<
-		ReturnType< $rise_bench_charts['operation'] >
-		,
-		ReturnType< $rise_bench_charts_operation['operation'] >
-	>
-	type $rise_bench_charts_operation__runs_rise_bench_charts_4 = $mol_type_enforce<
-		ReturnType< $rise_bench_charts['selected_runs'] >
-		,
-		ReturnType< $rise_bench_charts_operation['runs'] >
-	>
-	export class $rise_bench_charts extends $mol_view {
-		charts( ): readonly($mol_view)[]
-		operation( id: any): string
-		selected_runs( ): readonly($rise_bench_run)[]
-		runs( ): readonly($rise_bench_run)[]
-		operations( ): readonly(string)[]
-		selected( next?: readonly(string)[] ): readonly(string)[]
-		sub( ): ReturnType< $rise_bench_charts['charts'] >
-		Selection( ): $rise_bench_charts_selection
-		Chart( id: any): $rise_bench_charts_operation
-	}
-	
-}
-
-//# sourceMappingURL=charts.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $rise_bench_charts extends $.$rise_bench_charts {
-        charts(): ($.$rise_bench_charts_selection | $.$rise_bench_charts_operation)[];
-        selected_runs(): $rise_bench_run[];
-        operation(index: number): string;
-    }
-}
-
-declare namespace $ { }
-
-declare namespace $ {
-    /** Stable URL order and backwards compatibility with the old `all` links. */
-    function $rise_bench_selection(value: string, options: readonly string[]): string[];
-}
-
-declare namespace $ {
-    type $rise_bench_batch_case = {
-        engine: string;
-        count: string;
-        schema: string;
-    };
-    /** A fixed, sequential matrix. Selection changes never alter a running batch. */
-    function $rise_bench_batch(engine: string, count: string, schema: string, text?: boolean): $rise_bench_batch_case[];
-}
-
-declare namespace $ {
-    /**
-     * Serialize csv data with delimiter
-     * @see https://mol.hyoo.ru/#!section=demos/demo=mol_csv_serial
-     */
-    function $mol_csv_serial(data: Record<string, any>[], delimiter?: string): string;
-    function $mol_csv_serial_table(rows: string[][], delimiter?: string): string;
-}
-
-declare namespace $ {
-    /** UTF-8 with BOM and semicolons opens correctly in Russian Windows Excel. */
-    function $rise_bench_csv(rows: readonly Record<string, unknown>[], columns: readonly string[]): string;
-}
-
-declare namespace $ {
-    /** Retain every seed Land until peer URLs have live reactive consumers. */
-    class $rise_bench_seed extends $mol_object {
-        static lands(): $giper_baza_land[];
-    }
-}
-
-declare namespace $ {
-
-	export class $mol_status extends $mol_view {
-		message( ): string
-		status( ): ReturnType< $mol_status['title'] >
-		minimal_height( ): number
-		minimal_width( ): number
-		sub( ): readonly(any)[]
-	}
-	
-}
-
-//# sourceMappingURL=status.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $mol_status extends $.$mol_status {
-        message(): any;
-    }
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
     type $rise_bench_idb_storage_product = $rise_bench_product;
     type $rise_bench_idb_storage_schema = {
         Product: {
@@ -62949,6 +65478,8 @@ declare namespace $ {
 	>
 	type $mol_switch__options_rise_bench_idb_9 = $mol_type_enforce<
 		({ 
+			'1': string,
+			'10': string,
 			'100': string,
 			'500': string,
 			'1000': string,
@@ -63241,7 +65772,7 @@ declare namespace $.$$ {
         storage_label(): string;
         dataset_prefix(): string;
         count_mode(next?: string): string;
-        schema_mode(next?: string): "full" | "compact";
+        schema_mode(next?: string): "compact" | "full";
         compact(): boolean;
         dataset_name(next?: string): string;
         storage(): $rise_bench_idb_storage | $rise_bench_sql_storage;
@@ -63275,2476 +65806,6 @@ declare namespace $.$$ {
 declare namespace $ {
 }
 
-declare namespace $ {
-
-	type $rise_bench_host_controls__kind_rise_bench_host_1 = $mol_type_enforce<
-		ReturnType< $rise_bench_host['kind'] >
-		,
-		ReturnType< $rise_bench_host_controls['kind'] >
-	>
-	type $rise_bench_host_controls__enabled_rise_bench_host_2 = $mol_type_enforce<
-		ReturnType< $rise_bench_host['controls_enabled'] >
-		,
-		ReturnType< $rise_bench_host_controls['enabled'] >
-	>
-	type $rise_bench_host_controls__run_enabled_rise_bench_host_3 = $mol_type_enforce<
-		ReturnType< $rise_bench_host['run_enabled'] >
-		,
-		ReturnType< $rise_bench_host_controls['run_enabled'] >
-	>
-	type $rise_bench_host_controls__running_rise_bench_host_4 = $mol_type_enforce<
-		ReturnType< $rise_bench_host['busy'] >
-		,
-		ReturnType< $rise_bench_host_controls['running'] >
-	>
-	type $rise_bench_host_controls__engines_rise_bench_host_5 = $mol_type_enforce<
-		ReturnType< $rise_bench_host['selected_engines'] >
-		,
-		ReturnType< $rise_bench_host_controls['engines'] >
-	>
-	type $rise_bench_host_controls__sizes_rise_bench_host_6 = $mol_type_enforce<
-		ReturnType< $rise_bench_host['selected_counts'] >
-		,
-		ReturnType< $rise_bench_host_controls['sizes'] >
-	>
-	type $rise_bench_host_controls__schemas_rise_bench_host_7 = $mol_type_enforce<
-		ReturnType< $rise_bench_host['selected_schemas'] >
-		,
-		ReturnType< $rise_bench_host_controls['schemas'] >
-	>
-	type $rise_bench_host_controls__run_rise_bench_host_8 = $mol_type_enforce<
-		ReturnType< $rise_bench_host['run'] >
-		,
-		ReturnType< $rise_bench_host_controls['run'] >
-	>
-	type $rise_bench_host_controls__stop_rise_bench_host_9 = $mol_type_enforce<
-		ReturnType< $rise_bench_host['stop'] >
-		,
-		ReturnType< $rise_bench_host_controls['stop'] >
-	>
-	type $rise_bench_host_controls__status_rise_bench_host_10 = $mol_type_enforce<
-		ReturnType< $rise_bench_host['status'] >
-		,
-		ReturnType< $rise_bench_host_controls['status'] >
-	>
-	type $rise_bench_host_controls__elapsed_rise_bench_host_11 = $mol_type_enforce<
-		ReturnType< $rise_bench_host['elapsed_text'] >
-		,
-		ReturnType< $rise_bench_host_controls['elapsed'] >
-	>
-	type $rise_bench_host_controls__retry_visible_rise_bench_host_12 = $mol_type_enforce<
-		ReturnType< $rise_bench_host['retry_visible'] >
-		,
-		ReturnType< $rise_bench_host_controls['retry_visible'] >
-	>
-	type $rise_bench_host_controls__retry_rise_bench_host_13 = $mol_type_enforce<
-		ReturnType< $rise_bench_host['retry'] >
-		,
-		ReturnType< $rise_bench_host_controls['retry'] >
-	>
-	type $mol_button_download__title_rise_bench_host_14 = $mol_type_enforce<
-		ReturnType< $rise_bench_host['csv_title'] >
-		,
-		ReturnType< $mol_button_download['title'] >
-	>
-	type $mol_button_download__hint_rise_bench_host_15 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $mol_button_download['hint'] >
-	>
-	type $mol_button_download__blob_rise_bench_host_16 = $mol_type_enforce<
-		ReturnType< $rise_bench_host['csv_blob'] >
-		,
-		ReturnType< $mol_button_download['blob'] >
-	>
-	type $mol_button_download__file_name_rise_bench_host_17 = $mol_type_enforce<
-		ReturnType< $rise_bench_host['csv_filename'] >
-		,
-		ReturnType< $mol_button_download['file_name'] >
-	>
-	type $mol_switch__value_rise_bench_host_18 = $mol_type_enforce<
-		ReturnType< $rise_bench_host['mode'] >
-		,
-		ReturnType< $mol_switch['value'] >
-	>
-	type $mol_switch__options_rise_bench_host_19 = $mol_type_enforce<
-		({ 
-			'table': string,
-			'charts': string,
-		}) 
-		,
-		ReturnType< $mol_switch['options'] >
-	>
-	type $rise_bench_metrics__operations_rise_bench_host_20 = $mol_type_enforce<
-		ReturnType< $rise_bench_host['operations'] >
-		,
-		ReturnType< $rise_bench_metrics['operations'] >
-	>
-	type $rise_bench_metrics__runs_rise_bench_host_21 = $mol_type_enforce<
-		ReturnType< $rise_bench_host['runs'] >
-		,
-		ReturnType< $rise_bench_metrics['runs'] >
-	>
-	type $rise_bench_metrics__compare_rise_bench_host_22 = $mol_type_enforce<
-		ReturnType< $rise_bench_host['compare'] >
-		,
-		ReturnType< $rise_bench_metrics['compare'] >
-	>
-	type $rise_bench_metrics__text_mode_rise_bench_host_23 = $mol_type_enforce<
-		ReturnType< $rise_bench_host['text_mode'] >
-		,
-		ReturnType< $rise_bench_metrics['text_mode'] >
-	>
-	type $mol_scroll__sub_rise_bench_host_24 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_scroll['sub'] >
-	>
-	type $mol_frame__uri_rise_bench_host_25 = $mol_type_enforce<
-		ReturnType< $rise_bench_host['fixture_uri'] >
-		,
-		ReturnType< $mol_frame['uri'] >
-	>
-	type $mol_frame__clipboard_read_rise_bench_host_26 = $mol_type_enforce<
-		boolean
-		,
-		ReturnType< $mol_frame['clipboard_read'] >
-	>
-	type $mol_frame__clipboard_write_rise_bench_host_27 = $mol_type_enforce<
-		boolean
-		,
-		ReturnType< $mol_frame['clipboard_write'] >
-	>
-	type $mol_frame__attr_rise_bench_host_28 = $mol_type_enforce<
-		({ 
-			'inert': ReturnType< $rise_bench_host['busy'] >,
-		})  & ReturnType< $mol_frame['attr'] >
-		,
-		ReturnType< $mol_frame['attr'] >
-	>
-	type $mol_page__title_rise_bench_host_29 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $mol_page['title'] >
-	>
-	type $mol_page__minimal_width_rise_bench_host_30 = $mol_type_enforce<
-		number
-		,
-		ReturnType< $mol_page['minimal_width'] >
-	>
-	type $mol_page__tools_rise_bench_host_31 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_page['tools'] >
-	>
-	type $mol_page__body_rise_bench_host_32 = $mol_type_enforce<
-		ReturnType< $rise_bench_host['results_body'] >
-		,
-		ReturnType< $mol_page['body'] >
-	>
-	type $rise_bench_charts__runs_rise_bench_host_33 = $mol_type_enforce<
-		ReturnType< $rise_bench_host['runs'] >
-		,
-		ReturnType< $rise_bench_charts['runs'] >
-	>
-	type $rise_bench_charts__operations_rise_bench_host_34 = $mol_type_enforce<
-		ReturnType< $rise_bench_host['operations'] >
-		,
-		ReturnType< $rise_bench_charts['operations'] >
-	>
-	type $rise_bench_charts__selected_rise_bench_host_35 = $mol_type_enforce<
-		ReturnType< $rise_bench_host['chart_selection'] >
-		,
-		ReturnType< $rise_bench_charts['selected'] >
-	>
-	export class $rise_bench_host extends $mol_book2 {
-		controls_enabled( ): boolean
-		run_enabled( ): boolean
-		busy( ): boolean
-		selected_engines( next?: readonly(string)[] ): readonly(string)[]
-		selected_counts( next?: readonly(string)[] ): readonly(string)[]
-		selected_schemas( next?: readonly(string)[] ): readonly(string)[]
-		run( next?: any ): any
-		stop( next?: any ): any
-		status( next?: string ): string
-		elapsed_text( ): string
-		retry_visible( ): boolean
-		retry( next?: any ): any
-		Controls( ): $rise_bench_host_controls
-		csv_title( ): string
-		csv_blob( ): any
-		csv_filename( ): string
-		Download( ): $mol_button_download
-		mode( next?: string ): string
-		Mode( ): $mol_switch
-		operations( ): readonly(string)[]
-		runs( ): readonly($rise_bench_run)[]
-		compare( ): boolean
-		text_mode( ): boolean
-		Metrics( ): $rise_bench_metrics
-		History( ): $mol_scroll
-		fixture_uri( ): string
-		Frame( ): $mol_frame
-		results_body( ): readonly($mol_view)[]
-		Results( ): $mol_page
-		chart_selection( next?: readonly(string)[] ): readonly(string)[]
-		kind( ): string
-		pages( ): readonly(any)[]
-		Charts( ): $rise_bench_charts
-	}
-	
-}
-
-//# sourceMappingURL=host.view.tree.d.ts.map
-declare namespace $.$$ {
-    type $rise_bench_host_pending = $rise_bench_archive_row & {
-        kind?: string;
-    };
-    export class $rise_bench_host extends $.$rise_bench_host {
-        menu_title(): string;
-        compare(): boolean;
-        text_mode(): boolean;
-        mode(next?: string): "charts" | "table";
-        fixture_kind(): string;
-        engine(next?: string): string;
-        count(next?: string): string;
-        schema(next?: string): string;
-        selected_engines(next?: readonly string[]): string[];
-        selected_counts(next?: readonly string[]): string[];
-        selected_schemas(next?: readonly string[]): string[];
-        private chart_selection_value?;
-        chart_selection(next?: readonly string[]): readonly string[];
-        ready(next?: boolean): boolean;
-        busy(next?: boolean): boolean;
-        active_case(next?: ($rise_bench_batch_case & {
-            token: string;
-        }) | null): ($rise_bench_batch_case & {
-            token: string;
-        }) | null;
-        display_case(next?: ($rise_bench_batch_case & {
-            token: string;
-        }) | null): ($rise_bench_batch_case & {
-            token: string;
-        }) | null;
-        frame_generation(next?: number): number;
-        private queue;
-        private total;
-        private finished;
-        private failed;
-        private command_sent;
-        private progress;
-        private timing_value;
-        timing(next?: {
-            batch: number;
-            step: number;
-            ended: number;
-        }): {
-            batch: number;
-            step: number;
-            ended: number;
-        };
-        elapsed_text(): string;
-        duration(milliseconds: number): string;
-        private readonly settled;
-        engine_title(engine: string): string;
-        controls_enabled(): boolean;
-        run_enabled(): boolean;
-        config(): {
-            count: string;
-            schema: string;
-        };
-        send(command: string, data: object): void;
-        run(): void;
-        next_case(): void;
-        fail_case(): void;
-        partial_row(): $rise_bench_archive_row;
-        stop(): void;
-        finish_case(row: $rise_bench_archive_row, kind: string): void;
-        operations(): string[];
-        fixture_uri(): string;
-        runs(): $rise_bench_run[];
-        pages(): readonly any[];
-        csv_filename(): string;
-        csv_title(): "CSV" | "Скачать CSV";
-        csv_blob(): Blob;
-        results_body(): ($.$mol_scroll | $.$mol_frame | $.$rise_bench_charts)[];
-        retry_visible(): boolean;
-        outbox(next?: readonly $rise_bench_host_pending[]): readonly $rise_bench_host_pending[];
-        accept(row: $rise_bench_archive_row, kind: string): void;
-        retry(): void;
-        private restored;
-        restore_outbox(): void;
-        listener(): {
-            destructor: () => void;
-        };
-        destructor(): void;
-        auto(): never[];
-    }
-    export {};
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
-
-	export class $rise_drag extends $mol_plugin {
-		pointerdown( next?: any ): any
-		dragged( next?: boolean ): boolean
-		pointermove_listener( ): $mol_dom_listener | null
-		pointerup_listener( ): $mol_dom_listener | null
-		x( next?: number ): number
-		y( next?: number ): number
-		repos_x( id: any): number
-		repos_y( id: any): number
-		on_drag( next?: any ): any
-		on_drag_start( next?: any ): any
-		on_drag_end( next?: any ): any
-		drag( next?: any ): any
-		drag_start( next?: any ): any
-		drag_end( next?: any ): any
-		use_buttons( ): readonly(any)[]
-		event( ): ({ 
-			pointerdown( next?: ReturnType< $rise_drag['pointerdown'] > ): ReturnType< $rise_drag['pointerdown'] >,
-		})  & ReturnType< $mol_plugin['event'] >
-		attr( ): ({ 
-			'rise_dragged': ReturnType< $rise_drag['dragged'] >,
-		})  & ReturnType< $mol_plugin['attr'] >
-		auto( ): readonly(any)[]
-		drags_synced( ): readonly($rise_drag)[]
-	}
-	
-}
-
-//# sourceMappingURL=drag.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $rise_drag extends $.$rise_drag {
-        repos_x(val: number): number;
-        repos_y(val: number): number;
-        start_event?: PointerEvent;
-        start_pos?: {
-            x: number;
-            y: number;
-        };
-        drags_synced_frozen: readonly $.$rise_drag[];
-        drag_start(event: PointerEvent): void;
-        drag(event: PointerEvent): void;
-        drag_end(event: PointerEvent): void;
-        pointerdown(event: PointerEvent): void;
-        pointermove_listener(): $mol_dom_listener | null;
-        handle_pointermove_async: ((event: PointerEvent) => Promise<void>) & {};
-        pointerup_listener(): $mol_dom_listener | null;
-        handle_pointerup_async: ((event: PointerEvent) => Promise<void>) & {};
-    }
-}
-
-declare namespace $ {
-
-	type $mol_view__sub_mol_card_1 = $mol_type_enforce<
-		ReturnType< $mol_card['content'] >
-		,
-		ReturnType< $mol_view['sub'] >
-	>
-	type $mol_view__minimal_height_mol_card_2 = $mol_type_enforce<
-		number
-		,
-		ReturnType< $mol_view['minimal_height'] >
-	>
-	type $mol_view__sub_mol_card_3 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_view['sub'] >
-	>
-	export class $mol_card extends $mol_list {
-		status( ): string
-		content( ): readonly($mol_view_content)[]
-		Content( ): $mol_view
-		status_text( ): ReturnType< $mol_card['status'] >
-		Status( ): $mol_view
-		attr( ): ({ 
-			'mol_card_status_type': ReturnType< $mol_card['status'] >,
-		})  & ReturnType< $mol_list['attr'] >
-		rows( ): readonly($mol_view)[]
-	}
-	
-}
-
-//# sourceMappingURL=card.view.tree.d.ts.map
-declare namespace $.$$ {
-    /**
-     * Represents a common card. It can has several statuses at bottom line.
-     * @see https://mol.hyoo.ru/#!section=demos/demo=mol_card_demo/readme
-     */
-    class $mol_card extends $.$mol_card {
-        rows(): readonly $mol_view[];
-    }
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
-
-	type __rise_drag_view_1 = $mol_type_enforce<
-		Parameters< $rise_drag_view['pointerdown'] >[0]
-		,
-		Parameters< ReturnType< $rise_drag_view['Drag'] >['pointerdown'] >[0]
-	>
-	type $rise_drag__on_drag_start_rise_drag_view_2 = $mol_type_enforce<
-		ReturnType< $rise_drag_view['on_drag_start'] >
-		,
-		ReturnType< $rise_drag['on_drag_start'] >
-	>
-	type $rise_drag__on_drag_end_rise_drag_view_3 = $mol_type_enforce<
-		ReturnType< $rise_drag_view['on_drag_end'] >
-		,
-		ReturnType< $rise_drag['on_drag_end'] >
-	>
-	type $rise_drag__on_drag_rise_drag_view_4 = $mol_type_enforce<
-		ReturnType< $rise_drag_view['on_drag'] >
-		,
-		ReturnType< $rise_drag['on_drag'] >
-	>
-	type $rise_drag__y_rise_drag_view_5 = $mol_type_enforce<
-		ReturnType< $rise_drag_view['y'] >
-		,
-		ReturnType< $rise_drag['y'] >
-	>
-	type $rise_drag__x_rise_drag_view_6 = $mol_type_enforce<
-		ReturnType< $rise_drag_view['x'] >
-		,
-		ReturnType< $rise_drag['x'] >
-	>
-	type $rise_drag__drags_synced_rise_drag_view_7 = $mol_type_enforce<
-		ReturnType< $rise_drag_view['drags_synced'] >
-		,
-		ReturnType< $rise_drag['drags_synced'] >
-	>
-	type $rise_drag__repos_x_rise_drag_view_8 = $mol_type_enforce<
-		ReturnType< $rise_drag_view['repos_x'] >
-		,
-		ReturnType< $rise_drag['repos_x'] >
-	>
-	type $rise_drag__repos_y_rise_drag_view_9 = $mol_type_enforce<
-		ReturnType< $rise_drag_view['repos_y'] >
-		,
-		ReturnType< $rise_drag['repos_y'] >
-	>
-	export class $rise_drag_view extends $mol_view {
-		on_drag_start( next?: any ): any
-		on_drag_end( next?: any ): any
-		on_drag( next?: any ): any
-		dragged( ): ReturnType< ReturnType< $rise_drag_view['Drag'] >['dragged'] >
-		y( next?: number ): number
-		x( next?: number ): number
-		drags_synced( ): readonly($rise_drag)[]
-		repos_x( id: any): number
-		repos_y( id: any): number
-		pointerdown( next?: ReturnType< ReturnType< $rise_drag_view['Drag'] >['pointerdown'] > ): ReturnType< ReturnType< $rise_drag_view['Drag'] >['pointerdown'] >
-		Drag( ): $rise_drag
-		plugins( ): readonly(any)[]
-		style( ): ({ 
-			'userSelect': string,
-		})  & ReturnType< $mol_view['style'] >
-	}
-	
-}
-
-//# sourceMappingURL=view.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $rise_drag_view extends $.$rise_drag_view {
-        repos_x(val: number): number;
-        repos_y(val: number): number;
-    }
-}
-
-declare namespace $ {
-
-	export class $rise_drag_absolute extends $rise_drag_view {
-		top( next?: number ): number
-		left( next?: number ): number
-		top_px( ): string
-		left_px( ): string
-		y( next?: ReturnType< $rise_drag_absolute['top'] > ): ReturnType< $rise_drag_absolute['top'] >
-		x( next?: ReturnType< $rise_drag_absolute['left'] > ): ReturnType< $rise_drag_absolute['left'] >
-		style( ): ({ 
-			'position': string,
-			'top': ReturnType< $rise_drag_absolute['top_px'] >,
-			'left': ReturnType< $rise_drag_absolute['left_px'] >,
-		})  & ReturnType< $rise_drag_view['style'] >
-	}
-	
-}
-
-//# sourceMappingURL=absolute.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $rise_drag_absolute extends $.$rise_drag_absolute {
-        top_px(): string;
-        left_px(): string;
-    }
-}
-
-declare namespace $ {
-
-	type $mol_card__title_rise_drag_demo_1 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $mol_card['title'] >
-	>
-	type $rise_drag_absolute__sub_rise_drag_demo_2 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $rise_drag_absolute['sub'] >
-	>
-	type $rise_drag_absolute__drags_synced_rise_drag_demo_3 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $rise_drag_absolute['drags_synced'] >
-	>
-	type $mol_card__title_rise_drag_demo_4 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $mol_card['title'] >
-	>
-	type $rise_drag_absolute__top_rise_drag_demo_5 = $mol_type_enforce<
-		ReturnType< $rise_drag_demo['top'] >
-		,
-		ReturnType< $rise_drag_absolute['top'] >
-	>
-	type $rise_drag_absolute__left_rise_drag_demo_6 = $mol_type_enforce<
-		ReturnType< $rise_drag_demo['left'] >
-		,
-		ReturnType< $rise_drag_absolute['left'] >
-	>
-	type $rise_drag_absolute__sub_rise_drag_demo_7 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $rise_drag_absolute['sub'] >
-	>
-	export class $rise_drag_demo extends $mol_example_small {
-		Card( ): $mol_card
-		Draggable( ): $rise_drag_absolute
-		top( next?: number ): number
-		left( next?: number ): number
-		Synced_drag( ): ReturnType< ReturnType< $rise_drag_demo['Synced'] >['Drag'] >
-		Synced_card( ): $mol_card
-		Synced( ): $rise_drag_absolute
-		sub( ): readonly(any)[]
-		tags( ): readonly(any)[]
-		aspects( ): readonly(any)[]
-	}
-	
-}
-
-//# sourceMappingURL=demo.view.tree.d.ts.map
-declare namespace $ {
-
-	type __rise_resize_1 = $mol_type_enforce<
-		Parameters< $rise_resize['drag_pointerdown'] >[0]
-		,
-		Parameters< ReturnType< $rise_resize['Drag_view'] >['pointerdown'] >[0]
-	>
-	type $rise_drag_view__minimal_height_rise_resize_2 = $mol_type_enforce<
-		number
-		,
-		ReturnType< $rise_drag_view['minimal_height'] >
-	>
-	type $rise_drag_view__sub_rise_resize_3 = $mol_type_enforce<
-		ReturnType< $rise_resize['drag_body'] >
-		,
-		ReturnType< $rise_drag_view['sub'] >
-	>
-	type $rise_drag_view__x_rise_resize_4 = $mol_type_enforce<
-		ReturnType< $rise_resize['x'] >
-		,
-		ReturnType< $rise_drag_view['x'] >
-	>
-	type $rise_drag_view__y_rise_resize_5 = $mol_type_enforce<
-		ReturnType< $rise_resize['y'] >
-		,
-		ReturnType< $rise_drag_view['y'] >
-	>
-	type $rise_drag_view__on_drag_start_rise_resize_6 = $mol_type_enforce<
-		ReturnType< $rise_resize['on_drag_start'] >
-		,
-		ReturnType< $rise_drag_view['on_drag_start'] >
-	>
-	type $rise_drag_view__on_drag_rise_resize_7 = $mol_type_enforce<
-		ReturnType< $rise_resize['on_drag'] >
-		,
-		ReturnType< $rise_drag_view['on_drag'] >
-	>
-	type $rise_drag_view__on_drag_end_rise_resize_8 = $mol_type_enforce<
-		ReturnType< $rise_resize['on_drag_end'] >
-		,
-		ReturnType< $rise_drag_view['on_drag_end'] >
-	>
-	type $rise_drag_view__drags_synced_rise_resize_9 = $mol_type_enforce<
-		ReturnType< $rise_resize['drags_synced'] >
-		,
-		ReturnType< $rise_drag_view['drags_synced'] >
-	>
-	type $rise_drag_view__repos_x_rise_resize_10 = $mol_type_enforce<
-		ReturnType< $rise_resize['repos_x'] >
-		,
-		ReturnType< $rise_drag_view['repos_x'] >
-	>
-	type $rise_drag_view__repos_y_rise_resize_11 = $mol_type_enforce<
-		ReturnType< $rise_resize['repos_y'] >
-		,
-		ReturnType< $rise_drag_view['repos_y'] >
-	>
-	type $rise_resize_edge__repos_x_rise_resize_12 = $mol_type_enforce<
-		ReturnType< $rise_resize['repos_x'] >
-		,
-		ReturnType< $rise_resize_edge['repos_x'] >
-	>
-	type $rise_resize_edge__repos_y_rise_resize_13 = $mol_type_enforce<
-		ReturnType< $rise_resize['repos_y'] >
-		,
-		ReturnType< $rise_resize_edge['repos_y'] >
-	>
-	type $rise_resize_edge__on_drag_start_rise_resize_14 = $mol_type_enforce<
-		ReturnType< $rise_resize['resize_start'] >
-		,
-		ReturnType< $rise_resize_edge['on_drag_start'] >
-	>
-	type $rise_resize_edge__on_drag_end_rise_resize_15 = $mol_type_enforce<
-		ReturnType< $rise_resize['resize_end'] >
-		,
-		ReturnType< $rise_resize_edge['on_drag_end'] >
-	>
-	type $rise_resize_edge__y_rise_resize_16 = $mol_type_enforce<
-		ReturnType< $rise_resize['top_edge_y'] >
-		,
-		ReturnType< $rise_resize_edge['y'] >
-	>
-	type $rise_resize_edge__repos_x_rise_resize_17 = $mol_type_enforce<
-		ReturnType< $rise_resize['repos_x'] >
-		,
-		ReturnType< $rise_resize_edge['repos_x'] >
-	>
-	type $rise_resize_edge__repos_y_rise_resize_18 = $mol_type_enforce<
-		ReturnType< $rise_resize['repos_y'] >
-		,
-		ReturnType< $rise_resize_edge['repos_y'] >
-	>
-	type $rise_resize_edge__on_drag_start_rise_resize_19 = $mol_type_enforce<
-		ReturnType< $rise_resize['resize_start'] >
-		,
-		ReturnType< $rise_resize_edge['on_drag_start'] >
-	>
-	type $rise_resize_edge__on_drag_end_rise_resize_20 = $mol_type_enforce<
-		ReturnType< $rise_resize['resize_end'] >
-		,
-		ReturnType< $rise_resize_edge['on_drag_end'] >
-	>
-	type $rise_resize_edge__x_rise_resize_21 = $mol_type_enforce<
-		ReturnType< $rise_resize['left_edge_x'] >
-		,
-		ReturnType< $rise_resize_edge['x'] >
-	>
-	type $rise_resize_edge__repos_x_rise_resize_22 = $mol_type_enforce<
-		ReturnType< $rise_resize['repos_x'] >
-		,
-		ReturnType< $rise_resize_edge['repos_x'] >
-	>
-	type $rise_resize_edge__repos_y_rise_resize_23 = $mol_type_enforce<
-		ReturnType< $rise_resize['repos_y'] >
-		,
-		ReturnType< $rise_resize_edge['repos_y'] >
-	>
-	type $rise_resize_edge__on_drag_start_rise_resize_24 = $mol_type_enforce<
-		ReturnType< $rise_resize['resize_start'] >
-		,
-		ReturnType< $rise_resize_edge['on_drag_start'] >
-	>
-	type $rise_resize_edge__on_drag_end_rise_resize_25 = $mol_type_enforce<
-		ReturnType< $rise_resize['resize_end'] >
-		,
-		ReturnType< $rise_resize_edge['on_drag_end'] >
-	>
-	type $rise_resize_edge__y_rise_resize_26 = $mol_type_enforce<
-		ReturnType< $rise_resize['bottom_edge_y'] >
-		,
-		ReturnType< $rise_resize_edge['y'] >
-	>
-	type $rise_resize_edge__repos_x_rise_resize_27 = $mol_type_enforce<
-		ReturnType< $rise_resize['repos_x'] >
-		,
-		ReturnType< $rise_resize_edge['repos_x'] >
-	>
-	type $rise_resize_edge__repos_y_rise_resize_28 = $mol_type_enforce<
-		ReturnType< $rise_resize['repos_y'] >
-		,
-		ReturnType< $rise_resize_edge['repos_y'] >
-	>
-	type $rise_resize_edge__on_drag_start_rise_resize_29 = $mol_type_enforce<
-		ReturnType< $rise_resize['resize_start'] >
-		,
-		ReturnType< $rise_resize_edge['on_drag_start'] >
-	>
-	type $rise_resize_edge__on_drag_end_rise_resize_30 = $mol_type_enforce<
-		ReturnType< $rise_resize['resize_end'] >
-		,
-		ReturnType< $rise_resize_edge['on_drag_end'] >
-	>
-	type $rise_resize_edge__x_rise_resize_31 = $mol_type_enforce<
-		ReturnType< $rise_resize['right_edge_x'] >
-		,
-		ReturnType< $rise_resize_edge['x'] >
-	>
-	type $rise_resize_edge__repos_x_rise_resize_32 = $mol_type_enforce<
-		ReturnType< $rise_resize['repos_x'] >
-		,
-		ReturnType< $rise_resize_edge['repos_x'] >
-	>
-	type $rise_resize_edge__repos_y_rise_resize_33 = $mol_type_enforce<
-		ReturnType< $rise_resize['repos_y'] >
-		,
-		ReturnType< $rise_resize_edge['repos_y'] >
-	>
-	type $rise_resize_edge__on_drag_start_rise_resize_34 = $mol_type_enforce<
-		ReturnType< $rise_resize['resize_start'] >
-		,
-		ReturnType< $rise_resize_edge['on_drag_start'] >
-	>
-	type $rise_resize_edge__on_drag_end_rise_resize_35 = $mol_type_enforce<
-		ReturnType< $rise_resize['resize_end'] >
-		,
-		ReturnType< $rise_resize_edge['on_drag_end'] >
-	>
-	type $rise_resize_edge__y_rise_resize_36 = $mol_type_enforce<
-		ReturnType< $rise_resize['top_edge_y'] >
-		,
-		ReturnType< $rise_resize_edge['y'] >
-	>
-	type $rise_resize_edge__x_rise_resize_37 = $mol_type_enforce<
-		ReturnType< $rise_resize['left_edge_x'] >
-		,
-		ReturnType< $rise_resize_edge['x'] >
-	>
-	type $rise_resize_edge__repos_x_rise_resize_38 = $mol_type_enforce<
-		ReturnType< $rise_resize['repos_x'] >
-		,
-		ReturnType< $rise_resize_edge['repos_x'] >
-	>
-	type $rise_resize_edge__repos_y_rise_resize_39 = $mol_type_enforce<
-		ReturnType< $rise_resize['repos_y'] >
-		,
-		ReturnType< $rise_resize_edge['repos_y'] >
-	>
-	type $rise_resize_edge__on_drag_start_rise_resize_40 = $mol_type_enforce<
-		ReturnType< $rise_resize['resize_start'] >
-		,
-		ReturnType< $rise_resize_edge['on_drag_start'] >
-	>
-	type $rise_resize_edge__on_drag_end_rise_resize_41 = $mol_type_enforce<
-		ReturnType< $rise_resize['resize_end'] >
-		,
-		ReturnType< $rise_resize_edge['on_drag_end'] >
-	>
-	type $rise_resize_edge__y_rise_resize_42 = $mol_type_enforce<
-		ReturnType< $rise_resize['top_edge_y'] >
-		,
-		ReturnType< $rise_resize_edge['y'] >
-	>
-	type $rise_resize_edge__x_rise_resize_43 = $mol_type_enforce<
-		ReturnType< $rise_resize['right_edge_x'] >
-		,
-		ReturnType< $rise_resize_edge['x'] >
-	>
-	type $rise_resize_edge__repos_x_rise_resize_44 = $mol_type_enforce<
-		ReturnType< $rise_resize['repos_x'] >
-		,
-		ReturnType< $rise_resize_edge['repos_x'] >
-	>
-	type $rise_resize_edge__repos_y_rise_resize_45 = $mol_type_enforce<
-		ReturnType< $rise_resize['repos_y'] >
-		,
-		ReturnType< $rise_resize_edge['repos_y'] >
-	>
-	type $rise_resize_edge__on_drag_start_rise_resize_46 = $mol_type_enforce<
-		ReturnType< $rise_resize['resize_start'] >
-		,
-		ReturnType< $rise_resize_edge['on_drag_start'] >
-	>
-	type $rise_resize_edge__on_drag_end_rise_resize_47 = $mol_type_enforce<
-		ReturnType< $rise_resize['resize_end'] >
-		,
-		ReturnType< $rise_resize_edge['on_drag_end'] >
-	>
-	type $rise_resize_edge__y_rise_resize_48 = $mol_type_enforce<
-		ReturnType< $rise_resize['bottom_edge_y'] >
-		,
-		ReturnType< $rise_resize_edge['y'] >
-	>
-	type $rise_resize_edge__x_rise_resize_49 = $mol_type_enforce<
-		ReturnType< $rise_resize['left_edge_x'] >
-		,
-		ReturnType< $rise_resize_edge['x'] >
-	>
-	type $rise_resize_edge__repos_x_rise_resize_50 = $mol_type_enforce<
-		ReturnType< $rise_resize['repos_x'] >
-		,
-		ReturnType< $rise_resize_edge['repos_x'] >
-	>
-	type $rise_resize_edge__repos_y_rise_resize_51 = $mol_type_enforce<
-		ReturnType< $rise_resize['repos_y'] >
-		,
-		ReturnType< $rise_resize_edge['repos_y'] >
-	>
-	type $rise_resize_edge__on_drag_start_rise_resize_52 = $mol_type_enforce<
-		ReturnType< $rise_resize['resize_start'] >
-		,
-		ReturnType< $rise_resize_edge['on_drag_start'] >
-	>
-	type $rise_resize_edge__on_drag_end_rise_resize_53 = $mol_type_enforce<
-		ReturnType< $rise_resize['resize_end'] >
-		,
-		ReturnType< $rise_resize_edge['on_drag_end'] >
-	>
-	type $rise_resize_edge__y_rise_resize_54 = $mol_type_enforce<
-		ReturnType< $rise_resize['bottom_edge_y'] >
-		,
-		ReturnType< $rise_resize_edge['y'] >
-	>
-	type $rise_resize_edge__x_rise_resize_55 = $mol_type_enforce<
-		ReturnType< $rise_resize['right_edge_x'] >
-		,
-		ReturnType< $rise_resize_edge['x'] >
-	>
-	export class $rise_resize extends $mol_view {
-		drag_body( ): readonly(any)[]
-		x( next?: number ): number
-		y( next?: number ): number
-		on_drag_start( next?: any ): any
-		on_drag( next?: any ): any
-		on_drag_end( next?: any ): any
-		dragged( ): ReturnType< ReturnType< $rise_resize['Drag_view'] >['dragged'] >
-		drags_synced( ): readonly($rise_drag)[]
-		Drag( ): ReturnType< ReturnType< $rise_resize['Drag_view'] >['Drag'] >
-		repos_x( id: any): number
-		repos_y( id: any): number
-		drag_pointerdown( next?: ReturnType< ReturnType< $rise_resize['Drag_view'] >['pointerdown'] > ): ReturnType< ReturnType< $rise_resize['Drag_view'] >['pointerdown'] >
-		Drag_view( ): $rise_drag_view
-		controls( ): readonly(any)[]
-		resize_start( next?: any ): any
-		resize_end( next?: any ): any
-		top_edge_y( next?: number ): number
-		Top_edge( ): $rise_resize_edge
-		left_edge_x( next?: number ): number
-		Left_edge( ): $rise_resize_edge
-		bottom_edge_y( next?: number ): number
-		Bottom_edge( ): $rise_resize_edge
-		right_edge_x( next?: number ): number
-		Right_edge( ): $rise_resize_edge
-		Top_left_edge( ): $rise_resize_edge
-		Top_right_edge( ): $rise_resize_edge
-		Bottom_left_edge( ): $rise_resize_edge
-		Bottom_right_edge( ): $rise_resize_edge
-		edges( ): readonly(any)[]
-		top_px( ): string
-		left_px( ): string
-		height_px( ): string
-		width_px( ): string
-		sub( ): readonly(any)[]
-		resizing( next?: boolean ): boolean
-		transforming( ): boolean
-		height_min( ): number
-		width_min( ): number
-		height( next?: number ): number
-		width( next?: number ): number
-		top( next?: number ): number
-		left( next?: number ): number
-		stick_threshold( ): number
-		x_stick( next?: number ): number
-		y_stick( next?: number ): number
-		bottom_edge_y_stick( next?: ReturnType< $rise_resize['height_min'] > ): ReturnType< $rise_resize['height_min'] >
-		right_edge_x_stick( next?: ReturnType< $rise_resize['width_min'] > ): ReturnType< $rise_resize['width_min'] >
-		top_edge_y_stick( next?: number ): number
-		left_edge_x_stick( next?: number ): number
-		stickable( next?: boolean ): boolean
-		sticks_y( ): readonly(number)[]
-		sticks_x( ): readonly(number)[]
-		auto( ): readonly(any)[]
-		style( ): ({ 
-			'top': ReturnType< $rise_resize['top_px'] >,
-			'left': ReturnType< $rise_resize['left_px'] >,
-			'height': ReturnType< $rise_resize['height_px'] >,
-			'width': ReturnType< $rise_resize['width_px'] >,
-		})  & ReturnType< $mol_view['style'] >
-	}
-	
-	export class $rise_resize_edge extends $rise_drag_view {
-	}
-	
-}
-
-//# sourceMappingURL=resize.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $rise_resize extends $.$rise_resize {
-        repos_x(val: number): number;
-        repos_y(val: number): number;
-        to_stick(sticks: readonly number[], val: number, shift: number): number;
-        to_stick_x(val: number, shift: number): number;
-        to_stick_y(val: number, shift: number): number;
-        y(next?: number): number;
-        x(next?: number): number;
-        top_edge_y(next?: number): number;
-        bottom_edge_y(next?: number): number;
-        left_edge_x(next?: number): number;
-        right_edge_x(next?: number): number;
-        top(next?: number): number;
-        left(next?: number): number;
-        width(next?: number): number;
-        height(next?: number): number;
-        height_px(): string;
-        width_px(): string;
-        top_px(): string;
-        left_px(): string;
-        transforming(): boolean;
-        resize_start(next?: any): void;
-        resize_end(): void;
-    }
-}
-
-declare namespace $.$$ {
-}
-
-declare namespace $ {
-
-	type __rise_resize_demo_1 = $mol_type_enforce<
-		Parameters< $rise_resize_demo['stickable'] >[0]
-		,
-		Parameters< ReturnType< $rise_resize_demo['Resize'] >['stickable'] >[0]
-	>
-	type $mol_check_box__title_rise_resize_demo_2 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $mol_check_box['title'] >
-	>
-	type $mol_check_box__checked_rise_resize_demo_3 = $mol_type_enforce<
-		ReturnType< $rise_resize_demo['stickable'] >
-		,
-		ReturnType< $mol_check_box['checked'] >
-	>
-	type $mol_text__text_rise_resize_demo_4 = $mol_type_enforce<
-		ReturnType< $rise_resize_demo['content'] >
-		,
-		ReturnType< $mol_text['text'] >
-	>
-	type $rise_resize__height_min_rise_resize_demo_5 = $mol_type_enforce<
-		number
-		,
-		ReturnType< $rise_resize['height_min'] >
-	>
-	type $rise_resize__width_min_rise_resize_demo_6 = $mol_type_enforce<
-		number
-		,
-		ReturnType< $rise_resize['width_min'] >
-	>
-	type $rise_resize__drag_body_rise_resize_demo_7 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $rise_resize['drag_body'] >
-	>
-	type $rise_resize__sticks_y_rise_resize_demo_8 = $mol_type_enforce<
-		ReturnType< $rise_resize_demo['sticks_y'] >
-		,
-		ReturnType< $rise_resize['sticks_y'] >
-	>
-	type $rise_resize__sticks_x_rise_resize_demo_9 = $mol_type_enforce<
-		ReturnType< $rise_resize_demo['sticks_x'] >
-		,
-		ReturnType< $rise_resize['sticks_x'] >
-	>
-	type $mol_view__style_rise_resize_demo_10 = $mol_type_enforce<
-		({ 
-			'left': ReturnType< $rise_resize_demo['stick_left'] >,
-		}) 
-		,
-		ReturnType< $mol_view['style'] >
-	>
-	type $mol_view__style_rise_resize_demo_11 = $mol_type_enforce<
-		({ 
-			'top': ReturnType< $rise_resize_demo['stick_top'] >,
-		}) 
-		,
-		ReturnType< $mol_view['style'] >
-	>
-	export class $rise_resize_demo extends $mol_example_small {
-		height( ): ReturnType< ReturnType< $rise_resize_demo['Resize'] >['height'] >
-		width( ): ReturnType< ReturnType< $rise_resize_demo['Resize'] >['width'] >
-		top( ): ReturnType< ReturnType< $rise_resize_demo['Resize'] >['top'] >
-		left( ): ReturnType< ReturnType< $rise_resize_demo['Resize'] >['left'] >
-		x( ): ReturnType< ReturnType< $rise_resize_demo['Resize'] >['x'] >
-		y( ): ReturnType< ReturnType< $rise_resize_demo['Resize'] >['y'] >
-		bottom_edge_y( ): ReturnType< ReturnType< $rise_resize_demo['Resize'] >['bottom_edge_y'] >
-		right_edge_x( ): ReturnType< ReturnType< $rise_resize_demo['Resize'] >['right_edge_x'] >
-		top_edge_y( ): ReturnType< ReturnType< $rise_resize_demo['Resize'] >['top_edge_y'] >
-		left_edge_x( ): ReturnType< ReturnType< $rise_resize_demo['Resize'] >['left_edge_x'] >
-		x_stick( ): ReturnType< ReturnType< $rise_resize_demo['Resize'] >['x_stick'] >
-		y_stick( ): ReturnType< ReturnType< $rise_resize_demo['Resize'] >['y_stick'] >
-		bottom_edge_y_stick( ): ReturnType< ReturnType< $rise_resize_demo['Resize'] >['bottom_edge_y_stick'] >
-		right_edge_x_stick( ): ReturnType< ReturnType< $rise_resize_demo['Resize'] >['right_edge_x_stick'] >
-		top_edge_y_stick( ): ReturnType< ReturnType< $rise_resize_demo['Resize'] >['top_edge_y_stick'] >
-		left_edge_x_stick( ): ReturnType< ReturnType< $rise_resize_demo['Resize'] >['left_edge_x_stick'] >
-		stickable( next?: ReturnType< ReturnType< $rise_resize_demo['Resize'] >['stickable'] > ): ReturnType< ReturnType< $rise_resize_demo['Resize'] >['stickable'] >
-		Stickable( ): $mol_check_box
-		content( ): string
-		Content( ): $mol_text
-		sticks_y( ): readonly(any)[]
-		sticks_x( ): readonly(any)[]
-		Resize( ): $rise_resize
-		sticks( ): readonly(any)[]
-		stick_left( id: any): string
-		stick_top( id: any): string
-		sub( ): readonly(any)[]
-		Stick_x( id: any): $mol_view
-		Stick_y( id: any): $mol_view
-		tags( ): readonly(any)[]
-		aspects( ): readonly(any)[]
-	}
-	
-}
-
-//# sourceMappingURL=demo.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $rise_resize_demo extends $.$rise_resize_demo {
-        content(): string;
-        sticks(): $mol_view[];
-        stick_left(x: number): string;
-        stick_top(y: number): string;
-    }
-}
-
-declare namespace $.$$ {
-}
-
-declare namespace $ {
-
-	type $rise_resize_edge__repos_x_rise_resize_ratio_1 = $mol_type_enforce<
-		ReturnType< $rise_resize_ratio['repos_x'] >
-		,
-		ReturnType< $rise_resize_edge['repos_x'] >
-	>
-	type $rise_resize_edge__repos_y_rise_resize_ratio_2 = $mol_type_enforce<
-		ReturnType< $rise_resize_ratio['repos_y'] >
-		,
-		ReturnType< $rise_resize_edge['repos_y'] >
-	>
-	type $rise_resize_edge__on_drag_start_rise_resize_ratio_3 = $mol_type_enforce<
-		ReturnType< $rise_resize_ratio['resize_start'] >
-		,
-		ReturnType< $rise_resize_edge['on_drag_start'] >
-	>
-	type $rise_resize_edge__on_drag_end_rise_resize_ratio_4 = $mol_type_enforce<
-		ReturnType< $rise_resize_ratio['resize_end'] >
-		,
-		ReturnType< $rise_resize_edge['on_drag_end'] >
-	>
-	type $rise_resize_edge__x_rise_resize_ratio_5 = $mol_type_enforce<
-		ReturnType< $rise_resize_ratio['left_top_edge_ratio_x'] >
-		,
-		ReturnType< $rise_resize_edge['x'] >
-	>
-	type $rise_resize_edge__repos_x_rise_resize_ratio_6 = $mol_type_enforce<
-		ReturnType< $rise_resize_ratio['repos_x'] >
-		,
-		ReturnType< $rise_resize_edge['repos_x'] >
-	>
-	type $rise_resize_edge__repos_y_rise_resize_ratio_7 = $mol_type_enforce<
-		ReturnType< $rise_resize_ratio['repos_y'] >
-		,
-		ReturnType< $rise_resize_edge['repos_y'] >
-	>
-	type $rise_resize_edge__on_drag_start_rise_resize_ratio_8 = $mol_type_enforce<
-		ReturnType< $rise_resize_ratio['resize_start'] >
-		,
-		ReturnType< $rise_resize_edge['on_drag_start'] >
-	>
-	type $rise_resize_edge__on_drag_end_rise_resize_ratio_9 = $mol_type_enforce<
-		ReturnType< $rise_resize_ratio['resize_end'] >
-		,
-		ReturnType< $rise_resize_edge['on_drag_end'] >
-	>
-	type $rise_resize_edge__x_rise_resize_ratio_10 = $mol_type_enforce<
-		ReturnType< $rise_resize_ratio['left_bottom_edge_ratio_x'] >
-		,
-		ReturnType< $rise_resize_edge['x'] >
-	>
-	type $rise_resize_edge__repos_x_rise_resize_ratio_11 = $mol_type_enforce<
-		ReturnType< $rise_resize_ratio['repos_x'] >
-		,
-		ReturnType< $rise_resize_edge['repos_x'] >
-	>
-	type $rise_resize_edge__repos_y_rise_resize_ratio_12 = $mol_type_enforce<
-		ReturnType< $rise_resize_ratio['repos_y'] >
-		,
-		ReturnType< $rise_resize_edge['repos_y'] >
-	>
-	type $rise_resize_edge__on_drag_start_rise_resize_ratio_13 = $mol_type_enforce<
-		ReturnType< $rise_resize_ratio['resize_start'] >
-		,
-		ReturnType< $rise_resize_edge['on_drag_start'] >
-	>
-	type $rise_resize_edge__on_drag_end_rise_resize_ratio_14 = $mol_type_enforce<
-		ReturnType< $rise_resize_ratio['resize_end'] >
-		,
-		ReturnType< $rise_resize_edge['on_drag_end'] >
-	>
-	type $rise_resize_edge__x_rise_resize_ratio_15 = $mol_type_enforce<
-		ReturnType< $rise_resize_ratio['right_bottom_edge_ratio_x'] >
-		,
-		ReturnType< $rise_resize_edge['x'] >
-	>
-	type $rise_resize_edge__repos_x_rise_resize_ratio_16 = $mol_type_enforce<
-		ReturnType< $rise_resize_ratio['repos_x'] >
-		,
-		ReturnType< $rise_resize_edge['repos_x'] >
-	>
-	type $rise_resize_edge__repos_y_rise_resize_ratio_17 = $mol_type_enforce<
-		ReturnType< $rise_resize_ratio['repos_y'] >
-		,
-		ReturnType< $rise_resize_edge['repos_y'] >
-	>
-	type $rise_resize_edge__on_drag_start_rise_resize_ratio_18 = $mol_type_enforce<
-		ReturnType< $rise_resize_ratio['resize_start'] >
-		,
-		ReturnType< $rise_resize_edge['on_drag_start'] >
-	>
-	type $rise_resize_edge__on_drag_end_rise_resize_ratio_19 = $mol_type_enforce<
-		ReturnType< $rise_resize_ratio['resize_end'] >
-		,
-		ReturnType< $rise_resize_edge['on_drag_end'] >
-	>
-	type $rise_resize_edge__x_rise_resize_ratio_20 = $mol_type_enforce<
-		ReturnType< $rise_resize_ratio['right_top_edge_ratio_x'] >
-		,
-		ReturnType< $rise_resize_edge['x'] >
-	>
-	type $rise_resize_edge__repos_x_rise_resize_ratio_21 = $mol_type_enforce<
-		ReturnType< $rise_resize_ratio['repos_x'] >
-		,
-		ReturnType< $rise_resize_edge['repos_x'] >
-	>
-	type $rise_resize_edge__repos_y_rise_resize_ratio_22 = $mol_type_enforce<
-		ReturnType< $rise_resize_ratio['repos_y'] >
-		,
-		ReturnType< $rise_resize_edge['repos_y'] >
-	>
-	type $rise_resize_edge__on_drag_start_rise_resize_ratio_23 = $mol_type_enforce<
-		ReturnType< $rise_resize_ratio['resize_start'] >
-		,
-		ReturnType< $rise_resize_edge['on_drag_start'] >
-	>
-	type $rise_resize_edge__on_drag_end_rise_resize_ratio_24 = $mol_type_enforce<
-		ReturnType< $rise_resize_ratio['resize_end'] >
-		,
-		ReturnType< $rise_resize_edge['on_drag_end'] >
-	>
-	type $rise_resize_edge__y_rise_resize_ratio_25 = $mol_type_enforce<
-		ReturnType< $rise_resize_ratio['top_left_edge_ratio_y'] >
-		,
-		ReturnType< $rise_resize_edge['y'] >
-	>
-	type $rise_resize_edge__repos_x_rise_resize_ratio_26 = $mol_type_enforce<
-		ReturnType< $rise_resize_ratio['repos_x'] >
-		,
-		ReturnType< $rise_resize_edge['repos_x'] >
-	>
-	type $rise_resize_edge__repos_y_rise_resize_ratio_27 = $mol_type_enforce<
-		ReturnType< $rise_resize_ratio['repos_y'] >
-		,
-		ReturnType< $rise_resize_edge['repos_y'] >
-	>
-	type $rise_resize_edge__on_drag_start_rise_resize_ratio_28 = $mol_type_enforce<
-		ReturnType< $rise_resize_ratio['resize_start'] >
-		,
-		ReturnType< $rise_resize_edge['on_drag_start'] >
-	>
-	type $rise_resize_edge__on_drag_end_rise_resize_ratio_29 = $mol_type_enforce<
-		ReturnType< $rise_resize_ratio['resize_end'] >
-		,
-		ReturnType< $rise_resize_edge['on_drag_end'] >
-	>
-	type $rise_resize_edge__y_rise_resize_ratio_30 = $mol_type_enforce<
-		ReturnType< $rise_resize_ratio['top_right_edge_ratio_y'] >
-		,
-		ReturnType< $rise_resize_edge['y'] >
-	>
-	type $rise_resize_edge__repos_x_rise_resize_ratio_31 = $mol_type_enforce<
-		ReturnType< $rise_resize_ratio['repos_x'] >
-		,
-		ReturnType< $rise_resize_edge['repos_x'] >
-	>
-	type $rise_resize_edge__repos_y_rise_resize_ratio_32 = $mol_type_enforce<
-		ReturnType< $rise_resize_ratio['repos_y'] >
-		,
-		ReturnType< $rise_resize_edge['repos_y'] >
-	>
-	type $rise_resize_edge__on_drag_start_rise_resize_ratio_33 = $mol_type_enforce<
-		ReturnType< $rise_resize_ratio['resize_start'] >
-		,
-		ReturnType< $rise_resize_edge['on_drag_start'] >
-	>
-	type $rise_resize_edge__on_drag_end_rise_resize_ratio_34 = $mol_type_enforce<
-		ReturnType< $rise_resize_ratio['resize_end'] >
-		,
-		ReturnType< $rise_resize_edge['on_drag_end'] >
-	>
-	type $rise_resize_edge__y_rise_resize_ratio_35 = $mol_type_enforce<
-		ReturnType< $rise_resize_ratio['bottom_left_edge_ratio_y'] >
-		,
-		ReturnType< $rise_resize_edge['y'] >
-	>
-	type $rise_resize_edge__repos_x_rise_resize_ratio_36 = $mol_type_enforce<
-		ReturnType< $rise_resize_ratio['repos_x'] >
-		,
-		ReturnType< $rise_resize_edge['repos_x'] >
-	>
-	type $rise_resize_edge__repos_y_rise_resize_ratio_37 = $mol_type_enforce<
-		ReturnType< $rise_resize_ratio['repos_y'] >
-		,
-		ReturnType< $rise_resize_edge['repos_y'] >
-	>
-	type $rise_resize_edge__on_drag_start_rise_resize_ratio_38 = $mol_type_enforce<
-		ReturnType< $rise_resize_ratio['resize_start'] >
-		,
-		ReturnType< $rise_resize_edge['on_drag_start'] >
-	>
-	type $rise_resize_edge__on_drag_end_rise_resize_ratio_39 = $mol_type_enforce<
-		ReturnType< $rise_resize_ratio['resize_end'] >
-		,
-		ReturnType< $rise_resize_edge['on_drag_end'] >
-	>
-	type $rise_resize_edge__y_rise_resize_ratio_40 = $mol_type_enforce<
-		ReturnType< $rise_resize_ratio['bottom_right_edge_ratio_y'] >
-		,
-		ReturnType< $rise_resize_edge['y'] >
-	>
-	export class $rise_resize_ratio extends $rise_resize {
-		left_top_edge_ratio_x( next?: number ): number
-		Left_top_edge_ratio( ): $rise_resize_edge
-		left_bottom_edge_ratio_x( next?: number ): number
-		Left_bottom_edge_ratio( ): $rise_resize_edge
-		right_bottom_edge_ratio_x( next?: number ): number
-		Right_bottom_edge_ratio( ): $rise_resize_edge
-		right_top_edge_ratio_x( next?: number ): number
-		Right_top_edge_ratio( ): $rise_resize_edge
-		top_left_edge_ratio_y( next?: number ): number
-		Top_left_edge_ratio( ): $rise_resize_edge
-		top_right_edge_ratio_y( next?: number ): number
-		Top_right_edge_ratio( ): $rise_resize_edge
-		bottom_left_edge_ratio_y( next?: number ): number
-		Bottom_left_edge_ratio( ): $rise_resize_edge
-		bottom_right_edge_ratio_y( next?: number ): number
-		Bottom_right_edge_ratio( ): $rise_resize_edge
-		ratio( ): number
-		edges_ratio( ): readonly(any)[]
-	}
-	
-}
-
-//# sourceMappingURL=ratio.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $rise_resize_ratio extends $.$rise_resize_ratio {
-        top_edge_y_by_ratio(): void;
-        bottom_edge_y_by_ratio(): void;
-        left_edge_x_by_ratio(): void;
-        right_edge_x_by_ratio(): void;
-        left_top_edge_ratio_x(next?: number): number;
-        left_bottom_edge_ratio_x(next?: number): number;
-        right_bottom_edge_ratio_x(next?: number): number;
-        top_left_edge_ratio_y(next?: number): number;
-        right_top_edge_ratio_x(next?: number): number;
-        top_right_edge_ratio_y(next?: number): number;
-        bottom_left_edge_ratio_y(next?: number): number;
-        bottom_right_edge_ratio_y(next?: number): number;
-        edges(): readonly (any)[];
-    }
-}
-
-declare namespace $.$$ {
-}
-
-declare namespace $ {
-
-	type $mol_text__text_rise_resize_ratio_demo_1 = $mol_type_enforce<
-		ReturnType< $rise_resize_ratio_demo['content'] >
-		,
-		ReturnType< $mol_text['text'] >
-	>
-	type $rise_resize_ratio__height_min_rise_resize_ratio_demo_2 = $mol_type_enforce<
-		number
-		,
-		ReturnType< $rise_resize_ratio['height_min'] >
-	>
-	type $rise_resize_ratio__width_min_rise_resize_ratio_demo_3 = $mol_type_enforce<
-		number
-		,
-		ReturnType< $rise_resize_ratio['width_min'] >
-	>
-	type $rise_resize_ratio__ratio_rise_resize_ratio_demo_4 = $mol_type_enforce<
-		number
-		,
-		ReturnType< $rise_resize_ratio['ratio'] >
-	>
-	type $rise_resize_ratio__drag_body_rise_resize_ratio_demo_5 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $rise_resize_ratio['drag_body'] >
-	>
-	type $rise_resize_ratio__sticks_y_rise_resize_ratio_demo_6 = $mol_type_enforce<
-		ReturnType< $rise_resize_ratio_demo['sticks_y'] >
-		,
-		ReturnType< $rise_resize_ratio['sticks_y'] >
-	>
-	type $rise_resize_ratio__sticks_x_rise_resize_ratio_demo_7 = $mol_type_enforce<
-		ReturnType< $rise_resize_ratio_demo['sticks_x'] >
-		,
-		ReturnType< $rise_resize_ratio['sticks_x'] >
-	>
-	type $mol_view__style_rise_resize_ratio_demo_8 = $mol_type_enforce<
-		({ 
-			'left': ReturnType< $rise_resize_ratio_demo['stick_left'] >,
-		}) 
-		,
-		ReturnType< $mol_view['style'] >
-	>
-	type $mol_view__style_rise_resize_ratio_demo_9 = $mol_type_enforce<
-		({ 
-			'top': ReturnType< $rise_resize_ratio_demo['stick_top'] >,
-		}) 
-		,
-		ReturnType< $mol_view['style'] >
-	>
-	export class $rise_resize_ratio_demo extends $mol_example_small {
-		height( ): ReturnType< ReturnType< $rise_resize_ratio_demo['Resize'] >['height'] >
-		width( ): ReturnType< ReturnType< $rise_resize_ratio_demo['Resize'] >['width'] >
-		top( ): ReturnType< ReturnType< $rise_resize_ratio_demo['Resize'] >['top'] >
-		left( ): ReturnType< ReturnType< $rise_resize_ratio_demo['Resize'] >['left'] >
-		x( ): ReturnType< ReturnType< $rise_resize_ratio_demo['Resize'] >['x'] >
-		y( ): ReturnType< ReturnType< $rise_resize_ratio_demo['Resize'] >['y'] >
-		bottom_edge_y( ): ReturnType< ReturnType< $rise_resize_ratio_demo['Resize'] >['bottom_edge_y'] >
-		right_edge_x( ): ReturnType< ReturnType< $rise_resize_ratio_demo['Resize'] >['right_edge_x'] >
-		top_edge_y( ): ReturnType< ReturnType< $rise_resize_ratio_demo['Resize'] >['top_edge_y'] >
-		left_edge_x( ): ReturnType< ReturnType< $rise_resize_ratio_demo['Resize'] >['left_edge_x'] >
-		x_stick( ): ReturnType< ReturnType< $rise_resize_ratio_demo['Resize'] >['x_stick'] >
-		y_stick( ): ReturnType< ReturnType< $rise_resize_ratio_demo['Resize'] >['y_stick'] >
-		bottom_edge_y_stick( ): ReturnType< ReturnType< $rise_resize_ratio_demo['Resize'] >['bottom_edge_y_stick'] >
-		right_edge_x_stick( ): ReturnType< ReturnType< $rise_resize_ratio_demo['Resize'] >['right_edge_x_stick'] >
-		top_edge_y_stick( ): ReturnType< ReturnType< $rise_resize_ratio_demo['Resize'] >['top_edge_y_stick'] >
-		left_edge_x_stick( ): ReturnType< ReturnType< $rise_resize_ratio_demo['Resize'] >['left_edge_x_stick'] >
-		content( ): string
-		Content( ): $mol_text
-		sticks_y( ): readonly(any)[]
-		sticks_x( ): readonly(any)[]
-		Resize( ): $rise_resize_ratio
-		sticks( ): readonly(any)[]
-		stick_left( id: any): string
-		stick_top( id: any): string
-		sub( ): readonly(any)[]
-		Stick_x( id: any): $mol_view
-		Stick_y( id: any): $mol_view
-		tags( ): readonly(any)[]
-		aspects( ): readonly(any)[]
-	}
-	
-}
-
-//# sourceMappingURL=demo.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $rise_resize_ratio_demo extends $.$rise_resize_ratio_demo {
-        content(): string;
-        sticks(): $mol_view[];
-        stick_left(x: number): string;
-        stick_top(y: number): string;
-    }
-}
-
-declare namespace $.$$ {
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
-
-	export class $rise_toggle extends $mol_check {
-		minimal_height( ): number
-		minimal_width( ): number
-		sub( ): readonly(any)[]
-	}
-	
-}
-
-//# sourceMappingURL=toggle.view.tree.d.ts.map
-declare namespace $ {
-
-	export class $rise_toggle_demo extends $mol_example_small {
-		Toggle( ): $rise_toggle
-		sub( ): readonly(any)[]
-		tags( ): readonly(any)[]
-		aspects( ): readonly(any)[]
-	}
-	
-}
-
-//# sourceMappingURL=demo.view.tree.d.ts.map
-declare namespace $ {
-
-	type $mol_view__sub_rise_range_1 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_view['sub'] >
-	>
-	type $mol_view__sub_rise_range_2 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_view['sub'] >
-	>
-	type $mol_view__sub_rise_range_3 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_view['sub'] >
-	>
-	type $mol_view__sub_rise_range_4 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_view['sub'] >
-	>
-	type $rise_range_input__disabled_rise_range_5 = $mol_type_enforce<
-		ReturnType< $rise_range['disabled'] >
-		,
-		ReturnType< $rise_range_input['disabled'] >
-	>
-	type $rise_range_input__min_rise_range_6 = $mol_type_enforce<
-		ReturnType< $rise_range['min'] >
-		,
-		ReturnType< $rise_range_input['min'] >
-	>
-	type $rise_range_input__max_rise_range_7 = $mol_type_enforce<
-		ReturnType< $rise_range['max'] >
-		,
-		ReturnType< $rise_range_input['max'] >
-	>
-	type $rise_range_input__step_rise_range_8 = $mol_type_enforce<
-		ReturnType< $rise_range['step'] >
-		,
-		ReturnType< $rise_range_input['step'] >
-	>
-	type $rise_range_input__value_rise_range_9 = $mol_type_enforce<
-		ReturnType< $rise_range['value'] >
-		,
-		ReturnType< $rise_range_input['value'] >
-	>
-	type $rise_range_input__event_input_rise_range_10 = $mol_type_enforce<
-		ReturnType< $rise_range['event_input'] >
-		,
-		ReturnType< $rise_range_input['event_input'] >
-	>
-	type $rise_range_value__sub_rise_range_11 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $rise_range_value['sub'] >
-	>
-	type $rise_range_value__disabled_rise_range_12 = $mol_type_enforce<
-		ReturnType< $rise_range['disabled'] >
-		,
-		ReturnType< $rise_range_value['disabled'] >
-	>
-	type $mol_view__sub_rise_range_13 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_view['sub'] >
-	>
-	export class $rise_range extends $mol_view {
-		label_min( ): string
-		Min( ): $mol_view
-		label_medium( ): string
-		Medium( ): $mol_view
-		label_max( ): string
-		Max( ): $mol_view
-		Labels( ): $mol_view
-		disabled( ): boolean
-		min( next?: number ): number
-		max( next?: number ): number
-		step( next?: number ): number
-		value( next?: number ): number
-		event_input( next?: any ): any
-		Input( ): $rise_range_input
-		Value( ): $rise_range_value
-		Current( ): $mol_view
-		percent( ): string
-		minimal_height( ): number
-		unit( ): string
-		medium( next?: number ): number
-		enabled( ): boolean
-		sub( ): readonly(any)[]
-		attr( ): ({ 
-			'disabled': ReturnType< $rise_range['disabled'] >,
-		})  & ReturnType< $mol_view['attr'] >
-		style( ): ({ 
-			'--rise_range_percent': ReturnType< $rise_range['percent'] >,
-		})  & ReturnType< $mol_view['style'] >
-	}
-	
-	export class $rise_range_input extends $mol_view {
-		disabled( ): boolean
-		min( next?: number ): number
-		max( next?: number ): number
-		step( next?: number ): number
-		value( next?: number ): number
-		event_input( next?: any ): any
-		dom_name( ): string
-		attr( ): ({ 
-			'type': string,
-			'disabled': ReturnType< $rise_range_input['disabled'] >,
-		})  & ReturnType< $mol_view['attr'] >
-		field( ): ({ 
-			'min': ReturnType< $rise_range_input['min'] >,
-			'max': ReturnType< $rise_range_input['max'] >,
-			'step': ReturnType< $rise_range_input['step'] >,
-			'value': ReturnType< $rise_range_input['value'] >,
-		})  & ReturnType< $mol_view['field'] >
-		event( ): ({ 
-			input( next?: ReturnType< $rise_range_input['event_input'] > ): ReturnType< $rise_range_input['event_input'] >,
-		})  & ReturnType< $mol_view['event'] >
-	}
-	
-	export class $rise_range_value extends $mol_view {
-		disabled( ): boolean
-		attr( ): ({ 
-			'disabled': ReturnType< $rise_range_value['disabled'] >,
-		})  & ReturnType< $mol_view['attr'] >
-	}
-	
-}
-
-//# sourceMappingURL=range.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $rise_range extends $.$rise_range {
-        event_input(event: Event): void;
-        medium(): number;
-        label_min(): string;
-        label_max(): string;
-        label_medium(): string;
-        percent(): string;
-        disabled(): boolean;
-    }
-}
-
-declare namespace $.$$ {
-}
-
-declare namespace $ {
-
-	type $mol_number__value_rise_range_demo_1 = $mol_type_enforce<
-		ReturnType< $rise_range_demo['value'] >
-		,
-		ReturnType< $mol_number['value'] >
-	>
-	type $mol_number__value_min_rise_range_demo_2 = $mol_type_enforce<
-		ReturnType< $rise_range_demo['min'] >
-		,
-		ReturnType< $mol_number['value_min'] >
-	>
-	type $mol_number__value_max_rise_range_demo_3 = $mol_type_enforce<
-		ReturnType< $rise_range_demo['max'] >
-		,
-		ReturnType< $mol_number['value_max'] >
-	>
-	type $rise_range__value_rise_range_demo_4 = $mol_type_enforce<
-		ReturnType< $rise_range_demo['value'] >
-		,
-		ReturnType< $rise_range['value'] >
-	>
-	type $rise_range__min_rise_range_demo_5 = $mol_type_enforce<
-		ReturnType< $rise_range_demo['min'] >
-		,
-		ReturnType< $rise_range['min'] >
-	>
-	type $rise_range__max_rise_range_demo_6 = $mol_type_enforce<
-		ReturnType< $rise_range_demo['max'] >
-		,
-		ReturnType< $rise_range['max'] >
-	>
-	type $rise_range__value_rise_range_demo_7 = $mol_type_enforce<
-		ReturnType< $rise_range_demo['value'] >
-		,
-		ReturnType< $rise_range['value'] >
-	>
-	type $rise_range__disabled_rise_range_demo_8 = $mol_type_enforce<
-		boolean
-		,
-		ReturnType< $rise_range['disabled'] >
-	>
-	type $rise_range__min_rise_range_demo_9 = $mol_type_enforce<
-		ReturnType< $rise_range_demo['min'] >
-		,
-		ReturnType< $rise_range['min'] >
-	>
-	type $rise_range__max_rise_range_demo_10 = $mol_type_enforce<
-		ReturnType< $rise_range_demo['max'] >
-		,
-		ReturnType< $rise_range['max'] >
-	>
-	type $mol_list__sub_rise_range_demo_11 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_list['sub'] >
-	>
-	export class $rise_range_demo extends $mol_example_small {
-		Number( ): $mol_number
-		value( next?: number ): number
-		min( ): number
-		max( ): number
-		Range( ): $rise_range
-		Range_disabled( ): $rise_range
-		List( ): $mol_list
-		sub( ): readonly(any)[]
-		tags( ): readonly(any)[]
-		aspects( ): readonly(any)[]
-	}
-	
-}
-
-//# sourceMappingURL=demo.view.tree.d.ts.map
-declare namespace $ {
-
-	type $mol_view__sub_rise_radio_1 = $mol_type_enforce<
-		ReturnType< $rise_radio['circle_inner'] >
-		,
-		ReturnType< $mol_view['sub'] >
-	>
-	export class $rise_radio extends $mol_switch {
-		Circle_inner( id: any): $mol_view
-		circle_inner( id: any): readonly(any)[]
-		Circle( id: any): $mol_view
-		option_label( id: any): readonly(any)[]
-	}
-	
-}
-
-//# sourceMappingURL=radio.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $rise_radio extends $.$rise_radio {
-        circle_inner(id: any): readonly any[];
-    }
-}
-
-declare namespace $.$$ {
-}
-
-declare namespace $ {
-
-	type $rise_radio__options_rise_radio_demo_1 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $rise_radio['options'] >
-	>
-	export class $rise_radio_demo extends $mol_example_small {
-		Radio( ): $rise_radio
-		sub( ): readonly(any)[]
-		tags( ): readonly(any)[]
-		aspects( ): readonly(any)[]
-	}
-	
-}
-
-//# sourceMappingURL=demo.view.tree.d.ts.map
-declare namespace $ {
-    class $mol_media extends $mol_object2 {
-        static match(query: string, next?: boolean): boolean;
-    }
-}
-
-declare namespace $ {
-    /**
-     * Switcher between light/dark themes (usually for `mol_theme_auto` plugin).
-     * @see https://mol.hyoo.ru/#!section=demos/demo=mol_lights_demo
-     */
-    function $mol_lights(this: $, next?: boolean): boolean;
-}
-
-declare namespace $ {
-
-	export class $mol_theme_auto extends $mol_plugin {
-		dark( ): string
-		theme( ): ReturnType< $mol_theme_auto['dark'] >
-		light( ): string
-		attr( ): ({ 
-			'mol_theme': ReturnType< $mol_theme_auto['theme'] >,
-		}) 
-	}
-	
-}
-
-//# sourceMappingURL=auto.view.tree.d.ts.map
-declare namespace $.$$ {
-    /**
-     * The [plugin](../../plugin/readme.md) which defines theme based on [mol_lights](../../lights/readme.md).
-     * @see https://mol.hyoo.ru/#!section=demos/demo=mol_lights_demo
-     */
-    class $mol_theme_auto extends $.$mol_theme_auto {
-        theme(): string;
-    }
-}
-
-declare namespace $ {
-
-	type $mol_tag_tree__ids_tags_mol_tag_tree_1 = $mol_type_enforce<
-		ReturnType< $mol_tag_tree['ids_tags'] >
-		,
-		ReturnType< $mol_tag_tree['ids_tags'] >
-	>
-	type $mol_tag_tree__path_mol_tag_tree_2 = $mol_type_enforce<
-		ReturnType< $mol_tag_tree['tag_path'] >
-		,
-		ReturnType< $mol_tag_tree['path'] >
-	>
-	type $mol_tag_tree__Item_mol_tag_tree_3 = $mol_type_enforce<
-		ReturnType< $mol_tag_tree['Item'] >
-		,
-		ReturnType< $mol_tag_tree['Item'] >
-	>
-	type $mol_tag_tree__item_title_mol_tag_tree_4 = $mol_type_enforce<
-		ReturnType< $mol_tag_tree['item_title'] >
-		,
-		ReturnType< $mol_tag_tree['item_title'] >
-	>
-	type $mol_tag_tree__tag_expanded_mol_tag_tree_5 = $mol_type_enforce<
-		ReturnType< $mol_tag_tree['tag_expanded'] >
-		,
-		ReturnType< $mol_tag_tree['tag_expanded'] >
-	>
-	type $mol_tag_tree__tag_name_mol_tag_tree_6 = $mol_type_enforce<
-		ReturnType< $mol_tag_tree['tag_name'] >
-		,
-		ReturnType< $mol_tag_tree['tag_name'] >
-	>
-	type $mol_tag_tree_sub__7 = $mol_type_enforce<
-		ReturnType< $mol_tag_tree['tag_list'] >[number]
-		,
-		$mol_view
-	>
-	type $mol_tag_tree_sub__8 = $mol_type_enforce<
-		ReturnType< $mol_tag_tree['item_list'] >[number]
-		,
-		$mol_view
-	>
-	type $mol_view__sub_mol_tag_tree_9 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_view['sub'] >
-	>
-	type $mol_expander__expandable_mol_tag_tree_10 = $mol_type_enforce<
-		boolean
-		,
-		ReturnType< $mol_expander['expandable'] >
-	>
-	type $mol_expander__expanded_mol_tag_tree_11 = $mol_type_enforce<
-		ReturnType< $mol_tag_tree['tag_expanded'] >
-		,
-		ReturnType< $mol_expander['expanded'] >
-	>
-	type $mol_expander__title_mol_tag_tree_12 = $mol_type_enforce<
-		ReturnType< $mol_tag_tree['tag_name'] >
-		,
-		ReturnType< $mol_expander['title'] >
-	>
-	type $mol_expander__content_mol_tag_tree_13 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_expander['content'] >
-	>
-	export class $mol_tag_tree extends $mol_list {
-		tag_list( ): readonly($mol_view)[]
-		item_list( ): readonly($mol_view)[]
-		item_title( id: any): string
-		tag_expanded( id: any, next?: boolean ): boolean
-		tag_name( id: any): string
-		tag_path( id: any): readonly(string)[]
-		Tag_tree( id: any): $mol_tag_tree
-		path( ): readonly(string)[]
-		ids_tags( ): Record<string, any>
-		ids( ): readonly(any)[]
-		tags( ): readonly(string)[]
-		levels_expanded( ): number
-		sub( ): readonly($mol_view)[]
-		Item( id: any): $mol_view
-		Tag( id: any): $mol_expander
-	}
-	
-}
-
-//# sourceMappingURL=tree.view.tree.d.ts.map
-declare namespace $.$$ {
-    /**
-     * @see https://mol.hyoo.ru/#!section=demos/demo=mol_tag_tree_demo
-     */
-    class $mol_tag_tree extends $.$mol_tag_tree {
-        ids(): string[];
-        item_list(): $mol_view[];
-        tags(): string[];
-        tag_list(): $.$mol_expander[];
-        tag_path(id: string): string[];
-        tag_expanded(id: readonly string[], next?: boolean): boolean;
-        tag_expanded_default(id: readonly string[]): boolean;
-        tag_name(id: string): string;
-        item_title(id: readonly string[]): string;
-    }
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
-
-	type $mol_search__query_mol_app_demo_menu_1 = $mol_type_enforce<
-		ReturnType< $mol_app_demo_menu['filter'] >
-		,
-		ReturnType< $mol_search['query'] >
-	>
-	type $mol_tag_tree__Item_mol_app_demo_menu_2 = $mol_type_enforce<
-		ReturnType< $mol_app_demo_menu['Option'] >
-		,
-		ReturnType< $mol_tag_tree['Item'] >
-	>
-	type $mol_tag_tree__ids_tags_mol_app_demo_menu_3 = $mol_type_enforce<
-		ReturnType< $mol_app_demo_menu['ids_tags'] >
-		,
-		ReturnType< $mol_tag_tree['ids_tags'] >
-	>
-	type $mol_tag_tree__levels_expanded_mol_app_demo_menu_4 = $mol_type_enforce<
-		ReturnType< $mol_app_demo_menu['levels_expanded'] >
-		,
-		ReturnType< $mol_tag_tree['levels_expanded'] >
-	>
-	type $mol_dimmer__haystack_mol_app_demo_menu_5 = $mol_type_enforce<
-		ReturnType< $mol_app_demo_menu['option_title'] >
-		,
-		ReturnType< $mol_dimmer['haystack'] >
-	>
-	type $mol_dimmer__needle_mol_app_demo_menu_6 = $mol_type_enforce<
-		ReturnType< $mol_app_demo_menu['filter'] >
-		,
-		ReturnType< $mol_dimmer['needle'] >
-	>
-	type $mol_link__arg_mol_app_demo_menu_7 = $mol_type_enforce<
-		ReturnType< $mol_app_demo_menu['option_arg'] >
-		,
-		ReturnType< $mol_link['arg'] >
-	>
-	type $mol_link__sub_mol_app_demo_menu_8 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_link['sub'] >
-	>
-	export class $mol_app_demo_menu extends $mol_page {
-		filter( next?: string ): string
-		Filter( ): $mol_search
-		ids_tags( ): Record<string, any>
-		levels_expanded_default( ): number
-		levels_expanded( ): ReturnType< $mol_app_demo_menu['levels_expanded_default'] >
-		Tree( ): $mol_tag_tree
-		option_arg( id: any): Record<string, any>
-		option_title( id: any): string
-		Option_title( id: any): $mol_dimmer
-		names( ): readonly(string)[]
-		widget_tags( id: any): readonly(string)[]
-		widget_aspects( id: any): readonly(string)[]
-		widget_title( id: any): string
-		search_start( next?: any ): any
-		body( ): readonly(any)[]
-		Option( id: any): $mol_link
-	}
-	
-}
-
-//# sourceMappingURL=menu.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $mol_app_demo_menu extends $.$mol_app_demo_menu {
-        filter(next?: string): string;
-        option_arg(id: readonly string[]): {
-            demo: string | undefined;
-        };
-        option_title(path_id: readonly string[]): string;
-        search_start(event?: Event): void;
-        /** Filter string not empty and ends with space */
-        filter_last_word_completed(): boolean;
-        /** Filter string uniq words */
-        filter_words(): string[];
-        ids_tags(): Record<string, string[]>;
-        tags_filtered(): string[];
-        filter_suggests(): string[];
-        levels_expanded(): number;
-        names_filtered(): string[];
-    }
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
-
-	export class $mol_icon_brightness_4 extends $mol_icon {
-		path( ): string
-	}
-	
-}
-
-//# sourceMappingURL=4.view.tree.d.ts.map
-declare namespace $ {
-
-	export class $mol_lights_toggle extends $mol_check_icon {
-		Lights_icon( ): $mol_icon_brightness_4
-		lights( next?: boolean ): boolean
-		Icon( ): ReturnType< $mol_lights_toggle['Lights_icon'] >
-		hint( ): string
-		checked( next?: ReturnType< $mol_lights_toggle['lights'] > ): ReturnType< $mol_lights_toggle['lights'] >
-	}
-	
-}
-
-//# sourceMappingURL=toggle.view.tree.d.ts.map
-declare namespace $.$$ {
-    /**
-     * Toggle for Switcher between light/dark themes (usually for `mol_theme_auto` plugin).
-     * @see https://mol.hyoo.ru/#!section=demos/demo=mol_lights_demo
-     */
-    class $mol_lights_toggle extends $.$mol_lights_toggle {
-        lights(next?: boolean): boolean;
-    }
-}
-
-declare namespace $ {
-
-	export class $mol_icon_forum extends $mol_icon {
-		path( ): string
-	}
-	
-}
-
-//# sourceMappingURL=forum.view.tree.d.ts.map
-declare namespace $ {
-
-	export class $mol_icon_forum_outline extends $mol_icon {
-		path( ): string
-	}
-	
-}
-
-//# sourceMappingURL=outline.view.tree.d.ts.map
-declare namespace $ {
-
-	export class $mol_icon_open_in_new extends $mol_icon {
-		path( ): string
-	}
-	
-}
-
-//# sourceMappingURL=new.view.tree.d.ts.map
-declare namespace $ {
-
-	type $mol_link__uri_mol_chat_1 = $mol_type_enforce<
-		ReturnType< $mol_chat['standalone'] >
-		,
-		ReturnType< $mol_link['uri'] >
-	>
-	type $mol_link__sub_mol_chat_2 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_link['sub'] >
-	>
-	type $mol_link__arg_mol_chat_3 = $mol_type_enforce<
-		({ 
-			'mol_chat': any,
-		}) 
-		,
-		ReturnType< $mol_link['arg'] >
-	>
-	type $mol_link__sub_mol_chat_4 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_link['sub'] >
-	>
-	type $mol_frame__uri_mol_chat_5 = $mol_type_enforce<
-		ReturnType< $mol_chat['embed'] >
-		,
-		ReturnType< $mol_frame['uri'] >
-	>
-	type $mol_page__title_mol_chat_6 = $mol_type_enforce<
-		ReturnType< $mol_chat['title'] >
-		,
-		ReturnType< $mol_page['title'] >
-	>
-	type $mol_page__tools_mol_chat_7 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_page['tools'] >
-	>
-	type $mol_page__Body_mol_chat_8 = $mol_type_enforce<
-		ReturnType< $mol_chat['Embed'] >
-		,
-		ReturnType< $mol_page['Body'] >
-	>
-	export class $mol_chat extends $mol_link {
-		Icon( ): $mol_icon_forum_outline
-		title( ): string
-		standalone( ): string
-		Standalone_icon( ): $mol_icon_open_in_new
-		Esternal( ): $mol_link
-		Close_icon( ): $mol_icon_close
-		Close( ): $mol_link
-		embed( ): string
-		Embed( ): $mol_frame
-		Page( ): $mol_page
-		seed( ): string
-		opened( ): boolean
-		arg( ): ({ 
-			'mol_chat': string,
-		}) 
-		hint( ): ReturnType< $mol_chat['title'] >
-		sub( ): readonly(any)[]
-		pages( ): readonly(any)[]
-	}
-	
-}
-
-//# sourceMappingURL=chat.view.tree.d.ts.map
-declare namespace $.$$ {
-    /**
-     * Button to open embedded chat.
-     * @see https://mol.hyoo.ru/#!section=demos/demo=mol_chat_demo
-     */
-    class $mol_chat extends $.$mol_chat {
-        opened(): boolean;
-        pages(): $mol_page[];
-        standalone(): string;
-        embed(): string;
-    }
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
-
-	export class $mol_icon_settings extends $mol_icon {
-		path( ): string
-	}
-	
-}
-
-//# sourceMappingURL=settings.view.tree.d.ts.map
-declare namespace $ {
-
-	type $mol_check_icon__checked_mol_app_demo_detail_1 = $mol_type_enforce<
-		ReturnType< $mol_app_demo_detail['readme'] >
-		,
-		ReturnType< $mol_check_icon['checked'] >
-	>
-	type $mol_check_icon__hint_mol_app_demo_detail_2 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $mol_check_icon['hint'] >
-	>
-	type $mol_check_icon__Icon_mol_app_demo_detail_3 = $mol_type_enforce<
-		ReturnType< $mol_app_demo_detail['readme_icon'] >
-		,
-		ReturnType< $mol_check_icon['Icon'] >
-	>
-	type $mol_chat__seed_mol_app_demo_detail_4 = $mol_type_enforce<
-		ReturnType< $mol_app_demo_detail['chat_seed'] >
-		,
-		ReturnType< $mol_chat['seed'] >
-	>
-	type $mol_speck__value_mol_app_demo_detail_5 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $mol_speck['value'] >
-	>
-	type $mol_link__hint_mol_app_demo_detail_6 = $mol_type_enforce<
-		ReturnType< $mol_app_demo_detail['edit_hint'] >
-		,
-		ReturnType< $mol_link['hint'] >
-	>
-	type $mol_link__sub_mol_app_demo_detail_7 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_link['sub'] >
-	>
-	type $mol_link__uri_mol_app_demo_detail_8 = $mol_type_enforce<
-		ReturnType< $mol_app_demo_detail['edit_uri'] >
-		,
-		ReturnType< $mol_link['uri'] >
-	>
-	type $mol_link__hint_mol_app_demo_detail_9 = $mol_type_enforce<
-		ReturnType< $mol_app_demo_detail['close_hint'] >
-		,
-		ReturnType< $mol_link['hint'] >
-	>
-	type $mol_link__sub_mol_app_demo_detail_10 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_link['sub'] >
-	>
-	type $mol_link__arg_mol_app_demo_detail_11 = $mol_type_enforce<
-		ReturnType< $mol_app_demo_detail['close_arg'] >
-		,
-		ReturnType< $mol_link['arg'] >
-	>
-	export class $mol_app_demo_detail extends $mol_page {
-		readme( next?: boolean ): boolean
-		readme_icon( ): $mol_icon_information_outline
-		Readme( ): $mol_check_icon
-		chat_pages( ): ReturnType< ReturnType< $mol_app_demo_detail['Chat'] >['pages'] >
-		chat_seed( ): string
-		Chat( ): $mol_chat
-		edit_hint( ): string
-		Edit_speck( ): $mol_speck
-		Edit_icon( ): $mol_icon_settings
-		edit_uri( ): string
-		Edit( ): $mol_link
-		close_hint( ): string
-		Close_icon( ): $mol_icon_close
-		close_arg( ): ({ 
-			'demo': any,
-		}) 
-		Close( ): $mol_link
-		Demo( ): $mol_view
-		description( ): string
-		tools( ): readonly(any)[]
-		body( ): readonly(any)[]
-	}
-	
-}
-
-//# sourceMappingURL=detail.view.tree.d.ts.map
-declare namespace $ {
-}
-
-declare namespace $ {
-
-	export class $mol_example_large extends $mol_example {
-	}
-	
-}
-
-//# sourceMappingURL=large.view.tree.d.ts.map
-declare namespace $ {
-
-	type $mol_link_source__uri_mol_app_demo_readme_1 = $mol_type_enforce<
-		ReturnType< $mol_app_demo_readme['source_link'] >
-		,
-		ReturnType< $mol_link_source['uri'] >
-	>
-	type $mol_link_source__hint_mol_app_demo_readme_2 = $mol_type_enforce<
-		ReturnType< $mol_app_demo_readme['source_hint'] >
-		,
-		ReturnType< $mol_link_source['hint'] >
-	>
-	type $mol_button_minor__hint_mol_app_demo_readme_3 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $mol_button_minor['hint'] >
-	>
-	type $mol_button_minor__sub_mol_app_demo_readme_4 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_button_minor['sub'] >
-	>
-	type $mol_button_minor__click_mol_app_demo_readme_5 = $mol_type_enforce<
-		ReturnType< $mol_app_demo_readme['close'] >
-		,
-		ReturnType< $mol_button_minor['click'] >
-	>
-	type $mol_text__text_mol_app_demo_readme_6 = $mol_type_enforce<
-		ReturnType< $mol_app_demo_readme['readme'] >
-		,
-		ReturnType< $mol_text['text'] >
-	>
-	type $mol_text__uri_base_mol_app_demo_readme_7 = $mol_type_enforce<
-		ReturnType< $mol_app_demo_readme['uri_base'] >
-		,
-		ReturnType< $mol_text['uri_base'] >
-	>
-	type $mol_view__sub_mol_app_demo_readme_8 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_view['sub'] >
-	>
-	export class $mol_app_demo_readme extends $mol_page {
-		source_link( ): string
-		source_hint( ): string
-		Source_link( ): $mol_link_source
-		Close_icon( ): $mol_icon_close
-		close( next?: any ): any
-		Close( ): $mol_button_minor
-		readme( ): string
-		uri_base( next?: string ): string
-		Not_found_caption( ): string
-		readme_link_template( ): string
-		source_link_template( ): string
-		repo( ): string
-		module( ): readonly(string)[]
-		title( ): string
-		opened( next?: boolean ): boolean
-		tools( ): readonly(any)[]
-		Readme( ): $mol_text
-		Not_found( ): $mol_view
-	}
-	
-}
-
-//# sourceMappingURL=readme.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $mol_app_demo_readme_not_found_error extends Error {
-        module: readonly string[];
-        constructor(module: readonly string[]);
-    }
-    class $mol_app_demo_readme extends $.$mol_app_demo_readme {
-        close(): void;
-        link(template: string, repo: string, module: readonly string[]): string;
-        uri_base(next?: string): string;
-        source_link(): string;
-        readme(): string;
-        body(): $mol_view[];
-    }
-}
-
-declare namespace $ {
-
-	type $mol_link_source__uri_mol_app_demo_main_1 = $mol_type_enforce<
-		ReturnType< $mol_app_demo_main['project_uri'] >
-		,
-		ReturnType< $mol_link_source['uri'] >
-	>
-	type $mol_text__text_mol_app_demo_main_2 = $mol_type_enforce<
-		ReturnType< $mol_app_demo_main['description'] >
-		,
-		ReturnType< $mol_text['text'] >
-	>
-	type $mol_text__uri_base_mol_app_demo_main_3 = $mol_type_enforce<
-		ReturnType< $mol_app_demo_main['project_uri'] >
-		,
-		ReturnType< $mol_text['uri_base'] >
-	>
-	export class $mol_app_demo_main extends $mol_page {
-		Lights( ): $mol_lights_toggle
-		project_uri( ): string
-		Project( ): $mol_link_source
-		description( ): string
-		Description( ): $mol_text
-		minimal_width( ): number
-		title( ): string
-		tools( ): readonly(any)[]
-		body( ): readonly(any)[]
-	}
-	
-}
-
-//# sourceMappingURL=main.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $mol_app_demo_main extends $.$mol_app_demo_main {
-        description(): string;
-    }
-}
-
-declare namespace $ {
-
-	type $mol_hotkey__key_mol_app_demo_1 = $mol_type_enforce<
-		({ 
-			F( next?: ReturnType< $mol_app_demo['search_start'] > ): ReturnType< $mol_app_demo['search_start'] >,
-		}) 
-		,
-		ReturnType< $mol_hotkey['key'] >
-	>
-	type $mol_hotkey__mod_ctrl_mol_app_demo_2 = $mol_type_enforce<
-		boolean
-		,
-		ReturnType< $mol_hotkey['mod_ctrl'] >
-	>
-	type __mol_app_demo_3 = $mol_type_enforce<
-		Parameters< $mol_app_demo['search_start'] >[0]
-		,
-		Parameters< ReturnType< $mol_app_demo['Menu'] >['search_start'] >[0]
-	>
-	type $mol_link_source__uri_mol_app_demo_4 = $mol_type_enforce<
-		ReturnType< $mol_app_demo['sources_uri'] >
-		,
-		ReturnType< $mol_link_source['uri'] >
-	>
-	type __mol_app_demo_5 = $mol_type_enforce<
-		Parameters< $mol_app_demo['chat_pages'] >[0]
-		,
-		Parameters< $mol_app_demo['Detail'] >[0]
-	>
-	type $mol_app_demo_menu__title_mol_app_demo_6 = $mol_type_enforce<
-		ReturnType< $mol_app_demo['menu_title'] >
-		,
-		ReturnType< $mol_app_demo_menu['title'] >
-	>
-	type $mol_app_demo_menu__names_mol_app_demo_7 = $mol_type_enforce<
-		ReturnType< $mol_app_demo['names'] >
-		,
-		ReturnType< $mol_app_demo_menu['names'] >
-	>
-	type $mol_app_demo_menu__widget_tags_mol_app_demo_8 = $mol_type_enforce<
-		ReturnType< $mol_app_demo['widget_tags'] >
-		,
-		ReturnType< $mol_app_demo_menu['widget_tags'] >
-	>
-	type $mol_app_demo_menu__widget_aspects_mol_app_demo_9 = $mol_type_enforce<
-		ReturnType< $mol_app_demo['widget_aspects'] >
-		,
-		ReturnType< $mol_app_demo_menu['widget_aspects'] >
-	>
-	type $mol_app_demo_menu__widget_title_mol_app_demo_10 = $mol_type_enforce<
-		ReturnType< $mol_app_demo['widget_title'] >
-		,
-		ReturnType< $mol_app_demo_menu['widget_title'] >
-	>
-	type $mol_app_demo_menu__tools_mol_app_demo_11 = $mol_type_enforce<
-		ReturnType< $mol_app_demo['tools'] >
-		,
-		ReturnType< $mol_app_demo_menu['tools'] >
-	>
-	type $mol_app_demo_detail__chat_seed_mol_app_demo_12 = $mol_type_enforce<
-		ReturnType< $mol_app_demo['chat_seed'] >
-		,
-		ReturnType< $mol_app_demo_detail['chat_seed'] >
-	>
-	type $mol_app_demo_detail__title_mol_app_demo_13 = $mol_type_enforce<
-		ReturnType< $mol_app_demo['detail_title'] >
-		,
-		ReturnType< $mol_app_demo_detail['title'] >
-	>
-	type $mol_app_demo_detail__description_mol_app_demo_14 = $mol_type_enforce<
-		ReturnType< $mol_app_demo['detail_description'] >
-		,
-		ReturnType< $mol_app_demo_detail['description'] >
-	>
-	type $mol_app_demo_detail__edit_uri_mol_app_demo_15 = $mol_type_enforce<
-		ReturnType< $mol_app_demo['edit_uri'] >
-		,
-		ReturnType< $mol_app_demo_detail['edit_uri'] >
-	>
-	type $mol_app_demo_detail__readme_mol_app_demo_16 = $mol_type_enforce<
-		ReturnType< $mol_app_demo['readme_page'] >
-		,
-		ReturnType< $mol_app_demo_detail['readme'] >
-	>
-	type $mol_app_demo_detail__Demo_mol_app_demo_17 = $mol_type_enforce<
-		ReturnType< $mol_app_demo['Demo'] >
-		,
-		ReturnType< $mol_app_demo_detail['Demo'] >
-	>
-	type $mol_app_demo_readme__repo_mol_app_demo_18 = $mol_type_enforce<
-		ReturnType< $mol_app_demo['repo'] >
-		,
-		ReturnType< $mol_app_demo_readme['repo'] >
-	>
-	type $mol_app_demo_readme__opened_mol_app_demo_19 = $mol_type_enforce<
-		ReturnType< $mol_app_demo['readme_page'] >
-		,
-		ReturnType< $mol_app_demo_readme['opened'] >
-	>
-	type $mol_app_demo_readme__module_mol_app_demo_20 = $mol_type_enforce<
-		ReturnType< $mol_app_demo['module'] >
-		,
-		ReturnType< $mol_app_demo_readme['module'] >
-	>
-	type $mol_status__sub_mol_app_demo_21 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_status['sub'] >
-	>
-	export class $mol_app_demo extends $mol_book2 {
-		detail_title( ): string
-		Theme( ): $mol_theme_auto
-		Search_start( ): $mol_hotkey
-		menu_title( ): string
-		names( ): readonly(string)[]
-		widget_tags( id: any): readonly(string)[]
-		widget_aspects( id: any): readonly(string)[]
-		widget_title( id: any): string
-		search_start( next?: ReturnType< ReturnType< $mol_app_demo['Menu'] >['search_start'] > ): ReturnType< ReturnType< $mol_app_demo['Menu'] >['search_start'] >
-		sources_uri( ): string
-		Sources( ): $mol_link_source
-		Lights( ): $mol_lights_toggle
-		tools( ): readonly(any)[]
-		chat_seed( id: any): string
-		chat_pages( id: any): ReturnType< ReturnType< $mol_app_demo['Detail'] >['chat_pages'] >
-		detail_description( ): string
-		edit_uri( ): string
-		readme_page( next?: boolean ): boolean
-		Demo( ): $mol_view
-		repo( ): string
-		module( ): readonly(string)[]
-		detail_empty_prefix( ): string
-		selected( ): string
-		detail_empty_postfix( ): string
-		editor_title( ): ReturnType< $mol_app_demo['detail_title'] >
-		meta_bundle_base( ): string
-		repo_dict( ): Record<string, any>
-		plugins( ): readonly(any)[]
-		demo_block_list( ): readonly(any)[]
-		Menu( ): $mol_app_demo_menu
-		Detail( id: any): $mol_app_demo_detail
-		Readme_page( ): $mol_app_demo_readme
-		Detail_empty_message( ): $mol_status
-	}
-	
-}
-
-//# sourceMappingURL=demo.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $mol_app_demo extends $.$mol_app_demo {
-        component_name(name: string): string;
-        detail_title(): string;
-        detail_description(): string;
-        names(): string[];
-        widget_tags(name: string): string[];
-        widget_title(name: string): string;
-        widget_aspects(name: string): readonly string[];
-        selected(): string;
-        readme_page(next?: boolean): boolean;
-        selected_class_name(): string;
-        Widget(name: string): $mol_example;
-        names_demo(): string[];
-        pages(): $mol_view[];
-        Demo(): $mol_example;
-        logo_uri(): string;
-        meta_bundle_base(): string;
-        repo_dict(): Record<string, string>;
-        name_parse(name: string): {
-            repo: string;
-            module: string[];
-        };
-        repo(): string;
-        module(): string[];
-        chat_link(): string;
-        edit_uri(): string;
-    }
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
-
-	export class $rise_demo extends $mol_app_demo {
-		menu_title( ): string
-		sources_uri( ): string
-	}
-	
-}
-
-//# sourceMappingURL=demo.view.tree.d.ts.map
 declare namespace $.$$ {
     /** Commands carry settings only; the online host never instantiates datasets. */
     class $rise_bench_fixture extends $mol_object {
@@ -65785,30 +65846,23 @@ declare namespace $ {
 
 declare namespace $ {
 
-	type $rise_bench_host__title_rise_app_1 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $rise_bench_host['title'] >
-	>
-	type $rise_bench_host__kind_rise_app_2 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $rise_bench_host['kind'] >
-	>
-	type $rise_bench__menu_title_rise_app_3 = $mol_type_enforce<
+	type $rise_bench__menu_title_rise_app_1 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $rise_bench['menu_title'] >
 	>
 	export class $rise_app extends $mol_book2_catalog {
-		Demo_host( ): $rise_bench_host
+		Theme( ): $mol_theme_auto
+		Lights( ): $mol_lights_toggle
+		Demo( ): $rise_demo
 		Bench( ): $rise_bench
 		menu_title( ): string
+		plugins( ): readonly(any)[]
+		menu_tools( ): readonly(any)[]
 		spreads( ): ({ 
-			'demo': ReturnType< $rise_app['Demo_host'] >,
+			'demo': ReturnType< $rise_app['Demo'] >,
 			'bench': ReturnType< $rise_app['Bench'] >,
 		}) 
-		Demo( ): $rise_demo
 	}
 	
 }
@@ -65816,6 +65870,7 @@ declare namespace $ {
 //# sourceMappingURL=app.web.view.tree.d.ts.map
 declare namespace $.$$ {
     class $rise_app extends $.$rise_app {
+        spread_title(id: string): string;
         fixture_kind(): string | null;
         fixture(): $.$rise_bench_baza_goods | $.$rise_bench_baza_crdttext | $.$rise_bench_idb | $rise_demo | null;
         bridge(): $rise_bench_fixture | null;

@@ -7309,30 +7309,6 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    $mol_test({
-        'convertion to primitives'() {
-            var unit = new $mol_unit_money_usd(5);
-            $mol_assert_equal(unit.valueOf(), 5);
-            $mol_assert_equal(unit * 2, 10);
-            $mol_assert_equal(unit + '', '$5');
-            $mol_assert_equal(`${unit}`, '$5');
-            $mol_assert_equal(unit.toString(), '$5');
-            $mol_assert_equal(String(unit), '$5');
-        },
-        'arithmetic'() {
-            var usd1 = new $mol_unit_money_usd(2);
-            var usd2 = new $mol_unit_money_usd(3);
-            var rur = new $mol_unit_money_rub(2);
-            $mol_assert_equal($mol_unit.summ(usd1, usd2).toString(), '$5');
-            $mol_assert_equal(usd1.mult(2).toString(), '$4');
-        },
-    });
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
     const { separated, repeat_greedy, char_except, from: regexp, line_end, end } = $mol_regexp;
     function $mol_csv_syntax_make(delimiter) {
         const cell = regexp({
@@ -7430,6 +7406,30 @@ var $;
         'tab separated'() {
             const tsv = '"foo"\t"bar"\n"123"\t"456"\n"x""xx"\t"y,y\ny"';
             $mol_assert_equal($mol_csv_serial($mol_csv_parse(tsv, '\t'), '\t'), tsv);
+        },
+    });
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_test({
+        'convertion to primitives'() {
+            var unit = new $mol_unit_money_usd(5);
+            $mol_assert_equal(unit.valueOf(), 5);
+            $mol_assert_equal(unit * 2, 10);
+            $mol_assert_equal(unit + '', '$5');
+            $mol_assert_equal(`${unit}`, '$5');
+            $mol_assert_equal(unit.toString(), '$5');
+            $mol_assert_equal(String(unit), '$5');
+        },
+        'arithmetic'() {
+            var usd1 = new $mol_unit_money_usd(2);
+            var usd2 = new $mol_unit_money_usd(3);
+            var rur = new $mol_unit_money_rub(2);
+            $mol_assert_equal($mol_unit.summ(usd1, usd2).toString(), '$5');
+            $mol_assert_equal(usd1.mult(2).toString(), '$4');
         },
     });
 })($ || ($ = {}));

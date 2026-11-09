@@ -13213,7 +13213,7 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    $mol_style_attach("mol/view/view/view.css", "@view-transition {\n\tnavigation: auto;\n}\n\n[mol_view] {\n\ttransition-property: height, width, min-height, min-width, max-width, max-height, transform, scale, translate, rotate;\n\ttransition-duration: .2s;\n\ttransition-timing-function: ease-out;\n\t-webkit-appearance: none;\n\tbox-sizing: border-box;\n\tdisplay: flex;\n\tflex-shrink: 0;\n\tcontain: style;\n\tscrollbar-color: var(--mol_theme_line) transparent;\n\tscrollbar-width: thin;\n\t/* text-wrap-style: pretty; dont work in textarea */\n\tunicode-bidi: plaintext\n}\n\n[mol_view]::selection {\n\tbackground: var(--mol_theme_line);\n}\t\n\n[mol_view]::-webkit-scrollbar {\n\twidth: .25rem;\n\theight: .25rem;\n}\n\n[mol_view]::-webkit-scrollbar-corner {\n\tbackground-color: var(--mol_theme_line);\n}\n\n[mol_view]::-webkit-scrollbar-track {\n\tbackground-color: transparent;\n}\n\n[mol_view]::-webkit-scrollbar-thumb {\n\tbackground-color: var(--mol_theme_line);\n\tborder-radius: var(--mol_gap_round);\n}\n\n[mol_view] > * {\n\tword-break: inherit;\n}\n\n[mol_view_root] {\n\tmargin: 0;\n\tpadding: 0;\n\twidth: 100%;\n\theight: 100%;\n\tbox-sizing: border-box;\n\tfont-family: system-ui, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;\n\tfont-size: 1rem;\n\tline-height: 1.5rem;\n\t/* background: var(--mol_theme_back);\n\tcolor: var(--mol_theme_text); */\n\tcontain: unset; /** Fixes bg ignoring when applied to body on Chrome */\n\ttab-size: 4;\n\t/*overscroll-behavior: contain; /** Disable navigation gestures **/\n}\n\n@media print {\n\t[mol_view_root] {\n\t\theight: auto;\n\t}\n}\n[mol_view][mol_view_error]:not([mol_view_error=\"Promise\"], [mol_view_error=\"$mol_promise_blocker\"]) {\n\tbackground-image: repeating-linear-gradient(\n\t\t-45deg,\n\t\t#f92323,\n\t\t#f92323 .5rem,\n\t\t#ff3d3d .5rem,\n\t\t#ff3d3d 1.5rem\n\t);\n\tcolor: black;\n\talign-items: center;\n\tjustify-content: center;\n}\n\n@keyframes mol_view_wait {\n\tfrom {\n\t\topacity: .25;\n\t}\n\t20% {\n\t\topacity: .75;\n\t}\n\tto {\n\t\topacity: .25;\n\t}\n}\n\n:where([mol_view][mol_view_error=\"$mol_promise_blocker\"]),\n:where([mol_view][mol_view_error=\"Promise\"]) {\n\tbackground: var(--mol_theme_hover);\n}\n\n[mol_view][mol_view_error=\"Promise\"] {\n\tanimation: mol_view_wait 1s steps(20,end) infinite;\n}\n");
+    $mol_style_attach("mol/view/view/view.css", "@view-transition {\n\tnavigation: auto;\n}\n\n[mol_view] {\n\ttransition-property: height, width, min-height, min-width, max-width, max-height, transform, scale, translate, rotate;\n\ttransition-duration: .2s;\n\ttransition-timing-function: ease-out;\n\t-webkit-appearance: none;\n\tbox-sizing: border-box;\n\tdisplay: flex;\n\tflex-shrink: 0;\n\tcontain: style;\n\tscrollbar-color: var(--mol_theme_line) transparent;\n\tscrollbar-width: thin;\n\t/* text-wrap-style: pretty; dont work in textarea */\n\tunicode-bidi: plaintext;\n}\n\n[mol_view]::selection {\n\tbackground: var(--mol_theme_line);\n}\t\n\n[mol_view]::-webkit-scrollbar {\n\twidth: .25rem;\n\theight: .25rem;\n}\n\n[mol_view]::-webkit-scrollbar-corner {\n\tbackground-color: var(--mol_theme_line);\n}\n\n[mol_view]::-webkit-scrollbar-track {\n\tbackground-color: transparent;\n}\n\n[mol_view]::-webkit-scrollbar-thumb {\n\tbackground-color: var(--mol_theme_line);\n\tborder-radius: var(--mol_gap_round);\n}\n\n[mol_view] > * {\n\tword-break: inherit;\n\tunicode-bidi: inherit;\n}\n\n[mol_view_root] {\n\tmargin: 0;\n\tpadding: 0;\n\twidth: 100%;\n\theight: 100%;\n\tbox-sizing: border-box;\n\tfont-family: system-ui, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;\n\tfont-size: 1rem;\n\tline-height: 1.5rem;\n\t/* background: var(--mol_theme_back);\n\tcolor: var(--mol_theme_text); */\n\tcontain: unset; /** Fixes bg ignoring when applied to body on Chrome */\n\ttab-size: 4;\n\t/*overscroll-behavior: contain; /** Disable navigation gestures **/\n}\n\n@media print {\n\t[mol_view_root] {\n\t\theight: auto;\n\t}\n}\n[mol_view][mol_view_error]:not([mol_view_error=\"Promise\"], [mol_view_error=\"$mol_promise_blocker\"]) {\n\tbackground-image: repeating-linear-gradient(\n\t\t-45deg,\n\t\t#f92323,\n\t\t#f92323 .5rem,\n\t\t#ff3d3d .5rem,\n\t\t#ff3d3d 1.5rem\n\t);\n\tcolor: black;\n\talign-items: center;\n\tjustify-content: center;\n}\n\n@keyframes mol_view_wait {\n\tfrom {\n\t\topacity: .25;\n\t}\n\t20% {\n\t\topacity: .75;\n\t}\n\tto {\n\t\topacity: .25;\n\t}\n}\n\n:where([mol_view][mol_view_error=\"$mol_promise_blocker\"]),\n:where([mol_view][mol_view_error=\"Promise\"]) {\n\tbackground: var(--mol_theme_hover);\n}\n\n[mol_view][mol_view_error=\"Promise\"] {\n\tanimation: mol_view_wait 1s steps(20,end) infinite;\n}\n");
 })($ || ($ = {}));
 
 ;
@@ -21261,7 +21261,7 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    $mol_style_attach("mol/textarea/textarea.view.css", "[mol_textarea] {\n\tflex: 1 0 auto;\n\tflex-direction: column;\n\tvertical-align: top;\n\tmin-height: max-content;\n\twhite-space: pre-wrap;\n\tword-break: break-word;\n\tborder-radius: var(--mol_gap_round);\n\tfont-family: monospace;\n\tposition: relative;\n\ttab-size: 4;\n}\n\n[mol_textarea_view] {\n    interactivity: inert;\n\twhite-space: inherit;\n\tfont-family: inherit;\n\ttab-size: inherit;\n}\n\n[mol_textarea_view_copy] {\n    interactivity: initial;\n}\n\n[mol_textarea_clickable] > [mol_textarea_view] {\n    interactivity: initial;\n}\n\n[mol_textarea_clickable] > [mol_textarea_edit] {\n    interactivity: inert;\n}\n\n[mol_textarea_edit] {\n\tfont-family: inherit;\n\tpadding: var(--mol_gap_text);\n\tcolor: transparent !important;\n\tcaret-color: var(--mol_theme_text);\n\tresize: none;\n\ttext-align: inherit;\n\twhite-space: inherit;\n\tborder-radius: inherit;\n\toverflow-anchor: none;\n\tposition: absolute;\n\theight: 100%;\n\twidth: 100%;\n\ttab-size: inherit;\n}\n\n[mol_textarea_sidebar_showed] [mol_textarea_edit] {\n\tleft: 1.75rem;\n\twidth: calc( 100% - 1.75rem );\n}\n\n[mol_textarea_edit]:hover + [mol_textarea_view] {\n\tz-index: var(--mol_layer_hover);\n}\n\n[mol_textarea_edit]:focus + [mol_textarea_view] {\n\tz-index: var(--mol_layer_focus);\n}\n");
+    $mol_style_attach("mol/textarea/textarea.view.css", "[mol_textarea] {\n\tflex: 1 0 auto;\n\tflex-direction: column;\n\tvertical-align: top;\n\tmin-height: max-content;\n\twhite-space: pre-wrap;\n\tword-break: break-word;\n\tborder-radius: var(--mol_gap_round);\n\tfont-family: monospace;\n\tposition: relative;\n\ttab-size: 4;\n}\n\n[mol_textarea_view] {\n    interactivity: inert;\n\twhite-space: inherit;\n\tfont-family: inherit;\n\ttab-size: inherit;\n\tunicode-bidi: normal;\n}\n\n[mol_textarea_view_copy] {\n    interactivity: initial;\n}\n\n[mol_textarea_clickable] > [mol_textarea_view] {\n    interactivity: initial;\n}\n\n[mol_textarea_clickable] > [mol_textarea_edit] {\n    interactivity: inert;\n}\n\n[mol_textarea_edit] {\n\tfont-family: inherit;\n\tpadding: var(--mol_gap_text);\n\tcolor: transparent !important;\n\tcaret-color: var(--mol_theme_text);\n\tresize: none;\n\ttext-align: inherit;\n\twhite-space: inherit;\n\tborder-radius: inherit;\n\toverflow-anchor: none;\n\tposition: absolute;\n\theight: 100%;\n\twidth: 100%;\n\ttab-size: inherit;\n}\n\n[mol_textarea_sidebar_showed] [mol_textarea_edit] {\n\tleft: 1.75rem;\n\twidth: calc( 100% - 1.75rem );\n}\n\n[mol_textarea_edit]:hover + [mol_textarea_view] {\n\tz-index: var(--mol_layer_hover);\n}\n\n[mol_textarea_edit]:focus + [mol_textarea_view] {\n\tz-index: var(--mol_layer_focus);\n}\n");
 })($ || ($ = {}));
 
 ;
@@ -23187,6 +23187,135 @@ var $;
 
 
 ;
+	($.$mol_icon_upload) = class $mol_icon_upload extends ($.$mol_icon) {
+		path(){
+			return "M9,16V10H5L12,3L19,10H15V16H9M5,20V18H19V20H5Z";
+		}
+	};
+
+
+;
+"use strict";
+
+
+;
+	($.$mol_button_open) = class $mol_button_open extends ($.$mol_button_minor) {
+		Icon(){
+			const obj = new this.$.$mol_icon_upload();
+			return obj;
+		}
+		files(next){
+			if(next !== undefined) return next;
+			return [];
+		}
+		files_handled(next){
+			return (this.files(next));
+		}
+		accept(){
+			return "";
+		}
+		multiple(){
+			return true;
+		}
+		Native(){
+			const obj = new this.$.$mol_button_open_native();
+			(obj.files) = (next) => ((this.files_handled(next)));
+			(obj.accept) = () => ((this.accept()));
+			(obj.multiple) = () => ((this.multiple()));
+			return obj;
+		}
+		sub(){
+			return [(this.Icon()), (this.Native())];
+		}
+	};
+	($mol_mem(($.$mol_button_open.prototype), "Icon"));
+	($mol_mem(($.$mol_button_open.prototype), "files"));
+	($mol_mem(($.$mol_button_open.prototype), "Native"));
+	($.$mol_button_open_native) = class $mol_button_open_native extends ($.$mol_view) {
+		accept(){
+			return "";
+		}
+		multiple(){
+			return true;
+		}
+		picked(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		dom_name(){
+			return "input";
+		}
+		files(next){
+			if(next !== undefined) return next;
+			return [];
+		}
+		attr(){
+			return {
+				"type": "file", 
+				"accept": (this.accept()), 
+				"multiple": (this.multiple())
+			};
+		}
+		event(){
+			return {"change": (next) => (this.picked(next))};
+		}
+	};
+	($mol_mem(($.$mol_button_open_native.prototype), "picked"));
+	($mol_mem(($.$mol_button_open_native.prototype), "files"));
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $mol_button_open extends $.$mol_button_open {
+            files_handled(next) {
+                try {
+                    const files = this.files(next);
+                    this.status([null]);
+                    return files;
+                }
+                catch (error) {
+                    // Calling actions from catch section, if throwing promise breaks idempotency
+                    Promise.resolve().then(() => this.status([error]));
+                    $mol_fail_hidden(error);
+                }
+            }
+        }
+        $$.$mol_button_open = $mol_button_open;
+        /**
+         * File open button
+         * @see https://mol.hyoo.ru/#!section=demos/demo=mol_button_demo
+         */
+        class $mol_button_open_native extends $.$mol_button_open_native {
+            dom_node() {
+                return super.dom_node();
+            }
+            picked() {
+                const files = this.dom_node().files;
+                if (!files || !files.length)
+                    return;
+                this.files([...files]);
+            }
+        }
+        $$.$mol_button_open_native = $mol_button_open_native;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/button/open/open.view.css", "[mol_button_open_native] {\n\tposition: absolute;\n\tleft: 0;\n\ttop: -100%;\n\twidth: 100%;\n\theight: 200%;\n\tcursor: pointer;\n\topacity: 0;\n}\n");
+})($ || ($ = {}));
+
+;
 	($.$mol_float) = class $mol_float extends ($.$mol_view) {
 		style(){
 			return {...(super.style()), "minHeight": "auto"};
@@ -23394,6 +23523,17 @@ var $;
 			]);
 			return obj;
 		}
+		attach_files(next){
+			if(next !== undefined) return next;
+			return [];
+		}
+		Attach(){
+			const obj = new this.$.$mol_button_open();
+			(obj.hint) = () => ((this.$.$mol_locale.text("$giper_baza_rich_edit_Attach_hint")));
+			(obj.enabled) = (next) => ((this.selected(next)));
+			(obj.files) = (next) => ((this.attach_files(next)));
+			return obj;
+		}
 		Main(){
 			const obj = new this.$.$mol_bar();
 			(obj.sub) = () => ([
@@ -23403,7 +23543,8 @@ var $;
 				(this.List_number_button()), 
 				(this.Quote_button()), 
 				(this.Preformat_button()), 
-				(this.Inline_format_menu())
+				(this.Inline_format_menu()), 
+				(this.Attach())
 			]);
 			return obj;
 		}
@@ -23508,6 +23649,8 @@ var $;
 	($mol_mem(($.$giper_baza_rich_edit.prototype), "Del_button"));
 	($mol_mem(($.$giper_baza_rich_edit.prototype), "Code_button"));
 	($mol_mem(($.$giper_baza_rich_edit.prototype), "Inline_format_menu"));
+	($mol_mem(($.$giper_baza_rich_edit.prototype), "attach_files"));
+	($mol_mem(($.$giper_baza_rich_edit.prototype), "Attach"));
 	($mol_mem(($.$giper_baza_rich_edit.prototype), "Main"));
 	($mol_mem(($.$giper_baza_rich_edit.prototype), "Search_query"));
 	($mol_mem(($.$giper_baza_rich_edit.prototype), "Search_replace"));
@@ -24478,7 +24621,7 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    $mol_style_attach("giper/baza/rich/edit/edit.view.css", "[giper_baza_rich_edit] {\n\tflex-direction: column;\n\tflex: 1;\n\tborder-radius: var(--mol_gap_round);\n\tbackground-color: var(--mol_theme_field);\n}\n\n[giper_baza_rich_edit_enabled] {\n\toutline: 1px solid var(--mol_theme_line);\n}\n\n[giper_baza_rich_edit]:focus-within {\n\tz-index: var(--mol_layer_focus);\n\toutline: 1px solid var(--mol_theme_focus);\n}\n\n[giper_baza_rich_edit_tools] {\n\tborder-radius: var(--mol_gap_round);\n\tbottom: 0;\n}\n\n/* [giper_baza_rich_edit]:not(:focus-within) [giper_baza_rich_edit_tools] {\n\tdisplay: none;\n} */\n\n[giper_baza_rich_edit_content] {\n\tflex-direction: column;\n\tflex: 1;\n\twhite-space: pre-wrap;\n\toutline: none;\n\tpadding: var(--mol_gap_block);\n}\n\n[giper_baza_rich_edit_content] a {\n\tcolor: var(--mol_theme_control);\n\ttext-decoration: none;\n\tborder-radius: var(--mol_gap_round);\n}\n\n[giper_baza_rich_edit_content] a:hover {\n\tbackground: var(--mol_theme_card);\n\tbox-shadow: 0 0 0 .25rem var(--mol_theme_card);\n}\n\n[giper_baza_rich_edit_content] p {\n\tmargin: 0;\n\tpadding: var(--mol_gap_text);\n}\n\n[giper_baza_rich_edit_content] ul {\n\tmargin: 0;\n\tpadding: 0 1.5rem;\n}\n\n/* [giper_baza_rich_edit_content] ul > p:before {\n\tcontent: '• ';\n    color: var(--mol_theme_shade);\n\twidth: 0;\n    display: inline-flex;\n    white-space: pre;\n    flex-direction: row-reverse;\n} */\n\n[giper_baza_rich_edit_content] ol {\n\tmargin: 0;\n\tpadding: 0 1.5rem;\n\tcounter-reset: giper_baza_rich_edit_content_ol 0;\n}\n\n[giper_baza_rich_edit_content] ol > p:before {\n\tcounter-increment: giper_baza_rich_edit_content_ol 1;\n\tcontent: counters(giper_baza_rich_edit_content_ol, \".\") \". \";\n\tcolor: var(--mol_theme_shade);\n\twidth: 0;\n    display: inline-flex;\n    white-space: pre;\n    flex-direction: row-reverse;\n}\n\n[giper_baza_rich_edit_content] blockquote {\n\tmargin: var(--mol_gap_block);\n\tpadding: var(--mol_gap_block);\n\tbackground: var(--mol_theme_card);\n\tborder-radius: var(--mol_gap_round);\n}\n\n[giper_baza_rich_edit_content] pre {\n\tmargin: 0 var(--mol_gap_block);\n\tpadding: 0 var(--mol_gap_block);\n\tborder-radius: var(--mol_gap_round);\n\toverflow-x: auto;\n\tbox-shadow: inset 1px 0 var(--mol_theme_line);\n}\n\n[giper_baza_rich_edit_content] img {\n\tmax-width: 100%;\n}\n\n[giper_baza_rich_edit_content] strong {\n\ttext-shadow: 0 0;\n\tfont-weight: normal;\n}\n\n[giper_baza_rich_edit_content] em {\n\tfont-style: italic;\n}\n\n[giper_baza_rich_edit_content] ins {\n\ttext-decoration: none;\n\tcolor: var(--mol_theme_special);\n}\n\n[giper_baza_rich_edit_content] del {\n\ttext-decoration: none;\n\tcolor: var(--mol_theme_shade);\n}\n\n[giper_baza_rich_edit_content] code {\n\tfont-family: monospace;\n}\n\n[giper_baza_rich_edit_content] hr {\n\tmargin: var(--mol_gap_block);\n\tborder: none;\n\tbox-shadow: 0 -1px 0 0px var(--mol_theme_line);\n    height: 1px;\n}\n\n[giper_baza_rich_edit_content] section {\n\tpadding: 0;\n\tmargin: 0;\n}\n\n[giper_baza_rich_edit_content] section > p:first-child {\n\tfont-size: 2rem;\n\tline-height: 3rem;\n\tfont-weight: normal;\n\tletter-spacing: 2px;\n}\n\n[giper_baza_rich_edit_content] section section > p:first-child {\n\tfont-size: 1.75rem;\n\tline-height: 3rem;\n}\n\n[giper_baza_rich_edit_content] section section section > p:first-child {\n\tfont-size: 1.5rem;\n\tline-height: 3rem;\n}\n\n[giper_baza_rich_edit_content] section section section section > p:first-child {\n\tfont-size: 1.25rem;\n\tline-height: 3rem;\n}\n\n[giper_baza_rich_edit_content] section section section section section > p:first-child {\n\tfont-size: 1.25rem;\n\tline-height: 3rem;\n\tfont-style: italic;\n}\n\n[giper_baza_rich_edit_content] section:not(:last-child) {\n\tbox-shadow: 0 1px 0 0 var(--mol_theme_line);\n}\n\n[giper_baza_rich_edit_content] section:not(:last-child) {\n\tpadding-bottom: var(--mol_gap_block);\n\tmargin-bottom: var(--mol_gap_block);\n\tbox-shadow: 0 1px 0 0 var(--mol_theme_line);\n}\n");
+    $mol_style_attach("giper/baza/rich/edit/edit.view.css", "[giper_baza_rich_edit] {\n\tmin-width: 0;\n\tflex-direction: column;\n\tflex: 1;\n\tborder-radius: var(--mol_gap_round);\n\tbackground-color: var(--mol_theme_field);\n}\n\n[giper_baza_rich_edit_enabled] {\n\toutline: 1px solid var(--mol_theme_line);\n}\n\n[giper_baza_rich_edit]:focus-within {\n\tz-index: var(--mol_layer_focus);\n\toutline: 1px solid var(--mol_theme_focus);\n}\n\n[giper_baza_rich_edit_tools] {\n\tborder-radius: var(--mol_gap_round);\n\tbottom: 0;\n}\n\n/* [giper_baza_rich_edit]:not(:focus-within) [giper_baza_rich_edit_tools] {\n\tdisplay: none;\n} */\n\n[giper_baza_rich_edit_content] {\n\tflex-direction: column;\n\tflex: 1;\n\twhite-space: pre-wrap;\n\toutline: none;\n\tpadding: var(--mol_gap_block);\n}\n\n[giper_baza_rich_edit_content] a {\n\tcolor: var(--mol_theme_control);\n\ttext-decoration: none;\n\tborder-radius: var(--mol_gap_round);\n}\n\n[giper_baza_rich_edit_content] a:hover {\n\tbackground: var(--mol_theme_card);\n\tbox-shadow: 0 0 0 .25rem var(--mol_theme_card);\n}\n\n[giper_baza_rich_edit_content] p {\n\tmargin: 0;\n\tpadding: var(--mol_gap_text);\n}\n\n[giper_baza_rich_edit_content] ul {\n\tmargin: 0;\n\tpadding: 0 0 0 1.5rem;\n}\n\n/* [giper_baza_rich_edit_content] ul > p:before {\n\tcontent: '• ';\n    color: var(--mol_theme_shade);\n\twidth: 0;\n    display: inline-flex;\n    white-space: pre;\n    flex-direction: row-reverse;\n} */\n\n[giper_baza_rich_edit_content] ol {\n\tmargin: 0;\n\tpadding: 0 0 0 1.5rem;\n\tcounter-reset: giper_baza_rich_edit_content_ol 0;\n}\n\n[giper_baza_rich_edit_content] ol > p:before {\n\tcounter-increment: giper_baza_rich_edit_content_ol 1;\n\tcontent: counters(giper_baza_rich_edit_content_ol, \".\") \". \";\n\tcolor: var(--mol_theme_shade);\n\twidth: 0;\n    display: inline-flex;\n    white-space: pre;\n    flex-direction: row-reverse;\n}\n\n[giper_baza_rich_edit_content] blockquote {\n\tmargin: var(--mol_gap_block);\n\tpadding: var(--mol_gap_block);\n\tbackground: var(--mol_theme_card);\n\tborder-radius: var(--mol_gap_round);\n}\n\n[giper_baza_rich_edit_content] pre {\n\tmargin: 0 var(--mol_gap_block);\n\tpadding: 0 var(--mol_gap_block);\n\tborder-radius: var(--mol_gap_round);\n\toverflow-x: auto;\n\tbox-shadow: inset 1px 0 var(--mol_theme_line);\n}\n\n[giper_baza_rich_edit_content] img {\n\tmax-width: 100%;\n\theight: auto;\n}\n\n[giper_baza_rich_edit_content] strong {\n\ttext-shadow: 0 0;\n\tfont-weight: normal;\n}\n\n[giper_baza_rich_edit_content] em {\n\tfont-style: italic;\n}\n\n[giper_baza_rich_edit_content] ins {\n\ttext-decoration: none;\n\tcolor: var(--mol_theme_special);\n}\n\n[giper_baza_rich_edit_content] del {\n\ttext-decoration: none;\n\tcolor: var(--mol_theme_shade);\n}\n\n[giper_baza_rich_edit_content] code {\n\tfont-family: monospace;\n}\n\n[giper_baza_rich_edit_content] hr {\n\tmargin: var(--mol_gap_block);\n\tborder: none;\n\tbox-shadow: 0 -1px 0 0px var(--mol_theme_line);\n    height: 1px;\n}\n\n[giper_baza_rich_edit_content] section {\n\tpadding: 0;\n\tmargin: 0;\n}\n\n[giper_baza_rich_edit_content] section > p:first-child {\n\tfont-size: 2rem;\n\tline-height: 3rem;\n\tfont-weight: normal;\n\tletter-spacing: 2px;\n}\n\n[giper_baza_rich_edit_content] section section > p:first-child {\n\tfont-size: 1.75rem;\n\tline-height: 3rem;\n}\n\n[giper_baza_rich_edit_content] section section section > p:first-child {\n\tfont-size: 1.5rem;\n\tline-height: 3rem;\n}\n\n[giper_baza_rich_edit_content] section section section section > p:first-child {\n\tfont-size: 1.25rem;\n\tline-height: 3rem;\n}\n\n[giper_baza_rich_edit_content] section section section section section > p:first-child {\n\tfont-size: 1.25rem;\n\tline-height: 3rem;\n\tfont-style: italic;\n}\n\n[giper_baza_rich_edit_content] section:not(:last-child) {\n\tbox-shadow: 0 1px 0 0 var(--mol_theme_line);\n}\n\n[giper_baza_rich_edit_content] section:not(:last-child) {\n\tpadding-bottom: var(--mol_gap_block);\n\tmargin-bottom: var(--mol_gap_block);\n\tbox-shadow: 0 1px 0 0 var(--mol_theme_line);\n}\n");
 })($ || ($ = {}));
 
 ;
@@ -24685,48 +24828,54 @@ var $;
                 this.save();
                 event.preventDefault();
             }
+            attach_files(files) {
+                const blob = files[0];
+                const area = this.pawn().land().area_make();
+                const file = area.Data($giper_baza_file);
+                if (blob.size > 1024 ** 2)
+                    return []; // 1MB limit
+                if (blob.type.startsWith('image/')) {
+                    file.type(blob.type);
+                    file.name(blob.name);
+                    file.buffer($mol_wire_sync(blob).bytes());
+                    file.land().units_saving();
+                    const img = $mol_wire_sync($mol_picture).load(file.uri());
+                    const [width, height] = $mol_picture.sizes(img);
+                    const sel = $mol_dom_range.from_selection();
+                    sel.paste($mol_jsx("img", { src: file.uri(), width: width, height: height }));
+                }
+                this.selection_load();
+                this.save();
+                return [];
+            }
             paste(event) {
                 event.preventDefault();
-                const sel = $mol_dom_range.from_selection();
                 const trans = $mol_dom_event.wrap(event).transfer();
                 if (trans.files().length) {
-                    const blob = trans.files().item(0);
-                    const area = this.pawn().land().area_make();
-                    const file = area.Data($giper_baza_file);
-                    if (blob.size > 1024 ** 2)
-                        return;
-                    if (blob.type.startsWith('image/')) {
-                        file.type(blob.type);
-                        file.name(blob.name);
-                        file.buffer($mol_wire_sync(blob).bytes());
-                        file.land().units_saving();
-                        const img = $mol_wire_sync($mol_picture).load(file.uri());
-                        const [width, height] = $mol_picture.sizes(img);
-                        sel.paste($mol_jsx("img", { src: file.uri(), width: width, height: height }));
+                    this.attach_files([trans.files().item(0)]);
+                    return;
+                }
+                const sel = $mol_dom_range.from_selection();
+                const html = trans.get('text/html');
+                const text = trans.get('text/plain');
+                let url = true;
+                try {
+                    new URL(text);
+                }
+                catch {
+                    url = false;
+                }
+                if (url) {
+                    if (sel.is_empty()) {
+                        sel.paste($mol_jsx("a", { href: text }, text));
+                    }
+                    else {
+                        sel.surround($mol_jsx("a", { href: text }));
                     }
                 }
                 else {
-                    const html = trans.get('text/html');
-                    const text = trans.get('text/plain');
-                    let url = true;
-                    try {
-                        new URL(text);
-                    }
-                    catch {
-                        url = false;
-                    }
-                    if (url) {
-                        if (sel.is_empty()) {
-                            sel.paste($mol_jsx("a", { href: text }, text));
-                        }
-                        else {
-                            sel.surround($mol_jsx("a", { href: text }));
-                        }
-                    }
-                    else {
-                        const data = html ? $mol_dom_range.inside($mol_dom_parse(html).documentElement).copy() : new Text(text);
-                        sel.paste(data);
-                    }
+                    const data = html ? $mol_dom_range.inside($mol_dom_parse(html).documentElement).copy() : new Text(text);
+                    sel.paste(data);
                 }
                 this.selection_load();
                 this.save();
@@ -25416,6 +25565,7 @@ var $;
     var $$;
     (function ($$) {
         $mol_style_define($giper_baza_flex_field, {
+            minWidth: 0,
             flex: {
                 grow: 1,
                 shrink: 1,
@@ -26522,135 +26672,6 @@ var $;
         }
         $$.$giper_baza_land_grab = $giper_baza_land_grab;
     })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-	($.$mol_icon_upload) = class $mol_icon_upload extends ($.$mol_icon) {
-		path(){
-			return "M9,16V10H5L12,3L19,10H15V16H9M5,20V18H19V20H5Z";
-		}
-	};
-
-
-;
-"use strict";
-
-
-;
-	($.$mol_button_open) = class $mol_button_open extends ($.$mol_button_minor) {
-		Icon(){
-			const obj = new this.$.$mol_icon_upload();
-			return obj;
-		}
-		files(next){
-			if(next !== undefined) return next;
-			return [];
-		}
-		files_handled(next){
-			return (this.files(next));
-		}
-		accept(){
-			return "";
-		}
-		multiple(){
-			return true;
-		}
-		Native(){
-			const obj = new this.$.$mol_button_open_native();
-			(obj.files) = (next) => ((this.files_handled(next)));
-			(obj.accept) = () => ((this.accept()));
-			(obj.multiple) = () => ((this.multiple()));
-			return obj;
-		}
-		sub(){
-			return [(this.Icon()), (this.Native())];
-		}
-	};
-	($mol_mem(($.$mol_button_open.prototype), "Icon"));
-	($mol_mem(($.$mol_button_open.prototype), "files"));
-	($mol_mem(($.$mol_button_open.prototype), "Native"));
-	($.$mol_button_open_native) = class $mol_button_open_native extends ($.$mol_view) {
-		accept(){
-			return "";
-		}
-		multiple(){
-			return true;
-		}
-		picked(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		dom_name(){
-			return "input";
-		}
-		files(next){
-			if(next !== undefined) return next;
-			return [];
-		}
-		attr(){
-			return {
-				"type": "file", 
-				"accept": (this.accept()), 
-				"multiple": (this.multiple())
-			};
-		}
-		event(){
-			return {"change": (next) => (this.picked(next))};
-		}
-	};
-	($mol_mem(($.$mol_button_open_native.prototype), "picked"));
-	($mol_mem(($.$mol_button_open_native.prototype), "files"));
-
-
-;
-"use strict";
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $mol_button_open extends $.$mol_button_open {
-            files_handled(next) {
-                try {
-                    const files = this.files(next);
-                    this.status([null]);
-                    return files;
-                }
-                catch (error) {
-                    // Calling actions from catch section, if throwing promise breaks idempotency
-                    Promise.resolve().then(() => this.status([error]));
-                    $mol_fail_hidden(error);
-                }
-            }
-        }
-        $$.$mol_button_open = $mol_button_open;
-        /**
-         * File open button
-         * @see https://mol.hyoo.ru/#!section=demos/demo=mol_button_demo
-         */
-        class $mol_button_open_native extends $.$mol_button_open_native {
-            dom_node() {
-                return super.dom_node();
-            }
-            picked() {
-                const files = this.dom_node().files;
-                if (!files || !files.length)
-                    return;
-                this.files([...files]);
-            }
-        }
-        $$.$mol_button_open_native = $mol_button_open_native;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_attach("mol/button/open/open.view.css", "[mol_button_open_native] {\n\tposition: absolute;\n\tleft: 0;\n\ttop: -100%;\n\twidth: 100%;\n\theight: 200%;\n\tcursor: pointer;\n\topacity: 0;\n}\n");
 })($ || ($ = {}));
 
 ;
@@ -30780,53 +30801,485 @@ var $;
 })($ || ($ = {}));
 
 ;
-	($.$mol_check_list) = class $mol_check_list extends ($.$mol_view) {
-		option_checked(id, next){
+	($.$mol_theme_auto) = class $mol_theme_auto extends ($.$mol_plugin) {
+		dark(){
+			return "$mol_theme_dark";
+		}
+		theme(){
+			return (this.dark());
+		}
+		light(){
+			return "$mol_theme_light";
+		}
+		attr(){
+			return {"mol_theme": (this.theme())};
+		}
+	};
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    class $mol_media extends $mol_object2 {
+        static match(query, next) {
+            if (next !== undefined)
+                return next;
+            const res = this.$.$mol_dom_context.matchMedia?.(query) ?? {};
+            res.onchange = () => this.match(query, res.matches);
+            return res.matches;
+        }
+    }
+    __decorate([
+        $mol_mem_key
+    ], $mol_media, "match", null);
+    $.$mol_media = $mol_media;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    function parse(theme) {
+        if (theme === 'true')
+            return true;
+        if (theme === 'false')
+            return false;
+        return null;
+    }
+    // Get once because chrome switches to light on print
+    const base = $.$mol_media.match('(prefers-color-scheme: light)');
+    /**
+     * Switcher between light/dark themes (usually for `mol_theme_auto` plugin).
+     * @see https://mol.hyoo.ru/#!section=demos/demo=mol_lights_demo
+     */
+    function $mol_lights(next) {
+        const arg = parse(this.$mol_state_arg.value('mol_lights'));
+        if (next === undefined) {
+            return arg ?? this.$mol_state_local.value('$mol_lights') ?? base;
+        }
+        else {
+            if (arg === null) {
+                this.$mol_state_local.value('$mol_lights', next === base ? null : next);
+            }
+            else {
+                this.$mol_state_arg.value('mol_lights', String(next));
+            }
+            return next;
+        }
+    }
+    $.$mol_lights = $mol_lights;
+})($ || ($ = {}));
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        /**
+         * The [plugin](../../plugin/readme.md) which defines theme based on [mol_lights](../../lights/readme.md).
+         * @see https://mol.hyoo.ru/#!section=demos/demo=mol_lights_demo
+         */
+        class $mol_theme_auto extends $.$mol_theme_auto {
+            theme() {
+                return this.$.$mol_lights() ? this.light() : this.dark();
+            }
+        }
+        $$.$mol_theme_auto = $mol_theme_auto;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+	($.$mol_icon_brightness_4) = class $mol_icon_brightness_4 extends ($.$mol_icon) {
+		path(){
+			return "M12,18C11.11,18 10.26,17.8 9.5,17.45C11.56,16.5 13,14.42 13,12C13,9.58 11.56,7.5 9.5,6.55C10.26,6.2 11.11,6 12,6A6,6 0 0,1 18,12A6,6 0 0,1 12,18M20,8.69V4H15.31L12,0.69L8.69,4H4V8.69L0.69,12L4,15.31V20H8.69L12,23.31L15.31,20H20V15.31L23.31,12L20,8.69Z";
+		}
+	};
+
+
+;
+"use strict";
+
+
+;
+	($.$mol_lights_toggle) = class $mol_lights_toggle extends ($.$mol_check_icon) {
+		Lights_icon(){
+			const obj = new this.$.$mol_icon_brightness_4();
+			return obj;
+		}
+		lights(next){
 			if(next !== undefined) return next;
 			return false;
 		}
-		option_title(id){
-			return "";
+		Icon(){
+			return (this.Lights_icon());
 		}
-		option_label(id){
-			return [(this.option_title(id))];
+		hint(){
+			return (this.$.$mol_locale.text("$mol_lights_toggle_hint"));
 		}
-		enabled(){
-			return true;
+		checked(next){
+			return (this.lights(next));
 		}
-		option_enabled(id){
-			return (this.enabled());
+	};
+	($mol_mem(($.$mol_lights_toggle.prototype), "Lights_icon"));
+	($mol_mem(($.$mol_lights_toggle.prototype), "lights"));
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        /**
+         * Toggle for Switcher between light/dark themes (usually for `mol_theme_auto` plugin).
+         * @see https://mol.hyoo.ru/#!section=demos/demo=mol_lights_demo
+         */
+        class $mol_lights_toggle extends $.$mol_lights_toggle {
+            lights(next) {
+                return this.$.$mol_lights(next);
+            }
+        }
+        $$.$mol_lights_toggle = $mol_lights_toggle;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+	($.$rise_drag) = class $rise_drag extends ($.$mol_plugin) {
+		pointerdown(next){
+			if(next !== undefined) return next;
+			return null;
 		}
-		option_hint(id){
-			return "";
+		dragged(next){
+			if(next !== undefined) return next;
+			return false;
 		}
-		items(){
+		pointermove_listener(){
+			return null;
+		}
+		pointerup_listener(){
+			return null;
+		}
+		x(next){
+			if(next !== undefined) return next;
+			return 0;
+		}
+		y(next){
+			if(next !== undefined) return next;
+			return 0;
+		}
+		repos_x(id){
+			return 1;
+		}
+		repos_y(id){
+			return 1;
+		}
+		on_drag(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		on_drag_start(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		on_drag_end(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		drag(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		drag_start(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		drag_end(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		use_buttons(){
+			return [0];
+		}
+		event(){
+			return {...(super.event()), "pointerdown": (next) => (this.pointerdown(next))};
+		}
+		attr(){
+			return {...(super.attr()), "rise_dragged": (this.dragged())};
+		}
+		auto(){
+			return [(this.pointermove_listener()), (this.pointerup_listener())];
+		}
+		drags_synced(){
 			return [];
 		}
-		dictionary(){
-			return {};
+	};
+	($mol_mem(($.$rise_drag.prototype), "pointerdown"));
+	($mol_mem(($.$rise_drag.prototype), "dragged"));
+	($mol_mem(($.$rise_drag.prototype), "x"));
+	($mol_mem(($.$rise_drag.prototype), "y"));
+	($mol_mem(($.$rise_drag.prototype), "on_drag"));
+	($mol_mem(($.$rise_drag.prototype), "on_drag_start"));
+	($mol_mem(($.$rise_drag.prototype), "on_drag_end"));
+	($mol_mem(($.$rise_drag.prototype), "drag"));
+	($mol_mem(($.$rise_drag.prototype), "drag_start"));
+	($mol_mem(($.$rise_drag.prototype), "drag_end"));
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $rise_drag extends $.$rise_drag {
+            repos_x(val) {
+                return val;
+            }
+            repos_y(val) {
+                return val;
+            }
+            start_event;
+            start_pos;
+            drags_synced_frozen = [];
+            drag_start(event) {
+                this.start_event = event;
+                this.start_pos = { x: this.x(), y: this.y() };
+                this.dragged(true);
+                this.on_drag_start(event);
+            }
+            drag(event) {
+                this.x(this.start_pos.x + this.repos_x(event.x - this.start_event.x));
+                this.y(this.start_pos.y + this.repos_y(event.y - this.start_event.y));
+                this.on_drag(event);
+            }
+            drag_end(event) {
+                this.dragged(false);
+                this.on_drag_end(event);
+            }
+            pointerdown(event) {
+                if (!this.use_buttons().includes(event.button))
+                    return;
+                this.drag_start(event);
+                this.drags_synced_frozen = this.drags_synced();
+                this.drags_synced_frozen.forEach(d => d.drag_start(event));
+                //immediate flush:
+                this.pointermove_listener();
+                this.pointerup_listener();
+            }
+            pointermove_listener() {
+                $mol_wire_solid();
+                if (!this.dragged())
+                    return null;
+                return new $mol_dom_listener(this.$.$mol_dom_context.document, 'pointermove', this.handle_pointermove_async);
+            }
+            handle_pointermove_async = $mol_wire_async((event) => {
+                this.drag(event);
+                this.drags_synced_frozen.forEach(d => d.drag(event));
+            });
+            pointerup_listener() {
+                $mol_wire_solid();
+                if (!this.dragged())
+                    return null;
+                return new $mol_dom_listener(this.$.$mol_dom_context.document, 'pointerup', this.handle_pointerup_async);
+            }
+            handle_pointerup_async = $mol_wire_async((event) => {
+                this.drag_end(event);
+                this.drags_synced_frozen.forEach(d => d.drag_end(event));
+                this.drags_synced_frozen = [];
+                //immediate flush:
+                this.pointerup_listener();
+                this.pointermove_listener();
+            });
+        }
+        __decorate([
+            $mol_mem
+        ], $rise_drag.prototype, "pointermove_listener", null);
+        __decorate([
+            $mol_mem
+        ], $rise_drag.prototype, "pointerup_listener", null);
+        $$.$rise_drag = $rise_drag;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+	($.$mol_example) = class $mol_example extends ($.$mol_view) {
+		tags(){
+			return [];
 		}
-		Option(id){
-			const obj = new this.$.$mol_check();
-			(obj.checked) = (next) => ((this.option_checked(id, next)));
-			(obj.label) = () => ((this.option_label(id)));
-			(obj.enabled) = () => ((this.option_enabled(id)));
-			(obj.hint) = () => ((this.option_hint(id)));
-			(obj.minimal_height) = () => (24);
+		aspects(){
+			return [];
+		}
+	};
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/example/example.view.css", "[mol_example] {\n\tmax-width: 100%;\n}\n");
+})($ || ($ = {}));
+
+;
+"use strict";
+
+
+;
+	($.$mol_example_small) = class $mol_example_small extends ($.$mol_example) {};
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/example/small/small.view.css", "[mol_example_small] {\n\tdisplay: flex;\n\tflex-wrap: wrap;\n\talign-items: flex-start;\n\talign-content: flex-start;\n\tjustify-content: flex-start;\n\tflex: 0 0 auto;\n\tbox-sizing: border-box;\n\tmax-width: 100%;\n\tgap: var(--mol_gap_block);\n}\n\n[mol_example_small] > * {\n\tmax-width: 100%;\n}\n");
+})($ || ($ = {}));
+
+;
+"use strict";
+
+
+;
+	($.$mol_card) = class $mol_card extends ($.$mol_list) {
+		status(){
+			return "";
+		}
+		content(){
+			return [(this.title())];
+		}
+		Content(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ((this.content()));
 			return obj;
 		}
-		options(){
-			return {};
+		status_text(){
+			return (this.status());
 		}
-		keys(){
+		Status(){
+			const obj = new this.$.$mol_view();
+			(obj.minimal_height) = () => (30);
+			(obj.sub) = () => ([(this.status_text())]);
+			return obj;
+		}
+		attr(){
+			return {...(super.attr()), "mol_card_status_type": (this.status())};
+		}
+		rows(){
+			return [(this.Content()), (this.Status())];
+		}
+	};
+	($mol_mem(($.$mol_card.prototype), "Content"));
+	($mol_mem(($.$mol_card.prototype), "Status"));
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        /**
+         * Represents a common card. It can has several statuses at bottom line.
+         * @see https://mol.hyoo.ru/#!section=demos/demo=mol_card_demo/readme
+         */
+        class $mol_card extends $.$mol_card {
+            rows() {
+                return [
+                    this.Content(),
+                    ...this.status_text() ? [this.Status()] : [],
+                ];
+            }
+        }
+        $$.$mol_card = $mol_card;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/card/card.view.css", "[mol_card] {\n\tbackground: var(--mol_theme_card);\n\tcolor: var(--mol_theme_text);\n\tborder-radius: var(--mol_gap_round);\n\tdisplay: flex;\n\tflex: 0 1 auto;\n\tflex-direction: column;\n\tposition: relative;\n\tbox-shadow: 0 0 0.5rem 0rem hsla(0,0%,0%,.125);\n\t/* overflow: hidden; */\n}\n\n[mol_card_content] {\n\tflex: 1 1 auto;\n\tborder-radius: var(--mol_gap_round);\n\tmargin: 0;\n\tpadding: var(--mol_gap_block);\n}\n\n[mol_card_status] {\n\tbackground: var(--mol_theme_line);\n\tpadding: var(--mol_gap_text);\n\tmargin: 0;\n}\n\n[mol_card_status] {\n\tbackground: var(--mol_theme_line);\n}\n");
+})($ || ($ = {}));
+
+;
+	($.$rise_drag_view) = class $rise_drag_view extends ($.$mol_view) {
+		on_drag_start(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		on_drag_end(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		on_drag(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		dragged(){
+			return (this.Drag().dragged());
+		}
+		y(next){
+			if(next !== undefined) return next;
+			return 0;
+		}
+		x(next){
+			if(next !== undefined) return next;
+			return 0;
+		}
+		drags_synced(){
 			return [];
 		}
-		sub(){
-			return (this.items());
+		repos_x(id){
+			return 1;
+		}
+		repos_y(id){
+			return 1;
+		}
+		pointerdown(next){
+			return (this.Drag().pointerdown(next));
+		}
+		Drag(){
+			const obj = new this.$.$rise_drag();
+			(obj.on_drag_start) = (next) => ((this.on_drag_start(next)));
+			(obj.on_drag_end) = (next) => ((this.on_drag_end(next)));
+			(obj.on_drag) = (next) => ((this.on_drag(next)));
+			(obj.y) = (next) => ((this.y(next)));
+			(obj.x) = (next) => ((this.x(next)));
+			(obj.drags_synced) = () => ((this.drags_synced()));
+			(obj.repos_x) = (id) => ((this.repos_x(id)));
+			(obj.repos_y) = (id) => ((this.repos_y(id)));
+			return obj;
+		}
+		plugins(){
+			return [...(super.plugins()), (this.Drag())];
+		}
+		style(){
+			return {...(super.style()), "userSelect": "none"};
 		}
 	};
-	($mol_mem_key(($.$mol_check_list.prototype), "option_checked"));
-	($mol_mem_key(($.$mol_check_list.prototype), "Option"));
+	($mol_mem(($.$rise_drag_view.prototype), "on_drag_start"));
+	($mol_mem(($.$rise_drag_view.prototype), "on_drag_end"));
+	($mol_mem(($.$rise_drag_view.prototype), "on_drag"));
+	($mol_mem(($.$rise_drag_view.prototype), "y"));
+	($mol_mem(($.$rise_drag_view.prototype), "x"));
+	($mol_mem(($.$rise_drag_view.prototype), "Drag"));
 
 
 ;
@@ -30839,61 +31292,51 @@ var $;
 (function ($) {
     var $$;
     (function ($$) {
-        /**
-         * List of checkboxes
-         * @see https://mol.hyoo.ru/#!section=demos/demo=mol_check_list_demo
-         */
-        class $mol_check_list extends $.$mol_check_list {
-            options() {
-                return {};
+        class $rise_drag_view extends $.$rise_drag_view {
+            repos_x(val) {
+                return val;
             }
-            dictionary(next) {
-                return next ?? {};
-            }
-            option_checked(id, next) {
-                const prev = this.dictionary();
-                if (next === undefined)
-                    return prev[id] ?? null;
-                const next_rec = { ...prev, [id]: next };
-                if (next === null)
-                    delete next_rec[id];
-                return this.dictionary(next_rec)[id] ?? null;
-            }
-            keys() {
-                return Object.keys(this.options());
-            }
-            items() {
-                return this.keys().map(key => this.Option(key));
-            }
-            option_title(key) {
-                return this.options()[key] || key;
+            repos_y(val) {
+                return val;
             }
         }
-        __decorate([
-            $mol_mem
-        ], $mol_check_list.prototype, "keys", null);
-        __decorate([
-            $mol_mem
-        ], $mol_check_list.prototype, "items", null);
-        $$.$mol_check_list = $mol_check_list;
+        $$.$rise_drag_view = $rise_drag_view;
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
 
 ;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_attach("mol/check/list/list.view.css", "[mol_check_list] {\n\tdisplay: flex;\n\tflex-wrap: wrap;\n\tflex: 1 1 auto;\n\tborder-radius: var(--mol_gap_round);\n\tgap: 1px;\n}\n\n[mol_check_list_option] {\n\tflex: 0 1 auto;\n}\n\n[mol_check_list_option]:where([mol_check_checked=\"true\"]) {\n\ttext-shadow: 0 0;\n\tcolor: var(--mol_theme_current);\n}\n\n[mol_check_list_option]:where([mol_check_checked=\"true\"][disabled]) {\n\tcolor: var(--mol_theme_text);\n}\n");
-})($ || ($ = {}));
-
-;
-	($.$mol_switch) = class $mol_switch extends ($.$mol_check_list) {
-		value(next){
+	($.$rise_drag_absolute) = class $rise_drag_absolute extends ($.$rise_drag_view) {
+		top(next){
 			if(next !== undefined) return next;
-			return "";
+			return 0;
+		}
+		left(next){
+			if(next !== undefined) return next;
+			return 0;
+		}
+		top_px(){
+			return "0px";
+		}
+		left_px(){
+			return "0px";
+		}
+		y(next){
+			return (this.top(next));
+		}
+		x(next){
+			return (this.left(next));
+		}
+		style(){
+			return {
+				...(super.style()), 
+				"position": "absolute", 
+				"top": (this.top_px()), 
+				"left": (this.left_px())
+			};
 		}
 	};
-	($mol_mem(($.$mol_switch.prototype), "value"));
+	($mol_mem(($.$rise_drag_absolute.prototype), "top"));
+	($mol_mem(($.$rise_drag_absolute.prototype), "left"));
 
 
 ;
@@ -30906,43 +31349,690 @@ var $;
 (function ($) {
     var $$;
     (function ($$) {
-        /**
-         * Buttons which switching the state
-         * @see https://mol.hyoo.ru/#!section=demos/demo=mol_switch_demo
-         */
-        class $mol_switch extends $.$mol_switch {
-            value(next) {
-                return $mol_state_session.value(`${this}.value()`, next) ?? '';
+        class $rise_drag_absolute extends $.$rise_drag_absolute {
+            top_px() {
+                return this.top() + 'px';
             }
-            option_checked(key, next) {
+            left_px() {
+                return this.left() + 'px';
+            }
+        }
+        $$.$rise_drag_absolute = $rise_drag_absolute;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+	($.$rise_drag_demo) = class $rise_drag_demo extends ($.$mol_example_small) {
+		Card(){
+			const obj = new this.$.$mol_card();
+			(obj.title) = () => ("Draggable");
+			return obj;
+		}
+		Draggable(){
+			const obj = new this.$.$rise_drag_absolute();
+			(obj.sub) = () => ([(this.Card())]);
+			(obj.drags_synced) = () => ([(this.Synced_drag())]);
+			return obj;
+		}
+		top(next){
+			if(next !== undefined) return next;
+			return 100;
+		}
+		left(next){
+			if(next !== undefined) return next;
+			return 100;
+		}
+		Synced_drag(){
+			return (this.Synced().Drag());
+		}
+		Synced_card(){
+			const obj = new this.$.$mol_card();
+			(obj.title) = () => ("Synced");
+			return obj;
+		}
+		Synced(){
+			const obj = new this.$.$rise_drag_absolute();
+			(obj.top) = (next) => ((this.top(next)));
+			(obj.left) = (next) => ((this.left(next)));
+			(obj.sub) = () => ([(this.Synced_card())]);
+			return obj;
+		}
+		sub(){
+			return [(this.Draggable()), (this.Synced())];
+		}
+		tags(){
+			return ["drag"];
+		}
+		aspects(){
+			return ["Widget"];
+		}
+	};
+	($mol_mem(($.$rise_drag_demo.prototype), "Card"));
+	($mol_mem(($.$rise_drag_demo.prototype), "Draggable"));
+	($mol_mem(($.$rise_drag_demo.prototype), "top"));
+	($mol_mem(($.$rise_drag_demo.prototype), "left"));
+	($mol_mem(($.$rise_drag_demo.prototype), "Synced_card"));
+	($mol_mem(($.$rise_drag_demo.prototype), "Synced"));
+
+
+;
+"use strict";
+
+
+;
+	($.$rise_resize) = class $rise_resize extends ($.$mol_view) {
+		drag_body(){
+			return [];
+		}
+		x(next){
+			if(next !== undefined) return next;
+			return 0;
+		}
+		y(next){
+			if(next !== undefined) return next;
+			return 0;
+		}
+		on_drag_start(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		on_drag(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		on_drag_end(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		dragged(){
+			return (this.Drag_view().dragged());
+		}
+		drags_synced(){
+			return [];
+		}
+		Drag(){
+			return (this.Drag_view().Drag());
+		}
+		repos_x(id){
+			return 1;
+		}
+		repos_y(id){
+			return 1;
+		}
+		drag_pointerdown(next){
+			return (this.Drag_view().pointerdown(next));
+		}
+		Drag_view(){
+			const obj = new this.$.$rise_drag_view();
+			(obj.minimal_height) = () => (0);
+			(obj.sub) = () => ((this.drag_body()));
+			(obj.x) = (next) => ((this.x(next)));
+			(obj.y) = (next) => ((this.y(next)));
+			(obj.on_drag_start) = (next) => ((this.on_drag_start(next)));
+			(obj.on_drag) = (next) => ((this.on_drag(next)));
+			(obj.on_drag_end) = (next) => ((this.on_drag_end(next)));
+			(obj.drags_synced) = () => ((this.drags_synced()));
+			(obj.repos_x) = (id) => ((this.repos_x(id)));
+			(obj.repos_y) = (id) => ((this.repos_y(id)));
+			return obj;
+		}
+		controls(){
+			return [];
+		}
+		resize_start(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		resize_end(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		top_edge_y(next){
+			if(next !== undefined) return next;
+			return 0;
+		}
+		Top_edge(){
+			const obj = new this.$.$rise_resize_edge();
+			(obj.repos_x) = (id) => ((this.repos_x(id)));
+			(obj.repos_y) = (id) => ((this.repos_y(id)));
+			(obj.on_drag_start) = (next) => ((this.resize_start(next)));
+			(obj.on_drag_end) = (next) => ((this.resize_end(next)));
+			(obj.y) = (next) => ((this.top_edge_y(next)));
+			return obj;
+		}
+		left_edge_x(next){
+			if(next !== undefined) return next;
+			return 0;
+		}
+		Left_edge(){
+			const obj = new this.$.$rise_resize_edge();
+			(obj.repos_x) = (id) => ((this.repos_x(id)));
+			(obj.repos_y) = (id) => ((this.repos_y(id)));
+			(obj.on_drag_start) = (next) => ((this.resize_start(next)));
+			(obj.on_drag_end) = (next) => ((this.resize_end(next)));
+			(obj.x) = (next) => ((this.left_edge_x(next)));
+			return obj;
+		}
+		bottom_edge_y(next){
+			if(next !== undefined) return next;
+			return 0;
+		}
+		Bottom_edge(){
+			const obj = new this.$.$rise_resize_edge();
+			(obj.repos_x) = (id) => ((this.repos_x(id)));
+			(obj.repos_y) = (id) => ((this.repos_y(id)));
+			(obj.on_drag_start) = (next) => ((this.resize_start(next)));
+			(obj.on_drag_end) = (next) => ((this.resize_end(next)));
+			(obj.y) = (next) => ((this.bottom_edge_y(next)));
+			return obj;
+		}
+		right_edge_x(next){
+			if(next !== undefined) return next;
+			return 0;
+		}
+		Right_edge(){
+			const obj = new this.$.$rise_resize_edge();
+			(obj.repos_x) = (id) => ((this.repos_x(id)));
+			(obj.repos_y) = (id) => ((this.repos_y(id)));
+			(obj.on_drag_start) = (next) => ((this.resize_start(next)));
+			(obj.on_drag_end) = (next) => ((this.resize_end(next)));
+			(obj.x) = (next) => ((this.right_edge_x(next)));
+			return obj;
+		}
+		Top_left_edge(){
+			const obj = new this.$.$rise_resize_edge();
+			(obj.repos_x) = (id) => ((this.repos_x(id)));
+			(obj.repos_y) = (id) => ((this.repos_y(id)));
+			(obj.on_drag_start) = (next) => ((this.resize_start(next)));
+			(obj.on_drag_end) = (next) => ((this.resize_end(next)));
+			(obj.y) = (next) => ((this.top_edge_y(next)));
+			(obj.x) = (next) => ((this.left_edge_x(next)));
+			return obj;
+		}
+		Top_right_edge(){
+			const obj = new this.$.$rise_resize_edge();
+			(obj.repos_x) = (id) => ((this.repos_x(id)));
+			(obj.repos_y) = (id) => ((this.repos_y(id)));
+			(obj.on_drag_start) = (next) => ((this.resize_start(next)));
+			(obj.on_drag_end) = (next) => ((this.resize_end(next)));
+			(obj.y) = (next) => ((this.top_edge_y(next)));
+			(obj.x) = (next) => ((this.right_edge_x(next)));
+			return obj;
+		}
+		Bottom_left_edge(){
+			const obj = new this.$.$rise_resize_edge();
+			(obj.repos_x) = (id) => ((this.repos_x(id)));
+			(obj.repos_y) = (id) => ((this.repos_y(id)));
+			(obj.on_drag_start) = (next) => ((this.resize_start(next)));
+			(obj.on_drag_end) = (next) => ((this.resize_end(next)));
+			(obj.y) = (next) => ((this.bottom_edge_y(next)));
+			(obj.x) = (next) => ((this.left_edge_x(next)));
+			return obj;
+		}
+		Bottom_right_edge(){
+			const obj = new this.$.$rise_resize_edge();
+			(obj.repos_x) = (id) => ((this.repos_x(id)));
+			(obj.repos_y) = (id) => ((this.repos_y(id)));
+			(obj.on_drag_start) = (next) => ((this.resize_start(next)));
+			(obj.on_drag_end) = (next) => ((this.resize_end(next)));
+			(obj.y) = (next) => ((this.bottom_edge_y(next)));
+			(obj.x) = (next) => ((this.right_edge_x(next)));
+			return obj;
+		}
+		edges(){
+			return [
+				(this.Top_edge()), 
+				(this.Left_edge()), 
+				(this.Bottom_edge()), 
+				(this.Right_edge()), 
+				(this.Top_left_edge()), 
+				(this.Top_right_edge()), 
+				(this.Bottom_left_edge()), 
+				(this.Bottom_right_edge())
+			];
+		}
+		top_px(){
+			return "0px";
+		}
+		left_px(){
+			return "0px";
+		}
+		height_px(){
+			return "20px";
+		}
+		width_px(){
+			return "20px";
+		}
+		sub(){
+			return [
+				(this.Drag_view()), 
+				...(this.controls()), 
+				...(this.edges())
+			];
+		}
+		resizing(next){
+			if(next !== undefined) return next;
+			return false;
+		}
+		transforming(){
+			return false;
+		}
+		height_min(){
+			return 20;
+		}
+		width_min(){
+			return 20;
+		}
+		height(next){
+			if(next !== undefined) return next;
+			return 0;
+		}
+		width(next){
+			if(next !== undefined) return next;
+			return 0;
+		}
+		top(next){
+			if(next !== undefined) return next;
+			return 0;
+		}
+		left(next){
+			if(next !== undefined) return next;
+			return 0;
+		}
+		stick_threshold(){
+			return 10;
+		}
+		x_stick(next){
+			if(next !== undefined) return next;
+			return 0;
+		}
+		y_stick(next){
+			if(next !== undefined) return next;
+			return 0;
+		}
+		bottom_edge_y_stick(next){
+			if(next !== undefined) return next;
+			return (this.height_min());
+		}
+		right_edge_x_stick(next){
+			if(next !== undefined) return next;
+			return (this.width_min());
+		}
+		top_edge_y_stick(next){
+			if(next !== undefined) return next;
+			return 0;
+		}
+		left_edge_x_stick(next){
+			if(next !== undefined) return next;
+			return 0;
+		}
+		stickable(next){
+			if(next !== undefined) return next;
+			return true;
+		}
+		sticks_y(){
+			return [];
+		}
+		sticks_x(){
+			return [];
+		}
+		auto(){
+			return [
+				(this.x()), 
+				(this.y()), 
+				(this.left_edge_x()), 
+				(this.right_edge_x()), 
+				(this.top_edge_y()), 
+				(this.bottom_edge_y())
+			];
+		}
+		style(){
+			return {
+				...(super.style()), 
+				"top": (this.top_px()), 
+				"left": (this.left_px()), 
+				"height": (this.height_px()), 
+				"width": (this.width_px())
+			};
+		}
+	};
+	($mol_mem(($.$rise_resize.prototype), "x"));
+	($mol_mem(($.$rise_resize.prototype), "y"));
+	($mol_mem(($.$rise_resize.prototype), "on_drag_start"));
+	($mol_mem(($.$rise_resize.prototype), "on_drag"));
+	($mol_mem(($.$rise_resize.prototype), "on_drag_end"));
+	($mol_mem(($.$rise_resize.prototype), "Drag_view"));
+	($mol_mem(($.$rise_resize.prototype), "resize_start"));
+	($mol_mem(($.$rise_resize.prototype), "resize_end"));
+	($mol_mem(($.$rise_resize.prototype), "top_edge_y"));
+	($mol_mem(($.$rise_resize.prototype), "Top_edge"));
+	($mol_mem(($.$rise_resize.prototype), "left_edge_x"));
+	($mol_mem(($.$rise_resize.prototype), "Left_edge"));
+	($mol_mem(($.$rise_resize.prototype), "bottom_edge_y"));
+	($mol_mem(($.$rise_resize.prototype), "Bottom_edge"));
+	($mol_mem(($.$rise_resize.prototype), "right_edge_x"));
+	($mol_mem(($.$rise_resize.prototype), "Right_edge"));
+	($mol_mem(($.$rise_resize.prototype), "Top_left_edge"));
+	($mol_mem(($.$rise_resize.prototype), "Top_right_edge"));
+	($mol_mem(($.$rise_resize.prototype), "Bottom_left_edge"));
+	($mol_mem(($.$rise_resize.prototype), "Bottom_right_edge"));
+	($mol_mem(($.$rise_resize.prototype), "resizing"));
+	($mol_mem(($.$rise_resize.prototype), "height"));
+	($mol_mem(($.$rise_resize.prototype), "width"));
+	($mol_mem(($.$rise_resize.prototype), "top"));
+	($mol_mem(($.$rise_resize.prototype), "left"));
+	($mol_mem(($.$rise_resize.prototype), "x_stick"));
+	($mol_mem(($.$rise_resize.prototype), "y_stick"));
+	($mol_mem(($.$rise_resize.prototype), "bottom_edge_y_stick"));
+	($mol_mem(($.$rise_resize.prototype), "right_edge_x_stick"));
+	($mol_mem(($.$rise_resize.prototype), "top_edge_y_stick"));
+	($mol_mem(($.$rise_resize.prototype), "left_edge_x_stick"));
+	($mol_mem(($.$rise_resize.prototype), "stickable"));
+	($.$rise_resize_edge) = class $rise_resize_edge extends ($.$rise_drag_view) {};
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $rise_resize extends $.$rise_resize {
+            repos_x(val) {
+                return val;
+            }
+            repos_y(val) {
+                return val;
+            }
+            to_stick(sticks, val, shift) {
+                if (!this.stickable())
+                    return val;
+                for (const stick of sticks) {
+                    const to_stick = stick - (val + shift);
+                    if (Math.abs(to_stick) < this.stick_threshold()) {
+                        return val + to_stick;
+                    }
+                }
+                return val;
+            }
+            to_stick_x(val, shift) {
+                return this.to_stick(this.sticks_x(), val, shift);
+            }
+            to_stick_y(val, shift) {
+                return this.to_stick(this.sticks_y(), val, shift);
+            }
+            y(next) {
                 if (next === undefined)
-                    return this.value() == key;
-                this.value(next ? key : '');
+                    return this.y_stick() ?? 0;
+                const top_stick = this.to_stick_y(next, this.top_edge_y_stick());
+                if (top_stick == next) {
+                    const bottom_stick = this.to_stick_y(next, this.top_edge_y_stick() + this.height());
+                    this.y_stick(bottom_stick);
+                }
+                else {
+                    this.y_stick(top_stick);
+                }
                 return next;
             }
+            x(next) {
+                if (next === undefined)
+                    return this.x_stick() ?? 0;
+                const left_stick = this.to_stick_x(next, this.left_edge_x_stick());
+                if (left_stick == next) {
+                    const right_stick = this.to_stick_x(next, this.left_edge_x_stick() + this.width());
+                    this.x_stick(right_stick);
+                }
+                else {
+                    this.x_stick(left_stick);
+                }
+                return next;
+            }
+            top_edge_y(next) {
+                if (next === undefined)
+                    return this.top_edge_y_stick() ?? 0;
+                const limit = this.bottom_edge_y_stick() - this.height_min();
+                const top_edge_y_stick = Math.min(this.to_stick_y(next, this.y_stick()), limit);
+                this.top_edge_y_stick(top_edge_y_stick);
+                return next;
+            }
+            bottom_edge_y(next) {
+                if (next === undefined)
+                    return this.bottom_edge_y_stick() ?? 0;
+                const limit = this.top_edge_y_stick() + this.height_min();
+                const bottom_edge_y_stick = Math.max(this.to_stick_y(next, this.top() - this.top_edge_y_stick()), limit);
+                this.bottom_edge_y_stick(bottom_edge_y_stick);
+                return next;
+            }
+            left_edge_x(next) {
+                if (next === undefined)
+                    return this.left_edge_x_stick() ?? 0;
+                const limit = this.right_edge_x_stick() - this.width_min();
+                const left_edge_x_stick = Math.min(this.to_stick_x(next, this.x_stick()), limit);
+                this.left_edge_x_stick(left_edge_x_stick);
+                return next;
+            }
+            right_edge_x(next) {
+                if (next === undefined)
+                    return this.right_edge_x_stick() ?? 0;
+                const limit = this.left_edge_x_stick() + this.width_min();
+                let right_edge_x_stick = Math.max(this.to_stick_x(next, this.left() - this.left_edge_x_stick()), limit);
+                this.right_edge_x_stick(right_edge_x_stick);
+                return next;
+            }
+            top(next) {
+                if (next !== undefined) {
+                    this.y_stick(next - this.top_edge_y_stick());
+                    return next;
+                }
+                return this.y_stick() + this.top_edge_y_stick();
+            }
+            left(next) {
+                if (next !== undefined) {
+                    this.x_stick(next - this.left_edge_x_stick());
+                    return next;
+                }
+                return this.x_stick() + this.left_edge_x_stick();
+            }
+            width(next) {
+                if (next !== undefined) {
+                    this.right_edge_x_stick(next + this.left_edge_x_stick());
+                    return next;
+                }
+                return this.right_edge_x_stick() - this.left_edge_x_stick();
+            }
+            height(next) {
+                if (next !== undefined) {
+                    this.bottom_edge_y_stick(next + this.top_edge_y_stick());
+                    return next;
+                }
+                return this.bottom_edge_y_stick() - this.top_edge_y_stick();
+            }
+            height_px() {
+                return this.height() + 'px';
+            }
+            width_px() {
+                return this.width() + 'px';
+            }
+            top_px() {
+                return this.top() + 'px';
+            }
+            left_px() {
+                return this.left() + 'px';
+            }
+            transforming() {
+                return this.dragged() || this.resizing();
+            }
+            resize_start(next) {
+                this.resizing(true);
+            }
+            resize_end() {
+                this.on_drag_end();
+                this.resizing(false);
+            }
         }
-        $$.$mol_switch = $mol_switch;
+        __decorate([
+            $mol_action
+        ], $rise_resize.prototype, "to_stick", null);
+        __decorate([
+            $mol_action
+        ], $rise_resize.prototype, "to_stick_x", null);
+        __decorate([
+            $mol_action
+        ], $rise_resize.prototype, "to_stick_y", null);
+        __decorate([
+            $mol_mem
+        ], $rise_resize.prototype, "y", null);
+        __decorate([
+            $mol_mem
+        ], $rise_resize.prototype, "x", null);
+        __decorate([
+            $mol_mem
+        ], $rise_resize.prototype, "top_edge_y", null);
+        __decorate([
+            $mol_mem
+        ], $rise_resize.prototype, "bottom_edge_y", null);
+        __decorate([
+            $mol_mem
+        ], $rise_resize.prototype, "left_edge_x", null);
+        __decorate([
+            $mol_mem
+        ], $rise_resize.prototype, "right_edge_x", null);
+        __decorate([
+            $mol_mem
+        ], $rise_resize.prototype, "top", null);
+        __decorate([
+            $mol_mem
+        ], $rise_resize.prototype, "left", null);
+        __decorate([
+            $mol_mem
+        ], $rise_resize.prototype, "width", null);
+        __decorate([
+            $mol_mem
+        ], $rise_resize.prototype, "height", null);
+        __decorate([
+            $mol_mem
+        ], $rise_resize.prototype, "height_px", null);
+        __decorate([
+            $mol_mem
+        ], $rise_resize.prototype, "width_px", null);
+        __decorate([
+            $mol_mem
+        ], $rise_resize.prototype, "top_px", null);
+        __decorate([
+            $mol_mem
+        ], $rise_resize.prototype, "left_px", null);
+        __decorate([
+            $mol_mem
+        ], $rise_resize.prototype, "transforming", null);
+        $$.$rise_resize = $rise_resize;
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
-
-;
-	($.$mol_button_major) = class $mol_button_major extends ($.$mol_button_minor) {
-		theme(){
-			return "$mol_theme_base";
-		}
-	};
-
 
 ;
 "use strict";
 var $;
 (function ($) {
-    $mol_style_attach("mol/button/major/major.view.css", "[mol_button_major] {\n\tbackground-color: var(--mol_theme_back);\n\tcolor: var(--mol_theme_text);\n}\n");
+    var $$;
+    (function ($$) {
+        const Edge_size = 10;
+        const Top_edge = {
+            top: `-${Edge_size / 2}px`,
+            height: `${Edge_size}px`,
+        };
+        const Left_edge = {
+            left: `-${Edge_size / 2}px`,
+            width: `${Edge_size}px`,
+        };
+        const Right_edge = {
+            right: `-${Edge_size / 2}px`,
+            width: `${Edge_size}px`,
+        };
+        const Bottom_edge = {
+            bottom: `-${Edge_size / 2}px`,
+            height: `${Edge_size}px`,
+        };
+        $mol_style_define($rise_resize, {
+            position: 'absolute',
+            transition: 'none',
+            Drag_view: {
+                // flex: {
+                // 	grow: 1,
+                // },
+                position: 'absolute',
+                width: '100%',
+                height: '100%',
+            },
+            Top_edge: {
+                cursor: 'ns-resize',
+                left: 0,
+                ...Top_edge,
+                width: '100%',
+            },
+            Top_left_edge: {
+                cursor: 'nwse-resize',
+                ...Top_edge,
+                ...Left_edge,
+            },
+            Top_right_edge: {
+                cursor: 'nesw-resize',
+                ...Top_edge,
+                ...Right_edge,
+            },
+            Left_edge: {
+                cursor: 'ew-resize',
+                ...Left_edge,
+                height: '100%',
+            },
+            Bottom_edge: {
+                cursor: 'ns-resize',
+                ...Bottom_edge,
+                width: '100%',
+            },
+            Bottom_left_edge: {
+                cursor: 'nesw-resize',
+                ...Bottom_edge,
+                ...Left_edge,
+            },
+            Bottom_right_edge: {
+                cursor: 'nwse-resize',
+                ...Bottom_edge,
+                ...Right_edge,
+            },
+            Right_edge: {
+                cursor: 'ew-resize',
+                ...Right_edge,
+                height: '100%',
+            },
+        });
+        $mol_style_define($rise_resize_edge, {
+            position: 'absolute',
+            zIndex: $mol_layer.float,
+            userSelect: 'none',
+            opacity: 0.1,
+            ":hover": {
+                background: {
+                    color: $mol_theme.shade,
+                },
+            },
+            '[rise_dragged]': {
+                'true': {
+                    background: {
+                        color: $mol_theme.line,
+                    },
+                    ":hover": {
+                        background: {
+                            color: $mol_theme.line,
+                        },
+                    },
+                },
+            },
+        });
+    })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
-
-;
-"use strict";
-
 
 ;
 	($.$mol_grid) = class $mol_grid extends ($.$mol_view) {
@@ -31245,458 +32335,6 @@ var $;
 })($ || ($ = {}));
 
 ;
-	($.$mol_icon_information) = class $mol_icon_information extends ($.$mol_icon) {
-		path(){
-			return "M13,9H11V7H13M13,17H11V11H13M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z";
-		}
-	};
-
-
-;
-"use strict";
-
-
-;
-	($.$mol_icon_information_outline) = class $mol_icon_information_outline extends ($.$mol_icon) {
-		path(){
-			return "M11,9H13V7H11M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M11,17H13V11H11V17Z";
-		}
-	};
-
-
-;
-"use strict";
-
-
-;
-	($.$mol_icon_content_copy) = class $mol_icon_content_copy extends ($.$mol_icon) {
-		path(){
-			return "M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z";
-		}
-	};
-
-
-;
-"use strict";
-
-
-;
-	($.$rise_bench_metrics_details) = class $rise_bench_metrics_details extends ($.$mol_pick) {
-		Icon(){
-			const obj = new this.$.$mol_icon_information_outline();
-			return obj;
-		}
-		Copy_icon(){
-			const obj = new this.$.$mol_icon_content_copy();
-			return obj;
-		}
-		Copy(){
-			const obj = new this.$.$mol_button_copy();
-			(obj.hint) = () => ("Копировать параметры компьютера");
-			(obj.text) = () => ((this.computer()));
-			(obj.sub) = () => ([(this.Copy_icon())]);
-			return obj;
-		}
-		computer(){
-			return "";
-		}
-		Computer(){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([(this.computer())]);
-			return obj;
-		}
-		Computer_label(){
-			const obj = new this.$.$mol_labeler();
-			(obj.title) = () => ("Параметры компьютера");
-			(obj.label) = () => (["Параметры компьютера", (this.Copy())]);
-			(obj.Content) = () => ((this.Computer()));
-			return obj;
-		}
-		browser(){
-			return "";
-		}
-		Browser(){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([(this.browser())]);
-			return obj;
-		}
-		Browser_label(){
-			const obj = new this.$.$mol_labeler();
-			(obj.title) = () => ("Браузер");
-			(obj.Content) = () => ((this.Browser()));
-			return obj;
-		}
-		Text(){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([(this.Computer_label()), (this.Browser_label())]);
-			return obj;
-		}
-		hint(){
-			return "Параметры компьютера и браузер";
-		}
-		trigger_content(){
-			return [(this.Icon())];
-		}
-		bubble_content(){
-			return [(this.Text())];
-		}
-	};
-	($mol_mem(($.$rise_bench_metrics_details.prototype), "Icon"));
-	($mol_mem(($.$rise_bench_metrics_details.prototype), "Copy_icon"));
-	($mol_mem(($.$rise_bench_metrics_details.prototype), "Copy"));
-	($mol_mem(($.$rise_bench_metrics_details.prototype), "Computer"));
-	($mol_mem(($.$rise_bench_metrics_details.prototype), "Computer_label"));
-	($mol_mem(($.$rise_bench_metrics_details.prototype), "Browser"));
-	($mol_mem(($.$rise_bench_metrics_details.prototype), "Browser_label"));
-	($mol_mem(($.$rise_bench_metrics_details.prototype), "Text"));
-
-
-;
-"use strict";
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_define($rise_bench_metrics_details, {
-        padding: 0,
-        Trigger: { padding: $mol_gap.text, minWidth: $mol_style_unit.rem(2.5), minHeight: $mol_style_unit.rem(2.5) },
-        Bubble: { maxHeight: $mol_style_unit.vh(80), overflow: 'auto' },
-        Text: { padding: $mol_gap.block, flex: { direction: 'column' }, maxWidth: $mol_style_unit.vw(80), width: $mol_style_unit.rem(28) },
-        Computer: { whiteSpace: 'pre-wrap', overflowWrap: 'anywhere' },
-        Computer_label: { Label: { align: { items: 'center' } } },
-        Browser: { whiteSpace: 'pre-wrap', overflowWrap: 'anywhere' },
-    });
-})($ || ($ = {}));
-
-;
-	($.$rise_bench_metrics) = class $rise_bench_metrics extends ($.$mol_grid) {
-		embedded(){
-			return false;
-		}
-		details_computer(id){
-			return "";
-		}
-		details_browser(id){
-			return "";
-		}
-		attr(){
-			return {...(super.attr()), "embedded": (this.embedded())};
-		}
-		runs(next){
-			if(next !== undefined) return next;
-			return [];
-		}
-		run_add(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		operations(){
-			return [];
-		}
-		compare(){
-			return false;
-		}
-		text_mode(){
-			return false;
-		}
-		Details(id){
-			const obj = new this.$.$rise_bench_metrics_details();
-			(obj.computer) = () => ((this.details_computer(id)));
-			(obj.browser) = () => ((this.details_browser(id)));
-			return obj;
-		}
-	};
-	($mol_mem(($.$rise_bench_metrics.prototype), "runs"));
-	($mol_mem(($.$rise_bench_metrics.prototype), "run_add"));
-	($mol_mem_key(($.$rise_bench_metrics.prototype), "Details"));
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    class $rise_bench_computer {
-        static clean(text) {
-            return text.replace(/\r\n?/g, '\n')
-                .replace(/^[\t ]*(?:Код устройства|Идентификатор устройства|Device ID)[^\n]*\n[\s\S]*?(?=^[\t ]*(?:Тип системы|System type)(?=[\t :]|$))/gim, '')
-                .replace(/^[\t ]*(?:Код устройства|Идентификатор устройства|Код продукта|Идентификатор продукта|Device ID|Product ID)[^\n]*(?:\n[\t ]*(?:[\da-f]{8}(?:-[\da-f]{4}){3}-[\da-f]{12}|[\dA-Z]{5}(?:-[\dA-Z]{5}){4}|\d{5}-\d{5}-\d{5}-[\dA-Z]{5})[\t ]*)?\n?/gim, '');
-        }
-    }
-    $.$rise_bench_computer = $rise_bench_computer;
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    $.$rise_bench_run_baza_version = '2e6100b225c8d4fb3a5b5d14e8568223e8a8c785';
-    $.$rise_bench_run_benchmark_version = '0.6.0';
-    class $rise_bench_run extends $mol_object {
-        count;
-        properties;
-        stamp;
-        baza_version;
-        benchmark_version;
-        id;
-        computer;
-        browser;
-        engine;
-        engine_version;
-        constructor(count, properties = 0, stamp = new $mol_time_moment().toString('DD.MM.YYYY hh:mm:ss'), baza_version = $.$rise_bench_run_baza_version, benchmark_version = $.$rise_bench_run_benchmark_version, id = crypto.randomUUID(), computer = $rise_bench_computer.clean($mol_state_local.value('$rise_bench_computer') ?? ''), browser = typeof navigator === 'undefined' ? '' : navigator.userAgent, engine = baza_version === '—' ? 'idb' : 'goods', engine_version = baza_version === '—' ? 'browser' : baza_version) {
-            super();
-            this.count = count;
-            this.properties = properties;
-            this.stamp = stamp;
-            this.baza_version = baza_version;
-            this.benchmark_version = benchmark_version;
-            this.id = id;
-            this.computer = computer;
-            this.browser = browser;
-            this.engine = engine;
-            this.engine_version = engine_version;
-        }
-        // Memoized channels can be reaped when neither table nor chart observes them.
-        // A run owns its data independently of those temporary subscriptions.
-        state_value = 'Выполняется';
-        failure_value = '';
-        bytes_value = null;
-        metric_values = new Map();
-        state(next) {
-            if (next !== undefined)
-                this.state_value = next;
-            return this.state_value;
-        }
-        failure(next) {
-            if (next !== undefined)
-                this.failure_value = next;
-            return this.failure_value;
-        }
-        bytes(next) {
-            if (next !== undefined)
-                this.bytes_value = next;
-            return this.bytes_value;
-        }
-        metric(operation, next) {
-            if (next !== undefined)
-                this.metric_values.set(operation, next);
-            return this.metric_values.get(operation) ?? null;
-        }
-    }
-    __decorate([
-        $mol_mem
-    ], $rise_bench_run.prototype, "state", null);
-    __decorate([
-        $mol_mem
-    ], $rise_bench_run.prototype, "failure", null);
-    __decorate([
-        $mol_mem
-    ], $rise_bench_run.prototype, "bytes", null);
-    __decorate([
-        $mol_mem_key
-    ], $rise_bench_run.prototype, "metric", null);
-    $.$rise_bench_run = $rise_bench_run;
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    $.$rise_bench_engine = {
-        goods: { title: 'Гипербаза', version: $rise_bench_run_baza_version, storage: 'Хранение: одна Area на запись' },
-        idb: { title: 'IDB', version: 'browser', storage: 'IndexedDB через $mol_db, без индексов' },
-        sqlite: { title: 'SQLite', version: '3.54.1-build1', storage: 'SQLite WASM · OPFS SAH Pool · без индексов' },
-        pglite: { title: 'PGlite', version: '0.5.15', storage: 'PGlite · IndexedDB · без индексов' },
-        duckdb: { title: 'DuckDB', version: '1.32.0', storage: 'DuckDB WASM · OPFS · без индексов' },
-    };
-})($ || ($ = {}));
-
-;
-"use strict";
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $rise_bench_metrics extends $.$rise_bench_metrics {
-            embedded() { return window.parent !== window; }
-            Cell(id) { return id.col === 'Компьютер' ? this.Details(id) : super.Cell(id); }
-            details_computer(id) { return this.runs()[Number(id.row.at(-1))]?.computer || 'Не указаны'; }
-            details_browser(id) { return this.runs()[Number(id.row.at(-1))]?.browser || 'Не указан'; }
-            run_add(run) {
-                const rows = this.runs();
-                if (rows.includes(run))
-                    return;
-                this.runs([run, ...rows]);
-            }
-            col_ids() { return ['№', 'Дата и время', ...this.compare() ? ['Хранилище'] : [], 'Версия движка', 'Версия бенчмарка', ...this.text_mode() ? ['Строк', 'Размер, КБ'] : ['Объём', 'Полей'], ...this.operations(), 'Состояние', 'Компьютер']; }
-            records() {
-                return this.runs().map((run, index, rows) => ({
-                    '№': rows.length - index,
-                    'Дата и время': run.stamp,
-                    'Хранилище': $rise_bench_engine[run.engine]?.title ?? run.engine,
-                    'Версия движка': run.engine === 'goods' ? run.engine_version.slice(0, 8) : run.engine_version,
-                    'Версия бенчмарка': run.benchmark_version,
-                    'Объём': run.count,
-                    'Строк': run.count,
-                    'Размер, КБ': run.bytes() === null ? '—' : (run.bytes() / 1024).toFixed(3),
-                    'Полей': run.properties || '—',
-                    'Состояние': run.failure() || run.state(),
-                    ...Object.fromEntries(this.operations().map(operation => {
-                        const time = run.metric(operation);
-                        return [operation, time === null ? '—' : time.toFixed(3)];
-                    })),
-                }));
-            }
-        }
-        __decorate([
-            $mol_action
-        ], $rise_bench_metrics.prototype, "run_add", null);
-        __decorate([
-            $mol_mem
-        ], $rise_bench_metrics.prototype, "records", null);
-        $$.$rise_bench_metrics = $rise_bench_metrics;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_define($rise_bench_metrics, { '[embedded]': { true: { display: 'none' } } });
-})($ || ($ = {}));
-
-;
-	($.$mol_example) = class $mol_example extends ($.$mol_view) {
-		tags(){
-			return [];
-		}
-		aspects(){
-			return [];
-		}
-	};
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_attach("mol/example/example.view.css", "[mol_example] {\n\tmax-width: 100%;\n}\n");
-})($ || ($ = {}));
-
-;
-"use strict";
-
-
-;
-	($.$mol_example_small) = class $mol_example_small extends ($.$mol_example) {};
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_attach("mol/example/small/small.view.css", "[mol_example_small] {\n\tdisplay: flex;\n\tflex-wrap: wrap;\n\talign-items: flex-start;\n\talign-content: flex-start;\n\tjustify-content: flex-start;\n\tflex: 0 0 auto;\n\tbox-sizing: border-box;\n\tmax-width: 100%;\n\tgap: var(--mol_gap_block);\n}\n\n[mol_example_small] > * {\n\tmax-width: 100%;\n}\n");
-})($ || ($ = {}));
-
-;
-"use strict";
-
-
-;
-	($.$mol_list_demo) = class $mol_list_demo extends ($.$mol_example_small) {
-		items_count(next){
-			if(next !== undefined) return next;
-			return 50;
-		}
-		Items_count(){
-			const obj = new this.$.$mol_number();
-			(obj.value) = (next) => ((this.items_count(next)));
-			(obj.value_min) = () => (0);
-			(obj.value_max) = () => (100000);
-			return obj;
-		}
-		Items_count_label(){
-			const obj = new this.$.$mol_labeler();
-			(obj.title) = () => ("Items count");
-			(obj.content) = () => ([(this.Items_count())]);
-			return obj;
-		}
-		item_title(id){
-			return "";
-		}
-		Item(id){
-			const obj = new this.$.$mol_link();
-			(obj.title) = () => ((this.item_title(id)));
-			return obj;
-		}
-		list_items(){
-			return [(this.Item("0"))];
-		}
-		List_empty(){
-			const obj = new this.$.$mol_paragraph();
-			(obj.title) = () => ("No items in this list");
-			return obj;
-		}
-		Items(){
-			const obj = new this.$.$mol_list();
-			(obj.rows) = () => ((this.list_items()));
-			(obj.Empty) = () => ((this.List_empty()));
-			return obj;
-		}
-		sub(){
-			return [(this.Items_count_label()), (this.Items())];
-		}
-		tags(){
-			return [
-				"list", 
-				"rows", 
-				"stack"
-			];
-		}
-		aspects(){
-			return ["Widget/Layout"];
-		}
-	};
-	($mol_mem(($.$mol_list_demo.prototype), "items_count"));
-	($mol_mem(($.$mol_list_demo.prototype), "Items_count"));
-	($mol_mem(($.$mol_list_demo.prototype), "Items_count_label"));
-	($mol_mem_key(($.$mol_list_demo.prototype), "Item"));
-	($mol_mem(($.$mol_list_demo.prototype), "List_empty"));
-	($mol_mem(($.$mol_list_demo.prototype), "Items"));
-
-
-;
-"use strict";
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $mol_list_demo extends $.$mol_list_demo {
-            item_title(id) {
-                return `Item #${id + 1}`;
-            }
-            list_items() {
-                const rows = [];
-                for (let key = 0; key < this.items_count(); key++) {
-                    rows.push(this.Item(key));
-                }
-                return rows;
-            }
-        }
-        $$.$mol_list_demo = $mol_list_demo;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
 	($.$mol_image) = class $mol_image extends ($.$mol_view) {
 		uri(){
 			return "";
@@ -31880,3190 +32518,6 @@ var $;
 var $;
 (function ($) {
     $mol_style_attach("mol/link/iconed/iconed.view.css", "[mol_link_iconed] {\n\talign-items: baseline;\n\tdisplay: inline-flex;\n\tpadding: var(--mol_gap_text);\n}\n\n[mol_link_iconed_icon] {\n\tbox-shadow: none;\n\theight: 1.5em;\n\twidth: 1em;\n\tflex: 0 0 auto;\n\tdisplay: inline-block;\n\talign-self: normal;\n\tvertical-align: top;\n\tborder-radius: 0;\n\tobject-fit: scale-down;\n\topacity: .75;\n}\n\n[mol_theme=\"$mol_theme_dark\"] [mol_link_iconed_icon] {\n\tfilter: var(--mol_theme_image);\n}\n");
-})($ || ($ = {}));
-
-;
-	($.$mol_row) = class $mol_row extends ($.$mol_view) {};
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_attach("mol/row/row.view.css", "[mol_row] {\n\tdisplay: flex;\n\tflex-wrap: wrap;\n\talign-items: flex-start;\n\talign-content: flex-start;\n\tjustify-content: flex-start;\n\tpadding: var(--mol_gap_block);\n\tgap: var(--mol_gap_block);\n\tflex: 0 0 auto;\n\tbox-sizing: border-box;\n\tmax-width: 100%;\n}\n\n[mol_row] > * {\n\tmax-width: 100%;\n}\n");
-})($ || ($ = {}));
-
-;
-"use strict";
-
-
-;
-	($.$mol_list_demo_table) = class $mol_list_demo_table extends ($.$mol_example) {
-		row_id(id, next){
-			if(next !== undefined) return next;
-			return "0000";
-		}
-		row_checked(id, next){
-			if(next !== undefined) return next;
-			return false;
-		}
-		Id(id){
-			const obj = new this.$.$mol_check_box();
-			(obj.title) = () => ((this.row_id(id)));
-			(obj.checked) = (next) => ((this.row_checked(id, next)));
-			return obj;
-		}
-		Id_labeler(id){
-			const obj = new this.$.$mol_labeler();
-			(obj.title) = () => ("ID");
-			(obj.Content) = () => ((this.Id(id)));
-			return obj;
-		}
-		row_uri(id){
-			return "";
-		}
-		row_title(id){
-			return "";
-		}
-		Title(id){
-			const obj = new this.$.$mol_link_iconed();
-			(obj.uri) = () => ((this.row_uri(id)));
-			(obj.title) = () => ((this.row_title(id)));
-			return obj;
-		}
-		Title_labeler(id){
-			const obj = new this.$.$mol_labeler();
-			(obj.title) = () => ("Product Name");
-			(obj.Content) = () => ((this.Title(id)));
-			return obj;
-		}
-		row_color(id, next){
-			if(next !== undefined) return next;
-			return "";
-		}
-		colors(){
-			return [];
-		}
-		Color(id){
-			const obj = new this.$.$mol_select();
-			(obj.value) = (next) => ((this.row_color(id, next)));
-			(obj.options) = () => ((this.colors()));
-			return obj;
-		}
-		Color_labeler(id){
-			const obj = new this.$.$mol_labeler();
-			(obj.title) = () => ("Color");
-			(obj.Content) = () => ((this.Color(id)));
-			return obj;
-		}
-		row_status(id, next){
-			if(next !== undefined) return next;
-			return "";
-		}
-		status_options(){
-			return {
-				"minor": "Store", 
-				"major": "Sale", 
-				"critical": "Support"
-			};
-		}
-		Status(id){
-			const obj = new this.$.$mol_switch();
-			(obj.value) = (next) => ((this.row_status(id, next)));
-			(obj.options) = () => ((this.status_options()));
-			return obj;
-		}
-		Status_labeler(id){
-			const obj = new this.$.$mol_labeler();
-			(obj.title) = () => ("Status");
-			(obj.Content) = () => ((this.Status(id)));
-			return obj;
-		}
-		row_quantity(id, next){
-			if(next !== undefined) return next;
-			return 0;
-		}
-		Quantity(id){
-			const obj = new this.$.$mol_number();
-			(obj.value) = (next) => ((this.row_quantity(id, next)));
-			return obj;
-		}
-		Quantity_labeler(id){
-			const obj = new this.$.$mol_labeler();
-			(obj.title) = () => ("Quantity");
-			(obj.Content) = () => ((this.Quantity(id)));
-			return obj;
-		}
-		row_moment(id, next){
-			if(next !== undefined) return next;
-			const obj = new this.$.$mol_time_moment();
-			return obj;
-		}
-		Date(id){
-			const obj = new this.$.$mol_date();
-			(obj.value_moment) = (next) => ((this.row_moment(id, next)));
-			return obj;
-		}
-		Date_labeler(id){
-			const obj = new this.$.$mol_labeler();
-			(obj.title) = () => ("Supply Time");
-			(obj.Content) = () => ((this.Date(id)));
-			return obj;
-		}
-		row_content(id){
-			return [
-				(this.Id_labeler(id)), 
-				(this.Title_labeler(id)), 
-				(this.Color_labeler(id)), 
-				(this.Status_labeler(id)), 
-				(this.Quantity_labeler(id)), 
-				(this.Date_labeler(id))
-			];
-		}
-		Row(id){
-			const obj = new this.$.$mol_row();
-			(obj.sub) = () => ((this.row_content(id)));
-			return obj;
-		}
-		rows(){
-			return [(this.Row("0"))];
-		}
-		Rows(){
-			const obj = new this.$.$mol_list();
-			(obj.item_width_min) = (id) => (200);
-			(obj.item_height_min) = (id) => (96);
-			(obj.rows) = () => ((this.rows()));
-			return obj;
-		}
-		title(){
-			return "Large list of rows with dynamic content";
-		}
-		count(){
-			return 100000;
-		}
-		sub(){
-			return [(this.Rows())];
-		}
-		tags(){
-			return [
-				"list", 
-				"table", 
-				"scroll", 
-				"divider", 
-				"grid"
-			];
-		}
-		aspects(){
-			return ["Widget/Layout"];
-		}
-	};
-	($mol_mem_key(($.$mol_list_demo_table.prototype), "row_id"));
-	($mol_mem_key(($.$mol_list_demo_table.prototype), "row_checked"));
-	($mol_mem_key(($.$mol_list_demo_table.prototype), "Id"));
-	($mol_mem_key(($.$mol_list_demo_table.prototype), "Id_labeler"));
-	($mol_mem_key(($.$mol_list_demo_table.prototype), "Title"));
-	($mol_mem_key(($.$mol_list_demo_table.prototype), "Title_labeler"));
-	($mol_mem_key(($.$mol_list_demo_table.prototype), "row_color"));
-	($mol_mem_key(($.$mol_list_demo_table.prototype), "Color"));
-	($mol_mem_key(($.$mol_list_demo_table.prototype), "Color_labeler"));
-	($mol_mem_key(($.$mol_list_demo_table.prototype), "row_status"));
-	($mol_mem_key(($.$mol_list_demo_table.prototype), "Status"));
-	($mol_mem_key(($.$mol_list_demo_table.prototype), "Status_labeler"));
-	($mol_mem_key(($.$mol_list_demo_table.prototype), "row_quantity"));
-	($mol_mem_key(($.$mol_list_demo_table.prototype), "Quantity"));
-	($mol_mem_key(($.$mol_list_demo_table.prototype), "Quantity_labeler"));
-	($mol_mem_key(($.$mol_list_demo_table.prototype), "row_moment"));
-	($mol_mem_key(($.$mol_list_demo_table.prototype), "Date"));
-	($mol_mem_key(($.$mol_list_demo_table.prototype), "Date_labeler"));
-	($mol_mem_key(($.$mol_list_demo_table.prototype), "Row"));
-	($mol_mem(($.$mol_list_demo_table.prototype), "Rows"));
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    /** Lazy computed lists with native Array interface. $mol_range2_array is mutable but all derived ranges are immutable. */
-    function $mol_range2(item = index => index, size = () => Number.POSITIVE_INFINITY) {
-        const source = typeof item === 'function' ? new $mol_range2_array() : item;
-        if (typeof item !== 'function') {
-            item = index => source[index];
-            size = () => source.length;
-        }
-        return new Proxy(source, {
-            get(target, field) {
-                if (typeof field === 'string') {
-                    if (field === 'length')
-                        return size();
-                    const index = Number(field);
-                    if (index < 0)
-                        return undefined;
-                    if (index >= size())
-                        return undefined;
-                    if (index === Math.trunc(index))
-                        return item(index);
-                }
-                return $mol_range2_array.prototype[field];
-            },
-            set(target, field) {
-                return $mol_fail(new TypeError(`Lazy range is read only (trying to set field ${JSON.stringify(field)})`));
-            },
-            ownKeys(target) {
-                return [...Array(size())].map((v, i) => String(i)).concat('length');
-            },
-            getOwnPropertyDescriptor(target, field) {
-                if (field === "length")
-                    return {
-                        value: size(),
-                        writable: true,
-                        enumerable: false,
-                        configurable: false,
-                    };
-                const index = Number(field);
-                if (index === Math.trunc(index))
-                    return {
-                        get: () => this.get(target, field, this),
-                        enumerable: true,
-                        configurable: true,
-                    };
-                return Object.getOwnPropertyDescriptor(target, field);
-            }
-        });
-    }
-    $.$mol_range2 = $mol_range2;
-    class $mol_range2_array extends Array {
-        // Lazy
-        concat(...tail) {
-            if (tail.length === 0)
-                return this;
-            if (tail.length > 1) {
-                let list = this;
-                for (let item of tail)
-                    list = list.concat(item);
-                return list;
-            }
-            return $mol_range2(index => index < this.length ? this[index] : tail[0][index - this.length], () => this.length + tail[0].length);
-        }
-        // Lazy
-        filter(check, context) {
-            const filtered = [];
-            let cursor = -1;
-            return $mol_range2(index => {
-                while (cursor < this.length && index >= filtered.length - 1) {
-                    const val = this[++cursor];
-                    if (check(val, cursor, this))
-                        filtered.push(val);
-                }
-                return filtered[index];
-            }, () => cursor < this.length ? Number.POSITIVE_INFINITY : filtered.length);
-        }
-        // Diligent
-        forEach(proceed, context) {
-            for (let [key, value] of this.entries())
-                proceed.call(context, value, key, this);
-        }
-        // Lazy
-        map(proceed, context) {
-            return $mol_range2(index => proceed.call(context, this[index], index, this), () => this.length);
-        }
-        // Diligent
-        reduce(merge, result) {
-            let index = 0;
-            if (arguments.length === 1) {
-                result = this[index++];
-            }
-            for (; index < this.length; ++index) {
-                result = merge(result, this[index], index, this);
-            }
-            return result;
-        }
-        // Lazy
-        toReversed() {
-            return $mol_range2(index => this[this.length - 1 - index], () => this.length);
-        }
-        // Lazy
-        slice(from = 0, to = this.length) {
-            return $mol_range2(index => this[from + index], () => Math.min(to, this.length) - from);
-        }
-        // Lazy
-        some(check, context) {
-            for (let index = 0; index < this.length; ++index) {
-                if (check.call(context, this[index], index, this))
-                    return true;
-            }
-            return false;
-        }
-        every(check, context) {
-            for (let index = 0; index < this.length; ++index) {
-                if (!check.call(context, this[index], index, this))
-                    return false;
-            }
-            return true;
-        }
-        reverse() {
-            return $mol_fail(new TypeError(`Mutable reverse is forbidden. Use toReversed instead.`));
-        }
-        sort() {
-            return $mol_fail(new TypeError(`Mutable sort is forbidden. Use toSorted instead.`));
-        }
-        indexOf(needle) {
-            return this.findIndex(item => item === needle);
-        }
-        [Symbol.toPrimitive]() {
-            return $mol_guid();
-        }
-    }
-    $.$mol_range2_array = $mol_range2_array;
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    function $mol_array_lottery(list) {
-        return list[Math.floor(Math.random() * list.length)];
-    }
-    $.$mol_array_lottery = $mol_array_lottery;
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    class $mol_unit extends $mol_object {
-        'valueOf()';
-        constructor(value) {
-            super();
-            if (value !== undefined)
-                this['valueOf()'] = value;
-        }
-        prefix() {
-            return '';
-        }
-        postfix() {
-            return '';
-        }
-        [Symbol.toPrimitive](hint) {
-            switch (hint) {
-                case 'number': return this.valueOf();
-                case 'string': return this.toString();
-                default: return this.toString();
-            }
-        }
-        valueOf() {
-            return this['valueOf()'];
-        }
-        delimiter() {
-            return ' ';
-        }
-        value_view() {
-            return this.valueOf().toLocaleString();
-        }
-        toString() {
-            return this.prefix() + this.value_view() + this.postfix();
-        }
-        static summ(a, b) {
-            var Class = a.constructor;
-            if (Class !== b.constructor)
-                throw new Error(`Not same measure: ${Class} , ${b.constructor}`);
-            return new Class(a.valueOf() + b.valueOf());
-        }
-        mult(m) {
-            var Class = this.constructor;
-            return new Class(this.valueOf() * m);
-        }
-    }
-    $.$mol_unit = $mol_unit;
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    class $mol_unit_money extends $mol_unit {
-    }
-    $.$mol_unit_money = $mol_unit_money;
-    class $mol_unit_money_usd extends $mol_unit_money {
-        prefix() {
-            return '$';
-        }
-    }
-    $.$mol_unit_money_usd = $mol_unit_money_usd;
-    class $mol_unit_money_rub extends $mol_unit_money {
-        postfix() {
-            return ' ₽';
-        }
-    }
-    $.$mol_unit_money_rub = $mol_unit_money_rub;
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    function $mol_stub_strings(prefix = '', count = 10, length = 10) {
-        if (prefix.length >= length)
-            return [];
-        let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz".split('');
-        let strings = [];
-        for (let i = 0; i < count; i++) {
-            let text = prefix;
-            for (let j = prefix.length; j < length; j++) {
-                text += $mol_array_lottery(possible);
-            }
-            strings.push(text);
-        }
-        return strings;
-    }
-    $.$mol_stub_strings = $mol_stub_strings;
-    function $mol_stub_code(length = 8) {
-        var max = Math.pow(16, length);
-        var min = Math.pow(16, length - 1);
-        var value = min + Math.floor(Math.random() * (max - min));
-        return value.toString(16).toUpperCase();
-    }
-    $.$mol_stub_code = $mol_stub_code;
-    function $mol_stub_price(max = 1000) {
-        var min = Math.floor(max / 16 / 16);
-        var value = min + Math.floor(Math.random() * (max - min));
-        return new $mol_unit_money_usd(value);
-    }
-    $.$mol_stub_price = $mol_stub_price;
-    function $mol_stub_product_name() {
-        var name = $mol_array_lottery([
-            'Monitor 15"',
-            'Monitor 17"',
-            'Monitor 19"',
-            'Graphics card',
-            'Frame grabber card'
-        ]);
-        var port = $mol_array_lottery(['D-SUB', 'DVI', 'HDMI']);
-        var resolution = $mol_array_lottery(['VGA', 'Full HD', '4K']);
-        return [name, port, resolution].join(', ');
-    }
-    $.$mol_stub_product_name = $mol_stub_product_name;
-    function $mol_stub_company_name_big() {
-        var product = $mol_array_lottery(['Everything', 'Something', 'Anything', 'Nothing']);
-        var type = $mol_array_lottery(['Company', 'Corporation', 'Holding']);
-        return `A ${type} that makes ${product}`;
-    }
-    $.$mol_stub_company_name_big = $mol_stub_company_name_big;
-    function $mol_stub_company_name_small() {
-        return $mol_array_lottery(['ACME inc.', 'Dream Company', 'Just Company']);
-    }
-    $.$mol_stub_company_name_small = $mol_stub_company_name_small;
-    function $mol_stub_company_name() {
-        return $mol_array_lottery([$mol_stub_company_name_small, $mol_stub_company_name_big])();
-    }
-    $.$mol_stub_company_name = $mol_stub_company_name;
-    function $mol_stub_person_name() {
-        var first = $mol_array_lottery(['Ivan', 'Petr', 'Sidor', 'John', 'Sam']);
-        var last = $mol_array_lottery(['Ivanov', 'Petrov', 'Sidorov', 'Johnson', 'Smith']);
-        return `${first} ${last}`;
-    }
-    $.$mol_stub_person_name = $mol_stub_person_name;
-    function $mol_stub_person_avatar(size = 80) {
-        const id = Math.random().toString(16).slice(2);
-        return `https://gravatar.com/avatar/${id}?d=robohash&s=${size}`;
-    }
-    $.$mol_stub_person_avatar = $mol_stub_person_avatar;
-    function $mol_stub_city() {
-        return $mol_array_lottery(['Moscow', 'London', 'Washington', 'Buenos Aires']);
-    }
-    $.$mol_stub_city = $mol_stub_city;
-    function $mol_stub_time(maxShift = 60 * 24 * 365) {
-        return new $mol_time_moment().shift({ minute: Math.round(Math.random() * maxShift) });
-    }
-    $.$mol_stub_time = $mol_stub_time;
-    function $mol_stub_message(max_length) {
-        const text = ' Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris. Maecenas congue ligula ac quam viverra nec consectetur ante hendrerit. Donec et mollis dolor. Praesent et diam eget libero egestas mattis sit amet vitae augue. Nam tincidunt congue enim, ut porta lorem lacinia consectetur. Donec ut libero sed arcu vehicula ultricies a non tortor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ut gravida lorem. Ut turpis felis, pulvinar a semper sed, adipiscing id dolor. Pellentesque auctor nisi id magna consequat sagittis. Curabitur dapibus enim sit amet elit pharetra tincidunt feugiat nisl imperdiet. Ut convallis libero in urna ultrices accumsan. Donec sed odio eros. Donec viverra mi quis quam pulvinar at malesuada arcu rhoncus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. In rutrum accumsan ultricies. Mauris vitae nisi at sem facilisis semper ac in est.';
-        return text.substring(0, Math.ceil(Math.random() * max_length - 5) + 5);
-    }
-    $.$mol_stub_message = $mol_stub_message;
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    $.$mol_colors = {
-        aliceblue: "#f0f8ff",
-        antiquewhite: "#faebd7",
-        aqua: "#00ffff",
-        aquamarine: "#7fffd4",
-        azure: "#f0ffff",
-        beige: "#f5f5dc",
-        bisque: "#ffe4c4",
-        black: "#000000",
-        blanchedalmond: "#ffebcd",
-        blue: "#0000ff",
-        blueviolet: "#8a2be2",
-        brown: "#a52a2a",
-        burlywood: "#deb887",
-        cadetblue: "#5f9ea0",
-        chartreuse: "#7fff00",
-        chocolate: "#d2691e",
-        coral: "#ff7f50",
-        cornflowerblue: "#6495ed",
-        cornsilk: "#fff8dc",
-        crimson: "#dc143c",
-        cyan: "#00ffff",
-        darkblue: "#00008b",
-        darkcyan: "#008b8b",
-        darkgoldenrod: "#b8860b",
-        darkgray: "#a9a9a9",
-        darkgreen: "#006400",
-        darkgrey: "#a9a9a9",
-        darkkhaki: "#bdb76b",
-        darkmagenta: "#8b008b",
-        darkolivegreen: "#556b2f",
-        darkorange: "#ff8c00",
-        darkorchid: "#9932cc",
-        darkred: "#8b0000",
-        darksalmon: "#e9967a",
-        darkseagreen: "#8fbc8f",
-        darkslateblue: "#483d8b",
-        darkslategrey: "#2f4f4f",
-        darkturquoise: "#00ced1",
-        darkviolet: "#9400d3",
-        deeppink: "#ff1493",
-        deepskyblue: "#00bfff",
-        dimgray: "#696969",
-        dimgrey: "#696969",
-        dodgerblue: "#1e90ff",
-        firebrick: "#b22222",
-        floralwhite: "#fffaf0",
-        forestgreen: "#228b22",
-        fuchsia: "#ff00ff",
-        gainsboro: "#dcdcdc",
-        ghostwhite: "#f8f8ff",
-        gold: "#ffd700",
-        goldenrod: "#daa520",
-        gray: "#808080",
-        green: "#008000",
-        greenyellow: "#adff2f",
-        grey: "#808080",
-        honeydew: "#f0fff0",
-        hotpink: "#ff69b4",
-        indianred: "#cd5c5c",
-        indigo: "#4b0082",
-        ivory: "#fffff0",
-        khaki: "#f0e68c",
-        lavender: "#e6e6fa",
-        lavenderblush: "#fff0f5",
-        lawngreen: "#7cfc00",
-        lemonchiffon: "#fffacd",
-        lightblue: "#add8e6",
-        lightcoral: "#f08080",
-        lightcyan: "#e0ffff",
-        lightgoldenrodyellow: "#fafad2",
-        lightgray: "#d3d3d3",
-        lightgreen: "#90ee90",
-        lightgrey: "#d3d3d3",
-        lightpink: "#ffb6c1",
-        lightsalmon: "#ffa07a",
-        lightseagreen: "#20b2aa",
-        lightskyblue: "#87cefa",
-        lightslategray: "#778899",
-        lightslategrey: "#778899",
-        lightsteelblue: "#b0c4de",
-        lightyellow: "#ffffe0",
-        lime: "#00ff00",
-        limegreen: "#32cd32",
-        linen: "#faf0e6",
-        magenta: "#ff00ff",
-        maroon: "#800000",
-        mediumaquamarine: "#66cdaa",
-        mediumblue: "#0000cd",
-        mediumorchid: "#ba55d3",
-        mediumpurple: "#9370db",
-        mediumseagreen: "#3cb371",
-        mediumslateblue: "#7b68ee",
-        mediumspringgreen: "#00fa9a",
-        mediumturquoise: "#48d1cc",
-        mediumvioletred: "#c71585",
-        midnightblue: "#191970",
-        mintcream: "#f5fffa",
-        mistyrose: "#ffe4e1",
-        moccasin: "#ffe4b5",
-        navajowhite: "#ffdead",
-        navy: "#000080",
-        oldlace: "#fdf5e6",
-        olive: "#808000",
-        olivedrab: "#6b8e23",
-        orange: "#ffa500",
-        orangered: "#ff4500",
-        orchid: "#da70d6",
-        palegoldenrod: "#eee8aa",
-        palegreen: "#98fb98",
-        paleturquoise: "#afeeee",
-        palevioletred: "#db7093",
-        papayawhip: "#ffefd5",
-        peachpuff: "#ffdab9",
-        peru: "#cd853f",
-        pink: "#ffc0cb",
-        plum: "#dda0dd",
-        powderblue: "#b0e0e6",
-        purple: "#800080",
-        rebeccapurple: "#663399",
-        red: "#ff0000",
-        rosybrown: "#bc8f8f",
-        royalblue: "#4169e1",
-        saddlebrown: "#8b4513",
-        salmon: "#fa8072",
-        sandybrown: "#f4a460",
-        seagreen: "#2e8b57",
-        seashell: "#fff5ee",
-        sienna: "#a0522d",
-        silver: "#c0c0c0",
-        skyblue: "#87ceeb",
-        slateblue: "#6a5acd",
-        slategray: "#708090",
-        slategrey: "#708090",
-        snow: "#fffafa",
-        springgreen: "#00ff7f",
-        steelblue: "#4682b4",
-        tan: "#d2b48c",
-        teal: "#008080",
-        thistle: "#d8bfd8",
-        tomato: "#ff6347",
-        turquoise: "#40e0d0",
-        violet: "#ee82ee",
-        wheat: "#f5deb3",
-        white: "#ffffff",
-        whitesmoke: "#f5f5f5",
-        yellow: "#ffff00",
-        yellowgreen: "#9acd32",
-    };
-})($ || ($ = {}));
-
-;
-"use strict";
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $mol_list_demo_table extends $.$mol_list_demo_table {
-            rows() {
-                return $mol_range2(index => this.Row(index), () => this.count());
-            }
-            check_list() {
-                return Array.from({ length: this.count() }, (_, i) => this.Id(i));
-            }
-            row_id(id) {
-                return String(id).padStart(5, '0');
-            }
-            row_title(id) {
-                $mol_wire_solid();
-                return $mol_stub_product_name();
-            }
-            row_quantity(id, next = Math.floor(Math.random() * 100)) {
-                $mol_wire_solid();
-                return next;
-            }
-            row_status(id, next = $mol_array_lottery(Object.keys(this.status_options()))) {
-                $mol_wire_solid();
-                return next;
-            }
-            row_uri(id) {
-                return `http://xkcd.com/${this.row_id(id)}`;
-            }
-            row_moment(id, next = new $mol_time_moment().shift({
-                day: Math.floor(Math.random() * 100)
-            })) {
-                $mol_wire_solid();
-                return next;
-            }
-            colors() {
-                return Object.keys($mol_colors);
-            }
-            row_color(id, next) {
-                $mol_wire_solid();
-                return next ?? $mol_array_lottery(this.colors());
-            }
-        }
-        __decorate([
-            $mol_mem
-        ], $mol_list_demo_table.prototype, "rows", null);
-        __decorate([
-            $mol_mem
-        ], $mol_list_demo_table.prototype, "check_list", null);
-        __decorate([
-            $mol_mem_key
-        ], $mol_list_demo_table.prototype, "row_title", null);
-        __decorate([
-            $mol_mem_key
-        ], $mol_list_demo_table.prototype, "row_quantity", null);
-        __decorate([
-            $mol_mem_key
-        ], $mol_list_demo_table.prototype, "row_status", null);
-        __decorate([
-            $mol_mem_key
-        ], $mol_list_demo_table.prototype, "row_uri", null);
-        __decorate([
-            $mol_mem_key
-        ], $mol_list_demo_table.prototype, "row_moment", null);
-        __decorate([
-            $mol_mem
-        ], $mol_list_demo_table.prototype, "colors", null);
-        __decorate([
-            $mol_mem_key
-        ], $mol_list_demo_table.prototype, "row_color", null);
-        $$.$mol_list_demo_table = $mol_list_demo_table;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        const { rem } = $mol_style_unit;
-        $mol_style_define($mol_list_demo_table, {
-            flex: {
-                direction: 'column',
-            },
-            Rows: {
-                flex: {
-                    grow: 1,
-                },
-            },
-            Row: {
-                boxShadow: `0 -1px 0 0 ${$mol_theme.line}`,
-            },
-            Title_labeler: {
-                flex: {
-                    basis: rem(15),
-                },
-            },
-            Color_labeler: {
-                flex: {
-                    basis: rem(10),
-                },
-            },
-            Id_labeler: {
-                flex: {
-                    basis: rem(5),
-                },
-                Label: {
-                    padding: {
-                        inlineStart: '2rem',
-                    },
-                },
-            },
-            Id: {
-                padding: $mol_gap.text,
-            },
-        });
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-	($.$rise_bench_baza_goods_rows) = class $rise_bench_baza_goods_rows extends ($.$mol_list) {};
-
-
-;
-"use strict";
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        /** Search replaces the set: preserve the viewport, not the previous row identity. */
-        class $rise_bench_baza_goods_rows extends $.$rise_bench_baza_goods_rows {
-            sub() {
-                const rows = this.rows();
-                // Native sub() searches the old row through the entire lazy range.
-                // No identity anchoring here: filtering replaces the result set.
-                return rows.length ? rows : [this.Empty()];
-            }
-        }
-        __decorate([
-            $mol_mem
-        ], $rise_bench_baza_goods_rows.prototype, "sub", null);
-        $$.$rise_bench_baza_goods_rows = $rise_bench_baza_goods_rows;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-	($.$rise_bench_baza_goods_table) = class $rise_bench_baza_goods_table extends ($.$mol_list_demo_table) {
-		Compact_id(id){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([(this.row_id(id))]);
-			return obj;
-		}
-		row_description(id){
-			return "";
-		}
-		Description(id){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([(this.row_description(id))]);
-			return obj;
-		}
-		Description_labeler(id){
-			const obj = new this.$.$mol_labeler();
-			(obj.title) = () => ("Description");
-			(obj.content) = () => ([(this.Description(id))]);
-			return obj;
-		}
-		row_tags(id){
-			return [];
-		}
-		Tags(id){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ((this.row_tags(id)));
-			return obj;
-		}
-		Tags_labeler(id){
-			const obj = new this.$.$mol_labeler();
-			(obj.title) = () => ("Tags");
-			(obj.content) = () => ([(this.Tags(id))]);
-			return obj;
-		}
-		Name(id){
-			const obj = new this.$.$mol_dimmer();
-			(obj.haystack) = () => ((this.row_title(id)));
-			(obj.needle) = () => ((this.query()));
-			return obj;
-		}
-		row_date(id){
-			return "";
-		}
-		count(){
-			return 1000;
-		}
-		products(){
-			return [];
-		}
-		compact(){
-			return false;
-		}
-		query(){
-			return "";
-		}
-		color_filter(){
-			return "all";
-		}
-		status_filter(){
-			return "all";
-		}
-		Rows(){
-			const obj = new this.$.$rise_bench_baza_goods_rows();
-			(obj.item_width_min) = (id) => (200);
-			(obj.item_height_min) = (id) => (96);
-			(obj.rows) = () => ((this.rows()));
-			return obj;
-		}
-		Compact_id_labeler(id){
-			const obj = new this.$.$mol_labeler();
-			(obj.title) = () => ("ID");
-			(obj.content) = () => ([(this.Compact_id(id))]);
-			return obj;
-		}
-		Details(id){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([(this.Description_labeler(id)), (this.Tags_labeler(id))]);
-			return obj;
-		}
-		Row(id){
-			const obj = new this.$.$mol_view();
-			(obj.minimal_height) = () => (96);
-			(obj.sub) = () => ((this.row_content(id)));
-			return obj;
-		}
-		Title(id){
-			const obj = new this.$.$mol_link_iconed();
-			(obj.uri) = () => ((this.row_uri(id)));
-			(obj.title) = () => ((this.row_title(id)));
-			(obj.content) = () => ([(this.Name(id))]);
-			return obj;
-		}
-		Date(id){
-			const obj = new this.$.$mol_date();
-			(obj.value_moment) = (next) => ((this.row_moment(id, next)));
-			(obj.trigger_content) = () => ([(this.row_date(id))]);
-			return obj;
-		}
-	};
-	($mol_mem_key(($.$rise_bench_baza_goods_table.prototype), "Compact_id"));
-	($mol_mem_key(($.$rise_bench_baza_goods_table.prototype), "Description"));
-	($mol_mem_key(($.$rise_bench_baza_goods_table.prototype), "Description_labeler"));
-	($mol_mem_key(($.$rise_bench_baza_goods_table.prototype), "Tags"));
-	($mol_mem_key(($.$rise_bench_baza_goods_table.prototype), "Tags_labeler"));
-	($mol_mem_key(($.$rise_bench_baza_goods_table.prototype), "Name"));
-	($mol_mem(($.$rise_bench_baza_goods_table.prototype), "Rows"));
-	($mol_mem_key(($.$rise_bench_baza_goods_table.prototype), "Compact_id_labeler"));
-	($mol_mem_key(($.$rise_bench_baza_goods_table.prototype), "Details"));
-	($mol_mem_key(($.$rise_bench_baza_goods_table.prototype), "Row"));
-	($mol_mem_key(($.$rise_bench_baza_goods_table.prototype), "Title"));
-	($mol_mem_key(($.$rise_bench_baza_goods_table.prototype), "Date"));
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    class $rise_bench_baza_goods_tag extends $giper_baza_entity {
-    }
-    $.$rise_bench_baza_goods_tag = $rise_bench_baza_goods_tag;
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    class $rise_bench_baza_goods_product extends $giper_baza_entity.with({
-        Id: $giper_baza_atom_text,
-        Checked: $giper_baza_atom_bool,
-        Uri: $giper_baza_atom_text,
-        Color: $giper_baza_atom_text,
-        Status: $giper_baza_atom_text,
-        Quantity: $giper_baza_atom_real,
-        Supply: $giper_baza_atom_time,
-        Description: $giper_baza_atom_text,
-        Tags: $giper_baza_list_link.to(() => $rise_bench_baza_goods_tag),
-    }) {
-    }
-    $.$rise_bench_baza_goods_product = $rise_bench_baza_goods_product;
-})($ || ($ = {}));
-
-;
-"use strict";
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $rise_bench_baza_goods_table extends $.$rise_bench_baza_goods_table {
-            count() { return this.products().length; }
-            row_content(id) {
-                return this.compact()
-                    ? [this.Compact_id_labeler(id), this.Title_labeler(id), this.Color_labeler(id), this.Status_labeler(id)]
-                    : [...super.row_content(id), this.Details(id)];
-            }
-            row_description(id) { return this.products()[id].Description()?.val() ?? ''; }
-            row_tags(id) {
-                const tags = this.products()[id].Tags()?.remote_list() ?? [];
-                return [tags.map(tag => tag.Title()?.val() ?? '').join(', ')];
-            }
-            rows() {
-                const count = this.count();
-                const color = this.color_filter();
-                const status = this.status_filter();
-                const terms = this.query().trim().toLowerCase().split(/\s+/).filter(Boolean);
-                if (!terms.length && color === 'all' && status === 'all')
-                    return $mol_range2(index => this.Row(count - index - 1), () => count);
-                const matches = [];
-                for (let index = count - 1; index >= 0; --index) {
-                    if (color !== 'all' && this.row_color(index) !== color)
-                        continue;
-                    if (status !== 'all' && this.row_status(index) !== status)
-                        continue;
-                    if (terms.length && !terms.every(term => this.row_title(index).toLowerCase().includes(term)))
-                        continue;
-                    matches.push(index);
-                }
-                return $mol_range2(index => this.Row(matches[index]), () => matches.length);
-            }
-            row_id(id) { return this.products()[id].Id().val(); }
-            row_title(id) { return this.products()[id].Title().val(); }
-            row_uri(id) { return this.compact() ? `https://xkcd.com/${Number(this.row_id(id)) + 1}/` : this.products()[id].Uri().val(); }
-            row_checked(id, next) {
-                return this.products()[id].Checked().val(next) ?? false;
-            }
-            row_color(id, next) {
-                return this.products()[id].Color().val(next) ?? '';
-            }
-            row_status(id, next) {
-                return this.products()[id].Status().val(next) ?? '';
-            }
-            row_quantity(id, next) {
-                return this.products()[id].Quantity().val(next) ?? 0;
-            }
-            row_moment(id, next) {
-                return this.products()[id].Supply().val(next);
-            }
-            row_date(id) { return this.row_moment(id).toString('DD.MM.YYYY'); }
-        }
-        __decorate([
-            $mol_mem
-        ], $rise_bench_baza_goods_table.prototype, "rows", null);
-        __decorate([
-            $mol_mem_key
-        ], $rise_bench_baza_goods_table.prototype, "row_title", null);
-        $$.$rise_bench_baza_goods_table = $rise_bench_baza_goods_table;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        $mol_style_define($rise_bench_baza_goods_table, {
-            Compact_id_labeler: { flex: { basis: $mol_style_unit.rem(5) } },
-            Row: {
-                // Restore the spacing visible in the original table, requested by the user.
-                minHeight: $mol_style_unit.px(96),
-                flex: { wrap: 'wrap' },
-                padding: $mol_gap.block,
-                gap: $mol_gap.block,
-                alignItems: 'flex-start',
-            },
-            Details: { flex: { basis: '100%', wrap: 'wrap' }, gap: $mol_gap.block },
-            Description_labeler: { flex: { basis: $mol_style_unit.rem(30), shrink: 1 } },
-            Description: { flex: { shrink: 1 }, minWidth: 0 },
-        });
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-	($.$rise_bench_surface) = class $rise_bench_surface extends ($.$mol_page) {
-		embedded(){
-			return false;
-		}
-		attr(){
-			return {...(super.attr()), "embedded": (this.embedded())};
-		}
-	};
-
-
-;
-"use strict";
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        /** Workload surface: keep the native scroll/virtualization, not page chrome. */
-        class $rise_bench_surface extends $.$rise_bench_surface {
-            embedded() { return window.parent !== window; }
-            sub() { return this.embedded() ? [this.Body()] : super.sub(); }
-        }
-        $$.$rise_bench_surface = $rise_bench_surface;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_define($rise_bench_surface, {
-        '[embedded]': { true: {
-                minWidth: 0, width: $mol_style_unit.per(100), flex: { grow: 1, shrink: 1 },
-                Body_content: { padding: 0 },
-            } },
-    });
-})($ || ($ = {}));
-
-;
-	($.$rise_bench_baza_goods) = class $rise_bench_baza_goods extends ($.$mol_book2) {
-		title(){
-			return "Сущности";
-		}
-		content(){
-			return [];
-		}
-		Storage_label(){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => (["Хранение: одна Area на запись"]);
-			return obj;
-		}
-		controls_enabled(){
-			return true;
-		}
-		schema_mode(next){
-			if(next !== undefined) return next;
-			return "compact";
-		}
-		Schema(){
-			const obj = new this.$.$mol_switch();
-			(obj.enabled) = () => ((this.controls_enabled()));
-			(obj.value) = (next) => ((this.schema_mode(next)));
-			(obj.options) = () => ({"compact": "4 свойства", "full": "10 свойств"});
-			return obj;
-		}
-		Schema_label(){
-			const obj = new this.$.$mol_labeler();
-			(obj.title) = () => ("Состав записи");
-			(obj.Content) = () => ((this.Schema()));
-			return obj;
-		}
-		count_mode(next){
-			if(next !== undefined) return next;
-			return "100";
-		}
-		Count(){
-			const obj = new this.$.$mol_switch();
-			(obj.enabled) = () => ((this.controls_enabled()));
-			(obj.value) = (next) => ((this.count_mode(next)));
-			(obj.options) = () => ({
-				"100": "100", 
-				"500": "500", 
-				"1000": "1000", 
-				"2000": "2000", 
-				"3000": "3000", 
-				"4000": "4000", 
-				"5000": "5000", 
-				"10000": "10000"
-			});
-			return obj;
-		}
-		Count_label(){
-			const obj = new this.$.$mol_labeler();
-			(obj.title) = () => ("Количество записей");
-			(obj.Content) = () => ((this.Count()));
-			return obj;
-		}
-		create_enabled(){
-			return true;
-		}
-		benchmark(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		Create(){
-			const obj = new this.$.$mol_button_major();
-			(obj.title) = () => ("Запустить бенчмарк");
-			(obj.enabled) = () => ((this.create_enabled()));
-			(obj.click) = (next) => ((this.benchmark(next)));
-			return obj;
-		}
-		Actions(){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([(this.Create())]);
-			return obj;
-		}
-		app_title(){
-			return "Товары";
-		}
-		body_scroll_top(next){
-			return (this.Records().body_scroll_top(next));
-		}
-		Metrics(){
-			const obj = new this.$.$rise_bench_metrics();
-			(obj.operations) = () => ([
-				"Создание, с", 
-				"Поиск, с", 
-				"Добавить 1, с", 
-				"F5, с", 
-				"Поиск после F5, с"
-			]);
-			return obj;
-		}
-		filters_enabled(){
-			return true;
-		}
-		search_query(next){
-			return (this.Search().query(next));
-		}
-		Search(){
-			const obj = new this.$.$mol_search();
-			(obj.hint) = () => ("Название товара");
-			(obj.enabled) = () => ((this.filters_enabled()));
-			return obj;
-		}
-		Search_label(){
-			const obj = new this.$.$mol_labeler();
-			(obj.title) = () => ("Поиск по названию");
-			(obj.Content) = () => ((this.Search()));
-			return obj;
-		}
-		color_filter(next){
-			if(next !== undefined) return next;
-			return "all";
-		}
-		Color_filter(){
-			const obj = new this.$.$mol_select();
-			(obj.enabled) = () => ((this.filters_enabled()));
-			(obj.value) = (next) => ((this.color_filter(next)));
-			(obj.dictionary) = () => ({
-				"all": "All colors", 
-				"red": "red", 
-				"green": "green", 
-				"blue": "blue"
-			});
-			return obj;
-		}
-		Color_label(){
-			const obj = new this.$.$mol_labeler();
-			(obj.title) = () => ("Color");
-			(obj.Content) = () => ((this.Color_filter()));
-			return obj;
-		}
-		status_filter(next){
-			if(next !== undefined) return next;
-			return "all";
-		}
-		Status_filter(){
-			const obj = new this.$.$mol_select();
-			(obj.enabled) = () => ((this.filters_enabled()));
-			(obj.value) = (next) => ((this.status_filter(next)));
-			(obj.dictionary) = () => ({
-				"all": "All statuses", 
-				"minor": "Store", 
-				"major": "Sale", 
-				"critical": "Support"
-			});
-			return obj;
-		}
-		Status_label(){
-			const obj = new this.$.$mol_labeler();
-			(obj.title) = () => ("Status");
-			(obj.Content) = () => ((this.Status_filter()));
-			return obj;
-		}
-		add_one(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		Add(){
-			const obj = new this.$.$mol_button_minor();
-			(obj.title) = () => ("Добавить запись");
-			(obj.enabled) = () => ((this.controls_enabled()));
-			(obj.click) = (next) => ((this.add_one(next)));
-			return obj;
-		}
-		reset(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		Reset(){
-			const obj = new this.$.$mol_button_minor();
-			(obj.title) = () => ("Очистить");
-			(obj.enabled) = () => ((this.controls_enabled()));
-			(obj.click) = (next) => ((this.reset(next)));
-			return obj;
-		}
-		Manual_actions(){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([(this.Add()), (this.Reset())]);
-			return obj;
-		}
-		Manual(){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([
-				(this.Search_label()), 
-				(this.Color_label()), 
-				(this.Status_label()), 
-				(this.Manual_actions())
-			]);
-			return obj;
-		}
-		products(){
-			return [];
-		}
-		compact_mode(){
-			return false;
-		}
-		Table(){
-			const obj = new this.$.$rise_bench_baza_goods_table();
-			(obj.products) = () => ((this.products()));
-			(obj.compact) = () => ((this.compact_mode()));
-			(obj.query) = () => ((this.search_query()));
-			(obj.color_filter) = () => ((this.color_filter()));
-			(obj.status_filter) = () => ((this.status_filter()));
-			return obj;
-		}
-		menu_title(){
-			return (this.title());
-		}
-		pages(){
-			return (this.content());
-		}
-		Settings(){
-			const obj = new this.$.$mol_page();
-			(obj.title) = () => ("Настройки");
-			(obj.minimal_width) = () => (320);
-			(obj.body) = () => ([
-				(this.Storage_label()), 
-				(this.Schema_label()), 
-				(this.Count_label()), 
-				(this.Actions())
-			]);
-			return obj;
-		}
-		Records(){
-			const obj = new this.$.$rise_bench_surface();
-			(obj.title) = () => ((this.app_title()));
-			(obj.minimal_width) = () => (640);
-			(obj.body) = () => ([
-				(this.Metrics()), 
-				(this.Manual()), 
-				(this.Table())
-			]);
-			return obj;
-		}
-	};
-	($mol_mem(($.$rise_bench_baza_goods.prototype), "Storage_label"));
-	($mol_mem(($.$rise_bench_baza_goods.prototype), "schema_mode"));
-	($mol_mem(($.$rise_bench_baza_goods.prototype), "Schema"));
-	($mol_mem(($.$rise_bench_baza_goods.prototype), "Schema_label"));
-	($mol_mem(($.$rise_bench_baza_goods.prototype), "count_mode"));
-	($mol_mem(($.$rise_bench_baza_goods.prototype), "Count"));
-	($mol_mem(($.$rise_bench_baza_goods.prototype), "Count_label"));
-	($mol_mem(($.$rise_bench_baza_goods.prototype), "benchmark"));
-	($mol_mem(($.$rise_bench_baza_goods.prototype), "Create"));
-	($mol_mem(($.$rise_bench_baza_goods.prototype), "Actions"));
-	($mol_mem(($.$rise_bench_baza_goods.prototype), "Metrics"));
-	($mol_mem(($.$rise_bench_baza_goods.prototype), "Search"));
-	($mol_mem(($.$rise_bench_baza_goods.prototype), "Search_label"));
-	($mol_mem(($.$rise_bench_baza_goods.prototype), "color_filter"));
-	($mol_mem(($.$rise_bench_baza_goods.prototype), "Color_filter"));
-	($mol_mem(($.$rise_bench_baza_goods.prototype), "Color_label"));
-	($mol_mem(($.$rise_bench_baza_goods.prototype), "status_filter"));
-	($mol_mem(($.$rise_bench_baza_goods.prototype), "Status_filter"));
-	($mol_mem(($.$rise_bench_baza_goods.prototype), "Status_label"));
-	($mol_mem(($.$rise_bench_baza_goods.prototype), "add_one"));
-	($mol_mem(($.$rise_bench_baza_goods.prototype), "Add"));
-	($mol_mem(($.$rise_bench_baza_goods.prototype), "reset"));
-	($mol_mem(($.$rise_bench_baza_goods.prototype), "Reset"));
-	($mol_mem(($.$rise_bench_baza_goods.prototype), "Manual_actions"));
-	($mol_mem(($.$rise_bench_baza_goods.prototype), "Manual"));
-	($mol_mem(($.$rise_bench_baza_goods.prototype), "Table"));
-	($mol_mem(($.$rise_bench_baza_goods.prototype), "Settings"));
-	($mol_mem(($.$rise_bench_baza_goods.prototype), "Records"));
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    class $rise_bench_baza_goods_dataset extends $giper_baza_entity.with({
-        Products: $giper_baza_list_link.to(() => $rise_bench_baza_goods_product),
-        Tags: $giper_baza_list_link.to(() => $rise_bench_baza_goods_tag),
-    }) {
-    }
-    $.$rise_bench_baza_goods_dataset = $rise_bench_baza_goods_dataset;
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    // A stable host identity: wire must not serialize a growing products array as a task argument.
-    class $rise_bench_baza_goods_preparation {
-        dataset;
-        count;
-        compact;
-        products = [];
-        links;
-        date = new $mol_time_moment('2026-10-05');
-        tag_links = [];
-        constructor(dataset, count, compact = false) {
-            this.dataset = dataset;
-            this.count = count;
-            this.compact = compact;
-        }
-    }
-    $.$rise_bench_baza_goods_preparation = $rise_bench_baza_goods_preparation;
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    function $rise_bench_product_name(index) {
-        const brands = ['Aurora', 'Orion', 'Vega', 'Nova', 'Atlas', 'Pixel', 'Aero', 'Terra', 'Lumen', 'Zen'];
-        const models = ['Wireless', 'Compact', 'Pro', 'Mini', 'Classic', 'Smart', 'Portable', 'Studio', 'Premium', 'Travel'];
-        const types = ['Notebook', 'Headphones', 'Monitor', 'Mouse', 'Keyboard', 'Camera', 'Printer', 'Router', 'Speaker', 'Watch'];
-        return `${brands[Math.floor(index / 10) % 10]} ${models[Math.floor(index / 100) % 10]} ${types[index % 10]} ${String(index).padStart(5, '0')}`;
-    }
-    $.$rise_bench_product_name = $rise_bench_product_name;
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    /** Identical input data for each non-CRDT storage adapter. */
-    function $rise_bench_product_make(index, compact) {
-        const product = {
-            id: String(index).padStart(5, '0'), title: $rise_bench_product_name(index),
-            color: ['red', 'green', 'blue'][index % 3], status: ['minor', 'major', 'critical'][index % 3],
-        };
-        return compact ? product : {
-            ...product, checked: false, uri: `https://xkcd.com/${index + 1}/`, quantity: index % 100, supply: '2026-10-05',
-            description: `${product.title} — sample product for the local CRDT benchmark.`,
-            tags: Array.from({ length: 5 }, (_, offset) => ['Office', 'Home', 'Travel', 'Studio', 'Gaming', 'Portable', 'Wireless', 'Compact', 'Premium', 'Classic', 'New', 'Popular', 'Eco', 'Gift', 'Work', 'Creative', 'Audio', 'Video', 'Network', 'Accessories'][(index + offset * 3) % 20]),
-        };
-    }
-    $.$rise_bench_product_make = $rise_bench_product_make;
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    function $rise_bench_baza_goods_product_name(index) {
-        return $rise_bench_product_name(index);
-    }
-    $.$rise_bench_baza_goods_product_name = $rise_bench_baza_goods_product_name;
-})($ || ($ = {}));
-
-;
-	($.$rise_bug_baza_nohash) = class $rise_bug_baza_nohash extends ($.$mol_page) {
-		Baza_status(){
-			const obj = new this.$.$giper_baza_status();
-			return obj;
-		}
-		entity_reset(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		Reset(){
-			const obj = new this.$.$mol_button_minor();
-			(obj.click) = (next) => ((this.entity_reset(next)));
-			return obj;
-		}
-		entity(){
-			return null;
-		}
-		add(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		Add(){
-			const obj = new this.$.$mol_button_minor();
-			(obj.click) = (next) => ((this.add(next)));
-			return obj;
-		}
-		id(id){
-			return "0";
-		}
-		Item(id){
-			const obj = new this.$.$mol_button_minor();
-			(obj.title) = () => ((this.id(id)));
-			return obj;
-		}
-		items(){
-			return [(this.Item("0"))];
-		}
-		Items(){
-			const obj = new this.$.$mol_list();
-			(obj.sub) = () => ((this.items()));
-			return obj;
-		}
-		body(){
-			return [
-				(this.Baza_status()), 
-				(this.Reset()), 
-				(this.entity()), 
-				(this.Add()), 
-				(this.Items())
-			];
-		}
-	};
-	($mol_mem(($.$rise_bug_baza_nohash.prototype), "Baza_status"));
-	($mol_mem(($.$rise_bug_baza_nohash.prototype), "entity_reset"));
-	($mol_mem(($.$rise_bug_baza_nohash.prototype), "Reset"));
-	($mol_mem(($.$rise_bug_baza_nohash.prototype), "add"));
-	($mol_mem(($.$rise_bug_baza_nohash.prototype), "Add"));
-	($mol_mem_key(($.$rise_bug_baza_nohash.prototype), "Item"));
-	($mol_mem(($.$rise_bug_baza_nohash.prototype), "Items"));
-
-
-;
-"use strict";
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $rise_bug_baza_nohash_entity extends $giper_baza_entity.with({
-            Dict: $giper_baza_dict_to($giper_baza_atom_link_to(() => $giper_baza_atom_text)),
-            List: $giper_baza_list_link_to(() => $giper_baza_atom_text),
-        }) {
-        }
-        $$.$rise_bug_baza_nohash_entity = $rise_bug_baza_nohash_entity;
-        class $rise_bug_baza_nohash extends $.$rise_bug_baza_nohash {
-            entity_reset() {
-                this.entity(null);
-            }
-            entity(reset) {
-                const land = this.$.$giper_baza_glob.land_grab([[null, $giper_baza_rank_deny]]);
-                return land.Data($rise_bug_baza_nohash_entity);
-            }
-            id(id) {
-                return id;
-            }
-            items() {
-                return this.entity().List()?.remote_list().map(i => this.Item(i.link().str)) ?? [];
-            }
-            add(next) {
-                const entity = this.entity();
-                const item = entity.List(null)?.make(entity.land());
-                const title = item?.link().toString() ?? '';
-                item?.val(title);
-                entity.Dict(null)?.key(title, 'auto');
-            }
-        }
-        __decorate([
-            $mol_mem
-        ], $rise_bug_baza_nohash.prototype, "entity", null);
-        $$.$rise_bug_baza_nohash = $rise_bug_baza_nohash;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-	($.$rise_bug_baza_noseal) = class $rise_bug_baza_noseal extends ($.$mol_page) {
-		Baza_status(){
-			const obj = new this.$.$giper_baza_status();
-			return obj;
-		}
-		entity_reset(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		Reset(){
-			const obj = new this.$.$mol_button_minor();
-			(obj.click) = (next) => ((this.entity_reset(next)));
-			return obj;
-		}
-		entity(){
-			return null;
-		}
-		add(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		Add(){
-			const obj = new this.$.$mol_button_minor();
-			(obj.click) = (next) => ((this.add(next)));
-			return obj;
-		}
-		id(id){
-			return "0";
-		}
-		Item(id){
-			const obj = new this.$.$mol_button_minor();
-			(obj.title) = () => ((this.id(id)));
-			return obj;
-		}
-		items(){
-			return [(this.Item("0"))];
-		}
-		Items(){
-			const obj = new this.$.$mol_list();
-			(obj.sub) = () => ((this.items()));
-			return obj;
-		}
-		body(){
-			return [
-				(this.Baza_status()), 
-				(this.Reset()), 
-				(this.entity()), 
-				(this.Add()), 
-				(this.Items())
-			];
-		}
-	};
-	($mol_mem(($.$rise_bug_baza_noseal.prototype), "Baza_status"));
-	($mol_mem(($.$rise_bug_baza_noseal.prototype), "entity_reset"));
-	($mol_mem(($.$rise_bug_baza_noseal.prototype), "Reset"));
-	($mol_mem(($.$rise_bug_baza_noseal.prototype), "add"));
-	($mol_mem(($.$rise_bug_baza_noseal.prototype), "Add"));
-	($mol_mem_key(($.$rise_bug_baza_noseal.prototype), "Item"));
-	($mol_mem(($.$rise_bug_baza_noseal.prototype), "Items"));
-
-
-;
-"use strict";
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $rise_bug_baza_noseal_entity extends $giper_baza_entity.with({
-            Dict: $giper_baza_dict_to($giper_baza_atom_link_to(() => $giper_baza_atom_text)),
-            List: $giper_baza_list_link_to(() => $giper_baza_atom_text),
-        }) {
-        }
-        $$.$rise_bug_baza_noseal_entity = $rise_bug_baza_noseal_entity;
-        class $rise_bug_baza_noseal extends $.$rise_bug_baza_noseal {
-            entity_reset() {
-                this.link_str(null);
-            }
-            link_str(next) {
-                if (next) {
-                    return $mol_state_arg.value('link_str', next);
-                }
-                let str = $mol_state_arg.value('link_str');
-                if (str && next !== null)
-                    return str;
-                const land = this.$.$giper_baza_glob.land_grab([[null, $giper_baza_rank_deny]]);
-                return $mol_state_arg.value('link_str', land.link().str);
-            }
-            entity(reset) {
-                const link = new $giper_baza_link(this.link_str());
-                const land = this.$.$giper_baza_glob.Land(link);
-                return land.Data($rise_bug_baza_noseal_entity);
-            }
-            id(id) {
-                return id;
-            }
-            items() {
-                return this.entity().List()?.remote_list().map(i => this.Item(i.link().str)) ?? [];
-            }
-            add(next) {
-                const entity = this.entity();
-                const item = entity.List(null)?.make(entity.land());
-                const title = item?.link().toString() ?? '';
-                item?.val(title);
-                entity.Dict(null)?.key($mol_wire_sync($).$mol_guid(), 'auto');
-            }
-        }
-        __decorate([
-            $mol_mem
-        ], $rise_bug_baza_noseal.prototype, "link_str", null);
-        __decorate([
-            $mol_mem
-        ], $rise_bug_baza_noseal.prototype, "entity", null);
-        $$.$rise_bug_baza_noseal = $rise_bug_baza_noseal;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-	($.$rise_bug_baza_decrypt) = class $rise_bug_baza_decrypt extends ($.$mol_page) {
-		Baza_status(){
-			const obj = new this.$.$giper_baza_status();
-			return obj;
-		}
-		entity_reset(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		Reset(){
-			const obj = new this.$.$mol_button_minor();
-			(obj.click) = (next) => ((this.entity_reset(next)));
-			return obj;
-		}
-		entity(){
-			return null;
-		}
-		add(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		Add(){
-			const obj = new this.$.$mol_button_minor();
-			(obj.click) = (next) => ((this.add(next)));
-			return obj;
-		}
-		id(id){
-			return "0";
-		}
-		cut(id, next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		Item(id){
-			const obj = new this.$.$mol_button_minor();
-			(obj.title) = () => ((this.id(id)));
-			(obj.click) = (next) => ((this.cut(id, next)));
-			return obj;
-		}
-		items(){
-			return [(this.Item("0"))];
-		}
-		Items(){
-			const obj = new this.$.$mol_list();
-			(obj.sub) = () => ((this.items()));
-			return obj;
-		}
-		body(){
-			return [
-				(this.Baza_status()), 
-				(this.Reset()), 
-				(this.entity()), 
-				(this.Add()), 
-				(this.Items())
-			];
-		}
-	};
-	($mol_mem(($.$rise_bug_baza_decrypt.prototype), "Baza_status"));
-	($mol_mem(($.$rise_bug_baza_decrypt.prototype), "entity_reset"));
-	($mol_mem(($.$rise_bug_baza_decrypt.prototype), "Reset"));
-	($mol_mem(($.$rise_bug_baza_decrypt.prototype), "add"));
-	($mol_mem(($.$rise_bug_baza_decrypt.prototype), "Add"));
-	($mol_mem_key(($.$rise_bug_baza_decrypt.prototype), "cut"));
-	($mol_mem_key(($.$rise_bug_baza_decrypt.prototype), "Item"));
-	($mol_mem(($.$rise_bug_baza_decrypt.prototype), "Items"));
-
-
-;
-"use strict";
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $rise_bug_baza_decrypt_entity extends $giper_baza_entity.with({
-            Dict: $giper_baza_dict_to($giper_baza_atom_link_to(() => $giper_baza_atom_text)),
-            List: $giper_baza_list_link_to(() => $giper_baza_atom_text),
-        }) {
-        }
-        $$.$rise_bug_baza_decrypt_entity = $rise_bug_baza_decrypt_entity;
-        class $rise_bug_baza_decrypt extends $.$rise_bug_baza_decrypt {
-            entity_reset() {
-                this.link_str(null);
-            }
-            link_str(next) {
-                if (next) {
-                    return $mol_state_arg.value('link_str', next);
-                }
-                let str = $mol_state_arg.value('link_str');
-                if (str && next !== null)
-                    return str;
-                const land = this.$.$giper_baza_glob.land_grab([[null, $giper_baza_rank_deny]]);
-                return $mol_state_arg.value('link_str', land.link().str);
-            }
-            entity(reset) {
-                const link = new $giper_baza_link(this.link_str());
-                const land = this.$.$giper_baza_glob.Land(link);
-                return land.Data($rise_bug_baza_decrypt_entity);
-            }
-            id(id) {
-                return id;
-            }
-            items() {
-                return this.entity().List()?.remote_list().map(i => this.Item(i.link().str)) ?? [];
-            }
-            add(next) {
-                const entity = this.entity();
-                const item = entity.List(null)?.make([[null, $giper_baza_rank_deny]]);
-                const title = item?.link().str ?? '';
-                item?.val(title);
-                entity.Dict(null)?.key($mol_wire_sync($).$mol_guid(), 'auto');
-            }
-            cut(id, next) {
-                this.entity().List()?.cut(new $giper_baza_link(id));
-            }
-        }
-        __decorate([
-            $mol_mem
-        ], $rise_bug_baza_decrypt.prototype, "link_str", null);
-        __decorate([
-            $mol_mem
-        ], $rise_bug_baza_decrypt.prototype, "entity", null);
-        $$.$rise_bug_baza_decrypt = $rise_bug_baza_decrypt;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-	($.$rise_bug_baza_slowtext) = class $rise_bug_baza_slowtext extends ($.$mol_page) {
-		Baza_status(){
-			const obj = new this.$.$giper_baza_status();
-			return obj;
-		}
-		entity_reset(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		Reset(){
-			const obj = new this.$.$mol_button_minor();
-			(obj.click) = (next) => ((this.entity_reset(next)));
-			return obj;
-		}
-		entity(){
-			return null;
-		}
-		text(next){
-			if(next !== undefined) return next;
-			return "";
-		}
-		Text(){
-			const obj = new this.$.$mol_textarea();
-			(obj.value) = (next) => ((this.text(next)));
-			return obj;
-		}
-		body(){
-			return [
-				(this.Baza_status()), 
-				(this.Reset()), 
-				(this.entity()), 
-				(this.Text())
-			];
-		}
-	};
-	($mol_mem(($.$rise_bug_baza_slowtext.prototype), "Baza_status"));
-	($mol_mem(($.$rise_bug_baza_slowtext.prototype), "entity_reset"));
-	($mol_mem(($.$rise_bug_baza_slowtext.prototype), "Reset"));
-	($mol_mem(($.$rise_bug_baza_slowtext.prototype), "text"));
-	($mol_mem(($.$rise_bug_baza_slowtext.prototype), "Text"));
-
-
-;
-"use strict";
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $rise_bug_baza_slowtext_entity extends $giper_baza_entity.with({
-            Text: $giper_baza_text,
-        }) {
-        }
-        $$.$rise_bug_baza_slowtext_entity = $rise_bug_baza_slowtext_entity;
-        class $rise_bug_baza_slowtext extends $.$rise_bug_baza_slowtext {
-            entity_reset() {
-                this.link_str(null);
-            }
-            link_str(next) {
-                if (next) {
-                    return $mol_state_arg.value('link_str', next);
-                }
-                let str = $mol_state_arg.value('link_str');
-                if (str && next !== null)
-                    return str;
-                const land = this.$.$giper_baza_glob.land_grab([[null, $giper_baza_rank_deny]]);
-                return $mol_state_arg.value('link_str', land.link().str);
-            }
-            entity() {
-                const link = new $giper_baza_link(this.link_str());
-                const land = this.$.$giper_baza_glob.Land(link);
-                const entity = land.Data($rise_bug_baza_slowtext_entity);
-                entity.Text(null);
-                return entity;
-            }
-            text(next) {
-                return this.entity().Text(next)?.value(next) ?? '';
-            }
-        }
-        __decorate([
-            $mol_mem
-        ], $rise_bug_baza_slowtext.prototype, "link_str", null);
-        __decorate([
-            $mol_mem
-        ], $rise_bug_baza_slowtext.prototype, "entity", null);
-        $$.$rise_bug_baza_slowtext = $rise_bug_baza_slowtext;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-	($.$rise_bug) = class $rise_bug extends ($.$mol_book2_catalog) {
-		placeholders(){
-			return [];
-		}
-		param(){
-			return "bug";
-		}
-		spread_classes(){
-			return [
-				"$rise_bug_baza_nohash", 
-				"$rise_bug_baza_noseal", 
-				"$rise_bug_baza_decrypt", 
-				"$rise_bug_baza_slowtext"
-			];
-		}
-	};
-
-
-;
-"use strict";
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $rise_bug extends $.$rise_bug {
-            spreads() {
-                const dict = Object.fromEntries(this.spread_classes().map(name => {
-                    return [name, new (this.$[name])];
-                }));
-                return dict;
-            }
-        }
-        $$.$rise_bug = $rise_bug;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    /** Stable operation identity and clock across wire suspension/replay. */
-    class $rise_bench_measure {
-        title;
-        count;
-        unit;
-        started = performance.now();
-        duration = null;
-        constructor(title, count = 0, unit = 'зап.') {
-            this.title = title;
-            this.count = count;
-            this.unit = unit;
-        }
-        finish() { this.duration ??= performance.now() - this.started; }
-    }
-    $.$rise_bench_measure = $rise_bench_measure;
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    /** Signed public post/just grant for the result Land, not a private key or data. */
-    class $rise_bench_archive_seed extends $mol_object {
-        static bytes = new Uint8Array([76, 65, 78, 68, 9, 212, 44, 154, 255, 14, 96, 10, 136, 26, 73, 199, 0, 0, 0, 0, 0, 0, 0, 0, 253, 63, 1, 0, 139, 176, 233, 106, 9, 212, 44, 154, 255, 14, 96, 10, 136, 26, 73, 199, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 254, 131, 2, 0, 139, 176, 233, 106, 9, 212, 44, 154, 255, 14, 96, 10, 136, 26, 73, 199, 241, 85, 138, 73, 112, 199, 124, 123, 68, 6, 185, 190, 194, 27, 94, 118, 169, 2, 18, 121, 13, 234, 180, 83, 85, 126, 55, 125, 35, 163, 21, 179, 54, 235, 32, 73, 72, 149, 122, 140, 201, 105, 80, 32, 212, 129, 251, 221, 124, 12, 235, 250, 73, 187, 195, 219, 52, 188, 89, 205, 100, 162, 134, 51, 156, 68, 77, 124, 226, 101, 45, 141, 172, 219, 4, 14, 129, 216, 17, 54, 183, 120, 163, 108, 52, 49, 79, 46, 106, 255, 247, 176, 10, 29, 235, 20, 235, 4, 153, 6, 255, 246, 32, 121, 180, 60, 71, 12, 42, 227, 51, 55, 213, 14, 32, 110, 96, 84, 177, 50, 94, 193, 103, 39, 25, 230, 73, 78, 205, 43, 84, 108, 197, 247, 80, 23, 108, 108, 246, 3, 199, 219, 38, 228, 200, 148, 1, 218, 234, 169, 58, 10, 15, 148, 227, 220, 185, 66, 156, 110, 12, 241, 98, 123, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-        static apply() {
-            const pack = $mol_wire_sync($giper_baza_pack).from(this.bytes.buffer);
-            const parts = $mol_wire_sync(pack).parts();
-            $mol_wire_sync($giper_baza_glob).apply_parts(parts);
-            return true;
-        }
-    }
-    __decorate([
-        $mol_mem
-    ], $rise_bench_archive_seed, "apply", null);
-    $.$rise_bench_archive_seed = $rise_bench_archive_seed;
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    /** Small result metadata only. Never stores a workload Land or database name. */
-    class $rise_bench_archive extends $mol_object {
-        static link = 'CdQsmv8O_YAqIGknH';
-        static operations(kind) {
-            return kind === 'text' ? ['Вставка, с', 'Добавить символ, с', 'F5, с']
-                : ['Запуск БД, с', 'Создание, с', 'Поиск, с', 'Добавить 1, с', 'F5, с', 'Поиск после F5, с'];
-        }
-        static preset = [[null, $giper_baza_rank_post('just')]];
-        static provision() {
-            this.$.$giper_baza_auth.current().pass();
-            const land = $mol_wire_sync($giper_baza_glob).land_grab(this.preset);
-            land.Data($giper_baza_dict).dive('title', $giper_baza_atom_text, null).val('Rise benchmark results');
-            $mol_wire_sync(land).units_saving();
-            return land.link().str;
-        }
-        static root() {
-            if (!this.link)
-                throw new Error('Не настроен общий Land результатов');
-            $rise_bench_archive_seed.apply();
-            return $giper_baza_glob.Land(new $giper_baza_link(this.link)).Data($giper_baza_dict);
-        }
-        static validate(value, operations) {
-            if (!value || typeof value !== 'object')
-                return null;
-            const row = value;
-            if (typeof row.id !== 'string' || !/^[\da-f-]{36}$/.test(row.id))
-                return null;
-            if (!Number.isSafeInteger(row.count) || row.count < 1 || row.count > 10000)
-                return null;
-            if (![0, 4, 10].includes(row.properties) || !['Готово', 'Ошибка', 'Остановлено'].includes(row.state))
-                return null;
-            if (typeof row.stamp !== 'string' || !/^\d{2}\.\d{2}\.\d{4} \d{2}:\d{2}:\d{2}$/.test(row.stamp))
-                return null;
-            if (row.error !== undefined && (typeof row.error !== 'string' || row.error.length > 2000))
-                return null;
-            if (typeof row.baza_version !== 'string' || !/^(?:[\da-f]{40}|—)$/.test(row.baza_version))
-                return null;
-            if (typeof row.benchmark_version !== 'string' || !/^\d+\.\d+\.\d+$/.test(row.benchmark_version))
-                return null;
-            if (row.engine !== undefined && !Object.hasOwn($rise_bench_engine, row.engine))
-                return null;
-            if (row.engine_version !== undefined && (typeof row.engine_version !== 'string' || !/^[\w.\-—]{1,80}$/.test(row.engine_version)))
-                return null;
-            if (row.computer !== undefined && (typeof row.computer !== 'string' || row.computer.length > 8000))
-                return null;
-            if (row.browser !== undefined && (typeof row.browser !== 'string' || row.browser.length > 4000))
-                return null;
-            if (row.bytes != null && (!Number.isSafeInteger(row.bytes) || row.bytes < 0 || row.bytes > 100_000_000))
-                return null;
-            if (!row.metrics || typeof row.metrics !== 'object')
-                return null;
-            const metrics = {};
-            for (const name of operations) {
-                // Older results and native Baza do not have a separate initialization phase.
-                const time = name === 'Запуск БД, с' ? row.metrics[name] ?? null : row.metrics[name];
-                if (time !== null && (typeof time !== 'number' || !Number.isFinite(time) || time < 0))
-                    return null;
-                metrics[name] = time;
-            }
-            return { id: row.id, count: row.count, properties: row.properties, stamp: row.stamp, state: row.state, error: row.error ?? '',
-                baza_version: row.baza_version, benchmark_version: row.benchmark_version, engine: row.engine, engine_version: row.engine_version, computer: row.computer ?? '', browser: row.browser ?? '', bytes: row.bytes ?? null, metrics };
-        }
-        static save(kind, row) {
-            if (kind !== 'text' && !Object.hasOwn($rise_bench_engine, kind))
-                throw new Error('Неизвестный бенчмарк');
-            const validated = this.validate(row, this.operations(kind));
-            if (!validated)
-                throw new Error('Некорректный результат бенчмарка');
-            if (validated.engine !== undefined && validated.engine !== (kind === 'text' ? 'goods' : kind))
-                throw new Error('Движок результата не соответствует нагрузке');
-            const atom = this.root().dive(kind + ':' + row.id, $giper_baza_atom_text, null);
-            if (!atom)
-                throw new Error('Нет доступа к результатам');
-            atom.val(JSON.stringify(validated));
-            $mol_wire_sync(this.root().land()).units_saving();
-        }
-        static rows(kind) {
-            const root = this.root();
-            return root.keys().filter(key => typeof key === 'string' && key.startsWith(kind + ':')).flatMap(key => {
-                const run = this.row(key);
-                return run ? [run] : [];
-            });
-        }
-        static row(key) {
-            const kind = key.split(':')[0];
-            const text = this.root().dive(key, $giper_baza_atom_text)?.val();
-            const row = text && $mol_error_fence(() => this.validate(JSON.parse(text), this.operations(kind)), () => null);
-            if (!row || key !== kind + ':' + row.id)
-                return null;
-            const run = new ($mol_wire_sync($rise_bench_run))(row.count, row.properties, row.stamp, row.baza_version ?? '—', row.benchmark_version ?? '—', row.id, row.computer ?? '', row.browser ?? '', row.engine, row.engine_version);
-            run.state(row.state);
-            run.failure(row.error ?? '');
-            run.bytes(row.bytes ?? null);
-            for (const [operation, value] of Object.entries(row.metrics))
-                if (typeof value === 'number')
-                    run.metric(operation, value);
-            return run;
-        }
-    }
-    __decorate([
-        $mol_action
-    ], $rise_bench_archive, "provision", null);
-    __decorate([
-        $mol_mem
-    ], $rise_bench_archive, "root", null);
-    __decorate([
-        $mol_action
-    ], $rise_bench_archive, "save", null);
-    __decorate([
-        $mol_mem_key
-    ], $rise_bench_archive, "rows", null);
-    __decorate([
-        $mol_mem_key
-    ], $rise_bench_archive, "row", null);
-    $.$rise_bench_archive = $rise_bench_archive;
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    /** Reports phase boundaries; only the user decides when to stop a workload. */
-    class $rise_bench_stage {
-        run;
-        operation;
-        static current = null;
-        static failure(error) {
-            // Native failures may contain a workload database name or Land ID.
-            // Archive only the stage and a bounded diagnostic, never raw payloads.
-            return `${this.current?.operation ?? 'Операция'}: ошибка выполнения`;
-        }
-        started = Date.now();
-        constructor(run, operation) {
-            this.run = run;
-            this.operation = operation;
-            $rise_bench_stage.current = this;
-            const token = new URL(location.href).searchParams.get('rise_run');
-            if (window.parent !== window)
-                window.parent.postMessage({
-                    type: 'rise-bench-progress', kind: new URL(location.href).searchParams.get('rise_fixture'), token,
-                    operation, started: this.started,
-                    row: { id: run.id, count: run.count, properties: run.properties, stamp: run.stamp,
-                        state: 'Ошибка', baza_version: run.baza_version, benchmark_version: run.benchmark_version,
-                        engine: run.engine, engine_version: run.engine_version, computer: run.computer, browser: run.browser,
-                        bytes: run.bytes(), metrics: Object.fromEntries($rise_bench_archive.operations(run.properties ? 'goods' : 'text').map(name => [name, run.metric(name)])) },
-                }, location.origin);
-        }
-    }
-    $.$rise_bench_stage = $rise_bench_stage;
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    /** Per-tab run history; the pending ticket belongs only to the next page. */
-    class $rise_bench_reload {
-        snapshot;
-        key;
-        constructor(key) {
-            this.key = key + (new URL(location.href).searchParams.get('rise_run') || '');
-            const saved = $mol_error_fence(() => JSON.parse(sessionStorage.getItem(this.key) || 'null'), () => null);
-            this.snapshot = Array.isArray(saved?.rows) ? saved : { rows: [], pending: null };
-        }
-        save(runs, operations, pending) {
-            const rows = runs.map(run => ({
-                count: run.count, properties: run.properties, stamp: run.stamp, state: run.state(),
-                error: run.failure(),
-                baza_version: run.baza_version, benchmark_version: run.benchmark_version,
-                engine: run.engine, engine_version: run.engine_version,
-                id: run.id,
-                computer: run.computer, browser: run.browser,
-                bytes: run.bytes(),
-                metrics: Object.fromEntries(operations.map(operation => [operation, run.metric(operation)])),
-            }));
-            sessionStorage.setItem(this.key, JSON.stringify({ rows, pending }));
-            if (!pending && ['Готово', 'Ошибка'].includes(rows[0]?.state))
-                $rise_bench_stage.current = null;
-            const kind = new URL(location.href).searchParams.get('rise_fixture');
-            if (window.parent !== window && !pending && ['Готово', 'Ошибка'].includes(rows[0]?.state)) {
-                window.parent.postMessage({ type: 'rise-bench-result', kind, token: new URL(location.href).searchParams.get('rise_run'), row: rows[0] }, location.origin);
-            }
-        }
-    }
-    $.$rise_bench_reload = $rise_bench_reload;
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    class $rise_bench_baza_goods_reload extends $rise_bench_reload {
-        constructor() { super('$rise_bench_baza_goods_runs'); }
-    }
-    $.$rise_bench_baza_goods_reload = $rise_bench_baza_goods_reload;
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    /** Observe the real rendered viewport, then allow a paint before completing. */
-    class $rise_bench_baza_goods_reload_ready extends $mol_object {
-        table;
-        title;
-        constructor(table, title) {
-            super();
-            this.table = table;
-            this.title = title;
-        }
-        observer;
-        frame = 0;
-        pending;
-        visible() {
-            if (!this.table.isConnected)
-                return false;
-            const rows = [...this.table.querySelectorAll('[rise_bench_baza_goods_table_row]')].filter(row => {
-                const rect = row.getBoundingClientRect();
-                return rect.top < innerHeight && rect.bottom > 0;
-            });
-            return rows.length > 0
-                && rows[0].textContent.includes(this.title)
-                && rows.every(row => !row.querySelector('[mol_view_error]')
-                    && !!row.querySelector('[rise_bench_baza_goods_table_title]')?.textContent?.trim());
-        }
-        wait() {
-            return this.pending ??= new Promise((resolve, reject) => {
-                const check = () => {
-                    if (this.frame || !this.visible())
-                        return;
-                    this.frame = requestAnimationFrame(() => {
-                        this.frame = requestAnimationFrame(() => {
-                            this.frame = 0;
-                            if (!this.visible())
-                                return;
-                            this.destructor();
-                            resolve(performance.timeOrigin + performance.now());
-                        });
-                    });
-                };
-                this.observer = new MutationObserver(check);
-                this.observer.observe(this.table, { childList: true, subtree: true, attributes: true, characterData: true });
-                check();
-            });
-        }
-        destructor() {
-            this.observer?.disconnect();
-            if (this.frame)
-                cancelAnimationFrame(this.frame);
-            super.destructor();
-        }
-    }
-    $.$rise_bench_baza_goods_reload_ready = $rise_bench_baza_goods_reload_ready;
-})($ || ($ = {}));
-
-;
-"use strict";
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $rise_bench_baza_goods extends $.$rise_bench_baza_goods {
-            preset = [[null, $giper_baza_rank_read]];
-            tag_names = ['Office', 'Home', 'Travel', 'Studio', 'Gaming', 'Portable', 'Wireless', 'Compact', 'Premium', 'Classic', 'New', 'Popular', 'Eco', 'Gift', 'Work', 'Creative', 'Audio', 'Video', 'Network', 'Accessories'];
-            prepare_tags(dataset) {
-                const list = dataset.Tags(null);
-                const existing = list.items();
-                if (existing.length === this.tag_names.length)
-                    return existing;
-                // Publish the catalog only after every referenced tag is fully initialized.
-                list.items($mol_wire_sync(this).prepare_catalog_links(dataset));
-                return list.items();
-            }
-            prepare_tag(dataset, index) {
-                const tag = dataset.land().Pawn($rise_bench_baza_goods_tag).Head($mol_wire_sync(dataset.land()).self_make());
-                tag.Title(null).val(this.tag_names[index]);
-                return tag;
-            }
-            prepare_catalog_links(dataset) {
-                return this.tag_names.map((_, index) => $mol_wire_sync(this).prepare_tag(dataset, index).link());
-            }
-            dataset_config() { return { count: this.record_count(), compact: this.compact_mode() }; }
-            prepare_dataset(config) {
-                // Resolve the local author before allocating another signing key. On a
-                // fresh profile, interleaving both initializations can strand king_grab.
-                this.$.$giper_baza_auth.current().pass();
-                const land = $mol_wire_sync($giper_baza_glob).land_grab(this.preset);
-                const dataset = land.Data($rise_bench_baza_goods_dataset);
-                dataset.Products(null);
-                return new $rise_bench_baza_goods_preparation(dataset, config.count, config.compact);
-            }
-            fill_product(state, index, product) {
-                product.Id(null).val(String(index).padStart(5, '0'));
-                product.Title(null).val($rise_bench_baza_goods_product_name(index));
-                product.Color(null).val(['red', 'green', 'blue'][index % 3]);
-                product.Status(null).val(['minor', 'major', 'critical'][index % 3]);
-                if (state.compact)
-                    return product;
-                product.Checked(null).val(false);
-                product.Uri(null).val(`https://xkcd.com/${index + 1}/`);
-                product.Quantity(null).val(index % 100);
-                product.Supply(null).val(state.date);
-                product.Description(null).val(`${$rise_bench_baza_goods_product_name(index)} — sample product for the local CRDT benchmark.`);
-                const tags = $mol_wire_sync(this).prepare_tags(state.dataset);
-                // Link.toBin caches bytes relative to its first Land; do not reuse catalog
-                // link instances when serializing the references into another Area.
-                product.Tags(null).items(state.tag_links[index] ??= Array.from({ length: 5 }, (_, offset) => new $giper_baza_link(tags[(index + offset * 3) % tags.length].str)));
-                return product;
-            }
-            initialize_product(key) {
-                const [state, index] = key;
-                // This initializer is only invoked by Create. A completed record has no
-                // remaining write dependencies and is never recreated on async replay.
-                if (state.products[index])
-                    return state.products[index];
-                const product = $mol_wire_sync(state.dataset.land()).area_make().Data($rise_bench_baza_goods_product);
-                return state.products[index] = this.fill_product(state, index, product);
-            }
-            schema_mode(next) {
-                return $mol_state_arg.value('schema', next) === 'full' ? 'full' : 'compact';
-            }
-            compact_mode() { return this.schema_mode() === 'compact'; }
-            count_mode(next) {
-                const count = $mol_state_arg.value('count', next);
-                return count && Object.hasOwn(this.Count().options(), count) ? count : '100';
-            }
-            record_count() { return Number(this.count_mode()); }
-            app_title() { return `Товары: ${this.record_count()} записей`; }
-            dataset_link(next) {
-                // Keep existing Area datasets; retired single/shard datasets stay untouched.
-                const key = '$rise_bug_listbaza_dataset_names2_area' + (this.record_count() === 1000 ? '' : '_' + this.record_count()) + (this.compact_mode() ? '_compact' : '');
-                return $mol_state_local.value(key + (new URL(location.href).searchParams.get('rise_run') || ''), next) ?? '';
-            }
-            dataset() {
-                const link = this.dataset_link();
-                return link ? $giper_baza_glob.Pawn(new $giper_baza_link(link), $rise_bench_baza_goods_dataset) : null;
-            }
-            products() {
-                const links = this.product_links();
-                return $mol_range2(index => $giper_baza_glob.Pawn(links[index], $rise_bench_baza_goods_product), () => links.length);
-            }
-            product_links() { return this.dataset()?.Products()?.items() ?? []; }
-            controls_enabled() { return this.add_enabled() && !$mol_promise_like(this.Add().status()?.[0]); }
-            filters_enabled() { return this.add_enabled(); }
-            add_enabled() {
-                return this.Metrics().runs()[0]?.state() !== 'Перезагрузка'
-                    && !$mol_promise_like(this.Create().status()?.[0]);
-            }
-            create_enabled() { return this.controls_enabled() && !$mol_promise_like(this.Create().status()?.[0]); }
-            prepare_append(dataset) {
-                return new $rise_bench_baza_goods_preparation(dataset, dataset.Products().items().length, this.compact_mode());
-            }
-            add_one() {
-                const total = new ($mol_wire_sync($rise_bench_measure))('Добавление');
-                const dataset = this.dataset() ?? $mol_wire_sync(this).prepare_dataset(this.dataset_config()).dataset;
-                // Freeze the insertion index before any writes or suspension.
-                const state = $mol_wire_sync(this).prepare_append(dataset);
-                const product = $mol_wire_sync(dataset.Products()).make(dataset.land());
-                $mol_wire_sync(this).fill_product(state, state.count, product);
-                this.dataset_link(dataset.link().str);
-                this.body_scroll_top(0);
-                total.finish();
-                return total.duration;
-            }
-            reset() {
-                // Detach only this selected benchmark dataset, not the whole local database.
-                this.dataset_link('');
-                this.search_query('');
-                this.color_filter('all');
-                this.status_filter('all');
-                this.body_scroll_top(0);
-            }
-            create() {
-                const total = new ($mol_wire_sync($rise_bench_measure))('Создание набора: всего', this.record_count());
-                const state = $mol_wire_sync(this).prepare_dataset(this.dataset_config());
-                for (let index = 0; index < state.count; ++index)
-                    this.initialize_product([state, index]);
-                // Publish once, after all Areas are filled. Publishing on each make()
-                // forces the next Area to save an increasingly large parent list.
-                $mol_wire_sync(state.dataset.Products()).items(state.links ??= state.products.map(product => product.link()));
-                this.dataset_link(state.dataset.link().str);
-                total.finish();
-                return total.duration;
-            }
-            start_run(run) {
-                if (this.Metrics().runs().includes(run))
-                    return;
-                this.reset();
-                this.Metrics().run_add(run);
-            }
-            benchmark_search() {
-                this.search_query('Notebook 00000');
-                return this.Table().rows().length;
-            }
-            benchmark() {
-                this.restore_runs();
-                const run = new ($mol_wire_sync($rise_bench_run))(this.record_count(), this.compact_mode() ? 4 : 10);
-                new ($mol_wire_sync($rise_bench_stage))(run, 'Подготовка');
-                $mol_wire_sync(this).start_run(run);
-                return $mol_error_fence(() => {
-                    new ($mol_wire_sync($rise_bench_stage))(run, 'Создание, с');
-                    const created = $mol_wire_sync(this).create();
-                    run.metric('Создание, с', created / 1000);
-                    // Drain the previous writes before measuring another operation.
-                    new ($mol_wire_sync($rise_bench_stage))(run, 'Сохранение после создания');
-                    $mol_wire_sync(this).save_dataset();
-                    new ($mol_wire_sync($rise_bench_stage))(run, 'Поиск, с');
-                    const search = new ($mol_wire_sync($rise_bench_measure))('Поиск');
-                    if ($mol_wire_sync(this).benchmark_search() !== 1)
-                        throw new Error('Поиск должен найти один товар');
-                    search.finish();
-                    run.metric('Поиск, с', search.duration / 1000);
-                    this.search_query('');
-                    new ($mol_wire_sync($rise_bench_stage))(run, 'Добавить 1, с');
-                    const added = $mol_wire_sync(this).add_one();
-                    run.metric('Добавить 1, с', added / 1000);
-                    new ($mol_wire_sync($rise_bench_stage))(run, 'Сохранение после добавления');
-                    $mol_wire_sync(this).save_dataset();
-                    new ($mol_wire_sync($rise_bench_stage))(run, 'F5, с');
-                    $mol_wire_sync(this).request_reload(run);
-                }, error => {
-                    run.state('Ошибка');
-                    run.failure($rise_bench_stage.failure(error));
-                    this.reload_store().save(this.Metrics().runs(), this.Metrics().operations(), null);
-                    return error;
-                });
-            }
-            reload_store() { return new $rise_bench_baza_goods_reload; }
-            runs_restored = false;
-            restore_runs() {
-                if (this.runs_restored)
-                    return;
-                const rows = this.reload_store().snapshot.rows.map(row => {
-                    const run = new $rise_bench_run(row.count, row.properties, row.stamp, row.baza_version ?? '—', row.benchmark_version ?? '—', row.id, row.computer ?? '', row.browser ?? '');
-                    run.state(row.state);
-                    run.bytes(row.bytes ?? null);
-                    for (const [name, value] of Object.entries(row.metrics))
-                        if (value !== null)
-                            run.metric(name, value);
-                    return run;
-                });
-                this.Metrics().runs(rows);
-                this.runs_restored = true;
-            }
-            save_dataset() {
-                const lands = new Set([this.dataset().land(), ...this.products().map(product => product.land())]);
-                // Native units_saving suspends until signing and IDB commits finish.
-                for (const land of lands)
-                    $mol_wire_sync(land).units_saving();
-            }
-            request_reload(run) {
-                run.state('Перезагрузка');
-                this.reload_store().save(this.Metrics().runs(), this.Metrics().operations(), {
-                    link: this.dataset_link(), count: run.count,
-                    started: performance.timeOrigin + performance.now(),
-                });
-                this.$.$mol_dom_context.location.reload();
-            }
-            reload_done = false;
-            resume_reload() {
-                if (this.reload_done)
-                    return;
-                const ticket = this.reload_store().snapshot.pending;
-                if (!ticket)
-                    return;
-                const run = this.Metrics().runs()[0];
-                return $mol_error_fence(() => {
-                    if (this.dataset_link() !== ticket.link || this.product_links().length !== ticket.count + 1) {
-                        throw new Error('После F5 открыт другой или неполный набор товаров');
-                    }
-                    const ready = new ($mol_wire_sync($rise_bench_baza_goods_reload_ready))(this.Table().dom_node(), $rise_bench_baza_goods_product_name(ticket.count));
-                    const finished = $mol_wire_sync(ready).wait();
-                    run.metric('F5, с', (finished - ticket.started) / 1000);
-                    new ($mol_wire_sync($rise_bench_stage))(run, 'Поиск после F5, с');
-                    const search = new ($mol_wire_sync($rise_bench_measure))('Поиск после F5');
-                    if ($mol_wire_sync(this).benchmark_search() !== 1)
-                        throw new Error('Поиск после F5 должен найти один товар');
-                    search.finish();
-                    run.metric('Поиск после F5, с', search.duration / 1000);
-                    this.search_query('');
-                    this.reload_done = true;
-                    run.state('Готово');
-                    this.reload_store().save(this.Metrics().runs(), this.Metrics().operations(), null);
-                }, error => {
-                    this.reload_done = true;
-                    run.state('Ошибка');
-                    run.failure($rise_bench_stage.failure(error));
-                    this.reload_store().save(this.Metrics().runs(), this.Metrics().operations(), null);
-                    return error;
-                });
-            }
-            auto() {
-                this.restore_runs();
-                this.resume_reload();
-                return [];
-            }
-            content() {
-                // Keep the synchronizer subscribed for the lifetime of the application.
-                $giper_baza_glob.yard().sync();
-                return [this.Settings(), this.Records()];
-            }
-        }
-        __decorate([
-            $mol_action
-        ], $rise_bench_baza_goods.prototype, "prepare_tags", null);
-        __decorate([
-            $mol_action
-        ], $rise_bench_baza_goods.prototype, "prepare_tag", null);
-        __decorate([
-            $mol_action
-        ], $rise_bench_baza_goods.prototype, "prepare_catalog_links", null);
-        __decorate([
-            $mol_mem
-        ], $rise_bench_baza_goods.prototype, "dataset_config", null);
-        __decorate([
-            $mol_action
-        ], $rise_bench_baza_goods.prototype, "prepare_dataset", null);
-        __decorate([
-            $mol_action
-        ], $rise_bench_baza_goods.prototype, "fill_product", null);
-        __decorate([
-            $mol_mem_key
-        ], $rise_bench_baza_goods.prototype, "initialize_product", null);
-        __decorate([
-            $mol_mem
-        ], $rise_bench_baza_goods.prototype, "schema_mode", null);
-        __decorate([
-            $mol_mem
-        ], $rise_bench_baza_goods.prototype, "count_mode", null);
-        __decorate([
-            $mol_mem
-        ], $rise_bench_baza_goods.prototype, "dataset_link", null);
-        __decorate([
-            $mol_mem
-        ], $rise_bench_baza_goods.prototype, "dataset", null);
-        __decorate([
-            $mol_mem
-        ], $rise_bench_baza_goods.prototype, "products", null);
-        __decorate([
-            $mol_mem
-        ], $rise_bench_baza_goods.prototype, "product_links", null);
-        __decorate([
-            $mol_action
-        ], $rise_bench_baza_goods.prototype, "add_one", null);
-        __decorate([
-            $mol_action
-        ], $rise_bench_baza_goods.prototype, "reset", null);
-        __decorate([
-            $mol_action
-        ], $rise_bench_baza_goods.prototype, "create", null);
-        __decorate([
-            $mol_action
-        ], $rise_bench_baza_goods.prototype, "start_run", null);
-        __decorate([
-            $mol_action
-        ], $rise_bench_baza_goods.prototype, "benchmark_search", null);
-        __decorate([
-            $mol_action
-        ], $rise_bench_baza_goods.prototype, "benchmark", null);
-        __decorate([
-            $mol_mem
-        ], $rise_bench_baza_goods.prototype, "reload_store", null);
-        __decorate([
-            $mol_action
-        ], $rise_bench_baza_goods.prototype, "restore_runs", null);
-        __decorate([
-            $mol_action
-        ], $rise_bench_baza_goods.prototype, "save_dataset", null);
-        __decorate([
-            $mol_action
-        ], $rise_bench_baza_goods.prototype, "request_reload", null);
-        __decorate([
-            $mol_mem
-        ], $rise_bench_baza_goods.prototype, "resume_reload", null);
-        __decorate([
-            $mol_mem
-        ], $rise_bench_baza_goods.prototype, "content", null);
-        $$.$rise_bench_baza_goods = $rise_bench_baza_goods;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        $mol_style_define($rise_bench_baza_goods, {
-            Settings: { flex: { grow: 0, basis: $mol_style_unit.rem(20) } },
-            Records: {
-                flex: { grow: 1, shrink: 1 },
-                minWidth: $mol_style_unit.px(640),
-                '@media': {
-                    '(max-width: 640px)': { minWidth: $mol_style_unit.per(100) },
-                },
-            },
-            Actions: { flex: { wrap: 'wrap' } },
-            Storage_label: { padding: $mol_gap.text },
-            Manual: { flex: { wrap: 'wrap' }, alignItems: 'flex-end' },
-            Manual_actions: { flex: { wrap: 'wrap' } },
-        });
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-	($.$rise_bench_textarea_input) = class $rise_bench_textarea_input extends ($.$mol_textarea_edit) {};
-
-
-;
-"use strict";
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        /** Native selection is applied as a command, never replayed by unrelated renders. */
-        class $rise_bench_textarea_input extends $.$rise_bench_textarea_input {
-            applied;
-            field() {
-                return { ...super.field(), selectionStart: undefined, selectionEnd: undefined };
-            }
-            render() {
-                const from = this.selection_start(), to = this.selection_end(), value = this.value();
-                super.render();
-                if (from === undefined || to === undefined)
-                    return;
-                if (this.applied?.from === from && this.applied.to === to && this.applied.value === value)
-                    return;
-                const node = this.dom_node();
-                if (node.selectionStart !== from || node.selectionEnd !== to)
-                    node.setSelectionRange(from, to);
-                this.applied = { from, to, value };
-            }
-            /** CRDT writes may suspend; a Promise is not an invalid-input error. */
-            value_changed(next) {
-                const node = this.dom_node();
-                node.setCustomValidity('');
-                return $mol_error_fence(() => this.value(next), error => {
-                    node.setCustomValidity(this.$.$mol_error_message(error));
-                    node.reportValidity();
-                    return next ?? $mol_mem_cached(() => this.value_changed()) ?? '';
-                });
-            }
-        }
-        __decorate([
-            $mol_mem
-        ], $rise_bench_textarea_input.prototype, "render", null);
-        __decorate([
-            $mol_mem
-        ], $rise_bench_textarea_input.prototype, "value_changed", null);
-        $$.$rise_bench_textarea_input = $rise_bench_textarea_input;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-	($.$rise_bench_textarea_view) = class $rise_bench_textarea_view extends ($.$mol_text_code) {};
-
-
-;
-"use strict";
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $rise_bench_textarea_view extends $.$rise_bench_textarea_view {
-            text_lines() { return (this.text() ?? '').split(/\r\n?|\n/); }
-        }
-        __decorate([
-            $mol_mem
-        ], $rise_bench_textarea_view.prototype, "text_lines", null);
-        $$.$rise_bench_textarea_view = $rise_bench_textarea_view;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-	($.$rise_bench_textarea) = class $rise_bench_textarea extends ($.$mol_textarea) {
-		bring(){
-			return (this.Edit().bring());
-		}
-		Edit(){
-			const obj = new this.$.$rise_bench_textarea_input();
-			(obj.value) = (next) => ((this.value(next)));
-			(obj.hint) = () => ((this.hint()));
-			(obj.enabled) = () => ((this.enabled()));
-			(obj.spellcheck) = () => ((this.spellcheck()));
-			(obj.length_max) = () => ((this.length_max()));
-			(obj.selection) = (next) => ((this.selection(next)));
-			(obj.submit) = (next) => ((this.submit(next)));
-			(obj.submit_with_ctrl) = () => ((this.submit_with_ctrl()));
-			return obj;
-		}
-		View(){
-			const obj = new this.$.$rise_bench_textarea_view();
-			(obj.text) = () => ((this.value()));
-			(obj.render_visible_only) = () => (false);
-			(obj.row_numb) = (id) => ((this.row_numb(id)));
-			(obj.sidebar_showed) = () => ((this.sidebar_showed()));
-			(obj.highlight) = () => ((this.highlight()));
-			(obj.syntax) = () => ((this.syntax()));
-			return obj;
-		}
-	};
-	($mol_mem(($.$rise_bench_textarea.prototype), "Edit"));
-	($mol_mem(($.$rise_bench_textarea.prototype), "View"));
-
-
-;
-"use strict";
-
-
-;
-	($.$rise_bench_baza_crdttext) = class $rise_bench_baza_crdttext extends ($.$mol_book2) {
-		title(){
-			return "Текст";
-		}
-		count_mode(next){
-			if(next !== undefined) return next;
-			return "100";
-		}
-		controls_enabled(){
-			return true;
-		}
-		Count(){
-			const obj = new this.$.$mol_switch();
-			(obj.value) = (next) => ((this.count_mode(next)));
-			(obj.enabled) = () => ((this.controls_enabled()));
-			(obj.options) = () => ({
-				"100": "100", 
-				"500": "500", 
-				"1000": "1000", 
-				"2000": "2000", 
-				"5000": "5000"
-			});
-			return obj;
-		}
-		Count_label(){
-			const obj = new this.$.$mol_labeler();
-			(obj.title) = () => ("Количество строк");
-			(obj.Content) = () => ((this.Count()));
-			return obj;
-		}
-		benchmark(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		Run(){
-			const obj = new this.$.$mol_button_major();
-			(obj.title) = () => ("Запустить бенчмарк");
-			(obj.click) = (next) => ((this.benchmark(next)));
-			(obj.enabled) = () => ((this.controls_enabled()));
-			return obj;
-		}
-		Menu(){
-			const obj = new this.$.$mol_page();
-			(obj.title) = () => ("CRDT text");
-			(obj.minimal_width) = () => (240);
-			(obj.body) = () => ([(this.Count_label()), (this.Run())]);
-			return obj;
-		}
-		page_title(){
-			return "CRDT-текст";
-		}
-		Metrics(){
-			const obj = new this.$.$rise_bench_metrics();
-			(obj.text_mode) = () => (true);
-			(obj.operations) = () => ([
-				"Вставка, с", 
-				"Добавить символ, с", 
-				"F5, с"
-			]);
-			return obj;
-		}
-		reset(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		Reset(){
-			const obj = new this.$.$mol_button_minor();
-			(obj.title) = () => ("Очистить");
-			(obj.click) = (next) => ((this.reset(next)));
-			(obj.enabled) = () => ((this.controls_enabled()));
-			return obj;
-		}
-		text(next){
-			if(next !== undefined) return next;
-			return "";
-		}
-		Editor(){
-			const obj = new this.$.$rise_bench_textarea();
-			(obj.hint) = () => ("Введите текст или запустите бенчмарк");
-			(obj.value) = (next) => ((this.text(next)));
-			(obj.enabled) = () => ((this.controls_enabled()));
-			(obj.spellcheck) = () => (false);
-			return obj;
-		}
-		Page(){
-			const obj = new this.$.$rise_bench_surface();
-			(obj.title) = () => ((this.page_title()));
-			(obj.minimal_width) = () => (640);
-			(obj.body) = () => ([
-				(this.Metrics()), 
-				(this.Reset()), 
-				(this.Editor())
-			]);
-			return obj;
-		}
-		menu_title(){
-			return (this.title());
-		}
-		pages(){
-			return [(this.Menu()), (this.Page())];
-		}
-	};
-	($mol_mem(($.$rise_bench_baza_crdttext.prototype), "count_mode"));
-	($mol_mem(($.$rise_bench_baza_crdttext.prototype), "Count"));
-	($mol_mem(($.$rise_bench_baza_crdttext.prototype), "Count_label"));
-	($mol_mem(($.$rise_bench_baza_crdttext.prototype), "benchmark"));
-	($mol_mem(($.$rise_bench_baza_crdttext.prototype), "Run"));
-	($mol_mem(($.$rise_bench_baza_crdttext.prototype), "Menu"));
-	($mol_mem(($.$rise_bench_baza_crdttext.prototype), "Metrics"));
-	($mol_mem(($.$rise_bench_baza_crdttext.prototype), "reset"));
-	($mol_mem(($.$rise_bench_baza_crdttext.prototype), "Reset"));
-	($mol_mem(($.$rise_bench_baza_crdttext.prototype), "text"));
-	($mol_mem(($.$rise_bench_baza_crdttext.prototype), "Editor"));
-	($mol_mem(($.$rise_bench_baza_crdttext.prototype), "Page"));
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    /** Native textarea plus its visible text layer, followed by a paint opportunity. */
-    class $rise_bench_baza_crdttext_render_ready extends $mol_object {
-        editor;
-        expected;
-        page;
-        constructor(editor, expected, page) {
-            super();
-            this.editor = editor;
-            this.expected = expected;
-            this.page = page;
-        }
-        pending;
-        observer;
-        frame = 0;
-        visible() {
-            const input = this.editor.Edit().dom_node();
-            const row = this.editor.View().Row(1).dom_node();
-            const rect = row.getBoundingClientRect();
-            const viewport = this.page.Body().dom_node().getBoundingClientRect();
-            return input.isConnected && input.value === this.expected
-                && this.editor.View().dom_node().contains(row)
-                && rect.height > 0 && rect.bottom > viewport.top && rect.bottom <= viewport.bottom + 1
-                && row.textContent.endsWith(this.expected.split('\n', 1)[0]);
-        }
-        wait() {
-            return this.pending ??= new Promise((resolve, reject) => {
-                const check = () => {
-                    // Show the first line through native scrolling, never force render.
-                    this.page.body_scroll_top(0);
-                    if (this.frame || !this.visible())
-                        return;
-                    this.frame = requestAnimationFrame(() => {
-                        this.frame = requestAnimationFrame(() => {
-                            this.frame = 0;
-                            if (!this.visible())
-                                return;
-                            this.destructor();
-                            resolve(performance.timeOrigin + performance.now());
-                        });
-                    });
-                };
-                this.observer = new MutationObserver(check);
-                this.observer.observe(this.editor.dom_node(), { childList: true, subtree: true, characterData: true });
-                check();
-            });
-        }
-        destructor() {
-            this.observer?.disconnect();
-            if (this.frame)
-                cancelAnimationFrame(this.frame);
-            super.destructor();
-        }
-    }
-    $.$rise_bench_baza_crdttext_render_ready = $rise_bench_baza_crdttext_render_ready;
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    class $rise_bench_baza_crdttext_reload extends $rise_bench_reload {
-        constructor() { super('$rise_bench_baza_crdttext_runs'); }
-    }
-    $.$rise_bench_baza_crdttext_reload = $rise_bench_baza_crdttext_reload;
-})($ || ($ = {}));
-
-;
-"use strict";
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $rise_bench_baza_crdttext extends $.$rise_bench_baza_crdttext {
-            preset = [[null, $giper_baza_rank_read]];
-            count_mode(next) {
-                const count = $mol_state_arg.value('lines', next);
-                return count && Object.hasOwn(this.Count().options(), count) ? count : '100';
-            }
-            line_count() { return Number(this.count_mode()); }
-            page_title() { return `CRDT-текст: ${this.line_count()} строк`; }
-            text_link(next) {
-                return $mol_state_local.value('$rise_bench_baza_crdttext' + (new URL(location.href).searchParams.get('rise_run') || ''), next) ?? '';
-            }
-            document() {
-                const link = this.text_link();
-                return link ? $giper_baza_glob.Pawn(new $giper_baza_link(link), $giper_baza_text) : null;
-            }
-            prepare_document() {
-                this.$.$giper_baza_auth.current().pass();
-                return $mol_wire_sync($giper_baza_glob).land_grab(this.preset).Data($giper_baza_text);
-            }
-            write_text(next) {
-                const document = this.document() ?? $mol_wire_sync(this).prepare_document();
-                $mol_wire_sync(document).text(next);
-                this.text_link(document.link().str);
-            }
-            text(next) {
-                if (next !== undefined)
-                    this.write_text(next);
-                $giper_baza_glob.yard().sync();
-                return this.document()?.text() ?? '';
-            }
-            sample_text(lines) {
-                return Array.from({ length: lines }, (_, index) => `Строка ${index + 1}: проверяем запись и редактирование текста в Гипербазе.`).join('\n');
-            }
-            insert(next) {
-                const measure = new ($mol_wire_sync($rise_bench_measure))('Вставка');
-                $mol_wire_sync(this).write_text(next);
-                measure.finish();
-                return measure.duration;
-            }
-            appended_text() { return '!' + this.text(); }
-            append_one() {
-                const measure = new ($mol_wire_sync($rise_bench_measure))('Добавление символа');
-                const next = $mol_wire_sync(this).appended_text();
-                $mol_wire_sync(this).write_text(next);
-                const ready = new ($mol_wire_sync($rise_bench_baza_crdttext_render_ready))(this.Editor(), next, this.Page());
-                $mol_wire_sync(ready).wait();
-                measure.finish();
-                return measure.duration;
-            }
-            start_run(run) {
-                if (this.Metrics().runs().includes(run))
-                    return;
-                $mol_wire_sync(this).reset();
-                this.Metrics().run_add(run);
-            }
-            benchmark() {
-                this.restore_runs();
-                const run = new ($mol_wire_sync($rise_bench_run))(this.line_count());
-                new ($mol_wire_sync($rise_bench_stage))(run, 'Подготовка');
-                const block = this.sample_text(run.count);
-                $mol_wire_sync(this).start_run(run);
-                return $mol_error_fence(() => {
-                    new ($mol_wire_sync($rise_bench_stage))(run, 'Вставка, с');
-                    const inserted = $mol_wire_sync(this).insert(block);
-                    run.metric('Вставка, с', inserted / 1000);
-                    new ($mol_wire_sync($rise_bench_stage))(run, 'Сохранение после вставки');
-                    $mol_wire_sync(this).save_document();
-                    new ($mol_wire_sync($rise_bench_stage))(run, 'Добавить символ, с');
-                    const appended = $mol_wire_sync(this).append_one();
-                    run.metric('Добавить символ, с', appended / 1000);
-                    new ($mol_wire_sync($rise_bench_stage))(run, 'Сохранение после добавления');
-                    $mol_wire_sync(this).save_document();
-                    new ($mol_wire_sync($rise_bench_stage))(run, 'F5, с');
-                    $mol_wire_sync(this).request_reload(run);
-                }, error => {
-                    run.state('Ошибка');
-                    run.failure($rise_bench_stage.failure(error));
-                    this.reload_store().save(this.Metrics().runs(), this.Metrics().operations(), null);
-                    return error;
-                });
-            }
-            reset() {
-                const document = $mol_wire_sync(this).prepare_document();
-                this.text_link(document.link().str);
-            }
-            controls_enabled() {
-                return this.Metrics().runs()[0]?.state() !== 'Перезагрузка'
-                    && !$mol_promise_like(this.Run().status()?.[0])
-                    && !$mol_promise_like(this.Reset().status()?.[0]);
-            }
-            reload_store() { return new $rise_bench_baza_crdttext_reload; }
-            runs_restored = false;
-            restore_runs() {
-                if (this.runs_restored)
-                    return;
-                this.Metrics().runs(this.reload_store().snapshot.rows.map(row => {
-                    const run = new $rise_bench_run(row.count, row.properties, row.stamp, row.baza_version ?? '—', row.benchmark_version ?? '—', row.id, row.computer ?? '', row.browser ?? '');
-                    run.state(row.state);
-                    run.bytes(row.bytes ?? null);
-                    for (const [name, value] of Object.entries(row.metrics))
-                        if (value !== null)
-                            run.metric(name, value);
-                    return run;
-                }));
-                this.runs_restored = true;
-            }
-            save_document() { $mol_wire_sync(this.document().land()).units_saving(); }
-            request_reload(run) {
-                run.bytes($mol_charset_encode(this.text()).byteLength);
-                run.state('Перезагрузка');
-                this.reload_store().save(this.Metrics().runs(), this.Metrics().operations(), {
-                    link: this.text_link(), count: run.count, started: performance.timeOrigin + performance.now(),
-                });
-                this.$.$mol_dom_context.location.reload();
-            }
-            reload_done = false;
-            resume_reload() {
-                if (this.reload_done)
-                    return;
-                const ticket = this.reload_store().snapshot.pending;
-                if (!ticket)
-                    return;
-                const run = this.Metrics().runs()[0];
-                return $mol_error_fence(() => {
-                    const expected = '!' + this.sample_text(ticket.count);
-                    if (this.text_link() !== ticket.link || this.text() !== expected)
-                        throw new Error('После F5 открыт другой или неполный CRDT-текст');
-                    const ready = new ($mol_wire_sync($rise_bench_baza_crdttext_render_ready))(this.Editor(), expected, this.Page());
-                    const finished = $mol_wire_sync(ready).wait();
-                    if (this.Editor().Edit().dom_node().value !== expected)
-                        throw new Error('После F5 текст не появился в textarea');
-                    run.metric('F5, с', (finished - ticket.started) / 1000);
-                    this.reload_done = true;
-                    run.state('Готово');
-                    this.reload_store().save(this.Metrics().runs(), this.Metrics().operations(), null);
-                }, error => {
-                    this.reload_done = true;
-                    run.state('Ошибка');
-                    run.failure($rise_bench_stage.failure(error));
-                    this.reload_store().save(this.Metrics().runs(), this.Metrics().operations(), null);
-                    return error;
-                });
-            }
-            auto() {
-                this.restore_runs();
-                this.resume_reload();
-                return [];
-            }
-        }
-        __decorate([
-            $mol_mem
-        ], $rise_bench_baza_crdttext.prototype, "count_mode", null);
-        __decorate([
-            $mol_mem
-        ], $rise_bench_baza_crdttext.prototype, "text_link", null);
-        __decorate([
-            $mol_mem
-        ], $rise_bench_baza_crdttext.prototype, "document", null);
-        __decorate([
-            $mol_action
-        ], $rise_bench_baza_crdttext.prototype, "prepare_document", null);
-        __decorate([
-            $mol_action
-        ], $rise_bench_baza_crdttext.prototype, "write_text", null);
-        __decorate([
-            $mol_mem
-        ], $rise_bench_baza_crdttext.prototype, "text", null);
-        __decorate([
-            $mol_mem_key
-        ], $rise_bench_baza_crdttext.prototype, "sample_text", null);
-        __decorate([
-            $mol_action
-        ], $rise_bench_baza_crdttext.prototype, "insert", null);
-        __decorate([
-            $mol_action
-        ], $rise_bench_baza_crdttext.prototype, "appended_text", null);
-        __decorate([
-            $mol_action
-        ], $rise_bench_baza_crdttext.prototype, "append_one", null);
-        __decorate([
-            $mol_action
-        ], $rise_bench_baza_crdttext.prototype, "start_run", null);
-        __decorate([
-            $mol_action
-        ], $rise_bench_baza_crdttext.prototype, "benchmark", null);
-        __decorate([
-            $mol_action
-        ], $rise_bench_baza_crdttext.prototype, "reset", null);
-        __decorate([
-            $mol_mem
-        ], $rise_bench_baza_crdttext.prototype, "reload_store", null);
-        __decorate([
-            $mol_action
-        ], $rise_bench_baza_crdttext.prototype, "restore_runs", null);
-        __decorate([
-            $mol_action
-        ], $rise_bench_baza_crdttext.prototype, "save_document", null);
-        __decorate([
-            $mol_action
-        ], $rise_bench_baza_crdttext.prototype, "request_reload", null);
-        __decorate([
-            $mol_mem
-        ], $rise_bench_baza_crdttext.prototype, "resume_reload", null);
-        $$.$rise_bench_baza_crdttext = $rise_bench_baza_crdttext;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        $mol_style_define($rise_bench_baza_crdttext, {
-            Menu: { flex: { grow: 0, basis: $mol_style_unit.rem(15) } },
-            Page: { flex: { grow: 1 } },
-        });
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-	($.$rise_bench) = class $rise_bench extends ($.$mol_book2_catalog) {
-		Goods_host(){
-			const obj = new this.$.$rise_bench_host();
-			(obj.title) = () => ("Сущности");
-			(obj.kind) = () => ("goods");
-			return obj;
-		}
-		Text_host(){
-			const obj = new this.$.$rise_bench_host();
-			(obj.title) = () => ("Текст");
-			(obj.kind) = () => ("text");
-			return obj;
-		}
-		placeholders(){
-			return [];
-		}
-		param(){
-			return "bench";
-		}
-		spreads(){
-			return {"$rise_bench_baza_goods": (this.Goods_host()), "$rise_bench_baza_crdttext": (this.Text_host())};
-		}
-		Goods(){
-			const obj = new this.$.$rise_bench_baza_goods();
-			return obj;
-		}
-		Crdttext(){
-			const obj = new this.$.$rise_bench_baza_crdttext();
-			return obj;
-		}
-		Idb(){
-			const obj = new this.$.$rise_bench_idb();
-			return obj;
-		}
-	};
-	($mol_mem(($.$rise_bench.prototype), "Goods_host"));
-	($mol_mem(($.$rise_bench.prototype), "Text_host"));
-	($mol_mem(($.$rise_bench.prototype), "Goods"));
-	($mol_mem(($.$rise_bench.prototype), "Crdttext"));
-	($mol_mem(($.$rise_bench.prototype), "Idb"));
-
-
-;
-"use strict";
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $rise_bench extends $.$rise_bench {
-            spread_ids() {
-                const ids = super.spread_ids();
-                return new URL(location.href).searchParams.get('rise_fixture') === 'tests' ? [...ids, '$rise_bench_idb'] : ids;
-            }
-            Spread(id) {
-                // Offline regression entry point exercises the same raw workload views.
-                if (new URL(location.href).searchParams.get('rise_fixture') === 'tests') {
-                    if (id === '$rise_bench_baza_goods')
-                        return this.Goods();
-                    if (id === '$rise_bench_baza_crdttext')
-                        return this.Crdttext();
-                    if (id === '$rise_bench_idb')
-                        return this.Idb();
-                }
-                return super.Spread(id);
-            }
-        }
-        $$.$rise_bench = $rise_bench;
-    })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
 
 ;
@@ -36040,255 +33494,6 @@ var $;
 })($ || ($ = {}));
 
 ;
-	($.$mol_icon_check) = class $mol_icon_check extends ($.$mol_icon) {
-		path(){
-			return "M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z";
-		}
-	};
-
-
-;
-"use strict";
-
-
-;
-	($.$mol_icon_check_all) = class $mol_icon_check_all extends ($.$mol_icon) {
-		path(){
-			return "M0.41,13.41L6,19L7.41,17.58L1.83,12M22.24,5.58L11.66,16.17L7.5,12L6.07,13.41L11.66,19L23.66,7M18,7L16.59,5.58L10.24,11.93L11.66,13.34L18,7Z";
-		}
-	};
-
-
-;
-"use strict";
-
-
-;
-	($.$rise_check_all) = class $rise_check_all extends ($.$mol_check_box) {
-		checks(){
-			return [];
-		}
-		Icon(){
-			const obj = new this.$.$mol_icon_check_all();
-			return obj;
-		}
-	};
-	($mol_mem(($.$rise_check_all.prototype), "Icon"));
-
-
-;
-"use strict";
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        /** Owned port of shm/check/all. No runtime dependency on shm. */
-        class $rise_check_all extends $.$rise_check_all {
-            checked(next) {
-                const checks = this.checks();
-                if (next !== undefined) {
-                    for (const check of checks)
-                        check.checked(next);
-                    return next;
-                }
-                return checks.length > 0 && checks.every(check => check.checked());
-            }
-        }
-        __decorate([
-            $mol_mem
-        ], $rise_check_all.prototype, "checked", null);
-        $$.$rise_check_all = $rise_check_all;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-	($.$rise_check_list) = class $rise_check_list extends ($.$mol_view) {
-		all_checked(next){
-			if(next !== undefined) return next;
-			return false;
-		}
-		All(){
-			const obj = new this.$.$rise_check_all();
-			(obj.title) = () => ("Все");
-			(obj.checks) = () => ((this.checks()));
-			(obj.enabled) = () => ((this.enabled()));
-			(obj.checked) = (next) => ((this.all_checked(next)));
-			return obj;
-		}
-		checks(){
-			return [];
-		}
-		Checks(){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ((this.checks()));
-			return obj;
-		}
-		check_title(id){
-			return "";
-		}
-		checked(id, next){
-			if(next !== undefined) return next;
-			return false;
-		}
-		options(){
-			return [];
-		}
-		titles(){
-			return {};
-		}
-		value(next){
-			if(next !== undefined) return next;
-			return [];
-		}
-		enabled(){
-			return true;
-		}
-		sub(){
-			return [(this.All()), (this.Checks())];
-		}
-		Check(id){
-			const obj = new this.$.$mol_check_box();
-			(obj.title) = () => ((this.check_title(id)));
-			(obj.enabled) = () => ((this.enabled()));
-			(obj.checked) = (next) => ((this.checked(id, next)));
-			return obj;
-		}
-	};
-	($mol_mem(($.$rise_check_list.prototype), "all_checked"));
-	($mol_mem(($.$rise_check_list.prototype), "All"));
-	($mol_mem(($.$rise_check_list.prototype), "Checks"));
-	($mol_mem_key(($.$rise_check_list.prototype), "checked"));
-	($mol_mem(($.$rise_check_list.prototype), "value"));
-	($mol_mem_key(($.$rise_check_list.prototype), "Check"));
-
-
-;
-"use strict";
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        /** Owned port of shm/check/list, with labels and a shared disabled state. */
-        class $rise_check_list extends $.$rise_check_list {
-            checks() { return this.options().map(id => this.Check(id)); }
-            check_title(id) { return this.titles()[id] ?? id; }
-            all_checked(next) {
-                const options = this.options();
-                if (next !== undefined) {
-                    this.value(next ? [...options] : []);
-                    return next;
-                }
-                return options.length > 0 && options.every(id => this.checked(id));
-            }
-            checked(id, next) {
-                const value = this.value();
-                if (next === undefined)
-                    return value.includes(id);
-                this.value(next ? value.includes(id) ? value : [...value, id] : value.filter(key => key !== id));
-                return next;
-            }
-        }
-        __decorate([
-            $mol_mem
-        ], $rise_check_list.prototype, "all_checked", null);
-        $$.$rise_check_list = $rise_check_list;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_define($rise_check_list, {
-        flex: { direction: 'column' },
-        Checks: { flex: { wrap: 'wrap' } },
-        All: { box: { shadow: [{ inset: false, x: 0, y: '1px', blur: 0, spread: 0, color: $mol_theme.line }] } },
-    });
-})($ || ($ = {}));
-
-;
-	($.$mol_icon_help) = class $mol_icon_help extends ($.$mol_icon) {
-		path(){
-			return "M10,19H13V22H10V19M12,2C17.35,2.22 19.68,7.62 16.5,11.67C15.67,12.67 14.33,13.33 13.67,14.17C13,15 13,16 13,17H10C10,15.33 10,13.92 10.67,12.92C11.33,11.92 12.67,11.33 13.5,10.67C15.92,8.43 15.32,5.26 12,5A3,3 0 0,0 9,8H6A6,6 0 0,1 12,2Z";
-		}
-	};
-
-
-;
-"use strict";
-
-
-;
-	($.$mol_icon_help_circle) = class $mol_icon_help_circle extends ($.$mol_icon) {
-		path(){
-			return "M15.07,11.25L14.17,12.17C13.45,12.89 13,13.5 13,15H11V14.5C11,13.39 11.45,12.39 12.17,11.67L13.41,10.41C13.78,10.05 14,9.55 14,9C14,7.89 13.1,7 12,7A2,2 0 0,0 10,9H8A4,4 0 0,1 12,5A4,4 0 0,1 16,9C16,9.88 15.64,10.67 15.07,11.25M13,19H11V17H13M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12C22,6.47 17.5,2 12,2Z";
-		}
-	};
-
-
-;
-"use strict";
-
-
-;
-	($.$mol_icon_help_circle_outline) = class $mol_icon_help_circle_outline extends ($.$mol_icon) {
-		path(){
-			return "M11,18H13V16H11V18M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,6A4,4 0 0,0 8,10H10A2,2 0 0,1 12,8A2,2 0 0,1 14,10C14,12 11,11.75 11,15H13C13,12.75 16,12.5 16,10A4,4 0 0,0 12,6Z";
-		}
-	};
-
-
-;
-"use strict";
-
-
-;
-	($.$rise_bench_host_controls_computerhelp) = class $rise_bench_host_controls_computerhelp extends ($.$mol_pick) {
-		Icon(){
-			const obj = new this.$.$mol_icon_help_circle_outline();
-			return obj;
-		}
-		Text(){
-			const obj = new this.$.$mol_text();
-			(obj.text) = () => ("В Windows нажмите **Win + I**, откройте **Система → О системе** (в некоторых версиях — «О программе»). В разделе **Характеристики устройства** нажмите **Копировать** и вставьте текст в это поле. Коды устройства и продукта удалятся автоматически. Имя компьютера, процессор, память и тип системы сохранятся. Версию Windows можно дописать ниже. [Инструкция Microsoft](https://support.microsoft.com/ru-ru/windows/experience/find-information-about-your-windows-device).");
-			return obj;
-		}
-		hint(){
-			return "Где найти параметры компьютера";
-		}
-		trigger_content(){
-			return [(this.Icon())];
-		}
-		bubble_content(){
-			return [(this.Text())];
-		}
-	};
-	($mol_mem(($.$rise_bench_host_controls_computerhelp.prototype), "Icon"));
-	($mol_mem(($.$rise_bench_host_controls_computerhelp.prototype), "Text"));
-
-
-;
-"use strict";
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_define($rise_bench_host_controls_computerhelp, {
-        Text: { width: $mol_style_unit.rem(28), maxWidth: $mol_style_unit.vw(85) },
-    });
-})($ || ($ = {}));
-
-;
 	($.$mol_text_list) = class $mol_text_list extends ($.$mol_text) {
 		type(){
 			return "";
@@ -36327,3696 +33532,6 @@ var $;
 ;
 "use strict";
 
-
-;
-	($.$rise_bench_host_controls) = class $rise_bench_host_controls extends ($.$mol_page) {
-		intro(){
-			return "";
-		}
-		Intro(){
-			const obj = new this.$.$mol_text();
-			(obj.text) = () => ((this.intro()));
-			return obj;
-		}
-		engines(next){
-			if(next !== undefined) return next;
-			return [];
-		}
-		engine_keys(){
-			return [];
-		}
-		engine_titles(){
-			return {};
-		}
-		Engine(){
-			const obj = new this.$.$rise_check_list();
-			(obj.enabled) = () => ((this.enabled()));
-			(obj.value) = (next) => ((this.engines(next)));
-			(obj.options) = () => ((this.engine_keys()));
-			(obj.titles) = () => ((this.engine_titles()));
-			return obj;
-		}
-		Engine_label(){
-			const obj = new this.$.$mol_labeler();
-			(obj.title) = () => ("Хранилище");
-			(obj.Content) = () => ((this.Engine()));
-			return obj;
-		}
-		storage_label(){
-			return "";
-		}
-		Storage_label(){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([(this.storage_label())]);
-			return obj;
-		}
-		schemas(next){
-			if(next !== undefined) return next;
-			return [];
-		}
-		Schema(){
-			const obj = new this.$.$rise_check_list();
-			(obj.enabled) = () => ((this.enabled()));
-			(obj.value) = (next) => ((this.schemas(next)));
-			(obj.options) = () => (["compact", "full"]);
-			(obj.titles) = () => ({"compact": "4 свойства", "full": "10 свойств"});
-			return obj;
-		}
-		Schema_label(){
-			const obj = new this.$.$mol_labeler();
-			(obj.title) = () => ("Состав записи");
-			(obj.Content) = () => ((this.Schema()));
-			return obj;
-		}
-		count_title(){
-			return "Количество записей";
-		}
-		sizes(next){
-			if(next !== undefined) return next;
-			return [];
-		}
-		count_keys(){
-			return [];
-		}
-		counts(){
-			return {};
-		}
-		Count(){
-			const obj = new this.$.$rise_check_list();
-			(obj.enabled) = () => ((this.enabled()));
-			(obj.value) = (next) => ((this.sizes(next)));
-			(obj.options) = () => ((this.count_keys()));
-			(obj.titles) = () => ((this.counts()));
-			return obj;
-		}
-		Count_label(){
-			const obj = new this.$.$mol_labeler();
-			(obj.title) = () => ((this.count_title()));
-			(obj.Content) = () => ((this.Count()));
-			return obj;
-		}
-		Computer_help(){
-			const obj = new this.$.$rise_bench_host_controls_computerhelp();
-			return obj;
-		}
-		computer(next){
-			if(next !== undefined) return next;
-			return "";
-		}
-		Computer(){
-			const obj = new this.$.$rise_bench_textarea();
-			(obj.length_max) = () => (8000);
-			(obj.hint) = () => ("Процессор, память, ОС");
-			(obj.value) = (next) => ((this.computer(next)));
-			(obj.enabled) = () => ((this.enabled()));
-			return obj;
-		}
-		Computer_label(){
-			const obj = new this.$.$mol_labeler();
-			(obj.title) = () => ("Параметры компьютера");
-			(obj.label) = () => (["Параметры компьютера", (this.Computer_help())]);
-			(obj.Content) = () => ((this.Computer()));
-			return obj;
-		}
-		run(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		Run(){
-			const obj = new this.$.$mol_button_major();
-			(obj.title) = () => ("Запустить бенчмарк");
-			(obj.enabled) = () => ((this.run_enabled()));
-			(obj.click) = (next) => ((this.run(next)));
-			return obj;
-		}
-		stop(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		Stop(){
-			const obj = new this.$.$mol_button_minor();
-			(obj.title) = () => ("Остановить");
-			(obj.click) = (next) => ((this.stop(next)));
-			return obj;
-		}
-		status(){
-			return "";
-		}
-		Status(){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([(this.status())]);
-			return obj;
-		}
-		elapsed(){
-			return "";
-		}
-		Elapsed(){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([(this.elapsed())]);
-			return obj;
-		}
-		retry(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		Retry(){
-			const obj = new this.$.$mol_button_minor();
-			(obj.title) = () => ("Повторить сохранение");
-			(obj.click) = (next) => ((this.retry(next)));
-			return obj;
-		}
-		controls(){
-			return [
-				(this.Intro()), 
-				(this.Engine_label()), 
-				(this.Storage_label()), 
-				(this.Schema_label()), 
-				(this.Count_label()), 
-				(this.Computer_label()), 
-				(this.Run()), 
-				(this.Stop()), 
-				(this.Status()), 
-				(this.Elapsed()), 
-				(this.Retry())
-			];
-		}
-		title(){
-			return "Настройки";
-		}
-		minimal_width(){
-			return 320;
-		}
-		kind(){
-			return "goods";
-		}
-		enabled(){
-			return true;
-		}
-		running(){
-			return false;
-		}
-		run_enabled(){
-			return true;
-		}
-		body(){
-			return (this.controls());
-		}
-		retry_visible(){
-			return false;
-		}
-	};
-	($mol_mem(($.$rise_bench_host_controls.prototype), "Intro"));
-	($mol_mem(($.$rise_bench_host_controls.prototype), "engines"));
-	($mol_mem(($.$rise_bench_host_controls.prototype), "Engine"));
-	($mol_mem(($.$rise_bench_host_controls.prototype), "Engine_label"));
-	($mol_mem(($.$rise_bench_host_controls.prototype), "Storage_label"));
-	($mol_mem(($.$rise_bench_host_controls.prototype), "schemas"));
-	($mol_mem(($.$rise_bench_host_controls.prototype), "Schema"));
-	($mol_mem(($.$rise_bench_host_controls.prototype), "Schema_label"));
-	($mol_mem(($.$rise_bench_host_controls.prototype), "sizes"));
-	($mol_mem(($.$rise_bench_host_controls.prototype), "Count"));
-	($mol_mem(($.$rise_bench_host_controls.prototype), "Count_label"));
-	($mol_mem(($.$rise_bench_host_controls.prototype), "Computer_help"));
-	($mol_mem(($.$rise_bench_host_controls.prototype), "computer"));
-	($mol_mem(($.$rise_bench_host_controls.prototype), "Computer"));
-	($mol_mem(($.$rise_bench_host_controls.prototype), "Computer_label"));
-	($mol_mem(($.$rise_bench_host_controls.prototype), "run"));
-	($mol_mem(($.$rise_bench_host_controls.prototype), "Run"));
-	($mol_mem(($.$rise_bench_host_controls.prototype), "stop"));
-	($mol_mem(($.$rise_bench_host_controls.prototype), "Stop"));
-	($mol_mem(($.$rise_bench_host_controls.prototype), "Status"));
-	($mol_mem(($.$rise_bench_host_controls.prototype), "Elapsed"));
-	($mol_mem(($.$rise_bench_host_controls.prototype), "retry"));
-	($mol_mem(($.$rise_bench_host_controls.prototype), "Retry"));
-
-
-;
-"use strict";
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $rise_bench_host_controls extends $.$rise_bench_host_controls {
-            /** Persist the draft locally; each run takes its own immutable snapshot. */
-            computer(next) { return $mol_state_local.value('$rise_bench_computer', next === undefined ? undefined : $rise_bench_computer.clean(next)) ?? ''; }
-            intro() {
-                return `Выберите хранилища, состав и объёмы данных. «Все» отмечает всю группу; каждое выбранное сочетание выполняется по очереди.\n\nТаймаута нет — при необходимости нажмите «Остановить».\n\nВерсия бенчмарка: ${$rise_bench_run_benchmark_version}.`;
-            }
-            engine_keys() { return Object.keys($rise_bench_engine); }
-            engine_titles() { return Object.fromEntries(Object.entries($rise_bench_engine).map(([key, engine]) => [key, engine.title])); }
-            count_title() { return this.kind() === 'text' ? 'Количество строк' : 'Количество записей'; }
-            counts() {
-                return Object.fromEntries((this.kind() === 'text' ? [100, 500, 1000, 2000, 5000] : [100, 500, 1000, 2000, 3000, 4000, 5000, 10000]).map(count => [count, String(count)]));
-            }
-            count_keys() { return Object.keys(this.counts()); }
-            storage_label() { return this.kind() === 'text' ? 'CRDT-текст' : this.engines().length === 1 ? $rise_bench_engine[this.engines()[0]].storage : 'Выбранные хранилища выполняются последовательно'; }
-            controls() {
-                return [
-                    this.Intro(),
-                    ...this.kind() === 'text' ? [] : [this.Engine_label()],
-                    this.Storage_label(),
-                    ...this.kind() === 'text' ? [] : [this.Schema_label()],
-                    this.Count_label(), this.Computer_label(), this.Run(), ...this.running() ? [this.Stop()] : [], this.Status(), this.Elapsed(),
-                    ...this.retry_visible() ? [this.Retry()] : [],
-                ];
-            }
-        }
-        __decorate([
-            $mol_mem
-        ], $rise_bench_host_controls.prototype, "computer", null);
-        $$.$rise_bench_host_controls = $rise_bench_host_controls;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_define($rise_bench_host_controls, {
-        flex: { grow: 0, basis: $mol_style_unit.rem(20) },
-        Storage_label: { padding: $mol_gap.text },
-        Status: { padding: $mol_gap.text },
-        Elapsed: { padding: $mol_gap.text },
-        Computer_label: { Label: { align: { items: 'center' } } },
-    });
-})($ || ($ = {}));
-
-;
-	($.$rise_bench_charts_selection) = class $rise_bench_charts_selection extends ($.$mol_pick) {
-		selection_title(){
-			return "";
-		}
-		choices(){
-			return [];
-		}
-		Items(){
-			const obj = new this.$.$mol_list();
-			(obj.rows) = () => ((this.choices()));
-			return obj;
-		}
-		List(){
-			const obj = new this.$.$mol_scroll();
-			(obj.sub) = () => ([(this.Items())]);
-			return obj;
-		}
-		presets(){
-			return [];
-		}
-		preset_title(id){
-			return "";
-		}
-		select_latest(id, next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		run_title(id){
-			return "";
-		}
-		checked(id, next){
-			if(next !== undefined) return next;
-			return false;
-		}
-		runs(){
-			return [];
-		}
-		value(next){
-			if(next !== undefined) return next;
-			return [];
-		}
-		title(){
-			return (this.selection_title());
-		}
-		bubble_content(){
-			return [(this.List())];
-		}
-		Presets(){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ((this.presets()));
-			return obj;
-		}
-		Preset(id){
-			const obj = new this.$.$mol_button_minor();
-			(obj.title) = () => ((this.preset_title(id)));
-			(obj.click) = (next) => ((this.select_latest(id, next)));
-			return obj;
-		}
-		Check(id){
-			const obj = new this.$.$mol_check_box();
-			(obj.title) = () => ((this.run_title(id)));
-			(obj.checked) = (next) => ((this.checked(id, next)));
-			return obj;
-		}
-	};
-	($mol_mem(($.$rise_bench_charts_selection.prototype), "Items"));
-	($mol_mem(($.$rise_bench_charts_selection.prototype), "List"));
-	($mol_mem_key(($.$rise_bench_charts_selection.prototype), "select_latest"));
-	($mol_mem_key(($.$rise_bench_charts_selection.prototype), "checked"));
-	($mol_mem(($.$rise_bench_charts_selection.prototype), "value"));
-	($mol_mem(($.$rise_bench_charts_selection.prototype), "Presets"));
-	($mol_mem_key(($.$rise_bench_charts_selection.prototype), "Preset"));
-	($mol_mem_key(($.$rise_bench_charts_selection.prototype), "Check"));
-
-
-;
-"use strict";
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $rise_bench_charts_selection extends $.$rise_bench_charts_selection {
-            selection_title() {
-                const selected = new Set(this.value());
-                return `Прогоны (${this.runs().filter(run => selected.has(run.id)).length})`;
-            }
-            choices() { return [this.Presets(), ...this.runs().map(run => this.Check(run.id))]; }
-            presets() { return [0, 10, 20, 30, 50].map(count => this.Preset(count)); }
-            preset_title(count) { return String(count); }
-            select_latest(count) { this.value(this.runs().slice(0, count).map(run => run.id)); }
-            checked(id, next) {
-                const value = this.value();
-                if (next === undefined)
-                    return value.includes(id);
-                this.value(next ? value.includes(id) ? value : [...value, id] : value.filter(key => key !== id));
-                return next;
-            }
-            run_title(id) {
-                const rows = this.runs(), index = rows.findIndex(run => run.id === id), run = rows[index];
-                const engine = $rise_bench_engine[run.engine]?.title ?? run.engine;
-                return `№ ${rows.length - index} · ${run.stamp} · ${engine} · ${run.count} ${run.properties ? `записей · ${run.properties} полей` : 'строк'} · v${run.benchmark_version} · ${run.state()}`;
-            }
-        }
-        __decorate([
-            $mol_action
-        ], $rise_bench_charts_selection.prototype, "select_latest", null);
-        $$.$rise_bench_charts_selection = $rise_bench_charts_selection;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_define($rise_bench_charts_selection, {
-        alignSelf: 'flex-start',
-        List: {
-            maxHeight: '70vh',
-            maxWidth: '90vw',
-        },
-    });
-})($ || ($ = {}));
-
-;
-	($.$mol_plot_dot) = class $mol_plot_dot extends ($.$mol_plot_graph) {
-		diameter(){
-			return 8;
-		}
-		curve(){
-			return "";
-		}
-		Curve(){
-			const obj = new this.$.$mol_svg_path();
-			(obj.geometry) = () => ((this.curve()));
-			return obj;
-		}
-		points_max(){
-			return +Infinity;
-		}
-		aspect(){
-			return 1;
-		}
-		style(){
-			return {...(super.style()), "stroke-width": (this.diameter())};
-		}
-		sub(){
-			return [(this.Hint()), (this.Curve())];
-		}
-		Sample(){
-			const obj = new this.$.$mol_plot_graph_sample();
-			(obj.color) = () => ((this.color()));
-			return obj;
-		}
-	};
-	($mol_mem(($.$mol_plot_dot.prototype), "Curve"));
-	($mol_mem(($.$mol_plot_dot.prototype), "Sample"));
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    // 00 HHHHH HHHHH HHHHH LLLLL LLLLL LLLLL
-    const mask = 0b11111_11111_11111;
-    function $mol_coord_pack(high, low) {
-        return (high << 17 >>> 2) | (low & mask);
-    }
-    $.$mol_coord_pack = $mol_coord_pack;
-    function $mol_coord_high(pack) {
-        return pack << 2 >> 17;
-    }
-    $.$mol_coord_high = $mol_coord_high;
-    function $mol_coord_low(pack) {
-        return (pack << 17) >> 17;
-    }
-    $.$mol_coord_low = $mol_coord_low;
-})($ || ($ = {}));
-
-;
-"use strict";
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $mol_plot_dot extends $.$mol_plot_dot {
-            filled() {
-                return new Set();
-            }
-            indexes() {
-                const radius = this.diameter() / 2;
-                // calculate by cpu
-                const points_max = this.points_max();
-                const viewport = this.viewport();
-                const viewport_left = viewport.x.min - radius;
-                const viewport_right = viewport.x.max + radius;
-                const viewport_bottom = viewport.y.min - radius;
-                const viewport_top = viewport.y.max + radius;
-                const [shift_x, shift_y] = this.shift();
-                const [scale_x, scale_y] = this.scale();
-                let last_x = Number.NEGATIVE_INFINITY;
-                let last_y = Number.NEGATIVE_INFINITY;
-                let spacing = 0;
-                let filled = this.filled();
-                let indexes;
-                const series_x = this.series_x();
-                const series_y = this.series_y();
-                do {
-                    indexes = [];
-                    for (let i = 0; i < series_x.length; i++) {
-                        const point_x = this.repos_x(series_x[i]);
-                        const point_y = this.repos_y(series_y[i]);
-                        const scaled_x = Math.round(shift_x + point_x * scale_x);
-                        const scaled_y = Math.round(shift_y + point_y * scale_y);
-                        if (Math.abs(scaled_x - last_x) < radius
-                            && Math.abs(scaled_y - last_y) < radius)
-                            continue;
-                        last_x = scaled_x;
-                        last_y = scaled_y;
-                        if (scaled_x < viewport_left)
-                            continue;
-                        if (scaled_y < viewport_bottom)
-                            continue;
-                        if (scaled_x > viewport_right)
-                            continue;
-                        if (scaled_y > viewport_top)
-                            continue;
-                        if (spacing !== 0) {
-                            const key = $mol_coord_pack(Math.round(point_x * scale_x / spacing) * spacing, Math.round(point_y * scale_y / spacing) * spacing);
-                            if (filled.has(key))
-                                continue;
-                            filled.add(key);
-                        }
-                        indexes.push(i);
-                        if (indexes.length > points_max)
-                            break;
-                    }
-                    spacing += Math.ceil(radius);
-                    filled.clear();
-                } while (indexes.length > points_max);
-                return indexes;
-            }
-            curve() {
-                const points = this.points();
-                if (points.length === 0)
-                    return '';
-                const diameter = this.diameter();
-                const aspect = this.aspect();
-                const shift_y = Math.max(0, Math.floor((aspect - 1) * diameter / 2));
-                const shift_x = Math.max(0, Math.floor((1 / aspect - 1) * diameter / 2));
-                const size_y = Math.max(0, Math.ceil((aspect - 1) * diameter));
-                const size_x = Math.max(0, Math.ceil((1 / aspect - 1) * diameter));
-                return points.map(point => `M ${point[0] - shift_x} ${point[1] - shift_y} l ${size_x} ${size_y}`).join(' ');
-            }
-        }
-        __decorate([
-            $mol_mem
-        ], $mol_plot_dot.prototype, "filled", null);
-        __decorate([
-            $mol_mem
-        ], $mol_plot_dot.prototype, "indexes", null);
-        $$.$mol_plot_dot = $mol_plot_dot;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_attach("mol/plot/dot/dot.view.css", "[mol_plot_dot] {\n\tstroke-linecap: round;\n\tfill: none;\n}\n\n[mol_plot_dot_sample] {\n\twidth: .5rem;\n\theight: .5rem;\n\tborder-radius: 1rem;\n\tbackground: currentColor;\n\tposition: absolute;\n\ttop: .75em;\n\tleft: 50%;\n\ttransform: translate(-50%, -50%);\n}\n");
-})($ || ($ = {}));
-
-;
-	($.$rise_bench_charts_operation_plot) = class $rise_bench_charts_operation_plot extends ($.$mol_plot_pane) {};
-
-
-;
-"use strict";
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $rise_bench_charts_operation_plot extends $.$rise_bench_charts_operation_plot {
-            dimensions() {
-                const data = super.dimensions();
-                return new $mol_vector_2d(new $mol_vector_range(0, Math.max(1, data.x.max)), new $mol_vector_range(0, Math.max(.001, data.y.max * 1.1)));
-            }
-        }
-        __decorate([
-            $mol_mem
-        ], $rise_bench_charts_operation_plot.prototype, "dimensions", null);
-        $$.$rise_bench_charts_operation_plot = $rise_bench_charts_operation_plot;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-	($.$mol_plot_group) = class $mol_plot_group extends ($.$mol_plot_graph) {
-		graphs(){
-			return [];
-		}
-		graphs_enriched(){
-			return (this.graphs());
-		}
-		graph_samples(){
-			return [];
-		}
-		sub(){
-			return (this.graphs_enriched());
-		}
-		Sample(){
-			const obj = new this.$.$mol_plot_graph_sample();
-			(obj.sub) = () => ((this.graph_samples()));
-			return obj;
-		}
-	};
-	($mol_mem(($.$mol_plot_group.prototype), "Sample"));
-
-
-;
-"use strict";
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $mol_plot_group extends $.$mol_plot_group {
-            graphs_enriched() {
-                const graphs = this.graphs();
-                for (let graph of graphs) {
-                    graph.shift = () => this.shift();
-                    graph.scale = () => this.scale();
-                    graph.size_real = () => this.size_real();
-                    graph.hue = () => this.hue();
-                    graph.series_x = () => this.series_x();
-                    graph.series_y = () => this.series_y();
-                    graph.dimensions_pane = () => this.dimensions_pane();
-                    graph.viewport = () => this.viewport();
-                    graph.cursor_position = () => this.cursor_position();
-                    graph.gap = () => this.gap();
-                    graph.title = () => this.title();
-                    graph.repos_x = val => this.repos_x(val);
-                    graph.repos_y = val => this.repos_y(val);
-                }
-                return graphs;
-            }
-            dimensions() {
-                const graphs = this.graphs_enriched();
-                let next = new this.$.$mol_vector_2d($mol_vector_range_full.inversed, $mol_vector_range_full.inversed);
-                for (let graph of graphs) {
-                    next = next.expanded2(graph.dimensions());
-                }
-                return next;
-            }
-            graph_samples() {
-                return this.graphs_enriched().map(graph => graph.Sample());
-            }
-            back() {
-                const graphs = this.graphs_enriched();
-                const next = [];
-                for (let graph of graphs)
-                    next.push(...graph.back());
-                return next;
-            }
-            front() {
-                const graphs = this.graphs_enriched();
-                const next = [];
-                for (let graph of graphs)
-                    next.push(...graph.front());
-                return next;
-            }
-        }
-        __decorate([
-            $mol_mem
-        ], $mol_plot_group.prototype, "graphs_enriched", null);
-        __decorate([
-            $mol_mem
-        ], $mol_plot_group.prototype, "dimensions", null);
-        __decorate([
-            $mol_mem
-        ], $mol_plot_group.prototype, "graph_samples", null);
-        $$.$mol_plot_group = $mol_plot_group;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-	($.$mol_plot_ruler_hor) = class $mol_plot_ruler_hor extends ($.$mol_plot_ruler) {
-		title_align(){
-			return "start";
-		}
-		label_align(){
-			return "middle";
-		}
-		title_pos_x(){
-			return "0";
-		}
-		title_pos_y(){
-			return "100%";
-		}
-		label_pos_y(id){
-			return (this.title_pos_y());
-		}
-		background_width(){
-			return "100%";
-		}
-	};
-
-
-;
-"use strict";
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $mol_plot_ruler_hor extends $.$mol_plot_ruler_hor {
-            dimensions_axis() {
-                return this.dimensions_pane().x;
-            }
-            viewport_axis() {
-                return new this.$.$mol_vector_range(0, this.size_real().x);
-            }
-            scale_axis() {
-                return this.scale()[0];
-            }
-            scale_step() {
-                return this.scale()[0];
-            }
-            shift_axis() {
-                return this.shift()[0];
-            }
-            curve() {
-                const [shift] = this.shift();
-                const [scale] = this.scale();
-                return this.axis_points().map(point => {
-                    let scaled = Math.round(point * scale + shift);
-                    scaled = Math.max(Number.MIN_SAFE_INTEGER, Math.min(scaled, Number.MAX_SAFE_INTEGER));
-                    return `M ${scaled} 1000 V 0`;
-                }).join(' ');
-            }
-            label_pos_x(index) {
-                return (this.axis_points()[index] * this.scale()[0] + this.shift()[0]).toFixed(3);
-            }
-            background_y() {
-                return String(this.size_real()[1] - this.font_size());
-            }
-            title_pos_y() {
-                return String(this.size_real()[1]);
-            }
-            background_height() {
-                return String(this.font_size());
-            }
-        }
-        $$.$mol_plot_ruler_hor = $mol_plot_ruler_hor;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_attach("mol/plot/ruler/hor/hor.view.css", "[mol_plot_ruler_hor_label] {\n\ttransform: translateY( -4px );\n}\n\n[mol_plot_ruler_hor_title] {\n\ttransform: translateY( -4px );\n}\n");
-})($ || ($ = {}));
-
-;
-	($.$rise_bench_charts_operation) = class $rise_bench_charts_operation extends ($.$mol_view) {
-		content(){
-			return [];
-		}
-		legends(){
-			return [];
-		}
-		legend_content(id){
-			return [];
-		}
-		series_title(id){
-			return "";
-		}
-		legend_sample(id){
-			return [];
-		}
-		graphs(){
-			return [];
-		}
-		series_x(id){
-			return [];
-		}
-		series_y(id){
-			return [];
-		}
-		Line(id){
-			const obj = new this.$.$mol_plot_line();
-			return obj;
-		}
-		Dots(id){
-			const obj = new this.$.$mol_plot_dot();
-			return obj;
-		}
-		operation(){
-			return "";
-		}
-		runs(){
-			return [];
-		}
-		sub(){
-			return (this.content());
-		}
-		Title(){
-			const obj = new this.$.$mol_view();
-			(obj.dom_name) = () => ("h3");
-			(obj.sub) = () => ([(this.operation())]);
-			return obj;
-		}
-		Empty(){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => (["Нет завершённых замеров"]);
-			return obj;
-		}
-		Legend(){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ((this.legends()));
-			return obj;
-		}
-		Legend_item(id){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ((this.legend_content(id)));
-			return obj;
-		}
-		Legend_text(id){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([(this.series_title(id))]);
-			return obj;
-		}
-		Legend_sample(id){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ((this.legend_sample(id)));
-			return obj;
-		}
-		Plot(){
-			const obj = new this.$.$rise_bench_charts_operation_plot();
-			(obj.hue_base) = () => (210);
-			(obj.graphs) = () => ((this.graphs()));
-			return obj;
-		}
-		Series(id){
-			const obj = new this.$.$mol_plot_group();
-			(obj.title) = () => ((this.series_title(id)));
-			(obj.series_x) = () => ((this.series_x(id)));
-			(obj.series_y) = () => ((this.series_y(id)));
-			(obj.graphs) = () => ([(this.Line(id)), (this.Dots(id))]);
-			return obj;
-		}
-		X(){
-			const obj = new this.$.$mol_plot_ruler_hor();
-			(obj.title) = () => ("Объём");
-			return obj;
-		}
-		Y(){
-			const obj = new this.$.$mol_plot_ruler_vert();
-			(obj.title) = () => ("с");
-			return obj;
-		}
-		Note(){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => (["Медиана прогонов; отдельные серии по хранилищу, полям, компьютеру и версии."]);
-			return obj;
-		}
-	};
-	($mol_mem_key(($.$rise_bench_charts_operation.prototype), "Line"));
-	($mol_mem_key(($.$rise_bench_charts_operation.prototype), "Dots"));
-	($mol_mem(($.$rise_bench_charts_operation.prototype), "Title"));
-	($mol_mem(($.$rise_bench_charts_operation.prototype), "Empty"));
-	($mol_mem(($.$rise_bench_charts_operation.prototype), "Legend"));
-	($mol_mem_key(($.$rise_bench_charts_operation.prototype), "Legend_item"));
-	($mol_mem_key(($.$rise_bench_charts_operation.prototype), "Legend_text"));
-	($mol_mem_key(($.$rise_bench_charts_operation.prototype), "Legend_sample"));
-	($mol_mem(($.$rise_bench_charts_operation.prototype), "Plot"));
-	($mol_mem_key(($.$rise_bench_charts_operation.prototype), "Series"));
-	($mol_mem(($.$rise_bench_charts_operation.prototype), "X"));
-	($mol_mem(($.$rise_bench_charts_operation.prototype), "Y"));
-	($mol_mem(($.$rise_bench_charts_operation.prototype), "Note"));
-
-
-;
-"use strict";
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $rise_bench_charts_operation extends $.$rise_bench_charts_operation {
-            groups() {
-                const groups = new Map();
-                for (const run of this.runs()) {
-                    const time = run.metric(this.operation());
-                    if (run.state() !== 'Готово' || time === null)
-                        continue;
-                    const engine = $rise_bench_engine[run.engine]?.title ?? run.engine;
-                    const key = JSON.stringify([engine, run.properties, run.computer, run.browser, run.benchmark_version, run.engine_version]);
-                    if (!groups.has(key))
-                        groups.set(key, {
-                            title: `${engine} ${run.engine_version.slice(0, run.engine === 'goods' ? 8 : 80)} · ${run.properties || 'текст'} · ${run.computer.split(/\r?\n/)[0] || 'ПК не указан'} · v${run.benchmark_version}`, values: new Map,
-                        });
-                    const values = groups.get(key).values;
-                    if (!values.has(run.count))
-                        values.set(run.count, []);
-                    values.get(run.count).push(time);
-                }
-                return [...groups.values()].map(group => ({ title: group.title, points: [...group.values].sort((a, b) => a[0] - b[0]).map(([count, times]) => {
-                        const sorted = [...times].sort((a, b) => a - b), middle = Math.floor(sorted.length / 2);
-                        return [count, sorted.length % 2 ? sorted[middle] : (sorted[middle - 1] + sorted[middle]) / 2];
-                    }) }));
-            }
-            content() { return this.groups().length ? [this.Title(), this.Legend(), this.Plot(), this.Note()] : [this.Title(), this.Empty()]; }
-            series_title(id) { return this.groups()[id].title; }
-            series_x(id) { return this.groups()[id].points.map(point => point[0]); }
-            series_y(id) { return this.groups()[id].points.map(point => point[1]); }
-            graphs() { return [...this.groups().map((_, id) => this.Series(id)), this.X(), this.Y()]; }
-            legends() { return this.groups().map((_, id) => this.Legend_item(id)); }
-            legend_content(id) { return [this.Legend_sample(id), this.Legend_text(id)]; }
-            legend_sample(id) { return [this.Series(id).Sample()]; }
-        }
-        __decorate([
-            $mol_mem
-        ], $rise_bench_charts_operation.prototype, "groups", null);
-        $$.$rise_bench_charts_operation = $rise_bench_charts_operation;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_define($rise_bench_charts_operation, {
-        flex: { direction: 'column', shrink: 0 }, minWidth: 0,
-        Plot: { height: $mol_style_unit.rem(18), flex: { shrink: 0 }, minWidth: 0 },
-        Legend: { flex: { direction: 'column' } },
-        Legend_item: { flex: { wrap: 'wrap' } },
-        Legend_sample: { position: 'relative', width: $mol_style_unit.rem(2), height: $mol_style_unit.rem(1.5), flex: { shrink: 0 } },
-    });
-})($ || ($ = {}));
-
-;
-	($.$rise_bench_charts) = class $rise_bench_charts extends ($.$mol_view) {
-		charts(){
-			return [];
-		}
-		operation(id){
-			return "";
-		}
-		selected_runs(){
-			return [];
-		}
-		runs(){
-			return [];
-		}
-		operations(){
-			return [];
-		}
-		selected(next){
-			if(next !== undefined) return next;
-			return [];
-		}
-		sub(){
-			return (this.charts());
-		}
-		Selection(){
-			const obj = new this.$.$rise_bench_charts_selection();
-			(obj.runs) = () => ((this.runs()));
-			(obj.value) = (next) => ((this.selected(next)));
-			return obj;
-		}
-		Chart(id){
-			const obj = new this.$.$rise_bench_charts_operation();
-			(obj.operation) = () => ((this.operation(id)));
-			(obj.runs) = () => ((this.selected_runs()));
-			return obj;
-		}
-	};
-	($mol_mem(($.$rise_bench_charts.prototype), "selected"));
-	($mol_mem(($.$rise_bench_charts.prototype), "Selection"));
-	($mol_mem_key(($.$rise_bench_charts.prototype), "Chart"));
-
-
-;
-"use strict";
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $rise_bench_charts extends $.$rise_bench_charts {
-            charts() { return [this.Selection(), ...this.operations().map((_, index) => this.Chart(index))]; }
-            selected_runs() {
-                const selected = new Set(this.selected());
-                return this.runs().filter(run => selected.has(run.id));
-            }
-            operation(index) { return this.operations()[index]; }
-        }
-        __decorate([
-            $mol_mem
-        ], $rise_bench_charts.prototype, "selected_runs", null);
-        $$.$rise_bench_charts = $rise_bench_charts;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_define($rise_bench_charts, { flex: { direction: 'column' } });
-})($ || ($ = {}));
-
-;
-	($.$rise_bench_host) = class $rise_bench_host extends ($.$mol_book2) {
-		controls_enabled(){
-			return true;
-		}
-		run_enabled(){
-			return true;
-		}
-		busy(){
-			return false;
-		}
-		selected_engines(next){
-			if(next !== undefined) return next;
-			return [];
-		}
-		selected_counts(next){
-			if(next !== undefined) return next;
-			return [];
-		}
-		selected_schemas(next){
-			if(next !== undefined) return next;
-			return [];
-		}
-		run(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		stop(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		status(next){
-			if(next !== undefined) return next;
-			return "";
-		}
-		elapsed_text(){
-			return "";
-		}
-		retry_visible(){
-			return false;
-		}
-		retry(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		Controls(){
-			const obj = new this.$.$rise_bench_host_controls();
-			(obj.kind) = () => ((this.kind()));
-			(obj.enabled) = () => ((this.controls_enabled()));
-			(obj.run_enabled) = () => ((this.run_enabled()));
-			(obj.running) = () => ((this.busy()));
-			(obj.engines) = (next) => ((this.selected_engines(next)));
-			(obj.sizes) = (next) => ((this.selected_counts(next)));
-			(obj.schemas) = (next) => ((this.selected_schemas(next)));
-			(obj.run) = (next) => ((this.run(next)));
-			(obj.stop) = (next) => ((this.stop(next)));
-			(obj.status) = () => ((this.status()));
-			(obj.elapsed) = () => ((this.elapsed_text()));
-			(obj.retry_visible) = () => ((this.retry_visible()));
-			(obj.retry) = (next) => ((this.retry(next)));
-			return obj;
-		}
-		csv_title(){
-			return "Скачать CSV";
-		}
-		csv_blob(){
-			return null;
-		}
-		csv_filename(){
-			return "rise-benchmark.csv";
-		}
-		Download(){
-			const obj = new this.$.$mol_button_download();
-			(obj.title) = () => ((this.csv_title()));
-			(obj.hint) = () => ("Скачать CSV");
-			(obj.blob) = () => ((this.csv_blob()));
-			(obj.file_name) = () => ((this.csv_filename()));
-			return obj;
-		}
-		mode(next){
-			if(next !== undefined) return next;
-			return "table";
-		}
-		Mode(){
-			const obj = new this.$.$mol_switch();
-			(obj.value) = (next) => ((this.mode(next)));
-			(obj.options) = () => ({"table": "Таблица", "charts": "Графики"});
-			return obj;
-		}
-		operations(){
-			return [];
-		}
-		runs(){
-			return [];
-		}
-		compare(){
-			return false;
-		}
-		text_mode(){
-			return false;
-		}
-		Metrics(){
-			const obj = new this.$.$rise_bench_metrics();
-			(obj.operations) = () => ((this.operations()));
-			(obj.runs) = () => ((this.runs()));
-			(obj.compare) = () => ((this.compare()));
-			(obj.text_mode) = () => ((this.text_mode()));
-			return obj;
-		}
-		History(){
-			const obj = new this.$.$mol_scroll();
-			(obj.sub) = () => ([(this.Metrics())]);
-			return obj;
-		}
-		fixture_uri(){
-			return "";
-		}
-		Frame(){
-			const obj = new this.$.$mol_frame();
-			(obj.uri) = () => ((this.fixture_uri()));
-			(obj.clipboard_read) = () => (false);
-			(obj.clipboard_write) = () => (false);
-			(obj.attr) = () => ({...(this.$.$mol_frame.prototype.attr.call(obj)), "inert": (this.busy())});
-			return obj;
-		}
-		results_body(){
-			return [(this.History()), (this.Frame())];
-		}
-		Results(){
-			const obj = new this.$.$mol_page();
-			(obj.title) = () => ("Результаты");
-			(obj.minimal_width) = () => (640);
-			(obj.tools) = () => ([(this.Download()), (this.Mode())]);
-			(obj.body) = () => ((this.results_body()));
-			return obj;
-		}
-		chart_selection(next){
-			if(next !== undefined) return next;
-			return [];
-		}
-		kind(){
-			return "goods";
-		}
-		pages(){
-			return [(this.Controls()), (this.Results())];
-		}
-		Charts(){
-			const obj = new this.$.$rise_bench_charts();
-			(obj.runs) = () => ((this.runs()));
-			(obj.operations) = () => ((this.operations()));
-			(obj.selected) = (next) => ((this.chart_selection(next)));
-			return obj;
-		}
-	};
-	($mol_mem(($.$rise_bench_host.prototype), "selected_engines"));
-	($mol_mem(($.$rise_bench_host.prototype), "selected_counts"));
-	($mol_mem(($.$rise_bench_host.prototype), "selected_schemas"));
-	($mol_mem(($.$rise_bench_host.prototype), "run"));
-	($mol_mem(($.$rise_bench_host.prototype), "stop"));
-	($mol_mem(($.$rise_bench_host.prototype), "status"));
-	($mol_mem(($.$rise_bench_host.prototype), "retry"));
-	($mol_mem(($.$rise_bench_host.prototype), "Controls"));
-	($mol_mem(($.$rise_bench_host.prototype), "Download"));
-	($mol_mem(($.$rise_bench_host.prototype), "mode"));
-	($mol_mem(($.$rise_bench_host.prototype), "Mode"));
-	($mol_mem(($.$rise_bench_host.prototype), "Metrics"));
-	($mol_mem(($.$rise_bench_host.prototype), "History"));
-	($mol_mem(($.$rise_bench_host.prototype), "Frame"));
-	($mol_mem(($.$rise_bench_host.prototype), "Results"));
-	($mol_mem(($.$rise_bench_host.prototype), "chart_selection"));
-	($mol_mem(($.$rise_bench_host.prototype), "Charts"));
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    /** Stable URL order and backwards compatibility with the old `all` links. */
-    function $rise_bench_selection(value, options) {
-        if (value === 'all')
-            return [...options];
-        const selected = new Set(value.split(','));
-        return options.filter(key => selected.has(key));
-    }
-    $.$rise_bench_selection = $rise_bench_selection;
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    /** A fixed, sequential matrix. Selection changes never alter a running batch. */
-    function $rise_bench_batch(engine, count, schema, text = false) {
-        const engines = text ? ['text'] : $rise_bench_selection(engine, Object.keys($rise_bench_engine));
-        const counts = $rise_bench_selection(count, (text ? [100, 500, 1000, 2000, 5000] : [100, 500, 1000, 2000, 3000, 4000, 5000, 10000]).map(String));
-        const schemas = text ? ['compact'] : $rise_bench_selection(schema, ['compact', 'full']);
-        return engines.flatMap(engine => schemas.flatMap(schema => counts.map(count => ({ engine, count, schema }))));
-    }
-    $.$rise_bench_batch = $rise_bench_batch;
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    /**
-     * Serialize csv data with delimiter
-     * @see https://mol.hyoo.ru/#!section=demos/demo=mol_csv_serial
-     */
-    function $mol_csv_serial(data, delimiter = ',') {
-        const fields = new Set();
-        for (const item of data) {
-            for (const field of Object.keys(item)) {
-                fields.add(field);
-            }
-        }
-        const rows = [[...fields]];
-        for (const item of data) {
-            const row = [];
-            rows.push(row);
-            for (const field of fields) {
-                row.push(String(item[field] ?? ''));
-            }
-        }
-        return $mol_csv_serial_table(rows, delimiter);
-    }
-    $.$mol_csv_serial = $mol_csv_serial;
-    function $mol_csv_serial_table(rows, delimiter = ',') {
-        return rows.map(row => row.map(cell => '"' + String(cell).replace(/"/g, '""') + '"').join(delimiter)).join('\n');
-    }
-    $.$mol_csv_serial_table = $mol_csv_serial_table;
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    /** UTF-8 with BOM and semicolons opens correctly in Russian Windows Excel. */
-    function $rise_bench_csv(rows, columns) {
-        const cell = (value) => {
-            const text = String(value ?? '');
-            // Quoting alone does not protect spreadsheet applications from formulas.
-            return typeof value === 'string' && /^[=+@\-\t\r]/.test(text) ? "'" + text : text;
-        };
-        return '\uFEFF' + $mol_csv_serial_table([[...columns], ...rows.map(row => columns.map(key => cell(row[key])))], ';');
-    }
-    $.$rise_bench_csv = $rise_bench_csv;
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    /** Retain every seed Land until peer URLs have live reactive consumers. */
-    class $rise_bench_seed extends $mol_object {
-        static lands() {
-            const pack = $mol_wire_sync($giper_baza_pack).from($mol_file.relative('web.baza').buffer());
-            const parts = $mol_wire_sync(pack).parts();
-            const lands = parts.map(([id]) => $giper_baza_glob.Land(new $giper_baza_link(id)));
-            $mol_wire_sync($giper_baza_glob).apply_parts(parts);
-            return lands;
-        }
-    }
-    __decorate([
-        $mol_mem
-    ], $rise_bench_seed, "lands", null);
-    $.$rise_bench_seed = $rise_bench_seed;
-})($ || ($ = {}));
-
-;
-	($.$mol_status) = class $mol_status extends ($.$mol_view) {
-		message(){
-			return "";
-		}
-		status(){
-			return (this.title());
-		}
-		minimal_height(){
-			return 24;
-		}
-		minimal_width(){
-			return 0;
-		}
-		sub(){
-			return [(this.message())];
-		}
-	};
-
-
-;
-"use strict";
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $mol_status extends $.$mol_status {
-            message() {
-                try {
-                    return this.status() ?? null;
-                }
-                catch (error) {
-                    if (error instanceof Promise)
-                        $mol_fail_hidden(error);
-                    $mol_fail_log(error);
-                    return error.message;
-                }
-            }
-        }
-        $$.$mol_status = $mol_status;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_attach("mol/status/status.view.css", "[mol_status] {\n\tpadding: var(--mol_gap_text);\n\tborder-radius: var(--mol_gap_round);\n\tdisplay: block;\n\tflex-shrink: 1;\n\tword-wrap: break-word;\n}\n\n[mol_status]:not([mol_view_error=\"Promise\"]) {\n\tcolor: var(--mol_theme_focus);\n}\n\n[mol_status]:not([mol_view_error=\"Promise\"]):empty {\n\tdisplay: none;\n}\n");
-})($ || ($ = {}));
-
-;
-	($.$rise_bench_idb_table) = class $rise_bench_idb_table extends ($.$rise_bench_baza_goods_table) {
-		records(){
-			return [];
-		}
-		change(id, next){
-			if(next !== undefined) return next;
-			return null;
-		}
-	};
-	($mol_mem_key(($.$rise_bench_idb_table.prototype), "change"));
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    /** Native IndexedDB through $mol_db. No indexes or CRDT fixture entities. */
-    class $rise_bench_idb_storage extends $mol_object {
-        name;
-        constructor(name) {
-            super();
-            this.name = name;
-        }
-        migration = (tx) => { tx.store_make('Product'); };
-        async db() { return this.$.$mol_db(this.name, this.migration); }
-        async prepare() { await this.db(); }
-        product(index, compact) {
-            return $rise_bench_product_make(index, compact);
-        }
-        async create(count, compact) {
-            const db = await this.db();
-            const tx = db.change('Product');
-            const products = tx.stores.Product;
-            const requests = Array.from({ length: count }, (_, index) => products.put(this.product(index, compact), index));
-            await Promise.all([...requests, tx.commit()]);
-        }
-        async count() { return (await this.db()).read('Product').Product.count(); }
-        async search() {
-            const products = await (await this.db()).read('Product').Product.select();
-            return products.filter(product => product.title.toLowerCase().includes('notebook 00000')).length;
-        }
-        async add(compact) {
-            const index = await this.count();
-            const tx = (await this.db()).change('Product');
-            await Promise.all([tx.stores.Product.put(this.product(index, compact), index), tx.commit()]);
-        }
-        async rows() {
-            return (await (await this.db()).read('Product').Product.select());
-        }
-        async change(index, field, value) {
-            const db = await this.db(), product = await db.read('Product').Product.get(index);
-            if (!product)
-                throw new Error('Запись не найдена');
-            const tx = db.change('Product');
-            await Promise.all([tx.stores.Product.put({ ...product, [field]: value }, index), tx.commit()]);
-        }
-        destructor() { $mol_wire_async(this).close(); }
-        async close() { (await this.db()).destructor(); }
-    }
-    __decorate([
-        $mol_memo.method
-    ], $rise_bench_idb_storage.prototype, "db", null);
-    $.$rise_bench_idb_storage = $rise_bench_idb_storage;
-})($ || ($ = {}));
-
-;
-"use strict";
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        /** Same cards and virtualization; only field access differs from CRDT storage. */
-        class $rise_bench_idb_table extends $.$rise_bench_idb_table {
-            count() { return this.records().length; }
-            row_id(id) { return this.records()[id].id; }
-            row_title(id) { return this.records()[id].title; }
-            row_uri(id) { return this.records()[id].uri ?? `https://xkcd.com/${Number(this.row_id(id)) + 1}/`; }
-            row_description(id) { return this.records()[id].description ?? ''; }
-            row_tags(id) { return [this.records()[id].tags?.join(', ') ?? '']; }
-            row_color(id, next) {
-                if (next !== undefined) {
-                    this.change(`${id}:color`, next);
-                    return next;
-                }
-                return this.records()[id].color;
-            }
-            row_status(id, next) {
-                if (next !== undefined) {
-                    this.change(`${id}:status`, next);
-                    return next;
-                }
-                return this.records()[id].status;
-            }
-            row_checked(id, next) {
-                if (next !== undefined) {
-                    this.change(`${id}:checked`, next);
-                    return next;
-                }
-                return this.records()[id].checked ?? false;
-            }
-            row_quantity(id, next) {
-                if (next !== undefined) {
-                    this.change(`${id}:quantity`, next);
-                    return next;
-                }
-                return this.records()[id].quantity ?? 0;
-            }
-            row_moment(id, next) {
-                if (next !== undefined) {
-                    this.change(`${id}:supply`, next.toString('YYYY-MM-DD'));
-                    return next;
-                }
-                return new $mol_time_moment(this.records()[id].supply ?? '2026-10-05');
-            }
-        }
-        __decorate([
-            $mol_mem_key
-        ], $rise_bench_idb_table.prototype, "row_moment", null);
-        $$.$rise_bench_idb_table = $rise_bench_idb_table;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-	($.$rise_bench_idb) = class $rise_bench_idb extends ($.$mol_book2) {
-		title(){
-			return "Сущности IDB";
-		}
-		storage_label(){
-			return "";
-		}
-		Storage_label(){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([(this.storage_label())]);
-			return obj;
-		}
-		schema_mode(next){
-			if(next !== undefined) return next;
-			return "compact";
-		}
-		controls_enabled(){
-			return true;
-		}
-		Schema(){
-			const obj = new this.$.$mol_switch();
-			(obj.value) = (next) => ((this.schema_mode(next)));
-			(obj.enabled) = () => ((this.controls_enabled()));
-			(obj.options) = () => ({"compact": "4 свойства", "full": "10 свойств"});
-			return obj;
-		}
-		Schema_label(){
-			const obj = new this.$.$mol_labeler();
-			(obj.title) = () => ("Состав записи");
-			(obj.Content) = () => ((this.Schema()));
-			return obj;
-		}
-		count_mode(next){
-			if(next !== undefined) return next;
-			return "100";
-		}
-		Count(){
-			const obj = new this.$.$mol_switch();
-			(obj.value) = (next) => ((this.count_mode(next)));
-			(obj.enabled) = () => ((this.controls_enabled()));
-			(obj.options) = () => ({
-				"100": "100", 
-				"500": "500", 
-				"1000": "1000", 
-				"2000": "2000", 
-				"3000": "3000", 
-				"4000": "4000", 
-				"5000": "5000", 
-				"10000": "10000"
-			});
-			return obj;
-		}
-		Count_label(){
-			const obj = new this.$.$mol_labeler();
-			(obj.title) = () => ("Количество записей");
-			(obj.Content) = () => ((this.Count()));
-			return obj;
-		}
-		benchmark(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		Run(){
-			const obj = new this.$.$mol_button_major();
-			(obj.title) = () => ("Запустить бенчмарк");
-			(obj.click) = (next) => ((this.benchmark(next)));
-			(obj.enabled) = () => ((this.controls_enabled()));
-			return obj;
-		}
-		Settings(){
-			const obj = new this.$.$mol_page();
-			(obj.title) = () => ("Настройки");
-			(obj.minimal_width) = () => (320);
-			(obj.body) = () => ([
-				(this.Storage_label()), 
-				(this.Schema_label()), 
-				(this.Count_label()), 
-				(this.Run())
-			]);
-			return obj;
-		}
-		storage_title(){
-			return "IDB";
-		}
-		body_scroll_top(next){
-			return (this.Page().body_scroll_top(next));
-		}
-		Metrics(){
-			const obj = new this.$.$rise_bench_metrics();
-			(obj.operations) = () => ([
-				"Запуск БД, с", 
-				"Создание, с", 
-				"Поиск, с", 
-				"Добавить 1, с", 
-				"F5, с", 
-				"Поиск после F5, с"
-			]);
-			return obj;
-		}
-		filters_enabled(){
-			return true;
-		}
-		search_query(next){
-			return (this.Search().query(next));
-		}
-		Search(){
-			const obj = new this.$.$mol_search();
-			(obj.hint) = () => ("Название товара");
-			(obj.enabled) = () => ((this.filters_enabled()));
-			return obj;
-		}
-		Search_label(){
-			const obj = new this.$.$mol_labeler();
-			(obj.title) = () => ("Поиск по названию");
-			(obj.Content) = () => ((this.Search()));
-			return obj;
-		}
-		color_filter(next){
-			if(next !== undefined) return next;
-			return "all";
-		}
-		Color_filter(){
-			const obj = new this.$.$mol_select();
-			(obj.enabled) = () => ((this.filters_enabled()));
-			(obj.value) = (next) => ((this.color_filter(next)));
-			(obj.dictionary) = () => ({
-				"all": "All colors", 
-				"red": "red", 
-				"green": "green", 
-				"blue": "blue"
-			});
-			return obj;
-		}
-		Color_label(){
-			const obj = new this.$.$mol_labeler();
-			(obj.title) = () => ("Color");
-			(obj.Content) = () => ((this.Color_filter()));
-			return obj;
-		}
-		status_filter(next){
-			if(next !== undefined) return next;
-			return "all";
-		}
-		Status_filter(){
-			const obj = new this.$.$mol_select();
-			(obj.enabled) = () => ((this.filters_enabled()));
-			(obj.value) = (next) => ((this.status_filter(next)));
-			(obj.dictionary) = () => ({
-				"all": "All statuses", 
-				"minor": "Store", 
-				"major": "Sale", 
-				"critical": "Support"
-			});
-			return obj;
-		}
-		Status_label(){
-			const obj = new this.$.$mol_labeler();
-			(obj.title) = () => ("Status");
-			(obj.Content) = () => ((this.Status_filter()));
-			return obj;
-		}
-		add_one(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		Add(){
-			const obj = new this.$.$mol_button_minor();
-			(obj.title) = () => ("Добавить запись");
-			(obj.enabled) = () => ((this.controls_enabled()));
-			(obj.click) = (next) => ((this.add_one(next)));
-			return obj;
-		}
-		reset(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		Reset(){
-			const obj = new this.$.$mol_button_minor();
-			(obj.title) = () => ("Очистить");
-			(obj.click) = (next) => ((this.reset(next)));
-			(obj.enabled) = () => ((this.controls_enabled()));
-			return obj;
-		}
-		Manual_actions(){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([(this.Add()), (this.Reset())]);
-			return obj;
-		}
-		change_message(){
-			return "";
-		}
-		Change_status(){
-			const obj = new this.$.$mol_status();
-			(obj.status) = () => ((this.change_message()));
-			return obj;
-		}
-		manual_content(){
-			return [
-				(this.Search_label()), 
-				(this.Color_label()), 
-				(this.Status_label()), 
-				(this.Manual_actions()), 
-				(this.Change_status())
-			];
-		}
-		Manual(){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ((this.manual_content()));
-			return obj;
-		}
-		products(){
-			return [];
-		}
-		compact(){
-			return false;
-		}
-		change(id, next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		Table(){
-			const obj = new this.$.$rise_bench_idb_table();
-			(obj.records) = () => ((this.products()));
-			(obj.compact) = () => ((this.compact()));
-			(obj.query) = () => ((this.search_query()));
-			(obj.color_filter) = () => ((this.color_filter()));
-			(obj.status_filter) = () => ((this.status_filter()));
-			(obj.change) = (id, next) => ((this.change(id, next)));
-			return obj;
-		}
-		Page(){
-			const obj = new this.$.$rise_bench_surface();
-			(obj.title) = () => ((this.storage_title()));
-			(obj.minimal_width) = () => (640);
-			(obj.body) = () => ([
-				(this.Metrics()), 
-				(this.Manual()), 
-				(this.Table())
-			]);
-			return obj;
-		}
-		menu_title(){
-			return (this.title());
-		}
-		pages(){
-			return [(this.Settings()), (this.Page())];
-		}
-	};
-	($mol_mem(($.$rise_bench_idb.prototype), "Storage_label"));
-	($mol_mem(($.$rise_bench_idb.prototype), "schema_mode"));
-	($mol_mem(($.$rise_bench_idb.prototype), "Schema"));
-	($mol_mem(($.$rise_bench_idb.prototype), "Schema_label"));
-	($mol_mem(($.$rise_bench_idb.prototype), "count_mode"));
-	($mol_mem(($.$rise_bench_idb.prototype), "Count"));
-	($mol_mem(($.$rise_bench_idb.prototype), "Count_label"));
-	($mol_mem(($.$rise_bench_idb.prototype), "benchmark"));
-	($mol_mem(($.$rise_bench_idb.prototype), "Run"));
-	($mol_mem(($.$rise_bench_idb.prototype), "Settings"));
-	($mol_mem(($.$rise_bench_idb.prototype), "Metrics"));
-	($mol_mem(($.$rise_bench_idb.prototype), "Search"));
-	($mol_mem(($.$rise_bench_idb.prototype), "Search_label"));
-	($mol_mem(($.$rise_bench_idb.prototype), "color_filter"));
-	($mol_mem(($.$rise_bench_idb.prototype), "Color_filter"));
-	($mol_mem(($.$rise_bench_idb.prototype), "Color_label"));
-	($mol_mem(($.$rise_bench_idb.prototype), "status_filter"));
-	($mol_mem(($.$rise_bench_idb.prototype), "Status_filter"));
-	($mol_mem(($.$rise_bench_idb.prototype), "Status_label"));
-	($mol_mem(($.$rise_bench_idb.prototype), "add_one"));
-	($mol_mem(($.$rise_bench_idb.prototype), "Add"));
-	($mol_mem(($.$rise_bench_idb.prototype), "reset"));
-	($mol_mem(($.$rise_bench_idb.prototype), "Reset"));
-	($mol_mem(($.$rise_bench_idb.prototype), "Manual_actions"));
-	($mol_mem(($.$rise_bench_idb.prototype), "Change_status"));
-	($mol_mem(($.$rise_bench_idb.prototype), "Manual"));
-	($mol_mem_key(($.$rise_bench_idb.prototype), "change"));
-	($mol_mem(($.$rise_bench_idb.prototype), "Table"));
-	($mol_mem(($.$rise_bench_idb.prototype), "Page"));
-
-
-;
-"use strict";
-
-;
-"use strict";
-var $;
-(function ($) {
-    async function $rise_bench_sql_sqlite(name) {
-        const { default: initialize } = await new Function('url', 'return import(url)')('https://cdn.jsdelivr.net/npm/@sqlite.org/sqlite-wasm@3.54.1-build1/dist/index.mjs');
-        const sqlite = await initialize();
-        // The previous document may still be releasing its worker during F5.
-        // Own this database for the driver's lifetime, not only during initialization.
-        return new Promise((resolve, reject) => {
-            navigator.locks.request('rise-bench-sqlite:' + name, async () => {
-                let release;
-                const held = new Promise(done => { release = done; });
-                try {
-                    const pool = await sqlite.installOpfsSAHPoolVfs({ directory: '/rise-bench/' + name, preserveOnInitFailure: true });
-                    const db = new pool.OpfsSAHPoolDb('/products.sqlite');
-                    resolve({
-                        async query(sql) { return db.exec({ sql, rowMode: 'object', returnValue: 'resultRows' }); },
-                        async close() { try {
-                            db.close();
-                            await pool.pauseVfs();
-                        }
-                        finally {
-                            release();
-                        } },
-                    });
-                    await held;
-                }
-                catch (error) {
-                    reject(error);
-                }
-            }).catch(reject);
-        });
-    }
-    $.$rise_bench_sql_sqlite = $rise_bench_sql_sqlite;
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    async function $rise_bench_sql_pglite(name) {
-        const { PGlite } = await new Function('url', 'return import(url)')('https://cdn.jsdelivr.net/npm/@electric-sql/pglite@0.5.15/dist/index.js');
-        const db = await PGlite.create('idb://' + name, { relaxedDurability: false });
-        return {
-            async query(sql) { const results = await db.exec(sql); return results.at(-1)?.rows ?? []; },
-            async close() { await db.close(); },
-        };
-    }
-    $.$rise_bench_sql_pglite = $rise_bench_sql_pglite;
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    async function $rise_bench_sql_duckdb(name) {
-        // 1.33.1-dev57 (npm latest) does not persist OPFS correctly. Pin the working release.
-        const duck = await new Function('url', 'return import(url)')('https://cdn.jsdelivr.net/npm/@duckdb/duckdb-wasm@1.32.0/+esm');
-        const base = 'https://cdn.jsdelivr.net/npm/@duckdb/duckdb-wasm@1.32.0/dist/';
-        const blob = new Blob([`importScripts(${JSON.stringify(base + 'duckdb-browser-eh.worker.js')})`], { type: 'text/javascript' });
-        const url = URL.createObjectURL(blob);
-        const worker = new Worker(url);
-        const db = new duck.AsyncDuckDB(new duck.VoidLogger(), worker);
-        try {
-            await db.instantiate(base + 'duckdb-eh.wasm');
-            await db.open({ path: 'opfs://' + name + '.duckdb', accessMode: duck.DuckDBAccessMode.READ_WRITE });
-        }
-        catch (error) {
-            worker.terminate();
-            throw error;
-        }
-        finally {
-            URL.revokeObjectURL(url);
-        }
-        const connection = await db.connect();
-        return {
-            async query(sql) { return (await connection.query(sql)).toArray().map((row) => row.toJSON()); },
-            async close() { await connection.close(); await db.terminate(); worker.terminate(); },
-        };
-    }
-    $.$rise_bench_sql_duckdb = $rise_bench_sql_duckdb;
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    /** Serial RPC: no interleaved transactions and no SQL work on the UI thread. */
-    function $rise_bench_sql_worker() {
-        let driver;
-        let tail = Promise.resolve();
-        globalThis.onmessage = event => {
-            const { id, method, args } = event.data;
-            tail = tail.then(async () => {
-                try {
-                    let result;
-                    if (method === 'open') {
-                        const [engine, name] = args;
-                        const factories = {
-                            sqlite: $rise_bench_sql_sqlite, pglite: $rise_bench_sql_pglite, duckdb: $rise_bench_sql_duckdb,
-                        };
-                        driver = await factories[engine](name);
-                    }
-                    else if (method === 'close')
-                        await driver.close();
-                    else
-                        result = await driver.query(args[0]);
-                    globalThis.postMessage({ id, result });
-                }
-                catch (error) {
-                    globalThis.postMessage({ id, error: error instanceof Error ? error.message : String(error) });
-                }
-            });
-        };
-    }
-    $.$rise_bench_sql_worker = $rise_bench_sql_worker;
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    /** Same product generation and operations as IDB, with relational SQL columns. */
-    class $rise_bench_sql_storage extends $mol_object {
-        name;
-        engine;
-        compact;
-        constructor(name, engine, compact) {
-            super();
-            this.name = name;
-            this.engine = engine;
-            this.compact = compact;
-        }
-        product(index, compact) { return $rise_bench_product_make(index, compact); }
-        worker;
-        serial = 0;
-        pending = new Map();
-        disposed = false;
-        async open() {
-            if (this.disposed)
-                throw new Error('Хранилище закрыто');
-            const source = [$rise_bench_sql_sqlite, $rise_bench_sql_pglite, $rise_bench_sql_duckdb, $rise_bench_sql_worker]
-                .map(factory => factory.toString()).join('\n')
-                + '\nconst $ = { $rise_bench_sql_sqlite, $rise_bench_sql_pglite, $rise_bench_sql_duckdb }; $rise_bench_sql_worker()';
-            const url = URL.createObjectURL(new Blob([source], { type: 'text/javascript' }));
-            this.worker = new Worker(url);
-            URL.revokeObjectURL(url);
-            this.worker.onmessage = ({ data }) => {
-                const task = this.pending.get(data.id);
-                if (!task)
-                    return;
-                this.pending.delete(data.id);
-                data.error ? task.reject(new Error(data.error)) : task.resolve(data.result);
-            };
-            this.worker.onerror = error => { this.fail(new Error(error.message)); this.destructor(); };
-            await this.request('open', [this.engine, this.name]);
-            await this.request('query', ['CREATE TABLE IF NOT EXISTS products (id TEXT, title TEXT, color TEXT, status TEXT'
-                    + (this.compact ? '' : ', checked INTEGER, uri TEXT, quantity INTEGER, supply TEXT, description TEXT, tags TEXT') + ')']);
-        }
-        request(method, args) {
-            if (this.disposed || !this.worker)
-                return Promise.reject(new Error('Хранилище закрыто'));
-            const id = ++this.serial;
-            return new Promise((resolve, reject) => {
-                this.pending.set(id, { resolve, reject });
-                this.worker.postMessage({ id, method, args });
-            });
-        }
-        fail(error) { for (const task of this.pending.values())
-            task.reject(error); this.pending.clear(); }
-        async query(sql) { await this.open(); return this.request('query', [sql]); }
-        async prepare() { await this.open(); }
-        literal(value) {
-            if (value === undefined || value === null)
-                return 'NULL';
-            if (typeof value === 'boolean')
-                return value ? '1' : '0';
-            if (typeof value === 'number') {
-                if (!Number.isFinite(value))
-                    throw new Error('Некорректное число');
-                return String(value);
-            }
-            return "'" + String(Array.isArray(value) ? JSON.stringify(value) : value).replace(/'/g, "''") + "'";
-        }
-        tuple(index, compact) { return '(' + Object.values(this.product(index, compact)).map(value => this.literal(value)).join(',') + ')'; }
-        async write(sql) {
-            await this.query(sql);
-            if (this.engine === 'duckdb')
-                await this.query('CHECKPOINT');
-        }
-        async create(count, compact) {
-            await this.write('INSERT INTO products VALUES ' + Array.from({ length: count }, (_, index) => this.tuple(index, compact)).join(','));
-        }
-        async count() { return Number((await this.query('SELECT COUNT(*) AS n FROM products'))[0].n); }
-        async search() { return Number((await this.query("SELECT COUNT(*) AS n FROM products WHERE LOWER(title) LIKE '%notebook 00000%'"))[0].n); }
-        async add(compact) { await this.write('INSERT INTO products VALUES ' + this.tuple(await this.count(), compact)); }
-        async rows() {
-            return (await this.query('SELECT * FROM products ORDER BY id')).map(row => ({ ...row,
-                ...(row.checked === undefined ? {} : { checked: Boolean(row.checked), tags: JSON.parse(row.tags) }),
-            }));
-        }
-        async change(index, field, value) {
-            if (!['color', 'status', 'checked', 'quantity', 'supply'].includes(field))
-                throw new Error('Неизвестное поле');
-            await this.write('UPDATE products SET ' + field + '=' + this.literal(value) + ' WHERE id=' + this.literal(String(index).padStart(5, '0')));
-        }
-        destructor() {
-            this.disposed = true;
-            this.fail(new Error('Хранилище закрыто'));
-            this.worker?.terminate();
-        }
-        async close() { try {
-            if (this.worker && !this.disposed)
-                await this.request('close', []);
-        }
-        finally {
-            this.destructor();
-        } }
-    }
-    __decorate([
-        $mol_memo.method
-    ], $rise_bench_sql_storage.prototype, "open", null);
-    $.$rise_bench_sql_storage = $rise_bench_sql_storage;
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    class $rise_bench_idb_ready extends $mol_object {
-        table;
-        title;
-        constructor(table, title) {
-            super();
-            this.table = table;
-            this.title = title;
-        }
-        pending;
-        observer;
-        frame = 0;
-        visible() { return this.table.isConnected && this.table.textContent.includes(this.title) && !this.table.querySelector('[mol_view_error]'); }
-        wait() {
-            return this.pending ??= new Promise((resolve, reject) => {
-                const check = () => {
-                    if (this.frame || !this.visible())
-                        return;
-                    this.frame = requestAnimationFrame(() => {
-                        this.frame = requestAnimationFrame(() => {
-                            this.frame = 0;
-                            if (!this.visible())
-                                return;
-                            this.destructor();
-                            resolve(performance.timeOrigin + performance.now());
-                        });
-                    });
-                };
-                this.observer = new MutationObserver(check);
-                this.observer.observe(this.table, { childList: true, subtree: true, characterData: true, attributes: true });
-                check();
-            });
-        }
-        destructor() {
-            this.observer?.disconnect();
-            if (this.frame)
-                cancelAnimationFrame(this.frame);
-            super.destructor();
-        }
-    }
-    $.$rise_bench_idb_ready = $rise_bench_idb_ready;
-})($ || ($ = {}));
-
-;
-"use strict";
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $rise_bench_idb extends $.$rise_bench_idb {
-            engine_kind() {
-                const kind = new URL(location.href).searchParams.get('rise_fixture');
-                return ['sqlite', 'pglite', 'duckdb'].includes(kind ?? '') ? kind : 'idb';
-            }
-            storage_title() { return $rise_bench_engine[this.engine_kind()].title; }
-            storage_label() { return $rise_bench_engine[this.engine_kind()].storage; }
-            dataset_prefix() { return '$rise_bench_' + this.engine_kind(); }
-            count_mode(next) {
-                const count = $mol_state_arg.value('count', next);
-                return count && Object.hasOwn(this.Count().options(), count) ? count : '100';
-            }
-            schema_mode(next) { return $mol_state_arg.value('schema', next) === 'full' ? 'full' : 'compact'; }
-            compact() { return this.schema_mode() === 'compact'; }
-            dataset_name(next) {
-                const name = $mol_state_local.value(this.dataset_prefix() + '_dataset_' + this.count_mode() + '_' + this.schema_mode() + (new URL(location.href).searchParams.get('rise_run') || ''), next);
-                if (name !== null && name !== undefined)
-                    return name;
-                // Reuse the former single dataset only when its saved run matches the selection.
-                const row = this.reload_store().snapshot.rows[0];
-                return row?.count === Number(this.count_mode()) && row.properties === (this.compact() ? 4 : 10)
-                    ? $mol_state_local.value(this.dataset_prefix() + '_dataset') ?? '' : '';
-            }
-            storage() {
-                return this.engine_kind() === 'idb' ? new $rise_bench_idb_storage(this.dataset_name())
-                    : new $rise_bench_sql_storage(this.dataset_name(), this.engine_kind(), this.compact());
-            }
-            revision(next = 0) { return next; }
-            products() {
-                this.revision();
-                if (!this.dataset_name())
-                    return [];
-                return $mol_wire_sync(this.storage()).rows();
-            }
-            refresh() { this.revision(this.revision() + 1); }
-            change(key, next) {
-                if (next === undefined)
-                    return null;
-                $mol_wire_async(this).save_change(key, next).catch(error => this.change_error(error));
-                return next;
-            }
-            change_error(next = null) { return next; }
-            change_message() { return this.change_error()?.message ?? ''; }
-            manual_content() {
-                return [this.Search_label(), this.Color_label(), this.Status_label(), this.Manual_actions(), ...this.change_error() ? [this.Change_status()] : []];
-            }
-            save_change(key, next) {
-                this.change_error(null);
-                const [index, field] = key.split(':');
-                if (!['color', 'status', 'checked', 'quantity', 'supply'].includes(field))
-                    throw new Error('Неизвестное поле');
-                $mol_wire_sync(this.storage()).change(Number(index), field, next);
-                this.refresh();
-            }
-            reset() {
-                this.dataset_name(this.dataset_prefix() + '_' + $mol_wire_sync(crypto).randomUUID());
-                this.search_query('');
-                this.color_filter('all');
-                this.status_filter('all');
-                this.refresh();
-                this.body_scroll_top(0);
-            }
-            add_one() {
-                if (!this.dataset_name())
-                    this.reset();
-                $mol_wire_sync(this.storage()).add(this.compact());
-                this.refresh();
-                this.body_scroll_top(0);
-            }
-            controls_enabled() {
-                return this.filters_enabled()
-                    && !$mol_promise_like(this.Add().status()?.[0]) && !$mol_promise_like(this.Reset().status()?.[0]);
-            }
-            filters_enabled() { return this.Metrics().runs()[0]?.state() !== 'Перезагрузка' && !$mol_promise_like(this.Run().status()?.[0]); }
-            reload_store() { return new $rise_bench_reload(this.dataset_prefix() + '_runs'); }
-            restored = false;
-            restore_runs() {
-                if (this.restored)
-                    return;
-                this.Metrics().runs(this.reload_store().snapshot.rows.map(row => {
-                    const run = new $rise_bench_run(row.count, row.properties, row.stamp, row.baza_version ?? '—', row.benchmark_version ?? '—', row.id, row.computer ?? '', row.browser ?? '', row.engine, row.engine_version);
-                    run.state(row.state);
-                    run.bytes(row.bytes ?? null);
-                    for (const [name, value] of Object.entries(row.metrics))
-                        if (value !== null)
-                            run.metric(name, value);
-                    return run;
-                }));
-                this.restored = true;
-            }
-            start_run(run) {
-                if (this.Metrics().runs().includes(run))
-                    return;
-                this.reset();
-                this.Metrics().run_add(run);
-            }
-            benchmark() {
-                this.restore_runs();
-                const run = new ($mol_wire_sync($rise_bench_run))(Number(this.count_mode()), this.compact() ? 4 : 10, undefined, '—', undefined, undefined, undefined, undefined, this.engine_kind(), $rise_bench_engine[this.engine_kind()].version);
-                new ($mol_wire_sync($rise_bench_stage))(run, 'Подготовка');
-                $mol_wire_sync(this).start_run(run);
-                return $mol_error_fence(() => {
-                    new ($mol_wire_sync($rise_bench_stage))(run, 'Запуск БД, с');
-                    const prepare = new ($mol_wire_sync($rise_bench_measure))('Запуск БД');
-                    $mol_wire_sync(this.storage()).prepare();
-                    prepare.finish();
-                    run.metric('Запуск БД, с', prepare.duration / 1000);
-                    new ($mol_wire_sync($rise_bench_stage))(run, 'Создание, с');
-                    const create = new ($mol_wire_sync($rise_bench_measure))('Создание IDB');
-                    $mol_wire_sync(this.storage()).create(run.count, this.compact());
-                    create.finish();
-                    run.metric('Создание, с', create.duration / 1000);
-                    new ($mol_wire_sync($rise_bench_stage))(run, 'Поиск, с');
-                    const search = new ($mol_wire_sync($rise_bench_measure))('Поиск IDB');
-                    if ($mol_wire_sync(this.storage()).search() !== 1)
-                        throw new Error('Поиск должен найти один товар');
-                    search.finish();
-                    run.metric('Поиск, с', search.duration / 1000);
-                    new ($mol_wire_sync($rise_bench_stage))(run, 'Добавить 1, с');
-                    const add = new ($mol_wire_sync($rise_bench_measure))('Добавление IDB');
-                    $mol_wire_sync(this.storage()).add(this.compact());
-                    add.finish();
-                    run.metric('Добавить 1, с', add.duration / 1000);
-                    $mol_wire_sync(this).refresh();
-                    run.state('Перезагрузка');
-                    new ($mol_wire_sync($rise_bench_stage))(run, 'F5, с');
-                    this.reload_store().save(this.Metrics().runs(), this.Metrics().operations(), { name: this.dataset_name(), count: run.count, started: performance.timeOrigin + performance.now() });
-                    this.$.$mol_dom_context.location.reload();
-                }, error => {
-                    run.state('Ошибка');
-                    run.failure($rise_bench_stage.failure(error));
-                    this.reload_store().save(this.Metrics().runs(), this.Metrics().operations(), null);
-                    return $mol_fail(error);
-                });
-            }
-            resumed = false;
-            resume_reload() {
-                if (this.resumed)
-                    return;
-                const ticket = this.reload_store().snapshot.pending;
-                if (!ticket)
-                    return;
-                const run = this.Metrics().runs()[0];
-                return $mol_error_fence(() => {
-                    if (this.dataset_name() !== ticket.name || $mol_wire_sync(this.storage()).count() !== ticket.count + 1)
-                        throw new Error('После F5 открыт неполный набор IDB');
-                    const ready = new ($mol_wire_sync($rise_bench_idb_ready))(this.Table().dom_node(), $rise_bench_product_name(ticket.count));
-                    run.metric('F5, с', ($mol_wire_sync(ready).wait() - ticket.started) / 1000);
-                    new ($mol_wire_sync($rise_bench_stage))(run, 'Поиск после F5, с');
-                    const search = new ($mol_wire_sync($rise_bench_measure))('Поиск IDB после F5');
-                    if ($mol_wire_sync(this.storage()).search() !== 1)
-                        throw new Error('Поиск IDB после F5 должен найти один товар');
-                    search.finish();
-                    run.metric('Поиск после F5, с', search.duration / 1000);
-                    this.resumed = true;
-                    run.state('Готово');
-                    this.reload_store().save(this.Metrics().runs(), this.Metrics().operations(), null);
-                }, error => {
-                    this.resumed = true;
-                    run.state('Ошибка');
-                    run.failure($rise_bench_stage.failure(error));
-                    this.reload_store().save(this.Metrics().runs(), this.Metrics().operations(), null);
-                    return error;
-                });
-            }
-            auto() { this.restore_runs(); this.resume_reload(); return []; }
-        }
-        __decorate([
-            $mol_mem
-        ], $rise_bench_idb.prototype, "count_mode", null);
-        __decorate([
-            $mol_mem
-        ], $rise_bench_idb.prototype, "schema_mode", null);
-        __decorate([
-            $mol_mem
-        ], $rise_bench_idb.prototype, "dataset_name", null);
-        __decorate([
-            $mol_mem
-        ], $rise_bench_idb.prototype, "storage", null);
-        __decorate([
-            $mol_mem
-        ], $rise_bench_idb.prototype, "revision", null);
-        __decorate([
-            $mol_mem
-        ], $rise_bench_idb.prototype, "products", null);
-        __decorate([
-            $mol_action
-        ], $rise_bench_idb.prototype, "refresh", null);
-        __decorate([
-            $mol_action
-        ], $rise_bench_idb.prototype, "change", null);
-        __decorate([
-            $mol_mem
-        ], $rise_bench_idb.prototype, "change_error", null);
-        __decorate([
-            $mol_action
-        ], $rise_bench_idb.prototype, "save_change", null);
-        __decorate([
-            $mol_action
-        ], $rise_bench_idb.prototype, "reset", null);
-        __decorate([
-            $mol_action
-        ], $rise_bench_idb.prototype, "add_one", null);
-        __decorate([
-            $mol_mem
-        ], $rise_bench_idb.prototype, "reload_store", null);
-        __decorate([
-            $mol_action
-        ], $rise_bench_idb.prototype, "restore_runs", null);
-        __decorate([
-            $mol_action
-        ], $rise_bench_idb.prototype, "start_run", null);
-        __decorate([
-            $mol_action
-        ], $rise_bench_idb.prototype, "benchmark", null);
-        __decorate([
-            $mol_mem
-        ], $rise_bench_idb.prototype, "resume_reload", null);
-        $$.$rise_bench_idb = $rise_bench_idb;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_define($rise_bench_idb, {
-        Manual: { flex: { wrap: 'wrap' }, alignItems: 'flex-end' },
-        Manual_actions: { flex: { wrap: 'wrap' } },
-    });
-})($ || ($ = {}));
-
-;
-"use strict";
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $rise_bench_host extends $.$rise_bench_host {
-            menu_title() { return this.title(); }
-            compare() { return this.kind() === 'goods'; }
-            text_mode() { return this.kind() === 'text'; }
-            mode(next) { return $mol_state_arg.value('results', next) === 'charts' ? 'charts' : 'table'; }
-            fixture_kind() { return (this.active_case() ?? this.display_case())?.engine ?? (this.compare() ? this.selected_engines()[0] ?? 'goods' : this.kind()); }
-            engine(next) {
-                if (next !== undefined)
-                    this.display_case(null);
-                if (next !== undefined && next !== ($mol_state_arg.value('engine') ?? 'goods'))
-                    this.ready(false);
-                return $mol_state_arg.value('engine', next) ?? 'goods';
-            }
-            count(next) {
-                if (next !== undefined)
-                    this.display_case(null);
-                const key = this.kind() === 'text' ? 'lines' : 'count';
-                if (next !== undefined && next !== ($mol_state_arg.value(key) ?? '100'))
-                    this.ready(false);
-                return $mol_state_arg.value(key, next) ?? '100';
-            }
-            schema(next) {
-                if (next !== undefined)
-                    this.display_case(null);
-                if (next !== undefined && next !== ($mol_state_arg.value('schema') ?? 'compact'))
-                    this.ready(false);
-                return $mol_state_arg.value('schema', next) ?? 'compact';
-            }
-            selected_engines(next) { return $rise_bench_selection(this.engine(next?.join(',')), Object.keys($rise_bench_engine)); }
-            selected_counts(next) { return $rise_bench_selection(this.count(next?.join(',')), Object.keys(this.Controls().counts())); }
-            selected_schemas(next) { return $rise_bench_selection(this.schema(next?.join(',')), ['compact', 'full']); }
-            chart_selection_value;
-            chart_selection(next) {
-                if (next !== undefined)
-                    this.chart_selection_value = next;
-                return this.chart_selection_value ?? this.runs().slice(0, 20).map(run => run.id);
-            }
-            ready(next = false) { return next; }
-            busy(next = false) { return next; }
-            active_case(next = null) { return next; }
-            display_case(next = null) { return next; }
-            frame_generation(next = 0) { return next; }
-            queue = [];
-            total = 0;
-            finished = 0;
-            failed = 0;
-            command_sent = false;
-            progress = null;
-            timing_value = { batch: 0, step: 0, ended: 0 };
-            timing(next) {
-                if (next !== undefined)
-                    this.timing_value = next;
-                return this.timing_value;
-            }
-            elapsed_text() {
-                const timing = this.timing();
-                if (!timing.batch)
-                    return '';
-                const now = timing.ended || $mol_state_time.now(1000);
-                return `Текущий этап: ${this.duration(now - timing.step)} · Всего: ${this.duration(now - timing.batch)}`;
-            }
-            duration(milliseconds) {
-                const seconds = Math.max(0, Math.floor(milliseconds / 1000));
-                return [Math.floor(seconds / 3600), Math.floor(seconds / 60) % 60, seconds % 60].map(value => String(value).padStart(2, '0')).join(':');
-            }
-            settled = new Set();
-            engine_title(engine) { return engine === 'text' ? 'CRDT-текст' : $rise_bench_engine[engine].title; }
-            controls_enabled() { return !this.busy(); }
-            run_enabled() { return this.ready() && this.controls_enabled() && this.selected_counts().length > 0 && (this.text_mode() || this.selected_engines().length > 0 && this.selected_schemas().length > 0); }
-            config() { const current = this.active_case() ?? this.display_case(); return { count: current?.count ?? this.selected_counts()[0] ?? '100', schema: current?.schema ?? this.selected_schemas()[0] ?? 'compact' }; }
-            send(command, data) {
-                const target = this.Frame().dom_node().contentWindow;
-                if (!target || !this.ready())
-                    throw new Error('Дождитесь загрузки бенчмарка');
-                target.postMessage({ type: 'rise-bench-command', kind: this.fixture_kind(), id: crypto.randomUUID(), command, data }, location.origin);
-            }
-            run() {
-                if (this.active_case() || !this.run_enabled())
-                    return;
-                this.queue = $rise_bench_batch(this.engine(), this.count(), this.schema(), this.text_mode());
-                this.total = this.queue.length;
-                this.finished = 0;
-                this.failed = 0;
-                this.settled.clear();
-                this.timing({ batch: Date.now(), step: Date.now(), ended: 0 });
-                this.next_case();
-            }
-            next_case() {
-                this.progress = null;
-                this.command_sent = false;
-                const next = this.queue.shift();
-                if (next || !this.display_case())
-                    this.ready(false);
-                this.active_case(next ? { ...next, token: crypto.randomUUID() } : null);
-                if (next || !this.display_case())
-                    this.frame_generation(this.frame_generation() + 1);
-                this.busy(Boolean(next));
-                if (!next) {
-                    this.timing({ ...this.timing(), ended: Date.now() });
-                    this.status(`Завершено ${this.finished} из ${this.total}; ошибки: ${this.failed}`);
-                    return;
-                }
-                this.timing({ ...this.timing(), step: Date.now() });
-                this.status(`${this.finished + 1}/${this.total}: ${this.engine_title(next.engine)}, ${next.count} — загрузка`);
-            }
-            fail_case() {
-                const active = this.active_case();
-                if (!active)
-                    return;
-                this.finish_case({ ...this.partial_row(), state: 'Ошибка', error: `${this.progress?.operation ?? 'Загрузка'}: ошибка выполнения` }, active.engine);
-            }
-            partial_row() {
-                const active = this.active_case();
-                return this.progress?.row ?? {
-                    id: crypto.randomUUID(), count: Number(active.count), properties: this.text_mode() ? 0 : active.schema === 'full' ? 10 : 4,
-                    stamp: new $mol_time_moment().toString('DD.MM.YYYY hh:mm:ss'), state: 'Ошибка',
-                    baza_version: active.engine === 'goods' || active.engine === 'text' ? $rise_bench_run_baza_version : '—',
-                    benchmark_version: $rise_bench_run_benchmark_version, engine: active.engine === 'text' ? 'goods' : active.engine,
-                    engine_version: active.engine === 'text' ? $rise_bench_run_baza_version : $rise_bench_engine[active.engine].version,
-                    computer: this.Controls().computer(), browser: navigator.userAgent,
-                    metrics: Object.fromEntries(this.operations().map(name => [name, null])),
-                };
-            }
-            stop() {
-                const active = this.active_case();
-                if (!active)
-                    return;
-                const row = { ...this.partial_row(), state: 'Остановлено', error: `Остановлено пользователем · ${this.progress?.operation ?? 'Загрузка'}` };
-                this.settled.add(active.token);
-                this.queue = [];
-                this.display_case(null);
-                this.active_case(null);
-                this.busy(false);
-                this.ready(false);
-                this.command_sent = false;
-                this.progress = null;
-                this.timing({ ...this.timing(), ended: Date.now() });
-                // A new document tears down the old workload, its listeners and SQL workers.
-                this.frame_generation(this.frame_generation() + 1);
-                this.status(`Остановлено. Завершено ${this.finished} из ${this.total}`);
-                $mol_wire_async(this).accept(row, active.engine).catch(error => $mol_fail_log(error));
-            }
-            finish_case(row, kind) {
-                const active = this.active_case();
-                if (!active || this.settled.has(active.token))
-                    return;
-                this.settled.add(active.token);
-                ++this.finished;
-                if (row.state === 'Ошибка')
-                    ++this.failed;
-                this.display_case(row.state === 'Готово' && !this.queue.length ? active : null);
-                $mol_wire_async(this).accept(row, kind).catch(error => $mol_fail_log(error));
-                this.next_case();
-            }
-            operations() {
-                return $rise_bench_archive.operations(this.kind());
-            }
-            fixture_uri() {
-                const url = new URL(location.href);
-                // The measured document runs the workload, not the parent unit-test suite.
-                url.pathname = url.pathname.replace(/\/test\.html$/, '/index.html');
-                url.searchParams.set('rise_fixture', this.fixture_kind());
-                url.searchParams.set('rise_generation', String(this.frame_generation()));
-                url.searchParams.set('rise_selection', [this.engine(), this.count(), this.schema()].join(':'));
-                const active = this.active_case() ?? this.display_case();
-                if (active)
-                    url.searchParams.set('rise_run', active.token);
-                else
-                    url.searchParams.delete('rise_run');
-                const config = this.config();
-                url.hash = '!count=' + config.count + '/lines=' + config.count + '/schema=' + config.schema;
-                return url.href;
-            }
-            runs() {
-                const rows = this.compare() ? Object.keys($rise_bench_engine).flatMap(kind => $rise_bench_archive.rows(kind)) : $rise_bench_archive.rows(this.kind());
-                const date = (value) => value.replace(/^(\d{2})\.(\d{2})\.(\d{4})/, '$3-$2-$1');
-                return [...rows].sort((a, b) => date(b.stamp).localeCompare(date(a.stamp)));
-            }
-            pages() { return this.kind() === 'demo' ? [this.Results()] : super.pages(); }
-            csv_filename() { return `rise-${this.text_mode() ? 'text' : 'entities'}-v${$rise_bench_run_benchmark_version}.csv`; }
-            csv_title() { return $mol_window.size().width < 640 ? 'CSV' : 'Скачать CSV'; }
-            csv_blob() {
-                const columns = [...this.Metrics().col_ids(), 'Браузер'];
-                const runs = this.runs();
-                const rows = this.Metrics().records().map((record, index) => ({
-                    ...record, 'Компьютер': runs[index].computer, 'Браузер': runs[index].browser,
-                    ...Object.fromEntries(this.operations().map(operation => [operation, runs[index].metric(operation)])),
-                }));
-                return new $mol_blob([$rise_bench_csv(rows, columns)], { type: 'text/csv;charset=utf-8' });
-            }
-            results_body() { return this.kind() === 'demo' ? [this.Frame()] : [this.mode() === 'charts' ? this.Charts() : this.History(), this.Frame()]; }
-            retry_visible() { return this.outbox().length > 0; }
-            outbox(next) {
-                return $mol_state_local.value('$rise_bench_outbox_' + this.kind(), next) ?? [];
-            }
-            accept(row, kind) {
-                if (!this.outbox().some(item => item.id === row.id))
-                    this.outbox([...this.outbox(), { ...row, kind }]);
-                const result = this.retry();
-                if (!this.total && row.state === 'Ошибка' && !this.outbox().some(item => item.id === row.id))
-                    this.status('Бенчмарк завершился с ошибкой. Доступные измерения сохранены.');
-                return result;
-            }
-            retry() {
-                return $mol_error_fence(() => {
-                    for (const row of this.outbox()) {
-                        $mol_wire_sync($rise_bench_archive).save(row.kind ?? this.kind(), row);
-                        this.outbox(this.outbox().filter(item => item.id !== row.id));
-                    }
-                    if (!this.total)
-                        this.status('Результаты сохранены');
-                }, error => { this.status('Не удалось сохранить результат. Нажмите «Повторить сохранение».'); return error; });
-            }
-            restored = false;
-            restore_outbox() {
-                if (this.restored)
-                    return;
-                this.restored = true;
-                if (this.outbox().length)
-                    $mol_wire_async(this).retry().catch(error => $mol_fail_log(error));
-            }
-            listener() {
-                const receive = (event) => {
-                    if (event.origin !== location.origin || event.source !== this.Frame().dom_node().contentWindow)
-                        return;
-                    if (event.data?.kind !== this.fixture_kind())
-                        return;
-                    const active = this.active_case();
-                    if (event.data?.token !== (active?.token ?? this.display_case()?.token ?? null))
-                        return;
-                    if (event.data.type === 'rise-bench-progress') {
-                        if (!active || !this.command_sent || typeof event.data.operation !== 'string' || !Number.isFinite(event.data.started))
-                            return;
-                        const row = $rise_bench_archive.validate(event.data.row, this.operations());
-                        if (!row || row.count !== Number(active.count) || row.engine !== (active.engine === 'text' ? 'goods' : active.engine))
-                            return;
-                        if (this.progress?.operation === event.data.operation && this.progress?.started === event.data.started)
-                            return;
-                        this.progress = { operation: event.data.operation, started: event.data.started, row };
-                        this.timing({ ...this.timing(), step: event.data.started });
-                        this.status(`${this.finished + 1}/${this.total}: ${this.engine_title(active.engine)}, ${active.count} — ${event.data.operation}`);
-                        return;
-                    }
-                    if (event.data.type === 'rise-bench-state') {
-                        const config = this.config();
-                        if (event.data.count !== config.count || this.kind() !== 'text' && event.data.schema !== config.schema)
-                            return;
-                        this.ready(true);
-                        this.busy(Boolean(active) || event.data.busy === true);
-                        if (active && !this.command_sent && !event.data.busy) {
-                            this.command_sent = true;
-                            this.send('run', config);
-                        }
-                        if (typeof event.data.error === 'string') {
-                            if (active)
-                                this.fail_case();
-                            else
-                                this.status(event.data.error);
-                        }
-                        return;
-                    }
-                    if (event.data.type !== 'rise-bench-result')
-                        return;
-                    const row = $rise_bench_archive.validate(event.data.row, this.operations());
-                    if (!row)
-                        return;
-                    if (active)
-                        this.finish_case(row, event.data.kind);
-                };
-                window.addEventListener('message', receive);
-                return { destructor: () => window.removeEventListener('message', receive) };
-            }
-            destructor() {
-                this.queue = [];
-                super.destructor();
-            }
-            auto() {
-                if (this.kind() === 'demo')
-                    return [];
-                this.listener();
-                this.restore_outbox();
-                $rise_bench_seed.lands();
-                $giper_baza_glob.yard().sync();
-                return [];
-            }
-        }
-        __decorate([
-            $mol_mem
-        ], $rise_bench_host.prototype, "mode", null);
-        __decorate([
-            $mol_mem
-        ], $rise_bench_host.prototype, "engine", null);
-        __decorate([
-            $mol_mem
-        ], $rise_bench_host.prototype, "count", null);
-        __decorate([
-            $mol_mem
-        ], $rise_bench_host.prototype, "schema", null);
-        __decorate([
-            $mol_mem
-        ], $rise_bench_host.prototype, "chart_selection", null);
-        __decorate([
-            $mol_mem
-        ], $rise_bench_host.prototype, "ready", null);
-        __decorate([
-            $mol_mem
-        ], $rise_bench_host.prototype, "busy", null);
-        __decorate([
-            $mol_mem
-        ], $rise_bench_host.prototype, "active_case", null);
-        __decorate([
-            $mol_mem
-        ], $rise_bench_host.prototype, "display_case", null);
-        __decorate([
-            $mol_mem
-        ], $rise_bench_host.prototype, "frame_generation", null);
-        __decorate([
-            $mol_mem
-        ], $rise_bench_host.prototype, "timing", null);
-        __decorate([
-            $mol_action
-        ], $rise_bench_host.prototype, "send", null);
-        __decorate([
-            $mol_action
-        ], $rise_bench_host.prototype, "run", null);
-        __decorate([
-            $mol_action
-        ], $rise_bench_host.prototype, "next_case", null);
-        __decorate([
-            $mol_action
-        ], $rise_bench_host.prototype, "fail_case", null);
-        __decorate([
-            $mol_action
-        ], $rise_bench_host.prototype, "stop", null);
-        __decorate([
-            $mol_action
-        ], $rise_bench_host.prototype, "finish_case", null);
-        __decorate([
-            $mol_mem
-        ], $rise_bench_host.prototype, "fixture_uri", null);
-        __decorate([
-            $mol_mem
-        ], $rise_bench_host.prototype, "runs", null);
-        __decorate([
-            $mol_mem
-        ], $rise_bench_host.prototype, "csv_blob", null);
-        __decorate([
-            $mol_mem
-        ], $rise_bench_host.prototype, "outbox", null);
-        __decorate([
-            $mol_action
-        ], $rise_bench_host.prototype, "accept", null);
-        __decorate([
-            $mol_action
-        ], $rise_bench_host.prototype, "retry", null);
-        __decorate([
-            $mol_action
-        ], $rise_bench_host.prototype, "restore_outbox", null);
-        __decorate([
-            $mol_mem
-        ], $rise_bench_host.prototype, "listener", null);
-        $$.$rise_bench_host = $rise_bench_host;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_define($rise_bench_host, {
-        Results: { flex: { grow: 1, shrink: 1 }, minWidth: $mol_style_unit.px(640), '@media': { '(max-width: 640px)': { minWidth: $mol_style_unit.per(100) } } },
-        Frame: { width: $mol_style_unit.per(100), height: $mol_style_unit.vh(75), flex: { shrink: 0 } },
-        History: { maxHeight: $mol_style_unit.rem(28), flex: { grow: 0, shrink: 0 } },
-    });
-})($ || ($ = {}));
-
-;
-	($.$rise_drag) = class $rise_drag extends ($.$mol_plugin) {
-		pointerdown(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		dragged(next){
-			if(next !== undefined) return next;
-			return false;
-		}
-		pointermove_listener(){
-			return null;
-		}
-		pointerup_listener(){
-			return null;
-		}
-		x(next){
-			if(next !== undefined) return next;
-			return 0;
-		}
-		y(next){
-			if(next !== undefined) return next;
-			return 0;
-		}
-		repos_x(id){
-			return 1;
-		}
-		repos_y(id){
-			return 1;
-		}
-		on_drag(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		on_drag_start(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		on_drag_end(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		drag(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		drag_start(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		drag_end(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		use_buttons(){
-			return [0];
-		}
-		event(){
-			return {...(super.event()), "pointerdown": (next) => (this.pointerdown(next))};
-		}
-		attr(){
-			return {...(super.attr()), "rise_dragged": (this.dragged())};
-		}
-		auto(){
-			return [(this.pointermove_listener()), (this.pointerup_listener())];
-		}
-		drags_synced(){
-			return [];
-		}
-	};
-	($mol_mem(($.$rise_drag.prototype), "pointerdown"));
-	($mol_mem(($.$rise_drag.prototype), "dragged"));
-	($mol_mem(($.$rise_drag.prototype), "x"));
-	($mol_mem(($.$rise_drag.prototype), "y"));
-	($mol_mem(($.$rise_drag.prototype), "on_drag"));
-	($mol_mem(($.$rise_drag.prototype), "on_drag_start"));
-	($mol_mem(($.$rise_drag.prototype), "on_drag_end"));
-	($mol_mem(($.$rise_drag.prototype), "drag"));
-	($mol_mem(($.$rise_drag.prototype), "drag_start"));
-	($mol_mem(($.$rise_drag.prototype), "drag_end"));
-
-
-;
-"use strict";
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $rise_drag extends $.$rise_drag {
-            repos_x(val) {
-                return val;
-            }
-            repos_y(val) {
-                return val;
-            }
-            start_event;
-            start_pos;
-            drags_synced_frozen = [];
-            drag_start(event) {
-                this.start_event = event;
-                this.start_pos = { x: this.x(), y: this.y() };
-                this.dragged(true);
-                this.on_drag_start(event);
-            }
-            drag(event) {
-                this.x(this.start_pos.x + this.repos_x(event.x - this.start_event.x));
-                this.y(this.start_pos.y + this.repos_y(event.y - this.start_event.y));
-                this.on_drag(event);
-            }
-            drag_end(event) {
-                this.dragged(false);
-                this.on_drag_end(event);
-            }
-            pointerdown(event) {
-                if (!this.use_buttons().includes(event.button))
-                    return;
-                this.drag_start(event);
-                this.drags_synced_frozen = this.drags_synced();
-                this.drags_synced_frozen.forEach(d => d.drag_start(event));
-                //immediate flush:
-                this.pointermove_listener();
-                this.pointerup_listener();
-            }
-            pointermove_listener() {
-                $mol_wire_solid();
-                if (!this.dragged())
-                    return null;
-                return new $mol_dom_listener(this.$.$mol_dom_context.document, 'pointermove', this.handle_pointermove_async);
-            }
-            handle_pointermove_async = $mol_wire_async((event) => {
-                this.drag(event);
-                this.drags_synced_frozen.forEach(d => d.drag(event));
-            });
-            pointerup_listener() {
-                $mol_wire_solid();
-                if (!this.dragged())
-                    return null;
-                return new $mol_dom_listener(this.$.$mol_dom_context.document, 'pointerup', this.handle_pointerup_async);
-            }
-            handle_pointerup_async = $mol_wire_async((event) => {
-                this.drag_end(event);
-                this.drags_synced_frozen.forEach(d => d.drag_end(event));
-                this.drags_synced_frozen = [];
-                //immediate flush:
-                this.pointerup_listener();
-                this.pointermove_listener();
-            });
-        }
-        __decorate([
-            $mol_mem
-        ], $rise_drag.prototype, "pointermove_listener", null);
-        __decorate([
-            $mol_mem
-        ], $rise_drag.prototype, "pointerup_listener", null);
-        $$.$rise_drag = $rise_drag;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-	($.$mol_card) = class $mol_card extends ($.$mol_list) {
-		status(){
-			return "";
-		}
-		content(){
-			return [(this.title())];
-		}
-		Content(){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ((this.content()));
-			return obj;
-		}
-		status_text(){
-			return (this.status());
-		}
-		Status(){
-			const obj = new this.$.$mol_view();
-			(obj.minimal_height) = () => (30);
-			(obj.sub) = () => ([(this.status_text())]);
-			return obj;
-		}
-		attr(){
-			return {...(super.attr()), "mol_card_status_type": (this.status())};
-		}
-		rows(){
-			return [(this.Content()), (this.Status())];
-		}
-	};
-	($mol_mem(($.$mol_card.prototype), "Content"));
-	($mol_mem(($.$mol_card.prototype), "Status"));
-
-
-;
-"use strict";
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        /**
-         * Represents a common card. It can has several statuses at bottom line.
-         * @see https://mol.hyoo.ru/#!section=demos/demo=mol_card_demo/readme
-         */
-        class $mol_card extends $.$mol_card {
-            rows() {
-                return [
-                    this.Content(),
-                    ...this.status_text() ? [this.Status()] : [],
-                ];
-            }
-        }
-        $$.$mol_card = $mol_card;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_attach("mol/card/card.view.css", "[mol_card] {\n\tbackground: var(--mol_theme_card);\n\tcolor: var(--mol_theme_text);\n\tborder-radius: var(--mol_gap_round);\n\tdisplay: flex;\n\tflex: 0 1 auto;\n\tflex-direction: column;\n\tposition: relative;\n\tbox-shadow: 0 0 0.5rem 0rem hsla(0,0%,0%,.125);\n\t/* overflow: hidden; */\n}\n\n[mol_card_content] {\n\tflex: 1 1 auto;\n\tborder-radius: var(--mol_gap_round);\n\tmargin: 0;\n\tpadding: var(--mol_gap_block);\n}\n\n[mol_card_status] {\n\tbackground: var(--mol_theme_line);\n\tpadding: var(--mol_gap_text);\n\tmargin: 0;\n}\n\n[mol_card_status] {\n\tbackground: var(--mol_theme_line);\n}\n");
-})($ || ($ = {}));
-
-;
-	($.$rise_drag_view) = class $rise_drag_view extends ($.$mol_view) {
-		on_drag_start(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		on_drag_end(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		on_drag(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		dragged(){
-			return (this.Drag().dragged());
-		}
-		y(next){
-			if(next !== undefined) return next;
-			return 0;
-		}
-		x(next){
-			if(next !== undefined) return next;
-			return 0;
-		}
-		drags_synced(){
-			return [];
-		}
-		repos_x(id){
-			return 1;
-		}
-		repos_y(id){
-			return 1;
-		}
-		pointerdown(next){
-			return (this.Drag().pointerdown(next));
-		}
-		Drag(){
-			const obj = new this.$.$rise_drag();
-			(obj.on_drag_start) = (next) => ((this.on_drag_start(next)));
-			(obj.on_drag_end) = (next) => ((this.on_drag_end(next)));
-			(obj.on_drag) = (next) => ((this.on_drag(next)));
-			(obj.y) = (next) => ((this.y(next)));
-			(obj.x) = (next) => ((this.x(next)));
-			(obj.drags_synced) = () => ((this.drags_synced()));
-			(obj.repos_x) = (id) => ((this.repos_x(id)));
-			(obj.repos_y) = (id) => ((this.repos_y(id)));
-			return obj;
-		}
-		plugins(){
-			return [...(super.plugins()), (this.Drag())];
-		}
-		style(){
-			return {...(super.style()), "userSelect": "none"};
-		}
-	};
-	($mol_mem(($.$rise_drag_view.prototype), "on_drag_start"));
-	($mol_mem(($.$rise_drag_view.prototype), "on_drag_end"));
-	($mol_mem(($.$rise_drag_view.prototype), "on_drag"));
-	($mol_mem(($.$rise_drag_view.prototype), "y"));
-	($mol_mem(($.$rise_drag_view.prototype), "x"));
-	($mol_mem(($.$rise_drag_view.prototype), "Drag"));
-
-
-;
-"use strict";
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $rise_drag_view extends $.$rise_drag_view {
-            repos_x(val) {
-                return val;
-            }
-            repos_y(val) {
-                return val;
-            }
-        }
-        $$.$rise_drag_view = $rise_drag_view;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-	($.$rise_drag_absolute) = class $rise_drag_absolute extends ($.$rise_drag_view) {
-		top(next){
-			if(next !== undefined) return next;
-			return 0;
-		}
-		left(next){
-			if(next !== undefined) return next;
-			return 0;
-		}
-		top_px(){
-			return "0px";
-		}
-		left_px(){
-			return "0px";
-		}
-		y(next){
-			return (this.top(next));
-		}
-		x(next){
-			return (this.left(next));
-		}
-		style(){
-			return {
-				...(super.style()), 
-				"position": "absolute", 
-				"top": (this.top_px()), 
-				"left": (this.left_px())
-			};
-		}
-	};
-	($mol_mem(($.$rise_drag_absolute.prototype), "top"));
-	($mol_mem(($.$rise_drag_absolute.prototype), "left"));
-
-
-;
-"use strict";
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $rise_drag_absolute extends $.$rise_drag_absolute {
-            top_px() {
-                return this.top() + 'px';
-            }
-            left_px() {
-                return this.left() + 'px';
-            }
-        }
-        $$.$rise_drag_absolute = $rise_drag_absolute;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-	($.$rise_drag_demo) = class $rise_drag_demo extends ($.$mol_example_small) {
-		Card(){
-			const obj = new this.$.$mol_card();
-			(obj.title) = () => ("Draggable");
-			return obj;
-		}
-		Draggable(){
-			const obj = new this.$.$rise_drag_absolute();
-			(obj.sub) = () => ([(this.Card())]);
-			(obj.drags_synced) = () => ([(this.Synced_drag())]);
-			return obj;
-		}
-		top(next){
-			if(next !== undefined) return next;
-			return 100;
-		}
-		left(next){
-			if(next !== undefined) return next;
-			return 100;
-		}
-		Synced_drag(){
-			return (this.Synced().Drag());
-		}
-		Synced_card(){
-			const obj = new this.$.$mol_card();
-			(obj.title) = () => ("Synced");
-			return obj;
-		}
-		Synced(){
-			const obj = new this.$.$rise_drag_absolute();
-			(obj.top) = (next) => ((this.top(next)));
-			(obj.left) = (next) => ((this.left(next)));
-			(obj.sub) = () => ([(this.Synced_card())]);
-			return obj;
-		}
-		sub(){
-			return [(this.Draggable()), (this.Synced())];
-		}
-		tags(){
-			return ["drag"];
-		}
-		aspects(){
-			return ["Widget"];
-		}
-	};
-	($mol_mem(($.$rise_drag_demo.prototype), "Card"));
-	($mol_mem(($.$rise_drag_demo.prototype), "Draggable"));
-	($mol_mem(($.$rise_drag_demo.prototype), "top"));
-	($mol_mem(($.$rise_drag_demo.prototype), "left"));
-	($mol_mem(($.$rise_drag_demo.prototype), "Synced_card"));
-	($mol_mem(($.$rise_drag_demo.prototype), "Synced"));
-
-
-;
-"use strict";
-
-
-;
-	($.$rise_resize) = class $rise_resize extends ($.$mol_view) {
-		drag_body(){
-			return [];
-		}
-		x(next){
-			if(next !== undefined) return next;
-			return 0;
-		}
-		y(next){
-			if(next !== undefined) return next;
-			return 0;
-		}
-		on_drag_start(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		on_drag(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		on_drag_end(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		dragged(){
-			return (this.Drag_view().dragged());
-		}
-		drags_synced(){
-			return [];
-		}
-		Drag(){
-			return (this.Drag_view().Drag());
-		}
-		repos_x(id){
-			return 1;
-		}
-		repos_y(id){
-			return 1;
-		}
-		drag_pointerdown(next){
-			return (this.Drag_view().pointerdown(next));
-		}
-		Drag_view(){
-			const obj = new this.$.$rise_drag_view();
-			(obj.minimal_height) = () => (0);
-			(obj.sub) = () => ((this.drag_body()));
-			(obj.x) = (next) => ((this.x(next)));
-			(obj.y) = (next) => ((this.y(next)));
-			(obj.on_drag_start) = (next) => ((this.on_drag_start(next)));
-			(obj.on_drag) = (next) => ((this.on_drag(next)));
-			(obj.on_drag_end) = (next) => ((this.on_drag_end(next)));
-			(obj.drags_synced) = () => ((this.drags_synced()));
-			(obj.repos_x) = (id) => ((this.repos_x(id)));
-			(obj.repos_y) = (id) => ((this.repos_y(id)));
-			return obj;
-		}
-		controls(){
-			return [];
-		}
-		resize_start(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		resize_end(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		top_edge_y(next){
-			if(next !== undefined) return next;
-			return 0;
-		}
-		Top_edge(){
-			const obj = new this.$.$rise_resize_edge();
-			(obj.repos_x) = (id) => ((this.repos_x(id)));
-			(obj.repos_y) = (id) => ((this.repos_y(id)));
-			(obj.on_drag_start) = (next) => ((this.resize_start(next)));
-			(obj.on_drag_end) = (next) => ((this.resize_end(next)));
-			(obj.y) = (next) => ((this.top_edge_y(next)));
-			return obj;
-		}
-		left_edge_x(next){
-			if(next !== undefined) return next;
-			return 0;
-		}
-		Left_edge(){
-			const obj = new this.$.$rise_resize_edge();
-			(obj.repos_x) = (id) => ((this.repos_x(id)));
-			(obj.repos_y) = (id) => ((this.repos_y(id)));
-			(obj.on_drag_start) = (next) => ((this.resize_start(next)));
-			(obj.on_drag_end) = (next) => ((this.resize_end(next)));
-			(obj.x) = (next) => ((this.left_edge_x(next)));
-			return obj;
-		}
-		bottom_edge_y(next){
-			if(next !== undefined) return next;
-			return 0;
-		}
-		Bottom_edge(){
-			const obj = new this.$.$rise_resize_edge();
-			(obj.repos_x) = (id) => ((this.repos_x(id)));
-			(obj.repos_y) = (id) => ((this.repos_y(id)));
-			(obj.on_drag_start) = (next) => ((this.resize_start(next)));
-			(obj.on_drag_end) = (next) => ((this.resize_end(next)));
-			(obj.y) = (next) => ((this.bottom_edge_y(next)));
-			return obj;
-		}
-		right_edge_x(next){
-			if(next !== undefined) return next;
-			return 0;
-		}
-		Right_edge(){
-			const obj = new this.$.$rise_resize_edge();
-			(obj.repos_x) = (id) => ((this.repos_x(id)));
-			(obj.repos_y) = (id) => ((this.repos_y(id)));
-			(obj.on_drag_start) = (next) => ((this.resize_start(next)));
-			(obj.on_drag_end) = (next) => ((this.resize_end(next)));
-			(obj.x) = (next) => ((this.right_edge_x(next)));
-			return obj;
-		}
-		Top_left_edge(){
-			const obj = new this.$.$rise_resize_edge();
-			(obj.repos_x) = (id) => ((this.repos_x(id)));
-			(obj.repos_y) = (id) => ((this.repos_y(id)));
-			(obj.on_drag_start) = (next) => ((this.resize_start(next)));
-			(obj.on_drag_end) = (next) => ((this.resize_end(next)));
-			(obj.y) = (next) => ((this.top_edge_y(next)));
-			(obj.x) = (next) => ((this.left_edge_x(next)));
-			return obj;
-		}
-		Top_right_edge(){
-			const obj = new this.$.$rise_resize_edge();
-			(obj.repos_x) = (id) => ((this.repos_x(id)));
-			(obj.repos_y) = (id) => ((this.repos_y(id)));
-			(obj.on_drag_start) = (next) => ((this.resize_start(next)));
-			(obj.on_drag_end) = (next) => ((this.resize_end(next)));
-			(obj.y) = (next) => ((this.top_edge_y(next)));
-			(obj.x) = (next) => ((this.right_edge_x(next)));
-			return obj;
-		}
-		Bottom_left_edge(){
-			const obj = new this.$.$rise_resize_edge();
-			(obj.repos_x) = (id) => ((this.repos_x(id)));
-			(obj.repos_y) = (id) => ((this.repos_y(id)));
-			(obj.on_drag_start) = (next) => ((this.resize_start(next)));
-			(obj.on_drag_end) = (next) => ((this.resize_end(next)));
-			(obj.y) = (next) => ((this.bottom_edge_y(next)));
-			(obj.x) = (next) => ((this.left_edge_x(next)));
-			return obj;
-		}
-		Bottom_right_edge(){
-			const obj = new this.$.$rise_resize_edge();
-			(obj.repos_x) = (id) => ((this.repos_x(id)));
-			(obj.repos_y) = (id) => ((this.repos_y(id)));
-			(obj.on_drag_start) = (next) => ((this.resize_start(next)));
-			(obj.on_drag_end) = (next) => ((this.resize_end(next)));
-			(obj.y) = (next) => ((this.bottom_edge_y(next)));
-			(obj.x) = (next) => ((this.right_edge_x(next)));
-			return obj;
-		}
-		edges(){
-			return [
-				(this.Top_edge()), 
-				(this.Left_edge()), 
-				(this.Bottom_edge()), 
-				(this.Right_edge()), 
-				(this.Top_left_edge()), 
-				(this.Top_right_edge()), 
-				(this.Bottom_left_edge()), 
-				(this.Bottom_right_edge())
-			];
-		}
-		top_px(){
-			return "0px";
-		}
-		left_px(){
-			return "0px";
-		}
-		height_px(){
-			return "20px";
-		}
-		width_px(){
-			return "20px";
-		}
-		sub(){
-			return [
-				(this.Drag_view()), 
-				...(this.controls()), 
-				...(this.edges())
-			];
-		}
-		resizing(next){
-			if(next !== undefined) return next;
-			return false;
-		}
-		transforming(){
-			return false;
-		}
-		height_min(){
-			return 20;
-		}
-		width_min(){
-			return 20;
-		}
-		height(next){
-			if(next !== undefined) return next;
-			return 0;
-		}
-		width(next){
-			if(next !== undefined) return next;
-			return 0;
-		}
-		top(next){
-			if(next !== undefined) return next;
-			return 0;
-		}
-		left(next){
-			if(next !== undefined) return next;
-			return 0;
-		}
-		stick_threshold(){
-			return 10;
-		}
-		x_stick(next){
-			if(next !== undefined) return next;
-			return 0;
-		}
-		y_stick(next){
-			if(next !== undefined) return next;
-			return 0;
-		}
-		bottom_edge_y_stick(next){
-			if(next !== undefined) return next;
-			return (this.height_min());
-		}
-		right_edge_x_stick(next){
-			if(next !== undefined) return next;
-			return (this.width_min());
-		}
-		top_edge_y_stick(next){
-			if(next !== undefined) return next;
-			return 0;
-		}
-		left_edge_x_stick(next){
-			if(next !== undefined) return next;
-			return 0;
-		}
-		stickable(next){
-			if(next !== undefined) return next;
-			return true;
-		}
-		sticks_y(){
-			return [];
-		}
-		sticks_x(){
-			return [];
-		}
-		auto(){
-			return [
-				(this.x()), 
-				(this.y()), 
-				(this.left_edge_x()), 
-				(this.right_edge_x()), 
-				(this.top_edge_y()), 
-				(this.bottom_edge_y())
-			];
-		}
-		style(){
-			return {
-				...(super.style()), 
-				"top": (this.top_px()), 
-				"left": (this.left_px()), 
-				"height": (this.height_px()), 
-				"width": (this.width_px())
-			};
-		}
-	};
-	($mol_mem(($.$rise_resize.prototype), "x"));
-	($mol_mem(($.$rise_resize.prototype), "y"));
-	($mol_mem(($.$rise_resize.prototype), "on_drag_start"));
-	($mol_mem(($.$rise_resize.prototype), "on_drag"));
-	($mol_mem(($.$rise_resize.prototype), "on_drag_end"));
-	($mol_mem(($.$rise_resize.prototype), "Drag_view"));
-	($mol_mem(($.$rise_resize.prototype), "resize_start"));
-	($mol_mem(($.$rise_resize.prototype), "resize_end"));
-	($mol_mem(($.$rise_resize.prototype), "top_edge_y"));
-	($mol_mem(($.$rise_resize.prototype), "Top_edge"));
-	($mol_mem(($.$rise_resize.prototype), "left_edge_x"));
-	($mol_mem(($.$rise_resize.prototype), "Left_edge"));
-	($mol_mem(($.$rise_resize.prototype), "bottom_edge_y"));
-	($mol_mem(($.$rise_resize.prototype), "Bottom_edge"));
-	($mol_mem(($.$rise_resize.prototype), "right_edge_x"));
-	($mol_mem(($.$rise_resize.prototype), "Right_edge"));
-	($mol_mem(($.$rise_resize.prototype), "Top_left_edge"));
-	($mol_mem(($.$rise_resize.prototype), "Top_right_edge"));
-	($mol_mem(($.$rise_resize.prototype), "Bottom_left_edge"));
-	($mol_mem(($.$rise_resize.prototype), "Bottom_right_edge"));
-	($mol_mem(($.$rise_resize.prototype), "resizing"));
-	($mol_mem(($.$rise_resize.prototype), "height"));
-	($mol_mem(($.$rise_resize.prototype), "width"));
-	($mol_mem(($.$rise_resize.prototype), "top"));
-	($mol_mem(($.$rise_resize.prototype), "left"));
-	($mol_mem(($.$rise_resize.prototype), "x_stick"));
-	($mol_mem(($.$rise_resize.prototype), "y_stick"));
-	($mol_mem(($.$rise_resize.prototype), "bottom_edge_y_stick"));
-	($mol_mem(($.$rise_resize.prototype), "right_edge_x_stick"));
-	($mol_mem(($.$rise_resize.prototype), "top_edge_y_stick"));
-	($mol_mem(($.$rise_resize.prototype), "left_edge_x_stick"));
-	($mol_mem(($.$rise_resize.prototype), "stickable"));
-	($.$rise_resize_edge) = class $rise_resize_edge extends ($.$rise_drag_view) {};
-
-
-;
-"use strict";
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $rise_resize extends $.$rise_resize {
-            repos_x(val) {
-                return val;
-            }
-            repos_y(val) {
-                return val;
-            }
-            to_stick(sticks, val, shift) {
-                if (!this.stickable())
-                    return val;
-                for (const stick of sticks) {
-                    const to_stick = stick - (val + shift);
-                    if (Math.abs(to_stick) < this.stick_threshold()) {
-                        return val + to_stick;
-                    }
-                }
-                return val;
-            }
-            to_stick_x(val, shift) {
-                return this.to_stick(this.sticks_x(), val, shift);
-            }
-            to_stick_y(val, shift) {
-                return this.to_stick(this.sticks_y(), val, shift);
-            }
-            y(next) {
-                if (next === undefined)
-                    return this.y_stick() ?? 0;
-                const top_stick = this.to_stick_y(next, this.top_edge_y_stick());
-                if (top_stick == next) {
-                    const bottom_stick = this.to_stick_y(next, this.top_edge_y_stick() + this.height());
-                    this.y_stick(bottom_stick);
-                }
-                else {
-                    this.y_stick(top_stick);
-                }
-                return next;
-            }
-            x(next) {
-                if (next === undefined)
-                    return this.x_stick() ?? 0;
-                const left_stick = this.to_stick_x(next, this.left_edge_x_stick());
-                if (left_stick == next) {
-                    const right_stick = this.to_stick_x(next, this.left_edge_x_stick() + this.width());
-                    this.x_stick(right_stick);
-                }
-                else {
-                    this.x_stick(left_stick);
-                }
-                return next;
-            }
-            top_edge_y(next) {
-                if (next === undefined)
-                    return this.top_edge_y_stick() ?? 0;
-                const limit = this.bottom_edge_y_stick() - this.height_min();
-                const top_edge_y_stick = Math.min(this.to_stick_y(next, this.y_stick()), limit);
-                this.top_edge_y_stick(top_edge_y_stick);
-                return next;
-            }
-            bottom_edge_y(next) {
-                if (next === undefined)
-                    return this.bottom_edge_y_stick() ?? 0;
-                const limit = this.top_edge_y_stick() + this.height_min();
-                const bottom_edge_y_stick = Math.max(this.to_stick_y(next, this.top() - this.top_edge_y_stick()), limit);
-                this.bottom_edge_y_stick(bottom_edge_y_stick);
-                return next;
-            }
-            left_edge_x(next) {
-                if (next === undefined)
-                    return this.left_edge_x_stick() ?? 0;
-                const limit = this.right_edge_x_stick() - this.width_min();
-                const left_edge_x_stick = Math.min(this.to_stick_x(next, this.x_stick()), limit);
-                this.left_edge_x_stick(left_edge_x_stick);
-                return next;
-            }
-            right_edge_x(next) {
-                if (next === undefined)
-                    return this.right_edge_x_stick() ?? 0;
-                const limit = this.left_edge_x_stick() + this.width_min();
-                let right_edge_x_stick = Math.max(this.to_stick_x(next, this.left() - this.left_edge_x_stick()), limit);
-                this.right_edge_x_stick(right_edge_x_stick);
-                return next;
-            }
-            top(next) {
-                if (next !== undefined) {
-                    this.y_stick(next - this.top_edge_y_stick());
-                    return next;
-                }
-                return this.y_stick() + this.top_edge_y_stick();
-            }
-            left(next) {
-                if (next !== undefined) {
-                    this.x_stick(next - this.left_edge_x_stick());
-                    return next;
-                }
-                return this.x_stick() + this.left_edge_x_stick();
-            }
-            width(next) {
-                if (next !== undefined) {
-                    this.right_edge_x_stick(next + this.left_edge_x_stick());
-                    return next;
-                }
-                return this.right_edge_x_stick() - this.left_edge_x_stick();
-            }
-            height(next) {
-                if (next !== undefined) {
-                    this.bottom_edge_y_stick(next + this.top_edge_y_stick());
-                    return next;
-                }
-                return this.bottom_edge_y_stick() - this.top_edge_y_stick();
-            }
-            height_px() {
-                return this.height() + 'px';
-            }
-            width_px() {
-                return this.width() + 'px';
-            }
-            top_px() {
-                return this.top() + 'px';
-            }
-            left_px() {
-                return this.left() + 'px';
-            }
-            transforming() {
-                return this.dragged() || this.resizing();
-            }
-            resize_start(next) {
-                this.resizing(true);
-            }
-            resize_end() {
-                this.on_drag_end();
-                this.resizing(false);
-            }
-        }
-        __decorate([
-            $mol_action
-        ], $rise_resize.prototype, "to_stick", null);
-        __decorate([
-            $mol_action
-        ], $rise_resize.prototype, "to_stick_x", null);
-        __decorate([
-            $mol_action
-        ], $rise_resize.prototype, "to_stick_y", null);
-        __decorate([
-            $mol_mem
-        ], $rise_resize.prototype, "y", null);
-        __decorate([
-            $mol_mem
-        ], $rise_resize.prototype, "x", null);
-        __decorate([
-            $mol_mem
-        ], $rise_resize.prototype, "top_edge_y", null);
-        __decorate([
-            $mol_mem
-        ], $rise_resize.prototype, "bottom_edge_y", null);
-        __decorate([
-            $mol_mem
-        ], $rise_resize.prototype, "left_edge_x", null);
-        __decorate([
-            $mol_mem
-        ], $rise_resize.prototype, "right_edge_x", null);
-        __decorate([
-            $mol_mem
-        ], $rise_resize.prototype, "top", null);
-        __decorate([
-            $mol_mem
-        ], $rise_resize.prototype, "left", null);
-        __decorate([
-            $mol_mem
-        ], $rise_resize.prototype, "width", null);
-        __decorate([
-            $mol_mem
-        ], $rise_resize.prototype, "height", null);
-        __decorate([
-            $mol_mem
-        ], $rise_resize.prototype, "height_px", null);
-        __decorate([
-            $mol_mem
-        ], $rise_resize.prototype, "width_px", null);
-        __decorate([
-            $mol_mem
-        ], $rise_resize.prototype, "top_px", null);
-        __decorate([
-            $mol_mem
-        ], $rise_resize.prototype, "left_px", null);
-        __decorate([
-            $mol_mem
-        ], $rise_resize.prototype, "transforming", null);
-        $$.$rise_resize = $rise_resize;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        const Edge_size = 10;
-        const Top_edge = {
-            top: `-${Edge_size / 2}px`,
-            height: `${Edge_size}px`,
-        };
-        const Left_edge = {
-            left: `-${Edge_size / 2}px`,
-            width: `${Edge_size}px`,
-        };
-        const Right_edge = {
-            right: `-${Edge_size / 2}px`,
-            width: `${Edge_size}px`,
-        };
-        const Bottom_edge = {
-            bottom: `-${Edge_size / 2}px`,
-            height: `${Edge_size}px`,
-        };
-        $mol_style_define($rise_resize, {
-            position: 'absolute',
-            transition: 'none',
-            Drag_view: {
-                // flex: {
-                // 	grow: 1,
-                // },
-                position: 'absolute',
-                width: '100%',
-                height: '100%',
-            },
-            Top_edge: {
-                cursor: 'ns-resize',
-                left: 0,
-                ...Top_edge,
-                width: '100%',
-            },
-            Top_left_edge: {
-                cursor: 'nwse-resize',
-                ...Top_edge,
-                ...Left_edge,
-            },
-            Top_right_edge: {
-                cursor: 'nesw-resize',
-                ...Top_edge,
-                ...Right_edge,
-            },
-            Left_edge: {
-                cursor: 'ew-resize',
-                ...Left_edge,
-                height: '100%',
-            },
-            Bottom_edge: {
-                cursor: 'ns-resize',
-                ...Bottom_edge,
-                width: '100%',
-            },
-            Bottom_left_edge: {
-                cursor: 'nesw-resize',
-                ...Bottom_edge,
-                ...Left_edge,
-            },
-            Bottom_right_edge: {
-                cursor: 'nwse-resize',
-                ...Bottom_edge,
-                ...Right_edge,
-            },
-            Right_edge: {
-                cursor: 'ew-resize',
-                ...Right_edge,
-                height: '100%',
-            },
-        });
-        $mol_style_define($rise_resize_edge, {
-            position: 'absolute',
-            zIndex: $mol_layer.float,
-            userSelect: 'none',
-            opacity: 0.1,
-            ":hover": {
-                background: {
-                    color: $mol_theme.shade,
-                },
-            },
-            '[rise_dragged]': {
-                'true': {
-                    background: {
-                        color: $mol_theme.line,
-                    },
-                    ":hover": {
-                        background: {
-                            color: $mol_theme.line,
-                        },
-                    },
-                },
-            },
-        });
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
 
 ;
 	($.$rise_resize_demo) = class $rise_resize_demo extends ($.$mol_example_small) {
@@ -41223,6 +34738,152 @@ var $;
 
 
 ;
+	($.$mol_check_list) = class $mol_check_list extends ($.$mol_view) {
+		option_checked(id, next){
+			if(next !== undefined) return next;
+			return false;
+		}
+		option_title(id){
+			return "";
+		}
+		option_label(id){
+			return [(this.option_title(id))];
+		}
+		enabled(){
+			return true;
+		}
+		option_enabled(id){
+			return (this.enabled());
+		}
+		option_hint(id){
+			return "";
+		}
+		items(){
+			return [];
+		}
+		dictionary(){
+			return {};
+		}
+		Option(id){
+			const obj = new this.$.$mol_check();
+			(obj.checked) = (next) => ((this.option_checked(id, next)));
+			(obj.label) = () => ((this.option_label(id)));
+			(obj.enabled) = () => ((this.option_enabled(id)));
+			(obj.hint) = () => ((this.option_hint(id)));
+			(obj.minimal_height) = () => (24);
+			return obj;
+		}
+		options(){
+			return {};
+		}
+		keys(){
+			return [];
+		}
+		sub(){
+			return (this.items());
+		}
+	};
+	($mol_mem_key(($.$mol_check_list.prototype), "option_checked"));
+	($mol_mem_key(($.$mol_check_list.prototype), "Option"));
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        /**
+         * List of checkboxes
+         * @see https://mol.hyoo.ru/#!section=demos/demo=mol_check_list_demo
+         */
+        class $mol_check_list extends $.$mol_check_list {
+            options() {
+                return {};
+            }
+            dictionary(next) {
+                return next ?? {};
+            }
+            option_checked(id, next) {
+                const prev = this.dictionary();
+                if (next === undefined)
+                    return prev[id] ?? null;
+                const next_rec = { ...prev, [id]: next };
+                if (next === null)
+                    delete next_rec[id];
+                return this.dictionary(next_rec)[id] ?? null;
+            }
+            keys() {
+                return Object.keys(this.options());
+            }
+            items() {
+                return this.keys().map(key => this.Option(key));
+            }
+            option_title(key) {
+                return this.options()[key] || key;
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $mol_check_list.prototype, "keys", null);
+        __decorate([
+            $mol_mem
+        ], $mol_check_list.prototype, "items", null);
+        $$.$mol_check_list = $mol_check_list;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/check/list/list.view.css", "[mol_check_list] {\n\tdisplay: flex;\n\tflex-wrap: wrap;\n\tflex: 1 1 auto;\n\tborder-radius: var(--mol_gap_round);\n\tgap: 1px;\n}\n\n[mol_check_list_option] {\n\tflex: 0 1 auto;\n}\n\n[mol_check_list_option]:where([mol_check_checked=\"true\"]) {\n\ttext-shadow: 0 0;\n\tcolor: var(--mol_theme_current);\n}\n\n[mol_check_list_option]:where([mol_check_checked=\"true\"][disabled]) {\n\tcolor: var(--mol_theme_text);\n}\n");
+})($ || ($ = {}));
+
+;
+	($.$mol_switch) = class $mol_switch extends ($.$mol_check_list) {
+		value(next){
+			if(next !== undefined) return next;
+			return "";
+		}
+	};
+	($mol_mem(($.$mol_switch.prototype), "value"));
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        /**
+         * Buttons which switching the state
+         * @see https://mol.hyoo.ru/#!section=demos/demo=mol_switch_demo
+         */
+        class $mol_switch extends $.$mol_switch {
+            value(next) {
+                return $mol_state_session.value(`${this}.value()`, next) ?? '';
+            }
+            option_checked(key, next) {
+                if (next === undefined)
+                    return this.value() == key;
+                this.value(next ? key : '');
+                return next;
+            }
+        }
+        $$.$mol_switch = $mol_switch;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
 	($.$rise_radio) = class $rise_radio extends ($.$mol_switch) {
 		Circle_inner(id){
 			const obj = new this.$.$mol_view();
@@ -41343,100 +35004,6 @@ var $;
 ;
 "use strict";
 
-
-;
-	($.$mol_theme_auto) = class $mol_theme_auto extends ($.$mol_plugin) {
-		dark(){
-			return "$mol_theme_dark";
-		}
-		theme(){
-			return (this.dark());
-		}
-		light(){
-			return "$mol_theme_light";
-		}
-		attr(){
-			return {"mol_theme": (this.theme())};
-		}
-	};
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    class $mol_media extends $mol_object2 {
-        static match(query, next) {
-            if (next !== undefined)
-                return next;
-            const res = this.$.$mol_dom_context.matchMedia?.(query) ?? {};
-            res.onchange = () => this.match(query, res.matches);
-            return res.matches;
-        }
-    }
-    __decorate([
-        $mol_mem_key
-    ], $mol_media, "match", null);
-    $.$mol_media = $mol_media;
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    function parse(theme) {
-        if (theme === 'true')
-            return true;
-        if (theme === 'false')
-            return false;
-        return null;
-    }
-    // Get once because chrome switches to light on print
-    const base = $.$mol_media.match('(prefers-color-scheme: light)');
-    /**
-     * Switcher between light/dark themes (usually for `mol_theme_auto` plugin).
-     * @see https://mol.hyoo.ru/#!section=demos/demo=mol_lights_demo
-     */
-    function $mol_lights(next) {
-        const arg = parse(this.$mol_state_arg.value('mol_lights'));
-        if (next === undefined) {
-            return arg ?? this.$mol_state_local.value('$mol_lights') ?? base;
-        }
-        else {
-            if (arg === null) {
-                this.$mol_state_local.value('$mol_lights', next === base ? null : next);
-            }
-            else {
-                this.$mol_state_arg.value('mol_lights', String(next));
-            }
-            return next;
-        }
-    }
-    $.$mol_lights = $mol_lights;
-})($ || ($ = {}));
-
-;
-"use strict";
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        /**
-         * The [plugin](../../plugin/readme.md) which defines theme based on [mol_lights](../../lights/readme.md).
-         * @see https://mol.hyoo.ru/#!section=demos/demo=mol_lights_demo
-         */
-        class $mol_theme_auto extends $.$mol_theme_auto {
-            theme() {
-                return this.$.$mol_lights() ? this.light() : this.dark();
-            }
-        }
-        $$.$mol_theme_auto = $mol_theme_auto;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
 
 ;
 	($.$mol_tag_tree) = class $mol_tag_tree extends ($.$mol_list) {
@@ -41810,9 +35377,9 @@ var $;
 })($ || ($ = {}));
 
 ;
-	($.$mol_icon_brightness_4) = class $mol_icon_brightness_4 extends ($.$mol_icon) {
+	($.$mol_icon_information) = class $mol_icon_information extends ($.$mol_icon) {
 		path(){
-			return "M12,18C11.11,18 10.26,17.8 9.5,17.45C11.56,16.5 13,14.42 13,12C13,9.58 11.56,7.5 9.5,6.55C10.26,6.2 11.11,6 12,6A6,6 0 0,1 18,12A6,6 0 0,1 12,18M20,8.69V4H15.31L12,0.69L8.69,4H4V8.69L0.69,12L4,15.31V20H8.69L12,23.31L15.31,20H20V15.31L23.31,12L20,8.69Z";
+			return "M13,9H11V7H13M13,17H11V11H13M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z";
 		}
 	};
 
@@ -41822,51 +35389,16 @@ var $;
 
 
 ;
-	($.$mol_lights_toggle) = class $mol_lights_toggle extends ($.$mol_check_icon) {
-		Lights_icon(){
-			const obj = new this.$.$mol_icon_brightness_4();
-			return obj;
-		}
-		lights(next){
-			if(next !== undefined) return next;
-			return false;
-		}
-		Icon(){
-			return (this.Lights_icon());
-		}
-		hint(){
-			return (this.$.$mol_locale.text("$mol_lights_toggle_hint"));
-		}
-		checked(next){
-			return (this.lights(next));
+	($.$mol_icon_information_outline) = class $mol_icon_information_outline extends ($.$mol_icon) {
+		path(){
+			return "M11,9H13V7H11M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M11,17H13V11H11V17Z";
 		}
 	};
-	($mol_mem(($.$mol_lights_toggle.prototype), "Lights_icon"));
-	($mol_mem(($.$mol_lights_toggle.prototype), "lights"));
 
 
 ;
 "use strict";
 
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        /**
-         * Toggle for Switcher between light/dark themes (usually for `mol_theme_auto` plugin).
-         * @see https://mol.hyoo.ru/#!section=demos/demo=mol_lights_demo
-         */
-        class $mol_lights_toggle extends $.$mol_lights_toggle {
-            lights(next) {
-                return this.$.$mol_lights(next);
-            }
-        }
-        $$.$mol_lights_toggle = $mol_lights_toggle;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
 
 ;
 	($.$mol_icon_forum) = class $mol_icon_forum extends ($.$mol_icon) {
@@ -42319,6 +35851,60 @@ var $;
 })($ || ($ = {}));
 
 ;
+	($.$mol_status) = class $mol_status extends ($.$mol_view) {
+		message(){
+			return "";
+		}
+		status(){
+			return (this.title());
+		}
+		minimal_height(){
+			return 24;
+		}
+		minimal_width(){
+			return 0;
+		}
+		sub(){
+			return [(this.message())];
+		}
+	};
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $mol_status extends $.$mol_status {
+            message() {
+                try {
+                    return this.status() ?? null;
+                }
+                catch (error) {
+                    if (error instanceof Promise)
+                        $mol_fail_hidden(error);
+                    $mol_fail_log(error);
+                    return error.message;
+                }
+            }
+        }
+        $$.$mol_status = $mol_status;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/status/status.view.css", "[mol_status] {\n\tpadding: var(--mol_gap_text);\n\tborder-radius: var(--mol_gap_round);\n\tdisplay: block;\n\tflex-shrink: 1;\n\tword-wrap: break-word;\n}\n\n[mol_status]:not([mol_view_error=\"Promise\"]) {\n\tcolor: var(--mol_theme_focus);\n}\n\n[mol_status]:not([mol_view_error=\"Promise\"]):empty {\n\tdisplay: none;\n}\n");
+})($ || ($ = {}));
+
+;
 	($.$mol_app_demo) = class $mol_app_demo extends ($.$mol_book2) {
 		detail_title(){
 			return "$mol";
@@ -42728,11 +36314,6531 @@ var $;
 
 
 ;
-	($.$rise_app) = class $rise_app extends ($.$mol_book2_catalog) {
-		Demo_host(){
+	($.$rise_bench_host_controls_support) = class $rise_bench_host_controls_support extends ($.$mol_view) {
+		Label(){
+			const obj = new this.$.$mol_paragraph();
+			(obj.sub) = () => (["при поддержке"]);
+			return obj;
+		}
+		logo_uri(){
+			return "";
+		}
+		Logo(){
+			const obj = new this.$.$mol_image();
+			(obj.uri) = () => ((this.logo_uri()));
+			(obj.title) = () => ("Шмаков Медиа");
+			return obj;
+		}
+		sub(){
+			return [(this.Label()), (this.Logo())];
+		}
+	};
+	($mol_mem(($.$rise_bench_host_controls_support.prototype), "Label"));
+	($mol_mem(($.$rise_bench_host_controls_support.prototype), "Logo"));
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $rise_bench_host_controls_support extends $.$rise_bench_host_controls_support {
+            logo_uri() {
+                const path = `rise/bench/host/controls/support/foot_logo_${this.$.$mol_lights() ? 'dark' : 'light'}.png`;
+                return new URL(location.pathname.includes('/-/') ? '/' + path : path, location.href).href;
+            }
+        }
+        $$.$rise_bench_host_controls_support = $rise_bench_host_controls_support;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+var $node = $node || {} ; $node[ "/rise/bench/host/controls/support/foot_logo_dark.png" ] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA6QAAAEeCAMAAACqryjVAAAAAXNSR0IArs4c6QAAAAlwSFlzAAAWJQAAFiUBSVIk8AAAAE5QTFRFR3BMLzVCLzRDy83RMDZCLzRDLjNDLjRC2tveLzVCLzVD////6uvsl5qhPEJPy83QY2dysbO5fYGKSU5aVlpmio2VpKetSU5bcHR+vr/EajcC2AAAAAp0Uk5TAJw8fxu9XX353U5Xqa4AAHNMSURBVHja7J2JVmM7D6UbFoPZGizL8/u/aP/3OAxJqDoUge4astcFkjO7br7IkmX5/zxeda7b/3PVVb+PcNW5Hq6fi6t+I0HoqmPxFdKrrpBeIb3qql+ClP2qV80rpFf9hpBendA3kosgfbh/o4/Gnx5v3uij9767f6Ob6wf5r4dUUppEKRJxCkQhMdFMkTjFl3dMnBJTSGm9ozRpHbDeJSJe+wJRSrzexXXA4V1Ice1bl1r7wvO7ebjpy8nz6PB4cvh6d3I4f+jqMaXnI+d6xu1wz84XQoq3+ig6T3ij+w+edIO3urt+kv96SDEqBRei6ZNIPBC7J5qeiMQjkTtTcA/U3IncAwWvtA6oHondiaY7kfhcB0R3ouRpvePXd+twpulCVH0SuweaXomaJ+KXk9vR4en58POT1+GyTv7A1dM6nIm9EkVPtB2eXONlkN5hh7d9SJ+ukF71PqTTrjKTfIX0qt8V0jSh+Z8XfPIV0qt+U0gpIl3HXuBEF/qkV0iv+i5Ika6QEsEnXyG96neGlIf9f1EjIm7DrDIRsf1/ewq4xSukV/2mkMaIRBGAPasonpXzmzfdXtTX4adnaDYFjvcpoMX0+HwrALRAiGKGlgIIUVD0k+O2E7OVk8399Wbrvm+kQDm6z0HdsgJnZyhgRPB4taRX/dY+aYQi1xjCbPXw0bc6mSgptHi1tSnRQVyQEx9eJz+cEdfbjsL0LD9sTh0wmYGZeTZTqLB1ooAeiYgdTiSIqQClzriOcwWE1/7M9KwGlUhr8yZrgZaCqDY6KLouPN064Ewc21gPW2qLgXm6qtrVJ73qN4/ubpDG1LGUFVDhAwNlcjM8K6/tz9C5e1FAO8qA0LPkFagKeeX6VblGIkYiyp2fj4zEWolCLXiVvtDXXy4qMKaDuKsDGVAbtXreWFyKb57bOTjyutYcABRLWjlfIb3qD/BJIyJRKIClWNATLQ0INYXWFJg4TO/I8mqmiiIXbzFoD3B6VdADUPIGXe6AJBFJc+1sYHqNWrEakff1OiYRkaRAenPRcnzRpYgqEE7VMpBHe4uotcnMIYoBztwX8csuS/QOJCZakMq1u3vV7w+pYzA1qNBBAmFHiW+RMGSmEzm44mhrQt1ggNGrGpDpjaoSDX19CybB8VXQ37vooLcyJVOmY3F97g28Yhn41Rhz3xqrOTxDWq6Bo6t+c580LgNV3/iTjEIFlY6VOoSOlQdZOeOWiMoRPAzgFfhlNq2/YZBJjljPikZvNBCIyPoxkQ18NtQbMgafYNs1xNM++Ybttbt71R8CaYATOSq/oSYKhE7FA85HGyBkdnIQKlFCO4H5CHnHkSWVU0vKsCOoidXWlY+UEE+3NdVGJ9qAtE4vmqqBIvwK6VW/O6Q+F6TWmRxyBNEZECeBoSVG22A7knWi3BebiZa0Zj82gdQQ35xxfJkIQXrGc64bx+2sIwmY4MdbeqBzBYwKPratJIhXSK/6M3zShkYndtMxOtM+pYy6wXakCk5IR45pQlI/grAt43jYK0Q6jqBKasfuqNrG8pFyp3Dy5fLDx7Yjwlkzs9Zs12SGq35rSG1Z0g5uqCecodL7qkeUmhJrPgYjYeZ+YHghxLnzcf9XjagdnMekfcV6j+CX51MhB8xiMTqSI5Egvt2gTO+KAdBbRRSqh3HSGq6QXvV7+6Qw1k5HikCgH8jekhBRKWj2GJP5yzZ7Jk4BT6mqBgcfo942q+xSDZ2Jsx7fRNlhLdWXoRhWw8sdSo2zGSodPbkD6cdPfUJ4Q43Atbt71Z8BaRtgOpYpHeuVWda3ttQhxAYAkFfC+wuLowMwjgfAeLY6Sgaga1TnkCUhALSYy4y8ruEk26kZTJsE8DfjroA2iln5LaOVnsVMR6qIZ9hGvUJ61W8OaU4LUofQiTjSkeYbMBveUlqRXVzxJiPvlVfWPJmZRXuYzTMAaB4uLcUjmDg18UMisFqdQWBMzOyv1wKc3lBaNiMc3jLa3zzj+GmDlmkuC9JwTWa46jcPHEE77ejYfHboG0qTAciV3wCNlzeho7groADy2PKXfiaOU0bBOt58KOQNhUYndxV+s7cj0UECJNqToOAaOLrqz4AUiXY1AHmlsC1K3+9bVvibXQIA0NEivz0hptTkRSnFo92xbaQCPdKLIpToR3d1SO5vw0SB9sQK2HU+6VW/NaQcF6TKtCvr1ulZamFR+q4y+IWrmgH1xLTEIYmXjPelxWqLgZZ41gLoSPzGi6QfyCETiQ5qcDDtql4DR1f9KZA67Yp1CN4mEXDPgd5VgD8TqoC18MLcyAvF4ZIkxSiNQ5oUpYWWmtRh6wCr7UAjp6GAJX4JJb8rHhB6w6UjQmhX1+juVX9MdzfSrhzJcZyL0HW+f6jygVB9pis0f/ZJZ5vkuTEwY87cslHLgzIqaZkskpZPCqvxgKb3xem69DvicpINUcFdmXaVcZ0Fc9WfASmdi5O4V5kxMHNoBuFsdNACgjuEzpUgxM1e7B9vgOpojaNlquqUZMYqItWXqkj1FEU4FnArTk3W0I3EF07VI7EanStktPXF8ayIFFQ9MjOH2ar7ss2nqrjOgrnqj+juGp0qGo6ljRyJXjR0zQEzPiNGS6wKa9ueKAbokMasCKG2KHVkxYtyznhVNpfZRMhQqTXvQPb5Ml07pwahUzX0uP0J9KKizB3HyolOlRakfLWkV53o7uHhv3VA7g+6eXx8uL37/5jMUN+ZkOlpxmZY6jW2coTHIVtdzj75UZGhNS5CM1BEIhU0alKHPpOYUmQ+jvbGJNUKAKC4SGTFZGkG6OKUU0fG6dNGO3xTjOMEenhMA0taU5y148yL5r/KJ73DsR6/7AN7/6nL3eNYT48XPsbT24vd7jzvp9t/d/t484T3dX//4aWmb2/+p8cX3Szin/6n9fxP/5F/++HyKY2OxBmVX5y94S+29I0E8QDDEabseK6/wmKA1UYVRkk8A8hDEjP9VOF59MVEOAIcZADZ4xocPbGI0V8ezHASStrU30xdSx3tL4V06XFnVeTL4Li/AKovsfy3eKvHnft+rvm3j/fY0wdBfQT29XRz+zGfNJ0w+naDozV0afGYLUF6/eRnn4Fo81wBmwf7hlxDUITQagbU5M0lOKa0eaS2yb1KSzHwK3zt4JMmGqjcDIfqZ+yrTFIg4kNpFFpSnAA4xVBC7m9uW04p1Q3S8bck2D8C2LE2n2Z0v137n9P7b4d0Pe8nDentDZYuYetVDx+81sNH0gIjvZUdQ2vK7ziCgnac+7O0ygOyFGiNokJNTKHW4gs5zUs+La75uqEMmS/HptGBXFtkeJAO+AHTpZOMI4BOxNrZEY7DwIHeKi9I498A6fluPH2FF3V/AWFntv27IL2c0bvHpzN8nrYe63/91Pc4vdtv/QWYnlZmOA3OvlWEvFNHaBwdxbGJlBdEFUWqUxIxQGvkA3PVdCNz1JYi8zFQHGeTsR2BMp6pjrUAucrg6W2sOyxMXSQdXQLg8/pLDD/h1uiN/r7KDE9fTunNRWbw/vR5vh3SfUb3jejq096deKr3T6fH3P5a6/H48D/dPpx3qe/vfgnS3OlYVs7dVsqQ0/jNK0AmHLVOV2iNB0CXT+ptMv1cHFs14NX8citASa07TQdyOtxFmI6Es4fUQQmRjiSIfzWktzjWzaWMPuIiSB9wrMfvhvT+M/e5PaHmZgH6DspPZzbw40+MhzdmG/sXWpBaOoN0ItGxKpjUT5A8IYIH9BkejwOJa4GO+CY10Opk2tORT/qaEhi8Ax4ZOUo/YGqngWXATh+yUVWin5nS/NfNgnn6OioWo5dBeocT3X4vpDeHnRcg+vR499NF3X/F778/hvRnUbWHvZKer3LQiRKYzksiHLEsqsJEXAFPg1J7M1Ba9ZA89Ms6BKIWp3MAJpVmSwdMV7X8VylOrOZEJOt0ouMCpH9f+ZQbfCWlD7gQ0luc6P5bIX389f7D3c0vBtvuTs3uT5i+OeHwZ5Te/rwQGW1iIjrDcdUMMzvhtrwBImYYL1/UQ4BNAyy+EtqYPiuerymB7B05tV5J+nZDEkDe8Nb19CkjjTNIJ+YZpO0vsqSP+ELbdXcxXueP8/CVkF7O6O0nhnIfnj76Pfjwk6bfncUP9nxSNgUsEep7pifbcVJRfw2ackWfRJQUJubU7GWgtCxCL1R0hXp8Hu4R5iwVcD5ZJWZog5/i6HrGPRJLBkr6S3zS/bj/3ZdkD+D+4issfR2klzN6d7NvFPdPw/3dxyDdiR/sQBpUXbyjQuhE1omPtjbtnJWW4sp8iIY+SUwWogutIkxfomRATi+YSufoyO24XHdFFIy9SobEGAqT2iF/JaSPONPT3WWMftkQzNLNV0F6OaO3TzvBmx1junvq4zGkO67J7c990qwpBiLBeY4gnCrC5ha2GFNVGCfYixmN2x9too1fEDVgRPo6sW9G9IBpouypIx8Z0wkjAXx7yA1WU2bIWXvQA3GIhvkMaeK/GlLcX8DoRVe5w3u6/R5IH36Z0YcLvsvudrq8O5DumtJzSOfz+mMV/t5g41ijF5ssvZTZ5LLMaMaINKRCF0d5vfhapQ74C6ad2RXCr8aUASF2LPGafno+xBvROdpqyd+4Fswjvsp43V+O+g3e0/23QHog7ulTZn6/q7sbR7/5OKT7o8jndXcjxSIzNkNuWuhIE85Z+XmhozQXlAhrRYe5rGkyhKbwA6JdmL5B0Q6YSodzzeLIkYgLluHERmucogtbckjEoCM1iEFrim34M6Txb7OkD18wEHNzOVt3hxNvdp/mckhvd8zhLqMX/wvd7EO69416+4Fkhtmh4JMYkagGesmmr00Mir7BaYvYyjykrIjuzOiJvkvsLxEjrVVIlhUV5EDUVrqEGCCvS9ecVkJ0KCrT0t/qk97dXhxTfcTlkN4cnnInD+oCSM++Dz7L6LrahbZ0H9Kd/u7jO5DGeQwpcTkeAE0KwE4KA2pNSMRr0bXNjJbNKV22rif6TrEhy+ELg5vKQGai2CHEaqkA0PraIAEW1i/K0Ej0t0N6ztjdpYzi/pOG9GbX+boc0runi+3o11O6D+kdzi+wn8zABfbm3XJBz0r0eeeomg49zVhaxuCVdyRM36x5SGZoChGnCm3LOyZBJGY+jTgdBcMSNJwn2Ie/DdLN3bnAej1sp9xfBun980OeP83t10G6GL3Mjj5dPI689LgH6ak+BSlxR3gDxGQ6V4A0dCaaqjLsEOIlUVSmD4v/0/xkCMl5GVUOufXtthUlqNE7Cm8bYWh0BmmJfx+kd08XULpwePhMu96Ptt6eWeXLIb3Ejt5d0v3e6a9+MaQyzyClAKMd5b7cUUHn1tthpLTAwocBPUzsLlaseP1V88sVkGVMa+28lpAS5Iq5x/eyqn99d/e9hLybXxxeuNlp1wfbd/f+fJDLIb2E0acLHPadoc7LId2fBUOCuF/4vRKxwUVInkO82j4K6PMIyDAokF3qDEkifVzLJd3+WOSxorxTsyr//LTc+Z+AdFmyT4Jx97Q+8xdAejZseXtm1y+G9FOMLt1c4pDu5PZd4pM+7ObuHrRXDFMAyFqSUCDjOcQ7+IOIZgBQhcTtFRRA8azDvJrXj7IqeA7szp5jh2zIIjP9RBWJ3oGU/zpI18vPUXr43N2dtesCQ3pucm6+DNKbFzouT2K4vMN7f0l093bfJz0oaGH6oRKARBRUW+CUDyFenfQhpaEbomrumqsUdVdguM9Zh1n7ZWM6O+qk9EJp4Z+BLfQepBb/RkjPwcDtx+M9D+ftusCQ7sxZuwDSHUa/rbO7tBMT24P0ASfxq58kM5xxWPgnBkwjUUKf2dLq6hqMaVeBYq0jO+rQ7l7HmIYOZMgUhQ6PnJKkOjLMXVqKu8ZU00ZmnagDg4nLz2ypwOldSGv46yBd+kwlsJsDApdAem5Iz+3609dA+vjr1vBm5zkui/A+3e1AupsOse+TLkpz+NEoJTQQCQpHq+hMFBU79o+JOBYb7tBaWlNoiT5bhaJIcYWOyC3rS/d3pSWklnaN6TLkWZwEZVGq75/FYzH6b/ikS58I8T4uAj7Rrr1k97NZzhdC+llGby98jB3S8PhxSJ9wpLsPQ8rMxB3OdCoWfWG0DXKMFeINOwYvRs/Zcu7ZqlYD0JvNIaOjRu9DB1Nso023FqabeM+tjaK7Ofrsz4FdnmV7zQNAju8+uxAz/1OQnncy73fhWmxdCOndkSE9h2PtvBzSc0b3db9jSC81pbjbhfT9Mx8/Vi2Q5VCd2hTwSG8VRdEPjHpAtRXi3Y0YtVlVCwBDa0BBnxZbG6ZVvWmVwimIRa5r/ornDDVVdEWptCM5BHY1dWsbsQ50lMSnz45SdJnoeQpp4r8T0l8fiHk4tOBSSG/eu9lZra/LIP0kow9fZ0h3YmK7kD6e93L2A0eisCoi1Q49T6sp/k8ziStgKT8zSik/h3hpj1EFFIAXjmjWA9tMIkVbEdfINYiU1FqQaDoMi2cAY7j7qDvTxsNzyEiYZaPU4A6gDEkzxpnqULwUxhcZisz/RODo10O8d4dPy6WQ3r3/scOJbi+E9OEzY673Xxja3Rle2oP06eys3WQGNtjzyyBFcSyLfGBUBDEfQryJfiJuLKoKAD4tTCQWphSrs/SkNTkTV5VSobWUYtlyhtaigEkcLjKJ587Y5wulljdKuaCx40QqL9dJXcMRpJP/XkjPQ7wP+wOkl0J6s5d/s/R0GaQPbwrkfnj5h7vLs4j3K3fuQ3pu028/VNLT0NYa2/loPSWzhShxxmKUu+QtxKs/d0dZpCB7BeCUhbNnJmrNC3OZqCMF4gwoFPCsqNJm8VKKtVQle9Gu5u4y6SfiAd/QrKWlA6WJOPWV0pSz4lll1SzkruGf8EnfX5Lldo/RCyF9MaT7n+ZLIF13+dXCCjf7xvzy+hMfg/Tp/H/l3iwYgXAzBZ6LV/PLSsAqvEGclh3lcDCpnelnsgJoT5rROTmVXgbRlFETV2ZuHIiLAlC4DpE0ErUW4akO6WaK5URCaw07OVAbmkJt2dIFYbLX9YeZY2wyCoBSA/fM/wKk+yHe8+NuL2jX8UM+7NcOvLsA0tv/qsvfP+00bCegehGcO2PAO5A+nn1x7vqkjD4UWiefBFyeY6wVQiRwQTswWn7KKEcfKGUCqMydA9ADBaklcmXiSERcq5sCsJpbcA5t1iyjzIShgOaiQ1Kso3jcCR8dbGl+ppSXLe/ASMcVfQ0oDvmrZ8Gcf4b2Kb0/YfTTkN4eNWkndnRxMsPD06/U47w9u/939HdvPgDp3Vkhs31I5Xgi5su6aI3fZOs0DEqyGP1pWDcwy3AAsQKFrEQyAInHHEzM3BpPIq5ELasmmsyNkppALU8ySdFxkObInMKHKHVuKExBM9PR+sOvWj1h5b95FsyOAbvZSWK4DNJ7bHr4qM25PHf345TefGXp8H1n+/EjxbGfHvYXEV6Q2vFUUG4G2OumBCeaKFX4wKjTj8WJxDX3JFIA5tGI0CGisT6vrrjZ4ciirpGdW6TmU9QWUDy9AAr06sOgOlqknygdKBW2enhUetYcQHY+me0WXiFl/ish3Q/xnicxXNau/WJDD+dG/fKpar9wvaevcEn3u/G3u5C+PshLwfz9wBEfdXOrHttV1s7E2hP8A4xSCgIAtcQKWEidiUppAW0yUZDc09YJTcNR2+TBxEQs+XDPIB45hlRtZCslq9ViyPUjlPZx6Ji/OZqTnU5fD3+3T7pH6cMOo5e36/ajkdDLIX388FPeAt+yVDpO9LgD6d3T/poW50MwZ0Y0nk7xWr9SwdxlNJaG3pMpYs8aczZOszbOnXgjaUhpRJTEhzSmtDFKLTIRR05ZJ7EYBqcwq0nJLiZTfCTeobQjBRpoRPVkuZralzn9J2bB7LKB23cM3M3l7TrPrN+PHV1emeHD1D/gy+JG+772OaSnjL6/yun+LBgWPa/2NxCICmYJA22P0ZRKyYCPUaAlJwdSIuLqOrkyWavJhYhmGVU2POX5hrFNK7l0H3Ba29h1ZOSW3HmW7rxDqbLVjni2Funq9o74b8yCOdNPQ7y3h02Xt+s8s37/83w5pPcf7fDe7Nz7qwdh3of0dq1v+nD+pPtpgQdELb47xauilV5X+KjQD8Uyi2oGpqIpDEFXkaE4RiGXEGJgciIJWaNvp7zcMbZkCp9r9dLQ2igFqtoBwKKPJqmFn47EBM0VqWcm1szv1Ngu6Z+BdGcg5myAdKddFxjSnYWKLoX08aOJfvdfCOl+/+B9SO9uVgGp/3Rz8/hw+1Gf9BVRj3SqCCdqEOKKSjR/Oj46coJ5wcgZGWreVDsT8TBpDGdainFo5GUBZx28bXMpboCPOg/DPkuW2somTrXRjyWHkNGkicIUMehUnDqM/4UE+/31zc4Zvbxd55n1l8eO9iG9/ehz7jjEXzdS+vAjSO8ecaaVL/UxSJPC+IzQWrQzMYrkgHKIIf1Y2nVIbRAMM5TOZpYaxeTGnPUAaTOpYxJFJhp5RE6JSSJzslwD8Ww1MBEvSruhpMmhw5lroh/qOWSUsqASVehI79cx++sh3YcDN8eVGC5u1/kUtctjR/uQnjNy94nqfpfq6aOQPt48Pjzc3j5seRhHoD7sLyJ8SN09UTAA2IJGEfUlfPRDcSpANXcdaMN1GIVQJ5NkhGAoTjSJkugYTFzBRFWStHU2B6aQkkhtMcwkM3DCi2qMnhMli/QjGdqGah+ORFQA5DNMuSKnf2AWzAdDvIdEowvatZNZvz+36+K6u8fN+kRxv+9IZ9ifqna8cvjTzd1O4CiqNjpVg8pmnRyJYlnho0A/llf0YXAU783hsRKRTKoNRlYBJi9UYxZjisUqEc0aF6EciGOLMmaMU4SZU5I6pHqz6QCAwD5iKEY/EB9CRom56+aWto7C7xxW/ymf9CflVNbGhwvatZNZv/9tcX8xpPcfu9ztBfPO9xu+D+nu8mwL0x8VImvvOZoCY0YnapAicjawca5RIW2UMnrRPFC4TWqtca1oEgEh0WSxCBElrRKJZ3OZnGJLMxjUTVtRYMgorsBozBxCSZwMcKYwGrX4Q0r1EDLKCUbUUEmQ+d0g019ePmU/ZvNa6v7xgnbtZtbvP8fDl0KKHXf4iyDd/97Zh/Qc08e7H/qkAnvvg1yJMphYe9MGXx/6n8mtex69F4gX7Z2SSG+cHIXZ4YEhubgTkfVoMTFHM2ucZASuHpsXAIACGaUYiniZIc5kY7giyyodwfQDRRSiCRu5QYgMkdJ7lDZk/ut90n1K14bHi9q1n1m/PwPzAkjPYbj9fSHd/7/ydPs+pO8PfDIGkUAWqGlzSNHpZwqSay8ljQKkDBtUZeiYHYUpdK/UasGoTEQxjRTS9KJFZklsPfEcUmqrXd0H0EcSszxTGzVnXexqllU1iX6gtkJGEskQl2VNqHSmhML/BKT7C4beXNaufUO6Hzv6Ukgf/t9D+nABpCeU4vFdnzTA6Fz2TKVALDrOgkbnik2HAo4xYUDyiDGRXJGIWmAmm9BAHEhmnHHOUbulLDybs9QkVeoQ9wwgQwGgdw3bmGmtCsANJdHPNDCJigZrmpnacqnje5T6X97d3bdh694XtWvfkF6UaL8P6TkjNx9F6fF3gPQ8OHzzDqTzXfYiGpGBiWG1v4SPfqo4gVIAzQpFGT7VBcGgLhyJKHHBpCnkLG3K6M1dtbGMMItLS1qjQSUEZg69ejUge+N5mHgK1GTG9BMdQkalqqwObyBGpXNVzH9gFsz5/p2+5k67diG6/1T38DJIb/80SHdKkp0Hjuxd9hxMCbKBykk7UULdrU8PQLFpaPUiYFMvAJITE0uDkGitYRXA30oQ0SyVW/VG3CSxhNDGGMuaqipQqrTI4VBZO7OrB/qx4iFk1A6AGpEp07mK6t+5iPBOZtwJo5e3az8hcH9g8QJIzxZg2kHpjObLdXsJpOdP9njmk8Lfdli9puepliulHmJsq7NLe6pA2f4DqrZhuTQoFEAUFi8TnQwyE6y6Ng8hziAzTR3F69BsxcrGothIkZlTrcO9irp4GXYomNR/atPr6gQESWpEgkbpMM5UvU5+QzP+fp90vxLX5e3aTwjc73dftojwu5Duo/RtlnR/CGb//8qCNM0FaaSD2LBJiBiVHIk4d+kCWaZ1TxPaHJtMCxqK95IBjMY+kHIJCZCkMqCcQkuzFs+6DPBCEO7D6+TiplAbdcgw7+qBedaqmluJ3RvTD1WUidVqrmjEXTmgEcUMHGc3GP7uWTD7YYqn2y9p174h3R9ZvADSU8P84Wrz3wbp4w6kuyUjTn3STgdxhjBRdDhFNEYhqghJcidKENoVA8UAwKAYqMO9rQJglQ1We6CCEUowdI5RZGbt7rUOtZgMhmeplpakuAxTQFWLDGhlKHINXURGoB+JlwUVD12ZEirDKaE3Jk79tSGCvzuZYf+j+nBRu/YN6eWxo31Izw3R3Ufv+VtAuoRj3Z5A6nRQ1kAcmUhQI2YBE8Mj+3Nnd18KABnIKCrqzTwDsNYkDwxlSeizxOGdA5tVVaFN7CY8tA4tY0CRi5YsKYm5a8l5WcGuRSE9z+Fp2I8pFTSirhwbKpEhqDMKE3MgLoi0FPBXB472P+2Pl7br3JBeEGu5ANKb93jf94Tvvmuc9HYH0v1ZdCc+aaOliTYLgDKposHhRI6EtF4w7Uvq7AAAUdOKXm2Dq1T3kqGWqlcvkmubaUrWt3lOsQh3KADoqCLi1jjEAai5S+3QkWvryEmM3ZMn/mmHN8LNDEwRlot15qoAKqvREv/VPun+R+rx69r1uHPFCwZLdyH9OA333zVQevPBqWof/866O4Z00pLA0VuqHY0VUDBNiHjuTBNO+0qdKKgCMOtQRV3IljbyAFC9ivnQWqXFUoBOS2v+qCbWWjK0rLMUkqoPK018uZMGLdDedExxIf55hNchfTOWBlUkzhgpOYrpPzZVbaei0UXt2l/J9/K8o31IH3Zw31lc6ashfdr/7thdUPj9RYQdKzmQC6IBcKLcAyU0otyZ9mXcLDY8q0AUAKDIANBrdTPArNWYsTHKjYniKt7XCjcogOLSWkqzhRSntCTe5kwb8VoMY9QxONVIP1ZFJFZjrogUASBkpOcVVunvr2C/b8Xuv7Bdj5+wTDuxoz1Id/Zd0MW+fKra/T6ku0vzH/ukiZYE4Oe4SwXAlJDyzJ2oIdG+plMBU+nPaELx8kqxEmqBAa+qwEAlzmhEpNBARFUYZXQA0OzabdQqLdU2oMPblFGgVhUlmE2eP6GUNRMJYhY1IgfwEvky6N9fmWH/7k93n2jXJQmB+4kVt5+G9G6H9u+OHJ2awU9A+vQ+pDaPfNKI8oKrHwxp6oL00aiRyIQTxRc8VbFB+aw8MrSZSYZCAibZ+mKoikFEaXBHzgByrnGmKdXcqoSZZLibFrNRUFBKlEE/VUMj1iy62VQA1l/2GB2Ev7U49q7uHu4+0a7LEgKX7u7+m/J8c/886fmTpf72q4/uk/BtNT3v9iDd95efjn3S+mbgYini2ZDSzP2Q+7ovnwmTiPTFjHYAMGRgva5ANGSFKsj7Bs92JoBARI0TFIBpLilNJp51aHW3AkVZiRLSYS3HVJl+pq5MDS1szRqADlpKSLQU/o3A0be3a9+Q/g/Mh8ebm/unJ/xMj5+D9OP/mo9f45Turqt/OaQ4hrTTQTPREj97pK0JIjGcPiJPCUYxC6BQYMEJxbNqhhcsFcqJGrDxb8BatDsFdGQvxQw9TqbYpGR3b5SGDUANcEMLgzjRzxQhRD3zePZKhZZY6KB0hfRL2nXzrlm6eyETH9XT3ZdAio+n731L3OjmCyHN6Tnj6ER8MKSSJdsafvmIvDVACkShsoG4/Sxg0b0I+sBSsYhI2zvhhgOkc8zCITKlKoFohjZnS9NVi1RL09VbcygwWiJi+plMmRKaVjUiAyqdKi9Ia7hCekm77rB0BOYTPqObj0O68w/zrSOle+vqfyGkOEBq50ZoGVKu9RcMKUlhAIBVU8XS6vQqAHG8kVpAIAcyNqlWIgp9orghQ83Ehnv1PmKyXIhCM0tummPtWMWBP2JKUxLEd5uZ8JzMcIX0knbdY2kXzHXQ01bK8vHhv4JctztO4j6k+9O+v7+/e3ve270c0uMK9gNCx3IgUkSK9CuGlFjZAKDxMqFleaIDgEJM8awOwBiBGl43JiKaZXaeWgaQswFmNmfLPpN5mD4KcrWOkhUejYl2TWlD4ohlSk+O59xXdLfxFdIL2nX7YSTv7vYHSz8B6c6KvN+fvnuDUxgvh/T+pDKDn1AagELkKmhIy5B+TDVMABoI6BnQ8sYnNWzS5w2dMIkVS7oQCjJzdFXoqIkLxtTigTn1OtqcrUINvgZpnKXtm1JWq+ZgasA4YVQ5X33Sy9v19CEkP5wEdBGk+zjcfEN89+mM+8uHYO5PVlVba2W/KGYsNs1zX4b0g2qZZzGmCKCPo6iRvv6xuu2aRYgSlrLKdoHRdLQQhDkGoll9ePdQW5LaUojMpmo+N0qNOO17pQJB22gF5KhWvwZakPIV0gva9ZxZv3PTiwp87kN698Od3x86esAZi1+ezBCJBBjrA8/R0MuBzfRrhpQ4Lw5cdaXsJiZiTt63t1jy5YaKKBNNgyqg6RBfthpkhlS1TmL1OienkhqvKNF0s6LdpgAm1ih8xJTygVZFfm6kKIxfkhmuPukF7TokBH5hDa/LIb3ZMd1fGzq6PzekX5AWeAYpsQPQXDKgEuBE2SRZJ0qI9FFNDM0lZxRAJS6wBhOR9OPBGJjqKmrCybMwL8itQYtCTQIxpZS8AKNVSzylpjRnK1rM1Ao07/Z3qStRRbCERgE1dUBLyQD61qp8DRxd2q6Hi1PVd2JHO5DuPev3l7G/wymK+5DuW/jbA6Qxvq1g34Hh3iJTW+MvkA3WQh+WZ6AMmAK22VCOlWkp9WdIOyzDClpEoiPV7j7HIYOYlliciTdLPyPHpACGGQAINdlLO4oUIYdRGGWKzc06IEyvkMZr4OjD7brckO7Hjj4F6f3JJT5uur82bHS49aWzYJ5+sBZMXfVpF5fWuT73eD+shgVits2KSkhxEhHn7bfjWdorrCuLhqPTNSKiMzEnqWsXx+2ZoiHb0MrUAWCsazWSn1PKC86WKgK1Q0sFPdDSNXB0Ybv2M+svn7O2D+n5v8yv1OZ+/FJDevcJSM8Pxc3pIsInZd3j8kRXWMU6fVzsqkNVwlqSPzDPZWExAxEPbICVIR0oBZk9M71IILnXGFOMM3njDdEpa4nuKaalcuquAPIAFLBGluhnWnBOTss7fWnlEaTzakk/2667Y0P6bbGjfUgfdyD9tvW+ny6d5rr09PPKDPF47UBaAxYNsmClX1HLq6Nb6W2d+QlsBjJUAOhoEgYKYCTwQJuioU3UWhsng45GB3GsxZliGYsxBWBFoRWtJB4fCR2NakrkykSbqb7OgrmwXfuZ9ZfHjvYh3R8o/f61hB/OOrv7kO5/UT39ZBHhirQ+ubnUMpSogukXNLVHosjERJEC00EdQCOatToA6HCZo2eocMEw81q0BgoDQrFREKZXLYPK7HVO4hiLqroDOnIwlr1RGKIK0eWdtlUB8QrpF7Xr7mjXN8aO9iG92+Xh8g7v/qXudiD9+DDOqU96XFg6IlFAo7hivPRx8YAQMfFkioGIX/c4NBKR544OQD2W7uIF2ZNIHZZ42iCSThTrpE0cQpyJlmTS1Dl4junqyBUlj9KMB38gdMSMSqxGdfnYV5/0S9p1s2u3Li/SsA/p0q9gd/dlHd77H2B4YUnPd9aCmW6HYdKI5mCqmDUhbgd8WCH3QDRTiCnMgy2NTEscKUhFVqAA2F5UGwVArjHEWgo6UcSczEwvCqVrWFdoQXpKk3vOOZWiVYu21mbbDR2pxbb6uwe/lKK4J75Celm79g3p5bGjfUj3lz/cr6D5NR319Uz7kO4P45wtIpwyFDiEdtWyEZXiZr+WbUQxV6YkcRZOzNOZA01mepXUUoAN02zutbp7LlrQi0+J2w1bFKuxpcC01Hy4rTcztUJNuHYtCaqCrHNS3M06qqgqiDSfq/VXAIrcFqRyDRx9pF07hvTbY0e3vwDE0z5dl9ey31+D5vFzyYo352vBQJND3Z9z6xMxRNIv9nYnGsVY2AMzMW+GlIlo+9WYAvMwcS0dUAOK1eZzVkktcYytJbZsnVLiNaqaIxFTMpcyIs11qZTYrEkvJRvqEDXZe66tjWKrv3vIsk+jI6cOXH3SC9p1d/TZ/L7Y0T6k57v3a7FdUjdwfwmaS9aCebo7XwsGLKhMSw1gSgj0a71dTjlRG2mICCdunDgyhRDmZJ4xcmuBMwA1KwAUvVgd5hID8ZwxxRlooK2r8UxzhEMSRDFvzDMt5CvH4a1spJcWvTWi/f7uYTDJ0OmgpMblOp/0knbd7/BwcexoH9KdNfm/l9K7px1GdyDdKRt85JP626yihE5kvdnQX+ntigd2Fy9chYlaapGFaS5jNtOq2ZlSGTMKNDuKHuoCBpGh6qkxoyCGNFtjbmkyLXETj0TU0irPG6kpAKhDeTYh2u/vomUBU0N5G1KK18oMF7TruGb9d8eO9iF9PEbmAkovtqP7kO4XJD2eBTPfGswGXxNgdPxCbzcNFlV4G8lmmz93FGdLrWrOIyXXMv4niWHOGKe6ETOdi2NLTNyIArFnTgCAbMIc4w6lq0tQ0dCOVkFmraRXSD/frqcvNKT7NXH3Ib09/gf9Tkr3S/1+ehHhdaXzRYTfjsI45hZibYeBmA9p5sCm3qFwl8j0EQmgXoSZxVCGVQlA5ncAra3xATiekih0aQAAl0STEv1Uyxn1xjqIFEzPyn4dJ72gXceG9PtjR/u1de9/eVnip08Ml+7xt3/QPqPnkCZ+A2MGU0UIq3MY6COKJSRoz5rHZNrEHPg/zRndh9twkSozRHoVt65e8vDZapNEJD15fdm7sc5htkCvipR7bjwKDMAYMfBeQbLljCrH1YF/bSoqXcunfKJd32JI9ytX70N6++OzP7gQ/ocbc3d/3DW/gOT1DOfHHM+CGVQy05KgEFmpZuXjebuZU4bVSMQxNZFqZqp5lFybVFGHqnaDwlTLkBlfb6fWh+baIhMlFV1kRo7NXBIzHSlKTt6RaGgeQOHJtKv1fVO1IVLDm6bGiOssmI+36xJDeuHCwvuQnpvSuw8axD3a9s+6ubvA3D7gfCXKdwJHCBHlEDoFKjGqVTgRnD4iac08EqdhsFEtxZRio0mJA4XIgXjN2N5CvnV0A8qhVyzII7mNOKWmOIC0Eh+IKIhUT/QiFpdYO5A7JCgUqjHQviIaRVQkNGIgx3U1OI0/LnB0/7tAendqSL8/drQP6e3OAXuGbAG3q9v7U7A+Dend/Q9ufraIcOakMHdTYLmkNDE/OgDDnSm2UWCNKbQmzXMu6vCRNQxtIw1OielVyQYAaGnUgOwc63arYq1SCMt+8gyBAy2xe2Yini11eIcLFDrrAnpH6kTqTMspBfLwoTAW4BtmweDuM5/I2w9+on4XSB+/3JCufsJl673cfCbX7/H46/JhF9G9LvI+pO/Tvva/75M6cmKxjE2BBFNWF5HpAxrdMwBvYwwA2Yf0wwJoXTM0Q3tByS1bTW/CtQbAqALqo0yeM3IDJIYpyw1NTZiWWvHms/JCt5uOXLwrCYdF/26SvWlMpkQDm/KI7ChfHTj6fv0GkH6LIV3CiW5/Aulu9+T+ow93dzJte3F3EaL7WYN3t487DvHxLJjYobZB2lWJrEux/lGXNADuHSjmkubBCBboyFUVKmheRq8d1hXqeaAGPoCamKPqqJKaJyJiqFAyl3lyD8+loK3TpLAPE2D2xBI4fsgpFdS+/hqAYqMAla+QfhLSm3ND+o15Rx+H9O5pv+u6jynuH05PXVzd4Cd9432Pd9VR/G8lnJsnYIf2s1kwaZiN6kgwIh1SdRDpoI8ozne2AdBlmqu1qrN6yZasdIUCWYR4HZi0Q4UdxTikEgo3SZIic4izpUhLRQGJTJGIJAfTNHtNgwZR4H2nNNGEl4lJE027WMmlxtdZMFdIfw3SuyOn8ZtjR/uQnlP6y893d2LXcH/zcHv3Zv/Dzf27XO1Duq/7dakdSJdKD6jbDkajgEafFWegdq0VyLGoj2leK0VUTkDV3FJJgYliRfaWjFMHNBVttHmetcpMgV7EM3kkIrbQaPYKM9bhkiKT0I4Y9e2PINCmK6SfhfTmCJRvjB1hB9I9v/Tm8fbh8ebpQyb/4eYdfDY9PZ3vWAR/AaRPj+/EI85mwcTXz/JccaOypoxE+rSKoiQtFYCWZJFZi/PskJbUvQ/vJbdGWbV1RJLJDmEU+6G95vWQnl1EoTYFZtyIEu1oYzEPb6t/wJBjSIWvkP4apEeG6ltjRw8/gvRhJ0XhM7Nc7h7uf8ny7XOPHd38+Ervl09piIJADQ0VTAKmT6tXILvOjiKVRhwUa06Dm9Y4o0nhqI5sgGmc1ZkTB2uI6oHOFeWAaOI0OvIEYKyjUKMPyJVoqPtYnnYpX1yZ4eHx/4vefeDHm5uHL7Nrj290d9bg/Yj05f+Wdz/a9dPnPkUdj7/Q5vufA3qzbOjHtK13c3v336/li252+VDof2eJ2HeX4x8gB9FQrkOJTOnzig0AXEe12qg13uJElSmM6TOVZCNWLUOrmTpP49SIpCNxtY1T9ri45NRWx5cnETVpYcAGgGC1xBRoXw1MFUkqmBxcwbSUj2fBXPV3aLG2eqn/A+LmV79O7h4e31mv8ek/N/V7n3rfJ7VOVojMmIrR9vN5TRRAR0/cQpwlTObEmy1sUmf0hJJGNvFgxRpRmy0SZQwmDqnNSLGO5j48Bl6x4LjwH5VNFaZVPAkJ7WtiUkLYfhq4nUBKdIX0qnPd/Wf+lj64sM33Q5qN1Ih0WEUlQqULxEORFVBhnnMQ0+REvOyezCENKgKrEkxaIBaRFDQUk42gEJPX1tIClChKSDMyMYvarIYumqw5R9rXioOt7v3ETIhXSK/6DbXvk+ZCK7ib60XB3SUHdAAwDikQM1EKjSgOCiHUUCd6FSk1Mac2iWPy2Eox4iQL5TRq9SKJiXjU7qMAw4JAZVRYQO3S0qQPCE4MR1uB61NILV4hverPgNT6KhKYYsJcwd0L1ADVCiAS86rx6TMQ0VouojXuNQXJQxKNGYhjqcTIYfNohVcPN4TNiiZWy11aapqTWtWSC2stlZ0i7SsPIvXJG6y1IRxBWq6QXvW7QprmEaSOucGZYkOghkCXyAeAmAGn1X9lktk2qxhSE24cSmhc3bM50kzMNVh1eTn8WSkSN26AwpmRrc7SXWXUapyIaV+jE5USQh5EeVScVrC/QnrVnn4PnzTBEV9GYCroIllbix+iTGq0iVOqgUhGkziJiQcTFzGoVZ4WKHgpTKUyh3VCSMuUJoppttYBc5Q6UhZT89g50UfkIPLubhusxejqk171Z0Aa54J0dSyJATAJmjqW8blEPqHaU8rZqYZ5CABt8JmPFCMzcaUQBne1wjNVJoYxsWPUNBMRM21iHlrdXHRFo5Dc8rBBNQp9RAKmimprwBSVOMbIz5CGqyW96jf3SVNVAIApQORKPDqRGV2kSmVUTTEVTzzZJ72IRyRmmkyhBmbiUjErp0q1WORuteiMIc4QmWNqnmZjpmopdmhxwM1yN2eZ9CElBBIEriBywA8NTtfA0VV/BqSAtRSbd0CJrMdptozMJQqU+9bXZWncqGt68TCpbdGhJEwjTmYKeThXni2pJuYOZPiyvTFE5kCcmFrTPFQ1ZMBcrYwY10U/OFCaZGU1rAYnf667m6+QXvW7QnpY9sWZlpoWIjO3bETqdKEKqipii40jOzS1t/WLQgsxcS+BtztPiYljUlgLwQtGSjEly/8TTybiHNhFvY+SDaXDCgBkoaWPzIOpWNkMxrSU+iCC87W7e9VvHTgiJiKeM27wEGXzqk6EShdKUQaALpM4tobOFN9wExuHWvhAaSCpsU5NRtM5jbQCRyJizkwcWpk+gAq1DhnYpJwTfUC8KqjkhEgctwan7Q9fA0dX/Qbayd1dS4MCyOm50CXBN4YvEwPFKrQ34TCJaowvu5iY2gic0axthpJbGMSunTlwaDTqSBxbUQlbdLdGES7QCgWAgk02NdIHtExloojNiQ32xgrD5WpJr/qtfVKiBJUZU4evgkAyt92NLtMA2mBRTA/yhs/DS5Y0yN1SkTrbZKk0KSIPnpEoxiReq0wm5sASq0qRpICqKgYwoAB/NAa9Gmxta/DUrcEFxnQNHF31W0NqmyXl56WvBUJE8FIPducSNVfVhGBATCSBnjVHWLBSYgq102BjZ5lxJE7Fu6VgiZaYInOybICWggl0aAEKoECPSRvRL+QFpq3B+tLguu0a11kwV/3ePql1frNqCkFqO+z6vOIoqTmqSqgSU7RXSxp63SBemUVi2xAL+2zWJMWeR3QFhoQZYpUWZ5hDUQAosiN2bC+1oAQBtH0UUnru3zuYlhzh6pNe9ftDyvC3BWpp29UugzRtLEytbpSCBK5Mm5jYU49EfEhynzW1Yqi1SoqDay40KXUAOXGoWqt7G7VgySBZAQBDW5wFyAj0AeVnEmVRuRQgV0iv+v10Xi1wntib3JAugZSHTSJODWWWamIy6iSKkYmZZiyNiLn5dmzxhqEI2jlJi9DGk9oAeoG1mDgi1VYnNjkO0t5Y+va2fhzSPCFH03uyX7u7V/3WkOJ9SCGXQMo8WkxEgwpGktZi+Z8iUR0LpylCRJwmEzF5qcMBlxI9jVo8SaxcgcJVQms9+agRZlAoHMuOljlbMV+88ochhWyQptfN4zoL5qrfGlKZSG/GWpaNWZs/DWkw5xCYedSCOsaQaUM1EsU+eGG8/akzMFdyDEZ1jG5DkkO51lo4dWVOnluZSRFVmxZkAEBHr4GHtgZ0hWJ+GNK0aKy0tF7C23UI5qrfPHCkTEsOJnqz6xOS3LgyM3ssXb00q3MWQ4jMWl+noEWmFGcqdcgoQiQwVJgDJqN7raH6KDJgQLGsUKgCUEAbU8jG0ieA4ia0L90gZUZ722BBvPqkV/3+PilFOG1K2wvU7J8dggkmzC0widjoQCxeRuCiCEScmA7iyiGFyDmrlx42aqG5a2oFE7VIHtVQmTWWbimrNvQMAFmYk2vjOkJGVkD7R6O7jkODjWndc1yHYK76I5IZBHkyRUfny8ZJo0ViJuIapfIAWhEkkTHAxOz0Ji+QZyCCDumHTVN1aFGgFqgi5SEQyVpME1R9Q9SdKKXcOJTGhoKcoQi0K9RVP+W5wdsYLTrT1Se96vevzEC0hjyAyst7C4z6ibRAbiMQM3OY5JHNFBhZI6xGIYkkFIjXoQeoYfZ6m1kUBQoAatUEAo1AE6QMYPVzI/FIxKNwG7CJUpARP5hx1GLEfNPgwUTXygxX/f4+6aYp0pg25RHCZ3J3QzYmphmJuXIsw7uiVGhvNaTAHJgCzXXs9lscpTd6VWyK0LVq0ZgBd5QOBTZGLTkRhxCZhyeuM/esNhRA/VDuboCkiXjS4KtPetXvX5mBhelZUomKuR+S7H9FM1c+GEkWqmFmbYqkgKZRtVIIxM4eIxEJEyVy62h0LCu5FEfPpQsmyoAC0DGYaBJFplaTh+aiaBmqAEqnPQUkihBMRArG9Kw2r5UZrvoTxkn1gFfL6ERW1nzS7L/EKAYdxIklspdS0AsA5W7IHCTEMXShOJh9pjoqncjROxQF6ItPQH2+dpIDM3EMyQr6AAaAUsC0o7UusiOBSfAyodxwrcxw1R8BaQGyWQEAEHlntv6rlRla10ibmGUG8iSiAAq6TwXA1IRX5gGzeeSRZxtMdAxYNadYRwa0VEkpzUAv4rCdzezA+gLIWhTApB1NRFqAMlVgNVihei3pedUfMAsmIvJhvc4MMFVw8tMlhPfFDiEmmrxRFGJoGQBgowFdiWYjoDMFjlpiTMV7pFP5tAPqP45PSbJuJRZsUkUW2lHbAE2pgmgAqa0Gc7ZrZYar/qSSnhEGJoGgroJkvybRuDq7xM4xBlYAioFuPsAtCRUYU6MJlGBTE/EpjHPHKnJMzG2GzlNrhinGR0ZKZWuQ21pWTf1LS3o+3Bzr7v/JOiX/u9Hj9YP8L6QFHkHa0Fa9rvy5lQ/TZhkDceRAgQsUVTGa+nDMFieXNczTHHDVSZQC05GK+88QJSaWxJxnUwC1AEBR3XvUoURWajMjKjb0SyG9wbGevp/Sw4LW1w/yP7fMxNCAdCisFykh0C8qWtr+EEkgFgW8qVUbMqyFaByTE0+artA+iCaf0qU8fgpcmIEo5jYAjAFslEL3nNIF50qo13G8qtrlGUeP55R+P6NXSP9JSK3wtr3VtsGa6FfVeloOJRemZgUjAC4WLMmcpQYuzJPiGApEokSn90ho9ENxCEwcB9wEAgxohkJRBv1cOoi0lrjW408Ix5DGI0gvp/T+/3yz7nGF9N/s7hajVSYwy2eLHEWf2x+OZVpVYCBLVc7emyrXGVNgYbWGSpT4zCdlZPqRQmPi4FMKm6JCYYCie4md9+uQoaKhUUT7+qUPHz+z+vslt7tC+o8GjkqhXIjyqEn9k4V3XdNak7vCG9ABlYoJHw4PwabMqZyLG1OY3DgQTXpVlfET3mZqzKLmACwVmALoOSP77jBpRKoTcW990i/ySx+/l9ErpP8MpPnEJ+00dPtDVjZmf1WcFdpos5FqAjQAmlHRVdRDUEnsMQJ5EnvMIREdxY5SNv4ham0StzqEAZcMlK6G7qil5rQ3TNq2HyZBaF+/HP8dTvTwnYxeIf1nfdIKXsupzVL1E2MwHLUUYLuep1TySjiAATC1nrurlNhSBTpRC+7MxPHoGtrph+I5UxgY05BRCswBQIFWPTP9WBVEFdWqEg3wUPry9UkfcaJvCx7d4grpv+uTRswV1k2oYGrgXzajAKA5EQVN3ZIVHFQ0qKKioDYp8Ejso0YhThQSvSj+eDgliDC3rKyqYIdqV6Aj27DcfupBWyGyYtWMqHTK4xXSr6rMcIf/RyHeu6crpP+wT8pqYa3D/5kCKkkzoBmAdyZqvSLB8KK6/VSFKVCIhrUwI0XiQK+KudD7YuY4gN5VtRaMolAFAORio6DtBXc9slYiWET6hvVJn3Ci+7tvYvQK6b8EKb9AuhYoFaxJapV5jVXQxyXdUIAC9DYGE6uqdjMA6IcfVBS1joJANdc48+B4Mgrzw5vGaFkBjoqR0bu6QlsBMMqcDUY/1PrqqfHw1ztzjPEVUv4KSG9wqpvvYfQK6b/pkyZbJgmeC1ExH/nXFj/kouVwCUgCBtEAoHiRGqCKJSdG51B7SNQCNaZncR+N3hOLQqFeFF6ljanoWaEKa2LNAflp3GiiYqXZy/NzONMXrk/6COD7Q7w3uEL6T0I6B7okGQpAweTa1JXIlemDMtUOHKak5AKdNBWoQFEUdDds0u0mCOS9xYYmPIVipBel5PWMzxibQevGlatKRVG41qrdc5Y4qpgqZC9utP4CQPHWDDksSMsXQfr9lD7iCuk/Bmlc3d2OyqJY2ozNDGn7G+ljcgAZm7KFsRL1yratD6BDuwJqWCoUtbPkXhOXo7gRTUU9NqB5GeShCjSpumC3VztdZmoGwFXofRUjsucfHOQcu+oGaeRvghS3X83oFdJ/NHAE4QJLIUwH0IjR4lx/6UMSADA98KMdBYYB6AAcQFV0g1po2JQoI6WCNKhENopMz0qlHyDl0KRgk8JSQ4GnCbhDSq5dtNdeUUC1MsMK1qnnOjjYdVXZBawFjt51suLrAkcLoG8diHnAFdJ/sxBZRCdHok1BMYjUzXV81CnljKXega7VHAdpBvq2RwFTc14giyg4Q2pLTnWmQkwHZZ49TRlQKA7qEka1riUrTKEYXgGYF6jCEkuZy6b2wT9wSSMECZPii+/KXVkWpPPrLOl3DsTc4QrpP+uTytGaTUo0VOzDTuksAAqg6z+1qRi54FnFTZdJVKGiik3mUMlDkQFVIOdilgGM3BWbOjapcFJglBKmVCAONADac4Uuy8+xKrKJmmqgMzmIKtoQMMnbpgrjGwNHS/dfGNi9QvrvQjojIj3LEKgh0Aed0vASK7WMql1b3ajLqugdmqFFoqGjStIwuhYoUDKWVg0UnOqV8cpBVQF4BaCASoe7YaBvBzJHomIDAODv5UJkO7ilhcgQX7ePbRc8fx2kN/ffMhCzGL1C+u/6pPPtmk0V7TBbTfZHSrmOCFtIlcXbnFmhUFRdtBVDjlQAJEsDUBheJC9+bAYUBQUNL1KtHFUV6uizeVIAI0MT8FzlrLBRbYDiAGoO71QKZNQ8UYmgR/Dmr/ZJHxZL3xDifcIV0n8Y0sYQelaDEamNsdke3e3pqpQF2vqjXLtqATAFADCJEpTnLChCBQ54x5LmXFUEoZsCG8BHqjyH1zhyRhUMzYqKjlqgRbUj15yNA7FDVcvqbesppQ1MCRUJcXPAn8Vw0i+HdKXWfn2u/Q2ukP6TkNrq7trrEkaLKKqamoCpIdKP1XoGeoEq4HUUQHPvNlBUAXYAABMxUBmzovKG0TOLvdQxpQVUKyYKPWbU2sxwhWlBQV7J+k1TnBVJ0ct2RuJINLTk53GZkgufJe6Ozs2VqL6B1BETNkiFvw7ShdOXh3gfcYX0n/ZJUVlzYn4eTokUEWmi/bSMPRuQgaE4yIZ2FcBRAHTGpkY0oUUAKCcg4yCtdZhql9oySgMO/d0BIG9W1BRwBeBe08hQK6ilKioADBQvFUzMVBTQpAA0KzTzyQAMwSPlQVSgh63RUDl/eeDo4T3n8enuqxi9v0L6r0Hqc4N0INeD0SMyRSVWH1XtZ3U96wKoGKAZjugAUKR73UAsVDDwHBYqQ1VTNJhV2Aa2ehFNJasOhWZD79ikHWoxVvPpPRdDnw2AoudekcVylJ47VEvuSDRmA3pFgZoq1GN5a0sTAs3DFxKjr1YOAKVq17P5pJdDujq8X0rpw0sQ6grpvzoLJnUAKgdHzZTItGn9SX83ZmxqkgHL2jLKRmQtJZeBCqUCLc/YNYuqkwHNRVV7V8WxVMtYGzs8sAPwnHNHUT6EoNCLmjUDMtQxKgAPFEJSaIHVrHB4xbA3ttQ6kfe6Gd2Ehq2ZwQBo5a8PHC2mvnYg5u6V9acrpP/sVLUQw4uj1lZmYIxoP4rvOgDAIOIbVqqri4vm8jxeSgJowyZJOaOR28b26FaxCp9YtpI71EpZpI4RVYgrBJoANM+QtjAeZohFkQFg+zMwBxGVXtfzANpywRh4oZTRiNVp49H6i/vNMTDR10P6DTNi7p5ekgyvkP7TlRmWGLbRy1rD1B/Ed2PRWQAFYtAOxXBsKnBtQdfbIGvstJaRpnfAGAB8KIrIopwHszDNDs14zmpIoVSYOlC0a3dgEQ102NRRWxGVCgOKElFqa8S0KWoHFGiwnBtt8mVA/TAQQxGVXpW/3ifddI9TPV7G6LrEFdIrpMRZeYFpKlrBNBHpWCwbE3BgtrzB5QWbSk+puXqsAIRMXQGbPLNmWMiAQ7UWGwKgywiFDZbHrEkLoLlGoFYDSk3QlY+EpeXamg+FKnQAyDoCBUrqMFXkVooCz6fIC4bW3RasgciRTiEtXwrpAuvrBmLuX7rMV0j/yVkwx5Dyqm/QECki6YQQq50wauoHaEZLhyXyMQAURbfqNQuH0BVh9m1nhnbzQQKg9r7yDhba2vgQwdXtgixDG7LaRC+So6qiKwBIncPBRUtpmFhmtyO4Cw2F+jquqFRo7AIAnYkmEjG8zjwOYTDuSCeQTv5SSN/Ps326vWyA9OnuCum1fApxgbzMGlEjNqXT1SbawVC5qzTKwLANmJWUKwlwlRiFB5wKgKrFWkbxiFc1w+LSXgxfhzYKZUCt9pQUDRhat0uvY1XRUAcEmnVZbiOWStm0dEGqrpqzAl4KgAFbpQ8F8QCr0KK00dJ3+aRfGOJ9PBps3Yf07uYX9fiLz/P0azpv9e3N/V5lmfNG3b/o4Vce9uZED3/sLJgDpFHhfBiGYaoIKogUIPQq3ogx16xCcygAaFk+4WzI3VC0MhFn5MiKoijiHZoytI8OaFZjHKQAtK/fgVJWZM0J6ApzaHRotywFm3LRIYvpsj1I3R4dqhi5KEaGAIBt4eQMjAgnymbVO1EFExFzVFR+C2n4eku63l9O6eNxb3kf0kfs6LJ++C12tN/op1+Po91/8h/x4emsO/NH+6Ts2KSWeNWSFq1qi9hntW7QjUj0RJzxIotdG2qo3nIlIlfA2aEbVC4D8NVFFWAwCtAckCRoBVAYH56AC6omhY9e8kAFgD6gQ4GMym8z8GfhyQ2bRHWMDV+gz4roQAeYEgRpwUrRMzbl9K2Bo7Xh8hDv7QlJ+5De4Jd1wZTWXd0spi6D9PGI0YtmJdz/wZCyKNRqSzI6siw4IwsCRQgdlOAVUGRURA7plZZKrcKUTaWVRBQxAHBDAcahu5pXumAt7gwFck3DIrVSoD1SYmBkRSulWVEbMLXetRS0PLI2LeozR1MXxTKYRBx4ZOSMIjPXgV7Ql31GL3D45onGBqaJalCTlFo1wPgF0vzlkC5eLg7x3h2d+EWW9KKnerzAju5Dum+97y7NeX74Y31SzrBIB80OXXPVYkIlskxLnH3xBkCTMEWefmCUYrMKagWaK7GqAqjpZVpoz5YgWJrxmSPJ0TTDeLIIgO4F8B4yrKt6cGhHyTDT3BQwQEcFUAA1IxqBMtAxCkZfCfbaYyt1IpkBkRh1JS0MQIVpiaVDvtMnfT/E+/jZwZdPQ/p0potM6f2xXbp5PNbTTtbyDqS71vDm8tlDfyqkQTUeOZ5YcV0zU6aEtDZbz1MhMa/AaYrTc+oVEE6cLDmcq7ENsgPKMfeugObRMhRDAXguPPECOzBQuSLLTFom4AOIrmjmxaVgkw43aOkkb0s2pEEkaQV1C1pRrYD27KoZGjBhRA7pDYkY0ECvYkf9Tkjfp/T2E5/O1Uf7FKQ3P7jy7cPN/ae+Onb6jnc4vf3lkN6fQ3+JF33zZ+buptyZ3ooVyiQQmxAitWVH4ZaBlZnbGnFLoyfNkEhxQ1frgCYfCd0aANRStuOro2NTKdrBBYAqlowpShwbfDUga1O1MTXnwKUrUFAUDijQnwPC7lDEGpkn0Itqh0MLgGEmWSpzhiESw0WsEzmQ6EiClr98FsxemOXu1z+dT3efgXT/O+H25glLn6zg8rADMW6/ANLHCwG7w4lu/0iftIPpWAI0Yh3EttEaiWgoivVhgChKRi5ILKGgUQnLNEZmq9FKXil7yEMyOrSaIlUFtHfuaFTwIk1cFWlAZUB9DKhANcWWPXrSZWyzanHb7qvoGapqFcxz8lCdAACHbj8ArI1so2FjM65a/BmdTmTQbwocXTQQcz5A+i2QLk5/zZTe7l0dR7q7HNK7i/nCie7/SEsKpxNNIBNVTAiEuGeiqoqiQFaorEyEZTorhRVgVSSkgd4BLUUFUJ3brwFYccewglyyJ6DLGMMHKnPNpcvk4D1LKSW4aqlAhsXAz1PhRjTkglRKBWSzrTo4EdWcDbaewLUAMaMje0bOK5EhV+9ECRh0IlbsrPR9AaSXDsQ8vh7/XZCuIcinX7Dvj3sM7vh/O5DuhWfvvsKS4vFP9EnBdCIGVk/RxsErrWWU0dVgBcgo2NQVpQUegAKmyRJqEMDn1L4SClCCQoerKmJUACYZSKumbuMw3Eo31J4dal1rRo9WaxnObSKXDhS0DMA6FrK1ZDUkikwBUCDn3FAMHcm1D4BEmi6PFBFClAGnU1V8p096Qa79URLDN0K6MAVuPhM3etozW0+XQ3pzdr3LS1o83f2BkBod5EJLAYARuQaOEKKeAYuSi8CgUMWSAo1DRdFuvXcuh41Q4ybb65EGACRJQIlRxfsEwEQxeyJTTaVx7LAQAaQJlJAAZHUKUzdEc4E64A6HrddQxMRMCVDp0DjgXdgA4xlHU8vre4aid6aEV0gDIi3Fb4X0klz721fMvhnSZa7uPgHpzfdD+ohLIb3DuW7+xJKetMQvuCbkZUprcFOmuNYD3TSiYqC4QgHnxn7g1QqPIHFWzWqaZTugi2IjrjjcUbwoQkEn9hK4thasdMFoNZc0eune+yiwXhWFB5ni4JYOw8qiwNKwFCKnYarA9svTqDqkFNXRl+V0iPPBkOZCSxOVlvhbu7sX5Nqvk9ah3wvp0u1nPvGPXwvpPmH3X1Ub6vbPgzS9oKm0ZCrLlCJBIEQGGHrCJi0D8IqMSmU6oNjUKSVKea0d3CYAgAXIeQ2ZdihQ/qesPNWJszS13tmLTBnWBvqADEXvFQAksRbgEAvuC08rC1ttNIgaFEhuFTA7GHJvFoYUMDE8+7MhFUTaJOh0kH7HLJj97/LbXxog/X5IL4gbfSukTxdDeof3dP/H5u5SxeFlQx3PXmkNy5T2CrWeiubXQrnCRALAARTPIt3NWkJv0Lq4LchWYMELyjRoHVoUXbKIDy4pJWpWuWvKaqhVB+AqKl2mcovSAWiHZ3VA+5ueNhNzC4CutxZKGRgTujEtqETeg6eDIUXQws8V93cWEb4U0ktDvK+M/gaQ7sSNvhHSm8vZun+3NhQe/9hZMI6SeWO0c15eaUXkqdsLzVjasEEBKpUowIEbg0kctaCitJ5LLYoeskJE3SrQAGj27fwSaNTOsdGISCJTmAeG6MjWAc2GrAipMN7K3atCVaG5EyfihCVTDE0N04Ey2TV3pglPVFZoF5gNxkQ80PHNs2AuDPHev/hOvwGkO2Gcb4T0ARdDeov3qyE/3f0xkMbjBb0bUkcxReeJAsMkVpNcEYm1pAWjDOnIyVEbswxTz5YyoIhNik0vClhHVnTGpq6agWZ9IzxDhZh5Ri4c26ycUl9jOz0Y2FFGKq5qEhMpAFscDgDQZSgVNXJkz7b2K1CzKhQlYYgCiSh372l7gaJqJCv9Xuyku8tfDek+pfc7V1qf8d8I0vO7338zpAusyyBdl3g6B/7mTw0cRQxOZp6Ic09ompkEs0/NRA0wLVJVta/1vJtMh2rWDTAUWBXpajZg2qGGUbD9kTSBkgsUPoDGxDOkkEIiTm4DbmjqarMCC8LFYyUaUPTtJxvyyFaANuA5kRslRQWaqyoEzVodJYMTYOtLJ+XNkEoxQSN2Kx4ZTkuMb0tm2B+I2R8g/Q0g3YkbfSekT7gY0gOaD+9c7fYPg9TooHrglTNmRDokMjClFTtSZIVCHEBlppQ7DhqAeqQQkZImDCSFdTLVoeBcDUiqSaFFYxsuFioS1+hUPdWctIrWqCO7osBMs6IjkBToIVqFgyoAMWViY4cOHwqoFXS4YKUOKphYnUkwiXNnHVTQ1nfRaxbkxPcHjpY+nmv/8Mro7wTpuXP98L2QPuICSE8N6Xlg4OlPgZSXT6pMBzmypzZU07a7K1OEVNuQUAWQAV25fGNk5OUNejZDdrYywSiEvLLqHXAoKlShClgBKk+ExNOYidIMNOFl496nK4DhUK0o6KXL4FSwSbMBGQAcAEpNKSqb1e2cYmrdSgdgMSeDrDyGAF9VjVCJDbmlZuiBDvIFaeSvhvTzAzG3r4x+L6SXx42+FdIHXA7p4RqP745XP/xhGUeNnrUhocZEDF8DiqYJSY2oAQCsA86hhrrQUS19BXyz97qZ0Jo3kGEb1NpN2QBJio2PWpknRWZnjmwtWjIATZDTAErdQM0oudgaMFnOaFMsdQUQiMgCNmBbV9VU1opOxtVXH7cWcWVidApbGw/1hZkOYv3GZIb9EO/tj2BeO38/SG92bn4BpHtfarcL0k8Z0rv3/wfc/RmQygocHS3LwDGsd6ZroUBWi9TQiAxAydBa2UnUMWTjCbrwNW88psJsDb5MYChybciKnnJBTxtalCLJpMnKTcgNvWqkCVFXbCqp6wDAEhNqcbfNNNuAYJQCdGpM5FB0IOuoVdHUGlTS3Ax/7sQNQlRWncDVOmZ6lWBBmr7Hku4PxOwkMXwnpJfHjb4P0nO797htuP+U4b95/5K4+bMCR6h0LlkxXaKGJnV1eA8AcaKBrBnaVTNGg6GgUUKeXGw2DChKAzKAkJANpkDluLE1A5PEQpGDCieU2tlKBhrQ4YB7jyMDiJWjd2DMGEeBPgd3kSgWp4yCglpQURUJQEUxoBE5JIeDRf3BchmMkb81cLQ/ELMzQPqbQYq3uvlOSB9xcqEfQrpvjO/+1DlrC9K8II0Vkc7EMCJBIyra0NSIJgCFBBoFgMqQgWrQigFgEjuQJVlQeIFWYGNZawa69cRMJJGJI1FtRIknDwCKEMbyLYHBzwuHN4M5RUbyimq22cEUmJlKoDBChB5K4RsGLBh0ABm+oZmrY7OoTIxGZ+Ks/K2Q7od478+PODD67ZBenm/0bZCe83T3GUhvsOnmx0Ur/qhkBu7KdKaKSVSUKcAmNzSiCgMmR3+udILakJd5w/RS4dLhLgBgwPA+KrT4AIxTC5EoEhE1DuzGbi0Pz9oUI1nrupzZblGLYRQMnkyuA7XGEUahYJFroMhciRzoNRc1hQCSax9aHJ2J1Sg1CJGvAVOmMw20b05m2M+1vzm7xGL0t4T08esh3XdI17/HJyC9O+mtnF8Wj38SpGug5VTcF6BEDS24IRIXKEafDnfpkv2QITg6gOpFrdYswysAsGLEXpoCyJqIeM7GbVbiSZt4jDgMOcYCZFXtAKBQ7dh4BZh5Mhyi2mqqbUYmmrFyTI1XDKkWhVVVf67oG4hyr5VXZ9eJBInO5N9Y4+hzId7HF/v6G0C6Hzf6PkhvTi3eZyC9OQfxASe6+4O6uxuQk04VNIfV4TWdkJ6XW1pbYCAXVFUABX0oAARnQ1ZkraKGXhQoVbMqYMyTJjHzcJlkyTOLUQvSsrIUiEIzci/o82Cbe0uOERIxOAMv0+CgVhPFGBqgUqAZyJ4RmxbkjT2BqLx0diuETsUF8o0V7D9O6e3ZR+j+7jeAdD9u9H2QPp6jdID0E4b0p12Z+z+r7i53yDuUQrgoE2tpIcJo1XGIXAYM1pNa67AMoPdUTJxz7RAywKEKRQXQC1OU1/AqJ/ZGKVKDodQhMMNKSMDGnGcUYAAwLkxqAAzr1zK3OUXOiqKoUbAhnMc4VC5MEGpy6OxGe6dlMaN9d93dg3aLHp2vb/gbQLofN/o2SO/OOqWfgfQGmx526h39MUMw8eCCZj7v8SIbClFC5VGXkbIYI4AMzaYDKgeCiD0Wda5dYgWGdaBgFMCZhEnCBmlk4slkzLmVPjonyeoF8KYpY0kB66ZQMFMs5c3U1NIVsmxqNsAyoK0AtbloRSFiLZJ4hY+KQRudiOtzQkP+8kWEf3mMfkG5jOx6+7tAuh83uhzS/d7GOnRBeokhfT92dPeHzYJJHX6GaerLOFW0bo5EVFGYtJZiPSvQzQ+QBmUuRZuNbg0oybI2AMshZCLiSOSTmWhIYPcZgco+RlYAvv0y1GKlADoAAI0StFqGdmwqy1sV0e2UDi0oAV0KOKNvXdyKlvvqnKswnagpKn/vLJhfHoi5e3oxrL8rpA/fAem+Q3r3KUjvjwzpTuzoT0gLjLTEAgjTiUJbISOdjYsGIoOxQlFC085lDPTcx4DFFuvk1rQmM5QJRQZKZGGSRfxmRENkzhxjDMXYoNCaZQLaEwogGT1hqGMA8JDBGgE4FAMd6AUwwABRJMWmIYqalYkGAreBQJS1RTpVWoXA/59Cup9r/7RP1eWQfn/c6HJIH868gc9A+vDOA+zkHf0565M64PxumJc1s6zgUddgKAW5AqUUdCBnBVlJU9pIPnKJKBkoXQsTt+2SjZhmEDOiXlroUO2RrSikAmoAFNYBwCNgozSF5pC0Kpkux3OlAmfkCh9whQJaoMhtrmRBQTUWyBrkPRG3jH62Pqnwd0O6U9f+bgGwTv9dIb0/D7lcDun+6MunIH06av5O7OgPg/SAaaRjBRSiCBNNWjZKS1F1QAEINmVM4WqcSmlzIi1TpzVQII6TmCrznJzcYinSZqs62ICswKoIaJoGTCuGlYSmAIZARDWkiQ5YUzPNKAJgQG0UVCBLttZ7BRKRQHJPK3xUTxEVXYh+5yLCn6D06CP520J6bP2/CdIzh/RTkD4cnb0TO/qzFhFeYu/IiemtGupmooQTjIg7oM/F5GEovQC6zRFVlBYh1SYAQKiGROyNCjPTjIEbEXMTmIHJgAwpI4p6bgW1oLAeVvIWuGkxxBwSV6i+LE7hqg0woKRyCO1CFbLGRVPUQsTa6UjRAIt0pPwNs2D2Kd1h9Jsg/f55apdD+njqkH4O0qOEwN3Y0R8SODpRKsCY9EYVbfvF5vBFKUzFLNUOAJo7mtbuHFnUq/VQgB5XxOj5NzPNScwhVIVpMxFFyV0dALS+DIWKwm1ZSzXNThwNtgjVCWgvpl0VkgFY7kWxMRpRpK1MwOMso1gVWo9a+v0+6f7nfcc6fT+kdxfEjb4e0oczK7cD6a4h3TfWePxzCpG1xqfm1OPr+4JIZGjdBJUoKEZRyzD4zNg0mVNJaQTJQatXaCQmahsjsvmkkSXE2crkBljMqhWKKn20UIABB3p3HALGmgHV0jkZsQCqPVXAa05QiBYdcPgsddjGaNCekLIyUXnraosB1o6gdabvTWbYP3Y3lfT7Ib37uB15PL3z5ZDuO6S7kO5n1v85saN9n3QgH0d258Da9CZ41HUGEggR95y8mlbFUoaEyDHlrKmmIh09MIfggSjSdOZGzFTh7NXDhIyZAHQpKmPA1GNGKWoaURTAWJcWKsSpETt0jdWgoKEjK9AhylAu+cBooFgQ6E2WETfDaduiAeF7khk+XQ12B5fvgfRpHXFB8fqvhPT+NKbzOUgfjxHfL0L4x0AaoYDPI3OaDLC0NgVdgV2u7otSNC5VKgD0YoBKZQNn797VSmeKlZkphEbCNLsQBWJLBZ5UqBUDYJaho7auUYDsAABV62jiXlCyqRMFzqEjq6K7oyiyHTrGntGDHhh1ZT+Ej55xPOvmRskACtH3LSK8r/sdRi+HdL8rd/e4ML4gbnQJpPsO6ecgvXs6Pn0/JvDwx/ikptMVsDrDW077c7R3Ygvs5qnzmVIbgKHryKUASAVorcaiGeic2vM11p9IoU4mkwHPkKRDodqCwIdaNqhjVSVLQM4jqx181JKYaHLEyAqDmgAAbFYMWFcAbdnRLtuztbU4UxCF+htCObatjc2RvtMn3ddOjcmvghT3P9TT06/VuN+B/3JIb88c0s9BerNL3sNvGjvahzSgMMUVvMk2XERSSjE2O0R7G8Yh6T7WA6WlGaAoy6hZoYriXVPH4JAb0SyReDARsUYi4spDs+ceYalVKapFc2WHRUHuOjKKeu+2+rVZRwKASUSBGjoGoBhNp0JLAQpXQNPGqDAL5PB9QtOAIjOm/0mk+igKQEdjanD6Lkg/Q+k+K9+2HP/tBXGjiyHdd0j3Id1PCNzvxzz+/ksfRtqUkHlZmzosK47lTAJflKpvL7mg2pgY2DQ7zyqcKiwLEae0ArrEFMJmT2eUmJmpqMSSAXQuKOherWxwpuKAQoFtN6wqoLkzua8S+zo1DzZYa0BXxRiABqKk3dHk0O1lFsWxNJvL6rtXFP7mZIZ93X4Mld8C0v0iZJdDenPmKO5Dum9I/7DY0X4yQ1L4es3JMw7Kz7w6HwK7eRYWDF7UeNXuOgQKDWjaZlemOJgoJeJKoXKMLJx5NBmtFUUaAKZ5R4bEaVV1wPOBTRPtGBurQ1CglSiQz4qho7hCe+/IBWriQdE3M19YpB4YDaKLy/8JS2ot8nPSkTEtfXvgaN82rW/y3wvS/bjRxZDuO6T7kO4b0j8odrRvSZfY30IJ9RZ47YjJO+BjQZCZ65o0I4BadetWUHuZuRZHH4lFmA6Tu3nzcYUjY6ZWPSERoCi1GWLZurwwR4Y3AVBK1oqhao4hsB6ZKUwSANn6kK6VBZCguaFsxAmsNlq+clZXqKfAL46oYUlzVrxNOsrfvKra/hmL0e+C9Onm8Ue6uV+QXhA3+kJI73a+OxakX2FIl3Cihz8omYFTdffaKmCR6UjRARyGX2Yvq3c811BIBVBFuEpBYXJLzVcXN5FXYo9xMq2UIh0xASjAKHC4aiyqCow1xrJJWwZPAGqR2AOZw7UXZYwNaajIQFZUIqqoDe3AKACbTEdi6bAm7u4tfmsywwXFA74B0of96O4FxesvgHTXIf0kpLdHlvFPjB3tQ3pQRY90LrZnSrUlml0nEXd03RirrScFOlMBM3NjSkweial4SqkJcRLA8pAMeCnFYkV1GzUmUwkKQDrKWKTmDGCERLUIFcByLphdE4oBkVEVmpZvHLiVFeIF+qRz8et82d8G0oXczgfq28ZJFxu3F8WNLod03yHdh3Q/IXA/dnTz5yTYLzmc6V01AL6RKSnPvhFbgZwOq66VbNy41VgtjrDoaEQxBQ7sITqPwaUUQFMASoWPLFW6ZADPqQqqL6s8Va5EkykoMrQpRIZApZZcAXQmClklG+cV4sUPnz12DbT0O3R3FyQ73+Hfn3F0e3nc6HJIH3bN2oL0goTA3djR7Z8FaYXQj8QdGExcIFLZscWHFMBKMYDTHLOEINwSEc3Y0iQiYZol5NwEPCugwzUnAZBSUWTnqoqeXaECxbP6RhcR56pQCRnAEFgYo/Gau920h1BmXiFe/PTZdfH7/bNgPk7pDqPfnrt7edzockjvnnZ5WZBeYEh3I2z3v3vu7pEEQvRTSgsTVQxuvvqQXAAousGZcm+jTaKksUWNLFGE5+SoG37GXkuHQnuJonAAiM10QB2wqhlVc1mMpkBMZXC2OgYUCmDAUKSb6tzsuIlRO4R48fNnP6rV//25u5frcki/vwjZ5ZCeOaQ7kF5gSHeKNPwpPimj0M8UFIfAbp7dYodsYG+qxLEKMZMQMRPHyDWmOohijWEAfQy1UIvD1uwyQ4MNeB9YUqgCHUAfnChUJi4Z0KzWgOkDmqGAbV1dyESr2xvZYZQoor7vk14hvSBudCGk5+XqPw3pUULgHx87WpDG9yypgemnSiiaA9FUFeY6YLwMLEpNQEs8KocUTGjSptGMuY7WFKECA0CuWhEHZkGrgAm8FQzAkmpJGYCujIMWuJSsgG0YR9RaNEPTWpO8JYqGSsQOw6CfqyK+A2m4WtILJpNeAOmOQ7oD6U5m/R8bO9r3SQVCOxoaO9oGpjRUQd6A6cAoHKNWFiZqzExxJt5OETfzgakAAOnagVa8Du1NhomMkgdkYxO1Zh26WWQazAXAMNRRkvRo3gBUJmLDSGoxH0K84p1pabfDe5LMcIX0grjRZZDePe2PWO5Duq70k7v+MUUa9iE9Wq2UeHhjOhOr8XNgN89JbZUZZAeqa6nUGrdGNIWaNyZJPMKIRTTMWpAyiigA1WKmQB+Q3lEbkhV4BTqGC1GMRIFziciH2p3FgKEokYiaag3c6nOIt0UInYmbW6MXCcY5pOUK6Y7ud257AaRn66d9GtLHI8r/yNjRfrXA5XD6cZAIdjx7rbVIgsgVhTdQUkStq7ht6ICQ8cyADmanFGchmo1n9QKhaRmaS9ZQRzQtOcVamvXspQAAHJqRC9CIaHIgzv1NgRQocLiXwaYa2wrxogeyTrGJTD6uagTMNxuAegYpX7u7FxQhuwDSHYd0B9KdhMA/M3a0HzhKiiO7ygW5Q97OlQaQDyWPctw4dhGaBZlXmd4sDSpNVbNHnsRMTWa1gUKiGd0AwFSTYTST2jElyaAGMwBFDNBI1DixcgZsoAFAijIOhXS5QhvHKqppe2dMjLKeTyvTUsjo0HjscmPwNXB0Sdzo5gshvTt1SHcgvSAhcMfVXrf/jXN3OR4Y7FmJjimddVG6wjS8ppgqE4WFryCnCG8dvjBdE6pbGVYpCFEjynEMaEhVTRTokgsD6j7MA292t+RegIw+ACs8iUIIbLkISpKavHouousmTVFFK9tziLcSkS+AOToyL0a1x6zhJHQ0lg9NzM+QpqslvaB4/QWQ7jikZ5BeaEj3E+1vfmOfNEHNMlQC7CzSQnX1FwNgZjUSybK3PFD4YEyNpgPybE0TMVohIibj0XLSgu5Ji2dRHRkYkDnUE7qiAGUUGwNLlUNlIicuHcB2yCgAFqLRYI1aa6ptI3bZylW+vrlZXq3g3Dmh0ZEmRupQs4J+DRx9UI/fBenNaXfz85DeHD3c3xA7WpDasyWNQMlDmDOcjiWYVJSJyLGUmQz1sFPT+iNccnLkRAdMvTuYSGIqHIo3LJOJsS7TgRwU4DSKqzoK0LGUiCq/5AqPokmh2aByQLQnw4zLjPL6QxSAwKKHaTzr6RLlTsdiQCiNkjv8Cuklxesvh/TcIf08pHe/bgrv7m4fcaL739gnrahMnLJCzkO56xDitDHigET0l9CSL1Jycw6pP2NqgAKWEpdh2geS29i28bar1YYMnzpgcMDqQNWOw0SySiLEBdXREzgDr4hqTVRnRZ/LjDba1OCcD3N3wnOVsYh0BumyxzErX33SC/KNLof03CG9ANJ7bLr7AJkPj483q3rMO3r8fSHlCijQA4RO5Eqs9TgxsBmYlgS5LePpXCEbphsny2JqiKmhZeHkAMaqZ11QXLQAAErFChcZAKgFokmBXahATar2YoBNOiAqU5VFIS9mdKkiZX2LZEAjAZ9BKhVQhYZr4OiiuNHlkO47pPuQ7icELjAfHm8WmTt6uvttFxEmitVrJMpOJ2pgKnaSqF4RXt+t/F0BXCZX6cjOm+UtAFrWqMOoAbEKXDVpB4R1Fp1jVBeoGoCgAAbHQHG77jK8eShUtrtNg9aaWFpebMoyo0umjnjsfUYaSieKmMTNvfHbWTBXSD+Rb3QZpPsO6Tmk+5n1eyZzXze/fzKDFTpRApPZWZdx0otEUfl5GZkOngb4Aq12QAe6zaw+1DBkQKUHg3r1YXUt++QjwQD0YNw2wJNWFADQGl/WcREemuJhWbS4UH1WBuTkwSNZP29OuCYzXBY3+iJIH3By8D6ku6uo3Z6YzH2dH3j7Gy8ivCTgHUu6jjry9XhFjBamicya49DrpVALoGVgeCgAFIB5ziVRS5ZH3TjEUmciqrEwCaBlI5Rf1nFJrszJDqtX2Mnk7nX2G01M8jNIR6czSNt1COYTcaMLIb17OulmXgLp00eRfHq6v7+5eXx8eHi4vb27e3dxmN9+FgxD3vFJUelIAWjHQPS3mHpikQ6MxSmnoQCgo0BHz+h2ILM2jTNYLg6r3juTEYfg4gBgEt+s4yKTR5O8AkssZ6sDA37mfVIFn2706yyYy+NGl0N67pBeAOnDx5D8Qwp87s+CMWU6Uh6UEOlY+Yzl1GHxGdO49Xr9lVMKbXRsqqVXgFlQqwqs5A3ZbKg8grehCqjVyK/15q3xQGXRwz1WUsOxcPaQlimi0ZEcfA4pXyH9RBGyyyB9xMlVL4D02SjvIPkbF/jc90nT6ZDLWyUkzp1O5GhHOewlZwWeMe3IKZFlmatefKBNPGUULOVspupVdZYyquKleopaTS8n1O38aWCehldEAUW2Oo8g5TP3s5HmszUcr7NgLs43uhzSO5wceQmk+5n1f06Bz31Izz/HnDsbIp1IkN4m9GpxX/xZfFmcIqXJ2Td7mj0FWuIwpZplnErzcEmBaYljNUAtNWtcpyhU+AXR4lXcFNn5FVI6lWk4bk1CJ7rOgrl0ntrlkN7fn9iuSyC9ezo3xn9Y3tH+LJh2CuBgOihkjQWay0gnx8wXRFXimwWekNO23YHssxaeLs0U0CGR6VXMIT4r8NGekLwAsNrcadTYDLD0gmhv/KbKqNDSibmPNWeFtgGhg1aRlSNhgzReA0c7huYIvMshPa96ewmkNzug/wFFGvYDR5WOJSsyu5AYCnQzhfHRIWE7oJ7Eb0IHkBs/I5s9TjPy2pZPqlZbDEzvaeFZR17HJTFupb5duTAaAG1HZ7xk0xuO24BsBqAocqLD2eUsjHQNHP3iPLWbb4D0cM19SC9PCPxNY0f7QzCDThQ7YO4Fz8qJ2tEnfGDNkTmL3/CAdcDji2nVkVhK4zLCrGNdU4sNF2lp6bCeUl73Gi4sJXH2EGsBsqyLSYY6eqBjrcKidBzIFViIpniWWVGonDUU18DRvnaM3kWQrsMugHTHkP4hsaN9n1TpTHMoNuViZgXIfFT3oBQiiqqJTsVFOTqQ65vhl+IziHFCoegtiVvJOFbO5rU1EaoYVOuMYvqyPjdH2147Ap2KHZXpKATNGCQb7/7i/pownarhGjj6xQ/w3ddDencBpKeG9A+NHe2nBYLpHYX42i/lhszW30BQjzy8s/AwpwKUtvZHMQA6JLVEokamjbz+3/bORUtRHAjD6qLin8r9Ann/F91tgtwybnoGe8ax85/TcwyECA4flaqEVCs5l9r4VvPAuJFk0WrhmAwxGAfA+kiLgVLJmAZnLBeHI0Yr57NdetYkJaXCRn2C1FZICxdW4G4XpJfDHkj3G9IkbHR6MZ8UnBUVwT2WM+4SGT9GZp4S6Pho+eTdJ+15lDpI1ivZWkEaHfO2Z30fKeg2hsknHQElbQSEkjQHh3JpYYlZtRwNhWNlieqT/qS/dn06pMfDLkhPWStvETvKIVWsLOsMlnPreOaO5iOtrU/DL3N6s16Jey+6N54Pbin/T8b0bhwmtSmL6Ij26NROY7YPFwO2xOeusIeGZEVpVEjLKjS4E9JbswPSbGb9W8WOEqRKJ0ghWVGmmy0VIWURfiC1aI+CAuCMngAiGYPvlbNi65IariUxNhMtpsm7SRaP48KdbcFnu+9ArCg1QsrrEMxjXQrY7YS0OeyANHtF7V1iR3ng6FOmVAF6AhZmyShtlugLy/binMXXx3aLVtJ2axuMQ9LSXmsINksGwyMtKbWCpgIgWUkSqIGjnwupHJ8N6eWwA9LMkL5P7CgPHKnyHU2AX3yGWedDxHK8NC4I4VBaStPBprm7rv+fgVJqdTCjT9ojHQk7VbYL+GVi3/IFpcBUagU4K0nBJUh9W4T0dDyfz5fmG0JaaG8fpMfDPkgvedf0PeYd5T5pEJkpjWZdli6wu8yS0VYI3kYjMNPUYqJJw2hvApGDZCSDV9PQjrkb4QHoqKzFwiclC03SmxCFmtk3M/uAC6S75dNCAO1UMH47qJR7pN590ic93ZB0/T6Qlnu7+yG9NTsgzZK/vFHsKJ8WCM8xIVh2/wJgVnN7mU+rf7kJ0u5Oi0JCj1NnJ3MpAzcO3WSErR66ssYH3dJEYWjvy2HLsa2ZyAjhVAdLbHnm7XwKuczWtJLtJDJIS/97x28DaXm60X5Im8MOSDND+k6xo3wyQ8fcpsMb8TCQSgJm/eqXT46j1pOvp+9VgE4Saw1CgFwzM1hLLxnpDiF7Rc52HxClN9/CiD63PUtKa6LFTlA6bqbUs0xZXzlJIWqIzCct9YOO7wtpU7p2NM+F9HLYB2lTMKS7O7zN60BqILeJjDiEesCohVm/RkIw236kNKDRe03N9qAVPwQzR4HJoWXrRC7tnH2pH3cYQa770UqGmrGyKyrRIcvCqlz2Fkz5AXt6U0hPt2M5bPRESPPmypDuyKL22slhynN343Cvryg1gkM+YNSXVj8woBFJQn+vF1YoR8gFliTUgPssOdcfqxFM/k0etIG/e0Cp7QxoxWjPJHSWRLgcmz++JaTNGbgUbMuteSqkt2YXpJ9fs35HcpjL6yyfwiGZXlEaMNjWTK1dQ0DQ27XLEm4jEry9bzMwa7qWyHlBzIiVJe0RWVKgNH+CmETIVxWDYWVKObgR24mEtqN8+ZTy4/UNIW2uCYH8pi00tgfS5rAD0jz5y3vFjvJ0/NRZYho2LiwZl9m0vymjwyyCzyDV0PkCD0KtADNgy5X8Ami9BBrBQa8b5XmjTEPSFkqPnnJG1dJSk4EixqE/lUT4iLWad4P0dE7XVWD0engqpNfDDkj3GtLXTyycL+nZCkusXRohJSgkamelxA5rKbcygfMEW464sowAbSDtc0hnKay7sfdGwwa+VkPmE3k1W4o8HPG5nrQpK5yfl0/5vpCermOTx9y8osDoHkiPh52Q5ob0rQZLc0hZFPBEClZPIRhHsYPS83ImCiIsph3oKIkxncVtPVIbThDLhlYfdHd7wZhfsS6B5fF9qkudaLMYcJoEEeK0h3pYTcsUpYY4/IysCEwqGHaH1BYg/Su7u2Wymsv1jPzZ0zTDutLbyz41n9DmoGuTlF/CrdkDaW5I3y52lC/pKb0DoLgRcCOmGlaSEYDynHOjxGKGnpymJPTaIqy8Vw+eZ75vATj7n5zykabAkV/FetU4Y9daQDgsseZTo6v+NkdwCN4iyU4nqDvA9ZxzbyygJHm4GdnOGwEIoylf0rPsp5z/JkhxfqTbo5dRjni+ztklNIe9kJ53GNKXTyycQ8oVYJVy070ux5VQlJbaOGwy86acSW0rI0+wOthpnwOfyJwolSLNMTL98CVKMxJmnl9AVtAQgpIDPK43Jp3M+JWUKs4ZomaTOPDpfIhtK4MC/ISpwiChuI5epB103wphlRKwvABpEla6/EWQlpVHSM54vm7bS7ge9kJ62WFIXz+xcJ5EGFBRfij4O5HKaxkNJok+ylF8qD6VLAb1Wn5AC/RyUgBMlFIroDP3QyK3gNU9JCMHpWXkQrSM9WJ8LW1q2QHWSxm9WDaqLdCHKLUX6cxMXO6zc8FhkuBSh+lx0/M4XknhLZjCW8/vBOnl8DshPR52Q3rLH5lvM+8o90lb/Bn1jDHeARiiURF/QJ99C+b4mefq5bdAei49MK47KPpdkN6a3ZCesoa/LHZ0fAFLyqL+I0pxHqnvqSj+jGidVa1kS8/N4aFOl8vly2OBzWWhH57M5foLan4rpM0vXniTXWbzpb9x0ukFfNJvrpJPmtQcbwDOp8Pb6+shPV0OVT8FKZffXhOk9eb5Mkjrz7rHJ60CTN9WSB9Aejv/oiqkz4KUeyl1lOmfqD8+6DiWhg9p00dJL0tzhbTvYUkuSnG1b64+/G1KOjskK5W+YS7pufpm0/hByAppBunOONipQvocSJUyjKDGyQIWkhFgmMYwiKkZWRDTgGQGSBUkuo995qOkGQGMBYAxNbQIySIwVsBQHYz1qTQu8cuhGLP36hzd8Mf4R8kCqaTuh+jUnJoaSKW5gRZg6YzzCuP3danERDo9Yj5tMqm6t7ZCmkG6+4XKCulTIO111agKaYX0JSGtzuisCmmF9CUhrXHdhahCWiF9OUjr+OhaFdIK6YsJilet5SukFdKXUnVCc1VIK6QvpbYq0z9NvS8qpFVVFdKqqqoKaVVVhbRCWlVVIa2qqqqQVlVVSCukVVVfoStmnZ+UOPtaf9af17/4slD4uGWPuwAAAABJRU5ErkJggg=="
+
+;
+var $node = $node || {} ; $node[ "/rise/bench/host/controls/support/foot_logo_light.png" ] = "data:image/png;base64,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"
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_define($rise_bench_host_controls_support, {
+        flex: { direction: 'column', grow: 1 },
+        align: { items: 'center' },
+        Logo: { width: '11rem', maxWidth: '100%' },
+    });
+})($ || ($ = {}));
+
+;
+	($.$mol_icon_check) = class $mol_icon_check extends ($.$mol_icon) {
+		path(){
+			return "M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z";
+		}
+	};
+
+
+;
+"use strict";
+
+
+;
+	($.$mol_icon_check_all) = class $mol_icon_check_all extends ($.$mol_icon) {
+		path(){
+			return "M0.41,13.41L6,19L7.41,17.58L1.83,12M22.24,5.58L11.66,16.17L7.5,12L6.07,13.41L11.66,19L23.66,7M18,7L16.59,5.58L10.24,11.93L11.66,13.34L18,7Z";
+		}
+	};
+
+
+;
+"use strict";
+
+
+;
+	($.$rise_check_all) = class $rise_check_all extends ($.$mol_check_box) {
+		checks(){
+			return [];
+		}
+		Icon(){
+			const obj = new this.$.$mol_icon_check_all();
+			return obj;
+		}
+	};
+	($mol_mem(($.$rise_check_all.prototype), "Icon"));
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        /** Owned port of shm/check/all. No runtime dependency on shm. */
+        class $rise_check_all extends $.$rise_check_all {
+            checked(next) {
+                const checks = this.checks();
+                if (next !== undefined) {
+                    for (const check of checks)
+                        check.checked(next);
+                    return next;
+                }
+                return checks.length > 0 && checks.every(check => check.checked());
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $rise_check_all.prototype, "checked", null);
+        $$.$rise_check_all = $rise_check_all;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+	($.$rise_check_list) = class $rise_check_list extends ($.$mol_view) {
+		all_checked(next){
+			if(next !== undefined) return next;
+			return false;
+		}
+		All(){
+			const obj = new this.$.$rise_check_all();
+			(obj.title) = () => ("Все");
+			(obj.checks) = () => ((this.checks()));
+			(obj.enabled) = () => ((this.enabled()));
+			(obj.checked) = (next) => ((this.all_checked(next)));
+			return obj;
+		}
+		checks(){
+			return [];
+		}
+		Checks(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ((this.checks()));
+			return obj;
+		}
+		check_title(id){
+			return "";
+		}
+		checked(id, next){
+			if(next !== undefined) return next;
+			return false;
+		}
+		options(){
+			return [];
+		}
+		titles(){
+			return {};
+		}
+		value(next){
+			if(next !== undefined) return next;
+			return [];
+		}
+		enabled(){
+			return true;
+		}
+		sub(){
+			return [(this.All()), (this.Checks())];
+		}
+		Check(id){
+			const obj = new this.$.$mol_check_box();
+			(obj.title) = () => ((this.check_title(id)));
+			(obj.enabled) = () => ((this.enabled()));
+			(obj.checked) = (next) => ((this.checked(id, next)));
+			return obj;
+		}
+	};
+	($mol_mem(($.$rise_check_list.prototype), "all_checked"));
+	($mol_mem(($.$rise_check_list.prototype), "All"));
+	($mol_mem(($.$rise_check_list.prototype), "Checks"));
+	($mol_mem_key(($.$rise_check_list.prototype), "checked"));
+	($mol_mem(($.$rise_check_list.prototype), "value"));
+	($mol_mem_key(($.$rise_check_list.prototype), "Check"));
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        /** Owned port of shm/check/list, with labels and a shared disabled state. */
+        class $rise_check_list extends $.$rise_check_list {
+            checks() { return this.options().map(id => this.Check(id)); }
+            check_title(id) { return this.titles()[id] ?? id; }
+            all_checked(next) {
+                const options = this.options();
+                if (next !== undefined) {
+                    this.value(next ? [...options] : []);
+                    return next;
+                }
+                return options.length > 0 && options.every(id => this.checked(id));
+            }
+            checked(id, next) {
+                const value = this.value();
+                if (next === undefined)
+                    return value.includes(id);
+                this.value(next ? value.includes(id) ? value : [...value, id] : value.filter(key => key !== id));
+                return next;
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $rise_check_list.prototype, "all_checked", null);
+        $$.$rise_check_list = $rise_check_list;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_define($rise_check_list, {
+        flex: { direction: 'column' },
+        Checks: { flex: { wrap: 'wrap' } },
+        All: { box: { shadow: [{ inset: false, x: 0, y: '1px', blur: 0, spread: 0, color: $mol_theme.line }] } },
+    });
+})($ || ($ = {}));
+
+;
+	($.$mol_icon_help) = class $mol_icon_help extends ($.$mol_icon) {
+		path(){
+			return "M10,19H13V22H10V19M12,2C17.35,2.22 19.68,7.62 16.5,11.67C15.67,12.67 14.33,13.33 13.67,14.17C13,15 13,16 13,17H10C10,15.33 10,13.92 10.67,12.92C11.33,11.92 12.67,11.33 13.5,10.67C15.92,8.43 15.32,5.26 12,5A3,3 0 0,0 9,8H6A6,6 0 0,1 12,2Z";
+		}
+	};
+
+
+;
+"use strict";
+
+
+;
+	($.$mol_icon_help_circle) = class $mol_icon_help_circle extends ($.$mol_icon) {
+		path(){
+			return "M15.07,11.25L14.17,12.17C13.45,12.89 13,13.5 13,15H11V14.5C11,13.39 11.45,12.39 12.17,11.67L13.41,10.41C13.78,10.05 14,9.55 14,9C14,7.89 13.1,7 12,7A2,2 0 0,0 10,9H8A4,4 0 0,1 12,5A4,4 0 0,1 16,9C16,9.88 15.64,10.67 15.07,11.25M13,19H11V17H13M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12C22,6.47 17.5,2 12,2Z";
+		}
+	};
+
+
+;
+"use strict";
+
+
+;
+	($.$mol_icon_help_circle_outline) = class $mol_icon_help_circle_outline extends ($.$mol_icon) {
+		path(){
+			return "M11,18H13V16H11V18M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,6A4,4 0 0,0 8,10H10A2,2 0 0,1 12,8A2,2 0 0,1 14,10C14,12 11,11.75 11,15H13C13,12.75 16,12.5 16,10A4,4 0 0,0 12,6Z";
+		}
+	};
+
+
+;
+"use strict";
+
+
+;
+	($.$rise_bench_host_controls_computerhelp) = class $rise_bench_host_controls_computerhelp extends ($.$mol_pick) {
+		Icon(){
+			const obj = new this.$.$mol_icon_help_circle_outline();
+			return obj;
+		}
+		Text(){
+			const obj = new this.$.$mol_text();
+			(obj.text) = () => ("В Windows нажмите **Win + I**, откройте **Система → О системе** (в некоторых версиях — «О программе»). В разделе **Характеристики устройства** нажмите **Копировать** и вставьте текст в это поле. Коды устройства и продукта удалятся автоматически. Имя компьютера, процессор, память и тип системы сохранятся. Версию Windows можно дописать ниже. [Инструкция Microsoft](https://support.microsoft.com/ru-ru/windows/experience/find-information-about-your-windows-device).");
+			return obj;
+		}
+		hint(){
+			return "Где найти параметры компьютера";
+		}
+		trigger_content(){
+			return [(this.Icon())];
+		}
+		bubble_content(){
+			return [(this.Text())];
+		}
+	};
+	($mol_mem(($.$rise_bench_host_controls_computerhelp.prototype), "Icon"));
+	($mol_mem(($.$rise_bench_host_controls_computerhelp.prototype), "Text"));
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_define($rise_bench_host_controls_computerhelp, {
+        Text: { width: $mol_style_unit.rem(28), maxWidth: $mol_style_unit.vw(85) },
+    });
+})($ || ($ = {}));
+
+;
+	($.$rise_bench_textarea_input) = class $rise_bench_textarea_input extends ($.$mol_textarea_edit) {};
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        /** Native selection is applied as a command, never replayed by unrelated renders. */
+        class $rise_bench_textarea_input extends $.$rise_bench_textarea_input {
+            applied;
+            field() {
+                return { ...super.field(), selectionStart: undefined, selectionEnd: undefined };
+            }
+            render() {
+                const from = this.selection_start(), to = this.selection_end(), value = this.value();
+                super.render();
+                if (from === undefined || to === undefined)
+                    return;
+                if (this.applied?.from === from && this.applied.to === to && this.applied.value === value)
+                    return;
+                const node = this.dom_node();
+                if (node.selectionStart !== from || node.selectionEnd !== to)
+                    node.setSelectionRange(from, to);
+                this.applied = { from, to, value };
+            }
+            /** CRDT writes may suspend; a Promise is not an invalid-input error. */
+            value_changed(next) {
+                const node = this.dom_node();
+                node.setCustomValidity('');
+                return $mol_error_fence(() => this.value(next), error => {
+                    node.setCustomValidity(this.$.$mol_error_message(error));
+                    node.reportValidity();
+                    return next ?? $mol_mem_cached(() => this.value_changed()) ?? '';
+                });
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $rise_bench_textarea_input.prototype, "render", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bench_textarea_input.prototype, "value_changed", null);
+        $$.$rise_bench_textarea_input = $rise_bench_textarea_input;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+	($.$rise_bench_textarea_view) = class $rise_bench_textarea_view extends ($.$mol_text_code) {};
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $rise_bench_textarea_view extends $.$rise_bench_textarea_view {
+            text_lines() { return (this.text() ?? '').split(/\r\n?|\n/); }
+        }
+        __decorate([
+            $mol_mem
+        ], $rise_bench_textarea_view.prototype, "text_lines", null);
+        $$.$rise_bench_textarea_view = $rise_bench_textarea_view;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+	($.$rise_bench_textarea) = class $rise_bench_textarea extends ($.$mol_textarea) {
+		bring(){
+			return (this.Edit().bring());
+		}
+		Edit(){
+			const obj = new this.$.$rise_bench_textarea_input();
+			(obj.value) = (next) => ((this.value(next)));
+			(obj.hint) = () => ((this.hint()));
+			(obj.enabled) = () => ((this.enabled()));
+			(obj.spellcheck) = () => ((this.spellcheck()));
+			(obj.length_max) = () => ((this.length_max()));
+			(obj.selection) = (next) => ((this.selection(next)));
+			(obj.submit) = (next) => ((this.submit(next)));
+			(obj.submit_with_ctrl) = () => ((this.submit_with_ctrl()));
+			return obj;
+		}
+		View(){
+			const obj = new this.$.$rise_bench_textarea_view();
+			(obj.text) = () => ((this.value()));
+			(obj.render_visible_only) = () => (false);
+			(obj.row_numb) = (id) => ((this.row_numb(id)));
+			(obj.sidebar_showed) = () => ((this.sidebar_showed()));
+			(obj.highlight) = () => ((this.highlight()));
+			(obj.syntax) = () => ((this.syntax()));
+			return obj;
+		}
+	};
+	($mol_mem(($.$rise_bench_textarea.prototype), "Edit"));
+	($mol_mem(($.$rise_bench_textarea.prototype), "View"));
+
+
+;
+"use strict";
+
+
+;
+	($.$mol_button_major) = class $mol_button_major extends ($.$mol_button_minor) {
+		theme(){
+			return "$mol_theme_base";
+		}
+	};
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/button/major/major.view.css", "[mol_button_major] {\n\tbackground-color: var(--mol_theme_back);\n\tcolor: var(--mol_theme_text);\n}\n");
+})($ || ($ = {}));
+
+;
+"use strict";
+
+
+;
+	($.$rise_bench_host_controls) = class $rise_bench_host_controls extends ($.$mol_page) {
+		Support(){
+			const obj = new this.$.$rise_bench_host_controls_support();
+			return obj;
+		}
+		intro(){
+			return "";
+		}
+		Intro(){
+			const obj = new this.$.$mol_text();
+			(obj.text) = () => ((this.intro()));
+			return obj;
+		}
+		engines(next){
+			if(next !== undefined) return next;
+			return [];
+		}
+		engine_keys(){
+			return [];
+		}
+		engine_titles(){
+			return {};
+		}
+		Engine(){
+			const obj = new this.$.$rise_check_list();
+			(obj.enabled) = () => ((this.enabled()));
+			(obj.value) = (next) => ((this.engines(next)));
+			(obj.options) = () => ((this.engine_keys()));
+			(obj.titles) = () => ((this.engine_titles()));
+			return obj;
+		}
+		Engine_label(){
+			const obj = new this.$.$mol_labeler();
+			(obj.title) = () => ("Хранилище");
+			(obj.Content) = () => ((this.Engine()));
+			return obj;
+		}
+		storage_label(){
+			return "";
+		}
+		Storage_label(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.storage_label())]);
+			return obj;
+		}
+		schemas(next){
+			if(next !== undefined) return next;
+			return [];
+		}
+		Schema(){
+			const obj = new this.$.$rise_check_list();
+			(obj.enabled) = () => ((this.enabled()));
+			(obj.value) = (next) => ((this.schemas(next)));
+			(obj.options) = () => (["compact", "full"]);
+			(obj.titles) = () => ({"compact": "4 свойства", "full": "10 свойств"});
+			return obj;
+		}
+		Schema_label(){
+			const obj = new this.$.$mol_labeler();
+			(obj.title) = () => ("Состав записи");
+			(obj.Content) = () => ((this.Schema()));
+			return obj;
+		}
+		count_title(){
+			return "Количество записей";
+		}
+		sizes(next){
+			if(next !== undefined) return next;
+			return [];
+		}
+		count_keys(){
+			return [];
+		}
+		counts(){
+			return {};
+		}
+		Count(){
+			const obj = new this.$.$rise_check_list();
+			(obj.enabled) = () => ((this.enabled()));
+			(obj.value) = (next) => ((this.sizes(next)));
+			(obj.options) = () => ((this.count_keys()));
+			(obj.titles) = () => ((this.counts()));
+			return obj;
+		}
+		Count_label(){
+			const obj = new this.$.$mol_labeler();
+			(obj.title) = () => ((this.count_title()));
+			(obj.Content) = () => ((this.Count()));
+			return obj;
+		}
+		Computer_help(){
+			const obj = new this.$.$rise_bench_host_controls_computerhelp();
+			return obj;
+		}
+		computer(next){
+			if(next !== undefined) return next;
+			return "";
+		}
+		Computer(){
+			const obj = new this.$.$rise_bench_textarea();
+			(obj.length_max) = () => (8000);
+			(obj.hint) = () => ("Процессор, память, ОС");
+			(obj.value) = (next) => ((this.computer(next)));
+			(obj.enabled) = () => ((this.enabled()));
+			return obj;
+		}
+		Computer_label(){
+			const obj = new this.$.$mol_labeler();
+			(obj.title) = () => ("Параметры компьютера");
+			(obj.label) = () => (["Параметры компьютера", (this.Computer_help())]);
+			(obj.Content) = () => ((this.Computer()));
+			return obj;
+		}
+		run(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Run(){
+			const obj = new this.$.$mol_button_major();
+			(obj.title) = () => ("Запустить бенчмарк");
+			(obj.enabled) = () => ((this.run_enabled()));
+			(obj.click) = (next) => ((this.run(next)));
+			return obj;
+		}
+		stop(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Stop(){
+			const obj = new this.$.$mol_button_minor();
+			(obj.title) = () => ("Остановить");
+			(obj.click) = (next) => ((this.stop(next)));
+			return obj;
+		}
+		status(){
+			return "";
+		}
+		Status(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.status())]);
+			return obj;
+		}
+		elapsed(){
+			return "";
+		}
+		Elapsed(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.elapsed())]);
+			return obj;
+		}
+		retry(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Retry(){
+			const obj = new this.$.$mol_button_minor();
+			(obj.title) = () => ("Повторить сохранение");
+			(obj.click) = (next) => ((this.retry(next)));
+			return obj;
+		}
+		controls(){
+			return [
+				(this.Intro()), 
+				(this.Engine_label()), 
+				(this.Storage_label()), 
+				(this.Schema_label()), 
+				(this.Count_label()), 
+				(this.Computer_label()), 
+				(this.Run()), 
+				(this.Stop()), 
+				(this.Status()), 
+				(this.Elapsed()), 
+				(this.Retry())
+			];
+		}
+		title(){
+			return "Настройки";
+		}
+		minimal_width(){
+			return 320;
+		}
+		kind(){
+			return "goods";
+		}
+		enabled(){
+			return true;
+		}
+		running(){
+			return false;
+		}
+		run_enabled(){
+			return true;
+		}
+		foot(){
+			return [(this.Support())];
+		}
+		body(){
+			return (this.controls());
+		}
+		retry_visible(){
+			return false;
+		}
+	};
+	($mol_mem(($.$rise_bench_host_controls.prototype), "Support"));
+	($mol_mem(($.$rise_bench_host_controls.prototype), "Intro"));
+	($mol_mem(($.$rise_bench_host_controls.prototype), "engines"));
+	($mol_mem(($.$rise_bench_host_controls.prototype), "Engine"));
+	($mol_mem(($.$rise_bench_host_controls.prototype), "Engine_label"));
+	($mol_mem(($.$rise_bench_host_controls.prototype), "Storage_label"));
+	($mol_mem(($.$rise_bench_host_controls.prototype), "schemas"));
+	($mol_mem(($.$rise_bench_host_controls.prototype), "Schema"));
+	($mol_mem(($.$rise_bench_host_controls.prototype), "Schema_label"));
+	($mol_mem(($.$rise_bench_host_controls.prototype), "sizes"));
+	($mol_mem(($.$rise_bench_host_controls.prototype), "Count"));
+	($mol_mem(($.$rise_bench_host_controls.prototype), "Count_label"));
+	($mol_mem(($.$rise_bench_host_controls.prototype), "Computer_help"));
+	($mol_mem(($.$rise_bench_host_controls.prototype), "computer"));
+	($mol_mem(($.$rise_bench_host_controls.prototype), "Computer"));
+	($mol_mem(($.$rise_bench_host_controls.prototype), "Computer_label"));
+	($mol_mem(($.$rise_bench_host_controls.prototype), "run"));
+	($mol_mem(($.$rise_bench_host_controls.prototype), "Run"));
+	($mol_mem(($.$rise_bench_host_controls.prototype), "stop"));
+	($mol_mem(($.$rise_bench_host_controls.prototype), "Stop"));
+	($mol_mem(($.$rise_bench_host_controls.prototype), "Status"));
+	($mol_mem(($.$rise_bench_host_controls.prototype), "Elapsed"));
+	($mol_mem(($.$rise_bench_host_controls.prototype), "retry"));
+	($mol_mem(($.$rise_bench_host_controls.prototype), "Retry"));
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    class $rise_bench_computer {
+        static clean(text) {
+            return text.replace(/\r\n?/g, '\n')
+                .replace(/^[\t ]*(?:Код устройства|Идентификатор устройства|Device ID)[^\n]*\n[\s\S]*?(?=^[\t ]*(?:Тип системы|System type)(?=[\t :]|$))/gim, '')
+                .replace(/^[\t ]*(?:Код устройства|Идентификатор устройства|Код продукта|Идентификатор продукта|Device ID|Product ID)[^\n]*(?:\n[\t ]*(?:[\da-f]{8}(?:-[\da-f]{4}){3}-[\da-f]{12}|[\dA-Z]{5}(?:-[\dA-Z]{5}){4}|\d{5}-\d{5}-\d{5}-[\dA-Z]{5})[\t ]*)?\n?/gim, '');
+        }
+    }
+    $.$rise_bench_computer = $rise_bench_computer;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $.$rise_bench_run_baza_version = '2e6100b225c8d4fb3a5b5d14e8568223e8a8c785';
+    $.$rise_bench_run_benchmark_version = '0.6.0';
+    class $rise_bench_run extends $mol_object {
+        count;
+        properties;
+        stamp;
+        baza_version;
+        benchmark_version;
+        id;
+        computer;
+        browser;
+        engine;
+        engine_version;
+        constructor(count, properties = 0, stamp = new $mol_time_moment().toString('DD.MM.YYYY hh:mm:ss'), baza_version = $.$rise_bench_run_baza_version, benchmark_version = $.$rise_bench_run_benchmark_version, id = crypto.randomUUID(), computer = $rise_bench_computer.clean($mol_state_local.value('$rise_bench_computer') ?? ''), browser = typeof navigator === 'undefined' ? '' : navigator.userAgent, engine = baza_version === '—' ? 'idb' : 'goods', engine_version = baza_version === '—' ? 'browser' : baza_version) {
+            super();
+            this.count = count;
+            this.properties = properties;
+            this.stamp = stamp;
+            this.baza_version = baza_version;
+            this.benchmark_version = benchmark_version;
+            this.id = id;
+            this.computer = computer;
+            this.browser = browser;
+            this.engine = engine;
+            this.engine_version = engine_version;
+        }
+        // Memoized channels can be reaped when neither table nor chart observes them.
+        // A run owns its data independently of those temporary subscriptions.
+        state_value = 'Выполняется';
+        failure_value = '';
+        bytes_value = null;
+        metric_values = new Map();
+        state(next) {
+            if (next !== undefined)
+                this.state_value = next;
+            return this.state_value;
+        }
+        failure(next) {
+            if (next !== undefined)
+                this.failure_value = next;
+            return this.failure_value;
+        }
+        bytes(next) {
+            if (next !== undefined)
+                this.bytes_value = next;
+            return this.bytes_value;
+        }
+        metric(operation, next) {
+            if (next !== undefined)
+                this.metric_values.set(operation, next);
+            return this.metric_values.get(operation) ?? null;
+        }
+    }
+    __decorate([
+        $mol_mem
+    ], $rise_bench_run.prototype, "state", null);
+    __decorate([
+        $mol_mem
+    ], $rise_bench_run.prototype, "failure", null);
+    __decorate([
+        $mol_mem
+    ], $rise_bench_run.prototype, "bytes", null);
+    __decorate([
+        $mol_mem_key
+    ], $rise_bench_run.prototype, "metric", null);
+    $.$rise_bench_run = $rise_bench_run;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $.$rise_bench_engine = {
+        goods: { title: 'Гипербаза', version: $rise_bench_run_baza_version, storage: 'Хранение: одна Area на запись' },
+        idb: { title: 'IDB', version: 'browser', storage: 'IndexedDB через $mol_db, без индексов' },
+        sqlite: { title: 'SQLite', version: '3.54.1-build1', storage: 'SQLite WASM · OPFS SAH Pool · без индексов' },
+        pglite: { title: 'PGlite', version: '0.5.15', storage: 'PGlite · IndexedDB · без индексов' },
+        duckdb: { title: 'DuckDB', version: '1.32.0', storage: 'DuckDB WASM · OPFS · без индексов' },
+    };
+})($ || ($ = {}));
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $rise_bench_host_controls extends $.$rise_bench_host_controls {
+            /** Persist the draft locally; each run takes its own immutable snapshot. */
+            computer(next) { return $mol_state_local.value('$rise_bench_computer', next === undefined ? undefined : $rise_bench_computer.clean(next)) ?? ''; }
+            intro() {
+                return `Выберите хранилища, состав и объёмы данных. «Все» отмечает всю группу; каждое выбранное сочетание выполняется по очереди.\n\nТаймаута нет — при необходимости нажмите «Остановить».\n\nВерсия бенчмарка: ${$rise_bench_run_benchmark_version}.\n\n[Код](${this.source_uri()})`;
+            }
+            source_uri() {
+                const selected = this.engines();
+                const engine = selected.includes('goods') ? 'goods' : selected[0] ?? 'goods';
+                const path = this.kind() === 'text' ? 'baza/crdttext/crdttext.view.ts' : engine === 'goods' ? 'baza/goods/goods.view.ts' : engine === 'idb' ? 'idb/idb.view.ts' : `sql/${engine}/${engine}.ts`;
+                return `https://github.com/stan-donarise/mam_rise/blob/master/bench/${path}`;
+            }
+            engine_keys() { return Object.keys($rise_bench_engine); }
+            engine_titles() { return Object.fromEntries(Object.entries($rise_bench_engine).map(([key, engine]) => [key, engine.title])); }
+            count_title() { return this.kind() === 'text' ? 'Количество строк' : 'Количество записей'; }
+            counts() {
+                return Object.fromEntries((this.kind() === 'text' ? [100, 500, 1000, 2000, 5000] : [1, 10, 100, 500, 1000, 2000, 3000, 4000, 5000, 10000]).map(count => [count, String(count)]));
+            }
+            count_keys() { return Object.keys(this.counts()); }
+            storage_label() { return this.kind() === 'text' ? 'CRDT-текст' : this.engines().length === 1 ? $rise_bench_engine[this.engines()[0]].storage : 'Выбранные хранилища выполняются последовательно'; }
+            controls() {
+                return [
+                    this.Intro(),
+                    ...this.kind() === 'text' ? [] : [this.Engine_label()],
+                    this.Storage_label(),
+                    ...this.kind() === 'text' ? [] : [this.Schema_label()],
+                    this.Count_label(), this.Computer_label(), this.Run(), ...this.running() ? [this.Stop()] : [], this.Status(), this.Elapsed(),
+                    ...this.retry_visible() ? [this.Retry()] : [],
+                ];
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $rise_bench_host_controls.prototype, "computer", null);
+        $$.$rise_bench_host_controls = $rise_bench_host_controls;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_define($rise_bench_host_controls, {
+        flex: { grow: 0, basis: $mol_style_unit.rem(20) },
+        Storage_label: { padding: $mol_gap.text },
+        Status: { padding: $mol_gap.text },
+        Elapsed: { padding: $mol_gap.text },
+        Computer_label: { Label: { align: { items: 'center' } } },
+    });
+})($ || ($ = {}));
+
+;
+	($.$mol_icon_content_copy) = class $mol_icon_content_copy extends ($.$mol_icon) {
+		path(){
+			return "M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z";
+		}
+	};
+
+
+;
+"use strict";
+
+
+;
+	($.$rise_bench_metrics_details) = class $rise_bench_metrics_details extends ($.$mol_pick) {
+		Icon(){
+			const obj = new this.$.$mol_icon_information_outline();
+			return obj;
+		}
+		Copy_icon(){
+			const obj = new this.$.$mol_icon_content_copy();
+			return obj;
+		}
+		Copy(){
+			const obj = new this.$.$mol_button_copy();
+			(obj.hint) = () => ("Копировать параметры компьютера");
+			(obj.text) = () => ((this.computer()));
+			(obj.sub) = () => ([(this.Copy_icon())]);
+			return obj;
+		}
+		computer(){
+			return "";
+		}
+		Computer(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.computer())]);
+			return obj;
+		}
+		Computer_label(){
+			const obj = new this.$.$mol_labeler();
+			(obj.title) = () => ("Параметры компьютера");
+			(obj.label) = () => (["Параметры компьютера", (this.Copy())]);
+			(obj.Content) = () => ((this.Computer()));
+			return obj;
+		}
+		browser(){
+			return "";
+		}
+		Browser(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.browser())]);
+			return obj;
+		}
+		Browser_label(){
+			const obj = new this.$.$mol_labeler();
+			(obj.title) = () => ("Браузер");
+			(obj.Content) = () => ((this.Browser()));
+			return obj;
+		}
+		Text(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.Computer_label()), (this.Browser_label())]);
+			return obj;
+		}
+		hint(){
+			return "Параметры компьютера и браузер";
+		}
+		trigger_content(){
+			return [(this.Icon())];
+		}
+		bubble_content(){
+			return [(this.Text())];
+		}
+	};
+	($mol_mem(($.$rise_bench_metrics_details.prototype), "Icon"));
+	($mol_mem(($.$rise_bench_metrics_details.prototype), "Copy_icon"));
+	($mol_mem(($.$rise_bench_metrics_details.prototype), "Copy"));
+	($mol_mem(($.$rise_bench_metrics_details.prototype), "Computer"));
+	($mol_mem(($.$rise_bench_metrics_details.prototype), "Computer_label"));
+	($mol_mem(($.$rise_bench_metrics_details.prototype), "Browser"));
+	($mol_mem(($.$rise_bench_metrics_details.prototype), "Browser_label"));
+	($mol_mem(($.$rise_bench_metrics_details.prototype), "Text"));
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_define($rise_bench_metrics_details, {
+        padding: 0,
+        Trigger: { padding: $mol_gap.text, minWidth: $mol_style_unit.rem(2.5), minHeight: $mol_style_unit.rem(2.5) },
+        Bubble: { maxHeight: $mol_style_unit.vh(80), overflow: 'auto' },
+        Text: { padding: $mol_gap.block, flex: { direction: 'column' }, maxWidth: $mol_style_unit.vw(80), width: $mol_style_unit.rem(28) },
+        Computer: { whiteSpace: 'pre-wrap', overflowWrap: 'anywhere' },
+        Computer_label: { Label: { align: { items: 'center' } } },
+        Browser: { whiteSpace: 'pre-wrap', overflowWrap: 'anywhere' },
+    });
+})($ || ($ = {}));
+
+;
+	($.$rise_bench_metrics) = class $rise_bench_metrics extends ($.$mol_grid) {
+		embedded(){
+			return false;
+		}
+		details_computer(id){
+			return "";
+		}
+		details_browser(id){
+			return "";
+		}
+		attr(){
+			return {...(super.attr()), "embedded": (this.embedded())};
+		}
+		runs(next){
+			if(next !== undefined) return next;
+			return [];
+		}
+		run_add(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		operations(){
+			return [];
+		}
+		compare(){
+			return false;
+		}
+		text_mode(){
+			return false;
+		}
+		Details(id){
+			const obj = new this.$.$rise_bench_metrics_details();
+			(obj.computer) = () => ((this.details_computer(id)));
+			(obj.browser) = () => ((this.details_browser(id)));
+			return obj;
+		}
+	};
+	($mol_mem(($.$rise_bench_metrics.prototype), "runs"));
+	($mol_mem(($.$rise_bench_metrics.prototype), "run_add"));
+	($mol_mem_key(($.$rise_bench_metrics.prototype), "Details"));
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $rise_bench_metrics extends $.$rise_bench_metrics {
+            embedded() { return window.parent !== window; }
+            Cell(id) { return id.col === 'Компьютер' ? this.Details(id) : super.Cell(id); }
+            details_computer(id) { return this.runs()[Number(id.row.at(-1))]?.computer || 'Не указаны'; }
+            details_browser(id) { return this.runs()[Number(id.row.at(-1))]?.browser || 'Не указан'; }
+            run_add(run) {
+                const rows = this.runs();
+                if (rows.includes(run))
+                    return;
+                this.runs([run, ...rows]);
+            }
+            col_ids() { return ['№', 'Дата и время', ...this.compare() ? ['Хранилище'] : [], 'Версия движка', 'Версия бенчмарка', ...this.text_mode() ? ['Строк', 'Размер, КБ'] : ['Объём', 'Полей'], ...this.operations(), 'Состояние', 'Компьютер']; }
+            records() {
+                return this.runs().map((run, index, rows) => ({
+                    '№': rows.length - index,
+                    'Дата и время': run.stamp,
+                    'Хранилище': $rise_bench_engine[run.engine]?.title ?? run.engine,
+                    'Версия движка': run.engine === 'goods' ? run.engine_version.slice(0, 8) : run.engine_version,
+                    'Версия бенчмарка': run.benchmark_version,
+                    'Объём': run.count,
+                    'Строк': run.count,
+                    'Размер, КБ': run.bytes() === null ? '—' : (run.bytes() / 1024).toFixed(3),
+                    'Полей': run.properties || '—',
+                    'Состояние': run.failure() || run.state(),
+                    ...Object.fromEntries(this.operations().map(operation => {
+                        const time = run.metric(operation);
+                        return [operation, time === null ? '—' : time.toFixed(3)];
+                    })),
+                }));
+            }
+        }
+        __decorate([
+            $mol_action
+        ], $rise_bench_metrics.prototype, "run_add", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bench_metrics.prototype, "records", null);
+        $$.$rise_bench_metrics = $rise_bench_metrics;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_define($rise_bench_metrics, { '[embedded]': { true: { display: 'none' } } });
+})($ || ($ = {}));
+
+;
+	($.$rise_bench_charts_selection) = class $rise_bench_charts_selection extends ($.$mol_pick) {
+		selection_title(){
+			return "";
+		}
+		choices(){
+			return [];
+		}
+		Items(){
+			const obj = new this.$.$mol_list();
+			(obj.rows) = () => ((this.choices()));
+			return obj;
+		}
+		List(){
+			const obj = new this.$.$mol_scroll();
+			(obj.sub) = () => ([(this.Items())]);
+			return obj;
+		}
+		presets(){
+			return [];
+		}
+		preset_title(id){
+			return "";
+		}
+		select_latest(id, next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		run_title(id){
+			return "";
+		}
+		checked(id, next){
+			if(next !== undefined) return next;
+			return false;
+		}
+		runs(){
+			return [];
+		}
+		value(next){
+			if(next !== undefined) return next;
+			return [];
+		}
+		title(){
+			return (this.selection_title());
+		}
+		bubble_content(){
+			return [(this.List())];
+		}
+		Presets(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ((this.presets()));
+			return obj;
+		}
+		Preset(id){
+			const obj = new this.$.$mol_button_minor();
+			(obj.title) = () => ((this.preset_title(id)));
+			(obj.click) = (next) => ((this.select_latest(id, next)));
+			return obj;
+		}
+		Check(id){
+			const obj = new this.$.$mol_check_box();
+			(obj.title) = () => ((this.run_title(id)));
+			(obj.checked) = (next) => ((this.checked(id, next)));
+			return obj;
+		}
+	};
+	($mol_mem(($.$rise_bench_charts_selection.prototype), "Items"));
+	($mol_mem(($.$rise_bench_charts_selection.prototype), "List"));
+	($mol_mem_key(($.$rise_bench_charts_selection.prototype), "select_latest"));
+	($mol_mem_key(($.$rise_bench_charts_selection.prototype), "checked"));
+	($mol_mem(($.$rise_bench_charts_selection.prototype), "value"));
+	($mol_mem(($.$rise_bench_charts_selection.prototype), "Presets"));
+	($mol_mem_key(($.$rise_bench_charts_selection.prototype), "Preset"));
+	($mol_mem_key(($.$rise_bench_charts_selection.prototype), "Check"));
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $rise_bench_charts_selection extends $.$rise_bench_charts_selection {
+            selection_title() {
+                const selected = new Set(this.value());
+                return `Прогоны (${this.runs().filter(run => selected.has(run.id)).length})`;
+            }
+            choices() { return [this.Presets(), ...this.runs().map(run => this.Check(run.id))]; }
+            presets() { return [0, 10, 20, 30, 50].map(count => this.Preset(count)); }
+            preset_title(count) { return String(count); }
+            select_latest(count) { this.value(this.runs().slice(0, count).map(run => run.id)); }
+            checked(id, next) {
+                const value = this.value();
+                if (next === undefined)
+                    return value.includes(id);
+                this.value(next ? value.includes(id) ? value : [...value, id] : value.filter(key => key !== id));
+                return next;
+            }
+            run_title(id) {
+                const rows = this.runs(), index = rows.findIndex(run => run.id === id), run = rows[index];
+                const engine = $rise_bench_engine[run.engine]?.title ?? run.engine;
+                return `№ ${rows.length - index} · ${run.stamp} · ${engine} · ${run.count} ${run.properties ? `записей · ${run.properties} полей` : 'строк'} · v${run.benchmark_version} · ${run.state()}`;
+            }
+        }
+        __decorate([
+            $mol_action
+        ], $rise_bench_charts_selection.prototype, "select_latest", null);
+        $$.$rise_bench_charts_selection = $rise_bench_charts_selection;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_define($rise_bench_charts_selection, {
+        alignSelf: 'flex-start',
+        List: {
+            maxHeight: '70vh',
+            maxWidth: '90vw',
+        },
+    });
+})($ || ($ = {}));
+
+;
+	($.$mol_plot_dot) = class $mol_plot_dot extends ($.$mol_plot_graph) {
+		diameter(){
+			return 8;
+		}
+		curve(){
+			return "";
+		}
+		Curve(){
+			const obj = new this.$.$mol_svg_path();
+			(obj.geometry) = () => ((this.curve()));
+			return obj;
+		}
+		points_max(){
+			return +Infinity;
+		}
+		aspect(){
+			return 1;
+		}
+		style(){
+			return {...(super.style()), "stroke-width": (this.diameter())};
+		}
+		sub(){
+			return [(this.Hint()), (this.Curve())];
+		}
+		Sample(){
+			const obj = new this.$.$mol_plot_graph_sample();
+			(obj.color) = () => ((this.color()));
+			return obj;
+		}
+	};
+	($mol_mem(($.$mol_plot_dot.prototype), "Curve"));
+	($mol_mem(($.$mol_plot_dot.prototype), "Sample"));
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    // 00 HHHHH HHHHH HHHHH LLLLL LLLLL LLLLL
+    const mask = 0b11111_11111_11111;
+    function $mol_coord_pack(high, low) {
+        return (high << 17 >>> 2) | (low & mask);
+    }
+    $.$mol_coord_pack = $mol_coord_pack;
+    function $mol_coord_high(pack) {
+        return pack << 2 >> 17;
+    }
+    $.$mol_coord_high = $mol_coord_high;
+    function $mol_coord_low(pack) {
+        return (pack << 17) >> 17;
+    }
+    $.$mol_coord_low = $mol_coord_low;
+})($ || ($ = {}));
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $mol_plot_dot extends $.$mol_plot_dot {
+            filled() {
+                return new Set();
+            }
+            indexes() {
+                const radius = this.diameter() / 2;
+                // calculate by cpu
+                const points_max = this.points_max();
+                const viewport = this.viewport();
+                const viewport_left = viewport.x.min - radius;
+                const viewport_right = viewport.x.max + radius;
+                const viewport_bottom = viewport.y.min - radius;
+                const viewport_top = viewport.y.max + radius;
+                const [shift_x, shift_y] = this.shift();
+                const [scale_x, scale_y] = this.scale();
+                let last_x = Number.NEGATIVE_INFINITY;
+                let last_y = Number.NEGATIVE_INFINITY;
+                let spacing = 0;
+                let filled = this.filled();
+                let indexes;
+                const series_x = this.series_x();
+                const series_y = this.series_y();
+                do {
+                    indexes = [];
+                    for (let i = 0; i < series_x.length; i++) {
+                        const point_x = this.repos_x(series_x[i]);
+                        const point_y = this.repos_y(series_y[i]);
+                        const scaled_x = Math.round(shift_x + point_x * scale_x);
+                        const scaled_y = Math.round(shift_y + point_y * scale_y);
+                        if (Math.abs(scaled_x - last_x) < radius
+                            && Math.abs(scaled_y - last_y) < radius)
+                            continue;
+                        last_x = scaled_x;
+                        last_y = scaled_y;
+                        if (scaled_x < viewport_left)
+                            continue;
+                        if (scaled_y < viewport_bottom)
+                            continue;
+                        if (scaled_x > viewport_right)
+                            continue;
+                        if (scaled_y > viewport_top)
+                            continue;
+                        if (spacing !== 0) {
+                            const key = $mol_coord_pack(Math.round(point_x * scale_x / spacing) * spacing, Math.round(point_y * scale_y / spacing) * spacing);
+                            if (filled.has(key))
+                                continue;
+                            filled.add(key);
+                        }
+                        indexes.push(i);
+                        if (indexes.length > points_max)
+                            break;
+                    }
+                    spacing += Math.ceil(radius);
+                    filled.clear();
+                } while (indexes.length > points_max);
+                return indexes;
+            }
+            curve() {
+                const points = this.points();
+                if (points.length === 0)
+                    return '';
+                const diameter = this.diameter();
+                const aspect = this.aspect();
+                const shift_y = Math.max(0, Math.floor((aspect - 1) * diameter / 2));
+                const shift_x = Math.max(0, Math.floor((1 / aspect - 1) * diameter / 2));
+                const size_y = Math.max(0, Math.ceil((aspect - 1) * diameter));
+                const size_x = Math.max(0, Math.ceil((1 / aspect - 1) * diameter));
+                return points.map(point => `M ${point[0] - shift_x} ${point[1] - shift_y} l ${size_x} ${size_y}`).join(' ');
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $mol_plot_dot.prototype, "filled", null);
+        __decorate([
+            $mol_mem
+        ], $mol_plot_dot.prototype, "indexes", null);
+        $$.$mol_plot_dot = $mol_plot_dot;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/plot/dot/dot.view.css", "[mol_plot_dot] {\n\tstroke-linecap: round;\n\tfill: none;\n}\n\n[mol_plot_dot_sample] {\n\twidth: .5rem;\n\theight: .5rem;\n\tborder-radius: 1rem;\n\tbackground: currentColor;\n\tposition: absolute;\n\ttop: .75em;\n\tleft: 50%;\n\ttransform: translate(-50%, -50%);\n}\n");
+})($ || ($ = {}));
+
+;
+	($.$rise_bench_charts_operation_plot) = class $rise_bench_charts_operation_plot extends ($.$mol_plot_pane) {};
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $rise_bench_charts_operation_plot extends $.$rise_bench_charts_operation_plot {
+            dimensions() {
+                const data = super.dimensions();
+                return new $mol_vector_2d(new $mol_vector_range(0, Math.max(1, data.x.max)), new $mol_vector_range(0, Math.max(.001, data.y.max * 1.1)));
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $rise_bench_charts_operation_plot.prototype, "dimensions", null);
+        $$.$rise_bench_charts_operation_plot = $rise_bench_charts_operation_plot;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+	($.$mol_plot_group) = class $mol_plot_group extends ($.$mol_plot_graph) {
+		graphs(){
+			return [];
+		}
+		graphs_enriched(){
+			return (this.graphs());
+		}
+		graph_samples(){
+			return [];
+		}
+		sub(){
+			return (this.graphs_enriched());
+		}
+		Sample(){
+			const obj = new this.$.$mol_plot_graph_sample();
+			(obj.sub) = () => ((this.graph_samples()));
+			return obj;
+		}
+	};
+	($mol_mem(($.$mol_plot_group.prototype), "Sample"));
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $mol_plot_group extends $.$mol_plot_group {
+            graphs_enriched() {
+                const graphs = this.graphs();
+                for (let graph of graphs) {
+                    graph.shift = () => this.shift();
+                    graph.scale = () => this.scale();
+                    graph.size_real = () => this.size_real();
+                    graph.hue = () => this.hue();
+                    graph.series_x = () => this.series_x();
+                    graph.series_y = () => this.series_y();
+                    graph.dimensions_pane = () => this.dimensions_pane();
+                    graph.viewport = () => this.viewport();
+                    graph.cursor_position = () => this.cursor_position();
+                    graph.gap = () => this.gap();
+                    graph.title = () => this.title();
+                    graph.repos_x = val => this.repos_x(val);
+                    graph.repos_y = val => this.repos_y(val);
+                }
+                return graphs;
+            }
+            dimensions() {
+                const graphs = this.graphs_enriched();
+                let next = new this.$.$mol_vector_2d($mol_vector_range_full.inversed, $mol_vector_range_full.inversed);
+                for (let graph of graphs) {
+                    next = next.expanded2(graph.dimensions());
+                }
+                return next;
+            }
+            graph_samples() {
+                return this.graphs_enriched().map(graph => graph.Sample());
+            }
+            back() {
+                const graphs = this.graphs_enriched();
+                const next = [];
+                for (let graph of graphs)
+                    next.push(...graph.back());
+                return next;
+            }
+            front() {
+                const graphs = this.graphs_enriched();
+                const next = [];
+                for (let graph of graphs)
+                    next.push(...graph.front());
+                return next;
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $mol_plot_group.prototype, "graphs_enriched", null);
+        __decorate([
+            $mol_mem
+        ], $mol_plot_group.prototype, "dimensions", null);
+        __decorate([
+            $mol_mem
+        ], $mol_plot_group.prototype, "graph_samples", null);
+        $$.$mol_plot_group = $mol_plot_group;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+	($.$mol_plot_ruler_hor) = class $mol_plot_ruler_hor extends ($.$mol_plot_ruler) {
+		title_align(){
+			return "start";
+		}
+		label_align(){
+			return "middle";
+		}
+		title_pos_x(){
+			return "0";
+		}
+		title_pos_y(){
+			return "100%";
+		}
+		label_pos_y(id){
+			return (this.title_pos_y());
+		}
+		background_width(){
+			return "100%";
+		}
+	};
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $mol_plot_ruler_hor extends $.$mol_plot_ruler_hor {
+            dimensions_axis() {
+                return this.dimensions_pane().x;
+            }
+            viewport_axis() {
+                return new this.$.$mol_vector_range(0, this.size_real().x);
+            }
+            scale_axis() {
+                return this.scale()[0];
+            }
+            scale_step() {
+                return this.scale()[0];
+            }
+            shift_axis() {
+                return this.shift()[0];
+            }
+            curve() {
+                const [shift] = this.shift();
+                const [scale] = this.scale();
+                return this.axis_points().map(point => {
+                    let scaled = Math.round(point * scale + shift);
+                    scaled = Math.max(Number.MIN_SAFE_INTEGER, Math.min(scaled, Number.MAX_SAFE_INTEGER));
+                    return `M ${scaled} 1000 V 0`;
+                }).join(' ');
+            }
+            label_pos_x(index) {
+                return (this.axis_points()[index] * this.scale()[0] + this.shift()[0]).toFixed(3);
+            }
+            background_y() {
+                return String(this.size_real()[1] - this.font_size());
+            }
+            title_pos_y() {
+                return String(this.size_real()[1]);
+            }
+            background_height() {
+                return String(this.font_size());
+            }
+        }
+        $$.$mol_plot_ruler_hor = $mol_plot_ruler_hor;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/plot/ruler/hor/hor.view.css", "[mol_plot_ruler_hor_label] {\n\ttransform: translateY( -4px );\n}\n\n[mol_plot_ruler_hor_title] {\n\ttransform: translateY( -4px );\n}\n");
+})($ || ($ = {}));
+
+;
+	($.$rise_bench_charts_operation) = class $rise_bench_charts_operation extends ($.$mol_view) {
+		content(){
+			return [];
+		}
+		legends(){
+			return [];
+		}
+		legend_content(id){
+			return [];
+		}
+		series_title(id){
+			return "";
+		}
+		legend_sample(id){
+			return [];
+		}
+		graphs(){
+			return [];
+		}
+		series_x(id){
+			return [];
+		}
+		series_y(id){
+			return [];
+		}
+		Line(id){
+			const obj = new this.$.$mol_plot_line();
+			return obj;
+		}
+		Dots(id){
+			const obj = new this.$.$mol_plot_dot();
+			return obj;
+		}
+		operation(){
+			return "";
+		}
+		runs(){
+			return [];
+		}
+		sub(){
+			return (this.content());
+		}
+		Title(){
+			const obj = new this.$.$mol_view();
+			(obj.dom_name) = () => ("h3");
+			(obj.sub) = () => ([(this.operation())]);
+			return obj;
+		}
+		Empty(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => (["Нет завершённых замеров"]);
+			return obj;
+		}
+		Legend(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ((this.legends()));
+			return obj;
+		}
+		Legend_item(id){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ((this.legend_content(id)));
+			return obj;
+		}
+		Legend_text(id){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.series_title(id))]);
+			return obj;
+		}
+		Legend_sample(id){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ((this.legend_sample(id)));
+			return obj;
+		}
+		Plot(){
+			const obj = new this.$.$rise_bench_charts_operation_plot();
+			(obj.hue_base) = () => (210);
+			(obj.graphs) = () => ((this.graphs()));
+			return obj;
+		}
+		Series(id){
+			const obj = new this.$.$mol_plot_group();
+			(obj.title) = () => ((this.series_title(id)));
+			(obj.series_x) = () => ((this.series_x(id)));
+			(obj.series_y) = () => ((this.series_y(id)));
+			(obj.graphs) = () => ([(this.Line(id)), (this.Dots(id))]);
+			return obj;
+		}
+		X(){
+			const obj = new this.$.$mol_plot_ruler_hor();
+			(obj.title) = () => ("Объём");
+			return obj;
+		}
+		Y(){
+			const obj = new this.$.$mol_plot_ruler_vert();
+			(obj.title) = () => ("с");
+			return obj;
+		}
+		Note(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => (["Медиана прогонов; отдельные серии по хранилищу, полям, компьютеру и версии."]);
+			return obj;
+		}
+	};
+	($mol_mem_key(($.$rise_bench_charts_operation.prototype), "Line"));
+	($mol_mem_key(($.$rise_bench_charts_operation.prototype), "Dots"));
+	($mol_mem(($.$rise_bench_charts_operation.prototype), "Title"));
+	($mol_mem(($.$rise_bench_charts_operation.prototype), "Empty"));
+	($mol_mem(($.$rise_bench_charts_operation.prototype), "Legend"));
+	($mol_mem_key(($.$rise_bench_charts_operation.prototype), "Legend_item"));
+	($mol_mem_key(($.$rise_bench_charts_operation.prototype), "Legend_text"));
+	($mol_mem_key(($.$rise_bench_charts_operation.prototype), "Legend_sample"));
+	($mol_mem(($.$rise_bench_charts_operation.prototype), "Plot"));
+	($mol_mem_key(($.$rise_bench_charts_operation.prototype), "Series"));
+	($mol_mem(($.$rise_bench_charts_operation.prototype), "X"));
+	($mol_mem(($.$rise_bench_charts_operation.prototype), "Y"));
+	($mol_mem(($.$rise_bench_charts_operation.prototype), "Note"));
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $rise_bench_charts_operation extends $.$rise_bench_charts_operation {
+            groups() {
+                const groups = new Map();
+                for (const run of this.runs()) {
+                    const time = run.metric(this.operation());
+                    if (run.state() !== 'Готово' || time === null)
+                        continue;
+                    const engine = $rise_bench_engine[run.engine]?.title ?? run.engine;
+                    const key = JSON.stringify([engine, run.properties, run.computer, run.browser, run.benchmark_version, run.engine_version]);
+                    if (!groups.has(key))
+                        groups.set(key, {
+                            title: `${engine} ${run.engine_version.slice(0, run.engine === 'goods' ? 8 : 80)} · ${run.properties || 'текст'} · ${run.computer.split(/\r?\n/)[0] || 'ПК не указан'} · v${run.benchmark_version}`, values: new Map,
+                        });
+                    const values = groups.get(key).values;
+                    if (!values.has(run.count))
+                        values.set(run.count, []);
+                    values.get(run.count).push(time);
+                }
+                return [...groups.values()].map(group => ({ title: group.title, points: [...group.values].sort((a, b) => a[0] - b[0]).map(([count, times]) => {
+                        const sorted = [...times].sort((a, b) => a - b), middle = Math.floor(sorted.length / 2);
+                        return [count, sorted.length % 2 ? sorted[middle] : (sorted[middle - 1] + sorted[middle]) / 2];
+                    }) }));
+            }
+            content() { return this.groups().length ? [this.Title(), this.Legend(), this.Plot(), this.Note()] : [this.Title(), this.Empty()]; }
+            series_title(id) { return this.groups()[id].title; }
+            series_x(id) { return this.groups()[id].points.map(point => point[0]); }
+            series_y(id) { return this.groups()[id].points.map(point => point[1]); }
+            graphs() { return [...this.groups().map((_, id) => this.Series(id)), this.X(), this.Y()]; }
+            legends() { return this.groups().map((_, id) => this.Legend_item(id)); }
+            legend_content(id) { return [this.Legend_sample(id), this.Legend_text(id)]; }
+            legend_sample(id) { return [this.Series(id).Sample()]; }
+        }
+        __decorate([
+            $mol_mem
+        ], $rise_bench_charts_operation.prototype, "groups", null);
+        $$.$rise_bench_charts_operation = $rise_bench_charts_operation;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_define($rise_bench_charts_operation, {
+        flex: { direction: 'column', shrink: 0 }, minWidth: 0,
+        Plot: { height: $mol_style_unit.rem(18), flex: { shrink: 0 }, minWidth: 0 },
+        Legend: { flex: { direction: 'column' } },
+        Legend_item: { flex: { wrap: 'wrap' } },
+        Legend_sample: { position: 'relative', width: $mol_style_unit.rem(2), height: $mol_style_unit.rem(1.5), flex: { shrink: 0 } },
+    });
+})($ || ($ = {}));
+
+;
+	($.$rise_bench_charts) = class $rise_bench_charts extends ($.$mol_view) {
+		charts(){
+			return [];
+		}
+		operation(id){
+			return "";
+		}
+		selected_runs(){
+			return [];
+		}
+		runs(){
+			return [];
+		}
+		operations(){
+			return [];
+		}
+		selected(next){
+			if(next !== undefined) return next;
+			return [];
+		}
+		sub(){
+			return (this.charts());
+		}
+		Selection(){
+			const obj = new this.$.$rise_bench_charts_selection();
+			(obj.runs) = () => ((this.runs()));
+			(obj.value) = (next) => ((this.selected(next)));
+			return obj;
+		}
+		Chart(id){
+			const obj = new this.$.$rise_bench_charts_operation();
+			(obj.operation) = () => ((this.operation(id)));
+			(obj.runs) = () => ((this.selected_runs()));
+			return obj;
+		}
+	};
+	($mol_mem(($.$rise_bench_charts.prototype), "selected"));
+	($mol_mem(($.$rise_bench_charts.prototype), "Selection"));
+	($mol_mem_key(($.$rise_bench_charts.prototype), "Chart"));
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $rise_bench_charts extends $.$rise_bench_charts {
+            charts() { return [this.Selection(), ...this.operations().map((_, index) => this.Chart(index))]; }
+            selected_runs() {
+                const selected = new Set(this.selected());
+                return this.runs().filter(run => selected.has(run.id));
+            }
+            operation(index) { return this.operations()[index]; }
+        }
+        __decorate([
+            $mol_mem
+        ], $rise_bench_charts.prototype, "selected_runs", null);
+        $$.$rise_bench_charts = $rise_bench_charts;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_define($rise_bench_charts, { flex: { direction: 'column' } });
+})($ || ($ = {}));
+
+;
+	($.$rise_bench_host) = class $rise_bench_host extends ($.$mol_book2) {
+		controls_enabled(){
+			return true;
+		}
+		run_enabled(){
+			return true;
+		}
+		busy(){
+			return false;
+		}
+		selected_engines(next){
+			if(next !== undefined) return next;
+			return [];
+		}
+		selected_counts(next){
+			if(next !== undefined) return next;
+			return [];
+		}
+		selected_schemas(next){
+			if(next !== undefined) return next;
+			return [];
+		}
+		run(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		stop(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		status(next){
+			if(next !== undefined) return next;
+			return "";
+		}
+		elapsed_text(){
+			return "";
+		}
+		retry_visible(){
+			return false;
+		}
+		retry(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Controls(){
+			const obj = new this.$.$rise_bench_host_controls();
+			(obj.kind) = () => ((this.kind()));
+			(obj.enabled) = () => ((this.controls_enabled()));
+			(obj.run_enabled) = () => ((this.run_enabled()));
+			(obj.running) = () => ((this.busy()));
+			(obj.engines) = (next) => ((this.selected_engines(next)));
+			(obj.sizes) = (next) => ((this.selected_counts(next)));
+			(obj.schemas) = (next) => ((this.selected_schemas(next)));
+			(obj.run) = (next) => ((this.run(next)));
+			(obj.stop) = (next) => ((this.stop(next)));
+			(obj.status) = () => ((this.status()));
+			(obj.elapsed) = () => ((this.elapsed_text()));
+			(obj.retry_visible) = () => ((this.retry_visible()));
+			(obj.retry) = (next) => ((this.retry(next)));
+			return obj;
+		}
+		csv_title(){
+			return "Скачать CSV";
+		}
+		csv_blob(){
+			return null;
+		}
+		csv_filename(){
+			return "rise-benchmark.csv";
+		}
+		Download(){
+			const obj = new this.$.$mol_button_download();
+			(obj.title) = () => ((this.csv_title()));
+			(obj.hint) = () => ("Скачать CSV");
+			(obj.blob) = () => ((this.csv_blob()));
+			(obj.file_name) = () => ((this.csv_filename()));
+			return obj;
+		}
+		mode(next){
+			if(next !== undefined) return next;
+			return "table";
+		}
+		Mode(){
+			const obj = new this.$.$mol_switch();
+			(obj.value) = (next) => ((this.mode(next)));
+			(obj.options) = () => ({"table": "Таблица", "charts": "Графики"});
+			return obj;
+		}
+		operations(){
+			return [];
+		}
+		runs(){
+			return [];
+		}
+		compare(){
+			return false;
+		}
+		text_mode(){
+			return false;
+		}
+		Metrics(){
+			const obj = new this.$.$rise_bench_metrics();
+			(obj.operations) = () => ((this.operations()));
+			(obj.runs) = () => ((this.runs()));
+			(obj.compare) = () => ((this.compare()));
+			(obj.text_mode) = () => ((this.text_mode()));
+			return obj;
+		}
+		History(){
+			const obj = new this.$.$mol_scroll();
+			(obj.sub) = () => ([(this.Metrics())]);
+			return obj;
+		}
+		fixture_uri(){
+			return "";
+		}
+		Frame(){
+			const obj = new this.$.$mol_frame();
+			(obj.uri) = () => ((this.fixture_uri()));
+			(obj.clipboard_read) = () => (false);
+			(obj.clipboard_write) = () => (false);
+			(obj.attr) = () => ({...(this.$.$mol_frame.prototype.attr.call(obj)), "inert": (this.busy())});
+			return obj;
+		}
+		results_body(){
+			return [(this.History()), (this.Frame())];
+		}
+		Results(){
+			const obj = new this.$.$mol_page();
+			(obj.title) = () => ("Результаты");
+			(obj.minimal_width) = () => (640);
+			(obj.tools) = () => ([(this.Download()), (this.Mode())]);
+			(obj.body) = () => ((this.results_body()));
+			return obj;
+		}
+		chart_selection(next){
+			if(next !== undefined) return next;
+			return [];
+		}
+		kind(){
+			return "goods";
+		}
+		pages(){
+			return [(this.Controls()), (this.Results())];
+		}
+		Charts(){
+			const obj = new this.$.$rise_bench_charts();
+			(obj.runs) = () => ((this.runs()));
+			(obj.operations) = () => ((this.operations()));
+			(obj.selected) = (next) => ((this.chart_selection(next)));
+			return obj;
+		}
+	};
+	($mol_mem(($.$rise_bench_host.prototype), "selected_engines"));
+	($mol_mem(($.$rise_bench_host.prototype), "selected_counts"));
+	($mol_mem(($.$rise_bench_host.prototype), "selected_schemas"));
+	($mol_mem(($.$rise_bench_host.prototype), "run"));
+	($mol_mem(($.$rise_bench_host.prototype), "stop"));
+	($mol_mem(($.$rise_bench_host.prototype), "status"));
+	($mol_mem(($.$rise_bench_host.prototype), "retry"));
+	($mol_mem(($.$rise_bench_host.prototype), "Controls"));
+	($mol_mem(($.$rise_bench_host.prototype), "Download"));
+	($mol_mem(($.$rise_bench_host.prototype), "mode"));
+	($mol_mem(($.$rise_bench_host.prototype), "Mode"));
+	($mol_mem(($.$rise_bench_host.prototype), "Metrics"));
+	($mol_mem(($.$rise_bench_host.prototype), "History"));
+	($mol_mem(($.$rise_bench_host.prototype), "Frame"));
+	($mol_mem(($.$rise_bench_host.prototype), "Results"));
+	($mol_mem(($.$rise_bench_host.prototype), "chart_selection"));
+	($mol_mem(($.$rise_bench_host.prototype), "Charts"));
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    /** Signed public post/just grant for the result Land, not a private key or data. */
+    class $rise_bench_archive_seed extends $mol_object {
+        static bytes = new Uint8Array([76, 65, 78, 68, 9, 212, 44, 154, 255, 14, 96, 10, 136, 26, 73, 199, 0, 0, 0, 0, 0, 0, 0, 0, 253, 63, 1, 0, 139, 176, 233, 106, 9, 212, 44, 154, 255, 14, 96, 10, 136, 26, 73, 199, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 254, 131, 2, 0, 139, 176, 233, 106, 9, 212, 44, 154, 255, 14, 96, 10, 136, 26, 73, 199, 241, 85, 138, 73, 112, 199, 124, 123, 68, 6, 185, 190, 194, 27, 94, 118, 169, 2, 18, 121, 13, 234, 180, 83, 85, 126, 55, 125, 35, 163, 21, 179, 54, 235, 32, 73, 72, 149, 122, 140, 201, 105, 80, 32, 212, 129, 251, 221, 124, 12, 235, 250, 73, 187, 195, 219, 52, 188, 89, 205, 100, 162, 134, 51, 156, 68, 77, 124, 226, 101, 45, 141, 172, 219, 4, 14, 129, 216, 17, 54, 183, 120, 163, 108, 52, 49, 79, 46, 106, 255, 247, 176, 10, 29, 235, 20, 235, 4, 153, 6, 255, 246, 32, 121, 180, 60, 71, 12, 42, 227, 51, 55, 213, 14, 32, 110, 96, 84, 177, 50, 94, 193, 103, 39, 25, 230, 73, 78, 205, 43, 84, 108, 197, 247, 80, 23, 108, 108, 246, 3, 199, 219, 38, 228, 200, 148, 1, 218, 234, 169, 58, 10, 15, 148, 227, 220, 185, 66, 156, 110, 12, 241, 98, 123, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+        static apply() {
+            const pack = $mol_wire_sync($giper_baza_pack).from(this.bytes.buffer);
+            const parts = $mol_wire_sync(pack).parts();
+            $mol_wire_sync($giper_baza_glob).apply_parts(parts);
+            return true;
+        }
+    }
+    __decorate([
+        $mol_mem
+    ], $rise_bench_archive_seed, "apply", null);
+    $.$rise_bench_archive_seed = $rise_bench_archive_seed;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    /** Small result metadata only. Never stores a workload Land or database name. */
+    class $rise_bench_archive extends $mol_object {
+        static link = 'CdQsmv8O_YAqIGknH';
+        static operations(kind) {
+            return kind === 'text' ? ['Вставка, с', 'Добавить символ, с', 'F5, с']
+                : ['Запуск БД, с', 'Создание, с', 'Поиск, с', 'Добавить 1, с', 'F5, с', 'Поиск после F5, с'];
+        }
+        static preset = [[null, $giper_baza_rank_post('just')]];
+        static provision() {
+            this.$.$giper_baza_auth.current().pass();
+            const land = $mol_wire_sync($giper_baza_glob).land_grab(this.preset);
+            land.Data($giper_baza_dict).dive('title', $giper_baza_atom_text, null).val('Rise benchmark results');
+            $mol_wire_sync(land).units_saving();
+            return land.link().str;
+        }
+        static root() {
+            if (!this.link)
+                throw new Error('Не настроен общий Land результатов');
+            $rise_bench_archive_seed.apply();
+            return $giper_baza_glob.Land(new $giper_baza_link(this.link)).Data($giper_baza_dict);
+        }
+        static validate(value, operations) {
+            if (!value || typeof value !== 'object')
+                return null;
+            const row = value;
+            if (typeof row.id !== 'string' || !/^[\da-f-]{36}$/.test(row.id))
+                return null;
+            if (!Number.isSafeInteger(row.count) || row.count < 1 || row.count > 10000)
+                return null;
+            if (![0, 4, 10].includes(row.properties) || !['Готово', 'Ошибка', 'Остановлено'].includes(row.state))
+                return null;
+            if (typeof row.stamp !== 'string' || !/^\d{2}\.\d{2}\.\d{4} \d{2}:\d{2}:\d{2}$/.test(row.stamp))
+                return null;
+            if (row.error !== undefined && (typeof row.error !== 'string' || row.error.length > 2000))
+                return null;
+            if (typeof row.baza_version !== 'string' || !/^(?:[\da-f]{40}|—)$/.test(row.baza_version))
+                return null;
+            if (typeof row.benchmark_version !== 'string' || !/^\d+\.\d+\.\d+$/.test(row.benchmark_version))
+                return null;
+            if (row.engine !== undefined && !Object.hasOwn($rise_bench_engine, row.engine))
+                return null;
+            if (row.engine_version !== undefined && (typeof row.engine_version !== 'string' || !/^[\w.\-—]{1,80}$/.test(row.engine_version)))
+                return null;
+            if (row.computer !== undefined && (typeof row.computer !== 'string' || row.computer.length > 8000))
+                return null;
+            if (row.browser !== undefined && (typeof row.browser !== 'string' || row.browser.length > 4000))
+                return null;
+            if (row.bytes != null && (!Number.isSafeInteger(row.bytes) || row.bytes < 0 || row.bytes > 100_000_000))
+                return null;
+            if (!row.metrics || typeof row.metrics !== 'object')
+                return null;
+            const metrics = {};
+            for (const name of operations) {
+                // Older results and native Baza do not have a separate initialization phase.
+                const time = name === 'Запуск БД, с' ? row.metrics[name] ?? null : row.metrics[name];
+                if (time !== null && (typeof time !== 'number' || !Number.isFinite(time) || time < 0))
+                    return null;
+                metrics[name] = time;
+            }
+            return { id: row.id, count: row.count, properties: row.properties, stamp: row.stamp, state: row.state, error: row.error ?? '',
+                baza_version: row.baza_version, benchmark_version: row.benchmark_version, engine: row.engine, engine_version: row.engine_version, computer: row.computer ?? '', browser: row.browser ?? '', bytes: row.bytes ?? null, metrics };
+        }
+        static save(kind, row) {
+            if (kind !== 'text' && !Object.hasOwn($rise_bench_engine, kind))
+                throw new Error('Неизвестный бенчмарк');
+            const validated = this.validate(row, this.operations(kind));
+            if (!validated)
+                throw new Error('Некорректный результат бенчмарка');
+            if (validated.engine !== undefined && validated.engine !== (kind === 'text' ? 'goods' : kind))
+                throw new Error('Движок результата не соответствует нагрузке');
+            const atom = this.root().dive(kind + ':' + row.id, $giper_baza_atom_text, null);
+            if (!atom)
+                throw new Error('Нет доступа к результатам');
+            atom.val(JSON.stringify(validated));
+            $mol_wire_sync(this.root().land()).units_saving();
+        }
+        static rows(kind) {
+            const root = this.root();
+            return root.keys().filter(key => typeof key === 'string' && key.startsWith(kind + ':')).flatMap(key => {
+                const run = this.row(key);
+                return run ? [run] : [];
+            });
+        }
+        static row(key) {
+            const kind = key.split(':')[0];
+            const text = this.root().dive(key, $giper_baza_atom_text)?.val();
+            const row = text && $mol_error_fence(() => this.validate(JSON.parse(text), this.operations(kind)), () => null);
+            if (!row || key !== kind + ':' + row.id)
+                return null;
+            const run = new ($mol_wire_sync($rise_bench_run))(row.count, row.properties, row.stamp, row.baza_version ?? '—', row.benchmark_version ?? '—', row.id, row.computer ?? '', row.browser ?? '', row.engine, row.engine_version);
+            run.state(row.state);
+            run.failure(row.error ?? '');
+            run.bytes(row.bytes ?? null);
+            for (const [operation, value] of Object.entries(row.metrics))
+                if (typeof value === 'number')
+                    run.metric(operation, value);
+            return run;
+        }
+    }
+    __decorate([
+        $mol_action
+    ], $rise_bench_archive, "provision", null);
+    __decorate([
+        $mol_mem
+    ], $rise_bench_archive, "root", null);
+    __decorate([
+        $mol_action
+    ], $rise_bench_archive, "save", null);
+    __decorate([
+        $mol_mem_key
+    ], $rise_bench_archive, "rows", null);
+    __decorate([
+        $mol_mem_key
+    ], $rise_bench_archive, "row", null);
+    $.$rise_bench_archive = $rise_bench_archive;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    /** Stable URL order and backwards compatibility with the old `all` links. */
+    function $rise_bench_selection(value, options) {
+        if (value === 'all')
+            return [...options];
+        const selected = new Set(value.split(','));
+        return options.filter(key => selected.has(key));
+    }
+    $.$rise_bench_selection = $rise_bench_selection;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    /** A fixed, sequential matrix. Selection changes never alter a running batch. */
+    function $rise_bench_batch(engine, count, schema, text = false) {
+        const engines = text ? ['text'] : $rise_bench_selection(engine, Object.keys($rise_bench_engine));
+        const counts = $rise_bench_selection(count, (text ? [100, 500, 1000, 2000, 5000] : [1, 10, 100, 500, 1000, 2000, 3000, 4000, 5000, 10000]).map(String));
+        const schemas = text ? ['compact'] : $rise_bench_selection(schema, ['compact', 'full']);
+        return engines.flatMap(engine => schemas.flatMap(schema => counts.map(count => ({ engine, count, schema }))));
+    }
+    $.$rise_bench_batch = $rise_bench_batch;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    /**
+     * Serialize csv data with delimiter
+     * @see https://mol.hyoo.ru/#!section=demos/demo=mol_csv_serial
+     */
+    function $mol_csv_serial(data, delimiter = ',') {
+        const fields = new Set();
+        for (const item of data) {
+            for (const field of Object.keys(item)) {
+                fields.add(field);
+            }
+        }
+        const rows = [[...fields]];
+        for (const item of data) {
+            const row = [];
+            rows.push(row);
+            for (const field of fields) {
+                row.push(String(item[field] ?? ''));
+            }
+        }
+        return $mol_csv_serial_table(rows, delimiter);
+    }
+    $.$mol_csv_serial = $mol_csv_serial;
+    function $mol_csv_serial_table(rows, delimiter = ',') {
+        return rows.map(row => row.map(cell => '"' + String(cell).replace(/"/g, '""') + '"').join(delimiter)).join('\n');
+    }
+    $.$mol_csv_serial_table = $mol_csv_serial_table;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    /** UTF-8 with BOM and semicolons opens correctly in Russian Windows Excel. */
+    function $rise_bench_csv(rows, columns) {
+        const cell = (value) => {
+            const text = String(value ?? '');
+            // Quoting alone does not protect spreadsheet applications from formulas.
+            return typeof value === 'string' && /^[=+@\-\t\r]/.test(text) ? "'" + text : text;
+        };
+        return '\uFEFF' + $mol_csv_serial_table([[...columns], ...rows.map(row => columns.map(key => cell(row[key])))], ';');
+    }
+    $.$rise_bench_csv = $rise_bench_csv;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    /** Retain every seed Land until peer URLs have live reactive consumers. */
+    class $rise_bench_seed extends $mol_object {
+        static lands() {
+            const pack = $mol_wire_sync($giper_baza_pack).from($mol_file.relative('web.baza').buffer());
+            const parts = $mol_wire_sync(pack).parts();
+            const lands = parts.map(([id]) => $giper_baza_glob.Land(new $giper_baza_link(id)));
+            $mol_wire_sync($giper_baza_glob).apply_parts(parts);
+            return lands;
+        }
+    }
+    __decorate([
+        $mol_mem
+    ], $rise_bench_seed, "lands", null);
+    $.$rise_bench_seed = $rise_bench_seed;
+})($ || ($ = {}));
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $rise_bench_host extends $.$rise_bench_host {
+            menu_title() { return this.title(); }
+            compare() { return this.kind() === 'goods'; }
+            text_mode() { return this.kind() === 'text'; }
+            mode(next) { return $mol_state_arg.value('results', next) === 'charts' ? 'charts' : 'table'; }
+            fixture_kind() { return (this.active_case() ?? this.display_case())?.engine ?? (this.compare() ? this.selected_engines()[0] ?? 'goods' : this.kind()); }
+            engine(next) {
+                if (next !== undefined)
+                    this.display_case(null);
+                if (next !== undefined && next !== ($mol_state_arg.value('engine') ?? 'goods'))
+                    this.ready(false);
+                return $mol_state_arg.value('engine', next) ?? 'goods';
+            }
+            count(next) {
+                if (next !== undefined)
+                    this.display_case(null);
+                const key = this.kind() === 'text' ? 'lines' : 'count';
+                if (next !== undefined && next !== ($mol_state_arg.value(key) ?? '100'))
+                    this.ready(false);
+                return $mol_state_arg.value(key, next) ?? '100';
+            }
+            schema(next) {
+                if (next !== undefined)
+                    this.display_case(null);
+                if (next !== undefined && next !== ($mol_state_arg.value('schema') ?? 'compact'))
+                    this.ready(false);
+                return $mol_state_arg.value('schema', next) ?? 'compact';
+            }
+            selected_engines(next) { return $rise_bench_selection(this.engine(next?.join(',')), Object.keys($rise_bench_engine)); }
+            selected_counts(next) { return $rise_bench_selection(this.count(next?.join(',')), Object.keys(this.Controls().counts())); }
+            selected_schemas(next) { return $rise_bench_selection(this.schema(next?.join(',')), ['compact', 'full']); }
+            chart_selection_value;
+            chart_selection(next) {
+                if (next !== undefined)
+                    this.chart_selection_value = next;
+                return this.chart_selection_value ?? this.runs().slice(0, 20).map(run => run.id);
+            }
+            ready(next = false) { return next; }
+            busy(next = false) { return next; }
+            active_case(next = null) { return next; }
+            display_case(next = null) { return next; }
+            frame_generation(next = 0) { return next; }
+            queue = [];
+            total = 0;
+            finished = 0;
+            failed = 0;
+            command_sent = false;
+            progress = null;
+            timing_value = { batch: 0, step: 0, ended: 0 };
+            timing(next) {
+                if (next !== undefined)
+                    this.timing_value = next;
+                return this.timing_value;
+            }
+            elapsed_text() {
+                const timing = this.timing();
+                if (!timing.batch)
+                    return '';
+                const now = timing.ended || $mol_state_time.now(1000);
+                return `Текущий этап: ${this.duration(now - timing.step)} · Всего: ${this.duration(now - timing.batch)}`;
+            }
+            duration(milliseconds) {
+                const seconds = Math.max(0, Math.floor(milliseconds / 1000));
+                return [Math.floor(seconds / 3600), Math.floor(seconds / 60) % 60, seconds % 60].map(value => String(value).padStart(2, '0')).join(':');
+            }
+            settled = new Set();
+            engine_title(engine) { return engine === 'text' ? 'CRDT-текст' : $rise_bench_engine[engine].title; }
+            controls_enabled() { return !this.busy(); }
+            run_enabled() { return this.ready() && this.controls_enabled() && this.selected_counts().length > 0 && (this.text_mode() || this.selected_engines().length > 0 && this.selected_schemas().length > 0); }
+            config() { const current = this.active_case() ?? this.display_case(); return { count: current?.count ?? this.selected_counts()[0] ?? '100', schema: current?.schema ?? this.selected_schemas()[0] ?? 'compact' }; }
+            send(command, data) {
+                const target = this.Frame().dom_node().contentWindow;
+                if (!target || !this.ready())
+                    throw new Error('Дождитесь загрузки бенчмарка');
+                target.postMessage({ type: 'rise-bench-command', kind: this.fixture_kind(), id: crypto.randomUUID(), command, data }, location.origin);
+            }
+            run() {
+                if (this.active_case() || !this.run_enabled())
+                    return;
+                this.queue = $rise_bench_batch(this.engine(), this.count(), this.schema(), this.text_mode());
+                this.total = this.queue.length;
+                this.finished = 0;
+                this.failed = 0;
+                this.settled.clear();
+                this.timing({ batch: Date.now(), step: Date.now(), ended: 0 });
+                this.next_case();
+            }
+            next_case() {
+                this.progress = null;
+                this.command_sent = false;
+                const next = this.queue.shift();
+                if (next || !this.display_case())
+                    this.ready(false);
+                this.active_case(next ? { ...next, token: crypto.randomUUID() } : null);
+                if (next || !this.display_case())
+                    this.frame_generation(this.frame_generation() + 1);
+                this.busy(Boolean(next));
+                if (!next) {
+                    this.timing({ ...this.timing(), ended: Date.now() });
+                    this.status(`Завершено ${this.finished} из ${this.total}; ошибки: ${this.failed}`);
+                    return;
+                }
+                this.timing({ ...this.timing(), step: Date.now() });
+                this.status(`${this.finished + 1}/${this.total}: ${this.engine_title(next.engine)}, ${next.count} — загрузка`);
+            }
+            fail_case() {
+                const active = this.active_case();
+                if (!active)
+                    return;
+                this.finish_case({ ...this.partial_row(), state: 'Ошибка', error: `${this.progress?.operation ?? 'Загрузка'}: ошибка выполнения` }, active.engine);
+            }
+            partial_row() {
+                const active = this.active_case();
+                return this.progress?.row ?? {
+                    id: crypto.randomUUID(), count: Number(active.count), properties: this.text_mode() ? 0 : active.schema === 'full' ? 10 : 4,
+                    stamp: new $mol_time_moment().toString('DD.MM.YYYY hh:mm:ss'), state: 'Ошибка',
+                    baza_version: active.engine === 'goods' || active.engine === 'text' ? $rise_bench_run_baza_version : '—',
+                    benchmark_version: $rise_bench_run_benchmark_version, engine: active.engine === 'text' ? 'goods' : active.engine,
+                    engine_version: active.engine === 'text' ? $rise_bench_run_baza_version : $rise_bench_engine[active.engine].version,
+                    computer: this.Controls().computer(), browser: navigator.userAgent,
+                    metrics: Object.fromEntries(this.operations().map(name => [name, null])),
+                };
+            }
+            stop() {
+                const active = this.active_case();
+                if (!active)
+                    return;
+                const row = { ...this.partial_row(), state: 'Остановлено', error: `Остановлено пользователем · ${this.progress?.operation ?? 'Загрузка'}` };
+                this.settled.add(active.token);
+                this.queue = [];
+                this.display_case(null);
+                this.active_case(null);
+                this.busy(false);
+                this.ready(false);
+                this.command_sent = false;
+                this.progress = null;
+                this.timing({ ...this.timing(), ended: Date.now() });
+                // A new document tears down the old workload, its listeners and SQL workers.
+                this.frame_generation(this.frame_generation() + 1);
+                this.status(`Остановлено. Завершено ${this.finished} из ${this.total}`);
+                $mol_wire_async(this).accept(row, active.engine).catch(error => $mol_fail_log(error));
+            }
+            finish_case(row, kind) {
+                const active = this.active_case();
+                if (!active || this.settled.has(active.token))
+                    return;
+                this.settled.add(active.token);
+                ++this.finished;
+                if (row.state === 'Ошибка')
+                    ++this.failed;
+                this.display_case(row.state === 'Готово' && !this.queue.length ? active : null);
+                $mol_wire_async(this).accept(row, kind).catch(error => $mol_fail_log(error));
+                this.next_case();
+            }
+            operations() {
+                return $rise_bench_archive.operations(this.kind());
+            }
+            fixture_uri() {
+                const url = new URL(location.href);
+                // The measured document runs the workload, not the parent unit-test suite.
+                url.pathname = url.pathname.replace(/\/test\.html$/, '/index.html');
+                url.searchParams.set('rise_fixture', this.fixture_kind());
+                url.searchParams.set('rise_generation', String(this.frame_generation()));
+                url.searchParams.set('rise_selection', [this.engine(), this.count(), this.schema()].join(':'));
+                const active = this.active_case() ?? this.display_case();
+                if (active)
+                    url.searchParams.set('rise_run', active.token);
+                else
+                    url.searchParams.delete('rise_run');
+                const config = this.config();
+                url.hash = '!count=' + config.count + '/lines=' + config.count + '/schema=' + config.schema;
+                return url.href;
+            }
+            runs() {
+                const rows = this.compare() ? Object.keys($rise_bench_engine).flatMap(kind => $rise_bench_archive.rows(kind)) : $rise_bench_archive.rows(this.kind());
+                const date = (value) => value.replace(/^(\d{2})\.(\d{2})\.(\d{4})/, '$3-$2-$1');
+                return [...rows].sort((a, b) => date(b.stamp).localeCompare(date(a.stamp)));
+            }
+            pages() { return this.kind() === 'demo' ? [this.Results()] : super.pages(); }
+            csv_filename() { return `rise-${this.text_mode() ? 'text' : 'entities'}-v${$rise_bench_run_benchmark_version}.csv`; }
+            csv_title() { return $mol_window.size().width < 640 ? 'CSV' : 'Скачать CSV'; }
+            csv_blob() {
+                const columns = [...this.Metrics().col_ids(), 'Браузер'];
+                const runs = this.runs();
+                const rows = this.Metrics().records().map((record, index) => ({
+                    ...record, 'Компьютер': runs[index].computer, 'Браузер': runs[index].browser,
+                    ...Object.fromEntries(this.operations().map(operation => [operation, runs[index].metric(operation)])),
+                }));
+                return new $mol_blob([$rise_bench_csv(rows, columns)], { type: 'text/csv;charset=utf-8' });
+            }
+            results_body() { return this.kind() === 'demo' ? [this.Frame()] : [this.mode() === 'charts' ? this.Charts() : this.History(), this.Frame()]; }
+            retry_visible() { return this.outbox().length > 0; }
+            outbox(next) {
+                return $mol_state_local.value('$rise_bench_outbox_' + this.kind(), next) ?? [];
+            }
+            accept(row, kind) {
+                if (!this.outbox().some(item => item.id === row.id))
+                    this.outbox([...this.outbox(), { ...row, kind }]);
+                const result = this.retry();
+                if (!this.total && row.state === 'Ошибка' && !this.outbox().some(item => item.id === row.id))
+                    this.status('Бенчмарк завершился с ошибкой. Доступные измерения сохранены.');
+                return result;
+            }
+            retry() {
+                return $mol_error_fence(() => {
+                    for (const row of this.outbox()) {
+                        $mol_wire_sync($rise_bench_archive).save(row.kind ?? this.kind(), row);
+                        this.outbox(this.outbox().filter(item => item.id !== row.id));
+                    }
+                    if (!this.total)
+                        this.status('Результаты сохранены');
+                }, error => { this.status('Не удалось сохранить результат. Нажмите «Повторить сохранение».'); return error; });
+            }
+            restored = false;
+            restore_outbox() {
+                if (this.restored)
+                    return;
+                this.restored = true;
+                if (this.outbox().length)
+                    $mol_wire_async(this).retry().catch(error => $mol_fail_log(error));
+            }
+            listener() {
+                const receive = (event) => {
+                    if (event.origin !== location.origin || event.source !== this.Frame().dom_node().contentWindow)
+                        return;
+                    if (event.data?.kind !== this.fixture_kind())
+                        return;
+                    const active = this.active_case();
+                    if (event.data?.token !== (active?.token ?? this.display_case()?.token ?? null))
+                        return;
+                    if (event.data.type === 'rise-bench-progress') {
+                        if (!active || !this.command_sent || typeof event.data.operation !== 'string' || !Number.isFinite(event.data.started))
+                            return;
+                        const row = $rise_bench_archive.validate(event.data.row, this.operations());
+                        if (!row || row.count !== Number(active.count) || row.engine !== (active.engine === 'text' ? 'goods' : active.engine))
+                            return;
+                        if (this.progress?.operation === event.data.operation && this.progress?.started === event.data.started)
+                            return;
+                        this.progress = { operation: event.data.operation, started: event.data.started, row };
+                        this.timing({ ...this.timing(), step: event.data.started });
+                        this.status(`${this.finished + 1}/${this.total}: ${this.engine_title(active.engine)}, ${active.count} — ${event.data.operation}`);
+                        return;
+                    }
+                    if (event.data.type === 'rise-bench-state') {
+                        const config = this.config();
+                        if (event.data.count !== config.count || this.kind() !== 'text' && event.data.schema !== config.schema)
+                            return;
+                        this.ready(true);
+                        this.busy(Boolean(active) || event.data.busy === true);
+                        if (active && !this.command_sent && !event.data.busy) {
+                            this.command_sent = true;
+                            this.send('run', config);
+                        }
+                        if (typeof event.data.error === 'string') {
+                            if (active)
+                                this.fail_case();
+                            else
+                                this.status(event.data.error);
+                        }
+                        return;
+                    }
+                    if (event.data.type !== 'rise-bench-result')
+                        return;
+                    const row = $rise_bench_archive.validate(event.data.row, this.operations());
+                    if (!row)
+                        return;
+                    if (active)
+                        this.finish_case(row, event.data.kind);
+                };
+                window.addEventListener('message', receive);
+                return { destructor: () => window.removeEventListener('message', receive) };
+            }
+            destructor() {
+                this.queue = [];
+                super.destructor();
+            }
+            auto() {
+                if (this.kind() === 'demo')
+                    return [];
+                this.listener();
+                this.restore_outbox();
+                $rise_bench_seed.lands();
+                $giper_baza_glob.yard().sync();
+                return [];
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $rise_bench_host.prototype, "mode", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bench_host.prototype, "engine", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bench_host.prototype, "count", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bench_host.prototype, "schema", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bench_host.prototype, "chart_selection", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bench_host.prototype, "ready", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bench_host.prototype, "busy", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bench_host.prototype, "active_case", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bench_host.prototype, "display_case", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bench_host.prototype, "frame_generation", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bench_host.prototype, "timing", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_host.prototype, "send", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_host.prototype, "run", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_host.prototype, "next_case", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_host.prototype, "fail_case", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_host.prototype, "stop", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_host.prototype, "finish_case", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bench_host.prototype, "fixture_uri", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bench_host.prototype, "runs", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bench_host.prototype, "csv_blob", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bench_host.prototype, "outbox", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_host.prototype, "accept", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_host.prototype, "retry", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_host.prototype, "restore_outbox", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bench_host.prototype, "listener", null);
+        $$.$rise_bench_host = $rise_bench_host;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_define($rise_bench_host, {
+        Results: { flex: { grow: 1, shrink: 1 }, minWidth: $mol_style_unit.px(640), '@media': { '(max-width: 640px)': { minWidth: $mol_style_unit.per(100) } } },
+        Frame: { width: $mol_style_unit.per(100), height: $mol_style_unit.vh(75), flex: { shrink: 0 } },
+        History: { maxHeight: $mol_style_unit.rem(28), flex: { grow: 0, shrink: 0 } },
+    });
+})($ || ($ = {}));
+
+;
+	($.$mol_list_demo) = class $mol_list_demo extends ($.$mol_example_small) {
+		items_count(next){
+			if(next !== undefined) return next;
+			return 50;
+		}
+		Items_count(){
+			const obj = new this.$.$mol_number();
+			(obj.value) = (next) => ((this.items_count(next)));
+			(obj.value_min) = () => (0);
+			(obj.value_max) = () => (100000);
+			return obj;
+		}
+		Items_count_label(){
+			const obj = new this.$.$mol_labeler();
+			(obj.title) = () => ("Items count");
+			(obj.content) = () => ([(this.Items_count())]);
+			return obj;
+		}
+		item_title(id){
+			return "";
+		}
+		Item(id){
+			const obj = new this.$.$mol_link();
+			(obj.title) = () => ((this.item_title(id)));
+			return obj;
+		}
+		list_items(){
+			return [(this.Item("0"))];
+		}
+		List_empty(){
+			const obj = new this.$.$mol_paragraph();
+			(obj.title) = () => ("No items in this list");
+			return obj;
+		}
+		Items(){
+			const obj = new this.$.$mol_list();
+			(obj.rows) = () => ((this.list_items()));
+			(obj.Empty) = () => ((this.List_empty()));
+			return obj;
+		}
+		sub(){
+			return [(this.Items_count_label()), (this.Items())];
+		}
+		tags(){
+			return [
+				"list", 
+				"rows", 
+				"stack"
+			];
+		}
+		aspects(){
+			return ["Widget/Layout"];
+		}
+	};
+	($mol_mem(($.$mol_list_demo.prototype), "items_count"));
+	($mol_mem(($.$mol_list_demo.prototype), "Items_count"));
+	($mol_mem(($.$mol_list_demo.prototype), "Items_count_label"));
+	($mol_mem_key(($.$mol_list_demo.prototype), "Item"));
+	($mol_mem(($.$mol_list_demo.prototype), "List_empty"));
+	($mol_mem(($.$mol_list_demo.prototype), "Items"));
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $mol_list_demo extends $.$mol_list_demo {
+            item_title(id) {
+                return `Item #${id + 1}`;
+            }
+            list_items() {
+                const rows = [];
+                for (let key = 0; key < this.items_count(); key++) {
+                    rows.push(this.Item(key));
+                }
+                return rows;
+            }
+        }
+        $$.$mol_list_demo = $mol_list_demo;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+	($.$mol_row) = class $mol_row extends ($.$mol_view) {};
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/row/row.view.css", "[mol_row] {\n\tdisplay: flex;\n\tflex-wrap: wrap;\n\talign-items: flex-start;\n\talign-content: flex-start;\n\tjustify-content: flex-start;\n\tpadding: var(--mol_gap_block);\n\tgap: var(--mol_gap_block);\n\tflex: 0 0 auto;\n\tbox-sizing: border-box;\n\tmax-width: 100%;\n}\n\n[mol_row] > * {\n\tmax-width: 100%;\n}\n");
+})($ || ($ = {}));
+
+;
+"use strict";
+
+
+;
+	($.$mol_list_demo_table) = class $mol_list_demo_table extends ($.$mol_example) {
+		row_id(id, next){
+			if(next !== undefined) return next;
+			return "0000";
+		}
+		row_checked(id, next){
+			if(next !== undefined) return next;
+			return false;
+		}
+		Id(id){
+			const obj = new this.$.$mol_check_box();
+			(obj.title) = () => ((this.row_id(id)));
+			(obj.checked) = (next) => ((this.row_checked(id, next)));
+			return obj;
+		}
+		Id_labeler(id){
+			const obj = new this.$.$mol_labeler();
+			(obj.title) = () => ("ID");
+			(obj.Content) = () => ((this.Id(id)));
+			return obj;
+		}
+		row_uri(id){
+			return "";
+		}
+		row_title(id){
+			return "";
+		}
+		Title(id){
+			const obj = new this.$.$mol_link_iconed();
+			(obj.uri) = () => ((this.row_uri(id)));
+			(obj.title) = () => ((this.row_title(id)));
+			return obj;
+		}
+		Title_labeler(id){
+			const obj = new this.$.$mol_labeler();
+			(obj.title) = () => ("Product Name");
+			(obj.Content) = () => ((this.Title(id)));
+			return obj;
+		}
+		row_color(id, next){
+			if(next !== undefined) return next;
+			return "";
+		}
+		colors(){
+			return [];
+		}
+		Color(id){
+			const obj = new this.$.$mol_select();
+			(obj.value) = (next) => ((this.row_color(id, next)));
+			(obj.options) = () => ((this.colors()));
+			return obj;
+		}
+		Color_labeler(id){
+			const obj = new this.$.$mol_labeler();
+			(obj.title) = () => ("Color");
+			(obj.Content) = () => ((this.Color(id)));
+			return obj;
+		}
+		row_status(id, next){
+			if(next !== undefined) return next;
+			return "";
+		}
+		status_options(){
+			return {
+				"minor": "Store", 
+				"major": "Sale", 
+				"critical": "Support"
+			};
+		}
+		Status(id){
+			const obj = new this.$.$mol_switch();
+			(obj.value) = (next) => ((this.row_status(id, next)));
+			(obj.options) = () => ((this.status_options()));
+			return obj;
+		}
+		Status_labeler(id){
+			const obj = new this.$.$mol_labeler();
+			(obj.title) = () => ("Status");
+			(obj.Content) = () => ((this.Status(id)));
+			return obj;
+		}
+		row_quantity(id, next){
+			if(next !== undefined) return next;
+			return 0;
+		}
+		Quantity(id){
+			const obj = new this.$.$mol_number();
+			(obj.value) = (next) => ((this.row_quantity(id, next)));
+			return obj;
+		}
+		Quantity_labeler(id){
+			const obj = new this.$.$mol_labeler();
+			(obj.title) = () => ("Quantity");
+			(obj.Content) = () => ((this.Quantity(id)));
+			return obj;
+		}
+		row_moment(id, next){
+			if(next !== undefined) return next;
+			const obj = new this.$.$mol_time_moment();
+			return obj;
+		}
+		Date(id){
+			const obj = new this.$.$mol_date();
+			(obj.value_moment) = (next) => ((this.row_moment(id, next)));
+			return obj;
+		}
+		Date_labeler(id){
+			const obj = new this.$.$mol_labeler();
+			(obj.title) = () => ("Supply Time");
+			(obj.Content) = () => ((this.Date(id)));
+			return obj;
+		}
+		row_content(id){
+			return [
+				(this.Id_labeler(id)), 
+				(this.Title_labeler(id)), 
+				(this.Color_labeler(id)), 
+				(this.Status_labeler(id)), 
+				(this.Quantity_labeler(id)), 
+				(this.Date_labeler(id))
+			];
+		}
+		Row(id){
+			const obj = new this.$.$mol_row();
+			(obj.sub) = () => ((this.row_content(id)));
+			return obj;
+		}
+		rows(){
+			return [(this.Row("0"))];
+		}
+		Rows(){
+			const obj = new this.$.$mol_list();
+			(obj.item_width_min) = (id) => (200);
+			(obj.item_height_min) = (id) => (96);
+			(obj.rows) = () => ((this.rows()));
+			return obj;
+		}
+		title(){
+			return "Large list of rows with dynamic content";
+		}
+		count(){
+			return 100000;
+		}
+		sub(){
+			return [(this.Rows())];
+		}
+		tags(){
+			return [
+				"list", 
+				"table", 
+				"scroll", 
+				"divider", 
+				"grid"
+			];
+		}
+		aspects(){
+			return ["Widget/Layout"];
+		}
+	};
+	($mol_mem_key(($.$mol_list_demo_table.prototype), "row_id"));
+	($mol_mem_key(($.$mol_list_demo_table.prototype), "row_checked"));
+	($mol_mem_key(($.$mol_list_demo_table.prototype), "Id"));
+	($mol_mem_key(($.$mol_list_demo_table.prototype), "Id_labeler"));
+	($mol_mem_key(($.$mol_list_demo_table.prototype), "Title"));
+	($mol_mem_key(($.$mol_list_demo_table.prototype), "Title_labeler"));
+	($mol_mem_key(($.$mol_list_demo_table.prototype), "row_color"));
+	($mol_mem_key(($.$mol_list_demo_table.prototype), "Color"));
+	($mol_mem_key(($.$mol_list_demo_table.prototype), "Color_labeler"));
+	($mol_mem_key(($.$mol_list_demo_table.prototype), "row_status"));
+	($mol_mem_key(($.$mol_list_demo_table.prototype), "Status"));
+	($mol_mem_key(($.$mol_list_demo_table.prototype), "Status_labeler"));
+	($mol_mem_key(($.$mol_list_demo_table.prototype), "row_quantity"));
+	($mol_mem_key(($.$mol_list_demo_table.prototype), "Quantity"));
+	($mol_mem_key(($.$mol_list_demo_table.prototype), "Quantity_labeler"));
+	($mol_mem_key(($.$mol_list_demo_table.prototype), "row_moment"));
+	($mol_mem_key(($.$mol_list_demo_table.prototype), "Date"));
+	($mol_mem_key(($.$mol_list_demo_table.prototype), "Date_labeler"));
+	($mol_mem_key(($.$mol_list_demo_table.prototype), "Row"));
+	($mol_mem(($.$mol_list_demo_table.prototype), "Rows"));
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    /** Lazy computed lists with native Array interface. $mol_range2_array is mutable but all derived ranges are immutable. */
+    function $mol_range2(item = index => index, size = () => Number.POSITIVE_INFINITY) {
+        const source = typeof item === 'function' ? new $mol_range2_array() : item;
+        if (typeof item !== 'function') {
+            item = index => source[index];
+            size = () => source.length;
+        }
+        return new Proxy(source, {
+            get(target, field) {
+                if (typeof field === 'string') {
+                    if (field === 'length')
+                        return size();
+                    const index = Number(field);
+                    if (index < 0)
+                        return undefined;
+                    if (index >= size())
+                        return undefined;
+                    if (index === Math.trunc(index))
+                        return item(index);
+                }
+                return $mol_range2_array.prototype[field];
+            },
+            set(target, field) {
+                return $mol_fail(new TypeError(`Lazy range is read only (trying to set field ${JSON.stringify(field)})`));
+            },
+            ownKeys(target) {
+                return [...Array(size())].map((v, i) => String(i)).concat('length');
+            },
+            getOwnPropertyDescriptor(target, field) {
+                if (field === "length")
+                    return {
+                        value: size(),
+                        writable: true,
+                        enumerable: false,
+                        configurable: false,
+                    };
+                const index = Number(field);
+                if (index === Math.trunc(index))
+                    return {
+                        get: () => this.get(target, field, this),
+                        enumerable: true,
+                        configurable: true,
+                    };
+                return Object.getOwnPropertyDescriptor(target, field);
+            }
+        });
+    }
+    $.$mol_range2 = $mol_range2;
+    class $mol_range2_array extends Array {
+        // Lazy
+        concat(...tail) {
+            if (tail.length === 0)
+                return this;
+            if (tail.length > 1) {
+                let list = this;
+                for (let item of tail)
+                    list = list.concat(item);
+                return list;
+            }
+            return $mol_range2(index => index < this.length ? this[index] : tail[0][index - this.length], () => this.length + tail[0].length);
+        }
+        // Lazy
+        filter(check, context) {
+            const filtered = [];
+            let cursor = -1;
+            return $mol_range2(index => {
+                while (cursor < this.length && index >= filtered.length - 1) {
+                    const val = this[++cursor];
+                    if (check(val, cursor, this))
+                        filtered.push(val);
+                }
+                return filtered[index];
+            }, () => cursor < this.length ? Number.POSITIVE_INFINITY : filtered.length);
+        }
+        // Diligent
+        forEach(proceed, context) {
+            for (let [key, value] of this.entries())
+                proceed.call(context, value, key, this);
+        }
+        // Lazy
+        map(proceed, context) {
+            return $mol_range2(index => proceed.call(context, this[index], index, this), () => this.length);
+        }
+        // Diligent
+        reduce(merge, result) {
+            let index = 0;
+            if (arguments.length === 1) {
+                result = this[index++];
+            }
+            for (; index < this.length; ++index) {
+                result = merge(result, this[index], index, this);
+            }
+            return result;
+        }
+        // Lazy
+        toReversed() {
+            return $mol_range2(index => this[this.length - 1 - index], () => this.length);
+        }
+        // Lazy
+        slice(from = 0, to = this.length) {
+            return $mol_range2(index => this[from + index], () => Math.min(to, this.length) - from);
+        }
+        // Lazy
+        some(check, context) {
+            for (let index = 0; index < this.length; ++index) {
+                if (check.call(context, this[index], index, this))
+                    return true;
+            }
+            return false;
+        }
+        every(check, context) {
+            for (let index = 0; index < this.length; ++index) {
+                if (!check.call(context, this[index], index, this))
+                    return false;
+            }
+            return true;
+        }
+        reverse() {
+            return $mol_fail(new TypeError(`Mutable reverse is forbidden. Use toReversed instead.`));
+        }
+        sort() {
+            return $mol_fail(new TypeError(`Mutable sort is forbidden. Use toSorted instead.`));
+        }
+        indexOf(needle) {
+            return this.findIndex(item => item === needle);
+        }
+        [Symbol.toPrimitive]() {
+            return $mol_guid();
+        }
+    }
+    $.$mol_range2_array = $mol_range2_array;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    function $mol_array_lottery(list) {
+        return list[Math.floor(Math.random() * list.length)];
+    }
+    $.$mol_array_lottery = $mol_array_lottery;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    class $mol_unit extends $mol_object {
+        'valueOf()';
+        constructor(value) {
+            super();
+            if (value !== undefined)
+                this['valueOf()'] = value;
+        }
+        prefix() {
+            return '';
+        }
+        postfix() {
+            return '';
+        }
+        [Symbol.toPrimitive](hint) {
+            switch (hint) {
+                case 'number': return this.valueOf();
+                case 'string': return this.toString();
+                default: return this.toString();
+            }
+        }
+        valueOf() {
+            return this['valueOf()'];
+        }
+        delimiter() {
+            return ' ';
+        }
+        value_view() {
+            return this.valueOf().toLocaleString();
+        }
+        toString() {
+            return this.prefix() + this.value_view() + this.postfix();
+        }
+        static summ(a, b) {
+            var Class = a.constructor;
+            if (Class !== b.constructor)
+                throw new Error(`Not same measure: ${Class} , ${b.constructor}`);
+            return new Class(a.valueOf() + b.valueOf());
+        }
+        mult(m) {
+            var Class = this.constructor;
+            return new Class(this.valueOf() * m);
+        }
+    }
+    $.$mol_unit = $mol_unit;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    class $mol_unit_money extends $mol_unit {
+    }
+    $.$mol_unit_money = $mol_unit_money;
+    class $mol_unit_money_usd extends $mol_unit_money {
+        prefix() {
+            return '$';
+        }
+    }
+    $.$mol_unit_money_usd = $mol_unit_money_usd;
+    class $mol_unit_money_rub extends $mol_unit_money {
+        postfix() {
+            return ' ₽';
+        }
+    }
+    $.$mol_unit_money_rub = $mol_unit_money_rub;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    function $mol_stub_strings(prefix = '', count = 10, length = 10) {
+        if (prefix.length >= length)
+            return [];
+        let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz".split('');
+        let strings = [];
+        for (let i = 0; i < count; i++) {
+            let text = prefix;
+            for (let j = prefix.length; j < length; j++) {
+                text += $mol_array_lottery(possible);
+            }
+            strings.push(text);
+        }
+        return strings;
+    }
+    $.$mol_stub_strings = $mol_stub_strings;
+    function $mol_stub_code(length = 8) {
+        var max = Math.pow(16, length);
+        var min = Math.pow(16, length - 1);
+        var value = min + Math.floor(Math.random() * (max - min));
+        return value.toString(16).toUpperCase();
+    }
+    $.$mol_stub_code = $mol_stub_code;
+    function $mol_stub_price(max = 1000) {
+        var min = Math.floor(max / 16 / 16);
+        var value = min + Math.floor(Math.random() * (max - min));
+        return new $mol_unit_money_usd(value);
+    }
+    $.$mol_stub_price = $mol_stub_price;
+    function $mol_stub_product_name() {
+        var name = $mol_array_lottery([
+            'Monitor 15"',
+            'Monitor 17"',
+            'Monitor 19"',
+            'Graphics card',
+            'Frame grabber card'
+        ]);
+        var port = $mol_array_lottery(['D-SUB', 'DVI', 'HDMI']);
+        var resolution = $mol_array_lottery(['VGA', 'Full HD', '4K']);
+        return [name, port, resolution].join(', ');
+    }
+    $.$mol_stub_product_name = $mol_stub_product_name;
+    function $mol_stub_company_name_big() {
+        var product = $mol_array_lottery(['Everything', 'Something', 'Anything', 'Nothing']);
+        var type = $mol_array_lottery(['Company', 'Corporation', 'Holding']);
+        return `A ${type} that makes ${product}`;
+    }
+    $.$mol_stub_company_name_big = $mol_stub_company_name_big;
+    function $mol_stub_company_name_small() {
+        return $mol_array_lottery(['ACME inc.', 'Dream Company', 'Just Company']);
+    }
+    $.$mol_stub_company_name_small = $mol_stub_company_name_small;
+    function $mol_stub_company_name() {
+        return $mol_array_lottery([$mol_stub_company_name_small, $mol_stub_company_name_big])();
+    }
+    $.$mol_stub_company_name = $mol_stub_company_name;
+    function $mol_stub_person_name() {
+        var first = $mol_array_lottery(['Ivan', 'Petr', 'Sidor', 'John', 'Sam']);
+        var last = $mol_array_lottery(['Ivanov', 'Petrov', 'Sidorov', 'Johnson', 'Smith']);
+        return `${first} ${last}`;
+    }
+    $.$mol_stub_person_name = $mol_stub_person_name;
+    function $mol_stub_person_avatar(size = 80) {
+        const id = Math.random().toString(16).slice(2);
+        return `https://gravatar.com/avatar/${id}?d=robohash&s=${size}`;
+    }
+    $.$mol_stub_person_avatar = $mol_stub_person_avatar;
+    function $mol_stub_city() {
+        return $mol_array_lottery(['Moscow', 'London', 'Washington', 'Buenos Aires']);
+    }
+    $.$mol_stub_city = $mol_stub_city;
+    function $mol_stub_time(maxShift = 60 * 24 * 365) {
+        return new $mol_time_moment().shift({ minute: Math.round(Math.random() * maxShift) });
+    }
+    $.$mol_stub_time = $mol_stub_time;
+    function $mol_stub_message(max_length) {
+        const text = ' Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris. Maecenas congue ligula ac quam viverra nec consectetur ante hendrerit. Donec et mollis dolor. Praesent et diam eget libero egestas mattis sit amet vitae augue. Nam tincidunt congue enim, ut porta lorem lacinia consectetur. Donec ut libero sed arcu vehicula ultricies a non tortor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ut gravida lorem. Ut turpis felis, pulvinar a semper sed, adipiscing id dolor. Pellentesque auctor nisi id magna consequat sagittis. Curabitur dapibus enim sit amet elit pharetra tincidunt feugiat nisl imperdiet. Ut convallis libero in urna ultrices accumsan. Donec sed odio eros. Donec viverra mi quis quam pulvinar at malesuada arcu rhoncus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. In rutrum accumsan ultricies. Mauris vitae nisi at sem facilisis semper ac in est.';
+        return text.substring(0, Math.ceil(Math.random() * max_length - 5) + 5);
+    }
+    $.$mol_stub_message = $mol_stub_message;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $.$mol_colors = {
+        aliceblue: "#f0f8ff",
+        antiquewhite: "#faebd7",
+        aqua: "#00ffff",
+        aquamarine: "#7fffd4",
+        azure: "#f0ffff",
+        beige: "#f5f5dc",
+        bisque: "#ffe4c4",
+        black: "#000000",
+        blanchedalmond: "#ffebcd",
+        blue: "#0000ff",
+        blueviolet: "#8a2be2",
+        brown: "#a52a2a",
+        burlywood: "#deb887",
+        cadetblue: "#5f9ea0",
+        chartreuse: "#7fff00",
+        chocolate: "#d2691e",
+        coral: "#ff7f50",
+        cornflowerblue: "#6495ed",
+        cornsilk: "#fff8dc",
+        crimson: "#dc143c",
+        cyan: "#00ffff",
+        darkblue: "#00008b",
+        darkcyan: "#008b8b",
+        darkgoldenrod: "#b8860b",
+        darkgray: "#a9a9a9",
+        darkgreen: "#006400",
+        darkgrey: "#a9a9a9",
+        darkkhaki: "#bdb76b",
+        darkmagenta: "#8b008b",
+        darkolivegreen: "#556b2f",
+        darkorange: "#ff8c00",
+        darkorchid: "#9932cc",
+        darkred: "#8b0000",
+        darksalmon: "#e9967a",
+        darkseagreen: "#8fbc8f",
+        darkslateblue: "#483d8b",
+        darkslategrey: "#2f4f4f",
+        darkturquoise: "#00ced1",
+        darkviolet: "#9400d3",
+        deeppink: "#ff1493",
+        deepskyblue: "#00bfff",
+        dimgray: "#696969",
+        dimgrey: "#696969",
+        dodgerblue: "#1e90ff",
+        firebrick: "#b22222",
+        floralwhite: "#fffaf0",
+        forestgreen: "#228b22",
+        fuchsia: "#ff00ff",
+        gainsboro: "#dcdcdc",
+        ghostwhite: "#f8f8ff",
+        gold: "#ffd700",
+        goldenrod: "#daa520",
+        gray: "#808080",
+        green: "#008000",
+        greenyellow: "#adff2f",
+        grey: "#808080",
+        honeydew: "#f0fff0",
+        hotpink: "#ff69b4",
+        indianred: "#cd5c5c",
+        indigo: "#4b0082",
+        ivory: "#fffff0",
+        khaki: "#f0e68c",
+        lavender: "#e6e6fa",
+        lavenderblush: "#fff0f5",
+        lawngreen: "#7cfc00",
+        lemonchiffon: "#fffacd",
+        lightblue: "#add8e6",
+        lightcoral: "#f08080",
+        lightcyan: "#e0ffff",
+        lightgoldenrodyellow: "#fafad2",
+        lightgray: "#d3d3d3",
+        lightgreen: "#90ee90",
+        lightgrey: "#d3d3d3",
+        lightpink: "#ffb6c1",
+        lightsalmon: "#ffa07a",
+        lightseagreen: "#20b2aa",
+        lightskyblue: "#87cefa",
+        lightslategray: "#778899",
+        lightslategrey: "#778899",
+        lightsteelblue: "#b0c4de",
+        lightyellow: "#ffffe0",
+        lime: "#00ff00",
+        limegreen: "#32cd32",
+        linen: "#faf0e6",
+        magenta: "#ff00ff",
+        maroon: "#800000",
+        mediumaquamarine: "#66cdaa",
+        mediumblue: "#0000cd",
+        mediumorchid: "#ba55d3",
+        mediumpurple: "#9370db",
+        mediumseagreen: "#3cb371",
+        mediumslateblue: "#7b68ee",
+        mediumspringgreen: "#00fa9a",
+        mediumturquoise: "#48d1cc",
+        mediumvioletred: "#c71585",
+        midnightblue: "#191970",
+        mintcream: "#f5fffa",
+        mistyrose: "#ffe4e1",
+        moccasin: "#ffe4b5",
+        navajowhite: "#ffdead",
+        navy: "#000080",
+        oldlace: "#fdf5e6",
+        olive: "#808000",
+        olivedrab: "#6b8e23",
+        orange: "#ffa500",
+        orangered: "#ff4500",
+        orchid: "#da70d6",
+        palegoldenrod: "#eee8aa",
+        palegreen: "#98fb98",
+        paleturquoise: "#afeeee",
+        palevioletred: "#db7093",
+        papayawhip: "#ffefd5",
+        peachpuff: "#ffdab9",
+        peru: "#cd853f",
+        pink: "#ffc0cb",
+        plum: "#dda0dd",
+        powderblue: "#b0e0e6",
+        purple: "#800080",
+        rebeccapurple: "#663399",
+        red: "#ff0000",
+        rosybrown: "#bc8f8f",
+        royalblue: "#4169e1",
+        saddlebrown: "#8b4513",
+        salmon: "#fa8072",
+        sandybrown: "#f4a460",
+        seagreen: "#2e8b57",
+        seashell: "#fff5ee",
+        sienna: "#a0522d",
+        silver: "#c0c0c0",
+        skyblue: "#87ceeb",
+        slateblue: "#6a5acd",
+        slategray: "#708090",
+        slategrey: "#708090",
+        snow: "#fffafa",
+        springgreen: "#00ff7f",
+        steelblue: "#4682b4",
+        tan: "#d2b48c",
+        teal: "#008080",
+        thistle: "#d8bfd8",
+        tomato: "#ff6347",
+        turquoise: "#40e0d0",
+        violet: "#ee82ee",
+        wheat: "#f5deb3",
+        white: "#ffffff",
+        whitesmoke: "#f5f5f5",
+        yellow: "#ffff00",
+        yellowgreen: "#9acd32",
+    };
+})($ || ($ = {}));
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $mol_list_demo_table extends $.$mol_list_demo_table {
+            rows() {
+                return $mol_range2(index => this.Row(index), () => this.count());
+            }
+            check_list() {
+                return Array.from({ length: this.count() }, (_, i) => this.Id(i));
+            }
+            row_id(id) {
+                return String(id).padStart(5, '0');
+            }
+            row_title(id) {
+                $mol_wire_solid();
+                return $mol_stub_product_name();
+            }
+            row_quantity(id, next = Math.floor(Math.random() * 100)) {
+                $mol_wire_solid();
+                return next;
+            }
+            row_status(id, next = $mol_array_lottery(Object.keys(this.status_options()))) {
+                $mol_wire_solid();
+                return next;
+            }
+            row_uri(id) {
+                return `http://xkcd.com/${this.row_id(id)}`;
+            }
+            row_moment(id, next = new $mol_time_moment().shift({
+                day: Math.floor(Math.random() * 100)
+            })) {
+                $mol_wire_solid();
+                return next;
+            }
+            colors() {
+                return Object.keys($mol_colors);
+            }
+            row_color(id, next) {
+                $mol_wire_solid();
+                return next ?? $mol_array_lottery(this.colors());
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $mol_list_demo_table.prototype, "rows", null);
+        __decorate([
+            $mol_mem
+        ], $mol_list_demo_table.prototype, "check_list", null);
+        __decorate([
+            $mol_mem_key
+        ], $mol_list_demo_table.prototype, "row_title", null);
+        __decorate([
+            $mol_mem_key
+        ], $mol_list_demo_table.prototype, "row_quantity", null);
+        __decorate([
+            $mol_mem_key
+        ], $mol_list_demo_table.prototype, "row_status", null);
+        __decorate([
+            $mol_mem_key
+        ], $mol_list_demo_table.prototype, "row_uri", null);
+        __decorate([
+            $mol_mem_key
+        ], $mol_list_demo_table.prototype, "row_moment", null);
+        __decorate([
+            $mol_mem
+        ], $mol_list_demo_table.prototype, "colors", null);
+        __decorate([
+            $mol_mem_key
+        ], $mol_list_demo_table.prototype, "row_color", null);
+        $$.$mol_list_demo_table = $mol_list_demo_table;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        const { rem } = $mol_style_unit;
+        $mol_style_define($mol_list_demo_table, {
+            flex: {
+                direction: 'column',
+            },
+            Rows: {
+                flex: {
+                    grow: 1,
+                },
+            },
+            Row: {
+                boxShadow: `0 -1px 0 0 ${$mol_theme.line}`,
+            },
+            Title_labeler: {
+                flex: {
+                    basis: rem(15),
+                },
+            },
+            Color_labeler: {
+                flex: {
+                    basis: rem(10),
+                },
+            },
+            Id_labeler: {
+                flex: {
+                    basis: rem(5),
+                },
+                Label: {
+                    padding: {
+                        inlineStart: '2rem',
+                    },
+                },
+            },
+            Id: {
+                padding: $mol_gap.text,
+            },
+        });
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+	($.$rise_bench_baza_goods_rows) = class $rise_bench_baza_goods_rows extends ($.$mol_list) {};
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        /** Search replaces the set: preserve the viewport, not the previous row identity. */
+        class $rise_bench_baza_goods_rows extends $.$rise_bench_baza_goods_rows {
+            sub() {
+                const rows = this.rows();
+                // Native sub() searches the old row through the entire lazy range.
+                // No identity anchoring here: filtering replaces the result set.
+                return rows.length ? rows : [this.Empty()];
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $rise_bench_baza_goods_rows.prototype, "sub", null);
+        $$.$rise_bench_baza_goods_rows = $rise_bench_baza_goods_rows;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+	($.$rise_bench_baza_goods_table) = class $rise_bench_baza_goods_table extends ($.$mol_list_demo_table) {
+		Compact_id(id){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.row_id(id))]);
+			return obj;
+		}
+		row_description(id){
+			return "";
+		}
+		Description(id){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.row_description(id))]);
+			return obj;
+		}
+		Description_labeler(id){
+			const obj = new this.$.$mol_labeler();
+			(obj.title) = () => ("Description");
+			(obj.content) = () => ([(this.Description(id))]);
+			return obj;
+		}
+		row_tags(id){
+			return [];
+		}
+		Tags(id){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ((this.row_tags(id)));
+			return obj;
+		}
+		Tags_labeler(id){
+			const obj = new this.$.$mol_labeler();
+			(obj.title) = () => ("Tags");
+			(obj.content) = () => ([(this.Tags(id))]);
+			return obj;
+		}
+		Name(id){
+			const obj = new this.$.$mol_dimmer();
+			(obj.haystack) = () => ((this.row_title(id)));
+			(obj.needle) = () => ((this.query()));
+			return obj;
+		}
+		row_date(id){
+			return "";
+		}
+		count(){
+			return 1000;
+		}
+		products(){
+			return [];
+		}
+		compact(){
+			return false;
+		}
+		query(){
+			return "";
+		}
+		color_filter(){
+			return "all";
+		}
+		status_filter(){
+			return "all";
+		}
+		Rows(){
+			const obj = new this.$.$rise_bench_baza_goods_rows();
+			(obj.item_width_min) = (id) => (200);
+			(obj.item_height_min) = (id) => (96);
+			(obj.rows) = () => ((this.rows()));
+			return obj;
+		}
+		Compact_id_labeler(id){
+			const obj = new this.$.$mol_labeler();
+			(obj.title) = () => ("ID");
+			(obj.content) = () => ([(this.Compact_id(id))]);
+			return obj;
+		}
+		Details(id){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.Description_labeler(id)), (this.Tags_labeler(id))]);
+			return obj;
+		}
+		Row(id){
+			const obj = new this.$.$mol_view();
+			(obj.minimal_height) = () => (96);
+			(obj.sub) = () => ((this.row_content(id)));
+			return obj;
+		}
+		Title(id){
+			const obj = new this.$.$mol_link_iconed();
+			(obj.uri) = () => ((this.row_uri(id)));
+			(obj.title) = () => ((this.row_title(id)));
+			(obj.content) = () => ([(this.Name(id))]);
+			return obj;
+		}
+		Date(id){
+			const obj = new this.$.$mol_date();
+			(obj.value_moment) = (next) => ((this.row_moment(id, next)));
+			(obj.trigger_content) = () => ([(this.row_date(id))]);
+			return obj;
+		}
+	};
+	($mol_mem_key(($.$rise_bench_baza_goods_table.prototype), "Compact_id"));
+	($mol_mem_key(($.$rise_bench_baza_goods_table.prototype), "Description"));
+	($mol_mem_key(($.$rise_bench_baza_goods_table.prototype), "Description_labeler"));
+	($mol_mem_key(($.$rise_bench_baza_goods_table.prototype), "Tags"));
+	($mol_mem_key(($.$rise_bench_baza_goods_table.prototype), "Tags_labeler"));
+	($mol_mem_key(($.$rise_bench_baza_goods_table.prototype), "Name"));
+	($mol_mem(($.$rise_bench_baza_goods_table.prototype), "Rows"));
+	($mol_mem_key(($.$rise_bench_baza_goods_table.prototype), "Compact_id_labeler"));
+	($mol_mem_key(($.$rise_bench_baza_goods_table.prototype), "Details"));
+	($mol_mem_key(($.$rise_bench_baza_goods_table.prototype), "Row"));
+	($mol_mem_key(($.$rise_bench_baza_goods_table.prototype), "Title"));
+	($mol_mem_key(($.$rise_bench_baza_goods_table.prototype), "Date"));
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    class $rise_bench_baza_goods_tag extends $giper_baza_entity {
+    }
+    $.$rise_bench_baza_goods_tag = $rise_bench_baza_goods_tag;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    class $rise_bench_baza_goods_product extends $giper_baza_entity.with({
+        Id: $giper_baza_atom_text,
+        Checked: $giper_baza_atom_bool,
+        Uri: $giper_baza_atom_text,
+        Color: $giper_baza_atom_text,
+        Status: $giper_baza_atom_text,
+        Quantity: $giper_baza_atom_real,
+        Supply: $giper_baza_atom_time,
+        Description: $giper_baza_atom_text,
+        Tags: $giper_baza_list_link.to(() => $rise_bench_baza_goods_tag),
+    }) {
+    }
+    $.$rise_bench_baza_goods_product = $rise_bench_baza_goods_product;
+})($ || ($ = {}));
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $rise_bench_baza_goods_table extends $.$rise_bench_baza_goods_table {
+            count() { return this.products().length; }
+            row_content(id) {
+                return this.compact()
+                    ? [this.Compact_id_labeler(id), this.Title_labeler(id), this.Color_labeler(id), this.Status_labeler(id)]
+                    : [...super.row_content(id), this.Details(id)];
+            }
+            row_description(id) { return this.products()[id].Description()?.val() ?? ''; }
+            row_tags(id) {
+                const tags = this.products()[id].Tags()?.remote_list() ?? [];
+                return [tags.map(tag => tag.Title()?.val() ?? '').join(', ')];
+            }
+            rows() {
+                const count = this.count();
+                const color = this.color_filter();
+                const status = this.status_filter();
+                const terms = this.query().trim().toLowerCase().split(/\s+/).filter(Boolean);
+                if (!terms.length && color === 'all' && status === 'all')
+                    return $mol_range2(index => this.Row(count - index - 1), () => count);
+                const matches = [];
+                for (let index = count - 1; index >= 0; --index) {
+                    if (color !== 'all' && this.row_color(index) !== color)
+                        continue;
+                    if (status !== 'all' && this.row_status(index) !== status)
+                        continue;
+                    if (terms.length && !terms.every(term => this.row_title(index).toLowerCase().includes(term)))
+                        continue;
+                    matches.push(index);
+                }
+                return $mol_range2(index => this.Row(matches[index]), () => matches.length);
+            }
+            row_id(id) { return this.products()[id].Id().val(); }
+            row_title(id) { return this.products()[id].Title().val(); }
+            row_uri(id) { return this.compact() ? `https://xkcd.com/${Number(this.row_id(id)) + 1}/` : this.products()[id].Uri().val(); }
+            row_checked(id, next) {
+                return this.products()[id].Checked().val(next) ?? false;
+            }
+            row_color(id, next) {
+                return this.products()[id].Color().val(next) ?? '';
+            }
+            row_status(id, next) {
+                return this.products()[id].Status().val(next) ?? '';
+            }
+            row_quantity(id, next) {
+                return this.products()[id].Quantity().val(next) ?? 0;
+            }
+            row_moment(id, next) {
+                return this.products()[id].Supply().val(next);
+            }
+            row_date(id) { return this.row_moment(id).toString('DD.MM.YYYY'); }
+        }
+        __decorate([
+            $mol_mem
+        ], $rise_bench_baza_goods_table.prototype, "rows", null);
+        __decorate([
+            $mol_mem_key
+        ], $rise_bench_baza_goods_table.prototype, "row_title", null);
+        $$.$rise_bench_baza_goods_table = $rise_bench_baza_goods_table;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        $mol_style_define($rise_bench_baza_goods_table, {
+            Compact_id_labeler: { flex: { basis: $mol_style_unit.rem(5) } },
+            Row: {
+                // Restore the spacing visible in the original table, requested by the user.
+                minHeight: $mol_style_unit.px(96),
+                flex: { wrap: 'wrap' },
+                padding: $mol_gap.block,
+                gap: $mol_gap.block,
+                alignItems: 'flex-start',
+            },
+            Details: { flex: { basis: '100%', wrap: 'wrap' }, gap: $mol_gap.block },
+            Description_labeler: { flex: { basis: $mol_style_unit.rem(30), shrink: 1 } },
+            Description: { flex: { shrink: 1 }, minWidth: 0 },
+        });
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+	($.$rise_bench_surface) = class $rise_bench_surface extends ($.$mol_page) {
+		embedded(){
+			return false;
+		}
+		attr(){
+			return {...(super.attr()), "embedded": (this.embedded())};
+		}
+	};
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        /** Workload surface: keep the native scroll/virtualization, not page chrome. */
+        class $rise_bench_surface extends $.$rise_bench_surface {
+            embedded() { return window.parent !== window; }
+            sub() { return this.embedded() ? [this.Body()] : super.sub(); }
+        }
+        $$.$rise_bench_surface = $rise_bench_surface;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_define($rise_bench_surface, {
+        '[embedded]': { true: {
+                minWidth: 0, width: $mol_style_unit.per(100), flex: { grow: 1, shrink: 1 },
+                Body_content: { padding: 0 },
+            } },
+    });
+})($ || ($ = {}));
+
+;
+	($.$rise_bench_baza_goods) = class $rise_bench_baza_goods extends ($.$mol_book2) {
+		title(){
+			return "Сущности";
+		}
+		content(){
+			return [];
+		}
+		Storage_label(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => (["Хранение: одна Area на запись"]);
+			return obj;
+		}
+		controls_enabled(){
+			return true;
+		}
+		schema_mode(next){
+			if(next !== undefined) return next;
+			return "compact";
+		}
+		Schema(){
+			const obj = new this.$.$mol_switch();
+			(obj.enabled) = () => ((this.controls_enabled()));
+			(obj.value) = (next) => ((this.schema_mode(next)));
+			(obj.options) = () => ({"compact": "4 свойства", "full": "10 свойств"});
+			return obj;
+		}
+		Schema_label(){
+			const obj = new this.$.$mol_labeler();
+			(obj.title) = () => ("Состав записи");
+			(obj.Content) = () => ((this.Schema()));
+			return obj;
+		}
+		count_mode(next){
+			if(next !== undefined) return next;
+			return "100";
+		}
+		Count(){
+			const obj = new this.$.$mol_switch();
+			(obj.enabled) = () => ((this.controls_enabled()));
+			(obj.value) = (next) => ((this.count_mode(next)));
+			(obj.options) = () => ({
+				"1": "1", 
+				"10": "10", 
+				"100": "100", 
+				"500": "500", 
+				"1000": "1000", 
+				"2000": "2000", 
+				"3000": "3000", 
+				"4000": "4000", 
+				"5000": "5000", 
+				"10000": "10000"
+			});
+			return obj;
+		}
+		Count_label(){
+			const obj = new this.$.$mol_labeler();
+			(obj.title) = () => ("Количество записей");
+			(obj.Content) = () => ((this.Count()));
+			return obj;
+		}
+		create_enabled(){
+			return true;
+		}
+		benchmark(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Create(){
+			const obj = new this.$.$mol_button_major();
+			(obj.title) = () => ("Запустить бенчмарк");
+			(obj.enabled) = () => ((this.create_enabled()));
+			(obj.click) = (next) => ((this.benchmark(next)));
+			return obj;
+		}
+		Actions(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.Create())]);
+			return obj;
+		}
+		app_title(){
+			return "Товары";
+		}
+		body_scroll_top(next){
+			return (this.Records().body_scroll_top(next));
+		}
+		Metrics(){
+			const obj = new this.$.$rise_bench_metrics();
+			(obj.operations) = () => ([
+				"Создание, с", 
+				"Поиск, с", 
+				"Добавить 1, с", 
+				"F5, с", 
+				"Поиск после F5, с"
+			]);
+			return obj;
+		}
+		filters_enabled(){
+			return true;
+		}
+		search_query(next){
+			return (this.Search().query(next));
+		}
+		Search(){
+			const obj = new this.$.$mol_search();
+			(obj.hint) = () => ("Название товара");
+			(obj.enabled) = () => ((this.filters_enabled()));
+			return obj;
+		}
+		Search_label(){
+			const obj = new this.$.$mol_labeler();
+			(obj.title) = () => ("Поиск по названию");
+			(obj.Content) = () => ((this.Search()));
+			return obj;
+		}
+		color_filter(next){
+			if(next !== undefined) return next;
+			return "all";
+		}
+		Color_filter(){
+			const obj = new this.$.$mol_select();
+			(obj.enabled) = () => ((this.filters_enabled()));
+			(obj.value) = (next) => ((this.color_filter(next)));
+			(obj.dictionary) = () => ({
+				"all": "All colors", 
+				"red": "red", 
+				"green": "green", 
+				"blue": "blue"
+			});
+			return obj;
+		}
+		Color_label(){
+			const obj = new this.$.$mol_labeler();
+			(obj.title) = () => ("Color");
+			(obj.Content) = () => ((this.Color_filter()));
+			return obj;
+		}
+		status_filter(next){
+			if(next !== undefined) return next;
+			return "all";
+		}
+		Status_filter(){
+			const obj = new this.$.$mol_select();
+			(obj.enabled) = () => ((this.filters_enabled()));
+			(obj.value) = (next) => ((this.status_filter(next)));
+			(obj.dictionary) = () => ({
+				"all": "All statuses", 
+				"minor": "Store", 
+				"major": "Sale", 
+				"critical": "Support"
+			});
+			return obj;
+		}
+		Status_label(){
+			const obj = new this.$.$mol_labeler();
+			(obj.title) = () => ("Status");
+			(obj.Content) = () => ((this.Status_filter()));
+			return obj;
+		}
+		add_one(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Add(){
+			const obj = new this.$.$mol_button_minor();
+			(obj.title) = () => ("Добавить запись");
+			(obj.enabled) = () => ((this.controls_enabled()));
+			(obj.click) = (next) => ((this.add_one(next)));
+			return obj;
+		}
+		reset(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Reset(){
+			const obj = new this.$.$mol_button_minor();
+			(obj.title) = () => ("Очистить");
+			(obj.enabled) = () => ((this.controls_enabled()));
+			(obj.click) = (next) => ((this.reset(next)));
+			return obj;
+		}
+		Manual_actions(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.Add()), (this.Reset())]);
+			return obj;
+		}
+		Manual(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([
+				(this.Search_label()), 
+				(this.Color_label()), 
+				(this.Status_label()), 
+				(this.Manual_actions())
+			]);
+			return obj;
+		}
+		products(){
+			return [];
+		}
+		compact_mode(){
+			return false;
+		}
+		Table(){
+			const obj = new this.$.$rise_bench_baza_goods_table();
+			(obj.products) = () => ((this.products()));
+			(obj.compact) = () => ((this.compact_mode()));
+			(obj.query) = () => ((this.search_query()));
+			(obj.color_filter) = () => ((this.color_filter()));
+			(obj.status_filter) = () => ((this.status_filter()));
+			return obj;
+		}
+		menu_title(){
+			return (this.title());
+		}
+		pages(){
+			return (this.content());
+		}
+		Settings(){
+			const obj = new this.$.$mol_page();
+			(obj.title) = () => ("Настройки");
+			(obj.minimal_width) = () => (320);
+			(obj.body) = () => ([
+				(this.Storage_label()), 
+				(this.Schema_label()), 
+				(this.Count_label()), 
+				(this.Actions())
+			]);
+			return obj;
+		}
+		Records(){
+			const obj = new this.$.$rise_bench_surface();
+			(obj.title) = () => ((this.app_title()));
+			(obj.minimal_width) = () => (640);
+			(obj.body) = () => ([
+				(this.Metrics()), 
+				(this.Manual()), 
+				(this.Table())
+			]);
+			return obj;
+		}
+	};
+	($mol_mem(($.$rise_bench_baza_goods.prototype), "Storage_label"));
+	($mol_mem(($.$rise_bench_baza_goods.prototype), "schema_mode"));
+	($mol_mem(($.$rise_bench_baza_goods.prototype), "Schema"));
+	($mol_mem(($.$rise_bench_baza_goods.prototype), "Schema_label"));
+	($mol_mem(($.$rise_bench_baza_goods.prototype), "count_mode"));
+	($mol_mem(($.$rise_bench_baza_goods.prototype), "Count"));
+	($mol_mem(($.$rise_bench_baza_goods.prototype), "Count_label"));
+	($mol_mem(($.$rise_bench_baza_goods.prototype), "benchmark"));
+	($mol_mem(($.$rise_bench_baza_goods.prototype), "Create"));
+	($mol_mem(($.$rise_bench_baza_goods.prototype), "Actions"));
+	($mol_mem(($.$rise_bench_baza_goods.prototype), "Metrics"));
+	($mol_mem(($.$rise_bench_baza_goods.prototype), "Search"));
+	($mol_mem(($.$rise_bench_baza_goods.prototype), "Search_label"));
+	($mol_mem(($.$rise_bench_baza_goods.prototype), "color_filter"));
+	($mol_mem(($.$rise_bench_baza_goods.prototype), "Color_filter"));
+	($mol_mem(($.$rise_bench_baza_goods.prototype), "Color_label"));
+	($mol_mem(($.$rise_bench_baza_goods.prototype), "status_filter"));
+	($mol_mem(($.$rise_bench_baza_goods.prototype), "Status_filter"));
+	($mol_mem(($.$rise_bench_baza_goods.prototype), "Status_label"));
+	($mol_mem(($.$rise_bench_baza_goods.prototype), "add_one"));
+	($mol_mem(($.$rise_bench_baza_goods.prototype), "Add"));
+	($mol_mem(($.$rise_bench_baza_goods.prototype), "reset"));
+	($mol_mem(($.$rise_bench_baza_goods.prototype), "Reset"));
+	($mol_mem(($.$rise_bench_baza_goods.prototype), "Manual_actions"));
+	($mol_mem(($.$rise_bench_baza_goods.prototype), "Manual"));
+	($mol_mem(($.$rise_bench_baza_goods.prototype), "Table"));
+	($mol_mem(($.$rise_bench_baza_goods.prototype), "Settings"));
+	($mol_mem(($.$rise_bench_baza_goods.prototype), "Records"));
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    class $rise_bench_baza_goods_dataset extends $giper_baza_entity.with({
+        Products: $giper_baza_list_link.to(() => $rise_bench_baza_goods_product),
+        Tags: $giper_baza_list_link.to(() => $rise_bench_baza_goods_tag),
+    }) {
+    }
+    $.$rise_bench_baza_goods_dataset = $rise_bench_baza_goods_dataset;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    // A stable host identity: wire must not serialize a growing products array as a task argument.
+    class $rise_bench_baza_goods_preparation {
+        dataset;
+        count;
+        compact;
+        products = [];
+        links;
+        date = new $mol_time_moment('2026-10-05');
+        tag_links = [];
+        constructor(dataset, count, compact = false) {
+            this.dataset = dataset;
+            this.count = count;
+            this.compact = compact;
+        }
+    }
+    $.$rise_bench_baza_goods_preparation = $rise_bench_baza_goods_preparation;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    function $rise_bench_product_name(index) {
+        const brands = ['Aurora', 'Orion', 'Vega', 'Nova', 'Atlas', 'Pixel', 'Aero', 'Terra', 'Lumen', 'Zen'];
+        const models = ['Wireless', 'Compact', 'Pro', 'Mini', 'Classic', 'Smart', 'Portable', 'Studio', 'Premium', 'Travel'];
+        const types = ['Notebook', 'Headphones', 'Monitor', 'Mouse', 'Keyboard', 'Camera', 'Printer', 'Router', 'Speaker', 'Watch'];
+        return `${brands[Math.floor(index / 10) % 10]} ${models[Math.floor(index / 100) % 10]} ${types[index % 10]} ${String(index).padStart(5, '0')}`;
+    }
+    $.$rise_bench_product_name = $rise_bench_product_name;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    /** Identical input data for each non-CRDT storage adapter. */
+    function $rise_bench_product_make(index, compact) {
+        const product = {
+            id: String(index).padStart(5, '0'), title: $rise_bench_product_name(index),
+            color: ['red', 'green', 'blue'][index % 3], status: ['minor', 'major', 'critical'][index % 3],
+        };
+        return compact ? product : {
+            ...product, checked: false, uri: `https://xkcd.com/${index + 1}/`, quantity: index % 100, supply: '2026-10-05',
+            description: `${product.title} — sample product for the local CRDT benchmark.`,
+            tags: Array.from({ length: 5 }, (_, offset) => ['Office', 'Home', 'Travel', 'Studio', 'Gaming', 'Portable', 'Wireless', 'Compact', 'Premium', 'Classic', 'New', 'Popular', 'Eco', 'Gift', 'Work', 'Creative', 'Audio', 'Video', 'Network', 'Accessories'][(index + offset * 3) % 20]),
+        };
+    }
+    $.$rise_bench_product_make = $rise_bench_product_make;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    function $rise_bench_baza_goods_product_name(index) {
+        return $rise_bench_product_name(index);
+    }
+    $.$rise_bench_baza_goods_product_name = $rise_bench_baza_goods_product_name;
+})($ || ($ = {}));
+
+;
+	($.$rise_bug_baza_nohash) = class $rise_bug_baza_nohash extends ($.$mol_page) {
+		Baza_status(){
+			const obj = new this.$.$giper_baza_status();
+			return obj;
+		}
+		entity_reset(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Reset(){
+			const obj = new this.$.$mol_button_minor();
+			(obj.click) = (next) => ((this.entity_reset(next)));
+			return obj;
+		}
+		entity(){
+			return null;
+		}
+		add(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Add(){
+			const obj = new this.$.$mol_button_minor();
+			(obj.click) = (next) => ((this.add(next)));
+			return obj;
+		}
+		id(id){
+			return "0";
+		}
+		Item(id){
+			const obj = new this.$.$mol_button_minor();
+			(obj.title) = () => ((this.id(id)));
+			return obj;
+		}
+		items(){
+			return [(this.Item("0"))];
+		}
+		Items(){
+			const obj = new this.$.$mol_list();
+			(obj.sub) = () => ((this.items()));
+			return obj;
+		}
+		body(){
+			return [
+				(this.Baza_status()), 
+				(this.Reset()), 
+				(this.entity()), 
+				(this.Add()), 
+				(this.Items())
+			];
+		}
+	};
+	($mol_mem(($.$rise_bug_baza_nohash.prototype), "Baza_status"));
+	($mol_mem(($.$rise_bug_baza_nohash.prototype), "entity_reset"));
+	($mol_mem(($.$rise_bug_baza_nohash.prototype), "Reset"));
+	($mol_mem(($.$rise_bug_baza_nohash.prototype), "add"));
+	($mol_mem(($.$rise_bug_baza_nohash.prototype), "Add"));
+	($mol_mem_key(($.$rise_bug_baza_nohash.prototype), "Item"));
+	($mol_mem(($.$rise_bug_baza_nohash.prototype), "Items"));
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $rise_bug_baza_nohash_entity extends $giper_baza_entity.with({
+            Dict: $giper_baza_dict_to($giper_baza_atom_link_to(() => $giper_baza_atom_text)),
+            List: $giper_baza_list_link_to(() => $giper_baza_atom_text),
+        }) {
+        }
+        $$.$rise_bug_baza_nohash_entity = $rise_bug_baza_nohash_entity;
+        class $rise_bug_baza_nohash extends $.$rise_bug_baza_nohash {
+            entity_reset() {
+                this.entity(null);
+            }
+            entity(reset) {
+                const land = this.$.$giper_baza_glob.land_grab([[null, $giper_baza_rank_deny]]);
+                return land.Data($rise_bug_baza_nohash_entity);
+            }
+            id(id) {
+                return id;
+            }
+            items() {
+                return this.entity().List()?.remote_list().map(i => this.Item(i.link().str)) ?? [];
+            }
+            add(next) {
+                const entity = this.entity();
+                const item = entity.List(null)?.make(entity.land());
+                const title = item?.link().toString() ?? '';
+                item?.val(title);
+                entity.Dict(null)?.key(title, 'auto');
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $rise_bug_baza_nohash.prototype, "entity", null);
+        $$.$rise_bug_baza_nohash = $rise_bug_baza_nohash;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+	($.$rise_bug_baza_noseal) = class $rise_bug_baza_noseal extends ($.$mol_page) {
+		Baza_status(){
+			const obj = new this.$.$giper_baza_status();
+			return obj;
+		}
+		entity_reset(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Reset(){
+			const obj = new this.$.$mol_button_minor();
+			(obj.click) = (next) => ((this.entity_reset(next)));
+			return obj;
+		}
+		entity(){
+			return null;
+		}
+		add(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Add(){
+			const obj = new this.$.$mol_button_minor();
+			(obj.click) = (next) => ((this.add(next)));
+			return obj;
+		}
+		id(id){
+			return "0";
+		}
+		Item(id){
+			const obj = new this.$.$mol_button_minor();
+			(obj.title) = () => ((this.id(id)));
+			return obj;
+		}
+		items(){
+			return [(this.Item("0"))];
+		}
+		Items(){
+			const obj = new this.$.$mol_list();
+			(obj.sub) = () => ((this.items()));
+			return obj;
+		}
+		body(){
+			return [
+				(this.Baza_status()), 
+				(this.Reset()), 
+				(this.entity()), 
+				(this.Add()), 
+				(this.Items())
+			];
+		}
+	};
+	($mol_mem(($.$rise_bug_baza_noseal.prototype), "Baza_status"));
+	($mol_mem(($.$rise_bug_baza_noseal.prototype), "entity_reset"));
+	($mol_mem(($.$rise_bug_baza_noseal.prototype), "Reset"));
+	($mol_mem(($.$rise_bug_baza_noseal.prototype), "add"));
+	($mol_mem(($.$rise_bug_baza_noseal.prototype), "Add"));
+	($mol_mem_key(($.$rise_bug_baza_noseal.prototype), "Item"));
+	($mol_mem(($.$rise_bug_baza_noseal.prototype), "Items"));
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $rise_bug_baza_noseal_entity extends $giper_baza_entity.with({
+            Dict: $giper_baza_dict_to($giper_baza_atom_link_to(() => $giper_baza_atom_text)),
+            List: $giper_baza_list_link_to(() => $giper_baza_atom_text),
+        }) {
+        }
+        $$.$rise_bug_baza_noseal_entity = $rise_bug_baza_noseal_entity;
+        class $rise_bug_baza_noseal extends $.$rise_bug_baza_noseal {
+            entity_reset() {
+                this.link_str(null);
+            }
+            link_str(next) {
+                if (next) {
+                    return $mol_state_arg.value('link_str', next);
+                }
+                let str = $mol_state_arg.value('link_str');
+                if (str && next !== null)
+                    return str;
+                const land = this.$.$giper_baza_glob.land_grab([[null, $giper_baza_rank_deny]]);
+                return $mol_state_arg.value('link_str', land.link().str);
+            }
+            entity(reset) {
+                const link = new $giper_baza_link(this.link_str());
+                const land = this.$.$giper_baza_glob.Land(link);
+                return land.Data($rise_bug_baza_noseal_entity);
+            }
+            id(id) {
+                return id;
+            }
+            items() {
+                return this.entity().List()?.remote_list().map(i => this.Item(i.link().str)) ?? [];
+            }
+            add(next) {
+                const entity = this.entity();
+                const item = entity.List(null)?.make(entity.land());
+                const title = item?.link().toString() ?? '';
+                item?.val(title);
+                entity.Dict(null)?.key($mol_wire_sync($).$mol_guid(), 'auto');
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $rise_bug_baza_noseal.prototype, "link_str", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bug_baza_noseal.prototype, "entity", null);
+        $$.$rise_bug_baza_noseal = $rise_bug_baza_noseal;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+	($.$rise_bug_baza_decrypt) = class $rise_bug_baza_decrypt extends ($.$mol_page) {
+		Baza_status(){
+			const obj = new this.$.$giper_baza_status();
+			return obj;
+		}
+		entity_reset(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Reset(){
+			const obj = new this.$.$mol_button_minor();
+			(obj.click) = (next) => ((this.entity_reset(next)));
+			return obj;
+		}
+		entity(){
+			return null;
+		}
+		add(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Add(){
+			const obj = new this.$.$mol_button_minor();
+			(obj.click) = (next) => ((this.add(next)));
+			return obj;
+		}
+		id(id){
+			return "0";
+		}
+		cut(id, next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Item(id){
+			const obj = new this.$.$mol_button_minor();
+			(obj.title) = () => ((this.id(id)));
+			(obj.click) = (next) => ((this.cut(id, next)));
+			return obj;
+		}
+		items(){
+			return [(this.Item("0"))];
+		}
+		Items(){
+			const obj = new this.$.$mol_list();
+			(obj.sub) = () => ((this.items()));
+			return obj;
+		}
+		body(){
+			return [
+				(this.Baza_status()), 
+				(this.Reset()), 
+				(this.entity()), 
+				(this.Add()), 
+				(this.Items())
+			];
+		}
+	};
+	($mol_mem(($.$rise_bug_baza_decrypt.prototype), "Baza_status"));
+	($mol_mem(($.$rise_bug_baza_decrypt.prototype), "entity_reset"));
+	($mol_mem(($.$rise_bug_baza_decrypt.prototype), "Reset"));
+	($mol_mem(($.$rise_bug_baza_decrypt.prototype), "add"));
+	($mol_mem(($.$rise_bug_baza_decrypt.prototype), "Add"));
+	($mol_mem_key(($.$rise_bug_baza_decrypt.prototype), "cut"));
+	($mol_mem_key(($.$rise_bug_baza_decrypt.prototype), "Item"));
+	($mol_mem(($.$rise_bug_baza_decrypt.prototype), "Items"));
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $rise_bug_baza_decrypt_entity extends $giper_baza_entity.with({
+            Dict: $giper_baza_dict_to($giper_baza_atom_link_to(() => $giper_baza_atom_text)),
+            List: $giper_baza_list_link_to(() => $giper_baza_atom_text),
+        }) {
+        }
+        $$.$rise_bug_baza_decrypt_entity = $rise_bug_baza_decrypt_entity;
+        class $rise_bug_baza_decrypt extends $.$rise_bug_baza_decrypt {
+            entity_reset() {
+                this.link_str(null);
+            }
+            link_str(next) {
+                if (next) {
+                    return $mol_state_arg.value('link_str', next);
+                }
+                let str = $mol_state_arg.value('link_str');
+                if (str && next !== null)
+                    return str;
+                const land = this.$.$giper_baza_glob.land_grab([[null, $giper_baza_rank_deny]]);
+                return $mol_state_arg.value('link_str', land.link().str);
+            }
+            entity(reset) {
+                const link = new $giper_baza_link(this.link_str());
+                const land = this.$.$giper_baza_glob.Land(link);
+                return land.Data($rise_bug_baza_decrypt_entity);
+            }
+            id(id) {
+                return id;
+            }
+            items() {
+                return this.entity().List()?.remote_list().map(i => this.Item(i.link().str)) ?? [];
+            }
+            add(next) {
+                const entity = this.entity();
+                const item = entity.List(null)?.make([[null, $giper_baza_rank_deny]]);
+                const title = item?.link().str ?? '';
+                item?.val(title);
+                entity.Dict(null)?.key($mol_wire_sync($).$mol_guid(), 'auto');
+            }
+            cut(id, next) {
+                this.entity().List()?.cut(new $giper_baza_link(id));
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $rise_bug_baza_decrypt.prototype, "link_str", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bug_baza_decrypt.prototype, "entity", null);
+        $$.$rise_bug_baza_decrypt = $rise_bug_baza_decrypt;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+	($.$rise_bug_baza_slowtext) = class $rise_bug_baza_slowtext extends ($.$mol_page) {
+		Baza_status(){
+			const obj = new this.$.$giper_baza_status();
+			return obj;
+		}
+		entity_reset(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Reset(){
+			const obj = new this.$.$mol_button_minor();
+			(obj.click) = (next) => ((this.entity_reset(next)));
+			return obj;
+		}
+		entity(){
+			return null;
+		}
+		text(next){
+			if(next !== undefined) return next;
+			return "";
+		}
+		Text(){
+			const obj = new this.$.$mol_textarea();
+			(obj.value) = (next) => ((this.text(next)));
+			return obj;
+		}
+		body(){
+			return [
+				(this.Baza_status()), 
+				(this.Reset()), 
+				(this.entity()), 
+				(this.Text())
+			];
+		}
+	};
+	($mol_mem(($.$rise_bug_baza_slowtext.prototype), "Baza_status"));
+	($mol_mem(($.$rise_bug_baza_slowtext.prototype), "entity_reset"));
+	($mol_mem(($.$rise_bug_baza_slowtext.prototype), "Reset"));
+	($mol_mem(($.$rise_bug_baza_slowtext.prototype), "text"));
+	($mol_mem(($.$rise_bug_baza_slowtext.prototype), "Text"));
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $rise_bug_baza_slowtext_entity extends $giper_baza_entity.with({
+            Text: $giper_baza_text,
+        }) {
+        }
+        $$.$rise_bug_baza_slowtext_entity = $rise_bug_baza_slowtext_entity;
+        class $rise_bug_baza_slowtext extends $.$rise_bug_baza_slowtext {
+            entity_reset() {
+                this.link_str(null);
+            }
+            link_str(next) {
+                if (next) {
+                    return $mol_state_arg.value('link_str', next);
+                }
+                let str = $mol_state_arg.value('link_str');
+                if (str && next !== null)
+                    return str;
+                const land = this.$.$giper_baza_glob.land_grab([[null, $giper_baza_rank_deny]]);
+                return $mol_state_arg.value('link_str', land.link().str);
+            }
+            entity() {
+                const link = new $giper_baza_link(this.link_str());
+                const land = this.$.$giper_baza_glob.Land(link);
+                const entity = land.Data($rise_bug_baza_slowtext_entity);
+                entity.Text(null);
+                return entity;
+            }
+            text(next) {
+                return this.entity().Text(next)?.value(next) ?? '';
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $rise_bug_baza_slowtext.prototype, "link_str", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bug_baza_slowtext.prototype, "entity", null);
+        $$.$rise_bug_baza_slowtext = $rise_bug_baza_slowtext;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+	($.$rise_bug) = class $rise_bug extends ($.$mol_book2_catalog) {
+		placeholders(){
+			return [];
+		}
+		param(){
+			return "bug";
+		}
+		spread_classes(){
+			return [
+				"$rise_bug_baza_nohash", 
+				"$rise_bug_baza_noseal", 
+				"$rise_bug_baza_decrypt", 
+				"$rise_bug_baza_slowtext"
+			];
+		}
+	};
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $rise_bug extends $.$rise_bug {
+            spreads() {
+                const dict = Object.fromEntries(this.spread_classes().map(name => {
+                    return [name, new (this.$[name])];
+                }));
+                return dict;
+            }
+        }
+        $$.$rise_bug = $rise_bug;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    /** Stable operation identity and clock across wire suspension/replay. */
+    class $rise_bench_measure {
+        title;
+        count;
+        unit;
+        started = performance.now();
+        duration = null;
+        constructor(title, count = 0, unit = 'зап.') {
+            this.title = title;
+            this.count = count;
+            this.unit = unit;
+        }
+        finish() { this.duration ??= performance.now() - this.started; }
+    }
+    $.$rise_bench_measure = $rise_bench_measure;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    /** Reports phase boundaries; only the user decides when to stop a workload. */
+    class $rise_bench_stage {
+        run;
+        operation;
+        static current = null;
+        static failure(error) {
+            // Native failures may contain a workload database name or Land ID.
+            // Archive only the stage and a bounded diagnostic, never raw payloads.
+            return `${this.current?.operation ?? 'Операция'}: ошибка выполнения`;
+        }
+        started = Date.now();
+        constructor(run, operation) {
+            this.run = run;
+            this.operation = operation;
+            $rise_bench_stage.current = this;
+            const token = new URL(location.href).searchParams.get('rise_run');
+            if (window.parent !== window)
+                window.parent.postMessage({
+                    type: 'rise-bench-progress', kind: new URL(location.href).searchParams.get('rise_fixture'), token,
+                    operation, started: this.started,
+                    row: { id: run.id, count: run.count, properties: run.properties, stamp: run.stamp,
+                        state: 'Ошибка', baza_version: run.baza_version, benchmark_version: run.benchmark_version,
+                        engine: run.engine, engine_version: run.engine_version, computer: run.computer, browser: run.browser,
+                        bytes: run.bytes(), metrics: Object.fromEntries($rise_bench_archive.operations(run.properties ? 'goods' : 'text').map(name => [name, run.metric(name)])) },
+                }, location.origin);
+        }
+    }
+    $.$rise_bench_stage = $rise_bench_stage;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    /** Per-tab run history; the pending ticket belongs only to the next page. */
+    class $rise_bench_reload {
+        snapshot;
+        key;
+        constructor(key) {
+            this.key = key + (new URL(location.href).searchParams.get('rise_run') || '');
+            const saved = $mol_error_fence(() => JSON.parse(sessionStorage.getItem(this.key) || 'null'), () => null);
+            this.snapshot = Array.isArray(saved?.rows) ? saved : { rows: [], pending: null };
+        }
+        save(runs, operations, pending) {
+            const rows = runs.map(run => ({
+                count: run.count, properties: run.properties, stamp: run.stamp, state: run.state(),
+                error: run.failure(),
+                baza_version: run.baza_version, benchmark_version: run.benchmark_version,
+                engine: run.engine, engine_version: run.engine_version,
+                id: run.id,
+                computer: run.computer, browser: run.browser,
+                bytes: run.bytes(),
+                metrics: Object.fromEntries(operations.map(operation => [operation, run.metric(operation)])),
+            }));
+            sessionStorage.setItem(this.key, JSON.stringify({ rows, pending }));
+            if (!pending && ['Готово', 'Ошибка'].includes(rows[0]?.state))
+                $rise_bench_stage.current = null;
+            const kind = new URL(location.href).searchParams.get('rise_fixture');
+            if (window.parent !== window && !pending && ['Готово', 'Ошибка'].includes(rows[0]?.state)) {
+                window.parent.postMessage({ type: 'rise-bench-result', kind, token: new URL(location.href).searchParams.get('rise_run'), row: rows[0] }, location.origin);
+            }
+        }
+    }
+    $.$rise_bench_reload = $rise_bench_reload;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    class $rise_bench_baza_goods_reload extends $rise_bench_reload {
+        constructor() { super('$rise_bench_baza_goods_runs'); }
+    }
+    $.$rise_bench_baza_goods_reload = $rise_bench_baza_goods_reload;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    /** Observe the real rendered viewport, then allow a paint before completing. */
+    class $rise_bench_baza_goods_reload_ready extends $mol_object {
+        table;
+        title;
+        constructor(table, title) {
+            super();
+            this.table = table;
+            this.title = title;
+        }
+        observer;
+        frame = 0;
+        pending;
+        visible() {
+            if (!this.table.isConnected)
+                return false;
+            const rows = [...this.table.querySelectorAll('[rise_bench_baza_goods_table_row]')].filter(row => {
+                const rect = row.getBoundingClientRect();
+                return rect.top < innerHeight && rect.bottom > 0;
+            });
+            return rows.length > 0
+                && rows[0].textContent.includes(this.title)
+                && rows.every(row => !row.querySelector('[mol_view_error]')
+                    && !!row.querySelector('[rise_bench_baza_goods_table_title]')?.textContent?.trim());
+        }
+        wait() {
+            return this.pending ??= new Promise((resolve, reject) => {
+                const check = () => {
+                    if (this.frame || !this.visible())
+                        return;
+                    this.frame = requestAnimationFrame(() => {
+                        this.frame = requestAnimationFrame(() => {
+                            this.frame = 0;
+                            if (!this.visible())
+                                return;
+                            this.destructor();
+                            resolve(performance.timeOrigin + performance.now());
+                        });
+                    });
+                };
+                this.observer = new MutationObserver(check);
+                this.observer.observe(this.table, { childList: true, subtree: true, attributes: true, characterData: true });
+                check();
+            });
+        }
+        destructor() {
+            this.observer?.disconnect();
+            if (this.frame)
+                cancelAnimationFrame(this.frame);
+            super.destructor();
+        }
+    }
+    $.$rise_bench_baza_goods_reload_ready = $rise_bench_baza_goods_reload_ready;
+})($ || ($ = {}));
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $rise_bench_baza_goods extends $.$rise_bench_baza_goods {
+            preset = [[null, $giper_baza_rank_read]];
+            tag_names = ['Office', 'Home', 'Travel', 'Studio', 'Gaming', 'Portable', 'Wireless', 'Compact', 'Premium', 'Classic', 'New', 'Popular', 'Eco', 'Gift', 'Work', 'Creative', 'Audio', 'Video', 'Network', 'Accessories'];
+            prepare_tags(dataset) {
+                const list = dataset.Tags(null);
+                const existing = list.items();
+                if (existing.length === this.tag_names.length)
+                    return existing;
+                // Publish the catalog only after every referenced tag is fully initialized.
+                list.items($mol_wire_sync(this).prepare_catalog_links(dataset));
+                return list.items();
+            }
+            prepare_tag(dataset, index) {
+                const tag = dataset.land().Pawn($rise_bench_baza_goods_tag).Head($mol_wire_sync(dataset.land()).self_make());
+                tag.Title(null).val(this.tag_names[index]);
+                return tag;
+            }
+            prepare_catalog_links(dataset) {
+                return this.tag_names.map((_, index) => $mol_wire_sync(this).prepare_tag(dataset, index).link());
+            }
+            dataset_config() { return { count: this.record_count(), compact: this.compact_mode() }; }
+            prepare_dataset(config) {
+                // Resolve the local author before allocating another signing key. On a
+                // fresh profile, interleaving both initializations can strand king_grab.
+                this.$.$giper_baza_auth.current().pass();
+                const land = $mol_wire_sync($giper_baza_glob).land_grab(this.preset);
+                const dataset = land.Data($rise_bench_baza_goods_dataset);
+                dataset.Products(null);
+                return new $rise_bench_baza_goods_preparation(dataset, config.count, config.compact);
+            }
+            fill_product(state, index, product) {
+                product.Id(null).val(String(index).padStart(5, '0'));
+                product.Title(null).val($rise_bench_baza_goods_product_name(index));
+                product.Color(null).val(['red', 'green', 'blue'][index % 3]);
+                product.Status(null).val(['minor', 'major', 'critical'][index % 3]);
+                if (state.compact)
+                    return product;
+                product.Checked(null).val(false);
+                product.Uri(null).val(`https://xkcd.com/${index + 1}/`);
+                product.Quantity(null).val(index % 100);
+                product.Supply(null).val(state.date);
+                product.Description(null).val(`${$rise_bench_baza_goods_product_name(index)} — sample product for the local CRDT benchmark.`);
+                const tags = $mol_wire_sync(this).prepare_tags(state.dataset);
+                // Link.toBin caches bytes relative to its first Land; do not reuse catalog
+                // link instances when serializing the references into another Area.
+                product.Tags(null).items(state.tag_links[index] ??= Array.from({ length: 5 }, (_, offset) => new $giper_baza_link(tags[(index + offset * 3) % tags.length].str)));
+                return product;
+            }
+            initialize_product(key) {
+                const [state, index] = key;
+                // This initializer is only invoked by Create. A completed record has no
+                // remaining write dependencies and is never recreated on async replay.
+                if (state.products[index])
+                    return state.products[index];
+                const product = $mol_wire_sync(state.dataset.land()).area_make().Data($rise_bench_baza_goods_product);
+                return state.products[index] = this.fill_product(state, index, product);
+            }
+            schema_mode(next) {
+                return $mol_state_arg.value('schema', next) === 'full' ? 'full' : 'compact';
+            }
+            compact_mode() { return this.schema_mode() === 'compact'; }
+            count_mode(next) {
+                const count = $mol_state_arg.value('count', next);
+                return count && Object.hasOwn(this.Count().options(), count) ? count : '100';
+            }
+            record_count() { return Number(this.count_mode()); }
+            app_title() { return `Товары: ${this.record_count()} записей`; }
+            dataset_link(next) {
+                // Keep existing Area datasets; retired single/shard datasets stay untouched.
+                const key = '$rise_bug_listbaza_dataset_names2_area' + (this.record_count() === 1000 ? '' : '_' + this.record_count()) + (this.compact_mode() ? '_compact' : '');
+                return $mol_state_local.value(key + (new URL(location.href).searchParams.get('rise_run') || ''), next) ?? '';
+            }
+            dataset() {
+                const link = this.dataset_link();
+                return link ? $giper_baza_glob.Pawn(new $giper_baza_link(link), $rise_bench_baza_goods_dataset) : null;
+            }
+            products() {
+                const links = this.product_links();
+                return $mol_range2(index => $giper_baza_glob.Pawn(links[index], $rise_bench_baza_goods_product), () => links.length);
+            }
+            product_links() { return this.dataset()?.Products()?.items() ?? []; }
+            controls_enabled() { return this.add_enabled() && !$mol_promise_like(this.Add().status()?.[0]); }
+            filters_enabled() { return this.add_enabled(); }
+            add_enabled() {
+                return this.Metrics().runs()[0]?.state() !== 'Перезагрузка'
+                    && !$mol_promise_like(this.Create().status()?.[0]);
+            }
+            create_enabled() { return this.controls_enabled() && !$mol_promise_like(this.Create().status()?.[0]); }
+            prepare_append(dataset) {
+                return new $rise_bench_baza_goods_preparation(dataset, dataset.Products().items().length, this.compact_mode());
+            }
+            add_one() {
+                const total = new ($mol_wire_sync($rise_bench_measure))('Добавление');
+                const dataset = this.dataset() ?? $mol_wire_sync(this).prepare_dataset(this.dataset_config()).dataset;
+                // Freeze the insertion index before any writes or suspension.
+                const state = $mol_wire_sync(this).prepare_append(dataset);
+                const product = $mol_wire_sync(dataset.Products()).make(dataset.land());
+                $mol_wire_sync(this).fill_product(state, state.count, product);
+                this.dataset_link(dataset.link().str);
+                this.body_scroll_top(0);
+                total.finish();
+                return total.duration;
+            }
+            reset() {
+                // Detach only this selected benchmark dataset, not the whole local database.
+                this.dataset_link('');
+                this.search_query('');
+                this.color_filter('all');
+                this.status_filter('all');
+                this.body_scroll_top(0);
+            }
+            create() {
+                const total = new ($mol_wire_sync($rise_bench_measure))('Создание набора: всего', this.record_count());
+                const state = $mol_wire_sync(this).prepare_dataset(this.dataset_config());
+                for (let index = 0; index < state.count; ++index)
+                    this.initialize_product([state, index]);
+                // Publish once, after all Areas are filled. Publishing on each make()
+                // forces the next Area to save an increasingly large parent list.
+                $mol_wire_sync(state.dataset.Products()).items(state.links ??= state.products.map(product => product.link()));
+                this.dataset_link(state.dataset.link().str);
+                total.finish();
+                return total.duration;
+            }
+            start_run(run) {
+                if (this.Metrics().runs().includes(run))
+                    return;
+                this.reset();
+                this.Metrics().run_add(run);
+            }
+            benchmark_search() {
+                this.search_query('Notebook 00000');
+                return this.Table().rows().length;
+            }
+            benchmark() {
+                this.restore_runs();
+                const run = new ($mol_wire_sync($rise_bench_run))(this.record_count(), this.compact_mode() ? 4 : 10);
+                new ($mol_wire_sync($rise_bench_stage))(run, 'Подготовка');
+                $mol_wire_sync(this).start_run(run);
+                return $mol_error_fence(() => {
+                    new ($mol_wire_sync($rise_bench_stage))(run, 'Создание, с');
+                    const created = $mol_wire_sync(this).create();
+                    run.metric('Создание, с', created / 1000);
+                    // Drain the previous writes before measuring another operation.
+                    new ($mol_wire_sync($rise_bench_stage))(run, 'Сохранение после создания');
+                    $mol_wire_sync(this).save_dataset();
+                    new ($mol_wire_sync($rise_bench_stage))(run, 'Поиск, с');
+                    const search = new ($mol_wire_sync($rise_bench_measure))('Поиск');
+                    if ($mol_wire_sync(this).benchmark_search() !== 1)
+                        throw new Error('Поиск должен найти один товар');
+                    search.finish();
+                    run.metric('Поиск, с', search.duration / 1000);
+                    this.search_query('');
+                    new ($mol_wire_sync($rise_bench_stage))(run, 'Добавить 1, с');
+                    const added = $mol_wire_sync(this).add_one();
+                    run.metric('Добавить 1, с', added / 1000);
+                    new ($mol_wire_sync($rise_bench_stage))(run, 'Сохранение после добавления');
+                    $mol_wire_sync(this).save_dataset();
+                    new ($mol_wire_sync($rise_bench_stage))(run, 'F5, с');
+                    $mol_wire_sync(this).request_reload(run);
+                }, error => {
+                    run.state('Ошибка');
+                    run.failure($rise_bench_stage.failure(error));
+                    this.reload_store().save(this.Metrics().runs(), this.Metrics().operations(), null);
+                    return error;
+                });
+            }
+            reload_store() { return new $rise_bench_baza_goods_reload; }
+            runs_restored = false;
+            restore_runs() {
+                if (this.runs_restored)
+                    return;
+                const rows = this.reload_store().snapshot.rows.map(row => {
+                    const run = new $rise_bench_run(row.count, row.properties, row.stamp, row.baza_version ?? '—', row.benchmark_version ?? '—', row.id, row.computer ?? '', row.browser ?? '');
+                    run.state(row.state);
+                    run.bytes(row.bytes ?? null);
+                    for (const [name, value] of Object.entries(row.metrics))
+                        if (value !== null)
+                            run.metric(name, value);
+                    return run;
+                });
+                this.Metrics().runs(rows);
+                this.runs_restored = true;
+            }
+            save_dataset() {
+                const lands = new Set([this.dataset().land(), ...this.products().map(product => product.land())]);
+                // Native units_saving suspends until signing and IDB commits finish.
+                for (const land of lands)
+                    $mol_wire_sync(land).units_saving();
+            }
+            request_reload(run) {
+                run.state('Перезагрузка');
+                this.reload_store().save(this.Metrics().runs(), this.Metrics().operations(), {
+                    link: this.dataset_link(), count: run.count,
+                    started: performance.timeOrigin + performance.now(),
+                });
+                this.$.$mol_dom_context.location.reload();
+            }
+            reload_done = false;
+            resume_reload() {
+                if (this.reload_done)
+                    return;
+                const ticket = this.reload_store().snapshot.pending;
+                if (!ticket)
+                    return;
+                const run = this.Metrics().runs()[0];
+                return $mol_error_fence(() => {
+                    if (this.dataset_link() !== ticket.link || this.product_links().length !== ticket.count + 1) {
+                        throw new Error('После F5 открыт другой или неполный набор товаров');
+                    }
+                    const ready = new ($mol_wire_sync($rise_bench_baza_goods_reload_ready))(this.Table().dom_node(), $rise_bench_baza_goods_product_name(ticket.count));
+                    const finished = $mol_wire_sync(ready).wait();
+                    run.metric('F5, с', (finished - ticket.started) / 1000);
+                    new ($mol_wire_sync($rise_bench_stage))(run, 'Поиск после F5, с');
+                    const search = new ($mol_wire_sync($rise_bench_measure))('Поиск после F5');
+                    if ($mol_wire_sync(this).benchmark_search() !== 1)
+                        throw new Error('Поиск после F5 должен найти один товар');
+                    search.finish();
+                    run.metric('Поиск после F5, с', search.duration / 1000);
+                    this.search_query('');
+                    this.reload_done = true;
+                    run.state('Готово');
+                    this.reload_store().save(this.Metrics().runs(), this.Metrics().operations(), null);
+                }, error => {
+                    this.reload_done = true;
+                    run.state('Ошибка');
+                    run.failure($rise_bench_stage.failure(error));
+                    this.reload_store().save(this.Metrics().runs(), this.Metrics().operations(), null);
+                    return error;
+                });
+            }
+            auto() {
+                this.restore_runs();
+                this.resume_reload();
+                return [];
+            }
+            content() {
+                // Keep the synchronizer subscribed for the lifetime of the application.
+                $giper_baza_glob.yard().sync();
+                return [this.Settings(), this.Records()];
+            }
+        }
+        __decorate([
+            $mol_action
+        ], $rise_bench_baza_goods.prototype, "prepare_tags", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_baza_goods.prototype, "prepare_tag", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_baza_goods.prototype, "prepare_catalog_links", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bench_baza_goods.prototype, "dataset_config", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_baza_goods.prototype, "prepare_dataset", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_baza_goods.prototype, "fill_product", null);
+        __decorate([
+            $mol_mem_key
+        ], $rise_bench_baza_goods.prototype, "initialize_product", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bench_baza_goods.prototype, "schema_mode", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bench_baza_goods.prototype, "count_mode", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bench_baza_goods.prototype, "dataset_link", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bench_baza_goods.prototype, "dataset", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bench_baza_goods.prototype, "products", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bench_baza_goods.prototype, "product_links", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_baza_goods.prototype, "add_one", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_baza_goods.prototype, "reset", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_baza_goods.prototype, "create", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_baza_goods.prototype, "start_run", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_baza_goods.prototype, "benchmark_search", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_baza_goods.prototype, "benchmark", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bench_baza_goods.prototype, "reload_store", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_baza_goods.prototype, "restore_runs", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_baza_goods.prototype, "save_dataset", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_baza_goods.prototype, "request_reload", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bench_baza_goods.prototype, "resume_reload", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bench_baza_goods.prototype, "content", null);
+        $$.$rise_bench_baza_goods = $rise_bench_baza_goods;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        $mol_style_define($rise_bench_baza_goods, {
+            Settings: { flex: { grow: 0, basis: $mol_style_unit.rem(20) } },
+            Records: {
+                flex: { grow: 1, shrink: 1 },
+                minWidth: $mol_style_unit.px(640),
+                '@media': {
+                    '(max-width: 640px)': { minWidth: $mol_style_unit.per(100) },
+                },
+            },
+            Actions: { flex: { wrap: 'wrap' } },
+            Storage_label: { padding: $mol_gap.text },
+            Manual: { flex: { wrap: 'wrap' }, alignItems: 'flex-end' },
+            Manual_actions: { flex: { wrap: 'wrap' } },
+        });
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+	($.$rise_bench_baza_crdttext) = class $rise_bench_baza_crdttext extends ($.$mol_book2) {
+		title(){
+			return "Текст";
+		}
+		count_mode(next){
+			if(next !== undefined) return next;
+			return "100";
+		}
+		controls_enabled(){
+			return true;
+		}
+		Count(){
+			const obj = new this.$.$mol_switch();
+			(obj.value) = (next) => ((this.count_mode(next)));
+			(obj.enabled) = () => ((this.controls_enabled()));
+			(obj.options) = () => ({
+				"100": "100", 
+				"500": "500", 
+				"1000": "1000", 
+				"2000": "2000", 
+				"5000": "5000"
+			});
+			return obj;
+		}
+		Count_label(){
+			const obj = new this.$.$mol_labeler();
+			(obj.title) = () => ("Количество строк");
+			(obj.Content) = () => ((this.Count()));
+			return obj;
+		}
+		benchmark(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Run(){
+			const obj = new this.$.$mol_button_major();
+			(obj.title) = () => ("Запустить бенчмарк");
+			(obj.click) = (next) => ((this.benchmark(next)));
+			(obj.enabled) = () => ((this.controls_enabled()));
+			return obj;
+		}
+		Menu(){
+			const obj = new this.$.$mol_page();
+			(obj.title) = () => ("CRDT text");
+			(obj.minimal_width) = () => (240);
+			(obj.body) = () => ([(this.Count_label()), (this.Run())]);
+			return obj;
+		}
+		page_title(){
+			return "CRDT-текст";
+		}
+		Metrics(){
+			const obj = new this.$.$rise_bench_metrics();
+			(obj.text_mode) = () => (true);
+			(obj.operations) = () => ([
+				"Вставка, с", 
+				"Добавить символ, с", 
+				"F5, с"
+			]);
+			return obj;
+		}
+		reset(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Reset(){
+			const obj = new this.$.$mol_button_minor();
+			(obj.title) = () => ("Очистить");
+			(obj.click) = (next) => ((this.reset(next)));
+			(obj.enabled) = () => ((this.controls_enabled()));
+			return obj;
+		}
+		text(next){
+			if(next !== undefined) return next;
+			return "";
+		}
+		Editor(){
+			const obj = new this.$.$rise_bench_textarea();
+			(obj.hint) = () => ("Введите текст или запустите бенчмарк");
+			(obj.value) = (next) => ((this.text(next)));
+			(obj.enabled) = () => ((this.controls_enabled()));
+			(obj.spellcheck) = () => (false);
+			return obj;
+		}
+		Page(){
+			const obj = new this.$.$rise_bench_surface();
+			(obj.title) = () => ((this.page_title()));
+			(obj.minimal_width) = () => (640);
+			(obj.body) = () => ([
+				(this.Metrics()), 
+				(this.Reset()), 
+				(this.Editor())
+			]);
+			return obj;
+		}
+		menu_title(){
+			return (this.title());
+		}
+		pages(){
+			return [(this.Menu()), (this.Page())];
+		}
+	};
+	($mol_mem(($.$rise_bench_baza_crdttext.prototype), "count_mode"));
+	($mol_mem(($.$rise_bench_baza_crdttext.prototype), "Count"));
+	($mol_mem(($.$rise_bench_baza_crdttext.prototype), "Count_label"));
+	($mol_mem(($.$rise_bench_baza_crdttext.prototype), "benchmark"));
+	($mol_mem(($.$rise_bench_baza_crdttext.prototype), "Run"));
+	($mol_mem(($.$rise_bench_baza_crdttext.prototype), "Menu"));
+	($mol_mem(($.$rise_bench_baza_crdttext.prototype), "Metrics"));
+	($mol_mem(($.$rise_bench_baza_crdttext.prototype), "reset"));
+	($mol_mem(($.$rise_bench_baza_crdttext.prototype), "Reset"));
+	($mol_mem(($.$rise_bench_baza_crdttext.prototype), "text"));
+	($mol_mem(($.$rise_bench_baza_crdttext.prototype), "Editor"));
+	($mol_mem(($.$rise_bench_baza_crdttext.prototype), "Page"));
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    /** Native textarea plus its visible text layer, followed by a paint opportunity. */
+    class $rise_bench_baza_crdttext_render_ready extends $mol_object {
+        editor;
+        expected;
+        page;
+        constructor(editor, expected, page) {
+            super();
+            this.editor = editor;
+            this.expected = expected;
+            this.page = page;
+        }
+        pending;
+        observer;
+        frame = 0;
+        visible() {
+            const input = this.editor.Edit().dom_node();
+            const row = this.editor.View().Row(1).dom_node();
+            const rect = row.getBoundingClientRect();
+            const viewport = this.page.Body().dom_node().getBoundingClientRect();
+            return input.isConnected && input.value === this.expected
+                && this.editor.View().dom_node().contains(row)
+                && rect.height > 0 && rect.bottom > viewport.top && rect.bottom <= viewport.bottom + 1
+                && row.textContent.endsWith(this.expected.split('\n', 1)[0]);
+        }
+        wait() {
+            return this.pending ??= new Promise((resolve, reject) => {
+                const check = () => {
+                    // Show the first line through native scrolling, never force render.
+                    this.page.body_scroll_top(0);
+                    if (this.frame || !this.visible())
+                        return;
+                    this.frame = requestAnimationFrame(() => {
+                        this.frame = requestAnimationFrame(() => {
+                            this.frame = 0;
+                            if (!this.visible())
+                                return;
+                            this.destructor();
+                            resolve(performance.timeOrigin + performance.now());
+                        });
+                    });
+                };
+                this.observer = new MutationObserver(check);
+                this.observer.observe(this.editor.dom_node(), { childList: true, subtree: true, characterData: true });
+                check();
+            });
+        }
+        destructor() {
+            this.observer?.disconnect();
+            if (this.frame)
+                cancelAnimationFrame(this.frame);
+            super.destructor();
+        }
+    }
+    $.$rise_bench_baza_crdttext_render_ready = $rise_bench_baza_crdttext_render_ready;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    class $rise_bench_baza_crdttext_reload extends $rise_bench_reload {
+        constructor() { super('$rise_bench_baza_crdttext_runs'); }
+    }
+    $.$rise_bench_baza_crdttext_reload = $rise_bench_baza_crdttext_reload;
+})($ || ($ = {}));
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $rise_bench_baza_crdttext extends $.$rise_bench_baza_crdttext {
+            preset = [[null, $giper_baza_rank_read]];
+            count_mode(next) {
+                const count = $mol_state_arg.value('lines', next);
+                return count && Object.hasOwn(this.Count().options(), count) ? count : '100';
+            }
+            line_count() { return Number(this.count_mode()); }
+            page_title() { return `CRDT-текст: ${this.line_count()} строк`; }
+            text_link(next) {
+                return $mol_state_local.value('$rise_bench_baza_crdttext' + (new URL(location.href).searchParams.get('rise_run') || ''), next) ?? '';
+            }
+            document() {
+                const link = this.text_link();
+                return link ? $giper_baza_glob.Pawn(new $giper_baza_link(link), $giper_baza_text) : null;
+            }
+            prepare_document() {
+                this.$.$giper_baza_auth.current().pass();
+                return $mol_wire_sync($giper_baza_glob).land_grab(this.preset).Data($giper_baza_text);
+            }
+            write_text(next) {
+                const document = this.document() ?? $mol_wire_sync(this).prepare_document();
+                $mol_wire_sync(document).text(next);
+                this.text_link(document.link().str);
+            }
+            text(next) {
+                if (next !== undefined)
+                    this.write_text(next);
+                $giper_baza_glob.yard().sync();
+                return this.document()?.text() ?? '';
+            }
+            sample_text(lines) {
+                return Array.from({ length: lines }, (_, index) => `Строка ${index + 1}: проверяем запись и редактирование текста в Гипербазе.`).join('\n');
+            }
+            insert(next) {
+                const measure = new ($mol_wire_sync($rise_bench_measure))('Вставка');
+                $mol_wire_sync(this).write_text(next);
+                measure.finish();
+                return measure.duration;
+            }
+            appended_text() { return '!' + this.text(); }
+            append_one() {
+                const measure = new ($mol_wire_sync($rise_bench_measure))('Добавление символа');
+                const next = $mol_wire_sync(this).appended_text();
+                $mol_wire_sync(this).write_text(next);
+                const ready = new ($mol_wire_sync($rise_bench_baza_crdttext_render_ready))(this.Editor(), next, this.Page());
+                $mol_wire_sync(ready).wait();
+                measure.finish();
+                return measure.duration;
+            }
+            start_run(run) {
+                if (this.Metrics().runs().includes(run))
+                    return;
+                $mol_wire_sync(this).reset();
+                this.Metrics().run_add(run);
+            }
+            benchmark() {
+                this.restore_runs();
+                const run = new ($mol_wire_sync($rise_bench_run))(this.line_count());
+                new ($mol_wire_sync($rise_bench_stage))(run, 'Подготовка');
+                const block = this.sample_text(run.count);
+                $mol_wire_sync(this).start_run(run);
+                return $mol_error_fence(() => {
+                    new ($mol_wire_sync($rise_bench_stage))(run, 'Вставка, с');
+                    const inserted = $mol_wire_sync(this).insert(block);
+                    run.metric('Вставка, с', inserted / 1000);
+                    new ($mol_wire_sync($rise_bench_stage))(run, 'Сохранение после вставки');
+                    $mol_wire_sync(this).save_document();
+                    new ($mol_wire_sync($rise_bench_stage))(run, 'Добавить символ, с');
+                    const appended = $mol_wire_sync(this).append_one();
+                    run.metric('Добавить символ, с', appended / 1000);
+                    new ($mol_wire_sync($rise_bench_stage))(run, 'Сохранение после добавления');
+                    $mol_wire_sync(this).save_document();
+                    new ($mol_wire_sync($rise_bench_stage))(run, 'F5, с');
+                    $mol_wire_sync(this).request_reload(run);
+                }, error => {
+                    run.state('Ошибка');
+                    run.failure($rise_bench_stage.failure(error));
+                    this.reload_store().save(this.Metrics().runs(), this.Metrics().operations(), null);
+                    return error;
+                });
+            }
+            reset() {
+                const document = $mol_wire_sync(this).prepare_document();
+                this.text_link(document.link().str);
+            }
+            controls_enabled() {
+                return this.Metrics().runs()[0]?.state() !== 'Перезагрузка'
+                    && !$mol_promise_like(this.Run().status()?.[0])
+                    && !$mol_promise_like(this.Reset().status()?.[0]);
+            }
+            reload_store() { return new $rise_bench_baza_crdttext_reload; }
+            runs_restored = false;
+            restore_runs() {
+                if (this.runs_restored)
+                    return;
+                this.Metrics().runs(this.reload_store().snapshot.rows.map(row => {
+                    const run = new $rise_bench_run(row.count, row.properties, row.stamp, row.baza_version ?? '—', row.benchmark_version ?? '—', row.id, row.computer ?? '', row.browser ?? '');
+                    run.state(row.state);
+                    run.bytes(row.bytes ?? null);
+                    for (const [name, value] of Object.entries(row.metrics))
+                        if (value !== null)
+                            run.metric(name, value);
+                    return run;
+                }));
+                this.runs_restored = true;
+            }
+            save_document() { $mol_wire_sync(this.document().land()).units_saving(); }
+            request_reload(run) {
+                run.bytes($mol_charset_encode(this.text()).byteLength);
+                run.state('Перезагрузка');
+                this.reload_store().save(this.Metrics().runs(), this.Metrics().operations(), {
+                    link: this.text_link(), count: run.count, started: performance.timeOrigin + performance.now(),
+                });
+                this.$.$mol_dom_context.location.reload();
+            }
+            reload_done = false;
+            resume_reload() {
+                if (this.reload_done)
+                    return;
+                const ticket = this.reload_store().snapshot.pending;
+                if (!ticket)
+                    return;
+                const run = this.Metrics().runs()[0];
+                return $mol_error_fence(() => {
+                    const expected = '!' + this.sample_text(ticket.count);
+                    if (this.text_link() !== ticket.link || this.text() !== expected)
+                        throw new Error('После F5 открыт другой или неполный CRDT-текст');
+                    const ready = new ($mol_wire_sync($rise_bench_baza_crdttext_render_ready))(this.Editor(), expected, this.Page());
+                    const finished = $mol_wire_sync(ready).wait();
+                    if (this.Editor().Edit().dom_node().value !== expected)
+                        throw new Error('После F5 текст не появился в textarea');
+                    run.metric('F5, с', (finished - ticket.started) / 1000);
+                    this.reload_done = true;
+                    run.state('Готово');
+                    this.reload_store().save(this.Metrics().runs(), this.Metrics().operations(), null);
+                }, error => {
+                    this.reload_done = true;
+                    run.state('Ошибка');
+                    run.failure($rise_bench_stage.failure(error));
+                    this.reload_store().save(this.Metrics().runs(), this.Metrics().operations(), null);
+                    return error;
+                });
+            }
+            auto() {
+                this.restore_runs();
+                this.resume_reload();
+                return [];
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $rise_bench_baza_crdttext.prototype, "count_mode", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bench_baza_crdttext.prototype, "text_link", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bench_baza_crdttext.prototype, "document", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_baza_crdttext.prototype, "prepare_document", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_baza_crdttext.prototype, "write_text", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bench_baza_crdttext.prototype, "text", null);
+        __decorate([
+            $mol_mem_key
+        ], $rise_bench_baza_crdttext.prototype, "sample_text", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_baza_crdttext.prototype, "insert", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_baza_crdttext.prototype, "appended_text", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_baza_crdttext.prototype, "append_one", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_baza_crdttext.prototype, "start_run", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_baza_crdttext.prototype, "benchmark", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_baza_crdttext.prototype, "reset", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bench_baza_crdttext.prototype, "reload_store", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_baza_crdttext.prototype, "restore_runs", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_baza_crdttext.prototype, "save_document", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_baza_crdttext.prototype, "request_reload", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bench_baza_crdttext.prototype, "resume_reload", null);
+        $$.$rise_bench_baza_crdttext = $rise_bench_baza_crdttext;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        $mol_style_define($rise_bench_baza_crdttext, {
+            Menu: { flex: { grow: 0, basis: $mol_style_unit.rem(15) } },
+            Page: { flex: { grow: 1 } },
+        });
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+	($.$rise_bench) = class $rise_bench extends ($.$mol_book2_catalog) {
+		Goods_host(){
 			const obj = new this.$.$rise_bench_host();
-			(obj.title) = () => ("Demo");
-			(obj.kind) = () => ("demo");
+			(obj.title) = () => ("Сущности");
+			(obj.kind) = () => ("goods");
+			return obj;
+		}
+		Text_host(){
+			const obj = new this.$.$rise_bench_host();
+			(obj.title) = () => ("Текст");
+			(obj.kind) = () => ("text");
+			return obj;
+		}
+		placeholders(){
+			return [];
+		}
+		param(){
+			return "bench";
+		}
+		spreads(){
+			return {"$rise_bench_baza_goods": (this.Goods_host()), "$rise_bench_baza_crdttext": (this.Text_host())};
+		}
+		Goods(){
+			const obj = new this.$.$rise_bench_baza_goods();
+			return obj;
+		}
+		Crdttext(){
+			const obj = new this.$.$rise_bench_baza_crdttext();
+			return obj;
+		}
+		Idb(){
+			const obj = new this.$.$rise_bench_idb();
+			return obj;
+		}
+	};
+	($mol_mem(($.$rise_bench.prototype), "Goods_host"));
+	($mol_mem(($.$rise_bench.prototype), "Text_host"));
+	($mol_mem(($.$rise_bench.prototype), "Goods"));
+	($mol_mem(($.$rise_bench.prototype), "Crdttext"));
+	($mol_mem(($.$rise_bench.prototype), "Idb"));
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $rise_bench extends $.$rise_bench {
+            spread_ids() {
+                const ids = super.spread_ids();
+                return new URL(location.href).searchParams.get('rise_fixture') === 'tests' ? [...ids, '$rise_bench_idb'] : ids;
+            }
+            Spread(id) {
+                // Offline regression entry point exercises the same raw workload views.
+                if (new URL(location.href).searchParams.get('rise_fixture') === 'tests') {
+                    if (id === '$rise_bench_baza_goods')
+                        return this.Goods();
+                    if (id === '$rise_bench_baza_crdttext')
+                        return this.Crdttext();
+                    if (id === '$rise_bench_idb')
+                        return this.Idb();
+                }
+                return super.Spread(id);
+            }
+        }
+        $$.$rise_bench = $rise_bench;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+	($.$rise_bench_idb_table) = class $rise_bench_idb_table extends ($.$rise_bench_baza_goods_table) {
+		records(){
+			return [];
+		}
+		change(id, next){
+			if(next !== undefined) return next;
+			return null;
+		}
+	};
+	($mol_mem_key(($.$rise_bench_idb_table.prototype), "change"));
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    /** Native IndexedDB through $mol_db. No indexes or CRDT fixture entities. */
+    class $rise_bench_idb_storage extends $mol_object {
+        name;
+        constructor(name) {
+            super();
+            this.name = name;
+        }
+        migration = (tx) => { tx.store_make('Product'); };
+        async db() { return this.$.$mol_db(this.name, this.migration); }
+        async prepare() { await this.db(); }
+        product(index, compact) {
+            return $rise_bench_product_make(index, compact);
+        }
+        async create(count, compact) {
+            const db = await this.db();
+            const tx = db.change('Product');
+            const products = tx.stores.Product;
+            const requests = Array.from({ length: count }, (_, index) => products.put(this.product(index, compact), index));
+            await Promise.all([...requests, tx.commit()]);
+        }
+        async count() { return (await this.db()).read('Product').Product.count(); }
+        async search() {
+            const products = await (await this.db()).read('Product').Product.select();
+            return products.filter(product => product.title.toLowerCase().includes('notebook 00000')).length;
+        }
+        async add(compact) {
+            const index = await this.count();
+            const tx = (await this.db()).change('Product');
+            await Promise.all([tx.stores.Product.put(this.product(index, compact), index), tx.commit()]);
+        }
+        async rows() {
+            return (await (await this.db()).read('Product').Product.select());
+        }
+        async change(index, field, value) {
+            const db = await this.db(), product = await db.read('Product').Product.get(index);
+            if (!product)
+                throw new Error('Запись не найдена');
+            const tx = db.change('Product');
+            await Promise.all([tx.stores.Product.put({ ...product, [field]: value }, index), tx.commit()]);
+        }
+        destructor() { $mol_wire_async(this).close(); }
+        async close() { (await this.db()).destructor(); }
+    }
+    __decorate([
+        $mol_memo.method
+    ], $rise_bench_idb_storage.prototype, "db", null);
+    $.$rise_bench_idb_storage = $rise_bench_idb_storage;
+})($ || ($ = {}));
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        /** Same cards and virtualization; only field access differs from CRDT storage. */
+        class $rise_bench_idb_table extends $.$rise_bench_idb_table {
+            count() { return this.records().length; }
+            row_id(id) { return this.records()[id].id; }
+            row_title(id) { return this.records()[id].title; }
+            row_uri(id) { return this.records()[id].uri ?? `https://xkcd.com/${Number(this.row_id(id)) + 1}/`; }
+            row_description(id) { return this.records()[id].description ?? ''; }
+            row_tags(id) { return [this.records()[id].tags?.join(', ') ?? '']; }
+            row_color(id, next) {
+                if (next !== undefined) {
+                    this.change(`${id}:color`, next);
+                    return next;
+                }
+                return this.records()[id].color;
+            }
+            row_status(id, next) {
+                if (next !== undefined) {
+                    this.change(`${id}:status`, next);
+                    return next;
+                }
+                return this.records()[id].status;
+            }
+            row_checked(id, next) {
+                if (next !== undefined) {
+                    this.change(`${id}:checked`, next);
+                    return next;
+                }
+                return this.records()[id].checked ?? false;
+            }
+            row_quantity(id, next) {
+                if (next !== undefined) {
+                    this.change(`${id}:quantity`, next);
+                    return next;
+                }
+                return this.records()[id].quantity ?? 0;
+            }
+            row_moment(id, next) {
+                if (next !== undefined) {
+                    this.change(`${id}:supply`, next.toString('YYYY-MM-DD'));
+                    return next;
+                }
+                return new $mol_time_moment(this.records()[id].supply ?? '2026-10-05');
+            }
+        }
+        __decorate([
+            $mol_mem_key
+        ], $rise_bench_idb_table.prototype, "row_moment", null);
+        $$.$rise_bench_idb_table = $rise_bench_idb_table;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+	($.$rise_bench_idb) = class $rise_bench_idb extends ($.$mol_book2) {
+		title(){
+			return "Сущности IDB";
+		}
+		storage_label(){
+			return "";
+		}
+		Storage_label(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.storage_label())]);
+			return obj;
+		}
+		schema_mode(next){
+			if(next !== undefined) return next;
+			return "compact";
+		}
+		controls_enabled(){
+			return true;
+		}
+		Schema(){
+			const obj = new this.$.$mol_switch();
+			(obj.value) = (next) => ((this.schema_mode(next)));
+			(obj.enabled) = () => ((this.controls_enabled()));
+			(obj.options) = () => ({"compact": "4 свойства", "full": "10 свойств"});
+			return obj;
+		}
+		Schema_label(){
+			const obj = new this.$.$mol_labeler();
+			(obj.title) = () => ("Состав записи");
+			(obj.Content) = () => ((this.Schema()));
+			return obj;
+		}
+		count_mode(next){
+			if(next !== undefined) return next;
+			return "100";
+		}
+		Count(){
+			const obj = new this.$.$mol_switch();
+			(obj.value) = (next) => ((this.count_mode(next)));
+			(obj.enabled) = () => ((this.controls_enabled()));
+			(obj.options) = () => ({
+				"1": "1", 
+				"10": "10", 
+				"100": "100", 
+				"500": "500", 
+				"1000": "1000", 
+				"2000": "2000", 
+				"3000": "3000", 
+				"4000": "4000", 
+				"5000": "5000", 
+				"10000": "10000"
+			});
+			return obj;
+		}
+		Count_label(){
+			const obj = new this.$.$mol_labeler();
+			(obj.title) = () => ("Количество записей");
+			(obj.Content) = () => ((this.Count()));
+			return obj;
+		}
+		benchmark(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Run(){
+			const obj = new this.$.$mol_button_major();
+			(obj.title) = () => ("Запустить бенчмарк");
+			(obj.click) = (next) => ((this.benchmark(next)));
+			(obj.enabled) = () => ((this.controls_enabled()));
+			return obj;
+		}
+		Settings(){
+			const obj = new this.$.$mol_page();
+			(obj.title) = () => ("Настройки");
+			(obj.minimal_width) = () => (320);
+			(obj.body) = () => ([
+				(this.Storage_label()), 
+				(this.Schema_label()), 
+				(this.Count_label()), 
+				(this.Run())
+			]);
+			return obj;
+		}
+		storage_title(){
+			return "IDB";
+		}
+		body_scroll_top(next){
+			return (this.Page().body_scroll_top(next));
+		}
+		Metrics(){
+			const obj = new this.$.$rise_bench_metrics();
+			(obj.operations) = () => ([
+				"Запуск БД, с", 
+				"Создание, с", 
+				"Поиск, с", 
+				"Добавить 1, с", 
+				"F5, с", 
+				"Поиск после F5, с"
+			]);
+			return obj;
+		}
+		filters_enabled(){
+			return true;
+		}
+		search_query(next){
+			return (this.Search().query(next));
+		}
+		Search(){
+			const obj = new this.$.$mol_search();
+			(obj.hint) = () => ("Название товара");
+			(obj.enabled) = () => ((this.filters_enabled()));
+			return obj;
+		}
+		Search_label(){
+			const obj = new this.$.$mol_labeler();
+			(obj.title) = () => ("Поиск по названию");
+			(obj.Content) = () => ((this.Search()));
+			return obj;
+		}
+		color_filter(next){
+			if(next !== undefined) return next;
+			return "all";
+		}
+		Color_filter(){
+			const obj = new this.$.$mol_select();
+			(obj.enabled) = () => ((this.filters_enabled()));
+			(obj.value) = (next) => ((this.color_filter(next)));
+			(obj.dictionary) = () => ({
+				"all": "All colors", 
+				"red": "red", 
+				"green": "green", 
+				"blue": "blue"
+			});
+			return obj;
+		}
+		Color_label(){
+			const obj = new this.$.$mol_labeler();
+			(obj.title) = () => ("Color");
+			(obj.Content) = () => ((this.Color_filter()));
+			return obj;
+		}
+		status_filter(next){
+			if(next !== undefined) return next;
+			return "all";
+		}
+		Status_filter(){
+			const obj = new this.$.$mol_select();
+			(obj.enabled) = () => ((this.filters_enabled()));
+			(obj.value) = (next) => ((this.status_filter(next)));
+			(obj.dictionary) = () => ({
+				"all": "All statuses", 
+				"minor": "Store", 
+				"major": "Sale", 
+				"critical": "Support"
+			});
+			return obj;
+		}
+		Status_label(){
+			const obj = new this.$.$mol_labeler();
+			(obj.title) = () => ("Status");
+			(obj.Content) = () => ((this.Status_filter()));
+			return obj;
+		}
+		add_one(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Add(){
+			const obj = new this.$.$mol_button_minor();
+			(obj.title) = () => ("Добавить запись");
+			(obj.enabled) = () => ((this.controls_enabled()));
+			(obj.click) = (next) => ((this.add_one(next)));
+			return obj;
+		}
+		reset(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Reset(){
+			const obj = new this.$.$mol_button_minor();
+			(obj.title) = () => ("Очистить");
+			(obj.click) = (next) => ((this.reset(next)));
+			(obj.enabled) = () => ((this.controls_enabled()));
+			return obj;
+		}
+		Manual_actions(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.Add()), (this.Reset())]);
+			return obj;
+		}
+		change_message(){
+			return "";
+		}
+		Change_status(){
+			const obj = new this.$.$mol_status();
+			(obj.status) = () => ((this.change_message()));
+			return obj;
+		}
+		manual_content(){
+			return [
+				(this.Search_label()), 
+				(this.Color_label()), 
+				(this.Status_label()), 
+				(this.Manual_actions()), 
+				(this.Change_status())
+			];
+		}
+		Manual(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ((this.manual_content()));
+			return obj;
+		}
+		products(){
+			return [];
+		}
+		compact(){
+			return false;
+		}
+		change(id, next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Table(){
+			const obj = new this.$.$rise_bench_idb_table();
+			(obj.records) = () => ((this.products()));
+			(obj.compact) = () => ((this.compact()));
+			(obj.query) = () => ((this.search_query()));
+			(obj.color_filter) = () => ((this.color_filter()));
+			(obj.status_filter) = () => ((this.status_filter()));
+			(obj.change) = (id, next) => ((this.change(id, next)));
+			return obj;
+		}
+		Page(){
+			const obj = new this.$.$rise_bench_surface();
+			(obj.title) = () => ((this.storage_title()));
+			(obj.minimal_width) = () => (640);
+			(obj.body) = () => ([
+				(this.Metrics()), 
+				(this.Manual()), 
+				(this.Table())
+			]);
+			return obj;
+		}
+		menu_title(){
+			return (this.title());
+		}
+		pages(){
+			return [(this.Settings()), (this.Page())];
+		}
+	};
+	($mol_mem(($.$rise_bench_idb.prototype), "Storage_label"));
+	($mol_mem(($.$rise_bench_idb.prototype), "schema_mode"));
+	($mol_mem(($.$rise_bench_idb.prototype), "Schema"));
+	($mol_mem(($.$rise_bench_idb.prototype), "Schema_label"));
+	($mol_mem(($.$rise_bench_idb.prototype), "count_mode"));
+	($mol_mem(($.$rise_bench_idb.prototype), "Count"));
+	($mol_mem(($.$rise_bench_idb.prototype), "Count_label"));
+	($mol_mem(($.$rise_bench_idb.prototype), "benchmark"));
+	($mol_mem(($.$rise_bench_idb.prototype), "Run"));
+	($mol_mem(($.$rise_bench_idb.prototype), "Settings"));
+	($mol_mem(($.$rise_bench_idb.prototype), "Metrics"));
+	($mol_mem(($.$rise_bench_idb.prototype), "Search"));
+	($mol_mem(($.$rise_bench_idb.prototype), "Search_label"));
+	($mol_mem(($.$rise_bench_idb.prototype), "color_filter"));
+	($mol_mem(($.$rise_bench_idb.prototype), "Color_filter"));
+	($mol_mem(($.$rise_bench_idb.prototype), "Color_label"));
+	($mol_mem(($.$rise_bench_idb.prototype), "status_filter"));
+	($mol_mem(($.$rise_bench_idb.prototype), "Status_filter"));
+	($mol_mem(($.$rise_bench_idb.prototype), "Status_label"));
+	($mol_mem(($.$rise_bench_idb.prototype), "add_one"));
+	($mol_mem(($.$rise_bench_idb.prototype), "Add"));
+	($mol_mem(($.$rise_bench_idb.prototype), "reset"));
+	($mol_mem(($.$rise_bench_idb.prototype), "Reset"));
+	($mol_mem(($.$rise_bench_idb.prototype), "Manual_actions"));
+	($mol_mem(($.$rise_bench_idb.prototype), "Change_status"));
+	($mol_mem(($.$rise_bench_idb.prototype), "Manual"));
+	($mol_mem_key(($.$rise_bench_idb.prototype), "change"));
+	($mol_mem(($.$rise_bench_idb.prototype), "Table"));
+	($mol_mem(($.$rise_bench_idb.prototype), "Page"));
+
+
+;
+"use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    async function $rise_bench_sql_sqlite(name) {
+        const { default: initialize } = await new Function('url', 'return import(url)')('https://cdn.jsdelivr.net/npm/@sqlite.org/sqlite-wasm@3.54.1-build1/dist/index.mjs');
+        const sqlite = await initialize();
+        // The previous document may still be releasing its worker during F5.
+        // Own this database for the driver's lifetime, not only during initialization.
+        return new Promise((resolve, reject) => {
+            navigator.locks.request('rise-bench-sqlite:' + name, async () => {
+                let release;
+                const held = new Promise(done => { release = done; });
+                try {
+                    const pool = await sqlite.installOpfsSAHPoolVfs({ directory: '/rise-bench/' + name, preserveOnInitFailure: true });
+                    const db = new pool.OpfsSAHPoolDb('/products.sqlite');
+                    resolve({
+                        async query(sql) { return db.exec({ sql, rowMode: 'object', returnValue: 'resultRows' }); },
+                        async close() { try {
+                            db.close();
+                            await pool.pauseVfs();
+                        }
+                        finally {
+                            release();
+                        } },
+                    });
+                    await held;
+                }
+                catch (error) {
+                    reject(error);
+                }
+            }).catch(reject);
+        });
+    }
+    $.$rise_bench_sql_sqlite = $rise_bench_sql_sqlite;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    async function $rise_bench_sql_pglite(name) {
+        const { PGlite } = await new Function('url', 'return import(url)')('https://cdn.jsdelivr.net/npm/@electric-sql/pglite@0.5.15/dist/index.js');
+        const db = await PGlite.create('idb://' + name, { relaxedDurability: false });
+        return {
+            async query(sql) { const results = await db.exec(sql); return results.at(-1)?.rows ?? []; },
+            async close() { await db.close(); },
+        };
+    }
+    $.$rise_bench_sql_pglite = $rise_bench_sql_pglite;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    async function $rise_bench_sql_duckdb(name) {
+        // 1.33.1-dev57 (npm latest) does not persist OPFS correctly. Pin the working release.
+        const duck = await new Function('url', 'return import(url)')('https://cdn.jsdelivr.net/npm/@duckdb/duckdb-wasm@1.32.0/+esm');
+        const base = 'https://cdn.jsdelivr.net/npm/@duckdb/duckdb-wasm@1.32.0/dist/';
+        const blob = new Blob([`importScripts(${JSON.stringify(base + 'duckdb-browser-eh.worker.js')})`], { type: 'text/javascript' });
+        const url = URL.createObjectURL(blob);
+        const worker = new Worker(url);
+        const db = new duck.AsyncDuckDB(new duck.VoidLogger(), worker);
+        try {
+            await db.instantiate(base + 'duckdb-eh.wasm');
+            await db.open({ path: 'opfs://' + name + '.duckdb', accessMode: duck.DuckDBAccessMode.READ_WRITE });
+        }
+        catch (error) {
+            worker.terminate();
+            throw error;
+        }
+        finally {
+            URL.revokeObjectURL(url);
+        }
+        const connection = await db.connect();
+        return {
+            async query(sql) { return (await connection.query(sql)).toArray().map((row) => row.toJSON()); },
+            async close() { await connection.close(); await db.terminate(); worker.terminate(); },
+        };
+    }
+    $.$rise_bench_sql_duckdb = $rise_bench_sql_duckdb;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    /** Serial RPC: no interleaved transactions and no SQL work on the UI thread. */
+    function $rise_bench_sql_worker() {
+        let driver;
+        let tail = Promise.resolve();
+        globalThis.onmessage = event => {
+            const { id, method, args } = event.data;
+            tail = tail.then(async () => {
+                try {
+                    let result;
+                    if (method === 'open') {
+                        const [engine, name] = args;
+                        const factories = {
+                            sqlite: $rise_bench_sql_sqlite, pglite: $rise_bench_sql_pglite, duckdb: $rise_bench_sql_duckdb,
+                        };
+                        driver = await factories[engine](name);
+                    }
+                    else if (method === 'close')
+                        await driver.close();
+                    else
+                        result = await driver.query(args[0]);
+                    globalThis.postMessage({ id, result });
+                }
+                catch (error) {
+                    globalThis.postMessage({ id, error: error instanceof Error ? error.message : String(error) });
+                }
+            });
+        };
+    }
+    $.$rise_bench_sql_worker = $rise_bench_sql_worker;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    /** Same product generation and operations as IDB, with relational SQL columns. */
+    class $rise_bench_sql_storage extends $mol_object {
+        name;
+        engine;
+        compact;
+        constructor(name, engine, compact) {
+            super();
+            this.name = name;
+            this.engine = engine;
+            this.compact = compact;
+        }
+        product(index, compact) { return $rise_bench_product_make(index, compact); }
+        worker;
+        serial = 0;
+        pending = new Map();
+        disposed = false;
+        async open() {
+            if (this.disposed)
+                throw new Error('Хранилище закрыто');
+            const source = [$rise_bench_sql_sqlite, $rise_bench_sql_pglite, $rise_bench_sql_duckdb, $rise_bench_sql_worker]
+                .map(factory => factory.toString()).join('\n')
+                + '\nconst $ = { $rise_bench_sql_sqlite, $rise_bench_sql_pglite, $rise_bench_sql_duckdb }; $rise_bench_sql_worker()';
+            const url = URL.createObjectURL(new Blob([source], { type: 'text/javascript' }));
+            this.worker = new Worker(url);
+            URL.revokeObjectURL(url);
+            this.worker.onmessage = ({ data }) => {
+                const task = this.pending.get(data.id);
+                if (!task)
+                    return;
+                this.pending.delete(data.id);
+                data.error ? task.reject(new Error(data.error)) : task.resolve(data.result);
+            };
+            this.worker.onerror = error => { this.fail(new Error(error.message)); this.destructor(); };
+            await this.request('open', [this.engine, this.name]);
+            await this.request('query', ['CREATE TABLE IF NOT EXISTS products (id TEXT, title TEXT, color TEXT, status TEXT'
+                    + (this.compact ? '' : ', checked INTEGER, uri TEXT, quantity INTEGER, supply TEXT, description TEXT, tags TEXT') + ')']);
+        }
+        request(method, args) {
+            if (this.disposed || !this.worker)
+                return Promise.reject(new Error('Хранилище закрыто'));
+            const id = ++this.serial;
+            return new Promise((resolve, reject) => {
+                this.pending.set(id, { resolve, reject });
+                this.worker.postMessage({ id, method, args });
+            });
+        }
+        fail(error) { for (const task of this.pending.values())
+            task.reject(error); this.pending.clear(); }
+        async query(sql) { await this.open(); return this.request('query', [sql]); }
+        async prepare() { await this.open(); }
+        literal(value) {
+            if (value === undefined || value === null)
+                return 'NULL';
+            if (typeof value === 'boolean')
+                return value ? '1' : '0';
+            if (typeof value === 'number') {
+                if (!Number.isFinite(value))
+                    throw new Error('Некорректное число');
+                return String(value);
+            }
+            return "'" + String(Array.isArray(value) ? JSON.stringify(value) : value).replace(/'/g, "''") + "'";
+        }
+        tuple(index, compact) { return '(' + Object.values(this.product(index, compact)).map(value => this.literal(value)).join(',') + ')'; }
+        async write(sql) {
+            await this.query(sql);
+            if (this.engine === 'duckdb')
+                await this.query('CHECKPOINT');
+        }
+        async create(count, compact) {
+            await this.write('INSERT INTO products VALUES ' + Array.from({ length: count }, (_, index) => this.tuple(index, compact)).join(','));
+        }
+        async count() { return Number((await this.query('SELECT COUNT(*) AS n FROM products'))[0].n); }
+        async search() { return Number((await this.query("SELECT COUNT(*) AS n FROM products WHERE LOWER(title) LIKE '%notebook 00000%'"))[0].n); }
+        async add(compact) { await this.write('INSERT INTO products VALUES ' + this.tuple(await this.count(), compact)); }
+        async rows() {
+            return (await this.query('SELECT * FROM products ORDER BY id')).map(row => ({ ...row,
+                ...(row.checked === undefined ? {} : { checked: Boolean(row.checked), tags: JSON.parse(row.tags) }),
+            }));
+        }
+        async change(index, field, value) {
+            if (!['color', 'status', 'checked', 'quantity', 'supply'].includes(field))
+                throw new Error('Неизвестное поле');
+            await this.write('UPDATE products SET ' + field + '=' + this.literal(value) + ' WHERE id=' + this.literal(String(index).padStart(5, '0')));
+        }
+        destructor() {
+            this.disposed = true;
+            this.fail(new Error('Хранилище закрыто'));
+            this.worker?.terminate();
+        }
+        async close() { try {
+            if (this.worker && !this.disposed)
+                await this.request('close', []);
+        }
+        finally {
+            this.destructor();
+        } }
+    }
+    __decorate([
+        $mol_memo.method
+    ], $rise_bench_sql_storage.prototype, "open", null);
+    $.$rise_bench_sql_storage = $rise_bench_sql_storage;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    class $rise_bench_idb_ready extends $mol_object {
+        table;
+        title;
+        constructor(table, title) {
+            super();
+            this.table = table;
+            this.title = title;
+        }
+        pending;
+        observer;
+        frame = 0;
+        visible() { return this.table.isConnected && this.table.textContent.includes(this.title) && !this.table.querySelector('[mol_view_error]'); }
+        wait() {
+            return this.pending ??= new Promise((resolve, reject) => {
+                const check = () => {
+                    if (this.frame || !this.visible())
+                        return;
+                    this.frame = requestAnimationFrame(() => {
+                        this.frame = requestAnimationFrame(() => {
+                            this.frame = 0;
+                            if (!this.visible())
+                                return;
+                            this.destructor();
+                            resolve(performance.timeOrigin + performance.now());
+                        });
+                    });
+                };
+                this.observer = new MutationObserver(check);
+                this.observer.observe(this.table, { childList: true, subtree: true, characterData: true, attributes: true });
+                check();
+            });
+        }
+        destructor() {
+            this.observer?.disconnect();
+            if (this.frame)
+                cancelAnimationFrame(this.frame);
+            super.destructor();
+        }
+    }
+    $.$rise_bench_idb_ready = $rise_bench_idb_ready;
+})($ || ($ = {}));
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $rise_bench_idb extends $.$rise_bench_idb {
+            engine_kind() {
+                const kind = new URL(location.href).searchParams.get('rise_fixture');
+                return ['sqlite', 'pglite', 'duckdb'].includes(kind ?? '') ? kind : 'idb';
+            }
+            storage_title() { return $rise_bench_engine[this.engine_kind()].title; }
+            storage_label() { return $rise_bench_engine[this.engine_kind()].storage; }
+            dataset_prefix() { return '$rise_bench_' + this.engine_kind(); }
+            count_mode(next) {
+                const count = $mol_state_arg.value('count', next);
+                return count && Object.hasOwn(this.Count().options(), count) ? count : '100';
+            }
+            schema_mode(next) { return $mol_state_arg.value('schema', next) === 'full' ? 'full' : 'compact'; }
+            compact() { return this.schema_mode() === 'compact'; }
+            dataset_name(next) {
+                const name = $mol_state_local.value(this.dataset_prefix() + '_dataset_' + this.count_mode() + '_' + this.schema_mode() + (new URL(location.href).searchParams.get('rise_run') || ''), next);
+                if (name !== null && name !== undefined)
+                    return name;
+                // Reuse the former single dataset only when its saved run matches the selection.
+                const row = this.reload_store().snapshot.rows[0];
+                return row?.count === Number(this.count_mode()) && row.properties === (this.compact() ? 4 : 10)
+                    ? $mol_state_local.value(this.dataset_prefix() + '_dataset') ?? '' : '';
+            }
+            storage() {
+                return this.engine_kind() === 'idb' ? new $rise_bench_idb_storage(this.dataset_name())
+                    : new $rise_bench_sql_storage(this.dataset_name(), this.engine_kind(), this.compact());
+            }
+            revision(next = 0) { return next; }
+            products() {
+                this.revision();
+                if (!this.dataset_name())
+                    return [];
+                return $mol_wire_sync(this.storage()).rows();
+            }
+            refresh() { this.revision(this.revision() + 1); }
+            change(key, next) {
+                if (next === undefined)
+                    return null;
+                $mol_wire_async(this).save_change(key, next).catch(error => this.change_error(error));
+                return next;
+            }
+            change_error(next = null) { return next; }
+            change_message() { return this.change_error()?.message ?? ''; }
+            manual_content() {
+                return [this.Search_label(), this.Color_label(), this.Status_label(), this.Manual_actions(), ...this.change_error() ? [this.Change_status()] : []];
+            }
+            save_change(key, next) {
+                this.change_error(null);
+                const [index, field] = key.split(':');
+                if (!['color', 'status', 'checked', 'quantity', 'supply'].includes(field))
+                    throw new Error('Неизвестное поле');
+                $mol_wire_sync(this.storage()).change(Number(index), field, next);
+                this.refresh();
+            }
+            reset() {
+                this.dataset_name(this.dataset_prefix() + '_' + $mol_wire_sync(crypto).randomUUID());
+                this.search_query('');
+                this.color_filter('all');
+                this.status_filter('all');
+                this.refresh();
+                this.body_scroll_top(0);
+            }
+            add_one() {
+                if (!this.dataset_name())
+                    this.reset();
+                $mol_wire_sync(this.storage()).add(this.compact());
+                this.refresh();
+                this.body_scroll_top(0);
+            }
+            controls_enabled() {
+                return this.filters_enabled()
+                    && !$mol_promise_like(this.Add().status()?.[0]) && !$mol_promise_like(this.Reset().status()?.[0]);
+            }
+            filters_enabled() { return this.Metrics().runs()[0]?.state() !== 'Перезагрузка' && !$mol_promise_like(this.Run().status()?.[0]); }
+            reload_store() { return new $rise_bench_reload(this.dataset_prefix() + '_runs'); }
+            restored = false;
+            restore_runs() {
+                if (this.restored)
+                    return;
+                this.Metrics().runs(this.reload_store().snapshot.rows.map(row => {
+                    const run = new $rise_bench_run(row.count, row.properties, row.stamp, row.baza_version ?? '—', row.benchmark_version ?? '—', row.id, row.computer ?? '', row.browser ?? '', row.engine, row.engine_version);
+                    run.state(row.state);
+                    run.bytes(row.bytes ?? null);
+                    for (const [name, value] of Object.entries(row.metrics))
+                        if (value !== null)
+                            run.metric(name, value);
+                    return run;
+                }));
+                this.restored = true;
+            }
+            start_run(run) {
+                if (this.Metrics().runs().includes(run))
+                    return;
+                this.reset();
+                this.Metrics().run_add(run);
+            }
+            benchmark() {
+                this.restore_runs();
+                const run = new ($mol_wire_sync($rise_bench_run))(Number(this.count_mode()), this.compact() ? 4 : 10, undefined, '—', undefined, undefined, undefined, undefined, this.engine_kind(), $rise_bench_engine[this.engine_kind()].version);
+                new ($mol_wire_sync($rise_bench_stage))(run, 'Подготовка');
+                $mol_wire_sync(this).start_run(run);
+                return $mol_error_fence(() => {
+                    new ($mol_wire_sync($rise_bench_stage))(run, 'Запуск БД, с');
+                    const prepare = new ($mol_wire_sync($rise_bench_measure))('Запуск БД');
+                    $mol_wire_sync(this.storage()).prepare();
+                    prepare.finish();
+                    run.metric('Запуск БД, с', prepare.duration / 1000);
+                    new ($mol_wire_sync($rise_bench_stage))(run, 'Создание, с');
+                    const create = new ($mol_wire_sync($rise_bench_measure))('Создание IDB');
+                    $mol_wire_sync(this.storage()).create(run.count, this.compact());
+                    create.finish();
+                    run.metric('Создание, с', create.duration / 1000);
+                    new ($mol_wire_sync($rise_bench_stage))(run, 'Поиск, с');
+                    const search = new ($mol_wire_sync($rise_bench_measure))('Поиск IDB');
+                    if ($mol_wire_sync(this.storage()).search() !== 1)
+                        throw new Error('Поиск должен найти один товар');
+                    search.finish();
+                    run.metric('Поиск, с', search.duration / 1000);
+                    new ($mol_wire_sync($rise_bench_stage))(run, 'Добавить 1, с');
+                    const add = new ($mol_wire_sync($rise_bench_measure))('Добавление IDB');
+                    $mol_wire_sync(this.storage()).add(this.compact());
+                    add.finish();
+                    run.metric('Добавить 1, с', add.duration / 1000);
+                    $mol_wire_sync(this).refresh();
+                    run.state('Перезагрузка');
+                    new ($mol_wire_sync($rise_bench_stage))(run, 'F5, с');
+                    this.reload_store().save(this.Metrics().runs(), this.Metrics().operations(), { name: this.dataset_name(), count: run.count, started: performance.timeOrigin + performance.now() });
+                    this.$.$mol_dom_context.location.reload();
+                }, error => {
+                    run.state('Ошибка');
+                    run.failure($rise_bench_stage.failure(error));
+                    this.reload_store().save(this.Metrics().runs(), this.Metrics().operations(), null);
+                    return $mol_fail(error);
+                });
+            }
+            resumed = false;
+            resume_reload() {
+                if (this.resumed)
+                    return;
+                const ticket = this.reload_store().snapshot.pending;
+                if (!ticket)
+                    return;
+                const run = this.Metrics().runs()[0];
+                return $mol_error_fence(() => {
+                    if (this.dataset_name() !== ticket.name || $mol_wire_sync(this.storage()).count() !== ticket.count + 1)
+                        throw new Error('После F5 открыт неполный набор IDB');
+                    const ready = new ($mol_wire_sync($rise_bench_idb_ready))(this.Table().dom_node(), $rise_bench_product_name(ticket.count));
+                    run.metric('F5, с', ($mol_wire_sync(ready).wait() - ticket.started) / 1000);
+                    new ($mol_wire_sync($rise_bench_stage))(run, 'Поиск после F5, с');
+                    const search = new ($mol_wire_sync($rise_bench_measure))('Поиск IDB после F5');
+                    if ($mol_wire_sync(this.storage()).search() !== 1)
+                        throw new Error('Поиск IDB после F5 должен найти один товар');
+                    search.finish();
+                    run.metric('Поиск после F5, с', search.duration / 1000);
+                    this.resumed = true;
+                    run.state('Готово');
+                    this.reload_store().save(this.Metrics().runs(), this.Metrics().operations(), null);
+                }, error => {
+                    this.resumed = true;
+                    run.state('Ошибка');
+                    run.failure($rise_bench_stage.failure(error));
+                    this.reload_store().save(this.Metrics().runs(), this.Metrics().operations(), null);
+                    return error;
+                });
+            }
+            auto() { this.restore_runs(); this.resume_reload(); return []; }
+        }
+        __decorate([
+            $mol_mem
+        ], $rise_bench_idb.prototype, "count_mode", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bench_idb.prototype, "schema_mode", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bench_idb.prototype, "dataset_name", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bench_idb.prototype, "storage", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bench_idb.prototype, "revision", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bench_idb.prototype, "products", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_idb.prototype, "refresh", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_idb.prototype, "change", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bench_idb.prototype, "change_error", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_idb.prototype, "save_change", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_idb.prototype, "reset", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_idb.prototype, "add_one", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bench_idb.prototype, "reload_store", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_idb.prototype, "restore_runs", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_idb.prototype, "start_run", null);
+        __decorate([
+            $mol_action
+        ], $rise_bench_idb.prototype, "benchmark", null);
+        __decorate([
+            $mol_mem
+        ], $rise_bench_idb.prototype, "resume_reload", null);
+        $$.$rise_bench_idb = $rise_bench_idb;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_define($rise_bench_idb, {
+        Manual: { flex: { wrap: 'wrap' }, alignItems: 'flex-end' },
+        Manual_actions: { flex: { wrap: 'wrap' } },
+    });
+})($ || ($ = {}));
+
+;
+	($.$rise_app) = class $rise_app extends ($.$mol_book2_catalog) {
+		Theme(){
+			const obj = new this.$.$mol_theme_auto();
+			return obj;
+		}
+		Lights(){
+			const obj = new this.$.$mol_lights_toggle();
+			return obj;
+		}
+		Demo(){
+			const obj = new this.$.$rise_demo();
 			return obj;
 		}
 		Bench(){
@@ -42743,17 +42849,20 @@ var $;
 		menu_title(){
 			return "$rise";
 		}
-		spreads(){
-			return {"demo": (this.Demo_host()), "bench": (this.Bench())};
+		plugins(){
+			return [(this.Theme())];
 		}
-		Demo(){
-			const obj = new this.$.$rise_demo();
-			return obj;
+		menu_tools(){
+			return [(this.Lights())];
+		}
+		spreads(){
+			return {"demo": (this.Demo()), "bench": (this.Bench())};
 		}
 	};
-	($mol_mem(($.$rise_app.prototype), "Demo_host"));
-	($mol_mem(($.$rise_app.prototype), "Bench"));
+	($mol_mem(($.$rise_app.prototype), "Theme"));
+	($mol_mem(($.$rise_app.prototype), "Lights"));
 	($mol_mem(($.$rise_app.prototype), "Demo"));
+	($mol_mem(($.$rise_app.prototype), "Bench"));
 
 
 ;
@@ -42885,6 +42994,7 @@ var $;
     var $$;
     (function ($$) {
         class $rise_app extends $.$rise_app {
+            spread_title(id) { return id === 'demo' ? 'Demo' : super.spread_title(id); }
             fixture_kind() { return new URL(location.href).searchParams.get('rise_fixture'); }
             fixture() {
                 switch (this.fixture_kind()) {

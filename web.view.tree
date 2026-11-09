@@ -1086,6 +1086,26 @@ $mol_icon_xml $mol_icon path \M12.89,3L14.85,3.4L11.11,21L9.15,20.6L12.89,3M19.5
 
 $mol_icon_marker $mol_icon path \M18.5,1.15C17.97,1.15 17.46,1.34 17.07,1.73L11.26,7.55L16.91,13.2L22.73,7.39C23.5,6.61 23.5,5.35 22.73,4.56L19.89,1.73C19.5,1.34 19,1.15 18.5,1.15M10.3,8.5L4.34,14.46C3.56,15.24 3.56,16.5 4.36,17.31C3.14,18.54 1.9,19.77 0.67,21H6.33L7.19,20.14C7.97,20.9 9.22,20.89 10,20.12L15.95,14.16
 
+$mol_icon_upload $mol_icon path \M9,16V10H5L12,3L19,10H15V16H9M5,20V18H19V20H5Z
+
+$mol_button_open $mol_button_minor
+	sub /
+		<= Icon $mol_icon_upload
+		<= Native $mol_button_open_native
+			files? <=> files_handled? <=> files? /File
+			accept <= accept \
+			multiple <= multiple true
+
+$mol_button_open_native $mol_view
+	dom_name \input
+	files? /File
+	attr *
+		type \file
+		accept <= accept \
+		multiple <= multiple true
+	event *
+		change? <=> picked? null
+
 $mol_float $mol_view
 	style *
 		^
@@ -1201,6 +1221,10 @@ $giper_baza_rich_edit $mol_view
 							hint \Alt+C
 							enabled? <=> selected? false
 							click? <=> inline_toggle*code?
+				<= Attach $mol_button_open
+					hint @ \Attach file
+					enabled? <=> selected? false
+					files? <=> attach_files? /
 				- <= Search_toggle $mol_check_icon
 					hint @ \Search / Replace
 					checked? <=> search_active? false
@@ -1459,26 +1483,6 @@ $giper_baza_land_grab $mol_select
 		read @ \👀 Readable
 		deny @ \🔐 Private
 	grab? null $giper_baza_rank_preset
-
-$mol_icon_upload $mol_icon path \M9,16V10H5L12,3L19,10H15V16H9M5,20V18H19V20H5Z
-
-$mol_button_open $mol_button_minor
-	sub /
-		<= Icon $mol_icon_upload
-		<= Native $mol_button_open_native
-			files? <=> files_handled? <=> files? /File
-			accept <= accept \
-			multiple <= multiple true
-
-$mol_button_open_native $mol_view
-	dom_name \input
-	files? /File
-	attr *
-		type \file
-		accept <= accept \
-		multiple <= multiple true
-	event *
-		change? <=> picked? null
 
 $giper_baza_land_rights $mol_list
 	land $giper_baza_land
@@ -2144,1024 +2148,16 @@ $giper_baza_app $mol_book2_catalog
 				<= Spread_close
 	placeholders /
 
-$mol_check_list $mol_view
-	dictionary *
-	Option* $mol_check
-		checked? <=> option_checked*? false
-		label <= option_label* /
-			<= option_title* \
-		enabled <= option_enabled* <= enabled true
-		hint <= option_hint* \
-		minimal_height 24
-	options *
-	keys /string
-	sub <= items /$mol_check
-
-$mol_switch $mol_check_list
-	value? \
-
-$mol_button_major $mol_button_minor
-	theme \$mol_theme_base
-
-$mol_grid $mol_view
-	row_height 32
-	row_ids /string[]
-	row_id* null
-	col_ids /
-	records *
-	record* null
-	hierarchy null
-	hierarchy_col \
-	minimal_width 0
-	-
-	sub /
-		<= Head
-		<= Table $mol_grid_table
-			sub <= rows /$mol_view
-	Head $mol_grid_row
-		cells <= head_cells /$mol_view
-	Row* $mol_grid_row
-		minimal_height <= row_height
-		minimal_width <= minimal_width
-		cells <= cells* /$mol_view
-	-
-	Cell* $mol_view
-	cell* null
-	Cell_text* $mol_grid_cell
-		sub <= cell_content_text* <= cell_content* /$mol_view_content
-	Cell_number* $mol_grid_number
-		sub <= cell_content_number* <= cell_content* /$mol_view_content
-	Col_head* $mol_float
-		dom_name \th
-		sub <= col_head_content* /$mol_view_content
-	Cell_branch* $mol_check_expand
-		level <= cell_level* 0
-		label <= cell_content* /$mol_view_content
-		expanded? <=> cell_expanded*? false
-	Cell_content* /
-		<= Cell_dimmer* $mol_dimmer
-			needle <= needle \
-			haystack <= cell_value* \
-
-$mol_grid_table $mol_list
-	- dom_name \table
-
-$mol_grid_row $mol_view
-	- dom_name \tr
-	sub <= cells /$mol_view
-
-$mol_grid_cell $mol_view
-	- dom_name \td
-	minimal_height 40
-
-$mol_grid_number $mol_grid_cell
-
-$mol_icon_information $mol_icon path \M13,9H11V7H13M13,17H11V11H13M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z
-
-$mol_icon_information_outline $mol_icon path \M11,9H13V7H11M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M11,17H13V11H11V17Z
-
-$mol_icon_content_copy $mol_icon path \M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z
-
-$rise_bench_metrics_details $mol_pick
-	hint \Параметры компьютера и браузер
-	trigger_content / <= Icon $mol_icon_information_outline
-	bubble_content /
-		<= Text $mol_view
-			sub /
-				<= Computer_label $mol_labeler
-					title \Параметры компьютера
-					label /
-						\Параметры компьютера
-						<= Copy $mol_button_copy
-							hint \Копировать параметры компьютера
-							text <= computer
-							sub / <= Copy_icon $mol_icon_content_copy
-					Content <= Computer $mol_view
-						sub / <= computer \
-				<= Browser_label $mol_labeler
-					title \Браузер
-					Content <= Browser $mol_view
-						sub / <= browser \
-
-$rise_bench_metrics $mol_grid
-	attr *
-		^
-		embedded <= embedded false
-	runs? /$rise_bench_run
-	run_add? null
-	operations /string
-	compare false
-	text_mode false
-	Details* $rise_bench_metrics_details
-		computer <= details_computer* \
-		browser <= details_browser* \
-
-$mol_example $mol_view
-	tags /string
-	aspects /string
-
-$mol_example_small $mol_example
-
-$mol_list_demo $mol_example_small
-	sub /
-		<= Items_count_label $mol_labeler
-			title \Items count
-			content /
-				<= Items_count $mol_number
-					value? <=> items_count? 50
-					value_min 0
-					value_max 100000
-		<= Items $mol_list
-			rows <= list_items /
-				<= Item*0 $mol_link
-					title <= item_title* \
-			-
-			Empty <= List_empty $mol_paragraph
-				title \No items in this list
-	tags /
-		\list
-		\rows
-		\stack
-	aspects /
-		\Widget/Layout
-
-$mol_image $mol_view
-	dom_name \img
-	attr *any
-		^
-		src <= uri \
-		title <= hint
-		alt <= title \
-		loading <= loading \lazy
-		decoding <= decoding \async
-		crossOrigin <= cors null
-		width <= natural_width 0
-		height <= natural_height 0
-	event *any
-		load? <=> load? null
-	minimal_width 16
-	minimal_height 16
-
-$mol_link_iconed $mol_link
-	sub /
-		<= Icon $mol_image
-			uri <= icon \
-			title \
-	content /
-		<= title <= uri
-	host \
-
-$mol_row $mol_view
-
-$mol_list_demo_table $mol_example
-	title \Large list of rows with dynamic content
-	count 100000
-	sub /
-		- <= Head $mol_row sub /
-			<= Check $mol_check_group
-				checks <= check_list /$mol_check
-				title \Good Goods
-		<= Rows $mol_list
-			item_width_min* 200
-			item_height_min* 96
-			rows <= rows /
-				<= Row*0 $mol_row
-					sub <= row_content* /
-						<= Id_labeler* $mol_labeler
-							title \ID
-							Content <= Id* $mol_check_box
-								title <= row_id*? \0000
-								checked? <=> row_checked*? false
-						<= Title_labeler* $mol_labeler
-							title \Product Name
-							Content <= Title* $mol_link_iconed
-								uri <= row_uri* \
-								title <= row_title* \
-						<= Color_labeler* $mol_labeler
-							title \Color
-							Content <= Color* $mol_select
-								value? <=> row_color*? \
-								options <= colors /
-						<= Status_labeler* $mol_labeler
-							title \Status
-							Content <= Status* $mol_switch
-								value? <=> row_status*? \
-								options <= status_options *
-									minor \Store
-									major \Sale
-									critical \Support
-						<= Quantity_labeler* $mol_labeler
-							title \Quantity
-							Content <= Quantity* $mol_number
-								value? <=> row_quantity*? 0
-						<= Date_labeler* $mol_labeler
-							title \Supply Time
-							Content <= Date* $mol_date
-								value_moment? <=> row_moment*? $mol_time_moment
-	tags /
-		\list
-		\table
-		\scroll
-		\divider
-		\grid
-	aspects /
-		\Widget/Layout
-
-$rise_bench_baza_goods_rows $mol_list
-
-$rise_bench_baza_goods_table $mol_list_demo_table
-	count 1000
-	products /$rise_bench_baza_goods_product
-	compact false
-	query \
-	color_filter \all
-	status_filter \all
-	Rows $rise_bench_baza_goods_rows
-		item_width_min* 200
-		item_height_min* 96
-		rows <= rows
-	Compact_id_labeler* $mol_labeler
-		title \ID
-		content /
-			<= Compact_id* $mol_view
-				sub / <= row_id*?
-	Details* $mol_view
-		sub /
-			<= Description_labeler* $mol_labeler
-				title \Description
-				content /
-					<= Description* $mol_view
-						sub / <= row_description* \
-			<= Tags_labeler* $mol_labeler
-				title \Tags
-				content /
-					<= Tags* $mol_view
-						sub <= row_tags* /string
-	Row* $mol_view
-		minimal_height 96
-		sub <= row_content*
-	Title* $mol_link_iconed
-		uri <= row_uri*
-		title <= row_title*
-		content /
-			<= Name* $mol_dimmer
-				haystack <= row_title*
-				needle <= query
-	Date* $mol_date
-		value_moment? <=> row_moment*?
-		trigger_content / <= row_date* \
-
-$rise_bench_surface $mol_page
-	attr *
-		^
-		embedded <= embedded false
-
-$rise_bench_baza_goods $mol_book2
-	menu_title <= title \Сущности
-	pages <= content /$mol_view
-	Settings $mol_page
-		title \Настройки
-		minimal_width 320
-		body /
-			<= Storage_label $mol_view
-				sub / \Хранение: одна Area на запись
-			<= Schema_label $mol_labeler
-				title \Состав записи
-				Content <= Schema $mol_switch
-					enabled <= controls_enabled true
-					value? <=> schema_mode? \compact
-					options *
-						compact \4 свойства
-						full \10 свойств
-			<= Count_label $mol_labeler
-				title \Количество записей
-				Content <= Count $mol_switch
-					enabled <= controls_enabled
-					value? <=> count_mode? \100
-					options *
-						100 \100
-						500 \500
-						1000 \1000
-						2000 \2000
-						3000 \3000
-						4000 \4000
-						5000 \5000
-						10000 \10000
-			<= Actions $mol_view
-				sub /
-					<= Create $mol_button_major
-						title \Запустить бенчмарк
-						enabled <= create_enabled true
-						click? <=> benchmark? null
-	Records $rise_bench_surface
-		title <= app_title \Товары
-		minimal_width 640
-		body_scroll_top? => body_scroll_top?
-		body /
-			<= Metrics $rise_bench_metrics
-				operations /
-					\Создание, с
-					\Поиск, с
-					\Добавить 1, с
-					\F5, с
-					\Поиск после F5, с
-			<= Manual $mol_view
-				sub /
-					<= Search_label $mol_labeler
-						title \Поиск по названию
-						Content <= Search $mol_search
-							hint \Название товара
-							enabled <= filters_enabled true
-							query? => search_query? \
-					<= Color_label $mol_labeler
-						title \Color
-						Content <= Color_filter $mol_select
-							enabled <= filters_enabled
-							value? <=> color_filter? \all
-							dictionary *
-								all \All colors
-								red \red
-								green \green
-								blue \blue
-					<= Status_label $mol_labeler
-						title \Status
-						Content <= Status_filter $mol_select
-							enabled <= filters_enabled
-							value? <=> status_filter? \all
-							dictionary *
-								all \All statuses
-								minor \Store
-								major \Sale
-								critical \Support
-					<= Manual_actions $mol_view
-						sub /
-							<= Add $mol_button_minor
-								title \Добавить запись
-								enabled <= controls_enabled
-								click? <=> add_one? null
-							<= Reset $mol_button_minor
-								title \Очистить
-								enabled <= controls_enabled
-								click? <=> reset? null
-			<= Table $rise_bench_baza_goods_table
-				products <= products /$rise_bench_baza_goods_product
-				compact <= compact_mode false
-				query <= search_query?
-				color_filter <= color_filter?
-				status_filter <= status_filter?
-
-$rise_bug_baza_nohash $mol_page
-	body /
-		<= Baza_status $giper_baza_status
-		<= Reset $mol_button_minor
-			click? <=> entity_reset? null
-		<= entity null
-		<= Add $mol_button_minor
-			click? <=> add? null
-		<= Items $mol_list
-			sub <= items / <= Item*0 $mol_button_minor
-				title <= id* \0
-
-$rise_bug_baza_noseal $mol_page
-	body /
-		<= Baza_status $giper_baza_status
-		<= Reset $mol_button_minor
-			click? <=> entity_reset? null
-		<= entity null
-		<= Add $mol_button_minor
-			click? <=> add? null
-		<= Items $mol_list
-			sub <= items / <= Item*0 $mol_button_minor
-				title <= id* \0
-
-$rise_bug_baza_decrypt $mol_page
-	body /
-		<= Baza_status $giper_baza_status
-		<= Reset $mol_button_minor
-			click? <=> entity_reset? null
-		<= entity null
-		<= Add $mol_button_minor
-			click? <=> add? null
-		<= Items $mol_list
-			sub <= items / <= Item*0 $mol_button_minor
-				title <= id* \0
-				click? <=> cut*? null
-
-$rise_bug_baza_slowtext $mol_page
-	body /
-		<= Baza_status $giper_baza_status
-		<= Reset $mol_button_minor
-			click? <=> entity_reset? null
-		<= entity null
-		<= Text $mol_textarea
-			value? <=> text? \
-
-$rise_bug $mol_book2_catalog
-	placeholders /
-	param \bug
-	spread_classes /
-		\$rise_bug_baza_nohash
-		\$rise_bug_baza_noseal
-		\$rise_bug_baza_decrypt
-		\$rise_bug_baza_slowtext
-
-$rise_bench_textarea_input $mol_textarea_edit
-
-$rise_bench_textarea_view $mol_text_code
-
-$rise_bench_textarea $mol_textarea
-	Edit $rise_bench_textarea_input
-		value? <=> value?
-		hint <= hint
-		enabled <= enabled
-		spellcheck <= spellcheck
-		length_max <= length_max
-		selection? <=> selection?
-		bring => bring
-		submit? <=> submit?
-		submit_with_ctrl <= submit_with_ctrl
-	View $rise_bench_textarea_view
-		text <= value
-		render_visible_only false
-		row_numb* <= row_numb*
-		sidebar_showed <= sidebar_showed
-		highlight <= highlight
-		syntax <= syntax
-
-$rise_bench_baza_crdttext $mol_book2
-	menu_title <= title \Текст
-	pages /
-		<= Menu $mol_page
-			title \CRDT text
-			minimal_width 240
-			body /
-				<= Count_label $mol_labeler
-					title \Количество строк
-					Content <= Count $mol_switch
-						value? <=> count_mode? \100
-						enabled <= controls_enabled true
-						options *
-							100 \100
-							500 \500
-							1000 \1000
-							2000 \2000
-							5000 \5000
-				<= Run $mol_button_major
-					title \Запустить бенчмарк
-					click? <=> benchmark? null
-					enabled <= controls_enabled true
-		<= Page $rise_bench_surface
-			title <= page_title \CRDT-текст
-			minimal_width 640
-			body /
-				<= Metrics $rise_bench_metrics
-					text_mode true
-					operations /
-						\Вставка, с
-						\Добавить символ, с
-						\F5, с
-				<= Reset $mol_button_minor
-					title \Очистить
-					click? <=> reset? null
-					enabled <= controls_enabled
-				<= Editor $rise_bench_textarea
-					hint \Введите текст или запустите бенчмарк
-					value? <=> text? \
-					enabled <= controls_enabled
-					spellcheck false
-
-$rise_bench $mol_book2_catalog
-	placeholders /
-	param \bench
-	spreads *
-		$rise_bench_baza_goods <= Goods_host $rise_bench_host
-			title \Сущности
-			kind \goods
-		$rise_bench_baza_crdttext <= Text_host $rise_bench_host
-			title \Текст
-			kind \text
-	Goods $rise_bench_baza_goods
-	Crdttext $rise_bench_baza_crdttext
-	Idb $rise_bench_idb
-
-$mol_icon_youtube $mol_icon path \M10,15L15.19,12L10,9V15M21.56,7.17C21.69,7.64 21.78,8.27 21.84,9.07C21.91,9.87 21.94,10.56 21.94,11.16L22,12C22,14.19 21.84,15.8 21.56,16.83C21.31,17.73 20.73,18.31 19.83,18.56C19.36,18.69 18.5,18.78 17.18,18.84C15.88,18.91 14.69,18.94 13.59,18.94L12,19C7.81,19 5.2,18.84 4.17,18.56C3.27,18.31 2.69,17.73 2.44,16.83C2.31,16.36 2.22,15.73 2.16,14.93C2.09,14.13 2.06,13.44 2.06,12.84L2,12C2,9.81 2.16,8.2 2.44,7.17C2.69,6.27 3.27,5.69 4.17,5.44C4.64,5.31 5.5,5.22 6.82,5.16C8.12,5.09 9.31,5.06 10.41,5.06L12,5C16.19,5 18.8,5.16 19.83,5.44C20.73,5.69 21.31,6.27 21.56,7.17Z
-
-$mol_embed_service $mol_check
-	uri \
-	video_preview \
-	video_id \
-	checked? <=> active? false
-	sub /
-		<= Image $mol_image
-			title <= title \
-			uri <= video_preview \
-		<= Hint $mol_icon_youtube
-		<= Frame $mol_frame
-			title <= title \
-			uri <= video_embed \
-
-
-$mol_embed_youtube $mol_embed_service
-
-$mol_embed_rutube $mol_embed_service
-
-$mol_embed_vklive $mol_embed_service
-
-$mol_embed_any $mol_view
-	Image $mol_image
-		title <= title \
-		uri <= uri \
-	Object $mol_embed_native
-		title <= title \
-		uri <= uri \
-	Youtube $mol_embed_youtube
-		title <= title \
-		uri <= uri \
-	Rutube $mol_embed_rutube
-		title <= title \
-		uri <= uri \
-	Vklive $mol_embed_vklive
-		title <= title \
-		uri <= uri \
-
-$mol_text $mol_list
-	uri_base \
-	text \
-	param \
-	flow_tokens /
-	block_text* \
-	auto /
-		<= auto_scroll null
-	- \Blocks
-	Paragraph* $mol_paragraph
-		sub <= block_content* /
-	Quote* $mol_text
-		text <= quote_text* \
-		auto_scroll null
-		highlight <= highlight \
-		uri_resolve* <= uri_resolve* \
-		code_sidebar_showed <= code_sidebar_showed true
-	List* $mol_text_list
-		type <= list_type* \-
-		text <= list_text* \
-		highlight <= highlight \
-		uri_resolve* <= uri_resolve* \
-		code_sidebar_showed <= code_sidebar_showed true
-	item_index* 0
-	Header* $mol_text_header
-		minimal_height 40
-		level <= header_level* 1
-		content <= block_content* /
-		arg <= header_arg* *
-	Pre* $mol_text_code
-		text <= pre_text* \
-		row_themes <= pre_themes* /string
-		highlight <= highlight \
-		uri_resolve* <= uri_resolve* \
-		sidebar_showed <= code_sidebar_showed true
-	Cut* $mol_view dom_name \hr
-	- \Table
-	Table* $mol_grid
-		head_cells <= table_head_cells* /
-		rows <= table_rows* /
-	Table_row* $mol_grid_row
-		cells <= table_cells* /
-	Table_cell* $mol_text
-		auto_scroll null
-		text <= table_cell_text* \
-		highlight <= highlight \
-		uri_resolve* <= uri_resolve* \
-		code_sidebar_showed <= code_sidebar_showed true
-	- \Grid
-	Grid* $mol_grid
-		rows <= grid_rows* /
-	Grid_row* $mol_grid_row
-		cells <= grid_cells* /
-	Grid_cell* $mol_text
-		auto_scroll null
-		text <= grid_cell_text* \
-		highlight <= highlight \
-		uri_resolve* <= uri_resolve* \
-		code_sidebar_showed <= code_sidebar_showed true
-	- \Lines
-	String* $mol_dimmer
-		dom_name \span
-		needle <= highlight \
-		haystack <= line_text* \
-	Span* $mol_text_span
-		dom_name \span
-		type <= line_type* \
-		sub <= line_content* /
-	Code_line* $mol_text_code_line
-		numb_showed false
-		highlight <= highlight \
-		text <= line_text* \
-		uri_resolve* <= uri_resolve* \
-		syntax <= code_syntax null
-	Link* $mol_link_iconed
-		uri <= link_uri* \
-		content <= line_content* /
-	Link_http* $mol_link_iconed
-		uri <= link_uri* \
-		content / <= link_host* \
-	Embed* $mol_embed_any
-		uri <= link_uri* \
-		title <= line_text* \
-	- \Spoilers
-	Spoiler* $mol_expander
-		label /
-			<= Spoiler_label* $mol_text
-				text <= spoiler_label* \
-				highlight <= highlight \
-				uri_resolve* <= uri_resolve* \
-				code_sidebar_showed <= code_sidebar_showed true
-		content /
-			<= Spoiler_content* $mol_text
-				text <= spoiler_content* \
-				highlight <= highlight \
-				uri_resolve* <= uri_resolve* \
-				code_sidebar_showed <= code_sidebar_showed true
-
-$mol_text_header $mol_paragraph
-	level 1
-	sub /
-		<= Link $mol_link
-			arg <= arg *
-			hint @ \Permalink to this section
-			sub <= content /
-
-$mol_text_span $mol_paragraph
-	dom_name \span
-	attr *
-		^
-		mol_text_type <= type \
-
-$mol_icon_check $mol_icon path \M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z
-
-$mol_icon_check_all $mol_icon path \M0.41,13.41L6,19L7.41,17.58L1.83,12M22.24,5.58L11.66,16.17L7.5,12L6.07,13.41L11.66,19L23.66,7M18,7L16.59,5.58L10.24,11.93L11.66,13.34L18,7Z
-
-$rise_check_all $mol_check_box
-	checks /$mol_check
-	Icon $mol_icon_check_all
-
-$rise_check_list $mol_view
-	options /string
-	titles *
-	value? /string
-	enabled true
-	sub /
-		<= All $rise_check_all
-			title \Все
-			checks <= checks
-			enabled <= enabled
-			checked? <=> all_checked? false
-		<= Checks $mol_view
-			sub <= checks /$mol_check
-	Check* $mol_check_box
-		title <= check_title* \
-		enabled <= enabled
-		checked? <=> checked*? false
-
-$mol_icon_help $mol_icon path \M10,19H13V22H10V19M12,2C17.35,2.22 19.68,7.62 16.5,11.67C15.67,12.67 14.33,13.33 13.67,14.17C13,15 13,16 13,17H10C10,15.33 10,13.92 10.67,12.92C11.33,11.92 12.67,11.33 13.5,10.67C15.92,8.43 15.32,5.26 12,5A3,3 0 0,0 9,8H6A6,6 0 0,1 12,2Z
-
-$mol_icon_help_circle $mol_icon path \M15.07,11.25L14.17,12.17C13.45,12.89 13,13.5 13,15H11V14.5C11,13.39 11.45,12.39 12.17,11.67L13.41,10.41C13.78,10.05 14,9.55 14,9C14,7.89 13.1,7 12,7A2,2 0 0,0 10,9H8A4,4 0 0,1 12,5A4,4 0 0,1 16,9C16,9.88 15.64,10.67 15.07,11.25M13,19H11V17H13M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12C22,6.47 17.5,2 12,2Z
-
-$mol_icon_help_circle_outline $mol_icon path \M11,18H13V16H11V18M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,6A4,4 0 0,0 8,10H10A2,2 0 0,1 12,8A2,2 0 0,1 14,10C14,12 11,11.75 11,15H13C13,12.75 16,12.5 16,10A4,4 0 0,0 12,6Z
-
-$rise_bench_host_controls_computerhelp $mol_pick
-	hint \Где найти параметры компьютера
-	trigger_content / <= Icon $mol_icon_help_circle_outline
-	bubble_content /
-		<= Text $mol_text
-			text \В Windows нажмите **Win + I**, откройте **Система → О системе** (в некоторых версиях — «О программе»). В разделе **Характеристики устройства** нажмите **Копировать** и вставьте текст в это поле. Коды устройства и продукта удалятся автоматически. Имя компьютера, процессор, память и тип системы сохранятся. Версию Windows можно дописать ниже. [Инструкция Microsoft](https://support.microsoft.com/ru-ru/windows/experience/find-information-about-your-windows-device).
-
-$mol_text_list $mol_text
-	auto_scroll null
-	attr *
-		^
-		mol_text_list_type <= type \
-	Paragraph* $mol_text_list_item
-		index <= item_index*
-		sub <= block_content*
-
-$mol_text_list_item $mol_paragraph
-	attr *
-		^
-		mol_text_list_item_index <= index 0
-
-$rise_bench_host_controls $mol_page
-	title \Настройки
-	minimal_width 320
-	kind \goods
-	enabled true
-	running false
-	run_enabled true
-	body <= controls /$mol_view
-		<= Intro $mol_text
-			text <= intro \
-		<= Engine_label $mol_labeler
-			title \Хранилище
-			Content <= Engine $rise_check_list
-				enabled <= enabled
-				value? <=> engines? /string
-				options <= engine_keys /string
-				titles <= engine_titles *
-		<= Storage_label $mol_view
-			sub / <= storage_label \
-		<= Schema_label $mol_labeler
-			title \Состав записи
-			Content <= Schema $rise_check_list
-				enabled <= enabled
-				value? <=> schemas? /string
-				options /string
-					\compact
-					\full
-				titles *
-					compact \4 свойства
-					full \10 свойств
-		<= Count_label $mol_labeler
-			title <= count_title \Количество записей
-			Content <= Count $rise_check_list
-				enabled <= enabled
-				value? <=> sizes? /string
-				options <= count_keys /string
-				titles <= counts *
-		<= Computer_label $mol_labeler
-			title \Параметры компьютера
-			label /
-				\Параметры компьютера
-				<= Computer_help $rise_bench_host_controls_computerhelp
-			Content <= Computer $rise_bench_textarea
-				length_max 8000
-				hint \Процессор, память, ОС
-				value? <=> computer? \
-				enabled <= enabled
-		<= Run $mol_button_major
-			title \Запустить бенчмарк
-			enabled <= run_enabled
-			click? <=> run? null
-		<= Stop $mol_button_minor
-			title \Остановить
-			click? <=> stop? null
-		<= Status $mol_view
-			sub / <= status \
-		<= Elapsed $mol_view
-			sub / <= elapsed \
-		<= Retry $mol_button_minor
-			title \Повторить сохранение
-			click? <=> retry? null
-	retry_visible false
-
-$rise_bench_charts_selection $mol_pick
-	runs /$rise_bench_run
-	value? /string
-	title <= selection_title \
-	bubble_content /
-		<= List $mol_scroll
-			sub /
-				<= Items $mol_list
-					rows <= choices /$mol_view
-	Presets $mol_view
-		sub <= presets /$mol_view
-	Preset*0 $mol_button_minor
-		title <= preset_title* \
-		click? <=> select_latest*? null
-	Check* $mol_check_box
-		title <= run_title* \
-		checked? <=> checked*? false
-
-$mol_plot_dot $mol_plot_graph
-	points_max +Infinity
-	aspect 1
-	style *
-		^
-		stroke-width <= diameter 8
-	sub /
-		<= Hint
-		<= Curve $mol_svg_path
-			geometry <= curve \
-	-
-	Sample $mol_plot_graph_sample
-		color <= color
-
-$rise_bench_charts_operation_plot $mol_plot_pane
-
-$mol_plot_group $mol_plot_graph
-	sub <= graphs_enriched <= graphs /$mol_plot_graph
-	Sample $mol_plot_graph_sample
-		sub <= graph_samples /$mol_view
-
-$mol_plot_ruler_hor $mol_plot_ruler
-	title_align \start
-	label_align \middle
-	title_pos_x \0
-	title_pos_y \100%
-	label_pos_y* <= title_pos_y
-	background_width \100%
-
-$rise_bench_charts_operation $mol_view
-	operation \
-	runs /$rise_bench_run
-	sub <= content /$mol_view
-	Title $mol_view
-		dom_name \h3
-		sub / <= operation
-	Empty $mol_view
-		sub / \Нет завершённых замеров
-	Legend $mol_view
-		sub <= legends /$mol_view
-	Legend_item* $mol_view
-		sub <= legend_content* /$mol_view_content
-	Legend_text* $mol_view
-		sub / <= series_title* \
-	Legend_sample* $mol_view
-		sub <= legend_sample* /$mol_view
-	Plot $rise_bench_charts_operation_plot
-		hue_base 210
-		graphs <= graphs /$mol_plot_graph
-	Series* $mol_plot_group
-		title <= series_title* \
-		series_x <= series_x* /number
-		series_y <= series_y* /number
-		graphs /
-			<= Line* $mol_plot_line
-			<= Dots* $mol_plot_dot
-	X $mol_plot_ruler_hor
-		title \Объём
-	Y $mol_plot_ruler_vert
-		title \с
-	Note $mol_view
-		sub / \Медиана прогонов; отдельные серии по хранилищу, полям, компьютеру и версии.
-
-$rise_bench_charts $mol_view
-	runs /$rise_bench_run
-	operations /string
-	selected? /string
-	sub <= charts /$mol_view
-	Selection $rise_bench_charts_selection
-		runs <= runs
-		value? <=> selected?
-	Chart* $rise_bench_charts_operation
-		operation <= operation* \
-		runs <= selected_runs /$rise_bench_run
-
-$rise_bench_host $mol_book2
-	kind \goods
-	pages /
-		<= Controls $rise_bench_host_controls
-			kind <= kind
-			enabled <= controls_enabled true
-			run_enabled <= run_enabled true
-			running <= busy false
-			engines? <=> selected_engines? /string
-			sizes? <=> selected_counts? /string
-			schemas? <=> selected_schemas? /string
-			run? <=> run? null
-			stop? <=> stop? null
-			status <= status? \
-			elapsed <= elapsed_text \
-			retry_visible <= retry_visible false
-			retry? <=> retry? null
-		<= Results $mol_page
-			title \Результаты
-			minimal_width 640
-			tools /
-				<= Download $mol_button_download
-					title <= csv_title \Скачать CSV
-					hint \Скачать CSV
-					blob <= csv_blob null
-					file_name <= csv_filename \rise-benchmark.csv
-				<= Mode $mol_switch
-					value? <=> mode? \table
-					options *
-						table \Таблица
-						charts \Графики
-			body <= results_body /$mol_view
-				<= History $mol_scroll
-					sub /
-						<= Metrics $rise_bench_metrics
-							operations <= operations /string
-							runs <= runs /$rise_bench_run
-							compare <= compare false
-							text_mode <= text_mode false
-				<= Frame $mol_frame
-					uri <= fixture_uri \
-					clipboard_read false
-					clipboard_write false
-					attr *
-						^
-						inert <= busy false
-	Charts $rise_bench_charts
-		runs <= runs
-		operations <= operations
-		selected? <=> chart_selection? /string
-
-$mol_status $mol_view
-	status <= title
-	minimal_height 24
-	minimal_width 0
-	sub /
-		<= message \
-
-$rise_bench_idb_table $rise_bench_baza_goods_table
-	records /$rise_bench_idb_storage_product
-	change*? null
-
-$rise_bench_idb $mol_book2
-	menu_title <= title \Сущности IDB
-	pages /
-		<= Settings $mol_page
-			title \Настройки
-			minimal_width 320
-			body /
-				<= Storage_label $mol_view
-					sub / <= storage_label \
-				<= Schema_label $mol_labeler
-					title \Состав записи
-					Content <= Schema $mol_switch
-						value? <=> schema_mode? \compact
-						enabled <= controls_enabled true
-						options *
-							compact \4 свойства
-							full \10 свойств
-				<= Count_label $mol_labeler
-					title \Количество записей
-					Content <= Count $mol_switch
-						value? <=> count_mode? \100
-						enabled <= controls_enabled
-						options *
-							100 \100
-							500 \500
-							1000 \1000
-							2000 \2000
-							3000 \3000
-							4000 \4000
-							5000 \5000
-							10000 \10000
-				<= Run $mol_button_major
-					title \Запустить бенчмарк
-					click? <=> benchmark? null
-					enabled <= controls_enabled
-		<= Page $rise_bench_surface
-			title <= storage_title \IDB
-			minimal_width 640
-			body_scroll_top? => body_scroll_top?
-			body /
-				<= Metrics $rise_bench_metrics
-					operations /
-						\Запуск БД, с
-						\Создание, с
-						\Поиск, с
-						\Добавить 1, с
-						\F5, с
-						\Поиск после F5, с
-				<= Manual $mol_view
-					sub <= manual_content /$mol_view
-						<= Search_label $mol_labeler
-							title \Поиск по названию
-							Content <= Search $mol_search
-								hint \Название товара
-								enabled <= filters_enabled true
-								query? => search_query? \
-						<= Color_label $mol_labeler
-							title \Color
-							Content <= Color_filter $mol_select
-								enabled <= filters_enabled
-								value? <=> color_filter? \all
-								dictionary *
-									all \All colors
-									red \red
-									green \green
-									blue \blue
-						<= Status_label $mol_labeler
-							title \Status
-							Content <= Status_filter $mol_select
-								enabled <= filters_enabled
-								value? <=> status_filter? \all
-								dictionary *
-									all \All statuses
-									minor \Store
-									major \Sale
-									critical \Support
-						<= Manual_actions $mol_view
-							sub /
-								<= Add $mol_button_minor
-									title \Добавить запись
-									enabled <= controls_enabled
-									click? <=> add_one? null
-								<= Reset $mol_button_minor
-									title \Очистить
-									click? <=> reset? null
-									enabled <= controls_enabled
-						<= Change_status $mol_status
-							status <= change_message \
-				<= Table $rise_bench_idb_table
-					records <= products /$rise_bench_idb_storage_product
-					compact <= compact false
-					query <= search_query?
-					color_filter <= color_filter?
-					status_filter <= status_filter?
-					change*? <=> change*? null
+$mol_theme_auto $mol_plugin
+	light \$mol_theme_light
+	attr * mol_theme <= theme <= dark \$mol_theme_dark
+
+$mol_icon_brightness_4 $mol_icon path \M12,18C11.11,18 10.26,17.8 9.5,17.45C11.56,16.5 13,14.42 13,12C13,9.58 11.56,7.5 9.5,6.55C10.26,6.2 11.11,6 12,6A6,6 0 0,1 18,12A6,6 0 0,1 12,18M20,8.69V4H15.31L12,0.69L8.69,4H4V8.69L0.69,12L4,15.31V20H8.69L12,23.31L15.31,20H20V15.31L23.31,12L20,8.69Z
+
+$mol_lights_toggle $mol_check_icon
+	Icon <= Lights_icon $mol_icon_brightness_4
+	hint @ \Toggle lights
+	checked? <=> lights? false
 
 $rise_drag $mol_plugin
 	x? 0
@@ -3194,6 +2190,12 @@ $rise_drag $mol_plugin
 		<= pointerup_listener null $mol_dom_listener
 	-
 	drags_synced /$rise_drag
+
+$mol_example $mol_view
+	tags /string
+	aspects /string
+
+$mol_example_small $mol_example
 
 $mol_card $mol_list
 	attr *
@@ -3364,6 +2366,251 @@ $rise_resize $mol_view
 		width <= width_px \20px
 
 $rise_resize_edge $rise_drag_view
+
+$mol_grid $mol_view
+	row_height 32
+	row_ids /string[]
+	row_id* null
+	col_ids /
+	records *
+	record* null
+	hierarchy null
+	hierarchy_col \
+	minimal_width 0
+	-
+	sub /
+		<= Head
+		<= Table $mol_grid_table
+			sub <= rows /$mol_view
+	Head $mol_grid_row
+		cells <= head_cells /$mol_view
+	Row* $mol_grid_row
+		minimal_height <= row_height
+		minimal_width <= minimal_width
+		cells <= cells* /$mol_view
+	-
+	Cell* $mol_view
+	cell* null
+	Cell_text* $mol_grid_cell
+		sub <= cell_content_text* <= cell_content* /$mol_view_content
+	Cell_number* $mol_grid_number
+		sub <= cell_content_number* <= cell_content* /$mol_view_content
+	Col_head* $mol_float
+		dom_name \th
+		sub <= col_head_content* /$mol_view_content
+	Cell_branch* $mol_check_expand
+		level <= cell_level* 0
+		label <= cell_content* /$mol_view_content
+		expanded? <=> cell_expanded*? false
+	Cell_content* /
+		<= Cell_dimmer* $mol_dimmer
+			needle <= needle \
+			haystack <= cell_value* \
+
+$mol_grid_table $mol_list
+	- dom_name \table
+
+$mol_grid_row $mol_view
+	- dom_name \tr
+	sub <= cells /$mol_view
+
+$mol_grid_cell $mol_view
+	- dom_name \td
+	minimal_height 40
+
+$mol_grid_number $mol_grid_cell
+
+$mol_image $mol_view
+	dom_name \img
+	attr *any
+		^
+		src <= uri \
+		title <= hint
+		alt <= title \
+		loading <= loading \lazy
+		decoding <= decoding \async
+		crossOrigin <= cors null
+		width <= natural_width 0
+		height <= natural_height 0
+	event *any
+		load? <=> load? null
+	minimal_width 16
+	minimal_height 16
+
+$mol_link_iconed $mol_link
+	sub /
+		<= Icon $mol_image
+			uri <= icon \
+			title \
+	content /
+		<= title <= uri
+	host \
+
+$mol_icon_youtube $mol_icon path \M10,15L15.19,12L10,9V15M21.56,7.17C21.69,7.64 21.78,8.27 21.84,9.07C21.91,9.87 21.94,10.56 21.94,11.16L22,12C22,14.19 21.84,15.8 21.56,16.83C21.31,17.73 20.73,18.31 19.83,18.56C19.36,18.69 18.5,18.78 17.18,18.84C15.88,18.91 14.69,18.94 13.59,18.94L12,19C7.81,19 5.2,18.84 4.17,18.56C3.27,18.31 2.69,17.73 2.44,16.83C2.31,16.36 2.22,15.73 2.16,14.93C2.09,14.13 2.06,13.44 2.06,12.84L2,12C2,9.81 2.16,8.2 2.44,7.17C2.69,6.27 3.27,5.69 4.17,5.44C4.64,5.31 5.5,5.22 6.82,5.16C8.12,5.09 9.31,5.06 10.41,5.06L12,5C16.19,5 18.8,5.16 19.83,5.44C20.73,5.69 21.31,6.27 21.56,7.17Z
+
+$mol_embed_service $mol_check
+	uri \
+	video_preview \
+	video_id \
+	checked? <=> active? false
+	sub /
+		<= Image $mol_image
+			title <= title \
+			uri <= video_preview \
+		<= Hint $mol_icon_youtube
+		<= Frame $mol_frame
+			title <= title \
+			uri <= video_embed \
+
+
+$mol_embed_youtube $mol_embed_service
+
+$mol_embed_rutube $mol_embed_service
+
+$mol_embed_vklive $mol_embed_service
+
+$mol_embed_any $mol_view
+	Image $mol_image
+		title <= title \
+		uri <= uri \
+	Object $mol_embed_native
+		title <= title \
+		uri <= uri \
+	Youtube $mol_embed_youtube
+		title <= title \
+		uri <= uri \
+	Rutube $mol_embed_rutube
+		title <= title \
+		uri <= uri \
+	Vklive $mol_embed_vklive
+		title <= title \
+		uri <= uri \
+
+$mol_text $mol_list
+	uri_base \
+	text \
+	param \
+	flow_tokens /
+	block_text* \
+	auto /
+		<= auto_scroll null
+	- \Blocks
+	Paragraph* $mol_paragraph
+		sub <= block_content* /
+	Quote* $mol_text
+		text <= quote_text* \
+		auto_scroll null
+		highlight <= highlight \
+		uri_resolve* <= uri_resolve* \
+		code_sidebar_showed <= code_sidebar_showed true
+	List* $mol_text_list
+		type <= list_type* \-
+		text <= list_text* \
+		highlight <= highlight \
+		uri_resolve* <= uri_resolve* \
+		code_sidebar_showed <= code_sidebar_showed true
+	item_index* 0
+	Header* $mol_text_header
+		minimal_height 40
+		level <= header_level* 1
+		content <= block_content* /
+		arg <= header_arg* *
+	Pre* $mol_text_code
+		text <= pre_text* \
+		row_themes <= pre_themes* /string
+		highlight <= highlight \
+		uri_resolve* <= uri_resolve* \
+		sidebar_showed <= code_sidebar_showed true
+	Cut* $mol_view dom_name \hr
+	- \Table
+	Table* $mol_grid
+		head_cells <= table_head_cells* /
+		rows <= table_rows* /
+	Table_row* $mol_grid_row
+		cells <= table_cells* /
+	Table_cell* $mol_text
+		auto_scroll null
+		text <= table_cell_text* \
+		highlight <= highlight \
+		uri_resolve* <= uri_resolve* \
+		code_sidebar_showed <= code_sidebar_showed true
+	- \Grid
+	Grid* $mol_grid
+		rows <= grid_rows* /
+	Grid_row* $mol_grid_row
+		cells <= grid_cells* /
+	Grid_cell* $mol_text
+		auto_scroll null
+		text <= grid_cell_text* \
+		highlight <= highlight \
+		uri_resolve* <= uri_resolve* \
+		code_sidebar_showed <= code_sidebar_showed true
+	- \Lines
+	String* $mol_dimmer
+		dom_name \span
+		needle <= highlight \
+		haystack <= line_text* \
+	Span* $mol_text_span
+		dom_name \span
+		type <= line_type* \
+		sub <= line_content* /
+	Code_line* $mol_text_code_line
+		numb_showed false
+		highlight <= highlight \
+		text <= line_text* \
+		uri_resolve* <= uri_resolve* \
+		syntax <= code_syntax null
+	Link* $mol_link_iconed
+		uri <= link_uri* \
+		content <= line_content* /
+	Link_http* $mol_link_iconed
+		uri <= link_uri* \
+		content / <= link_host* \
+	Embed* $mol_embed_any
+		uri <= link_uri* \
+		title <= line_text* \
+	- \Spoilers
+	Spoiler* $mol_expander
+		label /
+			<= Spoiler_label* $mol_text
+				text <= spoiler_label* \
+				highlight <= highlight \
+				uri_resolve* <= uri_resolve* \
+				code_sidebar_showed <= code_sidebar_showed true
+		content /
+			<= Spoiler_content* $mol_text
+				text <= spoiler_content* \
+				highlight <= highlight \
+				uri_resolve* <= uri_resolve* \
+				code_sidebar_showed <= code_sidebar_showed true
+
+$mol_text_header $mol_paragraph
+	level 1
+	sub /
+		<= Link $mol_link
+			arg <= arg *
+			hint @ \Permalink to this section
+			sub <= content /
+
+$mol_text_span $mol_paragraph
+	dom_name \span
+	attr *
+		^
+		mol_text_type <= type \
+
+$mol_text_list $mol_text
+	auto_scroll null
+	attr *
+		^
+		mol_text_list_type <= type \
+	Paragraph* $mol_text_list_item
+		index <= item_index*
+		sub <= block_content*
+
+$mol_text_list_item $mol_paragraph
+	attr *
+		^
+		mol_text_list_item_index <= index 0
 
 $rise_resize_demo $mol_example_small
 	sub /
@@ -3599,6 +2846,22 @@ $rise_range_demo $mol_example_small
 	aspects /
 		\Widget
 
+$mol_check_list $mol_view
+	dictionary *
+	Option* $mol_check
+		checked? <=> option_checked*? false
+		label <= option_label* /
+			<= option_title* \
+		enabled <= option_enabled* <= enabled true
+		hint <= option_hint* \
+		minimal_height 24
+	options *
+	keys /string
+	sub <= items /$mol_check
+
+$mol_switch $mol_check_list
+	value? \
+
 $rise_radio $mol_switch
 	option_label* /
 		<= Circle* $mol_view
@@ -3616,10 +2879,6 @@ $rise_radio_demo $mol_example_small
 		\radio
 	aspects /
 		\Widget
-
-$mol_theme_auto $mol_plugin
-	light \$mol_theme_light
-	attr * mol_theme <= theme <= dark \$mol_theme_dark
 
 $mol_tag_tree $mol_list
 	path /string
@@ -3669,12 +2928,9 @@ $mol_app_demo_menu $mol_page
 				haystack <= option_title* \
 				needle <= filter? \
 
-$mol_icon_brightness_4 $mol_icon path \M12,18C11.11,18 10.26,17.8 9.5,17.45C11.56,16.5 13,14.42 13,12C13,9.58 11.56,7.5 9.5,6.55C10.26,6.2 11.11,6 12,6A6,6 0 0,1 18,12A6,6 0 0,1 12,18M20,8.69V4H15.31L12,0.69L8.69,4H4V8.69L0.69,12L4,15.31V20H8.69L12,23.31L15.31,20H20V15.31L23.31,12L20,8.69Z
+$mol_icon_information $mol_icon path \M13,9H11V7H13M13,17H11V11H13M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z
 
-$mol_lights_toggle $mol_check_icon
-	Icon <= Lights_icon $mol_icon_brightness_4
-	hint @ \Toggle lights
-	checked? <=> lights? false
+$mol_icon_information_outline $mol_icon path \M11,9H13V7H11M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M11,17H13V11H11V17Z
 
 $mol_icon_forum $mol_icon path \M17,12V3A1,1 0 0,0 16,2H3A1,1 0 0,0 2,3V17L6,13H16A1,1 0 0,0 17,12M21,6H19V15H6V17A1,1 0 0,0 7,18H18L22,22V7A1,1 0 0,0 21,6Z
 
@@ -3757,6 +3013,13 @@ $mol_app_demo_readme $mol_page
 	Not_found $mol_view sub /
 		<= Not_found_caption @ \Readme not found
 
+$mol_status $mol_view
+	status <= title
+	minimal_height 24
+	minimal_width 0
+	sub /
+		<= message \
+
 $mol_app_demo $mol_book2
 	editor_title <= detail_title \$mol
 	meta_bundle_base \
@@ -3814,12 +3077,768 @@ $rise_demo $mol_app_demo
 	menu_title \$rise
 	sources_uri \https://github.com/stan-donarise/mam_rise
 
+$rise_bench_host_controls_support $mol_view
+	sub /
+		<= Label $mol_paragraph
+			sub / \при поддержке
+		<= Logo $mol_image
+			uri <= logo_uri \
+			title \Шмаков Медиа
+
+$mol_icon_check $mol_icon path \M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z
+
+$mol_icon_check_all $mol_icon path \M0.41,13.41L6,19L7.41,17.58L1.83,12M22.24,5.58L11.66,16.17L7.5,12L6.07,13.41L11.66,19L23.66,7M18,7L16.59,5.58L10.24,11.93L11.66,13.34L18,7Z
+
+$rise_check_all $mol_check_box
+	checks /$mol_check
+	Icon $mol_icon_check_all
+
+$rise_check_list $mol_view
+	options /string
+	titles *
+	value? /string
+	enabled true
+	sub /
+		<= All $rise_check_all
+			title \Все
+			checks <= checks
+			enabled <= enabled
+			checked? <=> all_checked? false
+		<= Checks $mol_view
+			sub <= checks /$mol_check
+	Check* $mol_check_box
+		title <= check_title* \
+		enabled <= enabled
+		checked? <=> checked*? false
+
+$mol_icon_help $mol_icon path \M10,19H13V22H10V19M12,2C17.35,2.22 19.68,7.62 16.5,11.67C15.67,12.67 14.33,13.33 13.67,14.17C13,15 13,16 13,17H10C10,15.33 10,13.92 10.67,12.92C11.33,11.92 12.67,11.33 13.5,10.67C15.92,8.43 15.32,5.26 12,5A3,3 0 0,0 9,8H6A6,6 0 0,1 12,2Z
+
+$mol_icon_help_circle $mol_icon path \M15.07,11.25L14.17,12.17C13.45,12.89 13,13.5 13,15H11V14.5C11,13.39 11.45,12.39 12.17,11.67L13.41,10.41C13.78,10.05 14,9.55 14,9C14,7.89 13.1,7 12,7A2,2 0 0,0 10,9H8A4,4 0 0,1 12,5A4,4 0 0,1 16,9C16,9.88 15.64,10.67 15.07,11.25M13,19H11V17H13M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12C22,6.47 17.5,2 12,2Z
+
+$mol_icon_help_circle_outline $mol_icon path \M11,18H13V16H11V18M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,6A4,4 0 0,0 8,10H10A2,2 0 0,1 12,8A2,2 0 0,1 14,10C14,12 11,11.75 11,15H13C13,12.75 16,12.5 16,10A4,4 0 0,0 12,6Z
+
+$rise_bench_host_controls_computerhelp $mol_pick
+	hint \Где найти параметры компьютера
+	trigger_content / <= Icon $mol_icon_help_circle_outline
+	bubble_content /
+		<= Text $mol_text
+			text \В Windows нажмите **Win + I**, откройте **Система → О системе** (в некоторых версиях — «О программе»). В разделе **Характеристики устройства** нажмите **Копировать** и вставьте текст в это поле. Коды устройства и продукта удалятся автоматически. Имя компьютера, процессор, память и тип системы сохранятся. Версию Windows можно дописать ниже. [Инструкция Microsoft](https://support.microsoft.com/ru-ru/windows/experience/find-information-about-your-windows-device).
+
+$rise_bench_textarea_input $mol_textarea_edit
+
+$rise_bench_textarea_view $mol_text_code
+
+$rise_bench_textarea $mol_textarea
+	Edit $rise_bench_textarea_input
+		value? <=> value?
+		hint <= hint
+		enabled <= enabled
+		spellcheck <= spellcheck
+		length_max <= length_max
+		selection? <=> selection?
+		bring => bring
+		submit? <=> submit?
+		submit_with_ctrl <= submit_with_ctrl
+	View $rise_bench_textarea_view
+		text <= value
+		render_visible_only false
+		row_numb* <= row_numb*
+		sidebar_showed <= sidebar_showed
+		highlight <= highlight
+		syntax <= syntax
+
+$mol_button_major $mol_button_minor
+	theme \$mol_theme_base
+
+$rise_bench_host_controls $mol_page
+	title \Настройки
+	minimal_width 320
+	kind \goods
+	enabled true
+	running false
+	run_enabled true
+	foot /
+		<= Support $rise_bench_host_controls_support
+	body <= controls /$mol_view
+		<= Intro $mol_text
+			text <= intro \
+		<= Engine_label $mol_labeler
+			title \Хранилище
+			Content <= Engine $rise_check_list
+				enabled <= enabled
+				value? <=> engines? /string
+				options <= engine_keys /string
+				titles <= engine_titles *
+		<= Storage_label $mol_view
+			sub / <= storage_label \
+		<= Schema_label $mol_labeler
+			title \Состав записи
+			Content <= Schema $rise_check_list
+				enabled <= enabled
+				value? <=> schemas? /string
+				options /string
+					\compact
+					\full
+				titles *
+					compact \4 свойства
+					full \10 свойств
+		<= Count_label $mol_labeler
+			title <= count_title \Количество записей
+			Content <= Count $rise_check_list
+				enabled <= enabled
+				value? <=> sizes? /string
+				options <= count_keys /string
+				titles <= counts *
+		<= Computer_label $mol_labeler
+			title \Параметры компьютера
+			label /
+				\Параметры компьютера
+				<= Computer_help $rise_bench_host_controls_computerhelp
+			Content <= Computer $rise_bench_textarea
+				length_max 8000
+				hint \Процессор, память, ОС
+				value? <=> computer? \
+				enabled <= enabled
+		<= Run $mol_button_major
+			title \Запустить бенчмарк
+			enabled <= run_enabled
+			click? <=> run? null
+		<= Stop $mol_button_minor
+			title \Остановить
+			click? <=> stop? null
+		<= Status $mol_view
+			sub / <= status \
+		<= Elapsed $mol_view
+			sub / <= elapsed \
+		<= Retry $mol_button_minor
+			title \Повторить сохранение
+			click? <=> retry? null
+	retry_visible false
+
+$mol_icon_content_copy $mol_icon path \M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z
+
+$rise_bench_metrics_details $mol_pick
+	hint \Параметры компьютера и браузер
+	trigger_content / <= Icon $mol_icon_information_outline
+	bubble_content /
+		<= Text $mol_view
+			sub /
+				<= Computer_label $mol_labeler
+					title \Параметры компьютера
+					label /
+						\Параметры компьютера
+						<= Copy $mol_button_copy
+							hint \Копировать параметры компьютера
+							text <= computer
+							sub / <= Copy_icon $mol_icon_content_copy
+					Content <= Computer $mol_view
+						sub / <= computer \
+				<= Browser_label $mol_labeler
+					title \Браузер
+					Content <= Browser $mol_view
+						sub / <= browser \
+
+$rise_bench_metrics $mol_grid
+	attr *
+		^
+		embedded <= embedded false
+	runs? /$rise_bench_run
+	run_add? null
+	operations /string
+	compare false
+	text_mode false
+	Details* $rise_bench_metrics_details
+		computer <= details_computer* \
+		browser <= details_browser* \
+
+$rise_bench_charts_selection $mol_pick
+	runs /$rise_bench_run
+	value? /string
+	title <= selection_title \
+	bubble_content /
+		<= List $mol_scroll
+			sub /
+				<= Items $mol_list
+					rows <= choices /$mol_view
+	Presets $mol_view
+		sub <= presets /$mol_view
+	Preset*0 $mol_button_minor
+		title <= preset_title* \
+		click? <=> select_latest*? null
+	Check* $mol_check_box
+		title <= run_title* \
+		checked? <=> checked*? false
+
+$mol_plot_dot $mol_plot_graph
+	points_max +Infinity
+	aspect 1
+	style *
+		^
+		stroke-width <= diameter 8
+	sub /
+		<= Hint
+		<= Curve $mol_svg_path
+			geometry <= curve \
+	-
+	Sample $mol_plot_graph_sample
+		color <= color
+
+$rise_bench_charts_operation_plot $mol_plot_pane
+
+$mol_plot_group $mol_plot_graph
+	sub <= graphs_enriched <= graphs /$mol_plot_graph
+	Sample $mol_plot_graph_sample
+		sub <= graph_samples /$mol_view
+
+$mol_plot_ruler_hor $mol_plot_ruler
+	title_align \start
+	label_align \middle
+	title_pos_x \0
+	title_pos_y \100%
+	label_pos_y* <= title_pos_y
+	background_width \100%
+
+$rise_bench_charts_operation $mol_view
+	operation \
+	runs /$rise_bench_run
+	sub <= content /$mol_view
+	Title $mol_view
+		dom_name \h3
+		sub / <= operation
+	Empty $mol_view
+		sub / \Нет завершённых замеров
+	Legend $mol_view
+		sub <= legends /$mol_view
+	Legend_item* $mol_view
+		sub <= legend_content* /$mol_view_content
+	Legend_text* $mol_view
+		sub / <= series_title* \
+	Legend_sample* $mol_view
+		sub <= legend_sample* /$mol_view
+	Plot $rise_bench_charts_operation_plot
+		hue_base 210
+		graphs <= graphs /$mol_plot_graph
+	Series* $mol_plot_group
+		title <= series_title* \
+		series_x <= series_x* /number
+		series_y <= series_y* /number
+		graphs /
+			<= Line* $mol_plot_line
+			<= Dots* $mol_plot_dot
+	X $mol_plot_ruler_hor
+		title \Объём
+	Y $mol_plot_ruler_vert
+		title \с
+	Note $mol_view
+		sub / \Медиана прогонов; отдельные серии по хранилищу, полям, компьютеру и версии.
+
+$rise_bench_charts $mol_view
+	runs /$rise_bench_run
+	operations /string
+	selected? /string
+	sub <= charts /$mol_view
+	Selection $rise_bench_charts_selection
+		runs <= runs
+		value? <=> selected?
+	Chart* $rise_bench_charts_operation
+		operation <= operation* \
+		runs <= selected_runs /$rise_bench_run
+
+$rise_bench_host $mol_book2
+	kind \goods
+	pages /
+		<= Controls $rise_bench_host_controls
+			kind <= kind
+			enabled <= controls_enabled true
+			run_enabled <= run_enabled true
+			running <= busy false
+			engines? <=> selected_engines? /string
+			sizes? <=> selected_counts? /string
+			schemas? <=> selected_schemas? /string
+			run? <=> run? null
+			stop? <=> stop? null
+			status <= status? \
+			elapsed <= elapsed_text \
+			retry_visible <= retry_visible false
+			retry? <=> retry? null
+		<= Results $mol_page
+			title \Результаты
+			minimal_width 640
+			tools /
+				<= Download $mol_button_download
+					title <= csv_title \Скачать CSV
+					hint \Скачать CSV
+					blob <= csv_blob null
+					file_name <= csv_filename \rise-benchmark.csv
+				<= Mode $mol_switch
+					value? <=> mode? \table
+					options *
+						table \Таблица
+						charts \Графики
+			body <= results_body /$mol_view
+				<= History $mol_scroll
+					sub /
+						<= Metrics $rise_bench_metrics
+							operations <= operations /string
+							runs <= runs /$rise_bench_run
+							compare <= compare false
+							text_mode <= text_mode false
+				<= Frame $mol_frame
+					uri <= fixture_uri \
+					clipboard_read false
+					clipboard_write false
+					attr *
+						^
+						inert <= busy false
+	Charts $rise_bench_charts
+		runs <= runs
+		operations <= operations
+		selected? <=> chart_selection? /string
+
+$mol_list_demo $mol_example_small
+	sub /
+		<= Items_count_label $mol_labeler
+			title \Items count
+			content /
+				<= Items_count $mol_number
+					value? <=> items_count? 50
+					value_min 0
+					value_max 100000
+		<= Items $mol_list
+			rows <= list_items /
+				<= Item*0 $mol_link
+					title <= item_title* \
+			-
+			Empty <= List_empty $mol_paragraph
+				title \No items in this list
+	tags /
+		\list
+		\rows
+		\stack
+	aspects /
+		\Widget/Layout
+
+$mol_row $mol_view
+
+$mol_list_demo_table $mol_example
+	title \Large list of rows with dynamic content
+	count 100000
+	sub /
+		- <= Head $mol_row sub /
+			<= Check $mol_check_group
+				checks <= check_list /$mol_check
+				title \Good Goods
+		<= Rows $mol_list
+			item_width_min* 200
+			item_height_min* 96
+			rows <= rows /
+				<= Row*0 $mol_row
+					sub <= row_content* /
+						<= Id_labeler* $mol_labeler
+							title \ID
+							Content <= Id* $mol_check_box
+								title <= row_id*? \0000
+								checked? <=> row_checked*? false
+						<= Title_labeler* $mol_labeler
+							title \Product Name
+							Content <= Title* $mol_link_iconed
+								uri <= row_uri* \
+								title <= row_title* \
+						<= Color_labeler* $mol_labeler
+							title \Color
+							Content <= Color* $mol_select
+								value? <=> row_color*? \
+								options <= colors /
+						<= Status_labeler* $mol_labeler
+							title \Status
+							Content <= Status* $mol_switch
+								value? <=> row_status*? \
+								options <= status_options *
+									minor \Store
+									major \Sale
+									critical \Support
+						<= Quantity_labeler* $mol_labeler
+							title \Quantity
+							Content <= Quantity* $mol_number
+								value? <=> row_quantity*? 0
+						<= Date_labeler* $mol_labeler
+							title \Supply Time
+							Content <= Date* $mol_date
+								value_moment? <=> row_moment*? $mol_time_moment
+	tags /
+		\list
+		\table
+		\scroll
+		\divider
+		\grid
+	aspects /
+		\Widget/Layout
+
+$rise_bench_baza_goods_rows $mol_list
+
+$rise_bench_baza_goods_table $mol_list_demo_table
+	count 1000
+	products /$rise_bench_baza_goods_product
+	compact false
+	query \
+	color_filter \all
+	status_filter \all
+	Rows $rise_bench_baza_goods_rows
+		item_width_min* 200
+		item_height_min* 96
+		rows <= rows
+	Compact_id_labeler* $mol_labeler
+		title \ID
+		content /
+			<= Compact_id* $mol_view
+				sub / <= row_id*?
+	Details* $mol_view
+		sub /
+			<= Description_labeler* $mol_labeler
+				title \Description
+				content /
+					<= Description* $mol_view
+						sub / <= row_description* \
+			<= Tags_labeler* $mol_labeler
+				title \Tags
+				content /
+					<= Tags* $mol_view
+						sub <= row_tags* /string
+	Row* $mol_view
+		minimal_height 96
+		sub <= row_content*
+	Title* $mol_link_iconed
+		uri <= row_uri*
+		title <= row_title*
+		content /
+			<= Name* $mol_dimmer
+				haystack <= row_title*
+				needle <= query
+	Date* $mol_date
+		value_moment? <=> row_moment*?
+		trigger_content / <= row_date* \
+
+$rise_bench_surface $mol_page
+	attr *
+		^
+		embedded <= embedded false
+
+$rise_bench_baza_goods $mol_book2
+	menu_title <= title \Сущности
+	pages <= content /$mol_view
+	Settings $mol_page
+		title \Настройки
+		minimal_width 320
+		body /
+			<= Storage_label $mol_view
+				sub / \Хранение: одна Area на запись
+			<= Schema_label $mol_labeler
+				title \Состав записи
+				Content <= Schema $mol_switch
+					enabled <= controls_enabled true
+					value? <=> schema_mode? \compact
+					options *
+						compact \4 свойства
+						full \10 свойств
+			<= Count_label $mol_labeler
+				title \Количество записей
+				Content <= Count $mol_switch
+					enabled <= controls_enabled
+					value? <=> count_mode? \100
+					options *
+						1 \1
+						10 \10
+						100 \100
+						500 \500
+						1000 \1000
+						2000 \2000
+						3000 \3000
+						4000 \4000
+						5000 \5000
+						10000 \10000
+			<= Actions $mol_view
+				sub /
+					<= Create $mol_button_major
+						title \Запустить бенчмарк
+						enabled <= create_enabled true
+						click? <=> benchmark? null
+	Records $rise_bench_surface
+		title <= app_title \Товары
+		minimal_width 640
+		body_scroll_top? => body_scroll_top?
+		body /
+			<= Metrics $rise_bench_metrics
+				operations /
+					\Создание, с
+					\Поиск, с
+					\Добавить 1, с
+					\F5, с
+					\Поиск после F5, с
+			<= Manual $mol_view
+				sub /
+					<= Search_label $mol_labeler
+						title \Поиск по названию
+						Content <= Search $mol_search
+							hint \Название товара
+							enabled <= filters_enabled true
+							query? => search_query? \
+					<= Color_label $mol_labeler
+						title \Color
+						Content <= Color_filter $mol_select
+							enabled <= filters_enabled
+							value? <=> color_filter? \all
+							dictionary *
+								all \All colors
+								red \red
+								green \green
+								blue \blue
+					<= Status_label $mol_labeler
+						title \Status
+						Content <= Status_filter $mol_select
+							enabled <= filters_enabled
+							value? <=> status_filter? \all
+							dictionary *
+								all \All statuses
+								minor \Store
+								major \Sale
+								critical \Support
+					<= Manual_actions $mol_view
+						sub /
+							<= Add $mol_button_minor
+								title \Добавить запись
+								enabled <= controls_enabled
+								click? <=> add_one? null
+							<= Reset $mol_button_minor
+								title \Очистить
+								enabled <= controls_enabled
+								click? <=> reset? null
+			<= Table $rise_bench_baza_goods_table
+				products <= products /$rise_bench_baza_goods_product
+				compact <= compact_mode false
+				query <= search_query?
+				color_filter <= color_filter?
+				status_filter <= status_filter?
+
+$rise_bug_baza_nohash $mol_page
+	body /
+		<= Baza_status $giper_baza_status
+		<= Reset $mol_button_minor
+			click? <=> entity_reset? null
+		<= entity null
+		<= Add $mol_button_minor
+			click? <=> add? null
+		<= Items $mol_list
+			sub <= items / <= Item*0 $mol_button_minor
+				title <= id* \0
+
+$rise_bug_baza_noseal $mol_page
+	body /
+		<= Baza_status $giper_baza_status
+		<= Reset $mol_button_minor
+			click? <=> entity_reset? null
+		<= entity null
+		<= Add $mol_button_minor
+			click? <=> add? null
+		<= Items $mol_list
+			sub <= items / <= Item*0 $mol_button_minor
+				title <= id* \0
+
+$rise_bug_baza_decrypt $mol_page
+	body /
+		<= Baza_status $giper_baza_status
+		<= Reset $mol_button_minor
+			click? <=> entity_reset? null
+		<= entity null
+		<= Add $mol_button_minor
+			click? <=> add? null
+		<= Items $mol_list
+			sub <= items / <= Item*0 $mol_button_minor
+				title <= id* \0
+				click? <=> cut*? null
+
+$rise_bug_baza_slowtext $mol_page
+	body /
+		<= Baza_status $giper_baza_status
+		<= Reset $mol_button_minor
+			click? <=> entity_reset? null
+		<= entity null
+		<= Text $mol_textarea
+			value? <=> text? \
+
+$rise_bug $mol_book2_catalog
+	placeholders /
+	param \bug
+	spread_classes /
+		\$rise_bug_baza_nohash
+		\$rise_bug_baza_noseal
+		\$rise_bug_baza_decrypt
+		\$rise_bug_baza_slowtext
+
+$rise_bench_baza_crdttext $mol_book2
+	menu_title <= title \Текст
+	pages /
+		<= Menu $mol_page
+			title \CRDT text
+			minimal_width 240
+			body /
+				<= Count_label $mol_labeler
+					title \Количество строк
+					Content <= Count $mol_switch
+						value? <=> count_mode? \100
+						enabled <= controls_enabled true
+						options *
+							100 \100
+							500 \500
+							1000 \1000
+							2000 \2000
+							5000 \5000
+				<= Run $mol_button_major
+					title \Запустить бенчмарк
+					click? <=> benchmark? null
+					enabled <= controls_enabled true
+		<= Page $rise_bench_surface
+			title <= page_title \CRDT-текст
+			minimal_width 640
+			body /
+				<= Metrics $rise_bench_metrics
+					text_mode true
+					operations /
+						\Вставка, с
+						\Добавить символ, с
+						\F5, с
+				<= Reset $mol_button_minor
+					title \Очистить
+					click? <=> reset? null
+					enabled <= controls_enabled
+				<= Editor $rise_bench_textarea
+					hint \Введите текст или запустите бенчмарк
+					value? <=> text? \
+					enabled <= controls_enabled
+					spellcheck false
+
+$rise_bench $mol_book2_catalog
+	placeholders /
+	param \bench
+	spreads *
+		$rise_bench_baza_goods <= Goods_host $rise_bench_host
+			title \Сущности
+			kind \goods
+		$rise_bench_baza_crdttext <= Text_host $rise_bench_host
+			title \Текст
+			kind \text
+	Goods $rise_bench_baza_goods
+	Crdttext $rise_bench_baza_crdttext
+	Idb $rise_bench_idb
+
+$rise_bench_idb_table $rise_bench_baza_goods_table
+	records /$rise_bench_idb_storage_product
+	change*? null
+
+$rise_bench_idb $mol_book2
+	menu_title <= title \Сущности IDB
+	pages /
+		<= Settings $mol_page
+			title \Настройки
+			minimal_width 320
+			body /
+				<= Storage_label $mol_view
+					sub / <= storage_label \
+				<= Schema_label $mol_labeler
+					title \Состав записи
+					Content <= Schema $mol_switch
+						value? <=> schema_mode? \compact
+						enabled <= controls_enabled true
+						options *
+							compact \4 свойства
+							full \10 свойств
+				<= Count_label $mol_labeler
+					title \Количество записей
+					Content <= Count $mol_switch
+						value? <=> count_mode? \100
+						enabled <= controls_enabled
+						options *
+							1 \1
+							10 \10
+							100 \100
+							500 \500
+							1000 \1000
+							2000 \2000
+							3000 \3000
+							4000 \4000
+							5000 \5000
+							10000 \10000
+				<= Run $mol_button_major
+					title \Запустить бенчмарк
+					click? <=> benchmark? null
+					enabled <= controls_enabled
+		<= Page $rise_bench_surface
+			title <= storage_title \IDB
+			minimal_width 640
+			body_scroll_top? => body_scroll_top?
+			body /
+				<= Metrics $rise_bench_metrics
+					operations /
+						\Запуск БД, с
+						\Создание, с
+						\Поиск, с
+						\Добавить 1, с
+						\F5, с
+						\Поиск после F5, с
+				<= Manual $mol_view
+					sub <= manual_content /$mol_view
+						<= Search_label $mol_labeler
+							title \Поиск по названию
+							Content <= Search $mol_search
+								hint \Название товара
+								enabled <= filters_enabled true
+								query? => search_query? \
+						<= Color_label $mol_labeler
+							title \Color
+							Content <= Color_filter $mol_select
+								enabled <= filters_enabled
+								value? <=> color_filter? \all
+								dictionary *
+									all \All colors
+									red \red
+									green \green
+									blue \blue
+						<= Status_label $mol_labeler
+							title \Status
+							Content <= Status_filter $mol_select
+								enabled <= filters_enabled
+								value? <=> status_filter? \all
+								dictionary *
+									all \All statuses
+									minor \Store
+									major \Sale
+									critical \Support
+						<= Manual_actions $mol_view
+							sub /
+								<= Add $mol_button_minor
+									title \Добавить запись
+									enabled <= controls_enabled
+									click? <=> add_one? null
+								<= Reset $mol_button_minor
+									title \Очистить
+									click? <=> reset? null
+									enabled <= controls_enabled
+						<= Change_status $mol_status
+							status <= change_message \
+				<= Table $rise_bench_idb_table
+					records <= products /$rise_bench_idb_storage_product
+					compact <= compact false
+					query <= search_query?
+					color_filter <= color_filter?
+					status_filter <= status_filter?
+					change*? <=> change*? null
+
 $rise_app $mol_book2_catalog
 	menu_title \$rise
+	plugins /
+		<= Theme $mol_theme_auto
+	menu_tools /
+		<= Lights $mol_lights_toggle
 	spreads *
-		demo <= Demo_host $rise_bench_host
-			title \Demo
-			kind \demo
+		demo <= Demo $rise_demo
 		bench <= Bench $rise_bench
 			menu_title \Bench
-	Demo $rise_demo
