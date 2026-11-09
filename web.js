@@ -36564,7 +36564,7 @@ var $;
             /** Persist the draft locally; each run takes its own immutable snapshot. */
             computer(next) { return $mol_state_local.value('$rise_bench_computer', next === undefined ? undefined : $rise_bench_computer.clean(next)) ?? ''; }
             intro() {
-                return `Выберите хранилища, состав и объёмы данных. «Все» отмечает всю группу; каждое выбранное сочетание выполняется по очереди.\n\nНебольшой набор — обычно несколько секунд, крупные наборы — минуты. Полный перебор может занять десятки минут и дольше: время зависит от компьютера и хранилища. Таймаута нет — при необходимости нажмите «Остановить».\n\nВерсия бенчмарка: ${$rise_bench_run_benchmark_version}.`;
+                return `Выберите хранилища, состав и объёмы данных. «Все» отмечает всю группу; каждое выбранное сочетание выполняется по очереди.\n\nТаймаута нет — при необходимости нажмите «Остановить».\n\nВерсия бенчмарка: ${$rise_bench_run_benchmark_version}.`;
             }
             engine_keys() { return Object.keys($rise_bench_engine); }
             engine_titles() { return Object.fromEntries(Object.entries($rise_bench_engine).map(([key, engine]) => [key, engine.title])); }
@@ -36623,7 +36623,13 @@ var $;
 			(obj.sub) = () => ([(this.Items())]);
 			return obj;
 		}
-		reset(next){
+		presets(){
+			return [];
+		}
+		preset_title(id){
+			return "";
+		}
+		select_latest(id, next){
 			if(next !== undefined) return next;
 			return null;
 		}
@@ -36647,10 +36653,15 @@ var $;
 		bubble_content(){
 			return [(this.List())];
 		}
-		Reset(){
+		Presets(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ((this.presets()));
+			return obj;
+		}
+		Preset(id){
 			const obj = new this.$.$mol_button_minor();
-			(obj.title) = () => ("Сбросить");
-			(obj.click) = (next) => ((this.reset(next)));
+			(obj.title) = () => ((this.preset_title(id)));
+			(obj.click) = (next) => ((this.select_latest(id, next)));
 			return obj;
 		}
 		Check(id){
@@ -36662,10 +36673,11 @@ var $;
 	};
 	($mol_mem(($.$rise_bench_charts_selection.prototype), "Items"));
 	($mol_mem(($.$rise_bench_charts_selection.prototype), "List"));
-	($mol_mem(($.$rise_bench_charts_selection.prototype), "reset"));
+	($mol_mem_key(($.$rise_bench_charts_selection.prototype), "select_latest"));
 	($mol_mem_key(($.$rise_bench_charts_selection.prototype), "checked"));
 	($mol_mem(($.$rise_bench_charts_selection.prototype), "value"));
-	($mol_mem(($.$rise_bench_charts_selection.prototype), "Reset"));
+	($mol_mem(($.$rise_bench_charts_selection.prototype), "Presets"));
+	($mol_mem_key(($.$rise_bench_charts_selection.prototype), "Preset"));
 	($mol_mem_key(($.$rise_bench_charts_selection.prototype), "Check"));
 
 
@@ -36682,10 +36694,12 @@ var $;
         class $rise_bench_charts_selection extends $.$rise_bench_charts_selection {
             selection_title() {
                 const selected = new Set(this.value());
-                return `Выбранные (${this.runs().filter(run => selected.has(run.id)).length})`;
+                return `Прогоны (${this.runs().filter(run => selected.has(run.id)).length})`;
             }
-            choices() { return [this.Reset(), ...this.runs().map(run => this.Check(run.id))]; }
-            reset() { this.value(this.runs().slice(0, 10).map(run => run.id)); }
+            choices() { return [this.Presets(), ...this.runs().map(run => this.Check(run.id))]; }
+            presets() { return [0, 10, 20, 30, 50].map(count => this.Preset(count)); }
+            preset_title(count) { return String(count); }
+            select_latest(count) { this.value(this.runs().slice(0, count).map(run => run.id)); }
             checked(id, next) {
                 const value = this.value();
                 if (next === undefined)
@@ -36701,7 +36715,7 @@ var $;
         }
         __decorate([
             $mol_action
-        ], $rise_bench_charts_selection.prototype, "reset", null);
+        ], $rise_bench_charts_selection.prototype, "select_latest", null);
         $$.$rise_bench_charts_selection = $rise_bench_charts_selection;
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
@@ -38619,7 +38633,7 @@ var $;
             chart_selection(next) {
                 if (next !== undefined)
                     this.chart_selection_value = next;
-                return this.chart_selection_value ?? this.runs().slice(0, 10).map(run => run.id);
+                return this.chart_selection_value ?? this.runs().slice(0, 20).map(run => run.id);
             }
             ready(next = false) { return next; }
             busy(next = false) { return next; }

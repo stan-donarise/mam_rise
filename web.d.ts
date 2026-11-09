@@ -62359,22 +62359,27 @@ declare namespace $ {
 		,
 		ReturnType< $mol_scroll['sub'] >
 	>
-	type $mol_button_minor__title_rise_bench_charts_selection_3 = $mol_type_enforce<
-		string
+	type $mol_view__sub_rise_bench_charts_selection_3 = $mol_type_enforce<
+		ReturnType< $rise_bench_charts_selection['presets'] >
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_button_minor__title_rise_bench_charts_selection_4 = $mol_type_enforce<
+		ReturnType< $rise_bench_charts_selection['preset_title'] >
 		,
 		ReturnType< $mol_button_minor['title'] >
 	>
-	type $mol_button_minor__click_rise_bench_charts_selection_4 = $mol_type_enforce<
-		ReturnType< $rise_bench_charts_selection['reset'] >
+	type $mol_button_minor__click_rise_bench_charts_selection_5 = $mol_type_enforce<
+		ReturnType< $rise_bench_charts_selection['select_latest'] >
 		,
 		ReturnType< $mol_button_minor['click'] >
 	>
-	type $mol_check_box__title_rise_bench_charts_selection_5 = $mol_type_enforce<
+	type $mol_check_box__title_rise_bench_charts_selection_6 = $mol_type_enforce<
 		ReturnType< $rise_bench_charts_selection['run_title'] >
 		,
 		ReturnType< $mol_check_box['title'] >
 	>
-	type $mol_check_box__checked_rise_bench_charts_selection_6 = $mol_type_enforce<
+	type $mol_check_box__checked_rise_bench_charts_selection_7 = $mol_type_enforce<
 		ReturnType< $rise_bench_charts_selection['checked'] >
 		,
 		ReturnType< $mol_check_box['checked'] >
@@ -62384,14 +62389,17 @@ declare namespace $ {
 		choices( ): readonly($mol_view)[]
 		Items( ): $mol_list
 		List( ): $mol_scroll
-		reset( next?: any ): any
+		presets( ): readonly($mol_view)[]
+		preset_title( id: any): string
+		select_latest( id: any, next?: any ): any
 		run_title( id: any): string
 		checked( id: any, next?: boolean ): boolean
 		runs( ): readonly($rise_bench_run)[]
 		value( next?: readonly(string)[] ): readonly(string)[]
 		title( ): ReturnType< $rise_bench_charts_selection['selection_title'] >
 		bubble_content( ): readonly(any)[]
-		Reset( ): $mol_button_minor
+		Presets( ): $mol_view
+		Preset( id: any): $mol_button_minor
 		Check( id: any): $mol_check_box
 	}
 	
@@ -62401,8 +62409,10 @@ declare namespace $ {
 declare namespace $.$$ {
     class $rise_bench_charts_selection extends $.$rise_bench_charts_selection {
         selection_title(): string;
-        choices(): $mol_button_minor[];
-        reset(): void;
+        choices(): $mol_view[];
+        presets(): $mol_button_minor[];
+        preset_title(count: number): string;
+        select_latest(count: number): void;
         checked(id: string, next?: boolean): boolean;
         run_title(id: string): string;
     }
